@@ -4,7 +4,13 @@ import { ProverbsCard } from "@/components/proverbs";
 import { WeatherCard } from "@/components/weather";
 import { MoonCard } from "@/components/moon";
 import { AgentState } from "@/lib/types";
-import { useCoAgent, useCopilotAction } from "@copilotkit/react-core";
+import {
+  useCoAgent,
+  useDefaultTool,
+  useFrontendTool,
+  useHumanInTheLoop,
+  useRenderToolCall,
+} from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
 import { useState } from "react";
 
@@ -12,26 +18,32 @@ export default function CopilotKitPage() {
   const [themeColor, setThemeColor] = useState("#6366f1");
 
   // 🪁 Frontend Actions: https://docs.copilotkit.ai/pydantic-ai/frontend-actions
-  useCopilotAction({
+  useFrontendTool({
     name: "setThemeColor",
-    parameters: [{
-      name: "themeColor",
-      description: "The theme color to set. Make sure to pick nice colors.",
-      required: true, 
-    }],
+    parameters: [
+      {
+        name: "themeColor",
+        description: "The theme color to set. Make sure to pick nice colors.",
+        required: true,
+      },
+    ],
     handler({ themeColor }) {
       setThemeColor(themeColor);
     },
   });
 
   return (
-    <main style={{ "--copilot-kit-primary-color": themeColor } as CopilotKitCSSProperties}>
+    <main
+      style={
+        { "--copilot-kit-primary-color": themeColor } as CopilotKitCSSProperties
+      }
+    >
       <CopilotSidebar
         disableSystemMessage={true}
         clickOutsideToClose={false}
         labels={{
           title: "Popup Assistant",
-          initial: "👋 Hi, there! You're chatting with an agent."
+          initial: "👋 Hi, there! You're chatting with an agent.",
         }}
         suggestions={[
           {
@@ -52,12 +64,13 @@ export default function CopilotKitPage() {
           },
           {
             title: "Update Agent State",
-            message: "Please remove 1 random proverb from the list if there are any.",
+            message:
+              "Please remove 1 random proverb from the list if there are any.",
           },
           {
             title: "Read Agent State",
             message: "What are the proverbs?",
-          }
+          },
         ]}
       >
         <YourMainContent themeColor={themeColor} />
@@ -75,29 +88,34 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
         "CopilotKit may be new, but its the best thing since sliced bread.",
       ],
     },
-  })
+  });
 
   //🪁 Generative UI: https://docs.copilotkit.ai/pydantic-ai/generative-ui
-  useCopilotAction({
-    name: "get_weather",
-    description: "Get the weather for a given location.",
-    available: "disabled",
-    parameters: [
-      { name: "location", type: "string", required: true },
-    ],
-    render: ({ args }) => {
-      return <WeatherCard location={args.location} themeColor={themeColor} />
+  useRenderToolCall(
+    {
+      name: "get_weather",
+      description: "Get the weather for a given location.",
+      parameters: [{ name: "location", type: "string", required: true }],
+      render: ({ args, result }) => {
+        return <WeatherCard location={args.location} themeColor={themeColor} />;
+      },
     },
-  }, [themeColor]);
+    [themeColor],
+  );
 
   // 🪁 Human In the Loop: https://docs.copilotkit.ai/pydantic-ai/human-in-the-loop
-  useCopilotAction({
-    name: "go_to_moon",
-    description: "Go to the moon on request.",
-    renderAndWaitForResponse: ({ respond, status}) => {
-      return <MoonCard themeColor={themeColor} status={status} respond={respond} />
+  useHumanInTheLoop(
+    {
+      name: "go_to_moon",
+      description: "Go to the moon on request.",
+      render: ({ respond, status }) => {
+        return (
+          <MoonCard themeColor={themeColor} status={status} respond={respond} />
+        );
+      },
     },
-  }, [themeColor]);
+    [themeColor],
+  );
 
   return (
     <div
