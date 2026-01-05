@@ -1,76 +1,35 @@
 "use client";
 
-import { ProverbsCard } from "@/components/proverbs";
-import { WeatherCard } from "@/components/weather";
-import { MoonCard } from "@/components/moon";
-import { AgentState } from "@/lib/types";
+import { JobsCard } from "@/components/jobs";
 import {
-  useCoAgent,
-  useDefaultTool,
-  useFrontendTool,
-  useHumanInTheLoop,
-  useRenderToolCall,
-} from "@copilotkit/react-core";
+  JobsBarChart, JobsPieChart, SalaryAreaChart,
+  MarketDashboard, ArticlesGrid, ChartLoading
+} from "@/components/charts";
+import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
+import { VoiceInput } from "@/components/voice-input";
+import { AgentState } from "@/lib/types";
+import { useCoAgent, useRenderToolCall, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
-import { useState } from "react";
+import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { useState, useCallback } from "react";
 
 export default function CopilotKitPage() {
   const [themeColor, setThemeColor] = useState("#6366f1");
 
-  // 🪁 Frontend Actions: https://docs.copilotkit.ai/pydantic-ai/frontend-actions
-  useFrontendTool({
-    name: "setThemeColor",
-    parameters: [
-      {
-        name: "themeColor",
-        description: "The theme color to set. Make sure to pick nice colors.",
-        required: true,
-      },
-    ],
-    handler({ themeColor }) {
-      setThemeColor(themeColor);
-    },
-  });
-
   return (
-    <main
-      style={
-        { "--copilot-kit-primary-color": themeColor } as CopilotKitCSSProperties
-      }
-    >
+    <main style={{ "--copilot-kit-primary-color": themeColor } as CopilotKitCSSProperties}>
       <CopilotSidebar
         disableSystemMessage={true}
         clickOutsideToClose={false}
         labels={{
-          title: "Popup Assistant",
-          initial: "👋 Hi, there! You're chatting with an agent.",
+          title: "Fractional AI",
+          initial: "Welcome! Use voice or text to explore jobs, charts, and A2UI widgets. Powered by Hume + CopilotKit + AG-UI + A2UI!",
         }}
         suggestions={[
-          {
-            title: "Generative UI",
-            message: "Get the weather in San Francisco.",
-          },
-          {
-            title: "Frontend Tools",
-            message: "Set the theme to green.",
-          },
-          {
-            title: "Human In the Loop",
-            message: "Please go to the moon.",
-          },
-          {
-            title: "Write Agent State",
-            message: "Add a proverb about AI.",
-          },
-          {
-            title: "Update Agent State",
-            message:
-              "Please remove 1 random proverb from the list if there are any.",
-          },
-          {
-            title: "Read Agent State",
-            message: "What are the proverbs?",
-          },
+          { title: "A2UI Job Card", message: "Show me an A2UI job card for a CTO position" },
+          { title: "Market Dashboard", message: "Show me the market dashboard" },
+          { title: "Salary Chart", message: "What are fractional executive salary ranges?" },
+          { title: "Featured Articles", message: "Show featured articles with images" },
         ]}
       >
         <YourMainContent themeColor={themeColor} />
@@ -80,49 +39,123 @@ export default function CopilotKitPage() {
 }
 
 function YourMainContent({ themeColor }: { themeColor: string }) {
-  // 🪁 Shared State: https://docs.copilotkit.ai/pydantic-ai/shared-state
-  const { state, setState } = useCoAgent<AgentState>({
+  const { state } = useCoAgent<AgentState>({
     name: "my_agent",
-    initialState: {
-      proverbs: [
-        "CopilotKit may be new, but its the best thing since sliced bread.",
-      ],
-    },
+    initialState: { jobs: [], search_query: "" },
   });
 
-  //🪁 Generative UI: https://docs.copilotkit.ai/pydantic-ai/generative-ui
-  useRenderToolCall(
-    {
-      name: "get_weather",
-      description: "Get the weather for a given location.",
-      parameters: [{ name: "location", type: "string", required: true }],
-      render: ({ args, result }) => {
-        return <WeatherCard location={args.location} themeColor={themeColor} />;
-      },
-    },
-    [themeColor],
-  );
+  // CopilotKit chat hook for voice integration
+  const { appendMessage } = useCopilotChat();
 
-  // 🪁 Human In the Loop: https://docs.copilotkit.ai/pydantic-ai/human-in-the-loop
-  useHumanInTheLoop(
-    {
-      name: "go_to_moon",
-      description: "Go to the moon on request.",
-      render: ({ respond, status }) => {
-        return (
-          <MoonCard themeColor={themeColor} status={status} respond={respond} />
-        );
-      },
+  // Handle voice input → send to CopilotKit
+  const handleVoiceMessage = useCallback((text: string) => {
+    console.log("🎤 Voice:", text);
+    appendMessage(new TextMessage({ content: text, role: Role.User }));
+  }, [appendMessage]);
+
+  // AG-UI Generative UI: Charts
+  useRenderToolCall({
+    name: "show_jobs_chart",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result) return <ChartLoading title="Loading..." />;
+      return <JobsBarChart data={result.chartData || []} title={result.title} subtitle={result.subtitle} />;
     },
-    [themeColor],
-  );
+  }, []);
+
+  useRenderToolCall({
+    name: "show_location_chart",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result) return <ChartLoading title="Loading..." />;
+      return <JobsPieChart data={result.chartData || []} title={result.title} subtitle={result.subtitle} />;
+    },
+  }, []);
+
+  useRenderToolCall({
+    name: "show_salary_insights",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result) return <ChartLoading title="Loading..." />;
+      return <SalaryAreaChart data={result.chartData || []} title={result.title} subtitle={result.subtitle} />;
+    },
+  }, []);
+
+  useRenderToolCall({
+    name: "show_market_dashboard",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result) return <ChartLoading title="Loading..." />;
+      return <MarketDashboard data={result} />;
+    },
+  }, []);
+
+  useRenderToolCall({
+    name: "get_featured_articles",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result) return <ChartLoading title="Loading..." />;
+      return <ArticlesGrid articles={result.articles || []} title={result.title} />;
+    },
+  }, []);
+
+  // A2UI Widgets
+  useRenderToolCall({
+    name: "show_a2ui_job_card",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result?.a2ui) return <A2UILoading title="Rendering A2UI..." />;
+      return (
+        <div className="space-y-2">
+          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-medium">A2UI Widget</span>
+          <A2UIRenderer widget={result.a2ui} />
+        </div>
+      );
+    },
+  }, []);
+
+  useRenderToolCall({
+    name: "show_a2ui_stats_widget",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result?.a2ui) return <A2UILoading title="Rendering A2UI..." />;
+      return (
+        <div className="space-y-2">
+          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-medium">A2UI Widget</span>
+          <A2UIRenderer widget={result.a2ui} />
+        </div>
+      );
+    },
+  }, []);
 
   return (
     <div
       style={{ backgroundColor: themeColor }}
-      className="h-screen flex justify-center items-center flex-col transition-colors duration-300"
+      className="min-h-screen flex justify-center items-center flex-col transition-colors duration-300 p-8"
     >
-      <ProverbsCard state={state} setState={setState} />
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">
+          Fractional Executive Platform
+        </h1>
+        <p className="text-white/80 text-lg mb-4">
+          Voice + Chat powered by the full stack
+        </p>
+        <div className="flex gap-2 justify-center flex-wrap mb-6">
+          <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">Hume Voice</span>
+          <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">CopilotKit</span>
+          <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">AG-UI</span>
+          <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">A2UI</span>
+          <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">Neon DB</span>
+        </div>
+
+        {/* Voice Input Button */}
+        <div className="flex flex-col items-center gap-2 mb-6">
+          <VoiceInput onMessage={handleVoiceMessage} />
+          <p className="text-white/60 text-sm">Tap to speak</p>
+        </div>
+      </div>
+
+      <JobsCard state={state} />
+
+      {/* Architecture diagram */}
+      <div className="mt-8 text-center text-white/50 text-xs max-w-md">
+        <p className="font-mono">
+          Voice (Hume) → CopilotKit → AG-UI → Pydantic Agent → Neon DB → A2UI/Charts
+        </p>
+      </div>
     </div>
   );
 }
