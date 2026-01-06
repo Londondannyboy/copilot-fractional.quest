@@ -291,17 +291,23 @@ agent = Agent(
     These are SOFT SAVES - they update the profile graph immediately without confirmation.
 
     ## COMPANY CONFIRMATION (Human-in-the-Loop)
-    When user mentions a company they WORK AT or WORKED AT, call confirm_company:
+    You have access to a FRONTEND TOOL called confirm_company.
+    This is a HUMAN-IN-THE-LOOP action that pauses and asks the user to confirm.
+
+    When user mentions a company they WORK AT or WORKED AT, IMMEDIATELY call:
+    confirm_company(company_name="Sony", company_url="https://www.sony.com", user_id="...")
 
     | User says... | Action |
     |--------------|--------|
-    | "I work at Sony" | confirm_company(company_name="Sony") |
-    | "I was at McKinsey" | confirm_company(company_name="McKinsey") |
-    | "Currently at Google" | confirm_company(company_name="Google") |
+    | "I work at Sony" | confirm_company(company_name="Sony", company_url="https://www.sony.com", user_id=state.user.id) |
+    | "I was at McKinsey" | confirm_company(company_name="McKinsey", company_url="https://www.mckinsey.com", user_id=state.user.id) |
+    | "Currently at Google" | confirm_company(company_name="Google", company_url="https://www.google.com", user_id=state.user.id) |
 
-    This triggers a HITL prompt asking user to:
+    This triggers a HITL popup in the frontend asking user to:
     1. Confirm the company (with URL shown)
     2. Add their job title at that company
+
+    IMPORTANT: Use the user's actual ID from state.user.id!
 
     CRITICAL RULES:
     - "What is my name?" → CALL get_user_profile, then say their name!
@@ -568,44 +574,6 @@ async def save_user_preference(ctx: RunContext[StateDeps[AppState]], preference_
   except Exception as e:
     print(f"💾 Error saving preference: {e}", file=sys.stderr)
     return {"saved": False, "error": str(e)}
-
-
-@agent.tool
-def confirm_company(ctx: RunContext[StateDeps[AppState]], company_name: str, company_url: str = "") -> dict:
-  """Trigger Human-in-the-Loop confirmation for a company the user mentioned.
-  The frontend will show the company with URL and ask user to confirm + add job title.
-
-  IMPORTANT: Call this when user mentions they work/worked at a company.
-  Examples: "I work at Sony", "I was at Google", "Currently at McKinsey"
-
-  Args:
-    company_name: The company name to confirm
-    company_url: Optional company website URL for validation
-
-  Returns:
-    dict with company info - frontend will handle HITL confirmation
-  """
-  state = ctx.deps.state
-  user = state.user
-
-  if not user or not user.id:
-    return {"error": "User not logged in"}
-
-  # Try to find company URL if not provided
-  if not company_url:
-    # Simple URL guess based on company name
-    clean_name = company_name.lower().replace(" ", "").replace(".", "")
-    company_url = f"https://www.{clean_name}.com"
-
-  print(f"🏢 Triggering company confirmation HITL: {company_name}", file=sys.stderr)
-
-  return {
-    "needs_confirmation": True,
-    "company_name": company_name,
-    "company_url": company_url,
-    "user_id": user.id,
-    "message": f"Please confirm you work/worked at {company_name}"
-  }
 
 @agent.tool
 def get_jobs(ctx: RunContext[StateDeps[AppState]]) -> list[dict]:
