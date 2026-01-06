@@ -1,6 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
 
+export async function DELETE(request: NextRequest) {
+  const userId = request.nextUrl.searchParams.get("userId");
+  const itemId = request.nextUrl.searchParams.get("itemId");
+
+  if (!userId || !itemId) {
+    return NextResponse.json({ error: "userId and itemId required" }, { status: 400 });
+  }
+
+  try {
+    const sql = getDb();
+    await sql`
+      DELETE FROM user_profile_items
+      WHERE id = ${parseInt(itemId)} AND user_id = ${userId}
+    `;
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting profile item:", error);
+    return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
+  }
+}
+
 function getDb() {
   if (!process.env.DATABASE_URL) {
     throw new Error("DATABASE_URL not configured");
