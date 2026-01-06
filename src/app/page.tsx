@@ -9,6 +9,7 @@ import { ForceGraph3DComponent, ForceGraphLoading } from "@/components/ForceGrap
 import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
 import { VoiceInput } from "@/components/voice-input";
 import { DynamicBackground } from "@/components/DynamicBackground";
+import { LiveProfileGraph } from "@/components/LiveProfileGraph";
 import { AgentState } from "@/lib/types";
 import { useCoAgent, useRenderToolCall, useCopilotChat, useHumanInTheLoop } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
@@ -83,6 +84,13 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
       scene: undefined,  // Dynamic background scene
     },
   });
+
+  // Refresh trigger for live profile graph - increment to force update
+  const [profileRefreshTrigger, setProfileRefreshTrigger] = useState(0);
+  const refreshProfile = useCallback(() => {
+    setProfileRefreshTrigger(prev => prev + 1);
+    console.log("📊 Profile refresh triggered");
+  }, []);
 
   // Sync user to agent state when session changes (run once when user loads)
   useEffect(() => {
@@ -317,13 +325,21 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
             </div>
             <div className="flex gap-2">
               <button
-                onClick={() => respond({ confirmed: true, job_id: args.job_id })}
+                onClick={() => {
+                  respond({ confirmed: true, job_id: args.job_id });
+                  // Refresh profile graph after HITL confirmation
+                  setTimeout(() => refreshProfile(), 500);
+                }}
                 className="flex-1 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 Yes, save it
               </button>
               <button
-                onClick={() => respond({ confirmed: false, job_id: args.job_id })}
+                onClick={() => {
+                  respond({ confirmed: false, job_id: args.job_id });
+                  // Also refresh on rejection to update preferences
+                  setTimeout(() => refreshProfile(), 500);
+                }}
                 className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 Not now
@@ -337,6 +353,106 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
         return (
           <div className="p-2 text-sm text-gray-600 bg-gray-50 rounded-lg">
             {result.confirmed ? "Added to your saved jobs" : "Skipped"}
+          </div>
+        );
+      }
+
+      return <></>;
+    },
+  });
+
+  // Human-in-the-Loop: Company Confirmation
+  // When user mentions a company, confirm and get job title
+  const [companyJobTitle, setCompanyJobTitle] = useState("");
+  useHumanInTheLoop({
+    name: "confirm_company",
+    description: "Confirm user's company and get their job title",
+    parameters: [
+      { name: "company_name", type: "string", description: "The company name", required: true },
+      { name: "company_url", type: "string", description: "Company website URL", required: false },
+      { name: "user_id", type: "string", description: "User ID", required: true },
+    ],
+    render: ({ args, respond, status, result }) => {
+      if (status === "executing" && respond) {
+        return (
+          <div className="p-4 bg-white rounded-lg shadow-lg border border-orange-100 max-w-md">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">
+                Confirm Company
+              </span>
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-2">You worked at {args.company_name}?</h3>
+            <div className="bg-gray-50 rounded-lg p-3 mb-4">
+              <p className="font-medium text-gray-800">{args.company_name}</p>
+              {args.company_url && (
+                <a
+                  href={args.company_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  {args.company_url}
+                </a>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm text-gray-600 mb-1">Your job title there:</label>
+              <input
+                type="text"
+                value={companyJobTitle}
+                onChange={(e) => setCompanyJobTitle(e.target.value)}
+                placeholder="e.g., CTO, VP Engineering, Director"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+              />
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={async () => {
+                  // Save to Neon
+                  try {
+                    await fetch('/api/user-profile', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        userId: args.user_id,
+                        itemType: 'company',
+                        value: args.company_name,
+                        confirmed: true,
+                        metadata: {
+                          company_url: args.company_url,
+                          job_title: companyJobTitle || 'Not specified',
+                        }
+                      })
+                    });
+                  } catch (e) {
+                    console.error('Failed to save company:', e);
+                  }
+                  respond({ confirmed: true, company: args.company_name, job_title: companyJobTitle });
+                  setCompanyJobTitle("");
+                  setTimeout(() => refreshProfile(), 500);
+                }}
+                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              >
+                Yes, confirm
+              </button>
+              <button
+                onClick={() => {
+                  respond({ confirmed: false, company: args.company_name });
+                  setCompanyJobTitle("");
+                }}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors"
+              >
+                Not this company
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      if (status === "complete" && result) {
+        return (
+          <div className="p-2 text-sm text-gray-600 bg-gray-50 rounded-lg">
+            {result.confirmed ? `Added ${result.company} to your profile` : "Skipped"}
           </div>
         );
       }
@@ -383,27 +499,39 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
           </SignedIn>
         </div>
 
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">
-            {firstName ? `Hey ${firstName}!` : 'Fractional Executive Platform'}
+        {/* Main Content - Graph + Voice */}
+        <div className="flex flex-col items-center gap-6">
+          {/* Greeting */}
+          <h1 className="text-3xl font-bold text-white drop-shadow-lg text-center">
+            {firstName ? `Hey ${firstName}!` : 'Welcome'}
           </h1>
-          <p className="text-white/80 text-lg mb-4">
-            {firstName ? 'What can I help you find today?' : 'Voice + Chat powered by the full stack'}
-          </p>
-          <div className="flex gap-2 justify-center flex-wrap mb-6">
-            <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">Hume Voice</span>
-            <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">CopilotKit</span>
-            <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">AG-UI</span>
-            <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">A2UI</span>
-            <span className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur">Neon DB</span>
-            <span className="text-xs bg-purple-500/40 text-white px-3 py-1 rounded-full backdrop-blur">Zep Memory</span>
-            <span className="text-xs bg-indigo-500/40 text-white px-3 py-1 rounded-full backdrop-blur">3D Graph</span>
-          </div>
+
+          {/* Live Profile Graph - Loads independently, no AG-UI delay */}
+          <SignedIn>
+            <LiveProfileGraph
+              userId={user?.id}
+              userName={firstName || undefined}
+              refreshTrigger={profileRefreshTrigger}
+            />
+          </SignedIn>
+
+          {/* Not signed in - prompt */}
+          <SignedOut>
+            <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 text-center border border-white/10 max-w-sm">
+              <p className="text-white/80 mb-4">Sign in to see your profile graph</p>
+              <button
+                onClick={() => window.location.href = '/auth/sign-in'}
+                className="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg transition-colors"
+              >
+                Sign In
+              </button>
+            </div>
+          </SignedOut>
 
           {/* Voice Input Button */}
-          <div className="flex flex-col items-center gap-2 mb-6">
+          <div className="flex flex-col items-center gap-2">
             {isSessionLoading ? (
-              <div className="w-16 h-16 rounded-full bg-white/20 animate-pulse flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full bg-white/20 animate-pulse flex items-center justify-center">
                 <span className="text-white/60 text-xs">...</span>
               </div>
             ) : (
@@ -411,15 +539,15 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
             )}
             <p className="text-white/60 text-sm">{isSessionLoading ? 'Loading...' : 'Tap to speak'}</p>
           </div>
-        </div>
 
-        <JobsCard state={state} />
-
-        {/* Architecture diagram */}
-        <div className="mt-8 text-center text-white/50 text-xs max-w-md">
-          <p className="font-mono">
-            Voice (Hume) → CopilotKit → AG-UI → Pydantic Agent → Neon DB → A2UI/Charts
-          </p>
+          {/* Tech stack badges */}
+          <div className="flex gap-2 justify-center flex-wrap max-w-md">
+            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Hume</span>
+            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">CopilotKit</span>
+            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Pydantic AI</span>
+            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Zep</span>
+            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Neon</span>
+          </div>
         </div>
       </div>
     </CopilotSidebar>

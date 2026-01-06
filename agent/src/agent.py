@@ -9,6 +9,7 @@ import psycopg2
 import httpx
 import os
 import sys
+import re
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -132,6 +133,61 @@ async def store_conversation_message(session_id: str, user_id: str, role: str, c
     except Exception as e:
         print(f"[Zep] Error storing message: {e}", file=sys.stderr)
 
+
+# =====
+# Entity Extraction for Graph
+# =====
+LOCATIONS = ["london", "manchester", "birmingham", "leeds", "bristol", "edinburgh", "glasgow", "remote", "uk", "europe", "usa", "new york", "san francisco", "sydney", "dublin"]
+ROLES = ["cto", "cfo", "cmo", "coo", "cpo", "chro", "ciso", "ceo", "vp", "director", "head of", "chief", "founder", "partner"]
+INDUSTRIES = ["tech", "fintech", "saas", "ai", "finance", "healthcare", "retail", "ecommerce", "media", "consulting", "startup", "enterprise", "pharma"]
+SKILLS = ["python", "javascript", "react", "node", "aws", "cloud", "data", "analytics", "strategy", "leadership", "product", "marketing", "sales", "growth", "m&a", "fundraising"]
+
+def extract_entities_from_fact(fact: str) -> list[tuple[str, str]]:
+    """Extract clean entity labels from verbose Zep fact text.
+    Returns list of (label, type) tuples.
+    """
+    entities = []
+    fact_lower = fact.lower()
+
+    # Extract locations
+    for loc in LOCATIONS:
+        if loc in fact_lower:
+            label = loc.upper() if loc == "uk" or loc == "usa" else loc.title()
+            if loc == "new york":
+                label = "New York"
+            elif loc == "san francisco":
+                label = "San Francisco"
+            entities.append((label, "location"))
+
+    # Extract roles (use uppercase for C-suite)
+    for role in ROLES:
+        if role in fact_lower:
+            if role in ["cto", "cfo", "cmo", "coo", "cpo", "chro", "ciso", "ceo", "vp"]:
+                entities.append((role.upper(), "role"))
+            else:
+                entities.append((role.title(), "role"))
+
+    # Extract industries
+    for ind in INDUSTRIES:
+        if ind in fact_lower:
+            label = ind.upper() if ind in ["ai", "saas"] else ind.title()
+            entities.append((label, "interest"))
+
+    # Extract skills
+    for skill in SKILLS:
+        if skill in fact_lower:
+            label = skill.upper() if skill in ["aws", "ai"] else skill.title()
+            entities.append((label, "skill"))
+
+    # Extract experience (look for "X years" pattern)
+    years_match = re.search(r'(\d+)\s*(?:\+\s*)?years?', fact_lower)
+    if years_match:
+        years = years_match.group(1)
+        entities.append((f"{years}+ Years", "skill"))
+
+    return entities
+
+
 # =====
 # State
 # =====
@@ -223,13 +279,29 @@ agent = Agent(
     ALWAYS call set_ambient_scene when location or role is first mentioned in conversation!
 
     ## ONBOARDING - Saving User Info
-    When user tells you their location, role preference, or experience, SAVE IT:
+    When user tells you their location, role preference, or experience, SAVE IT immediately:
 
     | User says... | Call save_user_preference with... |
     |--------------|-----------------------------------|
     | "I'm in London" | preference_type="location", value="London" |
     | "I want CTO roles" | preference_type="role", value="CTO" |
-    | "15 years in tech" | preference_type="experience", value="15 years in tech" |
+    | "15 years in tech" | preference_type="experience", value="15 years" |
+    | "I know Python" | preference_type="skill", value="Python" |
+
+    These are SOFT SAVES - they update the profile graph immediately without confirmation.
+
+    ## COMPANY CONFIRMATION (Human-in-the-Loop)
+    When user mentions a company they WORK AT or WORKED AT, call confirm_company:
+
+    | User says... | Action |
+    |--------------|--------|
+    | "I work at Sony" | confirm_company(company_name="Sony") |
+    | "I was at McKinsey" | confirm_company(company_name="McKinsey") |
+    | "Currently at Google" | confirm_company(company_name="Google") |
+
+    This triggers a HITL prompt asking user to:
+    1. Confirm the company (with URL shown)
+    2. Add their job title at that company
 
     CRITICAL RULES:
     - "What is my name?" → CALL get_user_profile, then say their name!
@@ -432,11 +504,12 @@ def get_page_info(ctx: RunContext[StateDeps[AppState]]) -> dict:
 
 @agent.tool
 async def save_user_preference(ctx: RunContext[StateDeps[AppState]], preference_type: str, value: str) -> dict:
-  """Save a user preference to their profile. Call this after the user tells you their location, role preference, or experience.
+  """Save a user preference to their profile (soft save - no confirmation needed).
+  This updates the profile graph immediately.
 
   Args:
-    preference_type: One of 'location', 'role', or 'experience'
-    value: The value they provided (e.g., 'London', 'CTO', '15 years in tech')
+    preference_type: One of 'location', 'role_preference', 'skill', or 'experience'
+    value: The value they provided (e.g., 'London', 'CTO', 'Python')
 
   Returns:
     Confirmation that preference was saved
@@ -447,27 +520,92 @@ async def save_user_preference(ctx: RunContext[StateDeps[AppState]], preference_
   if not user or not user.id:
     return {"saved": False, "message": "User not logged in"}
 
-  # Store as a message to Zep - it will extract as a fact
-  fact_messages = {
-    "location": f"User is based in {value}",
-    "role": f"User is interested in {value} roles",
-    "experience": f"User has {value}",
+  # Map preference_type to item_type for database
+  item_type_map = {
+    "location": "location",
+    "role": "role_preference",
+    "role_preference": "role_preference",
+    "skill": "skill",
+    "experience": "skill",  # Store experience as skill type
   }
-
-  message = fact_messages.get(preference_type, f"User preference: {value}")
+  item_type = item_type_map.get(preference_type, preference_type)
 
   try:
+    # Save to Neon database via API (soft save, confirmed=false for auto-detected)
+    async with httpx.AsyncClient() as client:
+      # Use internal API - in production this would be the deployed URL
+      api_url = os.getenv("NEXT_PUBLIC_APP_URL", "http://localhost:3000")
+      response = await client.post(
+        f"{api_url}/api/user-profile",
+        json={
+          "userId": user.id,
+          "itemType": item_type,
+          "value": value,
+          "confirmed": False,  # Soft save - auto-detected
+          "metadata": {"source": "auto_detected"}
+        },
+        timeout=5.0
+      )
+      if response.status_code == 200:
+        print(f"💾 Saved to Neon: {item_type}={value}", file=sys.stderr)
+
+    # Also store to Zep for memory context
+    fact_messages = {
+      "location": f"User is based in {value}",
+      "role_preference": f"User is interested in {value} roles",
+      "skill": f"User has experience with {value}",
+    }
+    message = fact_messages.get(item_type, f"User preference: {value}")
     await store_conversation_message(
-      session_id=f"onboarding_{user.id}",
+      session_id=f"profile_{user.id}",
       user_id=user.id,
       role="user",
       content=message
     )
-    print(f"💾 Saved preference: {preference_type}={value} for user {user.id}", file=sys.stderr)
-    return {"saved": True, "type": preference_type, "value": value}
+
+    print(f"💾 Saved preference: {item_type}={value} for user {user.id}", file=sys.stderr)
+    return {"saved": True, "type": item_type, "value": value, "graph_updated": True}
   except Exception as e:
     print(f"💾 Error saving preference: {e}", file=sys.stderr)
     return {"saved": False, "error": str(e)}
+
+
+@agent.tool
+def confirm_company(ctx: RunContext[StateDeps[AppState]], company_name: str, company_url: str = "") -> dict:
+  """Trigger Human-in-the-Loop confirmation for a company the user mentioned.
+  The frontend will show the company with URL and ask user to confirm + add job title.
+
+  IMPORTANT: Call this when user mentions they work/worked at a company.
+  Examples: "I work at Sony", "I was at Google", "Currently at McKinsey"
+
+  Args:
+    company_name: The company name to confirm
+    company_url: Optional company website URL for validation
+
+  Returns:
+    dict with company info - frontend will handle HITL confirmation
+  """
+  state = ctx.deps.state
+  user = state.user
+
+  if not user or not user.id:
+    return {"error": "User not logged in"}
+
+  # Try to find company URL if not provided
+  if not company_url:
+    # Simple URL guess based on company name
+    clean_name = company_name.lower().replace(" ", "").replace(".", "")
+    company_url = f"https://www.{clean_name}.com"
+
+  print(f"🏢 Triggering company confirmation HITL: {company_name}", file=sys.stderr)
+
+  return {
+    "needs_confirmation": True,
+    "company_name": company_name,
+    "company_url": company_url,
+    "user_id": user.id,
+    "message": f"Please confirm you work/worked at {company_name}"
+  }
 
 @agent.tool
 def get_jobs(ctx: RunContext[StateDeps[AppState]]) -> list[dict]:
@@ -860,32 +998,27 @@ async def show_user_graph(ctx: RunContext[StateDeps[AppState]]) -> dict:
           if not fact:
             continue
 
-          # Determine node type from edge name
-          node_type = "fact"
-          if "INTEREST" in edge_name or "interest" in fact.lower():
-            node_type = "interest"
-          elif "ROLE" in edge_name or any(r in fact.upper() for r in ["CTO", "CFO", "CMO", "COO", "CHRO"]):
-            node_type = "role"
-          elif "LOCATION" in edge_name or any(loc in fact for loc in ["London", "Manchester", "Bristol", "Remote"]):
-            node_type = "location"
-          elif "SKILL" in edge_name or "experience" in fact.lower():
-            node_type = "skill"
+          # Extract clean entities from fact text
+          fact_lower = fact.lower()
+          extracted = extract_entities_from_fact(fact)
 
-          node_id = f"node_{i}"
-          # Truncate long facts
-          label = fact[:40] + "..." if len(fact) > 40 else fact
+          for entity_label, entity_type in extracted:
+            # Deduplicate by checking if label already exists
+            if any(n.get("label", "").lower() == entity_label.lower() for n in nodes):
+              continue
 
-          nodes.append({
-            "id": node_id,
-            "type": node_type,
-            "label": label
-          })
-          edges.append({
-            "source": "user",
-            "target": node_id,
-            "type": edge_name,
-            "label": edge_name.replace("_", " ").title()
-          })
+            node_id = f"node_{len(nodes)}"
+            nodes.append({
+              "id": node_id,
+              "type": entity_type,
+              "label": entity_label
+            })
+            edges.append({
+              "source": "user",
+              "target": node_id,
+              "type": edge_name,
+              "label": edge_name.replace("_", " ").title()
+            })
   except Exception as e:
     print(f"🌌 Error fetching Zep facts: {e}", file=sys.stderr)
 
