@@ -1051,14 +1051,47 @@ async def stream_sse_response(content: str, msg_id: str):
     yield "data: [DONE]\n\n"
 
 
-async def run_agent_for_clm(user_message: str, state: AppState) -> str:
-    """Run the Pydantic AI agent and return the text response."""
+async def run_agent_for_clm(user_message: str, state: AppState, conversation_history: list = None) -> str:
+    """Run the Pydantic AI agent and return the text response.
+
+    Args:
+        user_message: The latest user message
+        state: Current app state with user profile
+        conversation_history: List of previous messages for context
+    """
     try:
-        # Build the full message history
         from pydantic_ai.ag_ui import StateDeps
+        from pydantic_ai.messages import ModelMessage, ModelRequest, UserPromptPart
 
         deps = StateDeps(state)
-        result = await agent.run(user_message, deps=deps)
+
+        # Build message history for multi-turn context
+        message_history = []
+        if conversation_history:
+            for msg in conversation_history[:-1]:  # Exclude last (current) message
+                role = msg.get("role", "user")
+                content = msg.get("content", "")
+                if isinstance(content, str) and content.strip():
+                    # Convert to Pydantic AI message format
+                    if role == "user":
+                        message_history.append(
+                            ModelRequest(parts=[UserPromptPart(content=content)])
+                        )
+                    elif role == "assistant":
+                        # For assistant messages, we need ModelResponse
+                        from pydantic_ai.messages import ModelResponse, TextPart
+                        message_history.append(
+                            ModelResponse(parts=[TextPart(content=content)])
+                        )
+
+        print(f"[CLM] Running agent with {len(message_history)} history messages", file=sys.stderr)
+
+        # Run agent with history
+        result = await agent.run(
+            user_message,
+            deps=deps,
+            message_history=message_history if message_history else None
+        )
 
         # Extract text from result
         if hasattr(result, 'data') and result.data:
@@ -1069,6 +1102,8 @@ async def run_agent_for_clm(user_message: str, state: AppState) -> str:
             return str(result)
     except Exception as e:
         print(f"[CLM] Agent error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
         return ""
 
 
@@ -1154,8 +1189,8 @@ async def clm_endpoint(request: Request):
         page_context=page_ctx,
     )
 
-    # Run the agent
-    response_text = await run_agent_for_clm(user_msg, state)
+    # Run the agent with conversation history
+    response_text = await run_agent_for_clm(user_msg, state, conversation_history=messages)
 
     # Fallback if agent fails
     if not response_text:
