@@ -3,7 +3,7 @@
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, AreaChart, Area, Legend,
-  RadialBarChart, RadialBar
+  RadialBarChart, RadialBar, PieLabelRenderProps
 } from "recharts";
 
 const COLORS = ["#6366f1", "#8b5cf6", "#a855f7", "#d946ef", "#ec4899", "#f43f5e", "#f97316", "#eab308"];
@@ -54,7 +54,7 @@ export function JobsPieChart({ data, title, subtitle }: { data: ChartData; title
             outerRadius={100}
             paddingAngle={2}
             dataKey="jobs"
-            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+            label={(props: PieLabelRenderProps) => `${props.name || ''} ${((props.percent || 0) * 100).toFixed(0)}%`}
             labelLine={{ stroke: '#9ca3af' }}
           >
             {data.map((_, index) => (
@@ -93,7 +93,7 @@ export function SalaryAreaChart({ data, title, subtitle }: { data: SalaryData; t
           <YAxis tick={{ fill: '#6b7280', fontSize: 11 }} />
           <Tooltip
             contentStyle={{ backgroundColor: '#1f2937', border: 'none', borderRadius: '8px', color: 'white' }}
-            formatter={(value: number) => [`£${value}/day`, '']}
+            formatter={(value) => [`£${value || 0}/day`, '']}
           />
           <Legend />
           <Area type="monotone" dataKey="max" stroke="#6366f1" fill="url(#colorMax)" strokeWidth={2} name="Max Rate" />

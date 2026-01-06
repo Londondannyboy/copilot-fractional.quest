@@ -68,6 +68,20 @@ export function A2UIRenderer({ widget }: { widget: A2UIComponent }) {
           primary: "bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition-colors",
           secondary: "bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium transition-colors",
         };
+        // If button has URL, make it a link
+        if (comp.url) {
+          return (
+            <a
+              key={key}
+              href={comp.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonVariants[comp.variant || "primary"]}
+            >
+              {comp.label}
+            </a>
+          );
+        }
         return (
           <button
             key={key}
@@ -75,6 +89,19 @@ export function A2UIRenderer({ widget }: { widget: A2UIComponent }) {
           >
             {comp.label}
           </button>
+        );
+
+      case "link":
+        return (
+          <a
+            key={key}
+            href={comp.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-600 hover:text-indigo-800 underline px-4 py-1"
+          >
+            {comp.text || comp.label}
+          </a>
         );
 
       case "divider":

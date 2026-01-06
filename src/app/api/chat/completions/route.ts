@@ -1,105 +1,302 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL!);
+// CLM endpoint for Hume EVI - proxies to Pydantic AI agent
+// This makes voice use the SAME brain as the CopilotKit chat
 
-// OpenAI-compatible CLM endpoint for Hume EVI
+const AGENT_URL = process.env.AGENT_URL || 'http://localhost:8000';
+const ZEP_API_KEY = process.env.ZEP_API_KEY || '';
+
+interface OpenAIMessage {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+}
+
+interface AGUIMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system' | 'developer';
+  content: string;
+}
+
+// Fetch Zep context for the user
+async function getZepContext(userId: string): Promise<string> {
+  if (!userId || !ZEP_API_KEY) return '';
+
+  try {
+    const response = await fetch('https://api.getzep.com/api/v2/graph/search', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Api-Key ${ZEP_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        query: 'user preferences interests roles locations experience',
+        limit: 10,
+        scope: 'edges',
+      }),
+    });
+
+    if (!response.ok) return '';
+
+    const data = await response.json();
+    const edges = data.edges || [];
+    const facts = edges.slice(0, 5).map((e: any) => `- ${e.fact}`).filter(Boolean);
+
+    if (facts.length > 0) {
+      return `\n\nWhat I remember about you:\n${facts.join('\n')}`;
+    }
+    return '';
+  } catch {
+    return '';
+  }
+}
+
+// Parse SSE stream and extract text content
+async function parseSSEStream(response: Response): Promise<string> {
+  const reader = response.body?.getReader();
+  if (!reader) return '';
+
+  const decoder = new TextDecoder();
+  let content = '';
+  let buffer = '';
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      // Process complete lines
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || ''; // Keep incomplete line in buffer
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          try {
+            const data = JSON.parse(line.slice(6));
+
+            // Extract text content from various event types
+            if (data.type === 'TEXT_MESSAGE_CONTENT' || data.type === 'TextMessageContent') {
+              content += data.content || data.delta || '';
+            }
+            // Handle Pydantic AI streaming format
+            else if (data.delta?.content) {
+              content += data.delta.content;
+            }
+            // Handle direct content
+            else if (data.content && typeof data.content === 'string') {
+              content += data.content;
+            }
+          } catch {
+            // Skip non-JSON data lines
+          }
+        }
+      }
+    }
+  } finally {
+    reader.releaseLock();
+  }
+
+  return content.trim();
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const messages = body.messages || [];
+    const messages: OpenAIMessage[] = body.messages || [];
 
-    // Get the last user message
-    const userMessage = messages.filter((m: any) => m.role === 'user').pop();
-    const query = userMessage?.content?.toLowerCase() || '';
+    // Extract metadata from Hume (custom session ID format: "firstName|fractional_userId|pageContext")
+    // Hume sends custom_session_id in the request body
+    const customSessionId = body.custom_session_id || body.session_id || '';
+    const sessionParts = customSessionId.split('|');
+    const firstName = sessionParts[0] || '';
+    const sessionPart = sessionParts[1] || '';
+    const userId = sessionPart?.replace('fractional_', '') || '';
 
-    console.log('[CLM] Received:', query);
-
-    // Extract role type from query
-    let roleFilter = '';
-    if (query.includes('cto') || query.includes('technology') || query.includes('tech')) {
-      roleFilter = 'CTO';
-    } else if (query.includes('cfo') || query.includes('finance') || query.includes('financial')) {
-      roleFilter = 'CFO';
-    } else if (query.includes('cmo') || query.includes('marketing')) {
-      roleFilter = 'CMO';
-    } else if (query.includes('coo') || query.includes('operations')) {
-      roleFilter = 'COO';
-    } else if (query.includes('chro') || query.includes('hr') || query.includes('people')) {
-      roleFilter = 'CHRO';
+    // Parse page context if included (format: "location:London,jobs:25")
+    const pageContextStr = sessionParts[2] || '';
+    let pageContext: { location?: string; totalJobs?: number } | null = null;
+    if (pageContextStr) {
+      const parts = pageContextStr.split(',');
+      pageContext = {};
+      parts.forEach((p: string) => {
+        const [key, val] = p.split(':');
+        if (key === 'location') pageContext!.location = val;
+        if (key === 'jobs') pageContext!.totalJobs = parseInt(val, 10);
+      });
     }
 
-    let response = '';
+    // Also check for X-Page-Context header (fallback)
+    const headerContext = req.headers.get('x-page-context');
+    if (headerContext && !pageContext) {
+      try {
+        pageContext = JSON.parse(headerContext);
+      } catch { /* ignore */ }
+    }
 
-    if (roleFilter || query.includes('job') || query.includes('role') || query.includes('position')) {
-      // Search for jobs
-      const jobs = roleFilter
-        ? await sql`SELECT title, company, location, salary_min, salary_max, description FROM test_jobs WHERE role_type ILIKE ${`%${roleFilter}%`} OR title ILIKE ${`%${roleFilter}%`} LIMIT 5`
-        : await sql`SELECT title, company, location, salary_min, salary_max, description FROM test_jobs LIMIT 5`;
+    // Get the conversation history
+    const userMessages = messages.filter(m => m.role === 'user');
+    const lastUserMessage = userMessages[userMessages.length - 1]?.content || '';
 
-      console.log('[CLM] Found jobs:', jobs.length);
+    console.log('[CLM] Received from Hume:', lastUserMessage.slice(0, 100));
+    console.log('[CLM] User:', firstName || 'anonymous', 'Session:', sessionPart || 'none');
 
-      if (jobs.length > 0) {
-        response = `I found ${jobs.length} ${roleFilter || 'fractional executive'} positions:\n\n`;
-        jobs.forEach((job: any, i: number) => {
-          const salary = job.salary_min && job.salary_max
-            ? `£${Math.round(job.salary_min/1000)}k-£${Math.round(job.salary_max/1000)}k`
-            : '';
-          response += `${i + 1}. ${job.title} at ${job.company} in ${job.location}. ${salary ? `Salary: ${salary}.` : ''} ${job.description?.slice(0, 100) || ''}\n\n`;
+    // Fetch Zep context if we have a user ID
+    const zepContext = userId ? await getZepContext(userId) : '';
+
+    // Build AG-UI compatible message array
+    const aguiMessages: AGUIMessage[] = [];
+
+    // Build page context string
+    let pageContextString = '';
+    if (pageContext?.location) {
+      pageContextString = `
+PAGE CONTEXT - CRITICAL:
+🎯 User is currently on the ${pageContext.location.toUpperCase()} JOBS PAGE
+- When they say "jobs here", "these roles", "what's available" → they mean ${pageContext.location}
+${pageContext.totalJobs ? `- There are ${pageContext.totalJobs} jobs on this page` : ''}
+- Always reference "${pageContext.location}" when discussing jobs with them
+`;
+    }
+
+    // Add system context as a developer message
+    const systemContext = `You are a helpful career advisor for a fractional executive jobs platform.
+${firstName ? `The user's name is ${firstName}.` : ''}
+${zepContext}
+${pageContextString}
+
+IMPORTANT: Keep responses concise for voice - 1-2 sentences unless more detail is requested.
+Use emojis sparingly: 🔥 for hot roles, 💰 for salary, 📍 for location.
+When user asks about jobs, USE THE search_jobs TOOL to find real jobs from the database!`;
+
+    aguiMessages.push({
+      id: `sys_${Date.now()}`,
+      role: 'developer',
+      content: systemContext,
+    });
+
+    // Convert OpenAI messages to AG-UI format
+    messages.forEach((msg, idx) => {
+      aguiMessages.push({
+        id: `msg_${idx}_${Date.now()}`,
+        role: msg.role === 'system' ? 'developer' : msg.role,
+        content: msg.content,
+      });
+    });
+
+    // Build the AG-UI request body
+    const agentRequestBody = {
+      messages: aguiMessages,
+      runId: `run_${Date.now()}`,
+      threadId: sessionPart || `thread_${Date.now()}`,
+      state: {
+        jobs: [],
+        search_query: '',
+        user: userId ? { id: userId, name: firstName } : null,
+        page_context: pageContext ? {
+          page_type: `jobs_${pageContext.location?.toLowerCase() || 'all'}`,
+          location_filter: pageContext.location || null,
+          total_jobs: pageContext.totalJobs || null,
+        } : null,
+      },
+    };
+
+    console.log('[CLM] Calling Pydantic AI agent at:', AGENT_URL);
+
+    // Call the Pydantic AI agent
+    const agentResponse = await fetch(AGENT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'text/event-stream',
+      },
+      body: JSON.stringify(agentRequestBody),
+    });
+
+    if (!agentResponse.ok) {
+      console.error('[CLM] Agent error:', agentResponse.status, agentResponse.statusText);
+      throw new Error(`Agent returned ${agentResponse.status}`);
+    }
+
+    // Parse the SSE stream and extract text content
+    const responseText = await parseSSEStream(agentResponse);
+
+    console.log('[CLM] Agent response:', responseText.slice(0, 100));
+
+    // Store conversation to Zep in real-time (backup to webhook)
+    if (userId && ZEP_API_KEY) {
+      try {
+        // Store user message
+        await fetch('https://api.getzep.com/api/v2/sessions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Api-Key ${ZEP_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            session_id: `voice_${sessionPart}`,
+            user_id: userId,
+            metadata: { source: 'hume_clm', page: pageContext?.location || 'main' },
+          }),
         });
-        response += 'Would you like more details on any of these positions?';
-      } else {
-        response = `I don't have any ${roleFilter || ''} jobs matching that criteria right now. Would you like me to search for something else?`;
-      }
-    } else if (query.includes('market') || query.includes('stats') || query.includes('overview')) {
-      // Market stats
-      const stats = await sql`SELECT role_type, COUNT(*) as count FROM test_jobs GROUP BY role_type ORDER BY count DESC`;
-      const total = await sql`SELECT COUNT(*) as total FROM test_jobs`;
 
-      response = `Here's the current market overview. We have ${total[0]?.total || 0} active fractional executive positions. `;
-      response += `By role type: ${stats.map((s: any) => `${s.count} ${s.role_type}`).join(', ')}. `;
-      response += 'What role are you interested in?';
-    } else {
-      // Default greeting
-      response = `Hello! I'm your fractional executive job assistant. I can help you find CTO, CFO, CMO, COO, and CHRO positions. What type of role are you looking for?`;
+        // Store the exchange
+        await fetch(`https://api.getzep.com/api/v2/sessions/voice_${sessionPart}/messages`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Api-Key ${ZEP_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify([
+            { role_type: 'user', content: lastUserMessage },
+            { role_type: 'assistant', content: responseText },
+          ]),
+        });
+        console.log('[CLM] Stored exchange to Zep');
+      } catch (e) {
+        console.warn('[CLM] Failed to store to Zep:', e);
+      }
     }
 
-    // Return OpenAI-compatible response
+    // Return OpenAI-compatible response for Hume
     return NextResponse.json({
       id: `chatcmpl-${Date.now()}`,
       object: 'chat.completion',
       created: Math.floor(Date.now() / 1000),
-      model: 'fractional-clm',
+      model: 'pydantic-ai-agent',
       choices: [{
         index: 0,
         message: {
           role: 'assistant',
-          content: response
+          content: responseText || "I'm here to help you find fractional executive roles. What type of position interests you?",
         },
-        finish_reason: 'stop'
+        finish_reason: 'stop',
       }],
       usage: {
-        prompt_tokens: query.length,
-        completion_tokens: response.length,
-        total_tokens: query.length + response.length
-      }
+        prompt_tokens: lastUserMessage.length,
+        completion_tokens: responseText.length,
+        total_tokens: lastUserMessage.length + responseText.length,
+      },
     });
 
   } catch (error: any) {
-    console.error('[CLM] Error:', error);
+    console.error('[CLM] Error:', error.message);
+
+    // Fallback response
     return NextResponse.json({
       id: `chatcmpl-${Date.now()}`,
       object: 'chat.completion',
       created: Math.floor(Date.now() / 1000),
-      model: 'fractional-clm',
+      model: 'fractional-clm-fallback',
       choices: [{
         index: 0,
         message: {
           role: 'assistant',
-          content: 'I apologize, I encountered an error searching for jobs. Could you try again?'
+          content: "I'm having trouble connecting to my brain right now. Could you try again in a moment?",
         },
-        finish_reason: 'stop'
-      }]
+        finish_reason: 'stop',
+      }],
     });
   }
 }

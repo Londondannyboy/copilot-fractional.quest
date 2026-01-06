@@ -3,37 +3,81 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { VoiceProvider, useVoice } from "@humeai/voice-react";
 
+interface PageContext {
+  location?: string;
+  totalJobs?: number;
+  topRoles?: string[];
+}
+
+interface VoiceButtonProps {
+  onMessage: (text: string, role?: "user" | "assistant") => void;
+  firstName?: string | null;
+  userId?: string | null;  // For stable session ID
+  pageContext?: PageContext;  // Context about current page
+}
+
+// Session storage keys for persistence across remounts
+const SESSION_GREETED_KEY = 'hume_greeted_session';
+const SESSION_LAST_INTERACTION_KEY = 'hume_last_interaction';
+
+// Helper to get/set session storage safely (SSR-safe)
+function getSessionValue(key: string, defaultValue: number | boolean): number | boolean {
+  if (typeof window === 'undefined') return defaultValue;
+  const stored = sessionStorage.getItem(key);
+  if (stored === null) return defaultValue;
+  return key.includes('time') ? parseInt(stored, 10) : stored === 'true';
+}
+
+function setSessionValue(key: string, value: number | boolean): void {
+  if (typeof window === 'undefined') return;
+  sessionStorage.setItem(key, String(value));
+}
+
 // Inner component using voice hook
-function VoiceButton({ onMessage }: { onMessage: (text: string) => void }) {
-  const { connect, disconnect, status, messages, error } = useVoice();
+function VoiceButton({ onMessage, firstName, userId, pageContext }: VoiceButtonProps) {
+  const { connect, disconnect, status, messages, error, sendUserInput } = useVoice();
   const [isPending, setIsPending] = useState(false);
   const lastSentMsgId = useRef<string | null>(null);
+
+  // Use sessionStorage-backed refs for persistence across remounts
+  const greetedThisSession = useRef(getSessionValue(SESSION_GREETED_KEY, false) as boolean);
+  const lastInteractionTime = useRef(getSessionValue(SESSION_LAST_INTERACTION_KEY, 0) as number);
 
   // Debug logging
   useEffect(() => {
     console.log("🔊 Voice status:", status.value, error);
   }, [status, error]);
 
-  // Forward ONLY new user messages to CopilotKit (avoid duplicates)
+  // Forward BOTH user AND assistant messages to CopilotKit for full context
   useEffect(() => {
-    const userMsgs = messages.filter(
-      (m: any) => m.type === "user_message" && m.message?.content
+    // Get all conversation messages (user + assistant)
+    const conversationMsgs = messages.filter(
+      (m: any) => (m.type === "user_message" || m.type === "assistant_message") && m.message?.content
     );
-    if (userMsgs.length > 0) {
-      const lastMsg = userMsgs[userMsgs.length - 1] as any;
-      const msgId = lastMsg?.id || `${userMsgs.length}-${lastMsg?.message?.content}`;
+
+    if (conversationMsgs.length > 0) {
+      const lastMsg = conversationMsgs[conversationMsgs.length - 1] as any;
+      const msgId = lastMsg?.id || `${conversationMsgs.length}-${lastMsg?.message?.content?.slice(0, 20)}`;
 
       // Only send if this is a new message we haven't sent before
       if (lastMsg?.message?.content && msgId !== lastSentMsgId.current) {
-        console.log("🎤 Forwarding to CopilotKit:", lastMsg.message.content);
+        const isUser = lastMsg.type === "user_message";
+        console.log(`🎤 Forwarding ${isUser ? 'user' : 'assistant'} to CopilotKit:`, lastMsg.message.content.slice(0, 50));
         lastSentMsgId.current = msgId;
-        onMessage(lastMsg.message.content);
+
+        // Forward FULL content to CopilotKit with role indicator
+        // This fixes the truncation issue - Pydantic AI now sees complete voice transcript
+        onMessage(lastMsg.message.content, isUser ? "user" : "assistant");
       }
     }
   }, [messages, onMessage]);
 
   const handleToggle = useCallback(async () => {
     if (status.value === "connected") {
+      // Track disconnect time for returning user detection - persist to sessionStorage
+      const now = Date.now();
+      lastInteractionTime.current = now;
+      setSessionValue(SESSION_LAST_INTERACTION_KEY, now);
       disconnect();
     } else {
       setIsPending(true);
@@ -41,19 +85,152 @@ function VoiceButton({ onMessage }: { onMessage: (text: string) => void }) {
         console.log("🎤 Fetching Hume token...");
         const res = await fetch("/api/hume-token");
         const { accessToken } = await res.json();
-        console.log("🎤 Got token, connecting with configId...");
+
+        // Fetch Zep context if user is logged in
+        let zepContext = "";
+        if (userId) {
+          try {
+            const zepRes = await fetch(`/api/zep-context?userId=${userId}`);
+            const zepData = await zepRes.json();
+            if (zepData.context) {
+              zepContext = zepData.context;
+              console.log("🧠 Zep context loaded:", zepData.facts?.length || 0, "facts");
+            }
+          } catch (e) {
+            console.warn("Failed to fetch Zep context:", e);
+          }
+        }
+
+        // Detect if this is a quick reconnect (< 5 mins)
+        const timeSinceLastInteraction = lastInteractionTime.current > 0
+          ? Date.now() - lastInteractionTime.current
+          : Infinity;
+        const isQuickReconnect = timeSinceLastInteraction < 5 * 60 * 1000; // 5 minutes
+        const wasGreeted = greetedThisSession.current;
+
+        // Build system prompt with STRONG anti-re-greeting logic
+        let greetingInstruction = "";
+        if (wasGreeted || isQuickReconnect) {
+          greetingInstruction = `⚠️ CRITICAL - DO NOT GREET:
+This user has ALREADY been greeted in this session.
+- DO NOT say "Hi ${firstName}", "Hello", "Hey there", or any greeting
+- DO NOT introduce yourself
+- DO NOT say "lovely to meet you" or "nice to meet you"
+- Simply continue the conversation naturally
+- If you must acknowledge them, just say "I'm here" or "What's next?"
+Previous greeting was ${Math.round(timeSinceLastInteraction / 1000)}s ago - they're the SAME person, same session.`;
+        } else {
+          greetingInstruction = firstName
+            ? `This is the FIRST connection. Greet once: "Hi ${firstName}!" - but NEVER re-greet after this.`
+            : `This is the FIRST connection. Give a brief warm greeting - but NEVER re-greet after this.`;
+        }
+
+        // Build page context section
+        let pageContextSection = "";
+        if (pageContext?.location) {
+          pageContextSection = `
+PAGE_CONTEXT:
+User is viewing: ${pageContext.location.toUpperCase()} JOBS PAGE
+${pageContext.totalJobs ? `- Total jobs on page: ${pageContext.totalJobs}` : ''}
+${pageContext.topRoles?.length ? `- Top roles: ${pageContext.topRoles.join(', ')}` : ''}
+
+When the user says "jobs here", "these roles", "this area" - they mean ${pageContext.location}.
+When they ask to "show more" - search for more ${pageContext.location} jobs.
+Greet them mentioning ${pageContext.location}: "I see you're exploring ${pageContext.location} roles!"
+`;
+        }
+
+        const systemPrompt = `## YOUR ROLE
+You are the VOICE INTERFACE for a fractional executive jobs platform.
+Your job is to have natural conversations and help users explore jobs.
+
+## USER PROFILE
+${firstName ? `Name: ${firstName}` : 'Guest user'}
+${zepContext ? `\n### What I Remember About ${firstName || 'You'}:\n${zepContext}\n` : '\n### No prior history - this is their first visit.\n'}
+
+${pageContextSection}
+
+## GREETING RULES
+${greetingInstruction}
+
+## CRITICAL CONTEXT AWARENESS
+${pageContext?.location ? `
+🎯 USER IS ON THE ${pageContext.location.toUpperCase()} JOBS PAGE
+- When they say "jobs here", "these roles", "what's available" → ${pageContext.location} jobs
+- Total jobs on this page: ${pageContext.totalJobs || 'checking...'}
+- Top roles: ${pageContext.topRoles?.join(', ') || 'various C-suite'}
+- Always mention "${pageContext.location}" when discussing jobs
+` : '- User is on the main page'}
+
+## BEHAVIOR GUIDELINES
+1. Reference the PAGE CONTEXT above - they're on a specific location page!
+2. Reference their ZEP MEMORY if available - mention their past interests
+3. Be specific: "I see ${pageContext?.totalJobs || 'several'} roles here in ${pageContext?.location || 'the UK'}..."
+4. When they express interest ("I like CTO", "that looks good"), confirm and remember it
+5. Use emojis sparingly: 🔥 for hot roles, 💰 for salary, 📍 for location
+6. Keep responses SHORT for voice - 1-2 sentences max unless they ask for details
+
+## ONBOARDING (if no Zep memory)
+If this is their first visit, gently ask about:
+- What role type interests them? (CTO, CFO, CMO, etc.)
+- Preferred location? (London, Remote, etc.)
+- Experience level?
+Then confirm: "So you're interested in [role] in [location] - I'll remember that!"
+`;
+
+        // Use stable session ID based on user ID
+        const stableSessionId = userId
+          ? `fractional_${userId}`
+          : `fractional_anon_${Math.random().toString(36).slice(2, 10)}`;
+
+        // Include page context in session ID for CLM (format: "firstName|sessionId|location:X,jobs:Y")
+        let pageContextPart = '';
+        if (pageContext?.location) {
+          const parts = [`location:${pageContext.location}`];
+          if (pageContext.totalJobs) parts.push(`jobs:${pageContext.totalJobs}`);
+          pageContextPart = `|${parts.join(',')}`;
+        }
+
+        const customSessionId = firstName
+          ? `${firstName}|${stableSessionId}${pageContextPart}`
+          : `|${stableSessionId}${pageContextPart}`;
+
+        console.log("🎤 Got token, connecting with configId and user context:", firstName || 'anonymous');
+        console.log("🎤 Session ID:", customSessionId);
+        console.log("🎤 Quick reconnect?", isQuickReconnect, "Was greeted?", wasGreeted);
         await connect({
           auth: { type: "accessToken", value: accessToken },
-          configId: "acb5575c-e22f-44c0-a9c8-b03305d1ea92"  // CLM using simple-clm.vercel.app
+          configId: "acb5575c-e22f-44c0-a9c8-b03305d1ea92",
+          sessionSettings: {
+            type: "session_settings",
+            systemPrompt: systemPrompt,
+            customSessionId: customSessionId,
+          }
         });
         console.log("🎤 Connect call completed");
+
+        // Mark that we've greeted this session (only trigger greeting on FIRST connection)
+        if (!wasGreeted && !isQuickReconnect && firstName) {
+          setTimeout(() => {
+            console.log("🎤 FIRST connection - triggering greeting for:", firstName);
+            greetedThisSession.current = true;
+            setSessionValue(SESSION_GREETED_KEY, true);
+            sendUserInput(`Hello, my name is ${firstName}`);
+          }, 500);
+        } else {
+          // RECONNECTION - do NOT send any input, just mark as greeted
+          console.log("🎤 RECONNECTION detected - NOT re-greeting. wasGreeted:", wasGreeted, "quickReconnect:", isQuickReconnect);
+          greetedThisSession.current = true;
+          setSessionValue(SESSION_GREETED_KEY, true);
+          // Don't call sendUserInput at all!
+        }
       } catch (e) {
         console.error("Voice connect error:", e);
       } finally {
         setIsPending(false);
       }
     }
-  }, [connect, disconnect, status.value]);
+  }, [connect, disconnect, status.value, firstName, userId, sendUserInput]);
 
   const isConnected = status.value === "connected";
 
@@ -101,14 +278,19 @@ function VoiceButton({ onMessage }: { onMessage: (text: string) => void }) {
 }
 
 // Exported component with VoiceProvider
-export function VoiceInput({ onMessage }: { onMessage: (text: string) => void }) {
+export function VoiceInput({ onMessage, firstName, userId, pageContext }: {
+  onMessage: (text: string, role?: "user" | "assistant") => void;
+  firstName?: string | null;
+  userId?: string | null;
+  pageContext?: PageContext;
+}) {
   return (
     <VoiceProvider
       onError={(err) => console.error("🔴 Hume Error:", err)}
       onOpen={() => console.log("🟢 Hume connected")}
       onClose={(e) => console.log("🟡 Hume closed:", e)}
     >
-      <VoiceButton onMessage={onMessage} />
+      <VoiceButton onMessage={onMessage} firstName={firstName} userId={userId} pageContext={pageContext} />
     </VoiceProvider>
   );
 }
