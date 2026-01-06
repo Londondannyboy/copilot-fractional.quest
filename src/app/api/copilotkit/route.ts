@@ -15,7 +15,7 @@ const serviceAdapter = new ExperimentalEmptyAdapter();
 const runtime = new CopilotRuntime({
   agents: {
     // Our FastAPI endpoint URL
-    my_agent: new HttpAgent({ url: "https://copilotkit-agent-production.up.railway.app/agui" }),
+    my_agent: new HttpAgent({ url: "https://copilotkit-agent-production.up.railway.app/agui/" }),
   },
 });
 
