@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL!);
+// Lazy-load DB connection to avoid build-time errors
+function getDb() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL not configured');
+  }
+  return neon(process.env.DATABASE_URL);
+}
 
 // GET - fetch saved jobs for a user
 export async function GET(req: NextRequest) {
@@ -12,6 +18,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    const sql = getDb();
     const jobs = await sql`
       SELECT sj.id, sj.saved_at, tj.title, tj.company, tj.location
       FROM saved_jobs sj
@@ -36,6 +43,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    const sql = getDb();
     // Create table if not exists
     await sql`
       CREATE TABLE IF NOT EXISTS saved_jobs (
@@ -70,6 +78,7 @@ export async function DELETE(req: NextRequest) {
   }
 
   try {
+    const sql = getDb();
     await sql`
       DELETE FROM saved_jobs
       WHERE user_id = ${userId} AND job_id = ${jobId}
