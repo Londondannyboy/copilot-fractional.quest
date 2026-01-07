@@ -54,13 +54,13 @@ const NODE_COLORS: Record<string, string> = {
   skill: '#F59E0B',     // Amber
 }
 
-// Node sizes - user is largest
+// Node sizes - larger for visibility
 const NODE_SIZES: Record<string, number> = {
-  user: 25,
-  location: 14,
-  role: 16,
-  company: 14,
-  skill: 12,
+  user: 35,
+  location: 20,
+  role: 22,
+  company: 20,
+  skill: 18,
 }
 
 interface Props {
@@ -70,6 +70,7 @@ interface Props {
   isVoiceActive: boolean
   onVoiceToggle: () => void
   onNodeClick?: (item: ProfileItem) => void
+  onUserNodePositionChange?: (position: { x: number; y: number }) => void
 }
 
 export function VoiceGraphInterface({
@@ -78,7 +79,8 @@ export function VoiceGraphInterface({
   items,
   isVoiceActive,
   onVoiceToggle,
-  onNodeClick
+  onNodeClick,
+  onUserNodePositionChange
 }: Props) {
   const graphRef = useRef<any>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -150,54 +152,84 @@ export function VoiceGraphInterface({
 
   const data = graphData()
 
-  // Camera and lighting setup
+  // Debug log
   useEffect(() => {
-    if (graphRef.current && data.nodes.length > 0) {
+    console.log('VoiceGraphInterface - items:', items.length, 'nodes:', data.nodes.length, 'links:', data.links.length)
+  }, [items, data])
+
+  // Camera and lighting setup - run after graph mounts
+  useEffect(() => {
+    const initGraph = () => {
+      if (!graphRef.current) return false
+
       try {
-        // Set camera position - closer for immersive feel
+        // Set camera position - zoom in for immersive feel
         const camera = graphRef.current.camera()
         if (camera) {
-          camera.position.set(0, 0, 200)
+          camera.position.set(0, 0, 150) // Closer
           camera.lookAt(0, 0, 0)
         }
 
         // Add dramatic lighting
         const scene = graphRef.current.scene()
         if (scene) {
-          // Ambient light
-          const ambientLight = new THREE.AmbientLight(0x404040, 1.5)
-          scene.add(ambientLight)
+          // Check if lights already added
+          const existingLights = scene.children.filter((c: any) => c.isLight)
+          if (existingLights.length < 3) {
+            // Ambient light - brighter
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+            scene.add(ambientLight)
 
-          // Point lights for dramatic effect
-          const light1 = new THREE.PointLight(0x8B5CF6, 1, 500) // Purple
-          light1.position.set(100, 100, 100)
-          scene.add(light1)
+            // Point lights for dramatic effect
+            const light1 = new THREE.PointLight(0x8B5CF6, 2, 500) // Purple
+            light1.position.set(100, 100, 100)
+            scene.add(light1)
 
-          const light2 = new THREE.PointLight(0x3B82F6, 0.8, 500) // Blue
-          light2.position.set(-100, -100, 100)
-          scene.add(light2)
+            const light2 = new THREE.PointLight(0x3B82F6, 1.5, 500) // Blue
+            light2.position.set(-100, -100, 100)
+            scene.add(light2)
+          }
         }
+
+        // Center the graph on user node
+        graphRef.current.centerAt(0, 0, 500)
+
+        return true
       } catch (e) {
         console.warn('VoiceGraphInterface init error:', e)
+        return false
       }
     }
-  }, [data.nodes.length])
+
+    // Try to init immediately and also after a delay (graph may not be ready)
+    initGraph()
+    const timer = setTimeout(initGraph, 500)
+    const timer2 = setTimeout(initGraph, 1000)
+
+    return () => {
+      clearTimeout(timer)
+      clearTimeout(timer2)
+    }
+  }, [data.nodes.length, isClient])
 
   // Track user node screen position for voice widget overlay
   useEffect(() => {
-    if (!graphRef.current) return
+    if (!graphRef.current || !isClient) return
 
     const updateUserPosition = () => {
       try {
-        const userNode = data.nodes.find(n => n.id === 'user')
-        if (userNode && graphRef.current) {
-          const coords = graphRef.current.graph2ScreenCoords(
-            userNode.fx || 0,
-            userNode.fy || 0,
-            userNode.fz || 0
-          )
-          if (coords) {
-            setUserNodePosition({ x: coords.x, y: coords.y })
+        if (!graphRef.current) return
+
+        // User node is always at origin (0,0,0)
+        const coords = graphRef.current.graph2ScreenCoords(0, 0, 0)
+
+        if (coords && coords.x && coords.y) {
+          const newPos = { x: coords.x, y: coords.y }
+          setUserNodePosition(newPos)
+
+          // Call callback to update parent
+          if (onUserNodePositionChange) {
+            onUserNodePositionChange(newPos)
           }
         }
       } catch (e) {
@@ -205,10 +237,15 @@ export function VoiceGraphInterface({
       }
     }
 
-    // Update position periodically and on camera move
-    const interval = setInterval(updateUserPosition, 100)
+    // Update position frequently for smooth tracking
+    const interval = setInterval(updateUserPosition, 50)
+    // Also run immediately
+    setTimeout(updateUserPosition, 100)
+    setTimeout(updateUserPosition, 500)
+    setTimeout(updateUserPosition, 1000)
+
     return () => clearInterval(interval)
-  }, [data.nodes])
+  }, [data.nodes, isClient, onUserNodePositionChange])
 
   // Node appearance with glow effects
   const nodeThreeObject = useCallback((node: any) => {

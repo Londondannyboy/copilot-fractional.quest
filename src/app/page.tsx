@@ -586,6 +586,7 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
   const [profileItems, setProfileItems] = useState<{location?: string; role?: string; skills?: string[]; companies?: string[]}>({});
   const [fullProfileItems, setFullProfileItems] = useState<Array<{id: number; item_type: string; value: string; metadata: Record<string, unknown>; confirmed: boolean}>>([]);
   const [isVoiceActive, setIsVoiceActive] = useState(false);
+  const [userNodePosition, setUserNodePosition] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -730,10 +731,19 @@ Reference the page context when discussing jobs.`;
                 // Could open edit modal here
                 console.log('Edit item:', item);
               }}
+              onUserNodePositionChange={(pos) => setUserNodePosition(pos)}
             />
 
-            {/* Actual Voice Input - positioned at center, over the graph's user node */}
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+            {/* Actual Voice Input - BOUND to the user node position in the 3D graph */}
+            <div
+              className="absolute z-30 transition-all duration-75"
+              style={{
+                // Use tracked position from graph, fallback to center
+                left: userNodePosition ? `${userNodePosition.x}px` : '50%',
+                top: userNodePosition ? `${userNodePosition.y}px` : '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
               <div className="flex flex-col items-center">
                 <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} />
                 <p className="text-white/80 text-sm mt-2 font-medium drop-shadow-lg">
