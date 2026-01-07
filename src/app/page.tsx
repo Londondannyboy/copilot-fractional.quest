@@ -661,154 +661,108 @@ Reference the page context when discussing jobs.`;
       }}
       suggestions={suggestions}
     >
-      <div
-        className="min-h-screen flex justify-center items-center flex-col transition-colors duration-300 p-8 relative"
-      >
-        {/* Dynamic Unsplash Background */}
-        <DynamicBackground scene={state.scene} />
+      <div className="h-screen flex flex-col bg-gray-900">
+        {/* Navbar - Login/Profile on LEFT, away from CopilotKit panel */}
+        <nav className="h-14 bg-gray-800 border-b border-gray-700 flex items-center justify-between px-4 shrink-0">
+          {/* Left side - Auth */}
+          <div className="flex items-center gap-3">
+            {isSessionLoading ? (
+              <div className="text-gray-400 text-sm">Loading...</div>
+            ) : (
+              <>
+                <SignedOut>
+                  <button
+                    onClick={() => window.location.href = '/auth/sign-in'}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                  >
+                    Sign In
+                  </button>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton />
+                  <span className="text-white font-medium">{firstName || user?.name}</span>
+                  <button
+                    onClick={() => appendMessage(new TextMessage({ content: "Read my messages", role: Role.User }))}
+                    className="relative text-gray-400 hover:text-white p-1.5 rounded transition-colors"
+                    title="Messages"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                    </svg>
+                    <MessagesBadge userId={user?.id} />
+                  </button>
+                  <a href="/dashboard" className="text-gray-400 hover:text-white text-sm transition-colors">
+                    Dashboard
+                  </a>
+                </SignedIn>
+              </>
+            )}
+          </div>
 
-        {/* Auth Header with Messages Badge */}
-        <div className="absolute top-4 right-4 flex items-center gap-3">
-          {/* Show loading state while session is being checked */}
+          {/* Center - Logo */}
+          <div className="text-white font-bold text-lg">Fractional Quest</div>
+
+          {/* Right side - Legend */}
+          <div className="flex items-center gap-3 text-xs">
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Location</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500" /> Role</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-pink-500" /> Company</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500" /> Skill</span>
+          </div>
+        </nav>
+
+        {/* Main Content - FULLSCREEN Graph */}
+        <div className="flex-1 relative overflow-hidden">
           {isSessionLoading ? (
-            <div className="bg-white/20 text-white/60 px-4 py-2 rounded-lg backdrop-blur animate-pulse">
-              Loading...
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="text-white">Loading your universe...</div>
             </div>
-          ) : (
+          ) : user ? (
             <>
-              <SignedOut>
-                <button
-                  onClick={() => window.location.href = '/auth/sign-in'}
-                  className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg backdrop-blur transition-colors"
-                >
-                  Sign In
-                </button>
-              </SignedOut>
-              <SignedIn>
-            {/* Messages button with badge - clicks to open sidebar and ask about messages */}
-            <button
-              onClick={() => {
-                // Send a message to CopilotKit to read messages
-                appendMessage(new TextMessage({ content: "Read my messages", role: Role.User }));
-              }}
-              className="relative bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg backdrop-blur transition-colors"
-              title="Messages - Click to read"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-              <MessagesBadge userId={user?.id} />
-            </button>
-            <a
-              href="/dashboard"
-              className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg backdrop-blur transition-colors"
-            >
-              Dashboard
-            </a>
-                <UserButton />
-              </SignedIn>
+              {/* 3D Profile Graph - FULLSCREEN */}
+              <VoiceGraphInterface
+                userName={firstName || user.name || 'You'}
+                items={fullProfileItems}
+                onUserNodePositionChange={(pos) => setUserNodePosition(pos)}
+              />
+
+              {/* Voice Input - BOUND to user node */}
+              <div
+                className="absolute z-30 pointer-events-auto"
+                style={{
+                  left: userNodePosition ? `${userNodePosition.x}px` : '50%',
+                  top: userNodePosition ? `${userNodePosition.y}px` : '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                <div className="flex flex-col items-center">
+                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} />
+                  <p className="text-white text-sm mt-2 font-bold drop-shadow-lg">{firstName || 'You'}</p>
+                  <p className="text-white/60 text-xs">Tap to speak</p>
+                </div>
+              </div>
+
+              {/* Item count */}
+              <div className="absolute bottom-4 left-4 bg-black/60 px-3 py-1.5 rounded-lg text-white/70 text-xs z-20">
+                {fullProfileItems.length} profile items
+              </div>
             </>
+          ) : (
+            /* Not signed in */
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900">
+              <h1 className="text-4xl font-bold text-white mb-4">Your Career Universe</h1>
+              <p className="text-gray-400 text-lg mb-8 text-center max-w-md">
+                Sign in to visualize your professional profile in 3D
+              </p>
+              <button
+                onClick={() => window.location.href = '/auth/sign-in'}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-xl font-medium transition-colors"
+              >
+                Sign In to Begin
+              </button>
+            </div>
           )}
         </div>
-
-        {/* Main Content - Immersive Voice Graph Interface */}
-        {isSessionLoading ? (
-          <div className="flex flex-col items-center justify-center gap-6 min-h-[500px]">
-            <div className="w-24 h-24 rounded-full bg-white/20 animate-pulse" />
-            <p className="text-white/60">Loading your universe...</p>
-          </div>
-        ) : user ? (
-          /* Signed In - Show immersive graph with voice at center */
-          <div className="relative w-full max-w-4xl mx-auto" style={{ height: 'calc(100vh - 200px)', minHeight: '500px' }}>
-            {/* 3D Profile Graph - fills the container */}
-            <VoiceGraphInterface
-              userId={user.id}
-              userName={firstName || user.name || 'You'}
-              items={fullProfileItems}
-              isVoiceActive={isVoiceActive}
-              onVoiceToggle={() => setIsVoiceActive(!isVoiceActive)}
-              onNodeClick={(item) => {
-                // Could open edit modal here
-                console.log('Edit item:', item);
-              }}
-              onUserNodePositionChange={(pos) => setUserNodePosition(pos)}
-            />
-
-            {/* Actual Voice Input - BOUND to the user node position in the 3D graph */}
-            <div
-              className="absolute z-30 transition-all duration-75"
-              style={{
-                // Use tracked position from graph, fallback to center
-                left: userNodePosition ? `${userNodePosition.x}px` : '50%',
-                top: userNodePosition ? `${userNodePosition.y}px` : '50%',
-                transform: 'translate(-50%, -50%)',
-              }}
-            >
-              <div className="flex flex-col items-center">
-                <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} />
-                <p className="text-white/80 text-sm mt-2 font-medium drop-shadow-lg">
-                  {firstName || 'You'}
-                </p>
-                <p className="text-white/50 text-xs">Tap to speak</p>
-              </div>
-            </div>
-
-            {/* Legend */}
-            <div className="absolute bottom-4 left-4 flex gap-4 bg-black/50 backdrop-blur-sm px-4 py-3 rounded-xl z-20">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50" />
-                <span className="text-white/70 text-xs">Location</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50" />
-                <span className="text-white/70 text-xs">Role</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-pink-500 shadow-lg shadow-pink-500/50" />
-                <span className="text-white/70 text-xs">Company</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-amber-500 shadow-lg shadow-amber-500/50" />
-                <span className="text-white/70 text-xs">Skill</span>
-              </div>
-            </div>
-
-            {/* Profile count & edit hint */}
-            <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-xl z-20">
-              <span className="text-white/70 text-sm">{fullProfileItems.length} items • Click nodes to edit</span>
-            </div>
-
-            {/* Tech badges */}
-            <div className="absolute bottom-4 right-4 flex gap-2 bg-black/50 backdrop-blur-sm px-3 py-2 rounded-xl z-20">
-              <span className="text-xs text-white/50">Hume</span>
-              <span className="text-xs text-white/50">•</span>
-              <span className="text-xs text-white/50">CopilotKit</span>
-              <span className="text-xs text-white/50">•</span>
-              <span className="text-xs text-white/50">Pydantic AI</span>
-            </div>
-          </div>
-        ) : (
-          /* Not signed in - Show sign in prompt with preview */
-          <div className="flex flex-col items-center gap-8">
-            <h1 className="text-4xl font-bold text-white drop-shadow-lg text-center">
-              Your Career Universe
-            </h1>
-            <p className="text-white/70 text-lg text-center max-w-md">
-              Sign in to visualize your professional profile in 3D and chat with AI about fractional executive opportunities.
-            </p>
-            <button
-              onClick={() => window.location.href = '/auth/sign-in'}
-              className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-medium transition-all shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50"
-            >
-              Sign In to Begin
-            </button>
-            <div className="flex gap-2 justify-center flex-wrap">
-              <span className="text-xs bg-white/10 text-white/50 px-2 py-0.5 rounded-full">Voice AI</span>
-              <span className="text-xs bg-white/10 text-white/50 px-2 py-0.5 rounded-full">3D Profile Graph</span>
-              <span className="text-xs bg-white/10 text-white/50 px-2 py-0.5 rounded-full">Smart Job Search</span>
-            </div>
-          </div>
-        )}
       </div>
     </CopilotSidebar>
   );
