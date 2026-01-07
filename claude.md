@@ -1723,3 +1723,123 @@ id=8  skill: Marketing
 | File | Changes |
 |------|---------|
 | `agent/src/agent.py` | Company detection prompt expansion, normalize_value() function |
+
+---
+
+# Session Learnings: 2025-01-07 (Continued) - Content Migration Progress
+
+## What Was Completed This Session
+
+### New Pages Created (16 pages total):
+
+**CHRO Role (4 pages):**
+- `/fractional-chro-jobs-uk/page.tsx` - Jobs UK page (purple theme)
+- `/fractional-chro/page.tsx` - Role definition page
+- `/fractional-chro-salary/page.tsx` - Salary guide page
+- `/hire-fractional-chro/page.tsx` - Hiring guide page
+
+**CEO Role (4 pages):**
+- `/fractional-ceo-jobs-uk/page.tsx` - Jobs UK page (yellow/gold theme)
+- `/fractional-ceo/page.tsx` - Role definition page
+- `/fractional-ceo-salary/page.tsx` - Salary guide page
+- `/hire-fractional-ceo/page.tsx` - Hiring guide page
+
+**CPO Role (4 pages):**
+- `/fractional-cpo-jobs-uk/page.tsx` - Jobs UK page (indigo theme)
+- `/fractional-cpo/page.tsx` - Role definition page
+- `/fractional-cpo-salary/page.tsx` - Salary guide page
+- `/hire-fractional-cpo/page.tsx` - Hiring guide page
+
+**CISO Role (4 pages):**
+- `/fractional-ciso-jobs-uk/page.tsx` - Jobs UK page (red theme)
+- `/fractional-ciso/page.tsx` - Role definition page
+- `/fractional-ciso-salary/page.tsx` - Salary guide page
+- `/hire-fractional-ciso/page.tsx` - Hiring guide page
+
+### Audit Fixes Applied to New Pages:
+
+After creating pages, an audit compared them to original fractional.quest pages. These improvements were applied to CHRO, CEO, CPO, CISO pages:
+
+1. **Jobs UK pages** - Added:
+   - Internal links to role definition, salary guide, hiring guide
+   - External authority links (CIPD, IOD, NCSC, etc.)
+   - Location-based job search grid (London, Manchester, etc.)
+
+2. **Role Definition pages** - Added:
+   - Expanded Related Resources (3 cards including hiring guide)
+   - External Resources section with professional body links
+
+3. **Salary pages** - Added:
+   - 4 resource cards (including hiring guide)
+   - External Salary Resources links (Glassdoor, HMRC, etc.)
+
+### FAQs Added:
+
+Added to `/src/components/seo/FAQ.tsx`:
+- `CHRO_FAQS` - 5 questions about fractional CHRO
+- `CEO_FAQS` - 5 questions about fractional CEO
+- `CPO_FAQS` - 5 questions about fractional CPO
+- `CISO_FAQS` - 5 questions about fractional CISO
+
+### Components Modified:
+
+- `RoleContentHub.tsx` - Added 'cpo' to type definition
+
+### Git Commits:
+
+1. `2f08c57` - Add Jobs UK pages for CHRO, CEO, CPO, and CISO roles
+2. `71a7dee` - Add role definition pages for CHRO, CEO, CPO, and CISO
+3. `179a218` - Add salary guide pages for CHRO, CEO, CPO, and CISO
+4. `a336bae` - Add hiring guide pages for CHRO, CEO, CPO, and CISO
+5. `1b6e0e6` - Improve internal linking and resources on CHRO, CEO, CPO, CISO pages
+6. `fff6b56` - Add content migration plan documentation
+
+---
+
+## What Still Needs To Be Done
+
+### Priority 1: Apply Audit Fixes to Original Pages
+
+The CMO, CTO, CFO, COO pages exist but need the same internal/external link improvements that were applied to CHRO, CEO, CPO, CISO pages.
+
+**Files to update (12 files total):**
+
+| Role | Jobs UK | Definition | Salary |
+|------|---------|------------|--------|
+| CMO | `fractional-cmo-jobs-uk/page.tsx` | `fractional-cmo/page.tsx` | `fractional-cmo-salary/page.tsx` |
+| CTO | `fractional-cto-jobs-uk/page.tsx` | `fractional-cto/page.tsx` | `fractional-cto-salary/page.tsx` |
+| CFO | `fractional-cfo-jobs-uk/page.tsx` | `fractional-cfo/page.tsx` | `fractional-cfo-salary/page.tsx` |
+| COO | `fractional-coo-jobs-uk/page.tsx` | `fractional-coo/page.tsx` | `fractional-coo-salary/page.tsx` |
+
+**Changes needed for each:**
+
+1. **Jobs UK pages**: Add editorial section with internal links + external authority links + location grid (copy pattern from `fractional-chro-jobs-uk/page.tsx`)
+
+2. **Role Definition pages**: Expand Related Resources from 2→3 cards, add External Resources section (copy pattern from `fractional-chro/page.tsx`)
+
+3. **Salary pages**: Expand Related Resources from 3→4 cards, add External Salary Resources (copy pattern from `fractional-chro-salary/page.tsx`)
+
+### External Authority Links by Role:
+
+| Role | Links to Add |
+|------|-------------|
+| CMO | CIM (Chartered Institute of Marketing), DMA (Data & Marketing Association), Marketing Week |
+| CTO | BCS (British Computer Society), IET, Tech Nation |
+| CFO | ICAEW, ACCA, CIMA, FRC |
+| COO | IOD, CMI (Chartered Management Institute), CIPS |
+
+---
+
+## Reference Files (Copy Patterns From These)
+
+When updating CMO, CTO, CFO, COO pages, copy the exact pattern from:
+
+- **Jobs UK links**: `/src/app/fractional-chro-jobs-uk/page.tsx` lines 160-195
+- **Role definition resources**: `/src/app/fractional-chro/page.tsx` lines 155-208
+- **Salary resources**: `/src/app/fractional-chro-salary/page.tsx` lines 164-199
+
+---
+
+## Content Plan Location
+
+Full content migration plan with checklists: `/Users/dankeegan/copilotkit-demo/CONTENT_PLAN.md`

@@ -94,20 +94,45 @@ Migrating content from fractional.quest (v1) to copilotkit-demo (v2) with Copilo
 
 ## Completion Status
 
-### COMPLETED (All 4 page types):
+### Page Creation Status:
 
-| Role | Jobs UK | Definition | Salary | Hiring | Notes |
-|------|---------|------------|--------|--------|-------|
-| CMO | ✅ | ✅ | ✅ | ✅ | Original v1 pages |
-| CTO | ✅ | ✅ | ✅ | ✅ | Original v1 pages |
-| CFO | ✅ | ✅ | ✅ | ✅ | Original v1 pages |
-| COO | ✅ | ✅ | ✅ | ✅ | Original v1 pages |
-| CHRO | ✅ | ✅ | ✅ | ✅ | Created + audit fixes applied |
-| CEO | ✅ | ✅ | ✅ | ✅ | Created + audit fixes applied |
-| CPO | ✅ | ✅ | ✅ | ✅ | Created + audit fixes applied |
-| CISO | ✅ | ✅ | ✅ | ✅ | Created + audit fixes applied |
+| Role | Jobs UK | Definition | Salary | Hiring | Audit Fixes |
+|------|---------|------------|--------|--------|-------------|
+| CMO | ✅ | ✅ | ✅ | ✅ | ⚠️ NEEDS AUDIT |
+| CTO | ✅ | ✅ | ✅ | ✅ | ⚠️ NEEDS AUDIT |
+| CFO | ✅ | ✅ | ✅ | ✅ | ⚠️ NEEDS AUDIT |
+| COO | ✅ | ✅ | ✅ | ✅ | ⚠️ NEEDS AUDIT |
+| CHRO | ✅ | ✅ | ✅ | ✅ | ✅ DONE |
+| CEO | ✅ | ✅ | ✅ | ✅ | ✅ DONE |
+| CPO | ✅ | ✅ | ✅ | ✅ | ✅ DONE |
+| CISO | ✅ | ✅ | ✅ | ✅ | ✅ DONE |
 
-### TODO - Additional Pages:
+### What "Audit Fixes" means:
+The CHRO, CEO, CPO, CISO pages received these improvements that CMO, CTO, CFO, COO still need:
+
+**Jobs UK pages need:**
+- Internal links to role definition, salary guide, hiring guide pages
+- External authority links (professional bodies)
+- Location-based job search links grid (London, Manchester, etc.)
+
+**Role Definition pages need:**
+- Expanded Related Resources (3 cards including hiring guide)
+- External Resources section with professional body links
+
+**Salary pages need:**
+- 4 resource cards (including hiring guide)
+- External Salary Resources links (Glassdoor, HMRC, etc.)
+
+### TODO - Audit Fixes for Original Pages:
+
+| Role | Jobs UK Links | Definition Resources | Salary Resources |
+|------|---------------|---------------------|------------------|
+| CMO | ❌ Needs 15+ links | ❌ Needs expansion | ❌ Needs expansion |
+| CTO | ❌ Needs 15+ links | ❌ Needs expansion | ❌ Needs expansion |
+| CFO | ❌ Needs 15+ links | ❌ Needs expansion | ❌ Needs expansion |
+| COO | ❌ Needs 15+ links | ❌ Needs expansion | ❌ Needs expansion |
+
+### Additional Pages:
 
 | Page | Priority | Traffic | Status |
 |------|----------|---------|--------|
@@ -166,12 +191,32 @@ Jobs pages query the `jobs` table with:
 
 ---
 
-## Next Steps (If Continuing)
+## Next Steps (Priority Order)
 
-1. **Verify CMO, CTO, CFO, COO pages** have same level of internal/external links as CHRO, CEO, CPO, CISO
-2. **Add any missing components** (e.g., RoleNews if articles table is created)
-3. **Test all pages** build and render correctly
-4. **SEO audit** - ensure all canonical URLs and metadata are correct
+### Priority 1: Apply Audit Fixes to CMO, CTO, CFO, COO Pages
+
+**For each role (CMO, CTO, CFO, COO), update these 3 page types:**
+
+1. **Jobs UK page** (`/fractional-{role}-jobs-uk/page.tsx`):
+   - Add internal links to `/fractional-{role}`, `/fractional-{role}-salary`, `/hire-fractional-{role}`
+   - Add external authority links (see list above for each role)
+   - Add location grid (London, Manchester, Birmingham, Edinburgh, Bristol, Leeds, Glasgow, Remote UK)
+
+2. **Role Definition page** (`/fractional-{role}/page.tsx`):
+   - Change Related Resources from 2 to 3 cards (add hiring guide)
+   - Add External Resources section with professional body links
+
+3. **Salary page** (`/fractional-{role}-salary/page.tsx`):
+   - Change Related Resources from 3 to 4 cards (add hiring guide)
+   - Add External Salary Resources links
+
+**Reference**: Look at `/fractional-chro-jobs-uk/page.tsx`, `/fractional-chro/page.tsx`, `/fractional-chro-salary/page.tsx` for the exact pattern to follow.
+
+### Priority 2: Additional Tasks
+
+1. **Test all pages** build and render correctly (`npm run build`)
+2. **SEO audit** - ensure all canonical URLs and metadata are correct
+3. **Add any missing components** (e.g., RoleNews if articles table is created)
 
 ---
 
