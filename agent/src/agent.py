@@ -81,16 +81,36 @@ def extract_page_context_from_instructions(instructions: str) -> dict:
     """Extract page context from CopilotKit instructions text.
 
     Looks for patterns like:
+    - ## PAGE CONTEXT (for agent parsing)
+      Page Type: services
+      Role Type: CMO
     - ## Service Page Context: Fractional CMO
     - Current Page: hire-fractional-cmo
     """
+    global _cached_page_context
     import re
     result = {"page_type": None, "role_type": None, "is_services_page": False}
 
     if not instructions:
         return result
 
-    # Look for "Service Page Context: Fractional {ROLE}"
+    # NEW FORMAT: Look for structured PAGE CONTEXT block
+    # Page Type: services
+    page_type_match = re.search(r'Page Type:\s*(\w+)', instructions, re.IGNORECASE)
+    role_type_match = re.search(r'Role Type:\s*(\w+)', instructions, re.IGNORECASE)
+
+    if page_type_match and role_type_match:
+        page_type = page_type_match.group(1).lower()
+        role = role_type_match.group(1).upper()
+        result["page_type"] = f"{page_type}_{role.lower()}"
+        result["role_type"] = role
+        result["is_services_page"] = page_type == "services"
+
+        _cached_page_context = result
+        print(f"📍 Cached page context (new format): {page_type} page for {role}", file=sys.stderr)
+        return result
+
+    # LEGACY FORMAT: Look for "Service Page Context: Fractional {ROLE}"
     service_match = re.search(r'Service Page Context:\s*Fractional\s+(\w+)', instructions, re.IGNORECASE)
     if service_match:
         role = service_match.group(1).upper()
@@ -98,7 +118,6 @@ def extract_page_context_from_instructions(instructions: str) -> dict:
         result["role_type"] = role
         result["is_services_page"] = True
 
-        global _cached_page_context
         _cached_page_context = result
         print(f"📍 Cached page context from instructions: services page for {role}", file=sys.stderr)
         return result
@@ -2176,7 +2195,9 @@ async def extract_context_middleware(request: Request, call_next):
 
 def parse_session_id(session_id: str | None) -> dict:
     """
-    Parse custom session ID format: "firstName|fractional_userId|location:London,jobs:25"
+    Parse custom session ID format:
+    - Jobs page: "firstName|fractional_userId|location:London,jobs:25"
+    - Services page: "firstName|fractional_userId|services:CMO"
     """
     if not session_id:
         return {"first_name": "", "user_id": "", "page_context": None}
@@ -2194,8 +2215,13 @@ def parse_session_id(session_id: str | None) -> dict:
                 key, val = p.split(":", 1)
                 if key == "location":
                     page_context["location"] = val
+                    page_context["page_type"] = "jobs"
                 elif key == "jobs":
                     page_context["total_jobs"] = int(val)
+                elif key == "services":
+                    page_context["page_type"] = "services"
+                    page_context["role_type"] = val.upper()
+                    page_context["is_services_page"] = True
 
     return {
         "first_name": first_name,
@@ -2364,7 +2390,12 @@ async def clm_endpoint(request: Request):
 
     # Handle page question directly (fast path)
     if is_page_question(user_msg):
-        if page_context and page_context.get("location"):
+        if page_context and page_context.get("is_services_page"):
+            # Services page response
+            role = page_context.get("role_type", "executive")
+            response_text = f"We're on the Hire a Fractional {role} services page. I can explain our pricing, how it works, and help you decide if fractional {role} leadership is right for your company."
+        elif page_context and page_context.get("location"):
+            # Jobs page response
             loc = page_context["location"]
             jobs = page_context.get("total_jobs", "several")
             response_text = f"We're on the {loc} jobs page. There are {jobs} fractional executive positions here. Want me to show you the roles?"
@@ -2379,11 +2410,31 @@ async def clm_endpoint(request: Request):
         firstName=first_name if first_name else None,
     ) if user_id or first_name else None
 
-    page_ctx = PageContext(
-        page_type=f"jobs_{page_context['location'].lower()}" if page_context and page_context.get('location') else "main",
-        location_filter=page_context.get("location") if page_context else None,
-        total_jobs_on_page=page_context.get("total_jobs", 0) if page_context else 0,
-    ) if page_context else None
+    # Build page context - handle both jobs and services pages
+    page_ctx = None
+    if page_context:
+        if page_context.get("is_services_page"):
+            # Services page: cache the context for system prompt
+            global _cached_page_context
+            _cached_page_context = {
+                "page_type": f"services_{page_context.get('role_type', 'unknown').lower()}",
+                "role_type": page_context.get("role_type"),
+                "is_services_page": True
+            }
+            print(f"📍 [CLM] Services page for {page_context.get('role_type')}", file=sys.stderr)
+            # PageContext object doesn't have is_services_page, so we rely on cached context
+            page_ctx = PageContext(
+                page_type=f"services_{page_context.get('role_type', 'unknown').lower()}",
+                location_filter=None,
+                total_jobs_on_page=0,
+            )
+        else:
+            # Jobs page
+            page_ctx = PageContext(
+                page_type=f"jobs_{page_context['location'].lower()}" if page_context.get('location') else "main",
+                location_filter=page_context.get("location"),
+                total_jobs_on_page=page_context.get("total_jobs", 0),
+            )
 
     state = AppState(
         jobs=[],

@@ -216,9 +216,16 @@ export function ServicesTemplate({
       <FAQPageSchema faqs={faqs} />
 
       <CopilotSidebar
-        instructions={`## Service Page Context: Fractional ${roleType}
+        instructions={`## PAGE CONTEXT (for agent parsing)
+Page Type: services
+Page URL: /hire-fractional-${roleType.toLowerCase()}
+Role Type: ${roleType}
+Service: Fractional ${roleType} Hiring
+
+## Service Page Context: Fractional ${roleType}
 
 You're helping someone learn about our Fractional ${roleType} services.
+IMPORTANT: You are on the HIRE FRACTIONAL ${roleType} services page, NOT the main homepage.
 
 **What we offer:**
 - Part-time ${roleType} leadership (1-3 days/week)
@@ -234,7 +241,8 @@ ${tiers.map(t => `- ${t.name}: ${t.price} (${t.description})`).join('\n')}
 2. Explain the value of fractional leadership
 3. Answer questions about pricing, process, and fit
 4. Guide interested visitors toward booking a call
-5. Be confident about our expertise`}
+5. Be confident about our expertise
+6. When asked what page you're on, say "Hire Fractional ${roleType}" services page`}
         labels={{
           title: `Fractional ${roleType} Services`,
           initial: firstName
@@ -273,9 +281,8 @@ ${tiers.map(t => `- ${t.name}: ${t.price} (${t.description})`).join('\n')}
                   firstName={firstName}
                   userId={user?.id}
                   pageContext={{
-                    location: "UK",
-                    totalJobs: 0,
-                    topRoles: [roleType],
+                    pageType: 'services',
+                    roleType: roleType,
                   }}
                 />
                 <span className="text-sm opacity-70">

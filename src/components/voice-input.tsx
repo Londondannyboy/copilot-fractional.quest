@@ -7,6 +7,9 @@ interface PageContext {
   location?: string;
   totalJobs?: number;
   topRoles?: string[];
+  // For services pages
+  pageType?: 'jobs' | 'services';
+  roleType?: string;  // CMO, CTO, CFO, COO for services pages
 }
 
 interface VoiceButtonProps {
@@ -125,11 +128,32 @@ Previous greeting was ${Math.round(timeSinceLastInteraction / 1000)}s ago - they
             : `This is the FIRST connection. Give a brief warm greeting - but NEVER re-greet after this.`;
         }
 
-        // Build page context section
+        // Build page context section - different for jobs vs services pages
         let pageContextSection = "";
-        if (pageContext?.location) {
+        if (pageContext?.pageType === 'services' && pageContext?.roleType) {
+          // SERVICES PAGE context
           pageContextSection = `
-PAGE_CONTEXT:
+PAGE_CONTEXT: SERVICES PAGE
+User is viewing: "Hire a Fractional ${pageContext.roleType}" services page.
+
+This is NOT a job listings page - it's our SERVICES/SALES page explaining:
+- What a Fractional ${pageContext.roleType} does
+- Our pricing tiers (Starter £3k, Growth £6k, Scale £9k per month)
+- How the engagement process works (Discovery → Proposal → Strategy → Partnership)
+
+Your role here is CONSULTATIVE:
+- Help them understand if Fractional ${pageContext.roleType} is right for their company
+- Explain pricing when asked
+- Answer questions about the process
+- Guide interested visitors toward booking a discovery call
+
+When they ask "what page is this" or "where am I", say:
+"We're on the Hire a Fractional ${pageContext.roleType} services page."
+`;
+        } else if (pageContext?.location) {
+          // JOBS PAGE context
+          pageContextSection = `
+PAGE_CONTEXT: JOBS PAGE
 User is viewing: ${pageContext.location.toUpperCase()} JOBS PAGE
 ${pageContext.totalJobs ? `- Total jobs on page: ${pageContext.totalJobs}` : ''}
 ${pageContext.topRoles?.length ? `- Top roles: ${pageContext.topRoles.join(', ')}` : ''}
@@ -154,7 +178,13 @@ ${pageContextSection}
 ${greetingInstruction}
 
 ## CRITICAL CONTEXT AWARENESS
-${pageContext?.location ? `
+${pageContext?.pageType === 'services' && pageContext?.roleType ? `
+🎯 USER IS ON THE "HIRE A FRACTIONAL ${pageContext.roleType.toUpperCase()}" SERVICES PAGE
+- This is NOT a job listings page - it's our services/sales page
+- Help them understand Fractional ${pageContext.roleType} value proposition
+- Be ready to explain pricing: Starter £3k, Growth £6k, Scale £9k per month
+- When asked "what page" say: "Hire a Fractional ${pageContext.roleType} services page"
+` : pageContext?.location ? `
 🎯 USER IS ON THE ${pageContext.location.toUpperCase()} JOBS PAGE
 - When they say "jobs here", "these roles", "what's available" → ${pageContext.location} jobs
 - Total jobs on this page: ${pageContext.totalJobs || 'checking...'}
@@ -183,9 +213,13 @@ Then confirm: "So you're interested in [role] in [location] - I'll remember that
           ? `fractional_${userId}`
           : `fractional_anon_${Math.random().toString(36).slice(2, 10)}`;
 
-        // Include page context in session ID for CLM (format: "firstName|sessionId|location:X,jobs:Y")
+        // Include page context in session ID for CLM (format: "firstName|sessionId|location:X,jobs:Y" or "firstName|sessionId|services:CMO")
         let pageContextPart = '';
-        if (pageContext?.location) {
+        if (pageContext?.pageType === 'services' && pageContext?.roleType) {
+          // Services page: pass role type
+          pageContextPart = `|services:${pageContext.roleType}`;
+        } else if (pageContext?.location) {
+          // Jobs page: pass location and job count
           const parts = [`location:${pageContext.location}`];
           if (pageContext.totalJobs) parts.push(`jobs:${pageContext.totalJobs}`);
           pageContextPart = `|${parts.join(',')}`;

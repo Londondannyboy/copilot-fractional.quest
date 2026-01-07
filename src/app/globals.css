@@ -134,7 +134,7 @@ h1, h2 {
   font-family: var(--font-editorial);
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--text-primary);
+  /* Color controlled via Tailwind classes per-context */
 }
 
 h3, h4, h5, h6 {
