@@ -588,6 +588,10 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
   const [isVoiceActive, setIsVoiceActive] = useState(false);
   const [userNodePosition, setUserNodePosition] = useState<{ x: number; y: number } | null>(null);
 
+  // Graph view modes
+  type GraphViewType = 'profile' | 'career' | 'trinity' | 'network';
+  const [graphView, setGraphView] = useState<GraphViewType>('profile');
+
   // Stable callback for position updates to prevent VoiceGraphInterface re-renders
   const handleUserNodePositionChange = useCallback((pos: { x: number; y: number }) => {
     setUserNodePosition(pos);
@@ -707,12 +711,30 @@ Reference the page context when discussing jobs.`;
           {/* Center - Logo */}
           <div className="text-white font-bold text-lg">Fractional Quest</div>
 
-          {/* Right side - Legend */}
-          <div className="flex items-center gap-3 text-xs">
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Location</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500" /> Role</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-pink-500" /> Company</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500" /> Skill</span>
+          {/* Right side - View Switchers */}
+          <div className="flex items-center gap-2">
+            {[
+              { id: 'profile' as GraphViewType, icon: '👤', label: 'Profile', color: 'bg-violet-500' },
+              { id: 'career' as GraphViewType, icon: '📈', label: 'Career', color: 'bg-emerald-500' },
+              { id: 'trinity' as GraphViewType, icon: '🔺', label: 'Trinity', color: 'bg-blue-500' },
+              { id: 'network' as GraphViewType, icon: '🌐', label: 'Network', color: 'bg-amber-500' },
+            ].map((view) => (
+              <button
+                key={view.id}
+                onClick={() => setGraphView(view.id)}
+                className={`group flex items-center gap-1.5 px-2 py-1 rounded-full text-xs transition-all ${
+                  graphView === view.id
+                    ? `${view.color} text-white shadow-lg scale-105`
+                    : 'bg-gray-700/50 text-gray-300 hover:bg-gray-700'
+                }`}
+                title={view.label}
+              >
+                <span className={`w-2 h-2 rounded-full ${graphView === view.id ? 'bg-white/80' : view.color}`} />
+                <span className={`transition-all ${graphView === view.id ? 'max-w-20' : 'max-w-0 overflow-hidden'}`}>
+                  {view.label}
+                </span>
+              </button>
+            ))}
           </div>
         </nav>
 
@@ -732,8 +754,9 @@ Reference the page context when discussing jobs.`;
               />
 
               {/* Voice Input - BOUND to user node with smooth transition */}
+              {/* pointer-events-none on container lets mouse events pass through to graph */}
               <div
-                className="absolute z-30 pointer-events-auto transition-all duration-75 ease-out"
+                className="absolute z-30 pointer-events-none transition-all duration-75 ease-out"
                 style={{
                   left: userNodePosition ? `${userNodePosition.x}px` : '50%',
                   top: userNodePosition ? `${userNodePosition.y}px` : '50%',
@@ -741,15 +764,27 @@ Reference the page context when discussing jobs.`;
                 }}
               >
                 <div className="flex flex-col items-center">
-                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} />
+                  {/* Only the voice button captures clicks */}
+                  <div className="pointer-events-auto">
+                    <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} />
+                  </div>
                   <p className="text-white text-sm mt-2 font-bold drop-shadow-lg">{firstName || 'You'}</p>
                   <p className="text-white/60 text-xs">Tap to speak</p>
                 </div>
               </div>
 
-              {/* Item count */}
-              <div className="absolute bottom-4 left-4 bg-black/60 px-3 py-1.5 rounded-lg text-white/70 text-xs z-20">
-                {fullProfileItems.length} profile items
+              {/* View indicator + Item count */}
+              <div className="absolute bottom-4 left-4 flex items-center gap-3 z-20">
+                <div className="bg-black/60 px-3 py-1.5 rounded-lg text-white/70 text-xs">
+                  {fullProfileItems.length} profile items
+                </div>
+                {graphView !== 'profile' && (
+                  <div className="bg-violet-600/80 px-3 py-1.5 rounded-lg text-white text-xs font-medium animate-pulse">
+                    {graphView === 'career' && '📈 Career Timeline - Coming Soon'}
+                    {graphView === 'trinity' && '🔺 Trinity View - Coming Soon'}
+                    {graphView === 'network' && '🌐 Network Graph - Coming Soon'}
+                  </div>
+                )}
               </div>
             </>
           ) : (
