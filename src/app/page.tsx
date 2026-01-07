@@ -834,43 +834,12 @@ Reference the page context when discussing jobs.`;
       suggestions={suggestions}
     >
       <div className="h-screen flex flex-col bg-gray-900">
-        {/* Navbar - Login/Profile on LEFT, away from CopilotKit panel */}
-        <nav className="h-14 bg-gray-800 border-b border-gray-700 flex items-center justify-between px-4 shrink-0">
-          {/* Left side - Auth */}
-          <div className="flex items-center gap-3">
-            {isSessionLoading ? (
-              <div className="text-gray-400 text-sm">Loading...</div>
-            ) : (
-              <>
-                <SignedOut>
-                  <button
-                    onClick={() => window.location.href = '/auth/sign-in'}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-colors"
-                  >
-                    Sign In
-                  </button>
-                </SignedOut>
-                <SignedIn>
-                  {/* Clean navbar: name + links */}
-                  <span className="text-white text-sm font-medium">{firstName || user?.name}</span>
-                  <a href="/dashboard" className="text-gray-300 hover:text-white text-sm transition-colors">
-                    Dashboard
-                  </a>
-                  <button
-                    onClick={() => authClient.signOut()}
-                    className="text-white hover:text-gray-300 text-sm transition-colors"
-                  >
-                    Sign Out
-                  </button>
-                </SignedIn>
-              </>
-            )}
-          </div>
-
-          {/* Center - Logo */}
+        {/* Single Navbar */}
+        <nav className="h-12 bg-gray-800 border-b border-gray-700 flex items-center justify-between px-4 shrink-0">
+          {/* Left - Logo */}
           <div className="text-white font-bold text-lg">Fractional Quest</div>
 
-          {/* Right side - Add buttons */}
+          {/* Center - Add buttons (only when signed in) */}
           <div className="flex items-center gap-2">
             {user && [
               { type: 'location', label: '+ Location', color: '#10B981' },
@@ -891,6 +860,29 @@ Reference the page context when discussing jobs.`;
                 {item.label}
               </button>
             ))}
+          </div>
+
+          {/* Right - Auth */}
+          <div className="flex items-center gap-3">
+            {isSessionLoading ? (
+              <div className="text-gray-400 text-sm">...</div>
+            ) : (
+              <>
+                <SignedOut>
+                  <button
+                    onClick={() => window.location.href = '/auth/sign-in'}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                  >
+                    Sign In
+                  </button>
+                </SignedOut>
+                <SignedIn>
+                  <span className="text-white text-sm">{firstName || user?.name}</span>
+                  <a href="/dashboard" className="text-gray-300 hover:text-white text-sm">Dashboard</a>
+                  <UserButton />
+                </SignedIn>
+              </>
+            )}
           </div>
         </nav>
 

@@ -147,23 +147,33 @@ export function EditableGraph3D({ userId, userName, items, onEdit, onDelete, onA
   // Initial camera setup - center on user node
   useEffect(() => {
     if (graphRef.current && data.nodes.length > 0) {
-      try {
-        // Center camera on origin where user node is fixed
-        graphRef.current.cameraPosition({ x: 0, y: 0, z: 200 }, { x: 0, y: 0, z: 0 }, 0)
+      const setupCamera = () => {
+        try {
+          // Center camera on origin where user node is fixed
+          graphRef.current?.cameraPosition({ x: 0, y: 0, z: 200 }, { x: 0, y: 0, z: 0 }, 0)
 
-        // Add lighting
-        const scene = graphRef.current.scene()
-        if (scene) {
-          const ambientLight = new THREE.AmbientLight(0x404040, 2)
-          scene.add(ambientLight)
+          // Also center the graph view
+          graphRef.current?.centerAt(0, 0, 0)
 
-          const light = new THREE.PointLight(0xFFFFFF, 1, 1000)
-          light.position.set(100, 100, 100)
-          scene.add(light)
+          // Add lighting
+          const scene = graphRef.current?.scene()
+          if (scene) {
+            const ambientLight = new THREE.AmbientLight(0x404040, 2)
+            scene.add(ambientLight)
+
+            const light = new THREE.PointLight(0xFFFFFF, 1, 1000)
+            light.position.set(100, 100, 100)
+            scene.add(light)
+          }
+        } catch (e) {
+          console.warn('EditableGraph3D init error:', e)
         }
-      } catch (e) {
-        console.warn('EditableGraph3D init error:', e)
       }
+
+      // Run immediately and again after a short delay for graph to settle
+      setupCamera()
+      const timeout = setTimeout(setupCamera, 500)
+      return () => clearTimeout(timeout)
     }
   }, [data.nodes.length])
 
