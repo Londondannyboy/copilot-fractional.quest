@@ -502,10 +502,24 @@ agent = Agent(
     CRITICAL RULES:
     - "What is my name/email/skills/role/location?" → ANSWER DIRECTLY from the instructions context!
     - "What page are we on?" → CALL get_page_info, then describe the page!
-    - When user shares preferences → CALL save_user_preference to remember them!
+    - When user shares preferences → Use the HITL tools (confirm_location, confirm_skill, confirm_company)
     - NEVER say "I don't have access to personal information" - you DO, in the instructions!
     - NEVER say "I am a language model" - you are a career advisor with real data!
     - NEVER call a tool for simple profile questions - the data is in your instructions!
+
+    ## GETTING USER ID FOR HITL TOOLS - CRITICAL!
+    ⚠️ NEVER ASK THE USER FOR THEIR USER ID! You already have it!
+
+    The User ID is ALWAYS in your system instructions. Look for the line:
+    "- User ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+    Extract that UUID and use it directly in your HITL tool calls.
+
+    ❌ WRONG: "I need your user ID to confirm the skill. Could you please provide it?"
+    ✅ RIGHT: Just call confirm_skill(skill_name="Design", user_id="5e421f23-16a6-42de-a4a4-fa412414f1d8")
+
+    The user_id is a UUID like: 5e421f23-16a6-42de-a4a4-fa412414f1d8
+    Find it in your instructions and USE IT IMMEDIATELY without asking!
 
     If someone asks about day rates → CALL show_salary_insights, don't say you can't!
     If someone asks about jobs → CALL search_jobs, don't explain what you could do!
@@ -523,6 +537,27 @@ agent = Agent(
     End with a question or suggestion to keep the conversation going!
 
     IMPORTANT: Use double line breaks between sections. Never write walls of text.
+
+    ## JOB ASSESSMENT FLOW (assess_job_match)
+    When user asks to assess their fit for a job, ALWAYS call assess_job_match!
+
+    **Trigger phrases** (ANY of these → assess_job_match):
+    - "Assess my fit for..."
+    - "Am I qualified for..."
+    - "Should I apply to..."
+    - "How well do I match..."
+    - "Is this job right for me?"
+    - User clicks heart/save button on a job card
+
+    | User says... | Action |
+    |--------------|--------|
+    | "Assess my fit for the CTO job at TechCorp" | assess_job_match(job_title="CTO") |
+    | "Am I qualified for this job?" | assess_job_match() ← uses last_discussed_job |
+    | "Should I apply?" | assess_job_match() then offer to save if good match |
+
+    After showing assessment, if match is 60%+:
+    - Say something like "Good match! Would you like me to save this job for you?"
+    - If they say yes, call confirm_job_interest
 
     ## Important Behaviors
     - On first interaction: Show the user's 3D interest graph if they're logged in
@@ -1129,6 +1164,142 @@ async def search_jobs(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
     "total": len(job_cards),
     "query": query,
     "title": f"Found {len(job_cards)} {query} positions"
+  }
+
+@agent.tool
+async def assess_job_match(ctx: RunContext[StateDeps[AppState]], job_title: Optional[str] = None) -> dict:
+  """Assess how well the user matches a specific job.
+
+  Call this when user wants to:
+  - Like/save a job (❤️)
+  - Apply to a job
+  - Know if they're a good fit
+  - "Am I qualified for this?"
+  - "Should I apply?"
+
+  Returns a match assessment with:
+  - Match percentage (0-100)
+  - Matching skills
+  - Missing skills/requirements
+  - Recommendation (apply/upskill/skip)
+  """
+  print(f"📊 Assessing job match for: {job_title or 'last discussed job'}", file=sys.stderr)
+
+  state = ctx.deps.state
+  user = state.user
+  user_id = get_effective_user_id(user)
+
+  # Get job details
+  job = None
+  if job_title:
+    # Search for specific job
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("""
+      SELECT title, company, location, salary_min, salary_max, description, role_type
+      FROM test_jobs WHERE LOWER(title) LIKE %s LIMIT 1
+    """, (f"%{job_title.lower()}%",))
+    row = cur.fetchone()
+    cur.close()
+    conn.close()
+    if row:
+      job = {
+        "title": row[0], "company": row[1], "location": row[2],
+        "salary_min": row[3], "salary_max": row[4],
+        "description": row[5], "role_type": row[6]
+      }
+  elif state.last_discussed_job_details:
+    job = state.last_discussed_job_details
+
+  if not job:
+    return {"error": "No job to assess. Search for jobs first or specify a job title."}
+
+  # Get user's profile from Neon
+  user_skills = []
+  user_location = None
+  user_companies = []
+
+  if user_id:
+    try:
+      conn = psycopg2.connect(DATABASE_URL)
+      cur = conn.cursor()
+      cur.execute("""
+        SELECT item_type, value FROM user_profile_items WHERE user_id = %s
+      """, (user_id,))
+      for row in cur.fetchall():
+        if row[0] == 'skill':
+          user_skills.append(row[1].lower())
+        elif row[0] == 'location':
+          user_location = row[1].lower()
+        elif row[0] == 'company':
+          user_companies.append(row[1].lower())
+      cur.close()
+      conn.close()
+    except Exception as e:
+      print(f"Error fetching profile: {e}", file=sys.stderr)
+
+  # Parse job requirements (simple keyword extraction)
+  job_desc = (job.get("description") or "").lower()
+  job_role = (job.get("role_type") or "").lower()
+  job_location = (job.get("location") or "").lower()
+
+  # Common skill keywords to look for
+  skill_keywords = [
+    "python", "javascript", "react", "aws", "azure", "sql", "leadership",
+    "strategy", "m&a", "fundraising", "p&l", "marketing", "sales", "finance",
+    "operations", "digital transformation", "agile", "product", "design",
+    "ai", "machine learning", "data", "analytics", "growth", "b2b", "saas"
+  ]
+
+  required_skills = [s for s in skill_keywords if s in job_desc]
+  matching_skills = [s for s in required_skills if s in user_skills]
+  missing_skills = [s for s in required_skills if s not in user_skills]
+
+  # Calculate match percentage
+  skill_match = len(matching_skills) / max(len(required_skills), 1) * 60  # Skills = 60%
+  location_match = 20 if (user_location and user_location in job_location) or "remote" in job_location else 0
+  experience_match = 20 if user_companies else 10  # Having company experience = 20%
+
+  total_match = min(100, int(skill_match + location_match + experience_match))
+
+  # Determine recommendation
+  if total_match >= 80:
+    recommendation = "strong_match"
+    icon = "🚀"
+    message = "Excellent fit! You match most requirements."
+  elif total_match >= 60:
+    recommendation = "good_match"
+    icon = "⚡"
+    message = "Good potential! Consider highlighting your relevant experience."
+  elif total_match >= 40:
+    recommendation = "partial_match"
+    icon = "⚠️"
+    message = "Some gaps. You might want to upskill first."
+  else:
+    recommendation = "low_match"
+    icon = "❌"
+    message = "Significant gaps. Consider building more relevant experience."
+
+  return {
+    "job": {
+      "title": job["title"],
+      "company": job.get("company", "Unknown"),
+      "location": job.get("location", "Remote"),
+      "role_type": job.get("role_type")
+    },
+    "assessment": {
+      "match_percentage": total_match,
+      "icon": icon,
+      "recommendation": recommendation,
+      "message": message
+    },
+    "skills": {
+      "matching": [s.title() for s in matching_skills],
+      "missing": [s.title() for s in missing_skills],
+      "user_has": [s.title() for s in user_skills]
+    },
+    "location_match": location_match > 0,
+    "user_id": user_id
   }
 
 @agent.tool

@@ -341,11 +341,14 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
                   </a>
                   <button
                     onClick={() => {
-                      // Could trigger save to profile
-                      console.log('Save job:', job.title);
+                      // Trigger job assessment flow via chat
+                      appendMessage(new TextMessage({
+                        content: `Assess my fit for the "${job.title}" job at ${job.company}`,
+                        role: Role.User
+                      }));
                     }}
                     className="px-3 py-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                    title="Save job"
+                    title="Assess match & save"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -410,6 +413,84 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
       return (
         <div className="text-xs text-gray-500 italic">
           Background updated to {result.query}
+        </div>
+      );
+    },
+  }, []);
+
+  // Job Match Assessment - AG-UI Card
+  useRenderToolCall({
+    name: "assess_job_match",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result) return <ChartLoading title="Assessing match..." />;
+      if (result.error) return <div className="text-red-500 text-sm p-2">{result.error}</div>;
+
+      const { job, assessment, skills } = result;
+      const matchColor = assessment.match_percentage >= 80 ? "text-green-500" :
+                        assessment.match_percentage >= 60 ? "text-yellow-500" :
+                        assessment.match_percentage >= 40 ? "text-orange-500" : "text-red-500";
+      const bgColor = assessment.match_percentage >= 80 ? "bg-green-50 border-green-200" :
+                      assessment.match_percentage >= 60 ? "bg-yellow-50 border-yellow-200" :
+                      assessment.match_percentage >= 40 ? "bg-orange-50 border-orange-200" : "bg-red-50 border-red-200";
+
+      return (
+        <div className={`p-4 rounded-xl border-2 ${bgColor} max-w-md`}>
+          {/* Header */}
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h3 className="font-bold text-gray-900">{job.title}</h3>
+              <p className="text-sm text-gray-600">{job.company} • {job.location}</p>
+            </div>
+            <div className={`text-3xl font-bold ${matchColor}`}>
+              {assessment.icon} {assessment.match_percentage}%
+            </div>
+          </div>
+
+          {/* Match Bar */}
+          <div className="h-3 bg-gray-200 rounded-full mb-3 overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all ${
+                assessment.match_percentage >= 80 ? "bg-green-500" :
+                assessment.match_percentage >= 60 ? "bg-yellow-500" :
+                assessment.match_percentage >= 40 ? "bg-orange-500" : "bg-red-500"
+              }`}
+              style={{ width: `${assessment.match_percentage}%` }}
+            />
+          </div>
+
+          {/* Message */}
+          <p className="text-sm text-gray-700 mb-3">{assessment.message}</p>
+
+          {/* Skills */}
+          <div className="space-y-2">
+            {skills.matching.length > 0 && (
+              <div>
+                <p className="text-xs font-medium text-green-700 mb-1">✓ Matching Skills</p>
+                <div className="flex flex-wrap gap-1">
+                  {skills.matching.map((s: string) => (
+                    <span key={s} className="px-2 py-0.5 bg-green-100 text-green-800 text-xs rounded-full">{s}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {skills.missing.length > 0 && (
+              <div>
+                <p className="text-xs font-medium text-red-700 mb-1">✗ Missing Skills</p>
+                <div className="flex flex-wrap gap-1">
+                  {skills.missing.map((s: string) => (
+                    <span key={s} className="px-2 py-0.5 bg-red-100 text-red-800 text-xs rounded-full">{s}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Action hint */}
+          {skills.missing.length > 0 && (
+            <p className="text-xs text-gray-500 mt-3 italic">
+              💡 Tip: Add missing skills to your profile to improve your match!
+            </p>
+          )}
         </div>
       );
     },
