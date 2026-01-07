@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 interface RoleContentHubProps {
-  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'compliance' | 'product' | 'pm';
+  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'compliance' | 'product' | 'pm';
 }
 
 interface RoleLink {
