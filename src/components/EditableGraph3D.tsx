@@ -144,15 +144,12 @@ export function EditableGraph3D({ userId, userName, items, onEdit, onDelete, onA
 
   const data = graphData()
 
-  // Initial camera setup
+  // Initial camera setup - center on user node
   useEffect(() => {
     if (graphRef.current && data.nodes.length > 0) {
       try {
-        const camera = graphRef.current.camera()
-        if (camera) {
-          camera.position.set(0, 0, 250)
-          camera.lookAt(0, 0, 0)
-        }
+        // Center camera on origin where user node is fixed
+        graphRef.current.cameraPosition({ x: 0, y: 0, z: 200 }, { x: 0, y: 0, z: 0 }, 0)
 
         // Add lighting
         const scene = graphRef.current.scene()
@@ -262,34 +259,9 @@ export function EditableGraph3D({ userId, userName, items, onEdit, onDelete, onA
   }
 
   return (
-    <div className="relative" id="graph-container">
-      {/* Graph */}
-      <div className="rounded-xl overflow-hidden bg-gray-900 border border-gray-700">
-        <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex items-center justify-between">
-          <div>
-            <h3 className="text-white font-medium">Your Profile Graph</h3>
-            <p className="text-gray-400 text-xs">{data.nodes.length - 1} items • Click a node to edit</p>
-          </div>
-          <div className="flex gap-2">
-            {['location', 'role', 'company', 'skill'].map(type => (
-              <button
-                key={type}
-                onClick={() => onAdd(type === 'role' ? 'role_preference' : type)}
-                className="px-2 py-1 text-xs rounded-full transition-colors"
-                style={{
-                  backgroundColor: `${NODE_COLORS[type]}20`,
-                  color: NODE_COLORS[type],
-                  border: `1px solid ${NODE_COLORS[type]}40`,
-                }}
-              >
-                + {type.charAt(0).toUpperCase() + type.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* key forces re-render when items change */}
-        <ForceGraph3DLib
+    <div className="relative w-full h-full" id="graph-container">
+      {/* Graph - no header, just the 3D view */}
+      <ForceGraph3DLib
           key={`graph-${items.length}-${items.map(i => i.id).join('-')}`}
           ref={graphRef}
           graphData={data}
@@ -305,11 +277,10 @@ export function EditableGraph3D({ userId, userName, items, onEdit, onDelete, onA
           showNavInfo={false}
           enableNavigationControls={true}
           width={dimensions.width}
-          height={height - 60}
+          height={height}
           warmupTicks={50}
           cooldownTime={500}
         />
-      </div>
 
       {/* Edit Panel - slides in when node selected */}
       {selectedItem && (

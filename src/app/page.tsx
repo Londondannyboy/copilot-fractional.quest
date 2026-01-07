@@ -708,10 +708,7 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
   const [showAddModal, setShowAddModal] = useState<string | null>(null);
   const [newValue, setNewValue] = useState("");
 
-  // Graph view modes (for future views: Career Helix, Trinity, Network)
-  type GraphViewType = 'profile' | 'career' | 'trinity' | 'network';
-  const [graphView, setGraphView] = useState<GraphViewType>('profile');
-
+  
   // Graph edit handlers (same as dashboard)
   const handleGraphEdit = useCallback((item: {id: number; item_type: string; value: string; metadata: Record<string, unknown>; confirmed: boolean}) => {
     setEditingItem(item);
@@ -854,31 +851,14 @@ Reference the page context when discussing jobs.`;
                   </button>
                 </SignedOut>
                 <SignedIn>
-                  {/* Compact profile: small avatar + name + actions */}
-                  <div className="flex items-center gap-2">
-                    {/* Small avatar with white border */}
-                    <div className="w-8 h-8 rounded-full bg-white p-0.5 shrink-0">
-                      <UserButton />
-                    </div>
-                    <span className="text-white text-sm font-medium">{firstName || user?.name}</span>
-                  </div>
-                  <span className="text-gray-500">|</span>
-                  <button
-                    onClick={() => appendMessage(new TextMessage({ content: "Read my messages", role: Role.User }))}
-                    className="relative text-gray-300 hover:text-white p-1 rounded transition-colors"
-                    title="Messages"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                    </svg>
-                    <MessagesBadge userId={user?.id} />
-                  </button>
-                  <a href="/dashboard" className="text-gray-300 hover:text-white text-xs transition-colors">
+                  {/* Clean navbar: name + links */}
+                  <span className="text-white text-sm font-medium">{firstName || user?.name}</span>
+                  <a href="/dashboard" className="text-gray-300 hover:text-white text-sm transition-colors">
                     Dashboard
                   </a>
                   <button
                     onClick={() => authClient.signOut()}
-                    className="text-gray-300 hover:text-white text-xs transition-colors"
+                    className="text-white hover:text-gray-300 text-sm transition-colors"
                   >
                     Sign Out
                   </button>
@@ -890,28 +870,25 @@ Reference the page context when discussing jobs.`;
           {/* Center - Logo */}
           <div className="text-white font-bold text-lg">Fractional Quest</div>
 
-          {/* Right side - View Switchers */}
+          {/* Right side - Add buttons */}
           <div className="flex items-center gap-2">
-            {[
-              { id: 'profile' as GraphViewType, icon: '👤', label: 'Profile', color: 'bg-violet-500' },
-              { id: 'career' as GraphViewType, icon: '📈', label: 'Career', color: 'bg-emerald-500' },
-              { id: 'trinity' as GraphViewType, icon: '🔺', label: 'Trinity', color: 'bg-blue-500' },
-              { id: 'network' as GraphViewType, icon: '🌐', label: 'Network', color: 'bg-amber-500' },
-            ].map((view) => (
+            {user && [
+              { type: 'location', label: '+ Location', color: '#10B981' },
+              { type: 'role_preference', label: '+ Role', color: '#3B82F6' },
+              { type: 'company', label: '+ Company', color: '#EC4899' },
+              { type: 'skill', label: '+ Skill', color: '#F59E0B' },
+            ].map((item) => (
               <button
-                key={view.id}
-                onClick={() => setGraphView(view.id)}
-                className={`group flex items-center gap-1.5 px-2 py-1 rounded-full text-xs transition-all ${
-                  graphView === view.id
-                    ? `${view.color} text-white shadow-lg scale-105`
-                    : 'bg-gray-700/50 text-gray-300 hover:bg-gray-700'
-                }`}
-                title={view.label}
+                key={item.type}
+                onClick={() => handleGraphAdd(item.type)}
+                className="px-2 py-1 text-xs rounded-full transition-colors hover:opacity-80"
+                style={{
+                  backgroundColor: `${item.color}20`,
+                  color: item.color,
+                  border: `1px solid ${item.color}40`,
+                }}
               >
-                <span className={`w-2 h-2 rounded-full ${graphView === view.id ? 'bg-white/80' : view.color}`} />
-                <span className={`transition-all ${graphView === view.id ? 'max-w-20' : 'max-w-0 overflow-hidden'}`}>
-                  {view.label}
-                </span>
+                {item.label}
               </button>
             ))}
           </div>
