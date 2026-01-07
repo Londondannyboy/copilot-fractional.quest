@@ -935,16 +935,16 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
       color: 'purple'
     },
     {
-      value: 'skills_development',
-      label: '📚 Skills Development',
-      description: "I want to develop specific skills before my next role",
-      color: 'amber'
-    },
-    {
       value: 'lifestyle_change',
       label: '🌴 Lifestyle Change',
       description: "I'm seeking flexibility - remote work, relocation, or work-life balance",
       color: 'emerald'
+    },
+    {
+      value: 'just_curious',
+      label: '👀 Just Curious',
+      description: "I'm exploring what's out there - no immediate plans",
+      color: 'gray'
     },
   ];
 
@@ -1034,8 +1034,152 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     },
   });
 
+  // Human-in-the-Loop: Employment Status (Stage 1 Repo)
+  const EMPLOYMENT_STATUS_OPTIONS = [
+    { value: 'employed', label: '💼 Currently Employed', description: 'Working full-time or part-time' },
+    { value: 'between_roles', label: '🔄 Between Roles', description: 'Recently left or finishing up' },
+    { value: 'freelancing', label: '🚀 Freelancing/Consulting', description: 'Already working fractionally' },
+    { value: 'founder', label: '🏗️ Founder/Entrepreneur', description: 'Running my own venture' },
+  ];
+
+  useHumanInTheLoop({
+    name: "confirm_employment_status",
+    description: "Confirm user's current employment status",
+    parameters: [
+      { name: "user_id", type: "string", description: "User ID", required: true },
+    ],
+    render: ({ args, respond, status, result }) => {
+      if (status === "executing" && respond) {
+        return (
+          <div className="p-5 bg-white rounded-xl shadow-xl border border-blue-100 max-w-lg">
+            <div className="mb-4">
+              <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">
+                📋 STAGE 1 PROFILE
+              </span>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">
+              What's your current situation?
+            </h3>
+            <div className="space-y-2">
+              {EMPLOYMENT_STATUS_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={async () => {
+                    try {
+                      await fetch('/api/user-profile', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          userId: args.user_id,
+                          itemType: 'employment_status',
+                          value: option.value,
+                          confirmed: true,
+                          metadata: { label: option.label }
+                        })
+                      });
+                    } catch (e) {
+                      console.error('Failed to save employment status:', e);
+                    }
+                    respond({ confirmed: true, status: option.value, label: option.label });
+                    setTimeout(() => refreshProfile(), 500);
+                  }}
+                  className="w-full p-3 text-left rounded-lg border-2 border-gray-200 hover:border-blue-300 hover:shadow-md transition-all"
+                >
+                  <div className="font-semibold text-gray-900">{option.label}</div>
+                  <div className="text-sm text-gray-600">{option.description}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      }
+      if (status === "complete" && result) {
+        return (
+          <div className="p-2 text-sm text-blue-700 bg-blue-50 rounded-lg">
+            Status: {result.label}
+          </div>
+        );
+      }
+      return <></>;
+    },
+  });
+
+  // Human-in-the-Loop: Professional Vertical (Stage 1 Repo)
+  const VERTICAL_OPTIONS = [
+    { value: 'technology', label: '💻 Technology', description: 'Software, IT, Engineering' },
+    { value: 'finance', label: '💰 Finance', description: 'Banking, Investment, Accounting' },
+    { value: 'marketing', label: '📣 Marketing', description: 'Brand, Growth, Digital' },
+    { value: 'operations', label: '⚙️ Operations', description: 'Supply Chain, Process, Efficiency' },
+    { value: 'hr_people', label: '👥 HR & People', description: 'Talent, Culture, L&D' },
+    { value: 'sales', label: '🤝 Sales', description: 'Revenue, Partnerships, BD' },
+    { value: 'product', label: '📦 Product', description: 'Product Management, Strategy' },
+    { value: 'general_management', label: '🎯 General Management', description: 'CEO, COO, GM roles' },
+  ];
+
+  useHumanInTheLoop({
+    name: "confirm_professional_vertical",
+    description: "Confirm user's professional vertical/domain",
+    parameters: [
+      { name: "user_id", type: "string", description: "User ID", required: true },
+    ],
+    render: ({ args, respond, status, result }) => {
+      if (status === "executing" && respond) {
+        return (
+          <div className="p-5 bg-white rounded-xl shadow-xl border border-purple-100 max-w-lg">
+            <div className="mb-4">
+              <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">
+                📋 STAGE 1 PROFILE
+              </span>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">
+              What's your professional domain?
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              {VERTICAL_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={async () => {
+                    try {
+                      await fetch('/api/user-profile', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          userId: args.user_id,
+                          itemType: 'professional_vertical',
+                          value: option.value,
+                          confirmed: true,
+                          metadata: { label: option.label }
+                        })
+                      });
+                    } catch (e) {
+                      console.error('Failed to save vertical:', e);
+                    }
+                    respond({ confirmed: true, vertical: option.value, label: option.label });
+                    setTimeout(() => refreshProfile(), 500);
+                  }}
+                  className="p-3 text-left rounded-lg border-2 border-gray-200 hover:border-purple-300 hover:shadow-md transition-all"
+                >
+                  <div className="font-semibold text-gray-900 text-sm">{option.label}</div>
+                  <div className="text-xs text-gray-600">{option.description}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      }
+      if (status === "complete" && result) {
+        return (
+          <div className="p-2 text-sm text-purple-700 bg-purple-50 rounded-lg">
+            Vertical: {result.label}
+          </div>
+        );
+      }
+      return <></>;
+    },
+  });
+
   // Fetch profile items for instructions AND graph
-  const [profileItems, setProfileItems] = useState<{location?: string; role?: string; skills?: string[]; companies?: string[]; trinity?: string; trinityLabel?: string}>({});
+  const [profileItems, setProfileItems] = useState<{location?: string; role?: string; skills?: string[]; companies?: string[]; trinity?: string; trinityLabel?: string; employmentStatus?: string; vertical?: string}>({});
   const [fullProfileItems, setFullProfileItems] = useState<Array<{id: number; item_type: string; value: string; metadata: Record<string, unknown>; confirmed: boolean}>>([]);
 
   // Edit modal state (same pattern as dashboard)
@@ -1116,6 +1260,12 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
             grouped.trinity = item.value;
             grouped.trinityLabel = (item.metadata?.label as string) || item.value;
           }
+          if (item.item_type === 'employment_status') {
+            grouped.employmentStatus = (item.metadata?.label as string) || item.value;
+          }
+          if (item.item_type === 'professional_vertical') {
+            grouped.vertical = (item.metadata?.label as string) || item.value;
+          }
           if (item.item_type === 'skill') {
             if (!grouped.skills) grouped.skills = [];
             grouped.skills.push(item.value);
@@ -1135,18 +1285,36 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
   }, [user?.id, profileRefreshTrigger]);
 
   // Build instructions with FULL user context including profile items AND page context
+  // Stage 1 Repo completeness check
+  const stage1Complete = !!(profileItems.trinity && profileItems.employmentStatus && profileItems.vertical);
+  const missingStage1: string[] = [];
+  if (!profileItems.trinity) missingStage1.push('Trinity (purpose)');
+  if (!profileItems.employmentStatus) missingStage1.push('Employment Status');
+  if (!profileItems.vertical) missingStage1.push('Professional Vertical');
+
   const agentInstructions = user
     ? `CRITICAL USER CONTEXT:
 - User Name: ${firstName || user.name}
 - User ID: ${user.id}
 - User Email: ${user.email}
+
+STAGE 1 PROFILE (${stage1Complete ? '✅ COMPLETE' : '⚠️ INCOMPLETE'}):
 - Trinity: ${profileItems.trinity ? `${profileItems.trinityLabel} (${profileItems.trinity})` : 'Not set - MUST ASK FIRST!'}
+- Employment Status: ${profileItems.employmentStatus || 'Not set'}
+- Professional Vertical: ${profileItems.vertical || 'Not set'}
 - Location: ${profileItems.location || 'Not set'}
+
+EXTENDED PROFILE:
 - Target Role: ${profileItems.role || 'Not set'}
 - Skills: ${profileItems.skills?.join(', ') || 'None saved'}
-- Companies: ${profileItems.companies?.join(', ') || 'None saved'}
+- Companies: ${profileItems.companies?.join(', ') || 'None saved (add with URL for validation)'}
 
-${!profileItems.trinity ? `⚠️ TRINITY NOT SET - Before showing jobs or taking actions, call confirm_trinity(user_id="${user.id}") to understand their purpose!` : ''}
+${!stage1Complete ? `⚠️ STAGE 1 INCOMPLETE - Missing: ${missingStage1.join(', ')}
+Call these HITLs IN ORDER before showing jobs:
+${!profileItems.trinity ? `1. confirm_trinity(user_id="${user.id}")` : ''}
+${profileItems.trinity && !profileItems.employmentStatus ? `2. confirm_employment_status(user_id="${user.id}")` : ''}
+${profileItems.trinity && profileItems.employmentStatus && !profileItems.vertical ? `3. confirm_professional_vertical(user_id="${user.id}")` : ''}
+` : '✅ Stage 1 complete - ready to search jobs and match!'}
 
 PAGE CONTEXT:
 - Current Page: ${pageContext}
