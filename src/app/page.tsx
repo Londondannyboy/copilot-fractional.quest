@@ -588,6 +588,11 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
   const [isVoiceActive, setIsVoiceActive] = useState(false);
   const [userNodePosition, setUserNodePosition] = useState<{ x: number; y: number } | null>(null);
 
+  // Stable callback for position updates to prevent VoiceGraphInterface re-renders
+  const handleUserNodePositionChange = useCallback((pos: { x: number; y: number }) => {
+    setUserNodePosition(pos);
+  }, []);
+
   useEffect(() => {
     if (!user?.id) return;
 
@@ -723,12 +728,12 @@ Reference the page context when discussing jobs.`;
               <VoiceGraphInterface
                 userName={firstName || user.name || 'You'}
                 items={fullProfileItems}
-                onUserNodePositionChange={(pos) => setUserNodePosition(pos)}
+                onUserNodePositionChange={handleUserNodePositionChange}
               />
 
-              {/* Voice Input - BOUND to user node */}
+              {/* Voice Input - BOUND to user node with smooth transition */}
               <div
-                className="absolute z-30 pointer-events-auto"
+                className="absolute z-30 pointer-events-auto transition-all duration-75 ease-out"
                 style={{
                   left: userNodePosition ? `${userNodePosition.x}px` : '50%',
                   top: userNodePosition ? `${userNodePosition.y}px` : '50%',

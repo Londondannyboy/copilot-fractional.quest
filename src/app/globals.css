@@ -133,3 +133,23 @@ body, html {
 .text-muted {
   color: var(--color-muted);
 }
+
+/* ========================================
+   COPILOTKIT CUSTOMIZATION
+   Hide branding, customize styles
+   ======================================== */
+
+/* Hide "Powered by CopilotKit" branding */
+.copilotKitVersionInfo,
+[class*="copilotKit"] a[href*="copilotkit.ai"],
+.copilotKitFooter,
+.copilotKitSidebar footer,
+.copilotKitChat footer,
+.copilotKitWindow footer {
+  display: none !important;
+}
+
+/* Alternative: target by text content if needed */
+.copilotKitSidebarContentWrapper > div:last-child:has(a[href*="copilotkit"]) {
+  display: none !important;
+}
