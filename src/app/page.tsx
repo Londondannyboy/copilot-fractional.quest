@@ -699,6 +699,87 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     },
   });
 
+  // Human-in-the-Loop: Location Change Confirmation
+  // When user wants to change location, confirm the change
+  useHumanInTheLoop({
+    name: "confirm_location",
+    description: "Confirm user's location change",
+    parameters: [
+      { name: "new_location", type: "string", description: "The new location", required: true },
+      { name: "current_location", type: "string", description: "Current location (if any)", required: false },
+      { name: "user_id", type: "string", description: "User ID", required: true },
+    ],
+    render: ({ args, respond, status, result }) => {
+      if (status === "executing" && respond) {
+        const isChange = args.current_location && args.current_location !== args.new_location;
+        return (
+          <div className="p-4 bg-white rounded-lg shadow-lg border border-emerald-100 max-w-md">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">
+                📍 Location
+              </span>
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-2">
+              {isChange
+                ? `Change location from ${args.current_location} to ${args.new_location}?`
+                : `Set your location to ${args.new_location}?`
+              }
+            </h3>
+            <div className="flex gap-2">
+              <button
+                onClick={async () => {
+                  try {
+                    // Delete old location first if changing
+                    if (isChange) {
+                      const existing = fullProfileItems.find(i => i.item_type === 'location');
+                      if (existing) {
+                        await fetch(`/api/user-profile?id=${existing.id}&userId=${args.user_id}`, { method: 'DELETE' });
+                      }
+                    }
+                    await fetch('/api/user-profile', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        userId: args.user_id,
+                        itemType: 'location',
+                        value: args.new_location,
+                        confirmed: true,
+                        metadata: { source: 'voice_confirmed' }
+                      })
+                    });
+                  } catch (e) {
+                    console.error('Failed to save location:', e);
+                  }
+                  respond({ confirmed: true, location: args.new_location });
+                  setTimeout(() => refreshProfile(), 300);
+                }}
+                className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              >
+                Yes, confirm
+              </button>
+              <button
+                onClick={() => respond({ confirmed: false })}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      if (status === "complete" && result) {
+        return (
+          <div className="p-2 text-sm text-gray-600 bg-gray-50 rounded-lg">
+            {result.confirmed ? `Location set to ${result.location}` : "Cancelled"}
+          </div>
+        );
+      }
+
+      return <></>;
+    },
+  });
+
   // Fetch profile items for instructions AND graph
   const [profileItems, setProfileItems] = useState<{location?: string; role?: string; skills?: string[]; companies?: string[]}>({});
   const [fullProfileItems, setFullProfileItems] = useState<Array<{id: number; item_type: string; value: string; metadata: Record<string, unknown>; confirmed: boolean}>>([]);

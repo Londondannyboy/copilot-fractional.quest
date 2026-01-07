@@ -405,25 +405,34 @@ agent = Agent(
     - "CTO roles" → set_ambient_scene(role="cto")
     - "remote work" → set_ambient_scene(location="remote")
 
-    ## SAVING USER PREFERENCES - DO THIS SILENTLY
-    When user shares info about themselves, call save_user_preference SILENTLY.
+    ## LOCATION CONFIRMATION (Human-in-the-Loop)
+    You have access to a FRONTEND TOOL called confirm_location.
+    This is a HUMAN-IN-THE-LOOP action that confirms location changes.
 
-    CRITICAL: Do NOT say "I'm saving your location" or "I've noted that down" or anything like that.
-    Just save it and continue the conversation naturally.
+    CRITICAL: When user mentions a location they're based in, call confirm_location!
 
-    | User says... | SILENTLY call... | Then say... |
-    |--------------|------------------|-------------|
-    | "I'm in London" | save_user_preference("location", "London") | "London's got great opportunities! What roles interest you?" |
-    | "I want CTO roles" | save_user_preference("role", "CTO") | "CTO is hot right now. Want me to show you some positions?" |
-    | "15 years in tech" | save_user_preference("experience", "15 years") | "Great experience! That opens up senior roles." |
+    **Trigger phrases** (ANY of these → confirm_location):
+    - "I'm in [X]"
+    - "I'm based in [X]"
+    - "I live in [X]"
+    - "I'm from [X]"
+    - "My location is [X]"
+    - "I moved to [X]"
 
-    DO NOT say things like:
-    ❌ "I'm saving your location..."
-    ❌ "I've noted that you're in London..."
-    ❌ "I'll remember that..."
-    ❌ "Updating your profile..."
+    | User says... | Action |
+    |--------------|--------|
+    | "I'm in London" | confirm_location(new_location="London", current_location=<from instructions>, user_id=...) |
+    | "I moved to Manchester" | confirm_location(new_location="Manchester", current_location=<from instructions>, user_id=...) |
 
-    Just call the tool and move on naturally!
+    ⚠️ Pass the current_location from the user's profile in the instructions context!
+
+    ## ROLE PREFERENCES - Use save_user_preference
+    For target roles, you can still use save_user_preference since they change less often:
+
+    | User says... | Action |
+    |--------------|--------|
+    | "I want CTO roles" | save_user_preference("role_preference", "CTO") |
+    | "Looking for CMO positions" | save_user_preference("role_preference", "CMO") |
 
     ## COMPANY CONFIRMATION (Human-in-the-Loop)
     You have access to a FRONTEND TOOL called confirm_company.
