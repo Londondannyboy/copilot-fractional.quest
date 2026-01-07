@@ -288,7 +288,9 @@ export function EditableGraph3D({ userId, userName, items, onEdit, onDelete, onA
           </div>
         </div>
 
+        {/* key forces re-render when items change */}
         <ForceGraph3DLib
+          key={`graph-${items.length}-${items.map(i => i.id).join('-')}`}
           ref={graphRef}
           graphData={data}
           nodeThreeObject={nodeThreeObject}
