@@ -3,6 +3,7 @@
 import { UserButton, RedirectToSignIn, SignedIn, SignedOut, AccountSettingsCards } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from '@/lib/auth/client';
 import { useEffect, useState } from 'react';
+import { UserProfileSection } from '@/components/UserProfileSection';
 
 type SavedJob = {
   id: number;
@@ -98,6 +99,14 @@ export default function ProfilePage() {
           <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-6">Account Settings</h2>
             <AccountSettingsCards />
+          </div>
+
+          {/* Your Profile - Structured profile data */}
+          <div className="mb-8">
+            <UserProfileSection
+              userId={user?.id}
+              userName={user?.name?.split(' ')[0] || undefined}
+            />
           </div>
 
           {/* Zep Memory - What AI remembers about you */}

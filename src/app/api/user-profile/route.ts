@@ -3,10 +3,10 @@ import { neon } from "@neondatabase/serverless";
 
 export async function DELETE(request: NextRequest) {
   const userId = request.nextUrl.searchParams.get("userId");
-  const itemId = request.nextUrl.searchParams.get("itemId");
+  const itemId = request.nextUrl.searchParams.get("itemId") || request.nextUrl.searchParams.get("id");
 
   if (!userId || !itemId) {
-    return NextResponse.json({ error: "userId and itemId required" }, { status: 400 });
+    return NextResponse.json({ error: "userId and itemId (or id) required" }, { status: 400 });
   }
 
   try {

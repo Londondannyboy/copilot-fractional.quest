@@ -10,13 +10,46 @@ import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
 import { VoiceInput } from "@/components/voice-input";
 import { DynamicBackground } from "@/components/DynamicBackground";
 import { LiveProfileGraph } from "@/components/LiveProfileGraph";
+import { UserProfileSection } from "@/components/UserProfileSection";
 import { AgentState } from "@/lib/types";
 import { useCoAgent, useRenderToolCall, useCopilotChat, useHumanInTheLoop } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { UserButton, SignedIn, SignedOut } from "@neondatabase/neon-js/auth/react/ui";
 import { authClient } from "@/lib/auth/client";
+
+// Messages badge component
+function MessagesBadge({ userId }: { userId?: string }) {
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const fetchUnread = async () => {
+      try {
+        const res = await fetch(`/api/messages?userId=${userId}&unreadOnly=true`);
+        const data = await res.json();
+        setUnreadCount(data.unreadCount || 0);
+      } catch (e) {
+        console.error('Failed to fetch unread messages:', e);
+      }
+    };
+
+    fetchUnread();
+    // Poll every 30 seconds
+    const interval = setInterval(fetchUnread, 30000);
+    return () => clearInterval(interval);
+  }, [userId]);
+
+  if (unreadCount === 0) return null;
+
+  return (
+    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+      {unreadCount > 9 ? '9+' : unreadCount}
+    </span>
+  );
+}
 
 // Dynamic suggestions based on context
 function useDynamicSuggestions(state: AgentState, lastQuery: string) {
@@ -92,19 +125,22 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     console.log("📊 Profile refresh triggered");
   }, []);
 
-  // Sync user to agent state when session changes (run once when user loads)
+  // Sync user to agent state when session changes
+  // IMPORTANT: Always sync if user exists but state.user doesn't match (handles state resets)
   useEffect(() => {
-    console.log("🔄 User sync effect - user:", user?.name, "state.user:", state.user);
-    if (user && !state.user) {
-      console.log("🔄 Setting user state:", { firstName, name: user.name, email: user.email });
+    console.log("🔄 User sync effect - user:", user?.name, "state.user:", state.user?.name);
+    if (user && (!state.user || state.user.id !== user.id)) {
+      console.log("🔄 Setting user state:", { id: user.id, firstName, name: user.name, email: user.email });
       setState(prev => ({
         jobs: prev?.jobs ?? [],
         search_query: prev?.search_query ?? "",
+        scene: prev?.scene,
         user: {
           id: user.id,
           name: user.name,
           firstName: firstName || undefined,
           email: user.email,
+          liked_jobs: prev?.user?.liked_jobs ?? [],
         }
       }));
     }
@@ -117,8 +153,14 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
   // CopilotKit chat hook for voice integration
   const { appendMessage } = useCopilotChat();
 
+  // Use ref for user.id to prevent callback recreation on auth complete
+  const userIdRef = useRef<string | undefined>(user?.id);
+  useEffect(() => {
+    userIdRef.current = user?.id;
+  }, [user?.id]);
+
   // Handle voice input → send to CopilotKit with correct role
-  // Now receives FULL transcript (no more 200 char truncation!)
+  // Stable callback - uses refs to prevent recreation
   const handleVoiceMessage = useCallback((text: string, role: "user" | "assistant" = "user") => {
     console.log(`🎤 Voice (${role}):`, text.slice(0, 100) + (text.length > 100 ? '...' : ''));
 
@@ -128,12 +170,13 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     }
 
     // Store message to Zep for memory (fire-and-forget, don't block)
-    if (user?.id && text.length > 5) {
+    const currentUserId = userIdRef.current;
+    if (currentUserId && text.length > 5) {
       fetch('/api/zep-store', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId: user.id,
+          userId: currentUserId,
           role: role,
           content: text,
         }),
@@ -143,7 +186,7 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     // Send with correct role so Pydantic AI gets full conversation context
     const messageRole = role === "user" ? Role.User : Role.Assistant;
     appendMessage(new TextMessage({ content: text, role: messageRole }));
-  }, [appendMessage, setLastQuery, user?.id]);
+  }, [appendMessage, setLastQuery]); // Removed user?.id - using ref instead
 
   // AG-UI Generative UI: Charts
   useRenderToolCall({
@@ -186,7 +229,7 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     },
   }, []);
 
-  // Search Jobs - Render multiple job cards in chat
+  // Search Jobs - Render polished job cards in chat
   useRenderToolCall({
     name: "search_jobs",
     render: ({ result, status }) => {
@@ -195,44 +238,92 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
       const jobs = result.jobs || [];
       if (jobs.length === 0) {
         return (
-          <div className="p-4 bg-gray-50 rounded-lg text-gray-600">
-            No jobs found for "{result.query}"
+          <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl text-center">
+            <span className="text-3xl mb-2 block">🔍</span>
+            <p className="text-gray-600 font-medium">No jobs found for "{result.query}"</p>
+            <p className="text-gray-400 text-sm mt-1">Try a different search term</p>
           </div>
         );
       }
 
       return (
-        <div className="space-y-3">
-          <h3 className="font-semibold text-gray-900">{result.title}</h3>
-          <div className="grid gap-3">
-            {jobs.map((job: { title: string; company: string; location: string; salary: string; description: string; url: string }, i: number) => (
-              <div key={i} className="p-4 bg-white rounded-lg shadow border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h4 className="font-medium text-gray-900">{job.title}</h4>
-                    <p className="text-sm text-gray-600">{job.company}</p>
+        <div className="space-y-4">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <h3 className="font-bold text-gray-900 text-lg">{result.title}</h3>
+            <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              {jobs.length} found
+            </span>
+          </div>
+
+          {/* Job Cards */}
+          <div className="space-y-3">
+            {jobs.map((job: { title: string; company: string; location: string; salary: string; description: string; url: string; role_type?: string }, i: number) => (
+              <div
+                key={i}
+                className="group p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-lg transition-all duration-200"
+              >
+                {/* Top row: Title + Role badge */}
+                <div className="flex justify-between items-start gap-3 mb-2">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors truncate">
+                      {job.title}
+                    </h4>
+                    <p className="text-sm text-gray-600 font-medium">{job.company}</p>
                   </div>
-                  <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">{job.location}</span>
+                  {job.role_type && (
+                    <span className="shrink-0 text-xs bg-indigo-600 text-white px-2.5 py-1 rounded-full font-semibold">
+                      {job.role_type}
+                    </span>
+                  )}
                 </div>
-                <p className="text-sm text-gray-500 mb-2">{job.salary}</p>
-                {job.description && <p className="text-sm text-gray-600 mb-3">{job.description}</p>}
-                <div className="flex gap-2">
+
+                {/* Meta row: Location + Salary */}
+                <div className="flex flex-wrap gap-3 mb-3 text-sm">
+                  <span className="flex items-center gap-1 text-gray-500">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    {job.location}
+                  </span>
+                  {job.salary && (
+                    <span className="flex items-center gap-1 text-emerald-600 font-medium">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {job.salary}
+                    </span>
+                  )}
+                </div>
+
+                {/* Description */}
+                {job.description && (
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{job.description}</p>
+                )}
+
+                {/* Actions */}
+                <div className="flex gap-2 pt-2 border-t border-gray-100">
                   <a
                     href={job.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded transition-colors"
+                    className="flex-1 text-center text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
                   >
-                    Apply Now
+                    Apply Now →
                   </a>
-                  <a
-                    href={job.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded transition-colors"
+                  <button
+                    onClick={() => {
+                      // Could trigger save to profile
+                      console.log('Save job:', job.title);
+                    }}
+                    className="px-3 py-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    title="Save job"
                   >
-                    View Details
-                  </a>
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             ))}
@@ -464,11 +555,62 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     },
   });
 
+  // Fetch profile items for instructions
+  const [profileItems, setProfileItems] = useState<{location?: string; role?: string; skills?: string[]; companies?: string[]}>({});
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch(`/api/user-profile?userId=${user.id}`);
+        const data = await res.json();
+        const items = data.items || [];
+
+        // Group by type
+        const grouped: typeof profileItems = {};
+        items.forEach((item: { item_type: string; value: string }) => {
+          if (item.item_type === 'location') grouped.location = item.value;
+          if (item.item_type === 'role_preference') grouped.role = item.value;
+          if (item.item_type === 'skill') {
+            if (!grouped.skills) grouped.skills = [];
+            grouped.skills.push(item.value);
+          }
+          if (item.item_type === 'company') {
+            if (!grouped.companies) grouped.companies = [];
+            grouped.companies.push(item.value);
+          }
+        });
+        setProfileItems(grouped);
+      } catch (e) {
+        console.error('Failed to fetch profile for instructions:', e);
+      }
+    };
+
+    fetchProfile();
+  }, [user?.id, profileRefreshTrigger]);
+
+  // Build instructions with FULL user context including profile items
+  const agentInstructions = user
+    ? `CRITICAL USER CONTEXT:
+- User Name: ${firstName || user.name}
+- User ID: ${user.id}
+- User Email: ${user.email}
+- Location: ${profileItems.location || 'Not set'}
+- Target Role: ${profileItems.role || 'Not set'}
+- Skills: ${profileItems.skills?.join(', ') || 'None saved'}
+- Companies: ${profileItems.companies?.join(', ') || 'None saved'}
+
+When the user asks about their profile, skills, companies, location, etc., use the above info.
+When they ask about messages, use their User ID for database lookups.
+Always greet them as ${firstName || user.name} and be friendly.`
+    : undefined;
+
   return (
     <CopilotSidebar
       disableSystemMessage={true}
       clickOutsideToClose={false}
-      instructions={firstName ? `IMPORTANT: The user's name is ${firstName}. Always greet them personally by name and be friendly.` : undefined}
+      instructions={agentInstructions}
       labels={{
         title: "Fractional AI",
         initial: firstName ? `Hey ${firstName}! Ask me about fractional executive jobs, salaries, or market trends.` : "Welcome! Use voice or text to explore jobs, charts, and A2UI widgets.",
@@ -481,7 +623,7 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
         {/* Dynamic Unsplash Background */}
         <DynamicBackground scene={state.scene} />
 
-        {/* Auth Header */}
+        {/* Auth Header with Messages Badge */}
         <div className="absolute top-4 right-4 flex items-center gap-3">
           <SignedOut>
             <button
@@ -492,11 +634,25 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
             </button>
           </SignedOut>
           <SignedIn>
+            {/* Messages button with badge - clicks to open sidebar and ask about messages */}
+            <button
+              onClick={() => {
+                // Send a message to CopilotKit to read messages
+                appendMessage(new TextMessage({ content: "Read my messages", role: Role.User }));
+              }}
+              className="relative bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg backdrop-blur transition-colors"
+              title="Messages - Click to read"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <MessagesBadge userId={user?.id} />
+            </button>
             <a
-              href="/profile"
+              href="/dashboard"
               className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg backdrop-blur transition-colors"
             >
-              Profile
+              Dashboard
             </a>
             <UserButton />
           </SignedIn>
@@ -509,13 +665,16 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
             {firstName ? `Hey ${firstName}!` : 'Welcome'}
           </h1>
 
-          {/* Live Profile Graph - Loads independently, no AG-UI delay */}
+          {/* User Profile Section - Edit and view profile data */}
           <SignedIn>
-            <LiveProfileGraph
-              userId={user?.id}
-              userName={firstName || undefined}
-              refreshTrigger={profileRefreshTrigger}
-            />
+            <div className="w-full max-w-md">
+              <UserProfileSection
+                userId={user?.id}
+                userName={firstName || undefined}
+                refreshTrigger={profileRefreshTrigger}
+                onProfileUpdate={refreshProfile}
+              />
+            </div>
           </SignedIn>
 
           {/* Not signed in - prompt */}

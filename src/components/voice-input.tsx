@@ -277,20 +277,32 @@ Then confirm: "So you're interested in [role] in [location] - I'll remember that
   );
 }
 
-// Exported component with VoiceProvider
+// Stable callbacks to prevent VoiceProvider remounting
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleVoiceError = (err: any) => console.error("🔴 Hume Error:", err?.message || err);
+const handleVoiceOpen = () => console.log("🟢 Hume connected");
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleVoiceClose = (e: any) => console.log("🟡 Hume closed:", e?.code, e?.reason);
+
+// Exported component with VoiceProvider - memoized to prevent remounting
 export function VoiceInput({ onMessage, firstName, userId, pageContext }: {
   onMessage: (text: string, role?: "user" | "assistant") => void;
   firstName?: string | null;
   userId?: string | null;
   pageContext?: PageContext;
 }) {
+  // Memoize the button to prevent unnecessary re-renders
+  const voiceButton = useCallback(() => (
+    <VoiceButton onMessage={onMessage} firstName={firstName} userId={userId} pageContext={pageContext} />
+  ), [onMessage, firstName, userId, pageContext]);
+
   return (
     <VoiceProvider
-      onError={(err) => console.error("🔴 Hume Error:", err)}
-      onOpen={() => console.log("🟢 Hume connected")}
-      onClose={(e) => console.log("🟡 Hume closed:", e)}
+      onError={handleVoiceError}
+      onOpen={handleVoiceOpen}
+      onClose={handleVoiceClose}
     >
-      <VoiceButton onMessage={onMessage} firstName={firstName} userId={userId} pageContext={pageContext} />
+      {voiceButton()}
     </VoiceProvider>
   );
 }

@@ -17,6 +17,60 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 # =====
+# User Context Cache (for CopilotKit instructions parsing)
+# =====
+# When CopilotKit passes user info in instructions, we cache it here
+# so tools can access it even when state.user is None
+_cached_user_context: dict = {}
+
+def extract_user_from_instructions(instructions: str) -> dict:
+    """Extract user info from CopilotKit instructions text."""
+    result = {"user_id": None, "name": None, "email": None}
+
+    if not instructions:
+        return result
+
+    # Look for User ID pattern
+    import re
+    id_match = re.search(r'User ID:\s*([a-f0-9-]+)', instructions, re.IGNORECASE)
+    if id_match:
+        result["user_id"] = id_match.group(1)
+
+    # Look for User Name pattern
+    name_match = re.search(r'User Name:\s*([^\n]+)', instructions, re.IGNORECASE)
+    if name_match:
+        result["name"] = name_match.group(1).strip()
+
+    # Look for Email pattern
+    email_match = re.search(r'User Email:\s*([^\n]+)', instructions, re.IGNORECASE)
+    if email_match:
+        result["email"] = email_match.group(1).strip()
+
+    if result["user_id"]:
+        global _cached_user_context
+        _cached_user_context = result
+        print(f"📋 Cached user from instructions: {result['name']} ({result['user_id'][:8]}...)", file=sys.stderr)
+
+    return result
+
+def get_effective_user_id(state_user) -> Optional[str]:
+    """Get user ID from state or cached instructions."""
+    if state_user and state_user.id:
+        return state_user.id
+    if _cached_user_context.get("user_id"):
+        return _cached_user_context["user_id"]
+    return None
+
+def get_effective_user_name(state_user) -> Optional[str]:
+    """Get user name from state or cached instructions."""
+    if state_user and (state_user.firstName or state_user.name):
+        return state_user.firstName or state_user.name
+    if _cached_user_context.get("name"):
+        return _cached_user_context["name"]
+    return None
+
+
+# =====
 # Zep Memory (copied from lost.london-clm pattern)
 # =====
 ZEP_API_KEY = os.environ.get("ZEP_API_KEY", "")
@@ -132,6 +186,65 @@ async def store_conversation_message(session_id: str, user_id: str, role: str, c
         print(f"[Zep] Stored {role} message for user {user_id}", file=sys.stderr)
     except Exception as e:
         print(f"[Zep] Error storing message: {e}", file=sys.stderr)
+
+
+# =====
+# Unread Messages Check
+# =====
+def get_unread_messages(user_id: Optional[str]) -> list[dict]:
+    """Fetch unread messages from recruiters/admins for this user.
+
+    Returns list of unread messages with sender info.
+    """
+    if not user_id or not DATABASE_URL:
+        return []
+
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+
+        # Get unread messages with sender details
+        cur.execute("""
+            SELECT
+                m.id,
+                m.from_user_id,
+                m.content,
+                m.created_at,
+                ut.display_name,
+                ut.company,
+                ut.title,
+                ut.type
+            FROM messages m
+            LEFT JOIN user_types ut ON m.from_user_id = ut.user_id
+            WHERE m.to_user_id = %s AND m.read_at IS NULL
+            ORDER BY m.created_at DESC
+            LIMIT 5
+        """, (user_id,))
+
+        rows = cur.fetchall()
+        conn.close()
+
+        messages = []
+        for row in rows:
+            messages.append({
+                "id": row[0],
+                "from_user_id": row[1],
+                "content": row[2][:200] + "..." if len(row[2] or "") > 200 else row[2],
+                "created_at": str(row[3]) if row[3] else None,
+                "sender_name": row[4] or "Unknown",
+                "sender_company": row[5],
+                "sender_title": row[6],
+                "sender_type": row[7] or "recruiter",
+            })
+
+        if messages:
+            print(f"📬 Found {len(messages)} unread messages for user {user_id}", file=sys.stderr)
+
+        return messages
+
+    except Exception as e:
+        print(f"[Messages] Error fetching unread: {e}", file=sys.stderr)
+        return []
 
 
 # =====
@@ -264,44 +377,64 @@ agent = Agent(
     | articles, reading, insights | get_featured_articles |
     | my interests, profile, graph | show_user_graph |
 
-    ## AMBIENT SCENE - Create Immersive Experience!
-    When the user mentions a LOCATION or ROLE, call set_ambient_scene to change the background!
-    This creates an immersive visual experience that matches their interests.
+    ## AMBIENT SCENE - ALWAYS CALL THIS SILENTLY
+    When user mentions ANY location or role, IMMEDIATELY call set_ambient_scene.
+    Do NOT announce this - just do it silently in the background.
 
-    | User mentions... | Call set_ambient_scene with... |
-    |------------------|--------------------------------|
-    | "London", "jobs in London" | location="london" |
-    | "CTO", "tech roles" | role="cto" |
-    | "Manchester marketing" | location="manchester", role="cmo" |
-    | "remote work" | location="remote" |
-    | "startup CTO in SF" | location="san francisco", role="cto" |
+    Examples - call set_ambient_scene for:
+    - "I'm in London" → set_ambient_scene(location="london")
+    - "Manchester" → set_ambient_scene(location="manchester")
+    - "CTO roles" → set_ambient_scene(role="cto")
+    - "remote work" → set_ambient_scene(location="remote")
 
-    ALWAYS call set_ambient_scene when location or role is first mentioned in conversation!
+    ## SAVING USER PREFERENCES - DO THIS SILENTLY
+    When user shares info about themselves, call save_user_preference SILENTLY.
 
-    ## ONBOARDING - Saving User Info
-    When user tells you their location, role preference, or experience, SAVE IT immediately:
+    CRITICAL: Do NOT say "I'm saving your location" or "I've noted that down" or anything like that.
+    Just save it and continue the conversation naturally.
 
-    | User says... | Call save_user_preference with... |
-    |--------------|-----------------------------------|
-    | "I'm in London" | preference_type="location", value="London" |
-    | "I want CTO roles" | preference_type="role", value="CTO" |
-    | "15 years in tech" | preference_type="experience", value="15 years" |
-    | "I know Python" | preference_type="skill", value="Python" |
+    | User says... | SILENTLY call... | Then say... |
+    |--------------|------------------|-------------|
+    | "I'm in London" | save_user_preference("location", "London") | "London's got great opportunities! What roles interest you?" |
+    | "I want CTO roles" | save_user_preference("role", "CTO") | "CTO is hot right now. Want me to show you some positions?" |
+    | "15 years in tech" | save_user_preference("experience", "15 years") | "Great experience! That opens up senior roles." |
 
-    These are SOFT SAVES - they update the profile graph immediately without confirmation.
+    DO NOT say things like:
+    ❌ "I'm saving your location..."
+    ❌ "I've noted that you're in London..."
+    ❌ "I'll remember that..."
+    ❌ "Updating your profile..."
+
+    Just call the tool and move on naturally!
 
     ## COMPANY CONFIRMATION (Human-in-the-Loop)
     You have access to a FRONTEND TOOL called confirm_company.
     This is a HUMAN-IN-THE-LOOP action that pauses and asks the user to confirm.
 
-    When user mentions a company they WORK AT or WORKED AT, IMMEDIATELY call:
-    confirm_company(company_name="Sony", company_url="https://www.sony.com", user_id="...")
+    CRITICAL: When user mentions ANY company they work/worked at, call confirm_company!
+
+    **Trigger phrases** (ANY of these → confirm_company):
+    - "I work at [X]"
+    - "I worked at [X]"
+    - "I used to work at [X]"
+    - "I was at [X]"
+    - "Previously at [X]"
+    - "Currently at [X]"
+    - "I'm at [X]"
+    - "I joined [X]"
+    - "My company is [X]"
+    - "I left [X]"
+    - "Former [X] employee"
 
     | User says... | Action |
     |--------------|--------|
-    | "I work at Sony" | confirm_company(company_name="Sony", company_url="https://www.sony.com", user_id=state.user.id) |
-    | "I was at McKinsey" | confirm_company(company_name="McKinsey", company_url="https://www.mckinsey.com", user_id=state.user.id) |
-    | "Currently at Google" | confirm_company(company_name="Google", company_url="https://www.google.com", user_id=state.user.id) |
+    | "I work at Sony" | confirm_company(company_name="Sony", ...) |
+    | "I was at McKinsey" | confirm_company(company_name="McKinsey", ...) |
+    | "I used to work at Sony PlayStation" | confirm_company(company_name="Sony PlayStation", ...) |
+    | "Previously at Google" | confirm_company(company_name="Google", ...) |
+
+    ⚠️ NEVER save company names using save_user_preference("skill", ...)!
+    Companies are NOT skills. Always use confirm_company for employment history.
 
     This triggers a HITL popup in the frontend asking user to:
     1. Confirm the company (with URL shown)
@@ -365,28 +498,75 @@ async def add_user_context(ctx: RunContext[StateDeps[AppState]]) -> str:
   user = state.user
   print(f"🧑 Full state: jobs={len(state.jobs)}, query={state.search_query}, user={user}", file=sys.stderr)
 
-  if not user or not (user.firstName or user.name):
-    print("🧑 No user logged in", file=sys.stderr)
+  # Get effective user info (from state OR cached from CopilotKit instructions)
+  user_id = get_effective_user_id(user)
+  name = get_effective_user_name(user)
+
+  if not name and not user_id:
+    print("🧑 No user logged in (no state, no cached instructions)", file=sys.stderr)
     return "The user is not logged in. Encourage them to sign in for a personalized experience."
 
-  name = user.firstName or user.name
-  print(f"🧑 Greeting user: {name}", file=sys.stderr)
+  # If we have cached user from instructions but no state.user
+  if not user and _cached_user_context.get("name"):
+    name = _cached_user_context["name"]
+    user_id = _cached_user_context.get("user_id")
+    print(f"🧑 Using cached user from instructions: {name}", file=sys.stderr)
+  elif name:
+    print(f"🧑 Greeting user: {name}", file=sys.stderr)
 
   # Get Zep memory (preferences, interests from past conversations)
   zep_memory = ""
   profile_complete = False
   missing_fields: list[str] = []
-  if user.id:
-    zep_memory, profile_complete, missing_fields = await get_user_memory_context(user.id)
+  if user_id:
+    zep_memory, profile_complete, missing_fields = await get_user_memory_context(user_id)
     if zep_memory:
-      print(f"🧠 Zep memory injected for user {user.id}, complete={profile_complete}", file=sys.stderr)
+      print(f"🧠 Zep memory injected for user {user_id}, complete={profile_complete}", file=sys.stderr)
     if missing_fields:
       print(f"📋 Missing profile fields: {missing_fields}", file=sys.stderr)
+
+  # Check for unread messages from recruiters/coaches
+  unread_messages = []
+  if user_id:
+    unread_messages = get_unread_messages(user_id)
 
   # Build context-aware prompt
   prompt_parts = [
     f"IMPORTANT: The user's name is {name}. Always greet them by name and be personal!",
   ]
+
+  # 📬 UNREAD MESSAGES - Surface naturally in greeting
+  if unread_messages:
+    msg_count = len(unread_messages)
+    first_msg = unread_messages[0]
+    sender = first_msg.get("sender_name", "Someone")
+    company = first_msg.get("sender_company", "")
+    sender_title = first_msg.get("sender_title", "")
+    preview = first_msg.get("content", "")[:100]
+
+    sender_intro = f"{sender}"
+    if company:
+      sender_intro += f" from {company}"
+    if sender_title:
+      sender_intro += f" ({sender_title})"
+
+    prompt_parts.append(f"""
+
+## 📬 UNREAD MESSAGES - MENTION THIS FIRST!
+{name} has {msg_count} unread message{'s' if msg_count > 1 else ''} from recruiters/coaches.
+
+**Latest message from {sender_intro}:**
+"{preview}..."
+
+**CRITICAL: In your FIRST response, naturally mention:**
+"Hey {name}! Quick heads up - {sender} {'from ' + company if company else ''} just messaged you about an opportunity. Want me to read it out?"
+
+Or if continuing conversation:
+"By the way, you've got a new message from {sender}. Shall I tell you what they said?"
+
+This is a REAL message from a REAL recruiter - make it feel special!
+User can say "yes read it", "tell me more", or "later" to handle it.
+""")
 
   if zep_memory:
     prompt_parts.append(zep_memory)
@@ -482,14 +662,21 @@ def get_user_profile(ctx: RunContext[StateDeps[AppState]]) -> dict:
   Returns their name, email, and preferences."""
   state = ctx.deps.state
   user = state.user
-  if not user:
+
+  # Use effective user info (from state or cached from CopilotKit instructions)
+  user_id = get_effective_user_id(user)
+  name = get_effective_user_name(user)
+  email = _cached_user_context.get("email") if not user else user.email
+
+  if not user_id and not name:
     return {"logged_in": False, "message": "User is not logged in"}
 
   return {
     "logged_in": True,
-    "name": user.firstName or user.name or "Unknown",
-    "email": user.email,
-    "liked_jobs": user.liked_jobs,
+    "user_id": user_id,
+    "name": name or "Unknown",
+    "email": email,
+    "liked_jobs": user.liked_jobs if user else [],
   }
 
 @agent.tool
@@ -554,6 +741,94 @@ async def save_user_preference(ctx: RunContext[StateDeps[AppState]], preference_
   # Single-value fields - only one allowed
   SINGLE_VALUE_TYPES = ["location", "role_preference"]
 
+  # Valid options for validated fields
+  VALID_ROLES = [
+    "CEO", "CFO", "CMO", "CTO", "COO", "CHRO", "CIO", "CISO", "CPO", "CRO",
+    "VP ENGINEERING", "VP SALES", "VP MARKETING", "VP OPERATIONS", "VP PRODUCT",
+    "DIRECTOR", "MANAGING DIRECTOR", "GENERAL MANAGER",
+    "BOARD MEMBER", "NON-EXECUTIVE DIRECTOR", "ADVISOR"
+  ]
+
+  VALID_LOCATIONS = [
+    "London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Liverpool",
+    "Edinburgh", "Bristol", "Sheffield", "Newcastle", "Nottingham", "Cardiff",
+    "Belfast", "Leicester", "Southampton", "Brighton", "Oxford", "Cambridge",
+    "Reading", "Milton Keynes", "Remote", "Hybrid"
+  ]
+
+  # Normalize value based on type to prevent case duplicates
+  def normalize_value(val: str, typ: str) -> str:
+    """Normalize values to consistent case."""
+    if typ == "location":
+      # Title case for locations: "manchester" → "Manchester"
+      return val.strip().title()
+    elif typ == "role_preference":
+      # Uppercase for roles: "cto" → "CTO"
+      return val.strip().upper()
+    elif typ == "skill":
+      # Title case for skills: "python" → "Python"
+      return val.strip().title()
+    else:
+      return val.strip()
+
+  normalized_value = normalize_value(value, item_type)
+
+  # Smart validation for location and role values
+  # Accept if it matches known values, or looks like a real location/role
+  if item_type == "role_preference":
+    # Check if it's a known executive role (or variation)
+    role_upper = normalized_value.upper()
+    matched_role = None
+
+    # Direct match
+    if role_upper in VALID_ROLES:
+      matched_role = role_upper
+    else:
+      # Fuzzy match - check for partial matches
+      for valid_role in VALID_ROLES:
+        if role_upper in valid_role or valid_role in role_upper:
+          matched_role = valid_role
+          break
+        # Handle common variations
+        if role_upper.replace(" ", "") == valid_role.replace(" ", ""):
+          matched_role = valid_role
+          break
+
+    if matched_role:
+      normalized_value = matched_role
+    else:
+      # Reject obviously invalid values (less than 2 chars, no letters, etc.)
+      if len(normalized_value) < 2 or not any(c.isalpha() for c in normalized_value):
+        print(f"💾 Invalid role: {value}", file=sys.stderr)
+        return {"saved": False, "error": f"'{value}' doesn't look like a valid job title. Try: CEO, CFO, CMO, CTO, etc."}
+      # Accept other reasonable-looking roles
+      print(f"💾 Accepting custom role: {normalized_value}", file=sys.stderr)
+
+  if item_type == "location":
+    # Check if it's a known location
+    matched_location = None
+    value_lower = normalized_value.lower()
+
+    for valid_loc in VALID_LOCATIONS:
+      if value_lower == valid_loc.lower():
+        matched_location = valid_loc
+        break
+      # Partial match for city names
+      if value_lower in valid_loc.lower() or valid_loc.lower() in value_lower:
+        matched_location = valid_loc
+        break
+
+    if matched_location:
+      normalized_value = matched_location
+    else:
+      # Reject obviously invalid values
+      if len(normalized_value) < 2 or not any(c.isalpha() for c in normalized_value):
+        print(f"💾 Invalid location: {value}", file=sys.stderr)
+        return {"saved": False, "error": f"'{value}' doesn't look like a valid location."}
+      # Accept other reasonable-looking locations (could be a city we don't know)
+      normalized_value = normalized_value.title()  # Ensure proper case
+      print(f"💾 Accepting custom location: {normalized_value}", file=sys.stderr)
+
   try:
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
@@ -562,7 +837,7 @@ async def save_user_preference(ctx: RunContext[StateDeps[AppState]], preference_
 
     # For single-value fields, check if one exists and replace it
     if item_type in SINGLE_VALUE_TYPES:
-      # Get existing value
+      # Get existing value (case-insensitive search)
       cur.execute("""
         SELECT id, value FROM user_profile_items
         WHERE user_id = %s AND item_type = %s
@@ -572,41 +847,65 @@ async def save_user_preference(ctx: RunContext[StateDeps[AppState]], preference_
 
       if existing:
         old_value = existing[1]
-        if old_value.lower() == value.lower():
+        if old_value.lower() == normalized_value.lower():
           # Same value, no change needed
           cur.close()
           conn.close()
-          return {"saved": False, "message": f"Already set to {value}", "no_change": True}
+          return {"saved": False, "message": f"Already set to {normalized_value}", "no_change": True}
 
         # Delete old value (replace)
         cur.execute("""
           DELETE FROM user_profile_items
           WHERE user_id = %s AND item_type = %s
         """, (user.id, item_type))
-        print(f"💾 Replacing {item_type}: {old_value} → {value}", file=sys.stderr)
+        print(f"💾 Replacing {item_type}: {old_value} → {normalized_value}", file=sys.stderr)
 
-    # Insert new value
+    # Insert new value (using normalized value)
     cur.execute("""
       INSERT INTO user_profile_items (user_id, item_type, value, metadata, confirmed)
       VALUES (%s, %s, %s, %s, %s)
       ON CONFLICT (user_id, item_type, value) DO UPDATE SET updated_at = NOW()
       RETURNING id
-    """, (user.id, item_type, value, '{"source": "voice_detected"}', False))
+    """, (user.id, item_type, normalized_value, '{"source": "voice_detected"}', False))
 
     conn.commit()
     result = cur.fetchone()
     cur.close()
     conn.close()
 
-    print(f"💾 Saved to Neon: {item_type}={value} (id={result[0] if result else 'updated'})", file=sys.stderr)
+    print(f"💾 Saved to Neon: {item_type}={normalized_value} (id={result[0] if result else 'updated'})", file=sys.stderr)
+
+    # Auto-update ambient scene when location or role changes
+    if item_type == "location":
+      location_queries = {
+        "london": "london skyline cityscape",
+        "manchester": "manchester city urban",
+        "birmingham": "birmingham england city",
+        "remote": "home office modern workspace",
+        "hybrid": "modern coworking space",
+      }
+      query = location_queries.get(normalized_value.lower(), f"{normalized_value} city skyline")
+      state.scene = AmbientScene(location=normalized_value, query=query)
+      print(f"🎨 Auto-updated scene for location: {normalized_value}", file=sys.stderr)
+    elif item_type == "role_preference":
+      role_queries = {
+        "CTO": "technology startup office modern",
+        "CFO": "finance corporate office",
+        "CMO": "creative marketing agency",
+        "COO": "modern business operations",
+        "CEO": "executive boardroom luxury",
+      }
+      query = role_queries.get(normalized_value, f"{normalized_value} professional executive")
+      state.scene = AmbientScene(role=normalized_value, query=query)
+      print(f"🎨 Auto-updated scene for role: {normalized_value}", file=sys.stderr)
 
     # Store to Zep
     fact_messages = {
-      "location": f"User is based in {value}",
-      "role_preference": f"User is interested in {value} roles",
-      "skill": f"User has experience with {value}",
+      "location": f"User is based in {normalized_value}",
+      "role_preference": f"User is interested in {normalized_value} roles",
+      "skill": f"User has experience with {normalized_value}",
     }
-    message = fact_messages.get(item_type, f"User preference: {value}")
+    message = fact_messages.get(item_type, f"User preference: {normalized_value}")
     await store_conversation_message(
       session_id=f"profile_{user.id}",
       user_id=user.id,
@@ -614,12 +913,12 @@ async def save_user_preference(ctx: RunContext[StateDeps[AppState]], preference_
       content=message
     )
 
-    response = {"saved": True, "type": item_type, "value": value, "graph_updated": True}
+    response = {"saved": True, "type": item_type, "value": normalized_value, "graph_updated": True}
     if old_value:
       response["replaced"] = old_value
-      response["message"] = f"Changed {item_type} from {old_value} to {value}"
+      response["message"] = f"Changed {item_type} from {old_value} to {normalized_value}"
 
-    print(f"💾 Saved preference: {item_type}={value} for user {user.id}", file=sys.stderr)
+    print(f"💾 Saved preference: {item_type}={normalized_value} for user {user.id}", file=sys.stderr)
     return response
 
   except Exception as e:
@@ -677,7 +976,7 @@ async def search_jobs(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
     # Search by both role and location
     print(f"🔍 Filtering by role={found_role}, location={found_location}", file=sys.stderr)
     cur.execute("""
-      SELECT title, company, location, salary_min, salary_max, description
+      SELECT title, company, location, salary_min, salary_max, description, role_type
       FROM test_jobs
       WHERE (title ILIKE %s OR role_type ILIKE %s) AND location ILIKE %s
       ORDER BY id DESC
@@ -687,7 +986,7 @@ async def search_jobs(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
     # Search by role only
     print(f"🔍 Filtering by role={found_role}", file=sys.stderr)
     cur.execute("""
-      SELECT title, company, location, salary_min, salary_max, description
+      SELECT title, company, location, salary_min, salary_max, description, role_type
       FROM test_jobs
       WHERE title ILIKE %s OR role_type ILIKE %s
       ORDER BY id DESC
@@ -697,7 +996,7 @@ async def search_jobs(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
     # Search by location only
     print(f"🔍 Filtering by location={found_location}", file=sys.stderr)
     cur.execute("""
-      SELECT title, company, location, salary_min, salary_max, description
+      SELECT title, company, location, salary_min, salary_max, description, role_type
       FROM test_jobs
       WHERE location ILIKE %s
       ORDER BY id DESC
@@ -714,7 +1013,7 @@ async def search_jobs(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
       search_term = "%"
       print(f"🔍 Showing all jobs", file=sys.stderr)
     cur.execute("""
-      SELECT title, company, location, salary_min, salary_max, description
+      SELECT title, company, location, salary_min, salary_max, description, role_type
       FROM test_jobs
       ORDER BY id DESC
       LIMIT %s
@@ -766,7 +1065,8 @@ async def search_jobs(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
       "location": r[2] or "Remote",
       "salary": salary_text,
       "description": (r[5] or "")[:150] + "..." if r[5] and len(r[5]) > 150 else (r[5] or ""),
-      "url": job_url
+      "url": job_url,
+      "role_type": r[6] if len(r) > 6 else None  # Include role type badge
     })
 
   return {
@@ -979,80 +1279,88 @@ async def show_user_graph(ctx: RunContext[StateDeps[AppState]]) -> dict:
   state = ctx.deps.state
   user = state.user
 
-  if not user or not user.id:
+  # Use effective user ID (from state or cached instructions)
+  user_id = get_effective_user_id(user)
+  user_name = get_effective_user_name(user) or "You"
+
+  if not user_id:
     return {
       "nodes": [{"id": "guest", "type": "user", "label": "Guest"}],
       "edges": [],
       "title": "Sign in to see your personalized graph"
     }
 
-  user_name = user.firstName or user.name or "You"
   nodes = [{"id": "user", "type": "user", "label": user_name}]
   edges = []
 
-  # Fetch facts from Zep
+  # Map item_type to node_type for graph
+  TYPE_MAPPING = {
+    "location": "location",
+    "role_preference": "role",
+    "company": "interest",  # Use interest for companies
+    "skill": "skill",
+  }
+
+  # PRIMARY: Fetch profile from Neon database (same source as profile panel)
   try:
-    client = get_zep_client()
-    if client:
-      response = await client.post(
-        "/api/v2/graph/search",
-        json={
-          "user_id": user.id,
-          "query": "preferences interests roles locations skills jobs experience",
-          "limit": 20,
-          "scope": "edges",
-        },
-      )
+    if DATABASE_URL:
+      conn = psycopg2.connect(DATABASE_URL)
+      cur = conn.cursor()
+      cur.execute("""
+        SELECT item_type, value, metadata
+        FROM user_profile_items
+        WHERE user_id = %s
+        ORDER BY created_at DESC
+      """, (user_id,))
+      items = cur.fetchall()
+      cur.close()
+      conn.close()
 
-      if response.status_code == 200:
-        data = response.json()
-        zep_edges = data.get("edges", [])
-        print(f"🌌 Found {len(zep_edges)} facts for graph")
+      print(f"🌌 Found {len(items)} profile items in Neon")
 
-        # Transform Zep facts into graph nodes and edges
-        for i, edge in enumerate(zep_edges[:15]):  # Limit to 15 for performance
-          fact = edge.get("fact", "")
-          edge_name = edge.get("name", "RELATES_TO")
+      for item_type, value, metadata in items:
+        node_type = TYPE_MAPPING.get(item_type, "fact")
 
-          if not fact:
-            continue
+        # Skip if already exists (dedupe)
+        if any(n.get("label", "").lower() == value.lower() for n in nodes):
+          continue
 
-          # Extract clean entities from fact text
-          fact_lower = fact.lower()
-          extracted = extract_entities_from_fact(fact)
+        node_id = f"neon_{len(nodes)}"
+        nodes.append({
+          "id": node_id,
+          "type": node_type,
+          "label": value,
+          "data": metadata if metadata else {}
+        })
 
-          for entity_label, entity_type in extracted:
-            # Deduplicate by checking if label already exists
-            if any(n.get("label", "").lower() == entity_label.lower() for n in nodes):
-              continue
-
-            node_id = f"node_{len(nodes)}"
-            nodes.append({
-              "id": node_id,
-              "type": entity_type,
-              "label": entity_label
-            })
-            edges.append({
-              "source": "user",
-              "target": node_id,
-              "type": edge_name,
-              "label": edge_name.replace("_", " ").title()
-            })
+        # Create edge label based on type
+        edge_labels = {
+          "location": "Located In",
+          "role_preference": "Interested In",
+          "company": "Worked At",
+          "skill": "Has Skill",
+        }
+        edges.append({
+          "source": "user",
+          "target": node_id,
+          "type": item_type.upper(),
+          "label": edge_labels.get(item_type, "Related")
+        })
   except Exception as e:
-    print(f"🌌 Error fetching Zep facts: {e}", file=sys.stderr)
+    print(f"🌌 Error fetching Neon profile: {e}", file=sys.stderr)
 
   # Add some default nodes if graph is empty (besides user)
   if len(nodes) == 1:
     # Add placeholder nodes to show structure
     default_interests = [
-      ("CTO Roles", "role"),
-      ("London", "location"),
-      ("Startup Experience", "skill"),
+      ("Your Location", "location"),
+      ("Your Target Role", "role"),
+      ("Your Skills", "skill"),
     ]
     for i, (label, node_type) in enumerate(default_interests):
       node_id = f"default_{i}"
       nodes.append({"id": node_id, "type": node_type, "label": label})
-      edges.append({"source": "user", "target": node_id, "type": "EXAMPLE", "label": "Example"})
+      edges.append({"source": "user", "target": node_id, "type": "EXAMPLE", "label": "Add via chat"})
 
   print(f"🌌 Graph: {len(nodes)} nodes, {len(edges)} edges")
 
@@ -1187,6 +1495,159 @@ def set_ambient_scene(ctx: RunContext[StateDeps[AppState]], location: str = None
     "message": f"Background updated to show {search_query}"
   }
 
+
+# =====
+# Messaging Tools
+# =====
+@agent.tool
+def get_my_messages(ctx: RunContext[StateDeps[AppState]]) -> dict:
+  """Get the user's unread messages from recruiters and coaches.
+  Call this when user asks 'what messages', 'my inbox', 'any messages', 'read messages', etc.
+
+  Returns list of unread messages with sender info.
+  """
+  state = ctx.deps.state
+  user = state.user
+
+  # Use effective user ID (from state or cached from CopilotKit instructions)
+  user_id = get_effective_user_id(user)
+
+  if not user_id:
+    return {"messages": [], "error": "User not logged in"}
+
+  messages = get_unread_messages(user_id)
+
+  return {
+    "unread_count": len(messages),
+    "messages": messages,
+    "summary": f"You have {len(messages)} unread message{'s' if len(messages) != 1 else ''}" if messages else "No unread messages"
+  }
+
+
+@agent.tool
+def read_full_message(ctx: RunContext[StateDeps[AppState]], message_id: int) -> dict:
+  """Read the full content of a specific message and mark it as read.
+  Call this when user wants to hear/see a complete message.
+
+  Args:
+    message_id: The ID of the message to read
+
+  Returns:
+    Full message content and sender details
+  """
+  state = ctx.deps.state
+  user = state.user
+
+  # Use effective user ID (from state or cached from CopilotKit instructions)
+  user_id = get_effective_user_id(user)
+
+  if not user_id:
+    return {"error": "User not logged in"}
+
+  if not DATABASE_URL:
+    return {"error": "Database not configured"}
+
+  try:
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+
+    # Get full message
+    cur.execute("""
+      SELECT
+        m.id, m.from_user_id, m.content, m.created_at,
+        ut.display_name, ut.company, ut.title, ut.type
+      FROM messages m
+      LEFT JOIN user_types ut ON m.from_user_id = ut.user_id
+      WHERE m.id = %s AND m.to_user_id = %s
+    """, (message_id, user_id))
+
+    row = cur.fetchone()
+    if not row:
+      conn.close()
+      return {"error": "Message not found"}
+
+    # Mark as read
+    cur.execute("""
+      UPDATE messages SET read_at = NOW() WHERE id = %s
+    """, (message_id,))
+    conn.commit()
+    conn.close()
+
+    print(f"📬 Read message {message_id} for user {user_id}", file=sys.stderr)
+
+    return {
+      "message_id": row[0],
+      "from_user_id": row[1],
+      "content": row[2],
+      "sent_at": str(row[3]) if row[3] else None,
+      "sender_name": row[4] or "Unknown",
+      "sender_company": row[5],
+      "sender_title": row[6],
+      "sender_type": row[7] or "recruiter",
+      "marked_read": True
+    }
+
+  except Exception as e:
+    print(f"[Messages] Error reading message: {e}", file=sys.stderr)
+    return {"error": str(e)}
+
+
+@agent.tool
+def reply_to_message(ctx: RunContext[StateDeps[AppState]], to_user_id: str, content: str) -> dict:
+  """Send a reply message to a recruiter or coach.
+  Call this when user wants to respond to a message.
+
+  Args:
+    to_user_id: The user ID of the person to reply to
+    content: The message content to send
+
+  Returns:
+    Confirmation of message sent
+  """
+  state = ctx.deps.state
+  user = state.user
+
+  # Use effective user ID (from state or cached from CopilotKit instructions)
+  user_id = get_effective_user_id(user)
+
+  if not user_id:
+    return {"sent": False, "error": "User not logged in"}
+
+  if not DATABASE_URL:
+    return {"sent": False, "error": "Database not configured"}
+
+  if not content or len(content.strip()) < 2:
+    return {"sent": False, "error": "Message too short"}
+
+  try:
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+
+    # Insert reply
+    cur.execute("""
+      INSERT INTO messages (from_user_id, to_user_id, content)
+      VALUES (%s, %s, %s)
+      RETURNING id
+    """, (user_id, to_user_id, content.strip()))
+
+    new_id = cur.fetchone()[0]
+    conn.commit()
+    conn.close()
+
+    print(f"📬 Sent reply {new_id} from {user_id} to {to_user_id}", file=sys.stderr)
+
+    return {
+      "sent": True,
+      "message_id": new_id,
+      "to_user_id": to_user_id,
+      "preview": content[:50] + "..." if len(content) > 50 else content
+    }
+
+  except Exception as e:
+    print(f"[Messages] Error sending reply: {e}", file=sys.stderr)
+    return {"sent": False, "error": str(e)}
+
+
 # =====
 # Unified FastAPI App with AG-UI + CLM endpoints
 # =====
@@ -1210,6 +1671,40 @@ main_app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Middleware to extract user info from CopilotKit instructions
+@main_app.middleware("http")
+async def extract_user_middleware(request: Request, call_next):
+    """Extract user context from CopilotKit instructions before processing."""
+    # Only process POST requests that might contain messages
+    if request.method == "POST":
+        try:
+            # Read and restore body
+            body_bytes = await request.body()
+            if body_bytes:
+                body = json.loads(body_bytes)
+                messages = body.get("messages", [])
+
+                # Look for system messages with user context
+                for msg in messages:
+                    role = msg.get("role", "")
+                    content = msg.get("content", "")
+
+                    if role == "system" and "User ID:" in content:
+                        extracted = extract_user_from_instructions(content)
+                        if extracted.get("user_id"):
+                            print(f"🔐 Middleware extracted user: {extracted.get('name')} ({extracted.get('user_id')[:8]}...)", file=sys.stderr)
+
+                # Reconstruct request with body
+                async def receive():
+                    return {"type": "http.request", "body": body_bytes}
+
+                request = Request(request.scope, receive)
+        except Exception as e:
+            print(f"[Middleware] Error extracting user: {e}", file=sys.stderr)
+
+    return await call_next(request)
 
 
 def parse_session_id(session_id: str | None) -> dict:

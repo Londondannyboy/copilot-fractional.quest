@@ -1283,3 +1283,96 @@ cd agent && railway up
 # Check agent is responding
 curl -s https://copilotkit-agent-production.up.railway.app/health
 ```
+
+---
+
+# Session Learnings: 2025-01-06 (Continued) - Bug Fixes
+
+## Issues Fixed This Session
+
+### 1. Company Saved as Skill Bug ✅
+**Problem**: When user said "I used to work at Sony PlayStation", agent called `save_user_preference("skill", "sony playstation")` instead of `confirm_company`.
+
+**Root Cause**: Agent prompt only had limited trigger phrases ("I work at", "I was at", "Currently at") but missed "used to work at", "previously at", etc.
+
+**Fix** (`agent/src/agent.py` lines 293-326):
+```python
+## COMPANY CONFIRMATION (Human-in-the-Loop)
+CRITICAL: When user mentions ANY company they work/worked at, call confirm_company!
+
+**Trigger phrases** (ANY of these → confirm_company):
+- "I work at [X]"
+- "I worked at [X]"
+- "I used to work at [X]"
+- "I was at [X]"
+- "Previously at [X]"
+- "Currently at [X]"
+- "I'm at [X]"
+- "I joined [X]"
+- "My company is [X]"
+- "I left [X]"
+- "Former [X] employee"
+
+⚠️ NEVER save company names using save_user_preference("skill", ...)!
+Companies are NOT skills. Always use confirm_company for employment history.
+```
+
+**Verified**: Agent now calls `confirm_company` for "I used to work at Sony PlayStation"
+
+### 2. Case Sensitivity Causing Duplicates ✅
+**Problem**: "Manchester" and "manchester" were stored as separate entries because:
+- UNIQUE constraint on (user_id, item_type, value) is case-sensitive
+- No normalization before INSERT
+
+**Fix** (`agent/src/agent.py` lines 573-588):
+```python
+def normalize_value(val: str, typ: str) -> str:
+    """Normalize values to consistent case."""
+    if typ == "location":
+        # Title case for locations: "manchester" → "Manchester"
+        return val.strip().title()
+    elif typ == "role_preference":
+        # Uppercase for roles: "cto" → "CTO"
+        return val.strip().upper()
+    elif typ == "skill":
+        # Title case for skills: "python" → "Python"
+        return val.strip().title()
+    else:
+        return val.strip()
+
+normalized_value = normalize_value(value, item_type)
+```
+
+**Verified**: Input "manchester" is now stored as "Manchester"
+
+### 3. Cleaned Up Bad Test Data ✅
+- Deleted duplicate location entries (id 1, 3)
+- Deleted orphan entry with user_id "unknown"
+- Removed incorrectly saved "skill: technology"
+
+## Current Profile State (Dan Keegan)
+
+```
+id=5  location: London
+id=6  role_preference: CMO
+id=7  company: Sony (confirmed)
+id=8  skill: Marketing
+```
+
+## Updated Current State
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| CopilotKit chat | ✅ Working | Charts, jobs render correctly |
+| Voice (Hume) | ✅ Working | CLM on Railway responds |
+| Profile graph | ✅ Working | Shows Neon data, updates live |
+| Company HITL | ✅ Working | Triggers correctly for "work at" phrases |
+| save_user_preference | ✅ Working | Direct DB save with case normalization |
+| Single-value replace | ✅ Working | DELETE old → INSERT new |
+| Case normalization | ✅ Working | Prevents duplicates |
+
+## Files Modified This Session
+
+| File | Changes |
+|------|---------|
+| `agent/src/agent.py` | Company detection prompt expansion, normalize_value() function |
