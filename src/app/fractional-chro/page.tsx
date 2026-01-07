@@ -156,16 +156,52 @@ export default function FractionalChroPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
             <Link href="/fractional-chro-jobs-uk" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
               <span className="text-2xl mb-3 block">💼</span>
               <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">Fractional CHRO Jobs UK</h3>
               <p className="text-gray-600 text-sm">Browse live fractional CHRO roles</p>
             </Link>
-            <Link href="/fractional-jobs-uk?department=HR" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
-              <span className="text-2xl mb-3 block">🔍</span>
-              <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">All HR Leadership Jobs</h3>
-              <p className="text-gray-600 text-sm">Search all fractional HR positions</p>
+            <Link href="/fractional-chro-salary" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
+              <span className="text-2xl mb-3 block">💰</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">Fractional CHRO Salary Guide</h3>
+              <p className="text-gray-600 text-sm">Day rates and salary benchmarks</p>
+            </Link>
+            <Link href="/hire-fractional-chro" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
+              <span className="text-2xl mb-3 block">📋</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">How to Hire a Fractional CHRO</h3>
+              <p className="text-gray-600 text-sm">Complete hiring guide and evaluation</p>
+            </Link>
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-4">External Resources for HR Leaders</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <a href="https://www.cipd.org/uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
+              <span className="text-lg">🏛️</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-purple-700 text-sm">CIPD</h4>
+                <p className="text-gray-500 text-xs">Chartered Institute of Personnel and Development</p>
+              </div>
+            </a>
+            <a href="https://www.acas.org.uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
+              <span className="text-lg">⚖️</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-purple-700 text-sm">ACAS</h4>
+                <p className="text-gray-500 text-xs">Advisory, Conciliation and Arbitration Service</p>
+              </div>
+            </a>
+            <a href="https://www.gov.uk/browse/employing-people" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
+              <span className="text-lg">📜</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-purple-700 text-sm">GOV.UK Employment</h4>
+                <p className="text-gray-500 text-xs">Official UK employment law guidance</p>
+              </div>
+            </a>
+            <Link href="/fractional-jobs-uk?department=HR" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
+              <span className="text-lg">🔍</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-purple-700 text-sm">All HR Leadership Jobs</h4>
+                <p className="text-gray-500 text-xs">Search all fractional HR positions</p>
+              </div>
             </Link>
           </div>
         </div>

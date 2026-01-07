@@ -156,16 +156,52 @@ export default function FractionalCpoPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
             <Link href="/fractional-cpo-jobs-uk" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
               <span className="text-2xl mb-3 block">💼</span>
               <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">Fractional CPO Jobs UK</h3>
-              <p className="text-gray-600 text-sm">Browse live fractional CPO and product roles</p>
+              <p className="text-gray-600 text-sm">Browse live fractional CPO roles</p>
             </Link>
-            <Link href="/fractional-jobs-uk?department=Product" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
-              <span className="text-2xl mb-3 block">🔍</span>
-              <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">All Product Jobs</h3>
-              <p className="text-gray-600 text-sm">Search all fractional product positions</p>
+            <Link href="/fractional-cpo-salary" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
+              <span className="text-2xl mb-3 block">💰</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">Fractional CPO Salary Guide</h3>
+              <p className="text-gray-600 text-sm">Day rates and salary benchmarks</p>
+            </Link>
+            <Link href="/hire-fractional-cpo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
+              <span className="text-2xl mb-3 block">📋</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">How to Hire a Fractional CPO</h3>
+              <p className="text-gray-600 text-sm">Complete hiring guide and evaluation</p>
+            </Link>
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-4">External Resources for Product Leaders</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <a href="https://www.mindtheproduct.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
+              <span className="text-lg">🎯</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">Mind the Product</h4>
+                <p className="text-gray-500 text-xs">Global product management community</p>
+              </div>
+            </a>
+            <a href="https://www.productschool.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
+              <span className="text-lg">📚</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">Product School</h4>
+                <p className="text-gray-500 text-xs">Product management courses and certifications</p>
+              </div>
+            </a>
+            <a href="https://www.lennysnewsletter.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
+              <span className="text-lg">📰</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">Lenny's Newsletter</h4>
+                <p className="text-gray-500 text-xs">Product leadership insights and interviews</p>
+              </div>
+            </a>
+            <Link href="/fractional-jobs-uk?department=Product" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
+              <span className="text-lg">🔍</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">All Product Jobs</h4>
+                <p className="text-gray-500 text-xs">Search all fractional product positions</p>
+              </div>
             </Link>
           </div>
         </div>

@@ -123,7 +123,7 @@ export default async function FractionalCeoJobsUkPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">Why Fractional CEO Roles Are Growing</h2>
-            <p>The <strong>fractional CEO</strong> model provides companies with experienced executive leadership during transitions, turnarounds, or founder growth phases. These roles are ideal for boards seeking interim leadership or founders wanting experienced guidance alongside their own CEO responsibilities.</p>
+            <p>The <Link href="/fractional-ceo" className="text-yellow-600 hover:underline">fractional CEO</Link> model provides companies with experienced executive leadership during transitions, turnarounds, or founder growth phases. These roles are ideal for boards seeking interim leadership or founders wanting experienced guidance alongside their own CEO responsibilities. The <a href="https://www.iod.com/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline">Institute of Directors</a> reports growing demand for flexible executive leadership across UK businesses.</p>
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Typical Fractional CEO Responsibilities</h3>
             <ul>
               <li><strong>Strategic Leadership:</strong> Setting company direction and strategy</li>
@@ -132,6 +132,25 @@ export default async function FractionalCeoJobsUkPage() {
               <li><strong>Turnaround:</strong> Leading companies through challenging transitions</li>
               <li><strong>Exit Planning:</strong> Preparing for M&A or IPO</li>
             </ul>
+            <p className="mt-6">Review <Link href="/fractional-ceo-salary" className="text-yellow-600 hover:underline">fractional CEO salary benchmarks</Link> to understand market rates. Day rates typically range from £1,000-£2,000 depending on experience and company stage. Our <Link href="/hire-fractional-ceo" className="text-yellow-600 hover:underline">guide to hiring a fractional CEO</Link> covers the full process.</p>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">UK Resources for Executives</h3>
+            <ul>
+              <li><a href="https://www.iod.com/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline">Institute of Directors</a> — UK director community and resources</li>
+              <li><a href="https://www.british-business-bank.co.uk/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline">British Business Bank</a> — Business growth funding</li>
+              <li><a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline">BVCA</a> — British Private Equity & Venture Capital Association</li>
+            </ul>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Fractional Executive Jobs by Location</h3>
+            <p>Find fractional CEO and executive jobs across the UK:</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 not-prose mt-4">
+              <Link href="/fractional-jobs-london" className="text-yellow-600 hover:underline text-sm">London</Link>
+              <Link href="/fractional-jobs-uk?location=Manchester" className="text-yellow-600 hover:underline text-sm">Manchester</Link>
+              <Link href="/fractional-jobs-uk?location=Birmingham" className="text-yellow-600 hover:underline text-sm">Birmingham</Link>
+              <Link href="/fractional-jobs-uk?location=Edinburgh" className="text-yellow-600 hover:underline text-sm">Edinburgh</Link>
+              <Link href="/fractional-jobs-uk?location=Bristol" className="text-yellow-600 hover:underline text-sm">Bristol</Link>
+              <Link href="/fractional-jobs-uk?location=Leeds" className="text-yellow-600 hover:underline text-sm">Leeds</Link>
+              <Link href="/fractional-jobs-uk?location=Glasgow" className="text-yellow-600 hover:underline text-sm">Glasgow</Link>
+              <Link href="/fractional-jobs-uk?remote=true" className="text-yellow-600 hover:underline text-sm">Remote UK</Link>
+            </div>
           </article>
         </div>
       </section>

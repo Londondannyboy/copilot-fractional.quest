@@ -162,15 +162,34 @@ export default async function FractionalChroJobsUkPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">Why Fractional CHRO Jobs Are Growing in the UK</h2>
-            <p>The demand for <strong>fractional CHRO</strong> and <strong>part-time HR director</strong> roles has surged as UK companies recognise the need for senior people leadership during scaling phases. From building culture to implementing performance management systems, fractional HR leaders bring the expertise needed without full-time costs.</p>
+            <p>The demand for <Link href="/fractional-chro" className="text-purple-600 hover:underline">fractional CHRO</Link> and <strong>part-time HR director</strong> roles has surged as UK companies recognise the need for senior people leadership during scaling phases. From building culture to implementing performance management systems, fractional HR leaders bring the expertise needed without full-time costs. According to <a href="https://www.cipd.org/uk/knowledge/reports/people-profession-report/" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">CIPD research</a>, the demand for flexible HR leadership has increased 40% since 2021.</p>
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">What Does a Fractional CHRO Do?</h3>
             <ul>
               <li><strong>People Strategy:</strong> Developing HR strategies aligned with business growth</li>
               <li><strong>Talent Acquisition:</strong> Building recruitment processes and employer branding</li>
               <li><strong>Culture Development:</strong> Creating and maintaining company culture at scale</li>
               <li><strong>Performance Management:</strong> Implementing review cycles and feedback systems</li>
-              <li><strong>Compliance:</strong> Ensuring employment law compliance and HR policies</li>
+              <li><strong>Compliance:</strong> Ensuring <a href="https://www.gov.uk/browse/employing-people" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">UK employment law</a> compliance and HR policies</li>
             </ul>
+            <p className="mt-6">Understanding <Link href="/fractional-chro-salary" className="text-purple-600 hover:underline">fractional CHRO salary rates</Link> is essential when evaluating opportunities. Day rates typically range from £600-£1,100 depending on experience and sector. If you're looking to <Link href="/hire-fractional-chro" className="text-purple-600 hover:underline">hire a fractional CHRO</Link>, we have a complete guide to the process.</p>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">UK Resources for HR Leaders</h3>
+            <ul>
+              <li><a href="https://www.cipd.org/uk/" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">CIPD</a> — Chartered Institute of Personnel and Development</li>
+              <li><a href="https://www.acas.org.uk/" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">ACAS</a> — Advisory, Conciliation and Arbitration Service</li>
+              <li><a href="https://www.gov.uk/browse/employing-people" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">GOV.UK Employment</a> — Official UK employment guidance</li>
+            </ul>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Fractional HR Jobs by Location</h3>
+            <p>Find fractional CHRO and HR director jobs across the UK:</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 not-prose mt-4">
+              <Link href="/fractional-jobs-london" className="text-purple-600 hover:underline text-sm">London</Link>
+              <Link href="/fractional-jobs-uk?location=Manchester" className="text-purple-600 hover:underline text-sm">Manchester</Link>
+              <Link href="/fractional-jobs-uk?location=Birmingham" className="text-purple-600 hover:underline text-sm">Birmingham</Link>
+              <Link href="/fractional-jobs-uk?location=Edinburgh" className="text-purple-600 hover:underline text-sm">Edinburgh</Link>
+              <Link href="/fractional-jobs-uk?location=Bristol" className="text-purple-600 hover:underline text-sm">Bristol</Link>
+              <Link href="/fractional-jobs-uk?location=Leeds" className="text-purple-600 hover:underline text-sm">Leeds</Link>
+              <Link href="/fractional-jobs-uk?location=Glasgow" className="text-purple-600 hover:underline text-sm">Glasgow</Link>
+              <Link href="/fractional-jobs-uk?remote=true" className="text-purple-600 hover:underline text-sm">Remote UK</Link>
+            </div>
           </article>
         </div>
       </section>

@@ -164,7 +164,7 @@ export default function FractionalCeoSalaryPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Link href="/fractional-ceo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
               <span className="text-2xl mb-3 block">📖</span>
               <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">What is a Fractional CEO?</h3>
@@ -175,11 +175,24 @@ export default function FractionalCeoSalaryPage() {
               <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">Fractional CEO Jobs UK</h3>
               <p className="text-gray-600 text-sm">Browse live roles</p>
             </Link>
+            <Link href="/hire-fractional-ceo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
+              <span className="text-2xl mb-3 block">📋</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">How to Hire a Fractional CEO</h3>
+              <p className="text-gray-600 text-sm">Complete hiring guide</p>
+            </Link>
             <Link href="/fractional-jobs-uk?department=Executive" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
               <span className="text-2xl mb-3 block">🔍</span>
               <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">All Executive Jobs</h3>
               <p className="text-gray-600 text-sm">Search executive positions</p>
             </Link>
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-4">External Salary Resources</h3>
+          <div className="flex flex-wrap gap-3">
+            <a href="https://www.iod.com/resources/briefings/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline text-sm">IOD Director Briefings</a>
+            <span className="text-gray-300">•</span>
+            <a href="https://www.gov.uk/guidance/rates-and-thresholds-for-employers" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline text-sm">HMRC Employer Rates</a>
+            <span className="text-gray-300">•</span>
+            <a href="https://www.glassdoor.co.uk/Salaries/ceo-salary-SRCH_KO0,3.htm" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline text-sm">Glassdoor CEO Salaries</a>
           </div>
         </div>
       </section>

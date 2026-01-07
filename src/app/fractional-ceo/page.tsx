@@ -156,16 +156,52 @@ export default function FractionalCeoPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
             <Link href="/fractional-ceo-jobs-uk" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
               <span className="text-2xl mb-3 block">💼</span>
               <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">Fractional CEO Jobs UK</h3>
-              <p className="text-gray-600 text-sm">Browse live fractional CEO and executive roles</p>
+              <p className="text-gray-600 text-sm">Browse live fractional CEO roles</p>
             </Link>
-            <Link href="/fractional-jobs-uk?department=Executive" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
-              <span className="text-2xl mb-3 block">🔍</span>
-              <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">All Executive Jobs</h3>
-              <p className="text-gray-600 text-sm">Search all fractional executive positions</p>
+            <Link href="/fractional-ceo-salary" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
+              <span className="text-2xl mb-3 block">💰</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">Fractional CEO Salary Guide</h3>
+              <p className="text-gray-600 text-sm">Day rates and salary benchmarks</p>
+            </Link>
+            <Link href="/hire-fractional-ceo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
+              <span className="text-2xl mb-3 block">📋</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 mb-2">How to Hire a Fractional CEO</h3>
+              <p className="text-gray-600 text-sm">Complete hiring guide and evaluation</p>
+            </Link>
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-4">External Resources for Executives</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <a href="https://www.iod.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
+              <span className="text-lg">🏛️</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-yellow-700 text-sm">Institute of Directors</h4>
+                <p className="text-gray-500 text-xs">UK director community and professional development</p>
+              </div>
+            </a>
+            <a href="https://www.british-business-bank.co.uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
+              <span className="text-lg">🏦</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-yellow-700 text-sm">British Business Bank</h4>
+                <p className="text-gray-500 text-xs">Business growth funding and resources</p>
+              </div>
+            </a>
+            <a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
+              <span className="text-lg">📈</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-yellow-700 text-sm">BVCA</h4>
+                <p className="text-gray-500 text-xs">British Private Equity & Venture Capital Association</p>
+              </div>
+            </a>
+            <Link href="/fractional-jobs-uk?department=Executive" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-yellow-300 transition-colors group">
+              <span className="text-lg">🔍</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-yellow-700 text-sm">All Executive Jobs</h4>
+                <p className="text-gray-500 text-xs">Search all fractional executive positions</p>
+              </div>
             </Link>
           </div>
         </div>

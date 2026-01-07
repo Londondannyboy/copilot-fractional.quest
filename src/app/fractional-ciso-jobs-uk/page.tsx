@@ -123,7 +123,7 @@ export default async function FractionalCisoJobsUkPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">Why Fractional CISO Roles Are Critical</h2>
-            <p>The <strong>fractional CISO</strong> model enables companies to access senior cybersecurity leadership without the full-time cost. With increasing cyber threats and regulatory requirements like GDPR, SOC 2, and ISO 27001, organisations need expert security guidance during critical phases.</p>
+            <p>The <Link href="/fractional-ciso" className="text-red-600 hover:underline">fractional CISO</Link> model enables companies to access senior cybersecurity leadership without the full-time cost. With increasing cyber threats and regulatory requirements like <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">GDPR</a>, SOC 2, and ISO 27001, organisations need expert security guidance during critical phases. The <a href="https://www.ncsc.gov.uk/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">NCSC</a> provides guidance on building cyber resilience.</p>
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Typical Fractional CISO Responsibilities</h3>
             <ul>
               <li><strong>Security Strategy:</strong> Developing comprehensive cybersecurity roadmaps</li>
@@ -132,6 +132,26 @@ export default async function FractionalCisoJobsUkPage() {
               <li><strong>Incident Response:</strong> Building and testing security incident procedures</li>
               <li><strong>Team Building:</strong> Hiring and mentoring security teams</li>
             </ul>
+            <p className="mt-6">Review <Link href="/fractional-ciso-salary" className="text-red-600 hover:underline">fractional CISO salary benchmarks</Link> for current market rates. Day rates typically range from £900-£1,500 depending on certifications and compliance experience. Our <Link href="/hire-fractional-ciso" className="text-red-600 hover:underline">guide to hiring a fractional CISO</Link> covers vetting and evaluation.</p>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">UK Resources for Security Leaders</h3>
+            <ul>
+              <li><a href="https://www.ncsc.gov.uk/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">NCSC</a> — UK National Cyber Security Centre</li>
+              <li><a href="https://ico.org.uk/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">ICO</a> — Information Commissioner's Office</li>
+              <li><a href="https://www.isaca.org/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">ISACA</a> — CISM and security certifications</li>
+              <li><a href="https://www.isc2.org/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">ISC2</a> — CISSP certifications</li>
+            </ul>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Fractional Security Jobs by Location</h3>
+            <p>Find fractional CISO and security director jobs across the UK:</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 not-prose mt-4">
+              <Link href="/fractional-jobs-london" className="text-red-600 hover:underline text-sm">London</Link>
+              <Link href="/fractional-jobs-uk?location=Manchester" className="text-red-600 hover:underline text-sm">Manchester</Link>
+              <Link href="/fractional-jobs-uk?location=Birmingham" className="text-red-600 hover:underline text-sm">Birmingham</Link>
+              <Link href="/fractional-jobs-uk?location=Edinburgh" className="text-red-600 hover:underline text-sm">Edinburgh</Link>
+              <Link href="/fractional-jobs-uk?location=Bristol" className="text-red-600 hover:underline text-sm">Bristol</Link>
+              <Link href="/fractional-jobs-uk?location=Leeds" className="text-red-600 hover:underline text-sm">Leeds</Link>
+              <Link href="/fractional-jobs-uk?location=Cambridge" className="text-red-600 hover:underline text-sm">Cambridge</Link>
+              <Link href="/fractional-jobs-uk?remote=true" className="text-red-600 hover:underline text-sm">Remote UK</Link>
+            </div>
           </article>
         </div>
       </section>

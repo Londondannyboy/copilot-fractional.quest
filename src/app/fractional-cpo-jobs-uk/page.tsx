@@ -123,7 +123,7 @@ export default async function FractionalCpoJobsUkPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">Why Fractional CPO Roles Are in Demand</h2>
-            <p>The <strong>fractional CPO</strong> model allows companies to access senior product leadership during critical phases - from building initial product teams to launching new product lines. Product-led growth (PLG) expertise is particularly valued.</p>
+            <p>The <Link href="/fractional-cpo" className="text-indigo-600 hover:underline">fractional CPO</Link> model allows companies to access senior product leadership during critical phases - from building initial product teams to launching new product lines. Product-led growth (PLG) expertise is particularly valued. Resources like <a href="https://www.mindtheproduct.com/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Mind the Product</a> highlight the growing trend of fractional product leadership in UK tech.</p>
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Typical Fractional CPO Responsibilities</h3>
             <ul>
               <li><strong>Product Strategy:</strong> Defining product vision and roadmap</li>
@@ -132,6 +132,25 @@ export default async function FractionalCpoJobsUkPage() {
               <li><strong>Prioritisation:</strong> Managing product backlog and stakeholder alignment</li>
               <li><strong>Metrics:</strong> Establishing product success metrics and analytics</li>
             </ul>
+            <p className="mt-6">Check <Link href="/fractional-cpo-salary" className="text-indigo-600 hover:underline">fractional CPO salary data</Link> for current market rates. Day rates typically range from £800-£1,400 depending on PLG experience and industry. Our <Link href="/hire-fractional-cpo" className="text-indigo-600 hover:underline">guide to hiring a fractional CPO</Link> covers evaluation criteria and sourcing channels.</p>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">UK Resources for Product Leaders</h3>
+            <ul>
+              <li><a href="https://www.mindtheproduct.com/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Mind the Product</a> — Global product management community</li>
+              <li><a href="https://www.productschool.com/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Product School</a> — Product management courses and certifications</li>
+              <li><a href="https://www.lennysnewsletter.com/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Lenny's Newsletter</a> — Product leadership insights</li>
+            </ul>
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Fractional Product Jobs by Location</h3>
+            <p>Find fractional CPO and product director jobs across the UK:</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 not-prose mt-4">
+              <Link href="/fractional-jobs-london" className="text-indigo-600 hover:underline text-sm">London</Link>
+              <Link href="/fractional-jobs-uk?location=Manchester" className="text-indigo-600 hover:underline text-sm">Manchester</Link>
+              <Link href="/fractional-jobs-uk?location=Birmingham" className="text-indigo-600 hover:underline text-sm">Birmingham</Link>
+              <Link href="/fractional-jobs-uk?location=Edinburgh" className="text-indigo-600 hover:underline text-sm">Edinburgh</Link>
+              <Link href="/fractional-jobs-uk?location=Bristol" className="text-indigo-600 hover:underline text-sm">Bristol</Link>
+              <Link href="/fractional-jobs-uk?location=Leeds" className="text-indigo-600 hover:underline text-sm">Leeds</Link>
+              <Link href="/fractional-jobs-uk?location=Cambridge" className="text-indigo-600 hover:underline text-sm">Cambridge</Link>
+              <Link href="/fractional-jobs-uk?remote=true" className="text-indigo-600 hover:underline text-sm">Remote UK</Link>
+            </div>
           </article>
         </div>
       </section>

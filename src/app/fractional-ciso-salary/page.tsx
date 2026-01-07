@@ -170,7 +170,7 @@ export default function FractionalCisoSalaryPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Link href="/fractional-ciso" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-red-300 transition-colors group">
               <span className="text-2xl mb-3 block">📖</span>
               <h3 className="font-bold text-gray-900 group-hover:text-red-700 mb-2">What is a Fractional CISO?</h3>
@@ -181,11 +181,24 @@ export default function FractionalCisoSalaryPage() {
               <h3 className="font-bold text-gray-900 group-hover:text-red-700 mb-2">Fractional CISO Jobs UK</h3>
               <p className="text-gray-600 text-sm">Browse live roles</p>
             </Link>
+            <Link href="/hire-fractional-ciso" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-red-300 transition-colors group">
+              <span className="text-2xl mb-3 block">📋</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-red-700 mb-2">How to Hire a Fractional CISO</h3>
+              <p className="text-gray-600 text-sm">Complete hiring guide</p>
+            </Link>
             <Link href="/fractional-jobs-uk?department=Security" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-red-300 transition-colors group">
               <span className="text-2xl mb-3 block">🔍</span>
               <h3 className="font-bold text-gray-900 group-hover:text-red-700 mb-2">All Security Jobs</h3>
               <p className="text-gray-600 text-sm">Search security positions</p>
             </Link>
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-4">External Salary Resources</h3>
+          <div className="flex flex-wrap gap-3">
+            <a href="https://www.ncsc.gov.uk/collection/careers" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline text-sm">NCSC Careers</a>
+            <span className="text-gray-300">•</span>
+            <a href="https://www.gov.uk/guidance/rates-and-thresholds-for-employers" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline text-sm">HMRC Employer Rates</a>
+            <span className="text-gray-300">•</span>
+            <a href="https://www.glassdoor.co.uk/Salaries/ciso-salary-SRCH_KO0,4.htm" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline text-sm">Glassdoor CISO Salaries</a>
           </div>
         </div>
       </section>
