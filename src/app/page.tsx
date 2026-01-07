@@ -11,6 +11,13 @@ import { VoiceInput } from "@/components/voice-input";
 import { DynamicBackground } from "@/components/DynamicBackground";
 import { LiveProfileGraph } from "@/components/LiveProfileGraph";
 import { UserProfileSection } from "@/components/UserProfileSection";
+import dynamic from "next/dynamic";
+
+// Dynamic import for immersive voice graph
+const VoiceGraphInterface = dynamic(
+  () => import("@/components/VoiceGraphInterface").then(mod => mod.VoiceGraphInterface),
+  { ssr: false, loading: () => <div className="w-full h-[500px] bg-gray-900 rounded-2xl animate-pulse" /> }
+);
 import { AgentState } from "@/lib/types";
 import { useCoAgent, useRenderToolCall, useCopilotChat, useHumanInTheLoop } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
@@ -575,8 +582,10 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     },
   });
 
-  // Fetch profile items for instructions
+  // Fetch profile items for instructions AND graph
   const [profileItems, setProfileItems] = useState<{location?: string; role?: string; skills?: string[]; companies?: string[]}>({});
+  const [fullProfileItems, setFullProfileItems] = useState<Array<{id: number; item_type: string; value: string; metadata: Record<string, unknown>; confirmed: boolean}>>([]);
+  const [isVoiceActive, setIsVoiceActive] = useState(false);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -587,7 +596,10 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
         const data = await res.json();
         const items = data.items || [];
 
-        // Group by type
+        // Store full items for graph
+        setFullProfileItems(items);
+
+        // Group by type for instructions
         const grouped: typeof profileItems = {};
         items.forEach((item: { item_type: string; value: string }) => {
           if (item.item_type === 'location') grouped.location = item.value;
@@ -698,67 +710,95 @@ Reference the page context when discussing jobs.`;
           )}
         </div>
 
-        {/* Main Content - Graph + Voice */}
-        <div className="flex flex-col items-center gap-6">
-          {/* Greeting */}
-          <h1 className="text-3xl font-bold text-white drop-shadow-lg text-center">
-            {firstName ? `Hey ${firstName}!` : 'Welcome'}
-          </h1>
+        {/* Main Content - Immersive Voice Graph Interface */}
+        {isSessionLoading ? (
+          <div className="flex flex-col items-center justify-center gap-6 min-h-[500px]">
+            <div className="w-24 h-24 rounded-full bg-white/20 animate-pulse" />
+            <p className="text-white/60">Loading your universe...</p>
+          </div>
+        ) : user ? (
+          /* Signed In - Show immersive graph with voice at center */
+          <div className="relative w-full max-w-4xl mx-auto" style={{ height: 'calc(100vh - 200px)', minHeight: '500px' }}>
+            {/* 3D Profile Graph - fills the container */}
+            <VoiceGraphInterface
+              userId={user.id}
+              userName={firstName || user.name || 'You'}
+              items={fullProfileItems}
+              isVoiceActive={isVoiceActive}
+              onVoiceToggle={() => setIsVoiceActive(!isVoiceActive)}
+              onNodeClick={(item) => {
+                // Could open edit modal here
+                console.log('Edit item:', item);
+              }}
+            />
 
-          {/* User Profile Section - Edit and view profile data */}
-          {isSessionLoading ? (
-            <div className="w-full max-w-md bg-black/40 backdrop-blur-md rounded-xl p-6 animate-pulse">
-              <div className="h-32 bg-white/10 rounded-lg" />
-            </div>
-          ) : (
-            <>
-              <SignedIn>
-                <div className="w-full max-w-md">
-                  <UserProfileSection
-                    userId={user?.id}
-                    userName={firstName || undefined}
-                    refreshTrigger={profileRefreshTrigger}
-                    onProfileUpdate={refreshProfile}
-                  />
-                </div>
-              </SignedIn>
-
-              {/* Not signed in - prompt */}
-              <SignedOut>
-                <div className="bg-black/40 backdrop-blur-md rounded-xl p-6 text-center border border-white/10 max-w-sm">
-                  <p className="text-white/80 mb-4">Sign in to see your profile graph</p>
-                  <button
-                    onClick={() => window.location.href = '/auth/sign-in'}
-                    className="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg transition-colors"
-                  >
-                    Sign In
-                  </button>
-                </div>
-              </SignedOut>
-            </>
-          )}
-
-          {/* Voice Input Button */}
-          <div className="flex flex-col items-center gap-2">
-            {isSessionLoading ? (
-              <div className="w-20 h-20 rounded-full bg-white/20 animate-pulse flex items-center justify-center">
-                <span className="text-white/60 text-xs">...</span>
+            {/* Actual Voice Input - positioned at center, over the graph's user node */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+              <div className="flex flex-col items-center">
+                <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} />
+                <p className="text-white/80 text-sm mt-2 font-medium drop-shadow-lg">
+                  {firstName || 'You'}
+                </p>
+                <p className="text-white/50 text-xs">Tap to speak</p>
               </div>
-            ) : (
-              <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} />
-            )}
-            <p className="text-white/60 text-sm">{isSessionLoading ? 'Loading...' : 'Tap to speak'}</p>
-          </div>
+            </div>
 
-          {/* Tech stack badges */}
-          <div className="flex gap-2 justify-center flex-wrap max-w-md">
-            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Hume</span>
-            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">CopilotKit</span>
-            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Pydantic AI</span>
-            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Zep</span>
-            <span className="text-xs bg-white/10 text-white/70 px-2 py-0.5 rounded-full">Neon</span>
+            {/* Legend */}
+            <div className="absolute bottom-4 left-4 flex gap-4 bg-black/50 backdrop-blur-sm px-4 py-3 rounded-xl z-20">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50" />
+                <span className="text-white/70 text-xs">Location</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50" />
+                <span className="text-white/70 text-xs">Role</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-pink-500 shadow-lg shadow-pink-500/50" />
+                <span className="text-white/70 text-xs">Company</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-amber-500 shadow-lg shadow-amber-500/50" />
+                <span className="text-white/70 text-xs">Skill</span>
+              </div>
+            </div>
+
+            {/* Profile count & edit hint */}
+            <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-xl z-20">
+              <span className="text-white/70 text-sm">{fullProfileItems.length} items • Click nodes to edit</span>
+            </div>
+
+            {/* Tech badges */}
+            <div className="absolute bottom-4 right-4 flex gap-2 bg-black/50 backdrop-blur-sm px-3 py-2 rounded-xl z-20">
+              <span className="text-xs text-white/50">Hume</span>
+              <span className="text-xs text-white/50">•</span>
+              <span className="text-xs text-white/50">CopilotKit</span>
+              <span className="text-xs text-white/50">•</span>
+              <span className="text-xs text-white/50">Pydantic AI</span>
+            </div>
           </div>
-        </div>
+        ) : (
+          /* Not signed in - Show sign in prompt with preview */
+          <div className="flex flex-col items-center gap-8">
+            <h1 className="text-4xl font-bold text-white drop-shadow-lg text-center">
+              Your Career Universe
+            </h1>
+            <p className="text-white/70 text-lg text-center max-w-md">
+              Sign in to visualize your professional profile in 3D and chat with AI about fractional executive opportunities.
+            </p>
+            <button
+              onClick={() => window.location.href = '/auth/sign-in'}
+              className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-medium transition-all shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50"
+            >
+              Sign In to Begin
+            </button>
+            <div className="flex gap-2 justify-center flex-wrap">
+              <span className="text-xs bg-white/10 text-white/50 px-2 py-0.5 rounded-full">Voice AI</span>
+              <span className="text-xs bg-white/10 text-white/50 px-2 py-0.5 rounded-full">3D Profile Graph</span>
+              <span className="text-xs bg-white/10 text-white/50 px-2 py-0.5 rounded-full">Smart Job Search</span>
+            </div>
+          </div>
+        )}
       </div>
     </CopilotSidebar>
   );
