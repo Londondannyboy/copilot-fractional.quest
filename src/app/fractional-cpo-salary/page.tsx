@@ -8,6 +8,12 @@ import { IR35Calculator } from '@/components/IR35Calculator'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+
+const ogImage = getOGImageUrl('salary')
+const imageAlt = getImage('salary').alt
+const heroImage = getHeroImageUrl('cpo', 1920, 800)
+const imageCredit = getImage('cpo')
 
 export const metadata: Metadata = {
   title: 'Fractional CPO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
@@ -18,6 +24,13 @@ export const metadata: Metadata = {
     title: 'Fractional CPO Salary UK 2025 | Complete Compensation Guide',
     description: 'Fractional CPO salary UK: Day rates £800-£1,400. Complete guide to fractional CPO costs and compensation.',
     url: 'https://fractional.quest/fractional-cpo-salary',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fractional CPO Salary UK 2025 | Complete Compensation Guide',
+    description: 'Fractional CPO salary UK: Day rates £800-£1,400. Complete guide to fractional CPO costs and compensation.',
+    images: [ogImage],
   },
 }
 
@@ -34,17 +47,20 @@ export default function FractionalCpoSalaryPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80" alt="Fractional CPO Salary UK - Compensation Guide" fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={imageCredit.alt} fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 via-violet-500/80 to-purple-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Salary Guide 2025</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"><strong>Fractional CPO Salary</strong> UK</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair text-white mb-6 leading-tight"><strong>Fractional CPO Salary</strong> UK</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Complete guide to <strong>fractional CPO salary UK</strong> rates. Understand day rates, annual equivalents, and factors affecting compensation.</p>
             </div>
           </div>
+        </div>
+        <div className="absolute bottom-4 right-4 text-white/60 text-xs">
+          Photo by <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">{imageCredit.credit}</a> on Unsplash
         </div>
       </section>
 

@@ -10,6 +10,8 @@ import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
+import Image from "next/image";
+import { getHeroImageUrl, getImage } from '@/lib/images';
 
 const faqItems: FAQItem[] = [
   { question: 'How long does it take to hire a fractional CISO?', answer: 'Typically 2-4 weeks. Security clearance checks may add time for regulated industries. Includes defining requirements (1-3 days), sourcing (3-7 days), interviews and vetting (1-2 weeks), and onboarding.' },
@@ -41,6 +43,8 @@ export default function HireFractionalCISOPage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;
+  const heroImage = getHeroImageUrl('services', 1920, 800);
+  const imageCredit = getImage('services');
 
   const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
 
@@ -82,8 +86,9 @@ Key facts: Day rates £900-£1,500 | 2-4 weeks to hire | Certifications essentia
       >
         <div className="min-h-screen bg-white">
           {/* Hero */}
-          <section className="bg-gradient-to-br from-red-600 to-rose-500 py-24">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-red-600 to-rose-500 py-24">
+            <Image src={heroImage} alt="Hire a Fractional CISO" fill priority sizes="100vw" className="object-cover" />
+            <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
               <Link href="/fractional-ciso" className="text-red-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional CISO Guide</Link>
               <div className="max-w-4xl">
                 <span className="inline-block bg-white text-red-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Hiring Guide</span>
@@ -99,6 +104,9 @@ Key facts: Day rates £900-£1,500 | 2-4 weeks to hire | Certifications essentia
                   <Link href="/fractional-ciso-jobs-uk" className="px-8 py-4 bg-white text-red-600 font-bold uppercase tracking-wider hover:bg-red-50 transition-colors">Browse CISO Candidates</Link>
                 </div>
               </div>
+            </div>
+            <div className="absolute bottom-2 right-2 z-10">
+              <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/50 hover:text-white/70">Photo: {imageCredit.credit}</a>
             </div>
           </section>
 

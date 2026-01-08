@@ -1,11 +1,13 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { createDbQuery } from '@/lib/db'
 import { FAQ } from '@/components/seo/FAQ'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
+import { getRoleImageCategory, getHeroImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
 
@@ -156,9 +158,22 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Hero Section */}
       <section className={`relative bg-gradient-to-br ${colors.gradient} text-white py-16 lg:py-24 overflow-hidden`}>
+        {(() => {
+          const imageCategory = article.role_category ? getRoleImageCategory(article.role_category.toLowerCase()) : 'default'
+          const heroImageUrl = getHeroImageUrl(imageCategory, 1920, 800)
+          const imageCredit = getImage(imageCategory)
+          return (
+            <>
+              <Image src={heroImageUrl} alt={article.title} fill priority sizes="100vw" className="object-cover opacity-30" />
+              <div className="absolute bottom-2 right-2 z-10">
+                <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/40 hover:text-white/60">Photo: {imageCredit.credit}</a>
+              </div>
+            </>
+          )
+        })()}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.05),transparent_50%)]" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbsLight
             items={[
               { label: 'Home', href: '/' },

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
@@ -11,6 +12,8 @@ import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
+import { getHeroImageUrl, getImage } from '@/lib/images';
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 
 // FAQ items for the page
 const faqItems: FAQItem[] = [
@@ -127,6 +130,10 @@ const evaluationCriteria = [
 ];
 
 export default function HireFractionalCMOPage() {
+  // Hero image
+  const heroImage = getHeroImageUrl('services', 1920, 800)
+  const imageCredit = getImage('services')
+
   // Auth
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -254,8 +261,20 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
       >
         <div className="min-h-screen bg-white">
           {/* Hero */}
-          <section className="bg-gradient-to-br from-blue-600 to-blue-500 py-24">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <section className="relative py-24 overflow-hidden">
+            {/* Background Image */}
+            <Image
+              src={heroImage}
+              alt="Fractional CMO hiring guide"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 to-blue-500/85" />
+
+            {/* Content */}
+            <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
               <Link href="/fractional-cmo" className="text-blue-100 hover:text-white mb-8 inline-flex items-center text-sm">
                 <span className="mr-2">←</span> Back to Fractional CMO Guide
               </Link>
@@ -263,7 +282,7 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
                 <span className="inline-block bg-white text-blue-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">
                   Hiring Guide
                 </span>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">
+                <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">
                   Hire a<br />
                   <span className="text-blue-200">Fractional CMO</span>
                 </h1>
@@ -309,6 +328,20 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
                   </Link>
                 </div>
               </div>
+
+              {/* Photo Credit */}
+              {imageCredit && (
+                <div className="absolute bottom-4 right-6 text-xs text-white/60">
+                  <a
+                    href={imageCredit.creditUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-white/80"
+                  >
+                    Photo: {imageCredit.credit}
+                  </a>
+                </div>
+              )}
             </div>
           </section>
 
@@ -640,6 +673,23 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+
+          {/* Browse CMO Candidates */}
+          <section className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Find Talent</span>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Browse CMO Candidates</h2>
+                <p className="text-xl text-gray-500">Connect with experienced fractional CMOs seeking new opportunities</p>
+              </div>
+              <EmbeddedJobBoard
+                defaultDepartment="Marketing"
+                title="Available CMO Talent"
+                accentColor="amber"
+                jobsPerPage={6}
+              />
             </div>
           </section>
 

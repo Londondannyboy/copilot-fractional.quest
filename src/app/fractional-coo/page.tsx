@@ -7,7 +7,14 @@ import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { LazyYouTube } from '@/components/LazyYouTube'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { RoleCalculator } from '@/components/RoleCalculator'
+import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+
+const ogImage = getOGImageUrl('coo')
+const imageAlt = getImage('coo').alt
+const heroImage = getHeroImageUrl('coo', 1920, 800)
+const imageCredit = getImage('coo')
 
 export const metadata: Metadata = {
   title: 'What is a Fractional COO? | Part-Time Chief Operating Officer Guide 2025',
@@ -20,7 +27,13 @@ export const metadata: Metadata = {
     title: 'What is a Fractional COO? | Complete Guide',
     description: 'Understand fractional COO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Operating Officer.',
     url: 'https://fractional.quest/fractional-coo',
-    images: ['/images/fractional-coo.jpg'],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'What is a Fractional COO? | Complete Guide',
+    description: 'Understand fractional COO meaning, responsibilities, and costs.',
+    images: [ogImage],
   },
 }
 
@@ -43,8 +56,8 @@ export default function FractionalCooPage() {
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
-          alt="What is a Fractional COO - Part-time Chief Operating Officer"
+          src={heroImage}
+          alt={`What is a Fractional COO - ${imageAlt}`}
           fill
           priority
           sizes="100vw"
@@ -58,7 +71,7 @@ export default function FractionalCooPage() {
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
                 Role Guide
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                 What is a <strong>Fractional COO</strong>?
               </h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
@@ -66,6 +79,12 @@ export default function FractionalCooPage() {
               </p>
             </div>
           </div>
+        </div>
+        {/* Photo Credit */}
+        <div className="absolute bottom-2 right-2 z-10">
+          <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/50 hover:text-white/70 transition-colors">
+            Photo: {imageCredit.credit}
+          </a>
         </div>
       </section>
 
@@ -296,6 +315,23 @@ export default function FractionalCooPage() {
               Hiring Guide
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Job Board Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional COO Jobs UK</h2>
+            <p className="text-xl text-gray-500">Find your next fractional COO opportunity</p>
+          </div>
+          <EmbeddedJobBoard
+            defaultDepartment="Operations"
+            title="Latest Operations Jobs"
+            accentColor="purple"
+            jobsPerPage={6}
+          />
         </div>
       </section>
 

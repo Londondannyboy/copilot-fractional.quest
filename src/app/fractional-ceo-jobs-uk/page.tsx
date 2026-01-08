@@ -16,8 +16,12 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('ceo')
+const imageAlt = getImage('ceo').alt
 
 export const metadata: Metadata = {
   title: 'Fractional CEO Jobs UK | Part-Time CEO & Interim Executive Roles 2025',
@@ -28,6 +32,13 @@ export const metadata: Metadata = {
     title: 'Fractional CEO Jobs UK | Part-Time Executive Roles',
     description: 'Fractional CEO jobs UK & interim executive positions paying £1,000-£2,000/day.',
     url: 'https://fractional.quest/fractional-ceo-jobs-uk',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fractional CEO Jobs UK | Part-Time Executive Roles',
+    description: 'Fractional CEO jobs UK & interim executive positions paying £1,000-£2,000/day.',
+    images: [ogImage],
   },
 }
 

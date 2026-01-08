@@ -1,0 +1,1417 @@
+'use client'
+
+import Link from 'next/link'
+import { useState } from 'react'
+import type { PageData, Section, FAQ, ExternalLink } from '@/lib/pages'
+
+// ===========================================
+// Main Page Renderer
+// ===========================================
+
+interface PageRendererProps {
+  page: PageData
+}
+
+export function PageRenderer({ page }: PageRendererProps) {
+  return (
+    <div data-accent={page.accent_color || 'blue'}>
+      {/* Hero Section */}
+      <HeroSection page={page} />
+
+      {/* Content Sections */}
+      {page.sections?.map((section, index) => (
+        <SectionRenderer key={index} section={section} index={index} />
+      ))}
+
+      {/* FAQ Section */}
+      {page.faqs && page.faqs.length > 0 && (
+        <FAQSection faqs={page.faqs} />
+      )}
+
+      {/* External Links */}
+      {page.external_links && page.external_links.length > 0 && (
+        <ExternalLinksSection links={page.external_links} />
+      )}
+
+      {/* Related Pages */}
+      {page.related_pages && page.related_pages.length > 0 && (
+        <RelatedPagesSection slugs={page.related_pages} />
+      )}
+
+      {/* Job Board CTA */}
+      {page.job_board_enabled && (
+        <JobBoardCTA page={page} />
+      )}
+    </div>
+  )
+}
+
+// ===========================================
+// Hero Section
+// ===========================================
+
+function HeroSection({ page }: { page: PageData }) {
+  return (
+    <section className="hero-section py-16 md:py-24">
+      <div className="section-container relative z-10">
+        {/* Badge */}
+        {page.hero_badge && (
+          <div className="hero-badge mb-6">
+            {page.hero_badge}
+          </div>
+        )}
+
+        {/* Title */}
+        <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-4xl">
+          {page.hero_title || page.title}
+        </h1>
+
+        {/* Subtitle */}
+        {page.hero_subtitle && (
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed">
+            {page.hero_subtitle}
+          </p>
+        )}
+
+        {/* Quick Stats - if available in first section */}
+        {page.sections?.[0]?.type === 'market_stats' && (
+          <QuickStats stats={page.sections[0].stats as Array<{ label: string; value: string; context?: string }>} />
+        )}
+      </div>
+    </section>
+  )
+}
+
+function QuickStats({ stats }: { stats?: Array<{ label: string; value: string; context?: string }> }) {
+  if (!stats || stats.length === 0) return null
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+      {stats.slice(0, 4).map((stat, i) => (
+        <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+          <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
+          <div className="text-sm text-gray-400">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ===========================================
+// Section Renderer - Routes to specific components
+// ===========================================
+
+function SectionRenderer({ section, index }: { section: Section; index: number }) {
+  const isEven = index % 2 === 0
+
+  // Skip market_stats in first position (shown in hero)
+  if (section.type === 'market_stats' && index === 0) return null
+
+  const content = getSectionContent(section)
+
+  return (
+    <section className={`content-section ${!isEven ? 'bg-gray-50' : ''}`}>
+      <div className="section-container">
+        {section.heading && (
+          <div className="section-header">
+            <div className="section-eyebrow">{getSectionEyebrow(section.type)}</div>
+            <h2 className="section-title">{section.heading}</h2>
+          </div>
+        )}
+        {content}
+      </div>
+    </section>
+  )
+}
+
+function getSectionEyebrow(type: string): string {
+  const eyebrows: Record<string, string> = {
+    intro: 'Overview',
+    role_types: 'Opportunities',
+    market_stats: 'Market Data',
+    qualifications: 'Requirements',
+    market_trends: 'Trends',
+    responsibilities: 'What You\'ll Do',
+    comparison: 'Comparison',
+    services: 'Services',
+    when_to_hire: 'When to Hire',
+    costs: 'Investment',
+    how_to_hire: 'How to Hire',
+    areas: 'Locations',
+    sectors: 'Industries',
+    by_stage: 'By Stage',
+    common_roles: 'Popular Roles',
+    engagement_types: 'Engagement Types',
+    what_to_look_for: 'Selection Criteria',
+    hiring_process: 'Process',
+    rate_table: 'Rate Guide',
+    role_breakdown: 'Role Analysis',
+    working_patterns: 'Working Patterns',
+    getting_started: 'Getting Started',
+    why_saas: 'Why',
+    why_pe: 'Why PE',
+    why_fintech: 'Why FinTech',
+    why_healthtech: 'Why HealthTech',
+    roles: 'Roles',
+    subsectors: 'Sub-Sectors',
+    core_benefits: 'Key Benefits',
+    by_situation: 'By Situation',
+    roi: 'Return on Investment',
+    deliverables: 'Deliverables',
+    unique_aspects: 'What Makes It Unique',
+    considerations: 'Considerations',
+    vp_vs_cto: 'Role Comparison',
+    cro_vs_others: 'Role Comparison',
+    how_it_works: 'How It Works',
+    benefits: 'Benefits',
+    transition_steps: 'Transition Steps',
+    common_mistakes: 'Avoid These Mistakes',
+    timeline: 'Timeline',
+    saas_expertise: 'Expertise Required',
+    what_fractional_cto_provides: 'What You Get',
+    engagement_model: 'Engagement Model',
+    warning_signs: 'Warning Signs',
+    profile_optimization: 'Profile Tips',
+    content_strategy: 'Content Strategy',
+    key_terms: 'Key Terms',
+    equity: 'Equity',
+    manufacturing_expertise: 'Expertise',
+    ecommerce_expertise: 'Expertise',
+    b2b_expertise: 'Expertise',
+    ai_expertise: 'Expertise',
+    fundraising_services: 'Services',
+    by_round: 'By Round',
+    value_add: 'Value Added',
+    comparison_table: 'Comparison',
+    when_interim: 'When Interim',
+    when_fractional: 'When Fractional',
+    when_consultant: 'When Consultant',
+    prerequisites: 'Prerequisites',
+    ideal_portfolio: 'Portfolio Design',
+    time_management: 'Time Management',
+    client_selection: 'Client Selection',
+    remote_landscape: 'Remote Work',
+    best_roles_remote: 'Best Remote Roles',
+    making_remote_work: 'Making It Work',
+    rate_considerations: 'Rate Considerations',
+    location_factor: 'Location Factors',
+    sector_premiums: 'Sector Premiums',
+    annual_earnings: 'Earning Potential',
+  }
+  return eyebrows[type] || 'Insights'
+}
+
+function getSectionContent(section: Section): React.ReactNode {
+  switch (section.type) {
+    case 'intro':
+    case 'market_trends':
+    case 'qualifications':
+    case 'working_patterns':
+    case 'vp_vs_cto':
+    case 'cro_vs_others':
+    case 'unique_aspects':
+    case 'considerations':
+    case 'timeline':
+    case 'roi':
+    case 'rate_considerations':
+      return <ProseContent content={section.content} />
+
+    case 'role_types':
+    case 'roles':
+    case 'common_roles':
+      return <RoleCardsGrid items={section.items as RoleItem[]} />
+
+    case 'market_stats':
+      return <StatsGrid stats={section.stats as StatItem[]} />
+
+    case 'responsibilities':
+    case 'deliverables':
+      return <CheckList items={section.items as string[]} />
+
+    case 'comparison':
+    case 'comparison_table':
+      return <ComparisonTable items={section.items as ComparisonItem[]} />
+
+    case 'services':
+      return <ServicesGrid items={section.items as ServiceItem[]} />
+
+    case 'when_to_hire':
+    case 'warning_signs':
+      return <SignalsList signals={section.signals as SignalItem[]} />
+
+    case 'costs':
+      return <CostsSection content={section.content} rateTable={section.rateTable as RateTableItem[]} />
+
+    case 'how_to_hire':
+    case 'hiring_process':
+    case 'transition_steps':
+    case 'getting_started':
+      return <StepsList steps={section.steps as StepItem[]} />
+
+    case 'areas':
+      return <AreasGrid items={section.items as AreaItem[]} />
+
+    case 'sectors':
+    case 'subsectors':
+      return <SectorsGrid items={section.items as SectorItem[]} />
+
+    case 'by_stage':
+      return <StagesGrid items={section.items as StageItem[]} />
+
+    case 'what_to_look_for':
+      return <CriteriaSection mustHaves={section.mustHaves as CriteriaItem[]} niceToHaves={section.niceToHaves as CriteriaItem[]} />
+
+    case 'engagement_types':
+      return <EngagementTypes items={section.items as EngagementItem[]} />
+
+    case 'common_mistakes':
+      return <MistakesList mistakes={section.mistakes as MistakeItem[]} items={section.items as MistakeItem[]} />
+
+    case 'core_benefits':
+      return <BenefitsGrid items={section.items as BenefitItem[]} />
+
+    case 'by_situation':
+      return <SituationsList items={section.items as SituationItem[]} />
+
+    case 'why_saas':
+    case 'why_pe':
+    case 'why_fintech':
+    case 'why_healthtech':
+      return <ReasonsList items={section.items as ReasonItem[]} />
+
+    case 'saas_expertise':
+    case 'manufacturing_expertise':
+    case 'ecommerce_expertise':
+    case 'b2b_expertise':
+    case 'ai_expertise':
+      return <ExpertiseGrid items={section.items as ExpertiseItem[]} />
+
+    case 'fundraising_services':
+      return <ServicesGrid items={section.items as ServiceItem[]} />
+
+    case 'by_round':
+      return <RoundsList items={section.items as RoundItem[]} />
+
+    case 'value_add':
+      return <ValueAddSection stats={section.stats as ValueStat[]} />
+
+    case 'how_it_works':
+      return <HowItWorksGrid items={section.items as HowItWorksItem[]} />
+
+    case 'benefits':
+      return <BenefitsSplit forCompanies={section.forCompanies as BenefitItem[]} forExecutives={section.forExecutives as BenefitItem[]} />
+
+    case 'prerequisites':
+      return <PrerequisitesList items={section.items as PrerequisiteItem[]} />
+
+    case 'profile_optimization':
+    case 'key_terms':
+      return <TipsGrid items={section.items as TipItem[]} />
+
+    case 'content_strategy':
+      return <ContentStrategyGrid items={section.items as ContentItem[]} />
+
+    case 'ideal_portfolio':
+    case 'time_management':
+    case 'client_selection':
+      return <TipsGrid items={section.items as TipItem[]} />
+
+    case 'remote_landscape':
+      return <RemoteStats stats={section.stats as RemoteStat[]} />
+
+    case 'best_roles_remote':
+      return <RemoteRolesGrid items={section.items as RemoteRoleItem[]} />
+
+    case 'making_remote_work':
+      return <TipsList tips={section.tips as TipListItem[]} />
+
+    case 'rate_table':
+      return <RateTableSection items={section.items as RateTableItem[]} />
+
+    case 'role_breakdown':
+      return <RoleBreakdownGrid items={section.items as RoleBreakdownItem[]} />
+
+    case 'location_factor':
+      return <LocationFactorGrid items={section.items as LocationFactorItem[]} />
+
+    case 'sector_premiums':
+      return <SectorPremiumsGrid items={section.items as SectorPremiumItem[]} />
+
+    case 'annual_earnings':
+      return <EarningsSection content={section.content} examples={section.examples as EarningExample[]} />
+
+    case 'when_interim':
+    case 'when_fractional':
+    case 'when_consultant':
+      return <ScenariosList scenarios={section.scenarios as ScenarioItem[]} />
+
+    case 'engagement_model':
+      return (
+        <>
+          {section.content && <ProseContent content={section.content} />}
+          {section.typical_activities && <ActivitiesGrid items={section.typical_activities as ActivityItem[]} />}
+        </>
+      )
+
+    default:
+      // Generic content fallback
+      if (section.content) {
+        return <ProseContent content={section.content} />
+      }
+      if (section.items && Array.isArray(section.items)) {
+        return <GenericItemsList items={section.items} />
+      }
+      return null
+  }
+}
+
+// ===========================================
+// Section Component Types
+// ===========================================
+
+interface RoleItem {
+  title: string
+  rate: string
+  description: string
+}
+
+interface StatItem {
+  label: string
+  value: string
+  context?: string
+}
+
+interface ComparisonItem {
+  aspect: string
+  [key: string]: string
+}
+
+interface ServiceItem {
+  service: string
+  description: string
+  frequency?: string
+  impact?: string
+}
+
+interface SignalItem {
+  signal: string
+  detail: string
+  urgency?: string
+}
+
+interface RateTableItem {
+  level: string
+  dayRate: string
+  typical: string
+}
+
+interface StepItem {
+  step: string
+  detail: string
+}
+
+interface AreaItem {
+  area: string
+  focus: string
+  roles: string
+  rates?: string
+}
+
+interface SectorItem {
+  sector: string
+  description: string
+  focus?: string
+}
+
+interface StageItem {
+  stage: string
+  typical_roles?: string
+  focus: string
+  typical_commitment?: string
+  needs?: string
+}
+
+interface CriteriaItem {
+  criteria: string
+  detail: string
+}
+
+interface EngagementItem {
+  type: string
+  description: string
+  best_for: string
+  duration?: string
+  focus?: string
+}
+
+interface MistakeItem {
+  mistake: string
+  consequence?: string
+  impact?: string
+  fix?: string
+}
+
+interface BenefitItem {
+  benefit: string
+  detail: string
+  stat?: string
+}
+
+interface SituationItem {
+  situation: string
+  key_benefit: string
+}
+
+interface ReasonItem {
+  reason: string
+  detail: string
+}
+
+interface ExpertiseItem {
+  area: string
+  detail?: string
+  specifics?: string
+}
+
+interface RoundItem {
+  round: string
+  cfo_role: string
+  time: string
+  focus: string
+}
+
+interface ValueStat {
+  improvement: string
+  detail: string
+}
+
+interface HowItWorksItem {
+  aspect: string
+  detail: string
+}
+
+interface PrerequisiteItem {
+  prereq: string
+  detail: string
+  importance: string
+}
+
+interface TipItem {
+  term?: string
+  element?: string
+  tip?: string
+  recommendation?: string
+  criterion?: string
+  detail: string
+  advice?: string
+}
+
+interface ContentItem {
+  content_type: string
+  frequency: string
+  focus: string
+}
+
+interface RemoteStat {
+  stat: string
+  detail: string
+}
+
+interface RemoteRoleItem {
+  role: string
+  remote_fit: string
+  notes: string
+}
+
+interface TipListItem {
+  tip: string
+  detail: string
+}
+
+interface RoleBreakdownItem {
+  role: string
+  demand: string
+  rate: string
+  sectors: string
+}
+
+interface LocationFactorItem {
+  location: string
+  factor: string
+  notes: string
+}
+
+interface SectorPremiumItem {
+  sector: string
+  premium: string
+  reason: string
+}
+
+interface EarningExample {
+  scenario: string
+  rate: string
+  days: string
+  annual: string
+}
+
+interface ScenarioItem {
+  scenario: string
+  detail: string
+}
+
+interface ActivityItem {
+  activity: string
+  examples: string
+}
+
+// ===========================================
+// Section Components
+// ===========================================
+
+function ProseContent({ content }: { content?: string }) {
+  if (!content) return null
+  return (
+    <div className="prose-content max-w-3xl">
+      <p>{content}</p>
+    </div>
+  )
+}
+
+function RoleCardsGrid({ items }: { items?: RoleItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="role-card">
+          <div className="role-card-header">
+            <h3 className="role-title">{item.title}</h3>
+            <span className="role-rate">{item.rate}</span>
+          </div>
+          <p className="role-description">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function StatsGrid({ stats }: { stats?: StatItem[] }) {
+  if (!stats) return null
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {stats.map((stat, i) => (
+        <div key={i} className="stat-card">
+          <div className="stat-value">{stat.value}</div>
+          <div className="stat-label">{stat.label}</div>
+          {stat.context && <div className="text-xs text-gray-400 mt-1">{stat.context}</div>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function CheckList({ items }: { items?: string[] }) {
+  if (!items) return null
+  return (
+    <ul className="check-list max-w-2xl">
+      {items.map((item, i) => (
+        <li key={i}>{item}</li>
+      ))}
+    </ul>
+  )
+}
+
+function ComparisonTable({ items }: { items?: ComparisonItem[] }) {
+  if (!items || items.length === 0) return null
+
+  const keys = Object.keys(items[0]).filter(k => k !== 'aspect' && k !== 'winner')
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="comparison-table">
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            {keys.map(key => (
+              <th key={key} className="capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, i) => (
+            <tr key={i}>
+              <td className="font-medium">{item.aspect}</td>
+              {keys.map(key => (
+                <td key={key}>{item[key]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function ServicesGrid({ items }: { items?: ServiceItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card card-accent">
+          <h3 className="font-semibold text-lg mb-2">{item.service}</h3>
+          <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+          {item.frequency && (
+            <span className="inline-block mt-3 text-xs font-medium text-accent bg-accent-light px-2 py-1 rounded">
+              {item.frequency}
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function SignalsList({ signals }: { signals?: SignalItem[] }) {
+  if (!signals) return null
+  return (
+    <div className="space-y-4">
+      {signals.map((signal, i) => (
+        <div key={i} className="card card-accent">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full bg-accent-light flex items-center justify-center flex-shrink-0">
+              <span className="text-accent font-bold">{i + 1}</span>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-1">{signal.signal}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{signal.detail}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function CostsSection({ content, rateTable }: { content?: string; rateTable?: RateTableItem[] }) {
+  return (
+    <div className="space-y-8">
+      {content && <ProseContent content={content} />}
+      {rateTable && rateTable.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="comparison-table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Day Rate</th>
+                <th>Typical Clients</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rateTable.map((row, i) => (
+                <tr key={i}>
+                  <td className="font-medium">{row.level}</td>
+                  <td className="text-accent font-semibold">{row.dayRate}</td>
+                  <td className="text-gray-600">{row.typical}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function StepsList({ steps }: { steps?: StepItem[] }) {
+  if (!steps) return null
+  return (
+    <ol className="steps-list">
+      {steps.map((step, i) => (
+        <li key={i}>
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-1">{step.step}</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">{step.detail}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+function AreasGrid({ items }: { items?: AreaItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold text-lg mb-3">{item.area}</h3>
+          <div className="space-y-2 text-sm">
+            <p><span className="text-gray-500">Focus:</span> <span className="text-gray-700">{item.focus}</span></p>
+            <p><span className="text-gray-500">Roles:</span> <span className="text-gray-700">{item.roles}</span></p>
+            {item.rates && <p><span className="text-gray-500">Rates:</span> <span className="text-accent font-medium">{item.rates}</span></p>}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function SectorsGrid({ items }: { items?: SectorItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card card-accent">
+          <h3 className="font-semibold text-lg mb-2">{item.sector}</h3>
+          <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function StagesGrid({ items }: { items?: StageItem[] }) {
+  if (!items) return null
+  return (
+    <div className="space-y-4">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <div className="flex flex-col md:flex-row md:items-start gap-4">
+            <div className="md:w-1/4">
+              <span className="inline-block px-3 py-1 bg-accent-light text-accent font-semibold text-sm rounded-full">
+                {item.stage}
+              </span>
+            </div>
+            <div className="md:w-3/4 space-y-2">
+              {item.typical_roles && (
+                <p className="text-sm"><span className="text-gray-500">Typical Roles:</span> <span className="font-medium">{item.typical_roles}</span></p>
+              )}
+              <p className="text-sm"><span className="text-gray-500">Focus:</span> <span className="text-gray-700">{item.focus}</span></p>
+              {item.typical_commitment && (
+                <p className="text-sm"><span className="text-gray-500">Commitment:</span> <span className="text-gray-700">{item.typical_commitment}</span></p>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function CriteriaSection({ mustHaves, niceToHaves }: { mustHaves?: CriteriaItem[]; niceToHaves?: CriteriaItem[] }) {
+  return (
+    <div className="grid md:grid-cols-2 gap-8">
+      {mustHaves && (
+        <div>
+          <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+            <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm">✓</span>
+            Must-Haves
+          </h3>
+          <div className="space-y-3">
+            {mustHaves.map((item, i) => (
+              <div key={i} className="pl-8">
+                <h4 className="font-medium text-gray-900">{item.criteria}</h4>
+                <p className="text-sm text-gray-600">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {niceToHaves && (
+        <div>
+          <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+            <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">+</span>
+            Nice-to-Haves
+          </h3>
+          <div className="space-y-3">
+            {niceToHaves.map((item, i) => (
+              <div key={i} className="pl-8">
+                <h4 className="font-medium text-gray-900">{item.criteria}</h4>
+                <p className="text-sm text-gray-600">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function EngagementTypes({ items }: { items?: EngagementItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold text-lg mb-2">{item.type}</h3>
+          <p className="text-gray-600 text-sm mb-3">{item.description}</p>
+          <p className="text-sm"><span className="text-gray-500">Best for:</span> <span className="text-accent font-medium">{item.best_for}</span></p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function MistakesList({ mistakes, items }: { mistakes?: MistakeItem[]; items?: MistakeItem[] }) {
+  const data = mistakes || items
+  if (!data) return null
+  return (
+    <div className="space-y-4">
+      {data.map((item, i) => (
+        <div key={i} className="card border-l-4 border-red-400">
+          <div className="flex items-start gap-4">
+            <span className="text-red-500 text-xl">⚠</span>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-1">{item.mistake}</h3>
+              <p className="text-gray-600 text-sm">{item.consequence || item.impact || item.fix}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function BenefitsGrid({ items }: { items?: BenefitItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold text-lg mb-2">{item.benefit}</h3>
+          <p className="text-gray-600 text-sm mb-2">{item.detail}</p>
+          {item.stat && <p className="text-accent font-semibold text-sm">{item.stat}</p>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function SituationsList({ items }: { items?: SituationItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card card-accent">
+          <h3 className="font-semibold mb-2">{item.situation}</h3>
+          <p className="text-gray-600 text-sm">{item.key_benefit}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ReasonsList({ items }: { items?: ReasonItem[] }) {
+  if (!items) return null
+  return (
+    <div className="space-y-4">
+      {items.map((item, i) => (
+        <div key={i} className="card card-accent">
+          <h3 className="font-semibold text-gray-900 mb-1">{item.reason}</h3>
+          <p className="text-gray-600 text-sm">{item.detail}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ExpertiseGrid({ items }: { items?: ExpertiseItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold text-lg mb-2 text-accent">{item.area}</h3>
+          <p className="text-gray-600 text-sm">{item.detail || item.specifics}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function RoundsList({ items }: { items?: RoundItem[] }) {
+  if (!items) return null
+  return (
+    <div className="space-y-4">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <div className="flex flex-wrap items-center gap-4 mb-3">
+            <span className="px-3 py-1 bg-accent-light text-accent font-semibold rounded-full text-sm">{item.round}</span>
+            <span className="text-sm text-gray-500">{item.time}</span>
+          </div>
+          <p className="text-gray-700 mb-2">{item.cfo_role}</p>
+          <p className="text-sm text-gray-500">Focus: <span className="text-gray-700">{item.focus}</span></p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ValueAddSection({ stats }: { stats?: ValueStat[] }) {
+  if (!stats) return null
+  return (
+    <div className="grid md:grid-cols-2 gap-6">
+      {stats.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold text-accent mb-2">{item.improvement}</h3>
+          <p className="text-gray-600 text-sm">{item.detail}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function HowItWorksGrid({ items }: { items?: HowItWorksItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold mb-2">{item.aspect}</h3>
+          <p className="text-gray-600 text-sm">{item.detail}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function BenefitsSplit({ forCompanies, forExecutives }: { forCompanies?: BenefitItem[]; forExecutives?: BenefitItem[] }) {
+  return (
+    <div className="grid md:grid-cols-2 gap-8">
+      {forCompanies && (
+        <div>
+          <h3 className="font-semibold text-lg mb-4">For Companies</h3>
+          <div className="space-y-3">
+            {forCompanies.map((item, i) => (
+              <div key={i} className="card">
+                <h4 className="font-medium">{item.benefit}</h4>
+                <p className="text-sm text-gray-600">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {forExecutives && (
+        <div>
+          <h3 className="font-semibold text-lg mb-4">For Executives</h3>
+          <div className="space-y-3">
+            {forExecutives.map((item, i) => (
+              <div key={i} className="card">
+                <h4 className="font-medium">{item.benefit}</h4>
+                <p className="text-sm text-gray-600">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function PrerequisitesList({ items }: { items?: PrerequisiteItem[] }) {
+  if (!items) return null
+  return (
+    <div className="space-y-4">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-semibold">{item.prereq}</h3>
+            <span className={`text-xs px-2 py-1 rounded ${
+              item.importance === 'Essential' ? 'bg-red-100 text-red-700' :
+              item.importance === 'Very Important' ? 'bg-amber-100 text-amber-700' :
+              'bg-blue-100 text-blue-700'
+            }`}>{item.importance}</span>
+          </div>
+          <p className="text-gray-600 text-sm">{item.detail}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function TipsGrid({ items }: { items?: TipItem[] }) {
+  if (!items) return null
+  return (
+    <div className="space-y-4">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold mb-2">{item.term || item.element || item.tip || item.criterion}</h3>
+          <p className="text-gray-600 text-sm mb-2">{item.detail || item.advice || item.recommendation}</p>
+          {item.tip && <p className="text-xs text-accent">💡 {item.tip}</p>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ContentStrategyGrid({ items }: { items?: ContentItem[] }) {
+  if (!items) return null
+  return (
+    <div className="overflow-x-auto">
+      <table className="comparison-table">
+        <thead>
+          <tr>
+            <th>Content Type</th>
+            <th>Frequency</th>
+            <th>Focus</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, i) => (
+            <tr key={i}>
+              <td className="font-medium">{item.content_type}</td>
+              <td>{item.frequency}</td>
+              <td className="text-gray-600">{item.focus}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function RemoteStats({ stats }: { stats?: RemoteStat[] }) {
+  if (!stats) return null
+  return (
+    <div className="grid md:grid-cols-3 gap-4">
+      {stats.map((stat, i) => (
+        <div key={i} className="stat-card">
+          <div className="stat-value">{stat.stat}</div>
+          <div className="stat-label">{stat.detail}</div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function RemoteRolesGrid({ items }: { items?: RemoteRoleItem[] }) {
+  if (!items) return null
+  return (
+    <div className="overflow-x-auto">
+      <table className="comparison-table">
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Remote Fit</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, i) => (
+            <tr key={i}>
+              <td className="font-medium">{item.role}</td>
+              <td>
+                <span className={`px-2 py-1 rounded text-xs font-medium ${
+                  item.remote_fit === 'Excellent' ? 'bg-green-100 text-green-700' :
+                  item.remote_fit === 'Very Good' ? 'bg-blue-100 text-blue-700' :
+                  item.remote_fit === 'Good' ? 'bg-amber-100 text-amber-700' :
+                  'bg-gray-100 text-gray-700'
+                }`}>{item.remote_fit}</span>
+              </td>
+              <td className="text-gray-600 text-sm">{item.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function TipsList({ tips }: { tips?: TipListItem[] }) {
+  if (!tips) return null
+  return (
+    <div className="space-y-4">
+      {tips.map((tip, i) => (
+        <div key={i} className="card card-accent">
+          <h3 className="font-semibold mb-1">{tip.tip}</h3>
+          <p className="text-gray-600 text-sm">{tip.detail}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function RateTableSection({ items }: { items?: RateTableItem[] }) {
+  if (!items) return null
+  return (
+    <div className="overflow-x-auto">
+      <table className="comparison-table">
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Day Rate Range</th>
+            <th>Median</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item: Record<string, string>, i: number) => (
+            <tr key={i}>
+              <td className="font-medium">{item.role}</td>
+              <td className="text-accent font-semibold">{item.range}</td>
+              <td>{item.median}</td>
+              <td className="text-gray-600 text-sm">{item.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function RoleBreakdownGrid({ items }: { items?: RoleBreakdownItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-semibold">{item.role}</h3>
+            <span className={`text-xs px-2 py-1 rounded font-medium ${
+              item.demand === 'Very High' ? 'bg-green-100 text-green-700' :
+              item.demand === 'High' ? 'bg-blue-100 text-blue-700' :
+              'bg-gray-100 text-gray-700'
+            }`}>{item.demand}</span>
+          </div>
+          <p className="text-accent font-semibold mb-1">{item.rate}</p>
+          <p className="text-gray-600 text-sm">{item.sectors}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function LocationFactorGrid({ items }: { items?: LocationFactorItem[] }) {
+  if (!items) return null
+  return (
+    <div className="overflow-x-auto">
+      <table className="comparison-table">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Rate Factor</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, i) => (
+            <tr key={i}>
+              <td className="font-medium">{item.location}</td>
+              <td className="text-accent font-semibold">{item.factor}</td>
+              <td className="text-gray-600 text-sm">{item.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function SectorPremiumsGrid({ items }: { items?: SectorPremiumItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-semibold">{item.sector}</h3>
+            <span className="text-accent font-semibold">{item.premium}</span>
+          </div>
+          <p className="text-gray-600 text-sm">{item.reason}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function EarningsSection({ content, examples }: { content?: string; examples?: EarningExample[] }) {
+  return (
+    <div className="space-y-8">
+      {content && <ProseContent content={content} />}
+      {examples && (
+        <div className="card-grid">
+          {examples.map((ex, i) => (
+            <div key={i} className="stat-card">
+              <div className="text-sm text-gray-500 mb-2">{ex.scenario}</div>
+              <div className="stat-value">{ex.annual}</div>
+              <div className="text-xs text-gray-400 mt-2">{ex.rate} × {ex.days}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ScenariosList({ scenarios }: { scenarios?: ScenarioItem[] }) {
+  if (!scenarios) return null
+  return (
+    <div className="space-y-4">
+      {scenarios.map((item, i) => (
+        <div key={i} className="card card-accent">
+          <h3 className="font-semibold mb-1">{item.scenario}</h3>
+          <p className="text-gray-600 text-sm">{item.detail}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ActivitiesGrid({ items }: { items?: ActivityItem[] }) {
+  if (!items) return null
+  return (
+    <div className="card-grid mt-6">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <h3 className="font-semibold text-accent mb-1">{item.activity}</h3>
+          <p className="text-gray-600 text-sm">{item.examples}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function GenericItemsList({ items }: { items: Record<string, unknown>[] }) {
+  return (
+    <div className="space-y-4">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          {Object.entries(item).map(([key, value]) => (
+            <p key={key} className="text-sm">
+              <span className="text-gray-500 capitalize">{key.replace(/_/g, ' ')}:</span>{' '}
+              <span className="text-gray-700">{String(value)}</span>
+            </p>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ===========================================
+// FAQ Section
+// ===========================================
+
+function FAQSection({ faqs }: { faqs: FAQ[] }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  return (
+    <section className="content-section bg-gray-50">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="section-eyebrow">FAQs</div>
+          <h2 className="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div className="max-w-3xl">
+          {faqs.map((faq, i) => (
+            <div key={i} className="faq-item">
+              <button
+                className="faq-question w-full text-left"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              >
+                {faq.question}
+                <span className="text-xl">{openIndex === i ? '−' : '+'}</span>
+              </button>
+              {openIndex === i && (
+                <div className="faq-answer">{faq.answer}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ===========================================
+// External Links Section
+// ===========================================
+
+function ExternalLinksSection({ links }: { links: ExternalLink[] }) {
+  return (
+    <section className="content-section">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="section-eyebrow">Resources</div>
+          <h2 className="section-title">Useful Links</h2>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {links.map((link, i) => (
+            <a
+              key={i}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-card"
+            >
+              <div className="link-card-icon">🔗</div>
+              <div className="link-card-content">
+                <div className="link-card-title">{link.label}</div>
+                <div className="link-card-domain">{link.domain}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ===========================================
+// Related Pages Section
+// ===========================================
+
+function RelatedPagesSection({ slugs }: { slugs: string[] }) {
+  // In a real app, you'd fetch these pages
+  // For now, just show links
+  return (
+    <section className="content-section bg-gray-50">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="section-eyebrow">Related</div>
+          <h2 className="section-title">You Might Also Like</h2>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          {slugs.map((slug, i) => (
+            <Link
+              key={i}
+              href={`/${slug}`}
+              className="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:border-accent hover:text-accent transition-colors text-sm font-medium"
+            >
+              {slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ===========================================
+// Job Board CTA
+// ===========================================
+
+function JobBoardCTA({ page }: { page: PageData }) {
+  return (
+    <section className="cta-section">
+      <div className="section-container">
+        <h2 className="cta-title">
+          Browse {page.job_board_title || 'Fractional'} Jobs
+        </h2>
+        <p className="cta-subtitle">
+          Find your next fractional opportunity. Updated daily with new roles.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link href="/jobs" className="btn btn-primary">
+            View All Jobs
+          </Link>
+          <Link href="/" className="btn btn-ghost">
+            Talk to Frac
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}

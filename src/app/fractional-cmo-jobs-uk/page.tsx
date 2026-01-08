@@ -17,8 +17,12 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { LazyYouTube } from '@/components/LazyYouTube'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('cmo')
+const imageAlt = getImage('cmo').alt
 
 // Target keywords: "fractional cmo jobs uk", "fractional cmo uk", "fractional marketing jobs", "cmo salary uk", "part time cmo"
 export const metadata: Metadata = {
@@ -32,12 +36,13 @@ export const metadata: Metadata = {
     title: 'Fractional CMO Jobs UK | Part-Time CMO & Fractional Marketing Jobs',
     description: 'Fractional CMO jobs UK & fractional marketing jobs. Part-time CMO positions paying £700-£1,400/day. CMO salary UK guide included.',
     url: 'https://fractional.quest/fractional-cmo-jobs-uk',
-    images: ['/images/fractional-cmo-jobs-uk.jpg'],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Fractional CMO Jobs UK | Part-Time CMO Roles',
     description: 'Fractional CMO UK - Part-time CMO & fractional marketing jobs £700-£1,400/day.',
+    images: [ogImage],
   },
 }
 
@@ -423,10 +428,14 @@ export default async function FractionalCmoJobsUkPage() {
             </p>
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
-                { title: 'B2B SaaS CMO', desc: 'Demand generation & pipeline acceleration', rate: '£1,000-£1,400/day' },
-                { title: 'DTC/E-commerce CMO', desc: 'Customer acquisition & brand building', rate: '£900-£1,300/day' },
-                { title: 'Startup CMO', desc: 'Building marketing foundations Series A-C', rate: '£850-£1,200/day' },
-                { title: 'Growth Marketing CMO', desc: 'Performance-focused CAC/LTV optimisation', rate: '£900-£1,300/day' },
+                { title: 'VC-Backed Startup CMO', desc: 'High-growth marketing strategy for funded startups', rate: '£1,000-£1,300/day' },
+                { title: 'PE Portfolio CMO', desc: 'Value creation across private equity portfolios', rate: '£1,100-£1,400/day' },
+                { title: 'Scale-up CMO', desc: 'Building marketing engine for rapid growth', rate: '£850-£1,150/day' },
+                { title: 'Turnaround CMO', desc: 'Restructuring and repositioning troubled brands', rate: '£950-£1,250/day' },
+                { title: 'Fractional Marketing Director', desc: 'Hands-on marketing leadership and execution', rate: '£750-£1,000/day' },
+                { title: 'Interim CMO', desc: 'Bridge leadership during transitions', rate: '£1,000-£1,400/day' },
+                { title: 'Part-Time CMO', desc: 'Ongoing strategic guidance 1-3 days/week', rate: '£850-£1,200/day' },
+                { title: 'B2B SaaS CMO', desc: 'Demand generation & product-led growth', rate: '£1,100-£1,400/day' },
               ].map((type, i) => (
                 <div key={i} className="bg-gray-50 p-6 border border-gray-200">
                   <h4 className="font-bold text-gray-900 mb-1">{type.title}</h4>
@@ -501,7 +510,7 @@ export default async function FractionalCmoJobsUkPage() {
 
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Requirements for Fractional CMO Jobs</h3>
             <p>
-              Professional credentials and continuous development are increasingly valued in fractional CMO roles. Many successful CMOs hold qualifications from bodies like the <a href="https://www.cim.co.uk" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:text-amber-700 underline">Chartered Institute of Marketing (CIM)</a>. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:text-amber-700 underline">IR35 compliance</a> is also essential for most fractional arrangements.
+              Professional credentials and continuous development are increasingly valued in fractional CMO roles. Many successful CMOs hold qualifications from bodies like the <a href="https://www.cim.co.uk/" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:text-amber-700 underline">Chartered Institute of Marketing (CIM)</a>. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:text-amber-700 underline">IR35 compliance</a> is also essential for most fractional arrangements. The <a href="https://dma.org.uk/" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:text-amber-700 underline">DMA (Data & Marketing Association)</a> provides valuable resources for data-driven marketing leaders, while <a href="https://www.marketingweek.com/" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:text-amber-700 underline">Marketing Week</a> offers industry insights and salary benchmarks. For those working with agencies, the <a href="https://ipa.co.uk/" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:text-amber-700 underline">IPA (Institute of Practitioners in Advertising)</a> sets standards for advertising excellence.
             </p>
             <ul className="space-y-2">
               <li>12-15+ years marketing experience, 5+ in senior leadership</li>
@@ -516,6 +525,58 @@ export default async function FractionalCmoJobsUkPage() {
               <Link href="/fractional-cmo-cost" className="inline-flex items-center text-amber-500 font-bold hover:text-amber-400">
                 View Fractional CMO Cost Guide →
               </Link>
+            </div>
+
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">How to Access CMO Opportunities</h3>
+            <p>
+              Breaking into the fractional CMO market requires a strategic approach. Whether you&apos;re transitioning from a full-time CMO role or building your fractional practice, follow these steps to access the best opportunities.
+            </p>
+            <div className="space-y-6 my-8 not-prose">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                  <span className="text-amber-700 font-bold">1</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Build Your Fractional CMO Profile</h4>
+                  <p className="text-gray-600 text-sm">Create a compelling profile highlighting your marketing leadership experience, industry expertise, and measurable results. Focus on revenue impact, team building, and strategic initiatives.</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                  <span className="text-amber-700 font-bold">2</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Join Fractional Executive Networks</h4>
+                  <p className="text-gray-600 text-sm">Register with platforms like Fractional Quest, Chief Outsiders, and specialist recruiters. Attend <a href="https://www.cim.co.uk/" target="_blank" rel="noopener noreferrer" className="text-amber-700 underline">CIM</a> and <a href="https://dma.org.uk/" target="_blank" rel="noopener noreferrer" className="text-amber-700 underline">DMA</a> events to build your network.</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                  <span className="text-amber-700 font-bold">3</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Define Your Niche & Rate Card</h4>
+                  <p className="text-gray-600 text-sm">Specialise in a sector (B2B SaaS, DTC, FinTech) or function (demand gen, brand, PLG). Set your day rate based on experience level and market benchmarks (£700-£1,400/day).</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                  <span className="text-amber-700 font-bold">4</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Establish Your Business Structure</h4>
+                  <p className="text-gray-600 text-sm">Set up as a limited company, understand <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-amber-700 underline">IR35 implications</a>, and get professional indemnity insurance. Consult an accountant familiar with contractor arrangements.</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                  <span className="text-amber-700 font-bold">5</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Build Thought Leadership</h4>
+                  <p className="text-gray-600 text-sm">Share insights on LinkedIn, write for <a href="https://www.marketingweek.com/" target="_blank" rel="noopener noreferrer" className="text-amber-700 underline">Marketing Week</a>, speak at industry events. Position yourself as the go-to expert in your niche to attract inbound opportunities.</p>
+                </div>
+              </div>
             </div>
           </article>
         </div>
@@ -560,8 +621,88 @@ export default async function FractionalCmoJobsUkPage() {
         </div>
       </section>
 
+      {/* Related Marketing Leadership Roles */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Explore</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Related Marketing Leadership Roles</h2>
+            <p className="text-gray-600">Discover other marketing leadership opportunities across the UK</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/part-time-cmo-jobs-uk" className="group block bg-gray-50 p-6 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-amber-700">Part-Time CMO Jobs UK</h3>
+              <p className="text-gray-600 text-sm mb-3">Ongoing marketing leadership roles with flexible 1-3 day per week commitments.</p>
+              <span className="text-amber-700 font-semibold text-sm">View roles &rarr;</span>
+            </Link>
+            <Link href="/interim-cmo-jobs-uk" className="group block bg-gray-50 p-6 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-amber-700">Interim CMO Jobs UK</h3>
+              <p className="text-gray-600 text-sm mb-3">Bridge leadership positions during transitions, parental leave, or restructuring.</p>
+              <span className="text-amber-700 font-semibold text-sm">View roles &rarr;</span>
+            </Link>
+            <Link href="/fractional-cmo" className="group block bg-gray-50 p-6 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-amber-700">Fractional CMO Guide</h3>
+              <p className="text-gray-600 text-sm mb-3">Complete guide to fractional CMO roles, responsibilities, and career paths.</p>
+              <span className="text-amber-700 font-semibold text-sm">Read guide &rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Location Cards Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">By Location</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional CMO Jobs by Location</h2>
+            <p className="text-gray-600">Day rates and opportunities vary by region across the UK</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/fractional-jobs-london" className="group block bg-white p-6 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                  <span className="text-amber-700 font-bold">L</span>
+                </div>
+                <h3 className="font-bold text-gray-900 group-hover:text-amber-700">London</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">The UK&apos;s largest market for fractional CMO roles with premium rates.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-amber-700 font-semibold">£900-£1,300/day</span>
+                <span className="text-gray-400 text-sm">55% of roles</span>
+              </div>
+            </Link>
+            <Link href="/manchester" className="group block bg-white p-6 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-700 font-bold">M</span>
+                </div>
+                <h3 className="font-bold text-gray-900 group-hover:text-amber-700">Manchester</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">Growing tech hub with strong demand for marketing leadership.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-amber-700 font-semibold">£700-£1,000/day</span>
+                <span className="text-gray-400 text-sm">15% of roles</span>
+              </div>
+            </Link>
+            <div className="group block bg-white p-6 border border-gray-200 rounded-lg">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-green-700 font-bold">R</span>
+                </div>
+                <h3 className="font-bold text-gray-900">Remote UK</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">Nationwide opportunities with flexible working arrangements.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-amber-700 font-semibold">£600-£900/day</span>
+                <span className="text-gray-400 text-sm">30% of roles</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Resources Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Resources</span>

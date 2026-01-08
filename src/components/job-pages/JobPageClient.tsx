@@ -15,6 +15,7 @@ import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
 import { HeroSection, InitialCharts, FAQSection, SEOContent, JobGrid } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
 import { LondonSEOContent } from "@/lib/seo-content/london";
+import { ImageCategory } from "@/lib/images";
 
 // Generic SEO content type that matches the structure
 export type LocationSEOContent = LondonSEOContent;
@@ -52,6 +53,7 @@ interface JobPageClientProps {
   initialJobs: Job[];
   stats: JobStats;
   seoContent: LondonSEOContent;
+  imageCategory?: ImageCategory;
 }
 
 export function JobPageClient({
@@ -60,6 +62,7 @@ export function JobPageClient({
   initialJobs,
   stats,
   seoContent,
+  imageCategory,
 }: JobPageClientProps) {
   // Auth
   const { data: session } = authClient.useSession();
@@ -490,6 +493,7 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
           subtitle={seoContent.hero.subtitle}
           stats={stats}
           location={locationDisplay}
+          imageCategory={imageCategory}
           firstName={firstName}
           userId={user?.id}
           onVoiceMessage={handleVoiceMessage}

@@ -9,6 +9,12 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
+import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+
+const ogImage = getOGImageUrl('ceo')
+const imageAlt = getImage('ceo').alt
+const heroImage = getHeroImageUrl('ceo', 1920, 800)
+const imageCredit = getImage('ceo')
 
 export const metadata: Metadata = {
   title: 'What is a Fractional CEO? | Part-Time Chief Executive Officer Guide 2025',
@@ -19,6 +25,13 @@ export const metadata: Metadata = {
     title: 'What is a Fractional CEO? | Complete Guide',
     description: 'Understand fractional CEO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Executive Officer.',
     url: 'https://fractional.quest/fractional-ceo',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'What is a Fractional CEO? | Complete Guide',
+    description: 'Understand fractional CEO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Executive Officer.',
+    images: [ogImage],
   },
 }
 
@@ -35,17 +48,22 @@ export default function FractionalCeoPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80" alt="What is a Fractional CEO - Part-time Chief Executive" fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`${imageAlt} - What is a Fractional CEO`} fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/90 via-amber-500/80 to-orange-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Role Guide</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">What is a <strong>Fractional CEO</strong>?</h1>
+              <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">What is a <strong>Fractional CEO</strong>?</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">A <strong>fractional CEO</strong> is a part-time Chief Executive Officer who provides strategic executive leadership to companies on a flexible basis. Learn about <strong>fractional CEO meaning</strong>, responsibilities, and costs.</p>
             </div>
           </div>
+        </div>
+        <div className="absolute bottom-4 right-4 z-20">
+          <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/60 hover:text-white/80 transition-colors">
+            Photo by {imageCredit.credit} on Unsplash
+          </a>
         </div>
       </section>
 

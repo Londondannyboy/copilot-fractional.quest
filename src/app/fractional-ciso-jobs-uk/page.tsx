@@ -16,8 +16,12 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('ciso')
+const imageAlt = getImage('ciso').alt
 
 export const metadata: Metadata = {
   title: 'Fractional CISO Jobs UK | Part-Time Security Leadership Roles 2025',
@@ -28,6 +32,13 @@ export const metadata: Metadata = {
     title: 'Fractional CISO Jobs UK | Part-Time Security Leadership Roles',
     description: 'Fractional CISO jobs UK & fractional security director positions paying £900-£1,500/day.',
     url: 'https://fractional.quest/fractional-ciso-jobs-uk',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fractional CISO Jobs UK | Part-Time Security Leadership Roles',
+    description: 'Fractional CISO jobs UK & fractional security director positions paying £900-£1,500/day.',
+    images: [ogImage],
   },
 }
 

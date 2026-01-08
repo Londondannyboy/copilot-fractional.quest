@@ -1,0 +1,363 @@
+'use client'
+
+import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+
+interface Job {
+  id: string
+  slug: string
+  title: string
+  company_name: string
+  location: string
+  is_remote: boolean
+  workplace_type?: string
+  compensation?: string
+  role_category?: string
+  skills_required?: string[]
+  posted_date?: string
+  hours_per_week?: string
+}
+
+interface EmbeddedJobBoardProps {
+  defaultDepartment?: string
+  defaultLocation?: string
+  defaultWorkType?: string
+  jobsPerPage?: number
+  showFilters?: boolean
+  title?: string
+  accentColor?: string // 'emerald' | 'blue' | 'amber' | 'purple' | 'red' | 'indigo'
+}
+
+const DEPARTMENT_OPTIONS = [
+  { value: '', label: 'All Departments' },
+  { value: 'Engineering', label: 'Engineering' },
+  { value: 'Marketing', label: 'Marketing' },
+  { value: 'Finance', label: 'Finance' },
+  { value: 'Operations', label: 'Operations' },
+  { value: 'Sales', label: 'Sales' },
+  { value: 'HR', label: 'HR' },
+  { value: 'Product', label: 'Product' },
+]
+
+const LOCATION_OPTIONS = [
+  { value: '', label: 'All UK Locations' },
+  { value: 'London', label: 'London' },
+  { value: 'Manchester', label: 'Manchester' },
+  { value: 'Birmingham', label: 'Birmingham' },
+  { value: 'Bristol', label: 'Bristol' },
+  { value: 'Edinburgh', label: 'Edinburgh' },
+  { value: 'Remote', label: 'Remote' },
+]
+
+const WORK_TYPE_OPTIONS = [
+  { value: '', label: 'All Work Types' },
+  { value: 'remote', label: 'Remote' },
+  { value: 'hybrid', label: 'Hybrid' },
+  { value: 'onsite', label: 'On-site' },
+]
+
+// Role-specific images
+const ROLE_IMAGES: Record<string, string[]> = {
+  'Finance': [
+    'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=250&fit=crop',
+  ],
+  'Engineering': [
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=250&fit=crop',
+  ],
+  'Marketing': [
+    'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=250&fit=crop',
+  ],
+  'Operations': [
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=400&h=250&fit=crop',
+  ],
+  'default': [
+    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=250&fit=crop',
+  ],
+}
+
+function getJobImage(jobId: string, roleCategory?: string): string {
+  const hash = jobId.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0)
+  const images = ROLE_IMAGES[roleCategory || ''] || ROLE_IMAGES.default
+  return images[Math.abs(hash) % images.length]
+}
+
+function formatPostedDate(dateString?: string): string {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return 'Yesterday'
+  if (diffDays < 7) return `${diffDays} days ago`
+  if (diffDays < 14) return '1 week ago'
+  return `${Math.floor(diffDays / 7)} weeks ago`
+}
+
+export function EmbeddedJobBoard({
+  defaultDepartment = '',
+  defaultLocation = '',
+  defaultWorkType = '',
+  jobsPerPage = 9,
+  showFilters = true,
+  title = 'Latest Jobs',
+  accentColor = 'emerald',
+}: EmbeddedJobBoardProps) {
+  const [jobs, setJobs] = useState<Job[]>([])
+  const [totalJobs, setTotalJobs] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [department, setDepartment] = useState(defaultDepartment)
+  const [location, setLocation] = useState(defaultLocation)
+  const [workType, setWorkType] = useState(defaultWorkType)
+  const [page, setPage] = useState(1)
+
+  const accentClasses = {
+    emerald: { bg: 'bg-emerald-600', hover: 'hover:bg-emerald-700', text: 'text-emerald-600', ring: 'focus:ring-emerald-500' },
+    blue: { bg: 'bg-blue-600', hover: 'hover:bg-blue-700', text: 'text-blue-600', ring: 'focus:ring-blue-500' },
+    amber: { bg: 'bg-amber-600', hover: 'hover:bg-amber-700', text: 'text-amber-600', ring: 'focus:ring-amber-500' },
+    purple: { bg: 'bg-purple-600', hover: 'hover:bg-purple-700', text: 'text-purple-600', ring: 'focus:ring-purple-500' },
+    red: { bg: 'bg-red-600', hover: 'hover:bg-red-700', text: 'text-red-600', ring: 'focus:ring-red-500' },
+    indigo: { bg: 'bg-indigo-600', hover: 'hover:bg-indigo-700', text: 'text-indigo-600', ring: 'focus:ring-indigo-500' },
+  }
+  const accent = accentClasses[accentColor as keyof typeof accentClasses] || accentClasses.emerald
+
+  const fetchJobs = useCallback(async () => {
+    setLoading(true)
+    try {
+      const params = new URLSearchParams()
+      if (department) params.set('role', department)
+      if (location) params.set('location', location)
+      if (workType) params.set('remote', workType)
+      params.set('page', page.toString())
+      params.set('limit', jobsPerPage.toString())
+
+      const response = await fetch(`/api/jobs/search?${params.toString()}`)
+      if (response.ok) {
+        const data = await response.json()
+        setJobs(data.jobs || [])
+        setTotalJobs(data.total || 0)
+      }
+    } catch (error) {
+      console.error('Error fetching jobs:', error)
+    } finally {
+      setLoading(false)
+    }
+  }, [department, location, workType, page, jobsPerPage])
+
+  useEffect(() => {
+    fetchJobs()
+  }, [fetchJobs])
+
+  useEffect(() => {
+    setPage(1)
+  }, [department, location, workType])
+
+  const totalPages = Math.ceil(totalJobs / jobsPerPage)
+
+  return (
+    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      {/* Header */}
+      <div className="bg-gray-50 border-b border-gray-200 p-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+          <div className="flex items-center gap-2">
+            <span className={`text-2xl font-bold ${accent.text}`}>{totalJobs}</span>
+            <span className="text-gray-600">jobs found</span>
+          </div>
+        </div>
+
+        {/* Filters */}
+        {showFilters && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-1">
+                Department
+              </label>
+              <select
+                id="department"
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+                className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
+              >
+                {DEPARTMENT_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+                Location
+              </label>
+              <select
+                id="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
+              >
+                {LOCATION_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="workType" className="block text-sm font-medium text-gray-700 mb-1">
+                Work Type
+              </label>
+              <select
+                id="workType"
+                value={workType}
+                onChange={(e) => setWorkType(e.target.value)}
+                className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
+              >
+                {WORK_TYPE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Jobs List */}
+      <div className="p-6">
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-64 bg-gray-100 rounded-xl animate-pulse" />
+            ))}
+          </div>
+        ) : jobs.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="text-5xl mb-4">🔍</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">No jobs match your filters</h3>
+            <p className="text-gray-600 mb-4">Try adjusting your search criteria</p>
+            <button
+              onClick={() => { setDepartment(''); setLocation(''); setWorkType(''); }}
+              className={`px-6 py-2.5 ${accent.bg} text-white rounded-lg ${accent.hover} font-semibold transition-colors`}
+            >
+              Clear All Filters
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              {jobs.map((job) => (
+                <Link
+                  key={job.id}
+                  href={`/fractional-job/${job.slug}`}
+                  className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all"
+                >
+                  {/* Image */}
+                  <div className="relative h-40 overflow-hidden">
+                    <Image
+                      src={getJobImage(job.id, job.role_category)}
+                      alt={job.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 400px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent" />
+
+                    {/* Badges */}
+                    <div className="absolute top-3 left-3 flex gap-2">
+                      {job.role_category && (
+                        <span className="bg-gray-800/90 text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                          {job.role_category}
+                        </span>
+                      )}
+                      {job.is_remote && (
+                        <span className="bg-teal-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                          Remote
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="font-bold text-white text-lg leading-tight line-clamp-2">
+                        {job.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-4">
+                    <p className="text-gray-700 font-medium mb-2">{job.company_name}</p>
+
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-3">
+                      <span className="flex items-center gap-1">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        </svg>
+                        {job.location}
+                      </span>
+                      {job.compensation && (
+                        <span className="font-semibold text-gray-900">{job.compensation}</span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                      {job.posted_date && (
+                        <span className="text-xs text-gray-500">{formatPostedDate(job.posted_date)}</span>
+                      )}
+                      <span className={`text-sm font-semibold ${accent.text} group-hover:underline`}>
+                        View Job →
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-2 pt-4 border-t border-gray-200">
+                {page > 1 && (
+                  <button
+                    onClick={() => setPage(page - 1)}
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                  >
+                    ← Previous
+                  </button>
+                )}
+                <span className="px-4 py-2 text-gray-600">
+                  Page {page} of {totalPages}
+                </span>
+                {page < totalPages && (
+                  <button
+                    onClick={() => setPage(page + 1)}
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                  >
+                    Next →
+                  </button>
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="bg-gray-50 border-t border-gray-200 p-6 text-center">
+        <Link
+          href="/fractional-jobs-uk"
+          className={`inline-flex items-center gap-2 px-8 py-3 ${accent.bg} text-white rounded-lg font-semibold ${accent.hover} transition-colors`}
+        >
+          View All UK Jobs
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+export default EmbeddedJobBoard

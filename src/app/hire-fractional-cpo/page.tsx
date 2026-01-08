@@ -10,6 +10,8 @@ import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
+import Image from "next/image";
+import { getHeroImageUrl, getImage } from '@/lib/images';
 
 const faqItems: FAQItem[] = [
   { question: 'How long does it take to hire a fractional CPO?', answer: 'Typically 2-4 weeks. Product leaders are in high demand, so move quickly on good candidates. Includes defining requirements (1-3 days), sourcing (3-7 days), interviews (1-2 weeks), and onboarding.' },
@@ -41,6 +43,8 @@ export default function HireFractionalCPOPage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;
+  const heroImage = getHeroImageUrl('services', 1920, 800);
+  const imageCredit = getImage('services');
 
   const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
 
@@ -82,8 +86,10 @@ Key facts: Day rates £800-£1,400 | 2-4 weeks to hire | PLG specialists premium
       >
         <div className="min-h-screen bg-white">
           {/* Hero */}
-          <section className="bg-gradient-to-br from-indigo-600 to-violet-500 py-24">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <section className="relative min-h-[60vh] flex items-center">
+            <Image src={heroImage} alt="Hire a Fractional CPO" fill priority sizes="100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/90 to-violet-800/80" />
+            <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-24">
               <Link href="/fractional-cpo" className="text-indigo-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional CPO Guide</Link>
               <div className="max-w-4xl">
                 <span className="inline-block bg-white text-indigo-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Hiring Guide</span>
@@ -99,6 +105,9 @@ Key facts: Day rates £800-£1,400 | 2-4 weeks to hire | PLG specialists premium
                   <Link href="/fractional-cpo-jobs-uk" className="px-8 py-4 bg-white text-indigo-600 font-bold uppercase tracking-wider hover:bg-indigo-50 transition-colors">Browse CPO Candidates</Link>
                 </div>
               </div>
+            </div>
+            <div className="absolute bottom-2 right-2 z-10">
+              <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/50 hover:text-white/70">Photo: {imageCredit.credit}</a>
             </div>
           </section>
 

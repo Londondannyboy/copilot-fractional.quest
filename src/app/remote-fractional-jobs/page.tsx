@@ -11,8 +11,12 @@ import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('remote')
+const imageAlt = getImage('remote').alt
 
 export const metadata: Metadata = {
   title: 'Remote Fractional Jobs UK 2025 | Work From Home Executive Roles',
@@ -23,6 +27,13 @@ export const metadata: Metadata = {
     title: 'Remote Fractional Jobs | Work From Home Executive Roles',
     description: 'Find remote fractional executive jobs. Work from anywhere as a fractional CFO, CTO, CMO, or COO.',
     url: 'https://fractional.quest/remote-fractional-jobs',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Remote Fractional Jobs | Work From Home Executive Roles',
+    description: 'Find remote fractional executive jobs. Work from anywhere as a fractional CFO, CTO, CMO, or COO.',
+    images: [ogImage],
   },
 }
 

@@ -6,6 +6,12 @@ import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { IR35Calculator } from '@/components/IR35Calculator'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+
+const ogImage = getOGImageUrl('salary')
+const imageAlt = getImage('salary').alt
+const heroImage = getHeroImageUrl('cmo', 1920, 800)
+const imageCredit = getImage('cmo')
 
 export const metadata: Metadata = {
   title: 'Fractional CMO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
@@ -18,6 +24,13 @@ export const metadata: Metadata = {
     title: 'Fractional CMO Salary UK 2025 | Complete Compensation Guide',
     description: 'Fractional CMO salary UK: Day rates £700-£1,400. Complete guide to fractional CMO costs and compensation.',
     url: 'https://fractional.quest/fractional-cmo-salary',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Fractional CMO Salary UK Guide' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fractional CMO Salary UK 2025 | Complete Compensation Guide',
+    description: 'Fractional CMO salary UK: Day rates £700-£1,400. Complete guide to fractional CMO costs and compensation.',
+    images: [ogImage],
   },
 }
 
@@ -40,8 +53,8 @@ export default function FractionalCmoSalaryPage() {
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1920&q=80"
-          alt="Fractional CMO Salary UK - Compensation Guide"
+          src={heroImage}
+          alt={`${imageAlt} - Fractional CMO Salary UK Compensation Guide`}
           fill
           priority
           sizes="100vw"
@@ -55,7 +68,7 @@ export default function FractionalCmoSalaryPage() {
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
                 Salary Guide 2025
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair">
                 <strong>Fractional CMO Salary</strong> UK
               </h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
@@ -63,6 +76,9 @@ export default function FractionalCmoSalaryPage() {
               </p>
             </div>
           </div>
+        </div>
+        <div className="absolute bottom-4 right-4 text-white/60 text-xs">
+          Photo by <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">{imageCredit.credit}</a> on Unsplash
         </div>
       </section>
 

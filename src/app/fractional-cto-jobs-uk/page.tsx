@@ -17,8 +17,12 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { LazyYouTube } from '@/components/LazyYouTube'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('cto')
+const imageAlt = getImage('cto').alt
 
 // Target keywords: "fractional cto jobs uk", "fractional cto uk", "fractional technology jobs", "cto salary uk", "part time cto"
 export const metadata: Metadata = {
@@ -32,12 +36,13 @@ export const metadata: Metadata = {
     title: 'Fractional CTO Jobs UK | Part-Time CTO & Fractional Technology Jobs',
     description: 'Fractional CTO jobs UK & fractional technology jobs. Part-time CTO positions paying £800-£1,600/day. CTO salary UK guide included.',
     url: 'https://fractional.quest/fractional-cto-jobs-uk',
-    images: ['/images/fractional-cto-jobs-uk.jpg'],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Fractional CTO Jobs UK | Part-Time CTO Roles',
     description: 'Fractional CTO UK - Part-time CTO & fractional technology jobs £800-£1,600/day.',
+    images: [ogImage],
   },
 }
 
@@ -407,7 +412,7 @@ export default async function FractionalCtoJobsUkPage() {
 
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Why Fractional CTO UK & Part-Time CTO Jobs Are Booming</h3>
             <p>
-              The growth in <strong>fractional CTO UK</strong> and <strong>part-time CTO</strong> demand is supported by broader economic trends. The <a href="https://www.britishbusinessbank.co.uk/" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">British Business Bank&apos;s research</a> shows UK SMEs are increasingly seeking flexible access to senior talent through <strong>fractional technology jobs</strong>, while <a href="https://technation.io/" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">Tech Nation data</a> highlights the UK tech sector&apos;s continued expansion, creating strong demand for <strong>fractional CTO services</strong>.
+              The growth in <strong>fractional CTO UK</strong> and <strong>part-time CTO</strong> demand is supported by broader economic trends. The <a href="https://www.britishbusinessbank.co.uk/" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">British Business Bank&apos;s research</a> shows UK SMEs are increasingly seeking flexible access to senior talent through <strong>fractional technology jobs</strong>, while <a href="https://technation.io/" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">Tech Nation data</a> highlights the UK tech sector&apos;s continued expansion, creating strong demand for <strong>fractional CTO services</strong>. The <a href="https://www.gov.uk/government/publications/uk-digital-strategy" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">UK Government&apos;s Digital Strategy</a> further emphasises the critical need for technology leadership across British businesses.
             </p>
             <ul className="space-y-3">
               <li><strong>Cost efficiency:</strong> <strong>Fractional CTO UK</strong> provides senior expertise at a fraction of the cost</li>
@@ -423,10 +428,14 @@ export default async function FractionalCtoJobsUkPage() {
             </p>
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
-                { title: 'B2B SaaS CTO', desc: 'Platform architecture & engineering leadership', rate: '£1,200-£1,600/day' },
-                { title: 'AI/ML CTO', desc: 'Machine learning strategy & data infrastructure', rate: '£1,300-£1,800/day' },
-                { title: 'Startup CTO', desc: 'Building technical foundations Series A-C', rate: '£1,000-£1,400/day' },
-                { title: 'DevOps/Platform CTO', desc: 'Cloud infrastructure & deployment pipelines', rate: '£1,100-£1,500/day' },
+                { title: 'VC-Backed Startup CTO', desc: 'Technical leadership for venture-funded growth companies, building scalable architecture', rate: '£1,100-£1,400/day' },
+                { title: 'PE Portfolio CTO', desc: 'Technology transformation across private equity portfolio companies', rate: '£1,200-£1,500/day' },
+                { title: 'Scale-up CTO', desc: 'Scaling engineering teams and systems from Series B through growth stage', rate: '£900-£1,200/day' },
+                { title: 'Turnaround CTO', desc: 'Restructuring technical debt and modernising legacy systems', rate: '£1,000-£1,300/day' },
+                { title: 'Fractional Technical Director', desc: 'Senior technical guidance without full CTO responsibility', rate: '£850-£1,100/day' },
+                { title: 'Interim CTO', desc: 'Full-time temporary CTO coverage during transitions or searches', rate: '£1,100-£1,500/day' },
+                { title: 'Part-Time CTO', desc: 'Ongoing technology leadership 1-3 days per week', rate: '£950-£1,300/day' },
+                { title: 'AI/ML Specialist CTO', desc: 'Machine learning strategy, AI integration, and data infrastructure leadership', rate: '£1,200-£1,600/day' },
               ].map((type, i) => (
                 <div key={i} className="bg-gray-50 p-6 border border-gray-200">
                   <h4 className="font-bold text-gray-900 mb-1">{type.title}</h4>
@@ -501,7 +510,7 @@ export default async function FractionalCtoJobsUkPage() {
 
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Requirements for Fractional CTO Jobs</h3>
             <p>
-              Professional credentials and continuous development are increasingly valued in fractional CTO roles. Many successful CTOs hold qualifications from bodies like the <a href="https://www.bcs.org" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">BCS (British Computer Society)</a>. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">IR35 compliance</a> is also essential for most fractional arrangements.
+              Professional credentials and continuous development are increasingly valued in fractional CTO roles. Many successful CTOs hold qualifications from bodies like the <a href="https://www.bcs.org/" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">BCS (British Computer Society)</a> or the <a href="https://www.theiet.org/" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">IET (Institution of Engineering and Technology)</a>. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">IR35 compliance</a> is also essential for most fractional arrangements.
             </p>
             <ul className="space-y-2">
               <li>12-15+ years technology experience, 5+ in senior leadership</li>
@@ -510,6 +519,48 @@ export default async function FractionalCtoJobsUkPage() {
               <li>Team building and engineering management experience</li>
               <li>Board-level communication skills</li>
             </ul>
+
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">How to Access CTO Opportunities</h3>
+            <p>
+              Breaking into the <strong>fractional CTO UK</strong> market requires a strategic approach. Whether you&apos;re transitioning from a full-time role or expanding your <strong>part-time CTO</strong> portfolio, follow these steps to access the best <strong>fractional technology jobs</strong>:
+            </p>
+            <div className="space-y-6 my-8 not-prose">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold">1</div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Build Your Technical Portfolio</h4>
+                  <p className="text-gray-600 text-sm">Document successful projects, technology transformations, and measurable outcomes. Include case studies of team scaling, architecture decisions, and cost savings delivered.</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold">2</div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Establish Your IR35 Structure</h4>
+                  <p className="text-gray-600 text-sm">Set up your limited company or umbrella arrangement. Understand outside IR35 criteria for fractional engagements and ensure your contracts reflect genuine business-to-business relationships.</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold">3</div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Network in the UK Tech Ecosystem</h4>
+                  <p className="text-gray-600 text-sm">Engage with VC networks, accelerators like <a href="https://technation.io/" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-700 underline">Tech Nation</a>, and founder communities. Many fractional CTO roles come through warm introductions rather than job boards.</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold">4</div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Specialise in High-Demand Sectors</h4>
+                  <p className="text-gray-600 text-sm">Focus on in-demand areas like AI/ML, FinTech compliance, or healthcare tech. Specialist CTOs command 20-40% higher day rates than generalists.</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold">5</div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-1">Register with Specialist Platforms</h4>
+                  <p className="text-gray-600 text-sm">Join fractional executive platforms and specialist CTO networks. Maintain an updated profile on LinkedIn highlighting your fractional availability and advisory work.</p>
+                </div>
+              </div>
+            </div>
 
             <div className="bg-gray-50 text-gray-900 p-6 rounded-lg my-10 not-prose">
               <p className="text-gray-600 mb-3">Want to understand fractional CTO pricing?</p>
@@ -557,6 +608,80 @@ export default async function FractionalCtoJobsUkPage() {
             </p>
           </div>
           <FAQ items={CTO_FAQS} title="" />
+        </div>
+      </section>
+
+      {/* Location Cards */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">By Location</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Fractional CTO Jobs by Location</h2>
+            <p className="text-gray-600 mt-3">Find CTO opportunities across the UK&apos;s major tech hubs</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/fractional-jobs-london" className="group block bg-white p-6 border border-gray-200 hover:border-cyan-500 hover:shadow-lg transition-all">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-gray-900 text-lg group-hover:text-cyan-700 transition-colors">London</h3>
+                <span className="text-xs bg-cyan-100 text-cyan-800 px-2 py-1 rounded-full font-medium">Highest Rates</span>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">The UK&apos;s premier tech hub with the highest concentration of startups, scale-ups, and VC-backed companies.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-cyan-700 font-bold">£950-£1,400/day</span>
+                <span className="text-cyan-700 text-sm font-medium group-hover:translate-x-1 transition-transform">View jobs &rarr;</span>
+              </div>
+            </Link>
+            <Link href="/manchester" className="group block bg-white p-6 border border-gray-200 hover:border-cyan-500 hover:shadow-lg transition-all">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-gray-900 text-lg group-hover:text-cyan-700 transition-colors">Manchester</h3>
+                <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Growing Hub</span>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">The North&apos;s technology powerhouse with a thriving startup ecosystem and MediaCity digital cluster.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-cyan-700 font-bold">£750-£1,050/day</span>
+                <span className="text-cyan-700 text-sm font-medium group-hover:translate-x-1 transition-transform">View jobs &rarr;</span>
+              </div>
+            </Link>
+            <Link href="/fractional-jobs-uk" className="group block bg-white p-6 border border-gray-200 hover:border-cyan-500 hover:shadow-lg transition-all">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-gray-900 text-lg group-hover:text-cyan-700 transition-colors">Remote UK</h3>
+                <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium">Most Flexible</span>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">Nationwide remote opportunities offering maximum flexibility for experienced technology leaders.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-cyan-700 font-bold">£650-£950/day</span>
+                <span className="text-cyan-700 text-sm font-medium group-hover:translate-x-1 transition-transform">View jobs &rarr;</span>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Tech Leadership Roles */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Related Roles</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Related Tech Leadership Roles</h2>
+            <p className="text-gray-600 mt-3">Explore other technology leadership opportunities in the UK</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/part-time-cto-jobs-uk" className="group block bg-gray-50 p-6 border border-gray-200 hover:border-cyan-500 hover:shadow-lg transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-cyan-700 transition-colors">Part-Time CTO Jobs UK</h3>
+              <p className="text-gray-600 text-sm mb-3">Ongoing technology leadership positions 1-3 days per week with flexible arrangements.</p>
+              <span className="text-cyan-700 font-semibold text-sm">View roles &rarr;</span>
+            </Link>
+            <Link href="/interim-cto-jobs-uk" className="group block bg-gray-50 p-6 border border-gray-200 hover:border-cyan-500 hover:shadow-lg transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-cyan-700 transition-colors">Interim CTO Jobs UK</h3>
+              <p className="text-gray-600 text-sm mb-3">Full-time temporary CTO positions covering leadership transitions and executive searches.</p>
+              <span className="text-cyan-700 font-semibold text-sm">View roles &rarr;</span>
+            </Link>
+            <Link href="/fractional-cto" className="group block bg-gray-50 p-6 border border-gray-200 hover:border-cyan-500 hover:shadow-lg transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-cyan-700 transition-colors">Fractional CTO Guide</h3>
+              <p className="text-gray-600 text-sm mb-3">Complete guide to fractional CTO roles, responsibilities, and how to become one.</p>
+              <span className="text-cyan-700 font-semibold text-sm">Read guide &rarr;</span>
+            </Link>
+          </div>
         </div>
       </section>
 

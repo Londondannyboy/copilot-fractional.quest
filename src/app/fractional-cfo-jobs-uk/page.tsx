@@ -17,8 +17,12 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { LazyYouTube } from '@/components/LazyYouTube'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('cfo')
+const imageAlt = getImage('cfo').alt
 
 // Target keywords: "fractional cfo jobs uk", "fractional cfo uk", "fractional finance jobs", "cfo salary uk", "part time cfo"
 export const metadata: Metadata = {
@@ -32,12 +36,13 @@ export const metadata: Metadata = {
     title: 'Fractional CFO Jobs UK | Part-Time CFO & Fractional Finance Jobs',
     description: 'Fractional CFO jobs UK & fractional finance jobs. Part-time CFO positions paying £700-£1,400/day. CFO salary UK guide included.',
     url: 'https://fractional.quest/fractional-cfo-jobs-uk',
-    images: ['/images/fractional-cfo-jobs-uk.jpg'],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Fractional CFO Jobs UK | Part-Time CFO Roles',
     description: 'Fractional CFO UK - Part-time CFO & fractional finance jobs £700-£1,400/day.',
+    images: [ogImage],
   },
 }
 
@@ -416,7 +421,7 @@ export default async function FractionalCfoJobsUkPage() {
 
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Types of Fractional CFO Roles & Fractional Finance Jobs</h3>
             <p>
-              <strong>Fractional CFO roles</strong> and <strong>fractional finance jobs</strong> in the UK span a wide range of specialisations, each commanding different <strong>CFO salary UK</strong> rates based on the complexity and demand. VC-backed startup <strong>part-time CFO</strong> positions tend to pay the highest rates due to the expertise required in fundraising and investor relations.
+              <strong>Fractional CFO roles</strong> and <strong>fractional finance jobs</strong> in the UK span a wide range of specialisations, each commanding different <strong>CFO salary UK</strong> rates based on the complexity and demand. According to <a href="https://www.cipd.org/uk/knowledge/reports/flexible-working-trends/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">CIPD research on flexible working</a>, senior finance roles are increasingly adopting portfolio and fractional arrangements.
             </p>
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -424,6 +429,10 @@ export default async function FractionalCfoJobsUkPage() {
                 { title: 'PE Portfolio CFO', desc: 'Value creation & exit planning', rate: '£1,200-£1,500/day' },
                 { title: 'Scale-up CFO', desc: 'Growth finance & cash management', rate: '£900-£1,200/day' },
                 { title: 'Turnaround CFO', desc: 'Restructuring & crisis management', rate: '£1,000-£1,300/day' },
+                { title: 'Fractional Finance Director', desc: 'Day-to-day financial operations', rate: '£850-£1,100/day' },
+                { title: 'Interim CFO', desc: 'Full-time temporary coverage', rate: '£1,100-£1,500/day' },
+                { title: 'Part-Time CFO', desc: '1-3 days per week ongoing', rate: '£950-£1,300/day' },
+                { title: 'Exit-Ready CFO', desc: 'M&A and sale preparation', rate: '£1,100-£1,500/day' },
               ].map((type, i) => (
                 <div key={i} className="bg-gray-50 p-6 border border-gray-200">
                   <h4 className="font-bold text-gray-900 mb-1">{type.title}</h4>
@@ -496,10 +505,26 @@ export default async function FractionalCfoJobsUkPage() {
               <li><strong>Remote UK:</strong> £650-£950/day - nationwide <strong>part-time CFO</strong> opportunities</li>
             </ul>
 
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">How to Access Fractional CFO Opportunities</h3>
+            <p>
+              According to <a href="https://www.ons.gov.uk/employmentandlabourmarket" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">ONS employment data</a>, the UK&apos;s flexible executive market continues to grow. Here&apos;s how to position yourself for the best <strong>fractional CFO</strong> opportunities:
+            </p>
+            <ol className="space-y-3">
+              <li><strong>1. Build your portfolio profile:</strong> Document your track record with fundraising amounts, exits, and companies scaled</li>
+              <li><strong>2. Register with specialist platforms:</strong> Create profiles on Fractional.Quest and other executive networks</li>
+              <li><strong>3. Leverage VC/PE networks:</strong> Many <strong>fractional CFO roles</strong> come through investor introductions</li>
+              <li><strong>4. Establish thought leadership:</strong> Write about finance topics, speak at events, build your personal brand</li>
+              <li><strong>5. Consider IR35 status early:</strong> Structure your practice correctly from the start</li>
+            </ol>
+
+            <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">CFO vs Finance Director: Understanding the Terminology</h3>
+            <p>
+              In the UK market, &ldquo;CFO&rdquo; and &ldquo;Finance Director&rdquo; (FD) are often used interchangeably, though CFO typically implies a more strategic, board-level role. According to the <a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">British Private Equity & Venture Capital Association (BVCA)</a>, PE-backed companies increasingly prefer the CFO title to signal investor-grade financial leadership. Both <strong>fractional CFO</strong> and <strong>fractional Finance Director</strong> roles offer excellent opportunities for senior finance professionals.
+            </p>
+
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Requirements for Fractional CFO Jobs</h3>
             <p>
-              Professional credentials and continuous development are highly valued in fractional CFO roles. Most successful CFOs are qualified accountants with bodies like <a href="https://www.icaew.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">ICAEW</a>, <a href="https://www.accaglobal.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">ACCA</a>, or <a href="https://www.cimaglobal.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">CIMA</a>. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">IR35 compliance</a> is essential for most fractional arrangements.
-            </p>
+              Professional credentials and continuous development are highly valued in fractional CFO roles. Most successful CFOs are qualified accountants with bodies like <a href="https://www.icaew.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">ICAEW</a>, <a href="https://www.accaglobal.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">ACCA</a>, or <a href="https://www.cimaglobal.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">CIMA</a>. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:text-emerald-700 underline">IR35 compliance</a> is essential for most fractional arrangements.</p>
             <ul className="space-y-2">
               <li>Professional accounting qualification (ACA, ACCA, CIMA)</li>
               <li>12-15+ years finance experience, 5+ in senior leadership</li>
@@ -557,8 +582,64 @@ export default async function FractionalCfoJobsUkPage() {
         </div>
       </section>
 
-      {/* Resources Section */}
+      {/* Related Finance Leadership Roles */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Related Roles</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Related Finance Leadership Roles</h2>
+            <p className="text-xl text-gray-500">Explore other fractional finance opportunities in the UK</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Link href="/part-time-cfo-jobs-uk" className="group bg-gray-50 p-8 rounded-lg border border-gray-200 hover:border-emerald-500 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-700">Part-Time CFO Jobs UK</h3>
+              <p className="text-gray-600 mb-4">Ongoing 1-3 days per week CFO positions for experienced finance leaders seeking portfolio careers.</p>
+              <span className="text-emerald-700 font-semibold">View Part-Time CFO Jobs →</span>
+            </Link>
+            <Link href="/interim-cfo-jobs-uk" className="group bg-gray-50 p-8 rounded-lg border border-gray-200 hover:border-emerald-500 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-700">Interim CFO Jobs UK</h3>
+              <p className="text-gray-600 mb-4">Full-time temporary CFO roles covering leadership gaps, transformations, or crisis situations.</p>
+              <span className="text-emerald-700 font-semibold">View Interim CFO Jobs →</span>
+            </Link>
+            <Link href="/fractional-cfo" className="group bg-gray-50 p-8 rounded-lg border border-gray-200 hover:border-emerald-500 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-700">Fractional CFO Guide</h3>
+              <p className="text-gray-600 mb-4">Complete guide to what a fractional CFO does, typical responsibilities, and how to become one.</p>
+              <span className="text-emerald-700 font-semibold">Read the Guide →</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Location Cards */}
       <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">By Location</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional CFO Jobs by UK Location</h2>
+            <p className="text-xl text-gray-500">Find fractional CFO opportunities near you</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Link href="/fractional-jobs-london" className="group bg-white p-8 rounded-lg border border-gray-200 hover:border-emerald-500 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-700">London</h3>
+              <p className="text-gray-600 mb-2">The UK&apos;s largest market for fractional CFO roles. Home to VC-backed startups, PE portfolio companies, and scale-ups seeking senior finance leadership.</p>
+              <p className="text-emerald-700 font-semibold">Day rates: £950-£1,400</p>
+            </Link>
+            <Link href="/manchester" className="group bg-white p-8 rounded-lg border border-gray-200 hover:border-emerald-500 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-700">Manchester</h3>
+              <p className="text-gray-600 mb-2">Growing tech hub with strong demand for fractional finance leaders. MediaCityUK and Northern Quarter driving growth.</p>
+              <p className="text-emerald-700 font-semibold">Day rates: £750-£1,050</p>
+            </Link>
+            <Link href="/remote-fractional-jobs" className="group bg-white p-8 rounded-lg border border-gray-200 hover:border-emerald-500 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-700">Remote UK</h3>
+              <p className="text-gray-600 mb-2">Work from anywhere in the UK with remote-first companies. Hybrid and fully remote fractional CFO positions available.</p>
+              <p className="text-emerald-700 font-semibold">Day rates: £650-£950</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Resources Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Resources</span>

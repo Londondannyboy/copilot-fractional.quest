@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
@@ -10,6 +11,8 @@ import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
+import { getHeroImageUrl, getImage } from '@/lib/images';
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 
 const faqItems: FAQItem[] = [
   { question: 'How long does it take to hire a fractional CFO?', answer: 'Typically 2-4 weeks from first conversations to start date. This includes: defining requirements (1-3 days), sourcing candidates (3-7 days), interviews (1-2 weeks), and onboarding (1 week). Much faster than the 3-6 months required for full-time CFO recruitment.' },
@@ -42,6 +45,8 @@ export default function HireFractionalCFOPage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;
+  const heroImage = getHeroImageUrl('services', 1920, 800);
+  const imageCredit = getImage('services');
   const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
   useEffect(() => { if (user && !state?.user) { setState((prev) => ({ ...prev, user: { id: user.id, name: user.name || "", email: user.email || "" } })); } }, [user?.id, state?.user, setState]);
   const { appendMessage } = useCopilotChat();
@@ -68,12 +73,14 @@ export default function HireFractionalCFOPage() {
         clickOutsideToClose={false}
       >
         <div className="min-h-screen bg-white">
-          <section className="bg-gradient-to-br from-emerald-600 to-teal-600 py-24">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+            <Image src={heroImage} alt="Hire a Fractional CFO" fill priority sizes="100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/90 to-teal-600/80" />
+            <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-24">
               <Link href="/fractional-cfo" className="text-emerald-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional CFO Guide</Link>
               <div className="max-w-4xl">
                 <span className="inline-block bg-white text-emerald-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Hiring Guide</span>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">Hire a<br /><span className="text-emerald-200">Fractional CFO</span></h1>
+                <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">Hire a<br /><span className="text-emerald-200">Fractional CFO</span></h1>
                 <p className="text-2xl md:text-3xl text-emerald-50 leading-relaxed font-light mb-10">Complete guide to finding, vetting, and hiring the perfect fractional Chief Financial Officer for your business.</p>
                 <div className="flex flex-wrap gap-10 mb-12">
                   <div><div className="text-5xl font-black text-white">2-4 Weeks</div><div className="text-emerald-100 text-sm uppercase tracking-wider mt-1">To Hire</div></div>
@@ -86,6 +93,9 @@ export default function HireFractionalCFOPage() {
                   <Link href="#process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-emerald-600 transition-colors">See Hiring Process</Link>
                 </div>
               </div>
+            </div>
+            <div className="absolute bottom-2 right-2 z-10">
+              <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/50 hover:text-white/70">Photo: {imageCredit.credit}</a>
             </div>
           </section>
 
@@ -222,6 +232,23 @@ export default function HireFractionalCFOPage() {
                   <div><h4 className="font-bold text-gray-900 mb-2">Optional: Equity</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Advisory shares:</strong> 0.25-0.5% for long-term engagements (12+ months)</li><li><strong>Vesting:</strong> Quarterly or annual vesting</li><li><strong>Cash reduction:</strong> If equity included, day rate may reduce 10-15%</li></ul></div>
                 </div>
               </div>
+            </div>
+          </section>
+
+          {/* Browse CFO Candidates */}
+          <section className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Find Talent</span>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Browse CFO Candidates</h2>
+                <p className="text-xl text-gray-500">Connect with experienced fractional CFOs seeking new opportunities</p>
+              </div>
+              <EmbeddedJobBoard
+                defaultDepartment="Finance"
+                title="Available CFO Talent"
+                accentColor="emerald"
+                jobsPerPage={6}
+              />
             </div>
           </section>
 

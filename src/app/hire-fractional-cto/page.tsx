@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
@@ -9,7 +10,9 @@ import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { HireProcessStepper } from "@/components/HireProcessStepper";
+import { getHeroImageUrl, getImage } from '@/lib/images';
 
 const faqItems: FAQItem[] = [
   {
@@ -78,6 +81,9 @@ export default function HireFractionalCTOPage() {
     appendMessage(new TextMessage({ content: text, role: role === "user" ? Role.User : Role.Assistant }));
   }, [appendMessage, user?.id]);
 
+  const heroImage = getHeroImageUrl('services', 1920, 800)
+  const imageCredit = getImage('services')
+
   const suggestions = [
     { title: "Where to find CTOs", message: "Where can I find fractional CTOs to hire?" },
     { title: "Interview questions", message: "What questions should I ask when interviewing a fractional CTO?" },
@@ -107,12 +113,23 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
       >
         <div className="min-h-screen bg-white">
           {/* Hero */}
-          <section className="bg-gradient-to-br from-cyan-600 to-blue-600 py-24">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <section className="relative py-24 overflow-hidden">
+            {/* Background Image */}
+            <Image
+              src={heroImage}
+              alt="Fractional CTO services"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/90 to-blue-600/90" />
+
+            <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
               <Link href="/fractional-cto" className="text-cyan-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional CTO Guide</Link>
               <div className="max-w-4xl">
                 <span className="inline-block bg-white text-cyan-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Hiring Guide</span>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">Hire a<br /><span className="text-cyan-200">Fractional CTO</span></h1>
+                <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">Hire a<br /><span className="text-cyan-200">Fractional CTO</span></h1>
                 <p className="text-2xl md:text-3xl text-cyan-50 leading-relaxed font-light mb-10">Complete guide to finding, vetting, and hiring the perfect fractional Chief Technology Officer for your business.</p>
                 <div className="flex flex-wrap gap-10 mb-12">
                   <div><div className="text-5xl font-black text-white">2-4 Weeks</div><div className="text-cyan-100 text-sm uppercase tracking-wider mt-1">To Hire</div></div>
@@ -124,6 +141,13 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
                   <Link href="/fractional-cto-jobs-uk" className="px-8 py-4 bg-white text-cyan-600 font-bold uppercase tracking-wider hover:bg-cyan-50 transition-colors">Browse CTO Candidates</Link>
                   <Link href="#process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-cyan-600 transition-colors">See Hiring Process</Link>
                 </div>
+              </div>
+
+              {/* Photo Credit */}
+              <div className="absolute bottom-2 right-2 z-10">
+                <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/50 hover:text-white/70 transition-colors">
+                  Photo: {imageCredit.credit}
+                </a>
               </div>
             </div>
           </section>
@@ -277,6 +301,23 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
                   <div><h4 className="font-bold text-gray-900 mb-2">Optional: Equity</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Advisory shares:</strong> 0.25-0.5% for long-term engagements (12+ months)</li><li><strong>Vesting:</strong> Quarterly or annual vesting</li><li><strong>Cash reduction:</strong> If equity included, day rate may reduce 10-15%</li></ul></div>
                 </div>
               </div>
+            </div>
+          </section>
+
+          {/* Browse CTO Candidates */}
+          <section className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Find Talent</span>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Browse CTO Candidates</h2>
+                <p className="text-xl text-gray-500">Connect with experienced fractional CTOs seeking new opportunities</p>
+              </div>
+              <EmbeddedJobBoard
+                defaultDepartment="Engineering"
+                title="Available CTO Talent"
+                accentColor="blue"
+                jobsPerPage={6}
+              />
             </div>
           </section>
 

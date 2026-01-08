@@ -1957,3 +1957,190 @@ Based on impressions without clicks:
 6. `/interim-marketing-director` (38 impressions)
 7. `/fractional-cfo-meaning` (35 impressions)
 8. `/fractional-ciso-meaning` (27 impressions)
+
+---
+
+# Session Learnings: 2026-01-08 - Page Enrichment & Job Boards
+
+## What Was Completed This Session
+
+### 1. Jobs UK Pages Enriched (4 pages)
+Applied comprehensive enrichment to match original fractional.quest quality:
+
+**fractional-cfo-jobs-uk:**
+- Expanded role types from 4 to 8 (added Fractional Finance Director, Interim CFO, Part-Time CFO, Exit-Ready CFO)
+- Added external authority links: CIPD, ONS, BVCA
+- Added "How to Access Opportunities" 5-step guide
+- Added "CFO vs Finance Director Terminology" section
+- Added "Related Finance Leadership Roles" 3-card section
+- Added "Location Cards" section (London, Manchester, Remote)
+
+**fractional-cto-jobs-uk:**
+- 8 role types with AI/ML Specialist CTO
+- BCS, IET, Tech Nation, Gov.uk Digital Strategy links
+- Related Tech Leadership Roles section
+- Location Cards section
+
+**fractional-cmo-jobs-uk:**
+- 8 role types including B2B SaaS CMO
+- CIM, DMA, Marketing Week, IPA links
+- Related Marketing Leadership Roles section
+- Location Cards section
+
+**fractional-coo-jobs-uk:**
+- 8 role types including Integrator/EOS COO
+- CMI, IOD, CIPS, CIPD links
+- Related Operations Leadership Roles section
+- Location Cards section
+
+### 2. EmbeddedJobBoard Component Created
+
+**File:** `/src/components/EmbeddedJobBoard.tsx`
+
+Features:
+- Department filter (preset via props)
+- Location filter (UK locations)
+- Work type filter (Remote, Hybrid, On-site)
+- Pagination
+- Role-based images for job cards
+- Customizable accent colors (emerald, blue, amber, purple, red, indigo)
+- Loading states and empty states
+
+Usage:
+```tsx
+<EmbeddedJobBoard
+  defaultDepartment="Finance"
+  title="Fractional CFO Jobs"
+  accentColor="emerald"
+  jobsPerPage={6}
+/>
+```
+
+### 3. Jobs Search API Created
+
+**File:** `/src/app/api/jobs/search/route.ts`
+
+Supports:
+- Department/role category filtering
+- Location filtering
+- Remote/hybrid/onsite filtering
+- Pagination
+- Returns job data for EmbeddedJobBoard
+
+### 4. Job Boards Added to Pages
+
+**Role Definition Pages:**
+- fractional-cfo (Finance preset, emerald)
+- fractional-cto (Engineering preset, blue)
+- fractional-cmo (Marketing preset, amber)
+- fractional-coo (Operations preset, purple)
+
+**Hire Pages:**
+- hire-fractional-cfo
+- hire-fractional-cto
+- hire-fractional-cmo
+- hire-fractional-coo
+
+---
+
+## Architecture Consideration: Database-First Content
+
+User suggested moving page content to Neon for:
+- Agent can dynamically see page content
+- Easier content updates without code deploys
+- CMS-like experience
+
+**Proposed Schema:**
+```sql
+CREATE TABLE page_content (
+  id SERIAL PRIMARY KEY,
+  slug TEXT UNIQUE NOT NULL,
+  title TEXT NOT NULL,
+  meta_description TEXT,
+  hero_title TEXT,
+  hero_subtitle TEXT,
+  sections JSONB,  -- Array of content sections
+  faqs JSONB,      -- FAQ items
+  internal_links JSONB,
+  external_links JSONB,
+  schema_markup JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+**Benefits:**
+- Agent can query: "What content is on the CFO jobs page?"
+- Content updates don't require deploys
+- A/B testing content variations
+- Analytics on which content performs
+
+**Status:** Phase 2 consideration - current code-based approach works for now
+
+---
+
+## Key Metrics from Google Search Console
+
+### Top 10 Pages by Clicks (3 months):
+1. /fractional-jobs-london - 115 clicks
+2. /london - 40 clicks
+3. / - 25 clicks
+4. /fractional-jobs-uk - 23 clicks
+5. /fractional-cmo-jobs-uk - 17 clicks
+6. /fractional-cto-jobs-uk - 16 clicks
+7. /fractional-coo-jobs-uk - 12 clicks
+8. /fractional-cfo-jobs-uk - 9 clicks
+9. /fractional-ciso-jobs-uk - 7 clicks
+10. /remote-fractional-jobs - 6 clicks
+
+### High Impression / Low Click Opportunities:
+- /part-time-cfo-jobs-uk - 973 impressions, 2 clicks (0.2% CTR)
+- /fractional-cfo-jobs-uk - 573 impressions, 9 clicks (1.6% CTR)
+- /part-time-cfo - 568 impressions, 1 click (MISSING PAGE!)
+- /fractional-cmo-jobs-uk - 355 impressions, 17 clicks (4.8% CTR)
+- /fractional-ciso-jobs - 329 impressions, 8 clicks
+- /articles/fractional-cmo-jobs-uk - 307 impressions, 12 clicks
+- /fractional-jobs - 261 impressions, 2 clicks (MISSING PAGE!)
+- /fractional-hr - 219 impressions, 1 click (MISSING PAGE!)
+
+---
+
+## Remaining Work (Priority Order)
+
+### Immediate:
+1. Create /london page (40 clicks to redirect)
+2. Create /part-time-cfo page (568 impressions!)
+3. Enrich remaining jobs UK pages (CISO, CPO, CHRO, CEO, CCO)
+
+### This Week:
+4. Create /fractional-hr page (219 impressions)
+5. Create /fractional-jobs index page
+6. Create /cfo and /cmo short URL pages
+7. Add job boards to remaining role/hire pages
+
+### Future:
+8. Database-first content migration
+9. Article pages
+10. Industry vertical pages (startups, ecommerce)
+
+---
+
+## Files Modified This Session
+
+| File | Changes |
+|------|---------|
+| `src/app/fractional-cfo-jobs-uk/page.tsx` | 8 role types, authority links, location cards, related roles |
+| `src/app/fractional-cto-jobs-uk/page.tsx` | Same enrichment pattern |
+| `src/app/fractional-cmo-jobs-uk/page.tsx` | Same enrichment pattern |
+| `src/app/fractional-coo-jobs-uk/page.tsx` | Same enrichment pattern |
+| `src/components/EmbeddedJobBoard.tsx` | NEW - Reusable job board component |
+| `src/app/api/jobs/search/route.ts` | NEW - Jobs search API |
+| `src/app/fractional-cfo/page.tsx` | Added job board section |
+| `src/app/fractional-cto/page.tsx` | Added job board section |
+| `src/app/fractional-cmo/page.tsx` | Added job board section |
+| `src/app/fractional-coo/page.tsx` | Added job board section |
+| `src/app/hire-fractional-cfo/page.tsx` | Added job board section |
+| `src/app/hire-fractional-cto/page.tsx` | Added job board section |
+| `src/app/hire-fractional-cmo/page.tsx` | Added job board section |
+| `src/app/hire-fractional-coo/page.tsx` | Added job board section |
+| `PLAN.md` | Updated with session progress |

@@ -9,6 +9,12 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
+import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+
+const ogImage = getOGImageUrl('ciso')
+const imageAlt = getImage('ciso').alt
+const heroImage = getHeroImageUrl('ciso', 1920, 800)
+const imageCredit = getImage('ciso')
 
 export const metadata: Metadata = {
   title: 'What is a Fractional CISO? | Part-Time Chief Security Officer Guide 2025',
@@ -19,6 +25,13 @@ export const metadata: Metadata = {
     title: 'What is a Fractional CISO? | Complete Guide',
     description: 'Understand fractional CISO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Information Security Officer.',
     url: 'https://fractional.quest/fractional-ciso',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'What is a Fractional CISO? | Complete Guide',
+    description: 'Understand fractional CISO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Information Security Officer.',
+    images: [ogImage],
   },
 }
 
@@ -35,18 +48,30 @@ export default function FractionalCisoPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920&q=80" alt="What is a Fractional CISO - Part-time Chief Security Officer" fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`${imageAlt} - What is a Fractional CISO`} fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/90 via-rose-500/80 to-orange-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Role Guide</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">What is a <strong>Fractional CISO</strong>?</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair">What is a <strong>Fractional CISO</strong>?</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">A <strong>fractional CISO</strong> is a part-time Chief Information Security Officer who provides strategic cybersecurity leadership to companies on a flexible basis. Learn about <strong>fractional CISO meaning</strong>, responsibilities, and costs.</p>
             </div>
           </div>
         </div>
+        {imageCredit.credit && (
+          <div className="absolute bottom-2 right-3 z-20">
+            <a
+              href={imageCredit.creditUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] text-white/60 hover:text-white/90 transition-colors"
+            >
+              Photo: {imageCredit.credit}
+            </a>
+          </div>
+        )}
       </section>
 
       {/* Definition Box */}

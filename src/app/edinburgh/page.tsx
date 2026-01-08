@@ -2,6 +2,10 @@ import { Metadata } from "next";
 import { JobPageClient } from "@/components/job-pages";
 import { getJobsPageData } from "@/lib/jobs";
 import { edinburghSEO } from "@/lib/seo-content/edinburgh";
+import { getOGImageUrl, getImage } from "@/lib/images";
+
+const ogImage = getOGImageUrl('edinburgh')
+const imageAlt = getImage('edinburgh').alt
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -16,6 +20,13 @@ export const metadata: Metadata = {
     description: edinburghSEO.meta.description,
     type: "website",
     url: "https://fractional.quest/edinburgh",
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: edinburghSEO.meta.title,
+    description: edinburghSEO.meta.description,
+    images: [ogImage],
   },
 };
 
@@ -87,6 +98,7 @@ export default async function EdinburghJobsPage() {
         initialJobs={jobs}
         stats={stats}
         seoContent={edinburghSEO}
+        imageCategory="edinburgh"
       />
     </>
   );

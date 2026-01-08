@@ -8,6 +8,12 @@ import { IR35Calculator } from '@/components/IR35Calculator'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+
+const ogImage = getOGImageUrl('salary')
+const imageAlt = getImage('salary').alt
+const heroImage = getHeroImageUrl('chro', 1920, 800)
+const imageCredit = getImage('chro')
 
 export const metadata: Metadata = {
   title: 'Fractional CHRO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
@@ -18,6 +24,13 @@ export const metadata: Metadata = {
     title: 'Fractional CHRO Salary UK 2025 | Complete Compensation Guide',
     description: 'Fractional CHRO salary UK: Day rates £600-£1,100. Complete guide to fractional CHRO costs and compensation.',
     url: 'https://fractional.quest/fractional-chro-salary',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Fractional CHRO Salary UK Guide' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fractional CHRO Salary UK 2025 | Complete Compensation Guide',
+    description: 'Fractional CHRO salary UK: Day rates £600-£1,100. Complete guide to fractional CHRO costs and compensation.',
+    images: [ogImage],
   },
 }
 
@@ -34,17 +47,28 @@ export default function FractionalChroSalaryPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80" alt="Fractional CHRO Salary UK - Compensation Guide" fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`Fractional CHRO Salary UK - ${imageAlt}`} fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 via-violet-500/80 to-fuchsia-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Salary Guide 2025</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"><strong>Fractional CHRO Salary</strong> UK</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair"><strong>Fractional CHRO Salary</strong> UK</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Complete guide to <strong>fractional CHRO salary UK</strong> rates. Understand day rates, annual equivalents, and factors affecting compensation.</p>
             </div>
           </div>
+        </div>
+        {/* Photo Credit */}
+        <div className="absolute bottom-2 right-2 z-10">
+          <a
+            href={imageCredit.creditUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-white/50 hover:text-white/70 transition-colors"
+          >
+            Photo: {imageCredit.credit}
+          </a>
         </div>
       </section>
 

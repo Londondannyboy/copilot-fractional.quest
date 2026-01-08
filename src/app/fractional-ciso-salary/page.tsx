@@ -8,6 +8,12 @@ import { IR35Calculator } from '@/components/IR35Calculator'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+
+const ogImage = getOGImageUrl('salary')
+const imageAlt = getImage('salary').alt
+const heroImage = getHeroImageUrl('ciso', 1920, 800)
+const imageCredit = getImage('ciso')
 
 export const metadata: Metadata = {
   title: 'Fractional CISO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
@@ -18,6 +24,13 @@ export const metadata: Metadata = {
     title: 'Fractional CISO Salary UK 2025 | Complete Compensation Guide',
     description: 'Fractional CISO salary UK: Day rates £900-£1,500. Complete guide to fractional CISO costs and compensation.',
     url: 'https://fractional.quest/fractional-ciso-salary',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Fractional CISO Salary UK Guide' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fractional CISO Salary UK 2025 | Complete Compensation Guide',
+    description: 'Fractional CISO salary UK: Day rates £900-£1,500. Complete guide to fractional CISO costs and compensation.',
+    images: [ogImage],
   },
 }
 
@@ -34,17 +47,28 @@ export default function FractionalCisoSalaryPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920&q=80" alt="Fractional CISO Salary UK - Compensation Guide" fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`Fractional CISO Salary UK - ${imageAlt}`} fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/90 via-rose-500/80 to-orange-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Salary Guide 2025</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"><strong>Fractional CISO Salary</strong> UK</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair"><strong>Fractional CISO Salary</strong> UK</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Complete guide to <strong>fractional CISO salary UK</strong> rates. Understand day rates, annual equivalents, and factors affecting compensation.</p>
             </div>
           </div>
+        </div>
+        {/* Photo Credit */}
+        <div className="absolute bottom-2 right-2 z-10">
+          <a
+            href={imageCredit.creditUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-white/50 hover:text-white/70 transition-colors"
+          >
+            Photo: {imageCredit.credit}
+          </a>
         </div>
       </section>
 

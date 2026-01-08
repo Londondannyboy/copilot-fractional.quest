@@ -10,6 +10,8 @@ import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
+import Image from "next/image";
+import { getHeroImageUrl, getImage } from '@/lib/images';
 
 const faqItems: FAQItem[] = [
   { question: 'How long does it take to hire a fractional CEO?', answer: 'Typically 3-6 weeks due to the senior nature of the role. Board involvement and reference checks take longer. Includes defining requirements, sourcing (1-2 weeks), interviews (2-3 weeks), and onboarding.' },
@@ -41,6 +43,8 @@ export default function HireFractionalCEOPage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;
+  const heroImage = getHeroImageUrl('services', 1920, 800);
+  const imageCredit = getImage('services');
 
   const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
 
@@ -82,8 +86,10 @@ Key facts: Day rates £1,000-£2,000 | 3-6 weeks to hire | Often includes equity
       >
         <div className="min-h-screen bg-white">
           {/* Hero */}
-          <section className="bg-gradient-to-br from-yellow-600 to-amber-500 py-24">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-yellow-600 to-amber-500 py-24">
+            <Image src={heroImage} alt="Hire a Fractional CEO" fill priority sizes="100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-900/80 via-yellow-800/70 to-amber-700/60" />
+            <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
               <Link href="/fractional-ceo" className="text-yellow-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional CEO Guide</Link>
               <div className="max-w-4xl">
                 <span className="inline-block bg-white text-yellow-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Hiring Guide</span>
@@ -99,6 +105,9 @@ Key facts: Day rates £1,000-£2,000 | 3-6 weeks to hire | Often includes equity
                   <Link href="/fractional-ceo-jobs-uk" className="px-8 py-4 bg-white text-yellow-600 font-bold uppercase tracking-wider hover:bg-yellow-50 transition-colors">Browse CEO Candidates</Link>
                 </div>
               </div>
+            </div>
+            <div className="absolute bottom-2 right-2 z-10">
+              <a href={imageCredit.creditUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-white/50 hover:text-white/70">Photo: {imageCredit.credit}</a>
             </div>
           </section>
 

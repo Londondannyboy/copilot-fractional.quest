@@ -16,8 +16,12 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('chro')
+const imageAlt = getImage('chro').alt
 
 export const metadata: Metadata = {
   title: 'Fractional CHRO Jobs UK | Part-Time HR Director & People Leadership Roles 2025',
@@ -30,6 +34,13 @@ export const metadata: Metadata = {
     title: 'Fractional CHRO Jobs UK | Part-Time HR Leadership Roles',
     description: 'Fractional CHRO jobs UK & fractional HR director positions paying £600-£1,100/day.',
     url: 'https://fractional.quest/fractional-chro-jobs-uk',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fractional CHRO Jobs UK | Part-Time HR Leadership Roles',
+    description: 'Fractional CHRO jobs UK & fractional HR director positions paying £600-£1,100/day.',
+    images: [ogImage],
   },
 }
 

@@ -17,8 +17,12 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { LazyYouTube } from '@/components/LazyYouTube'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
+
+const ogImage = getOGImageUrl('coo')
+const imageAlt = getImage('coo').alt
 
 // Target keywords: "fractional coo jobs uk", "fractional coo uk", "fractional operations jobs", "coo salary uk", "part time coo"
 export const metadata: Metadata = {
@@ -32,12 +36,13 @@ export const metadata: Metadata = {
     title: 'Fractional COO Jobs UK | Part-Time COO & Fractional Operations Jobs',
     description: 'Fractional COO jobs UK & fractional operations jobs. Part-time COO positions paying £600-£1,200/day. COO salary UK guide included.',
     url: 'https://fractional.quest/fractional-coo-jobs-uk',
-    images: ['/images/fractional-coo-jobs-uk.jpg'],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Fractional COO Jobs UK | Part-Time COO Roles',
     description: 'Fractional COO UK - Part-time COO & fractional operations jobs £600-£1,200/day.',
+    images: [ogImage],
   },
 }
 
@@ -416,14 +421,18 @@ export default async function FractionalCooJobsUkPage() {
 
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Types of Fractional COO Roles & Fractional Operations Jobs</h3>
             <p>
-              <strong>Fractional COO roles</strong> and <strong>fractional operations jobs</strong> in the UK span a wide range of specialisations, each commanding different <strong>COO salary UK</strong> rates based on the complexity and demand. Scale-up <strong>part-time COO</strong> positions tend to pay the highest rates due to the expertise required in rapid growth management.
+              <strong>Fractional COO roles</strong> and <strong>fractional operations jobs</strong> in the UK span a wide range of specialisations, each commanding different <strong>COO salary UK</strong> rates based on the complexity and demand. Scale-up <strong>part-time COO</strong> positions tend to pay the highest rates due to the expertise required in rapid growth management. Professional accreditation from bodies like the <a href="https://www.managers.org.uk/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">Chartered Management Institute (CMI)</a> and the <a href="https://www.iod.com/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">Institute of Directors (IOD)</a> can significantly enhance credibility and command higher rates.
             </p>
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
-                { title: 'Scale-up COO', desc: 'Rapid growth & team scaling', rate: '£900-£1,200/day' },
-                { title: 'E-commerce COO', desc: 'Supply chain & fulfilment optimisation', rate: '£800-£1,100/day' },
-                { title: 'Startup COO', desc: 'Building operational foundations', rate: '£700-£1,000/day' },
-                { title: 'Process Improvement COO', desc: 'Lean operations & efficiency gains', rate: '£750-£1,050/day' },
+                { title: 'VC-Backed Startup COO', desc: 'High-growth venture-backed operations leadership', rate: '£1,000-£1,300/day' },
+                { title: 'PE Portfolio COO', desc: 'Private equity operational transformation', rate: '£1,100-£1,400/day' },
+                { title: 'Scale-up COO', desc: 'Rapid growth & team scaling', rate: '£850-£1,150/day' },
+                { title: 'Turnaround COO', desc: 'Business restructuring & recovery', rate: '£950-£1,250/day' },
+                { title: 'Fractional Operations Director', desc: 'Strategic ops leadership & process design', rate: '£750-£1,000/day' },
+                { title: 'Interim COO', desc: 'Full-time temporary executive coverage', rate: '£1,000-£1,400/day' },
+                { title: 'Part-Time COO', desc: 'Ongoing strategic ops support', rate: '£850-£1,200/day' },
+                { title: 'Integrator/EOS COO', desc: 'EOS implementation & operational excellence', rate: '£900-£1,200/day' },
               ].map((type, i) => (
                 <div key={i} className="bg-gray-50 p-6 border border-gray-200">
                   <h4 className="font-bold text-gray-900 mb-1">{type.title}</h4>
@@ -498,7 +507,7 @@ export default async function FractionalCooJobsUkPage() {
 
             <h3 className="text-2xl font-black text-gray-900 mt-12 mb-4">Requirements for Fractional COO Jobs</h3>
             <p>
-              Professional credentials and continuous development are increasingly valued in fractional COO roles. Many successful COOs hold qualifications from bodies like the <a href="https://www.managers.org.uk" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">Chartered Management Institute (CMI)</a>. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">IR35 compliance</a> is also essential for most fractional arrangements.
+              Professional credentials and continuous development are increasingly valued in fractional COO roles. Many successful COOs hold qualifications from bodies like the <a href="https://www.managers.org.uk/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">Chartered Management Institute (CMI)</a>. For COOs with supply chain responsibilities, accreditation from the <a href="https://www.cips.org/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">Chartered Institute of Procurement & Supply (CIPS)</a> is highly valued. Those managing significant people operations often benefit from <a href="https://www.cipd.org/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">CIPD (Chartered Institute of Personnel and Development)</a> qualifications. Understanding <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline">IR35 compliance</a> is also essential for most fractional arrangements.
             </p>
             <ul className="space-y-2">
               <li>10-15+ years operations experience, 5+ in senior leadership</li>
@@ -506,6 +515,7 @@ export default async function FractionalCooJobsUkPage() {
               <li>Deep expertise in process improvement and operational efficiency</li>
               <li>Team building and change management experience</li>
               <li>Board-level communication skills</li>
+              <li>Professional accreditations (CMI, CIPS, CIPD, IOD) are advantageous</li>
             </ul>
 
             <div className="bg-gray-50 text-gray-900 p-6 rounded-lg my-10 not-prose">
@@ -557,6 +567,134 @@ export default async function FractionalCooJobsUkPage() {
         </div>
       </section>
 
+      {/* Related Operations Leadership Roles */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Related Roles</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Related Operations Leadership Roles</h2>
+            <p className="text-xl text-gray-500">Explore other COO and operations leadership opportunities in the UK</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/part-time-coo-jobs-uk" className="group bg-gray-50 p-6 border border-gray-200 hover:border-slate-400 hover:shadow-lg transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-slate-700">Part-Time COO Jobs UK</h3>
+              <p className="text-gray-600 text-sm mb-3">Ongoing part-time COO roles with flexible hours and competitive day rates.</p>
+              <span className="text-slate-700 font-semibold text-sm group-hover:underline">Browse Part-Time COO Jobs &rarr;</span>
+            </Link>
+            <Link href="/interim-coo-jobs-uk" className="group bg-gray-50 p-6 border border-gray-200 hover:border-slate-400 hover:shadow-lg transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-slate-700">Interim COO Jobs UK</h3>
+              <p className="text-gray-600 text-sm mb-3">Full-time temporary COO positions for business transitions and transformations.</p>
+              <span className="text-slate-700 font-semibold text-sm group-hover:underline">Browse Interim COO Jobs &rarr;</span>
+            </Link>
+            <Link href="/fractional-coo" className="group bg-gray-50 p-6 border border-gray-200 hover:border-slate-400 hover:shadow-lg transition-all">
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-slate-700">Fractional COO Guide</h3>
+              <p className="text-gray-600 text-sm mb-3">Complete guide to becoming a fractional COO and building your practice.</p>
+              <span className="text-slate-700 font-semibold text-sm group-hover:underline">Read the Guide &rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Location Cards */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">By Location</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional COO Jobs by Location</h2>
+            <p className="text-xl text-gray-500">COO day rates and opportunities across the UK</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-6 border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">
+                  <span className="text-lg">🏙️</span>
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg">London</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">The UK&apos;s largest market for fractional COO roles, with the highest day rates and most diverse opportunities across fintech, scale-ups, and enterprise.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-700 font-bold text-lg">£900-£1,300/day</span>
+                <Link href="/fractional-jobs-london" className="text-slate-600 text-sm font-medium hover:underline">View Jobs &rarr;</Link>
+              </div>
+            </div>
+            <div className="bg-white p-6 border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">
+                  <span className="text-lg">🏭</span>
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg">Manchester</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">Growing hub for fractional operations leadership, with strong demand in manufacturing, e-commerce, and the Northern tech ecosystem.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-700 font-bold text-lg">£700-£1,000/day</span>
+                <Link href="/manchester" className="text-slate-600 text-sm font-medium hover:underline">View Jobs &rarr;</Link>
+              </div>
+            </div>
+            <div className="bg-white p-6 border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">
+                  <span className="text-lg">🌐</span>
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg">Remote UK</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">Fully remote fractional COO positions with UK-based companies. Flexible arrangements with occasional travel for board meetings.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-700 font-bold text-lg">£600-£900/day</span>
+                <Link href="/remote-fractional-jobs" className="text-slate-600 text-sm font-medium hover:underline">View Jobs &rarr;</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How to Access COO Opportunities */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Getting Started</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">How to Access COO Opportunities</h2>
+            <p className="text-xl text-gray-500">Five steps to landing your first fractional COO role</p>
+          </div>
+          <div className="space-y-6">
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">1</div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-1">Define Your Operational Specialism</h3>
+                <p className="text-gray-600">Identify your strongest areas: scale-up operations, supply chain optimisation, process improvement, or turnaround expertise. Clients seek specialists, not generalists.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">2</div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-1">Build Your Track Record Documentation</h3>
+                <p className="text-gray-600">Create case studies showing measurable impact: cost reductions, efficiency gains, team scaling, and successful transformations. Quantify everything with real metrics.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">3</div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-1">Establish Professional Credentials</h3>
+                <p className="text-gray-600">Consider accreditation from the <a href="https://www.managers.org.uk/" target="_blank" rel="noopener noreferrer" className="text-slate-700 underline">CMI</a>, <a href="https://www.iod.com/" target="_blank" rel="noopener noreferrer" className="text-slate-700 underline">IoD</a>, or <a href="https://www.cips.org/" target="_blank" rel="noopener noreferrer" className="text-slate-700 underline">CIPS</a>. These credentials signal professionalism and commitment to continuous development.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">4</div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-1">Network in Investor and Founder Circles</h3>
+                <p className="text-gray-600">VCs, PEs, and founder networks are the primary source of fractional COO referrals. Attend investor events, join founder communities, and build relationships with other fractional executives.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold shrink-0">5</div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-1">Set Up Your Fractional Practice</h3>
+                <p className="text-gray-600">Understand <a href="https://www.gov.uk/topic/business-tax/ir35" target="_blank" rel="noopener noreferrer" className="text-slate-700 underline">IR35 implications</a>, set competitive day rates, and create clear engagement frameworks. Consider joining a fractional executive collective for deal flow.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Resources Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -577,16 +715,22 @@ export default async function FractionalCooJobsUkPage() {
                   {' '}&mdash; Leading UK professional body for management and leadership
                 </li>
                 <li>
+                  <a href="https://www.iod.com/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline font-medium">
+                    Institute of Directors (IoD)
+                  </a>
+                  {' '}&mdash; Professional development for C-level executives
+                </li>
+                <li>
                   <a href="https://www.cips.org/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline font-medium">
                     Chartered Institute of Procurement & Supply (CIPS)
                   </a>
                   {' '}&mdash; Professional body for procurement and supply chain
                 </li>
                 <li>
-                  <a href="https://www.iod.com/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline font-medium">
-                    Institute of Directors (IoD)
+                  <a href="https://www.cipd.org/" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-700 underline font-medium">
+                    CIPD (Chartered Institute of Personnel and Development)
                   </a>
-                  {' '}&mdash; Professional development for C-level executives
+                  {' '}&mdash; Essential for COOs managing people operations and HR functions
                 </li>
               </ul>
             </div>

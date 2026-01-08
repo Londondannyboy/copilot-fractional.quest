@@ -2,6 +2,10 @@ import { Metadata } from "next";
 import { JobPageClient } from "@/components/job-pages";
 import { getJobsPageData } from "@/lib/jobs";
 import { londonSEO } from "@/lib/seo-content/london";
+import { getOGImageUrl, getImage } from "@/lib/images";
+
+const ogImage = getOGImageUrl('london')
+const imageAlt = getImage('london').alt
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -13,6 +17,13 @@ export const metadata: Metadata = {
     description: londonSEO.meta.description,
     type: "website",
     url: "https://fractional.quest/fractional-jobs-london",
+    images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: londonSEO.meta.title,
+    description: londonSEO.meta.description,
+    images: [ogImage],
   },
 };
 
@@ -67,6 +78,7 @@ export default async function FractionalJobsLondonPage() {
         initialJobs={jobs}
         stats={stats}
         seoContent={londonSEO}
+        imageCategory="london"
       />
     </>
   );
