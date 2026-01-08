@@ -216,6 +216,37 @@ function getSectionContent(section: Section): React.ReactNode {
     case 'rate_considerations':
       return <ProseContent content={section.content} />
 
+    // New section types from content migration
+    case 'stats_bar':
+      return <StatsBar items={section.items as StatsBarItem[]} />
+
+    case 'geographic_sectors':
+      return <GeographicSectors items={section.items as GeographicSectorItem[]} />
+
+    case 'emerging_roles':
+      return <EmergingRolesGrid items={section.items as EmergingRoleItem[]} />
+
+    case 'case_study':
+      return <CaseStudySection section={section as CaseStudyData} />
+
+    case 'industry_stats':
+      return <IndustryStatsGrid items={section.items as IndustryStat[]} />
+
+    case 'rate_tiers':
+      return <RateTiersSection tiers={section.tiers as RateTier[]} />
+
+    case 'ir35_info':
+      return <IR35InfoSection section={section as IR35Data} />
+
+    case 'location_rates':
+      return <LocationRatesGrid items={section.items as LocationRateItem[]} />
+
+    case 'specializations':
+      return <SpecializationsGrid items={section.items as SpecializationItem[]} />
+
+    case 'calculator':
+      return <CalculatorSection example={section.example as CalculatorExample} />
+
     case 'role_types':
     case 'roles':
     case 'common_roles':
@@ -562,6 +593,72 @@ interface ScenarioItem {
 interface ActivityItem {
   activity: string
   examples: string
+}
+
+// New interfaces for migrated content
+interface StatsBarItem {
+  value: string
+  label: string
+}
+
+interface GeographicSectorItem {
+  name: string
+  description: string
+}
+
+interface EmergingRoleItem {
+  title: string
+  rate: string
+  badge?: string
+}
+
+interface CaseStudyData {
+  type: string
+  title?: string
+  company: string
+  challenge: string
+  solution: string
+  results: string[]
+  quote?: string
+}
+
+interface IndustryStat {
+  stat: string
+  description: string
+}
+
+interface RateTier {
+  level: string
+  rate: string
+}
+
+interface IR35Data {
+  type: string
+  title?: string
+  inside_rate?: string
+  outside_rate?: string
+  note: string
+}
+
+interface LocationRateItem {
+  location: string
+  rate: string
+  share?: string
+  note?: string
+}
+
+interface SpecializationItem {
+  title: string
+  rate: string
+  badge?: string
+  description?: string
+}
+
+interface CalculatorExample {
+  day_rate: string
+  days_per_week: string
+  clients: string
+  annual: string
 }
 
 // ===========================================
@@ -1413,5 +1510,213 @@ function JobBoardCTA({ page }: { page: PageData }) {
         </div>
       </div>
     </section>
+  )
+}
+
+// ===========================================
+// New Components for Migrated Content
+// ===========================================
+
+function StatsBar({ items }: { items?: StatsBarItem[] }) {
+  if (!items) return null
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {items.map((item, i) => (
+        <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 text-center shadow-sm">
+          <div className="text-2xl font-bold text-accent">{item.value}</div>
+          <div className="text-sm text-gray-500">{item.label}</div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function GeographicSectors({ items }: { items?: GeographicSectorItem[] }) {
+  if (!items) return null
+  return (
+    <div className="space-y-6">
+      {items.map((item, i) => (
+        <div key={i} className="card card-accent">
+          <h3 className="font-semibold text-lg text-gray-900 mb-2">{item.name}</h3>
+          <p className="text-gray-600">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function EmergingRolesGrid({ items }: { items?: EmergingRoleItem[] }) {
+  if (!items) return null
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {items.map((item, i) => (
+        <div key={i} className="card relative">
+          {item.badge && (
+            <span className="absolute -top-2 -right-2 px-2 py-1 bg-accent text-white text-xs font-medium rounded-full">
+              {item.badge}
+            </span>
+          )}
+          <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+          <p className="text-accent font-semibold">{item.rate}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function CaseStudySection({ section }: { section: CaseStudyData }) {
+  return (
+    <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100">
+      <div className="flex items-start gap-4 mb-6">
+        <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-2xl">📊</div>
+        <div>
+          <h3 className="font-semibold text-xl text-gray-900">{section.company}</h3>
+          {section.title && <p className="text-gray-500 text-sm">{section.title}</p>}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <span className="text-xs font-semibold text-gray-400 uppercase">Challenge</span>
+          <p className="text-gray-700">{section.challenge}</p>
+        </div>
+        <div>
+          <span className="text-xs font-semibold text-gray-400 uppercase">Solution</span>
+          <p className="text-gray-700">{section.solution}</p>
+        </div>
+        <div>
+          <span className="text-xs font-semibold text-gray-400 uppercase">Results</span>
+          <ul className="mt-2 space-y-1">
+            {section.results.map((result, i) => (
+              <li key={i} className="flex items-center gap-2 text-gray-700">
+                <span className="text-accent">✓</span> {result}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {section.quote && (
+          <blockquote className="border-l-4 border-accent pl-4 italic text-gray-600 mt-4">
+            "{section.quote}"
+          </blockquote>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function IndustryStatsGrid({ items }: { items?: IndustryStat[] }) {
+  if (!items) return null
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {items.map((item, i) => (
+        <div key={i} className="stat-card">
+          <div className="stat-value">{item.stat}</div>
+          <div className="stat-label">{item.description}</div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function RateTiersSection({ tiers }: { tiers?: RateTier[] }) {
+  if (!tiers) return null
+  return (
+    <div className="space-y-3">
+      {tiers.map((tier, i) => (
+        <div key={i} className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-100">
+          <span className="font-medium text-gray-900">{tier.level}</span>
+          <span className="text-accent font-semibold">{tier.rate}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function IR35InfoSection({ section }: { section: IR35Data }) {
+  return (
+    <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <span className="text-2xl">⚠️</span>
+        <h3 className="font-semibold text-lg text-gray-900">{section.title || 'IR35 Considerations'}</h3>
+      </div>
+      {section.inside_rate && section.outside_rate && (
+        <div className="grid md:grid-cols-2 gap-4 mb-4">
+          <div className="bg-white rounded-lg p-4">
+            <div className="text-sm text-gray-500 mb-1">Inside IR35</div>
+            <div className="font-semibold text-gray-900">{section.inside_rate}</div>
+          </div>
+          <div className="bg-white rounded-lg p-4">
+            <div className="text-sm text-gray-500 mb-1">Outside IR35</div>
+            <div className="font-semibold text-accent">{section.outside_rate}</div>
+          </div>
+        </div>
+      )}
+      <p className="text-gray-700 text-sm">{section.note}</p>
+    </div>
+  )
+}
+
+function LocationRatesGrid({ items }: { items?: LocationRateItem[] }) {
+  if (!items) return null
+  return (
+    <div className="grid md:grid-cols-2 gap-4">
+      {items.map((item, i) => (
+        <div key={i} className="card">
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-semibold text-gray-900">{item.location}</h3>
+            <span className="text-accent font-semibold">{item.rate}</span>
+          </div>
+          {item.share && <p className="text-sm text-gray-500">{item.share}</p>}
+          {item.note && <p className="text-sm text-gray-500">{item.note}</p>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function SpecializationsGrid({ items }: { items?: SpecializationItem[] }) {
+  if (!items) return null
+  return (
+    <div className="grid md:grid-cols-3 gap-4">
+      {items.map((item, i) => (
+        <div key={i} className="card relative">
+          {item.badge && (
+            <span className="absolute -top-2 -right-2 px-2 py-1 bg-accent text-white text-xs font-medium rounded-full">
+              {item.badge}
+            </span>
+          )}
+          <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+          <p className="text-accent font-semibold mb-2">{item.rate}</p>
+          {item.description && <p className="text-gray-600 text-sm">{item.description}</p>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function CalculatorSection({ example }: { example?: CalculatorExample }) {
+  if (!example) return null
+  return (
+    <div className="bg-gradient-to-br from-accent/5 to-accent/10 rounded-2xl p-8">
+      <h3 className="font-semibold text-lg text-gray-900 mb-6">Earnings Calculator Example</h3>
+      <div className="grid md:grid-cols-4 gap-4 mb-6">
+        <div className="bg-white rounded-lg p-4 text-center">
+          <div className="text-sm text-gray-500 mb-1">Day Rate</div>
+          <div className="font-semibold text-gray-900">{example.day_rate}</div>
+        </div>
+        <div className="bg-white rounded-lg p-4 text-center">
+          <div className="text-sm text-gray-500 mb-1">Days/Week</div>
+          <div className="font-semibold text-gray-900">{example.days_per_week}</div>
+        </div>
+        <div className="bg-white rounded-lg p-4 text-center">
+          <div className="text-sm text-gray-500 mb-1">Clients</div>
+          <div className="font-semibold text-gray-900">{example.clients}</div>
+        </div>
+        <div className="bg-accent rounded-lg p-4 text-center">
+          <div className="text-sm text-white/80 mb-1">Annual</div>
+          <div className="font-bold text-xl text-white">{example.annual}</div>
+        </div>
+      </div>
+    </div>
   )
 }
