@@ -16,6 +16,9 @@ import { HeroSection, InitialCharts, FAQSection, SEOContent, JobGrid } from "./i
 import { Job, JobStats } from "@/lib/jobs";
 import { LondonSEOContent } from "@/lib/seo-content/london";
 
+// Generic SEO content type that matches the structure
+export type LocationSEOContent = LondonSEOContent;
+
 // Helper to convert annual salary to day rate (assuming ~220 working days)
 function salaryToDayRate(salaryStr: string): string {
   const match = salaryStr.match(/£(\d+)k\s*-\s*£(\d+)k/);

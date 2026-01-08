@@ -5,6 +5,8 @@ import { FAQ, CPO_FAQS } from '@/components/seo/FAQ'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
+import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
+import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
 
@@ -206,6 +208,14 @@ export default function FractionalCpoPage() {
           </div>
         </div>
       </section>
+
+      {/* E-E-A-T: Expert Profile */}
+      <ExpertProfile />
+      <ExpertProfileSchema />
+
+      {/* E-E-A-T: Case Study */}
+      <CaseStudy />
+      <CaseStudySchema />
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">

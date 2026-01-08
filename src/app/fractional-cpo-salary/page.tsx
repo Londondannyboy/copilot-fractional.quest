@@ -5,6 +5,8 @@ import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { IR35Calculator } from '@/components/IR35Calculator'
+import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
+import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
 
 export const metadata: Metadata = {
@@ -197,6 +199,14 @@ export default function FractionalCpoSalaryPage() {
           </div>
         </div>
       </section>
+
+      {/* E-E-A-T: Expert Profile */}
+      <ExpertProfile />
+      <ExpertProfileSchema />
+
+      {/* E-E-A-T: Case Study */}
+      <CaseStudy />
+      <CaseStudySchema />
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">

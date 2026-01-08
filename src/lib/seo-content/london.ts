@@ -35,7 +35,7 @@ export const londonSEO = {
   },
 
   content: {
-    whyLondon: {
+    whyLocation: {
       title: "Why London Leads in Fractional Hiring",
       paragraphs: [
         "London has emerged as the UK's premier hub for fractional executive talent. With its concentration of high-growth startups, scale-ups, and established enterprises seeking flexible C-suite expertise, the capital offers unparalleled opportunities for fractional leaders.",

@@ -35,7 +35,7 @@ export const cfoJobsUkSEO = {
   },
 
   content: {
-    whyLondon: {
+    whyLocation: {
       title: "Why Fractional CFO Demand is Surging",
       paragraphs: [
         "The fractional CFO model has become mainstream in the UK. PE-backed companies, high-growth startups, and established SMEs increasingly prefer flexible finance leadership to full-time hires. This creates exceptional opportunities for experienced finance leaders.",

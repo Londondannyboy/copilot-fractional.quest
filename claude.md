@@ -1843,3 +1843,117 @@ When updating CMO, CTO, CFO, COO pages, copy the exact pattern from:
 ## Content Plan Location
 
 Full content migration plan with checklists: `/Users/dankeegan/copilotkit-demo/CONTENT_PLAN.md`
+
+---
+
+# Google Search Console Data (Jan 2026)
+
+## Top Pages by Clicks (Last 3 Months: Nov 2025 - Jan 2026)
+
+### High Traffic Pages (10+ clicks)
+| URL | Clicks | Impressions | CTR | Position |
+|-----|--------|-------------|-----|----------|
+| /fractional-jobs-london | 115 | 745 | 15.4% | 8.3 |
+| /london | 40 | 200 | 20% | 10.0 |
+| / | 25 | 422 | 5.9% | 18.8 |
+| /fractional-jobs-uk | 23 | 441 | 5.2% | 7.6 |
+| /fractional-cmo-jobs-uk | 17 | 355 | 4.8% | 30.5 |
+| /uk-fractional-jobs-uk-london-fractional-jobs-london | 16 | 256 | 6.3% | 8.4 |
+| /fractional-cto-jobs-uk | 16 | 214 | 7.5% | 16.3 |
+| /articles/fractional-cmo-jobs-uk | 12 | 307 | 3.9% | 55.3 |
+| /fractional-coo-jobs-uk | 12 | 143 | 8.4% | 17.8 |
+
+### Medium Traffic Pages (2-9 clicks)
+| URL | Clicks | Impressions | CTR | Position |
+|-----|--------|-------------|-----|----------|
+| /fractional-cfo-jobs-uk | 9 | 573 | 1.6% | 43.6 |
+| /fractional-ciso-jobs | 8 | 329 | 2.4% | 21.8 |
+| /top-fractional-recruitment-agencies-... | 8 | 123 | 6.5% | 17.6 |
+| /fractional-ciso-jobs-uk | 7 | 66 | 10.6% | 13.6 |
+| /fractional-job/pharmacovigilance-physician-... | 7 | 22 | 31.8% | 4.4 |
+| /fractional-cpo-jobs-uk | 6 | 205 | 2.9% | 41.3 |
+| /remote-fractional-jobs | 6 | 42 | 14.3% | 5.7 |
+| /articles/fractional-cfo-jobs-uk | 5 | 288 | 1.7% | 47.4 |
+| /fractional-chro-jobs-uk | 5 | 90 | 5.6% | 18.7 |
+| /fractional-ceo-jobs-uk | 5 | 77 | 6.5% | 6.9 |
+| /fractional-cco-jobs-uk | 4 | 34 | 11.8% | 5.7 |
+| /fractional-jobs-tech | 4 | 33 | 12.1% | 5.9 |
+| /fractional-cdo-jobs-uk | 3 | 66 | 4.5% | 16.6 |
+| /part-time-cfo-jobs-uk | 2 | 973 | 0.2% | 56.9 |
+| /fractional-jobs | 2 | 261 | 0.8% | 12.2 |
+| /part-time-compliance-jobs-uk | 2 | 20 | 10% | 6.8 |
+| /fractional-recruitment-agency | 2 | 11 | 18.2% | 6.0 |
+
+### Low Traffic But Indexed (0-1 clicks, significant impressions)
+| URL | Clicks | Impressions | CTR | Position |
+|-----|--------|-------------|-----|----------|
+| /part-time-cfo | 1 | 568 | 0.2% | 62.5 |
+| /fractional-hr | 1 | 219 | 0.5% | 24.0 |
+| /compliance-officer-salary-uk | 1 | 52 | 1.9% | 5.0 |
+| /cmo | 1 | 30 | 3.3% | 40.6 |
+| /fractional-jobs-startups | 1 | 18 | 5.6% | 17.2 |
+| /cfo | 1 | 17 | 5.9% | 7.3 |
+| /guide | 1 | 13 | 7.7% | 10.8 |
+| /fractional-cso-jobs-uk | 1 | 13 | 7.7% | 24.4 |
+| /fractional-jobs-ecommerce | 1 | 10 | 10% | 7.1 |
+| /fractional-jobs-edinburgh | 1 | 8 | 12.5% | 5.4 |
+| /fractional-jobs-belfast | 1 | 6 | 16.7% | 6.7 |
+
+### Zero Clicks But High Impressions (Opportunity Pages)
+| URL | Clicks | Impressions | Position | Notes |
+|-----|--------|-------------|----------|-------|
+| /fractional-coo-services | 0 | 151 | 30.7 | Needs page |
+| /state-fractional-cfo-market-2025 | 0 | 76 | 5.3 | Needs page |
+| /interim-cfo | 0 | 66 | 59.0 | ✅ BUILT |
+| /fractional-cmo-services | 0 | 51 | 64.7 | Needs page |
+| /interim-executive | 0 | 50 | 52.0 | Needs page |
+| /fractional-cfo-services | 0 | 49 | 13.9 | Needs page |
+| /part-time-cmo-jobs-uk | 0 | 41 | 37.5 | ✅ BUILT |
+| /interim-marketing-director | 0 | 38 | 69.2 | Needs page |
+| /fractional-cfo-meaning | 0 | 35 | 45.2 | Needs page |
+| /fractional-cto | 0 | 29 | 5.4 | ✅ EXISTS |
+| /fractional-property-ownership-uk | 0 | 28 | 56.6 | Off-topic |
+| /fractional-cto-salary | 0 | 27 | 7.3 | ✅ EXISTS |
+| /fractional-ciso-meaning | 0 | 27 | 44.7 | Needs page |
+
+## Pages Built This Session (Jan 2026)
+
+### Interim Pages (8 total) ✅
+- /interim-cfo-jobs-uk
+- /interim-cto-jobs-uk
+- /interim-cmo-jobs-uk
+- /interim-coo-jobs-uk
+- /interim-ceo-jobs-uk
+- /interim-chro-jobs-uk
+- /interim-cpo-jobs-uk
+- /interim-ciso-jobs-uk
+
+### Part-Time Pages (8 total) ✅
+- /part-time-cfo-jobs-uk
+- /part-time-cto-jobs-uk
+- /part-time-cmo-jobs-uk
+- /part-time-coo-jobs-uk
+- /part-time-ceo-jobs-uk
+- /part-time-chro-jobs-uk
+- /part-time-cpo-jobs-uk
+- /part-time-ciso-jobs-uk
+
+### Location Pages (6 total) ✅
+- /fractional-jobs-london
+- /fractional-jobs-uk
+- /manchester
+- /birmingham
+- /edinburgh
+- /bristol
+
+## Priority Pages To Build Next
+
+Based on impressions without clicks:
+1. `/fractional-coo-services` (151 impressions)
+2. `/state-fractional-cfo-market-2025` (76 impressions) - Article
+3. `/fractional-cmo-services` (51 impressions)
+4. `/interim-executive` (50 impressions)
+5. `/fractional-cfo-services` (49 impressions)
+6. `/interim-marketing-director` (38 impressions)
+7. `/fractional-cfo-meaning` (35 impressions)
+8. `/fractional-ciso-meaning` (27 impressions)

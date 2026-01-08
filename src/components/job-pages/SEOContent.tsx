@@ -10,11 +10,11 @@ interface SEOContentProps {
 export function SEOContent({ content }: SEOContentProps) {
   return (
     <>
-      {/* Why London Section */}
+      {/* Why Location Section */}
       <Section>
-        <SectionHeading>{content.whyLondon.title}</SectionHeading>
+        <SectionHeading>{content.whyLocation.title}</SectionHeading>
         <div className="max-w-3xl space-y-4">
-          {content.whyLondon.paragraphs.map((p, i) => (
+          {content.whyLocation.paragraphs.map((p, i) => (
             <p key={i} className="text-gray-600 leading-relaxed">
               {p}
             </p>

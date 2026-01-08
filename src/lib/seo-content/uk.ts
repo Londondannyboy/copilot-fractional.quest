@@ -34,7 +34,7 @@ export const ukSEO = {
   },
 
   content: {
-    whyLondon: {
+    whyLocation: {
       title: "Why the UK Leads in Fractional Executive Hiring",
       paragraphs: [
         "The UK has emerged as a global leader in the fractional executive model. From London's tech scene to Manchester's growing business hub, Scottish innovation centers to Birmingham's manufacturing heartland, UK companies increasingly value flexible C-suite expertise.",

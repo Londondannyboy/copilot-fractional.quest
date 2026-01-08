@@ -3,13 +3,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { createDbQuery } from '@/lib/db'
 import { FAQ, CISO_FAQS } from '@/components/seo/FAQ'
+import { RoleCalculator } from '@/components/RoleCalculator'
 import { IR35Calculator } from '@/components/IR35Calculator'
+import { RoleNews } from '@/components/RoleNews'
 import { ServerJobGrid } from '@/components/ServerJobGrid'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { JobListingSchema } from '@/components/seo/JobPostingSchema'
 import { getRoleBreadcrumbs } from '@/lib/seo-config'
 import { WebPageSchema, LastUpdatedBadge } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
+import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
+import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
 import { RoleContentHub } from '@/components/RoleContentHub'
 
@@ -47,6 +51,19 @@ async function getSecurityJobs() {
   } catch { return [] }
 }
 
+async function getFeaturedCompanies() {
+  try {
+    const sql = createDbQuery()
+    const companies = await sql`
+      SELECT DISTINCT company_name FROM jobs
+      WHERE is_active = true AND role_category = 'Security' AND company_name IS NOT NULL
+        AND (country ILIKE '%UK%' OR country ILIKE '%United Kingdom%' OR location ILIKE '%UK%' OR location ILIKE '%London%' OR location ILIKE '%Manchester%')
+      ORDER BY company_name LIMIT 30
+    `
+    return companies.map((c: any) => c.company_name)
+  } catch { return [] }
+}
+
 async function getRelatedJobs() {
   try {
     const sql = createDbQuery()
@@ -56,7 +73,7 @@ async function getRelatedJobs() {
 }
 
 export default async function FractionalCisoJobsUkPage() {
-  const [stats, jobs, relatedJobs] = await Promise.all([getSecurityStats(), getSecurityJobs(), getRelatedJobs()])
+  const [stats, companies, jobs, relatedJobs] = await Promise.all([getSecurityStats(), getFeaturedCompanies(), getSecurityJobs(), getRelatedJobs()])
   const mostRecentJob = jobs[0]
   const lastUpdatedDate = mostRecentJob?.posted_date ? new Date(mostRecentJob.posted_date) : new Date()
 
@@ -119,6 +136,38 @@ export default async function FractionalCisoJobsUkPage() {
         </div>
       </section>
 
+      {/* Calculator */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-8 text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">CISO Salary UK</span>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900">CISO Salary UK Calculator - Fractional Security Rates</h2>
+          </div>
+          <RoleCalculator role="ciso" />
+        </div>
+      </section>
+
+      {/* Companies Hiring */}
+      {companies.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Who&apos;s Hiring</span>
+              <h2 className="text-3xl md:text-4xl font-black text-gray-900">UK Companies Hiring Fractional CISOs</h2>
+              <p className="text-gray-600 mt-2">These UK companies are actively looking for fractional CISO and security leadership talent</p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
+              {companies.map((company: string, index: number) => (
+                <span key={index} className="text-xl md:text-2xl font-light text-gray-400 hover:text-red-500 transition-colors cursor-default">
+                  {company}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Editorial */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
@@ -163,12 +212,32 @@ export default async function FractionalCisoJobsUkPage() {
         </div>
       </section>
 
+      {/* Security News */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-8">FAQ: Fractional CISO Jobs UK</h2>
+          <RoleNews category="Security" title="Latest UK Fractional Security & CISO News" limit={3} />
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional CISO UK & Part-Time Security Jobs</h2>
+            <p className="text-gray-600 mt-4">Answers about <strong>fractional CISO jobs</strong>, <strong>fractional security director jobs</strong>, and <strong>CISO salary UK</strong> rates</p>
+          </div>
           <FAQ items={CISO_FAQS} title="" />
         </div>
       </section>
+
+      {/* E-E-A-T: Expert Profile */}
+      <ExpertProfile />
+      <ExpertProfileSchema />
+
+      {/* E-E-A-T: Case Study */}
+      <CaseStudy />
+      <CaseStudySchema />
 
       {(relatedJobs as any[]).length > 0 && (
         <section className="py-12 bg-gray-50 border-t border-gray-200">

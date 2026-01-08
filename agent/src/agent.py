@@ -1597,24 +1597,55 @@ def show_location_chart(ctx: RunContext[StateDeps[AppState]]) -> dict:
   }
 
 @agent.tool
-def show_salary_insights(ctx: RunContext[StateDeps[AppState]]) -> dict:
-  """Show salary range insights by executive role type as an area chart."""
-  print("💰 Generating salary insights")
-  # Simulated market data based on industry standards
-  salary_data = [
-    {"role": "CEO", "min": 250, "max": 500, "avg": 375},
-    {"role": "CFO", "min": 200, "max": 400, "avg": 300},
-    {"role": "CTO", "min": 180, "max": 380, "avg": 280},
-    {"role": "CMO", "min": 150, "max": 320, "avg": 235},
-    {"role": "COO", "min": 170, "max": 350, "avg": 260},
-    {"role": "CHRO", "min": 140, "max": 280, "avg": 210},
-    {"role": "CRO", "min": 160, "max": 340, "avg": 250},
-    {"role": "CPO", "min": 150, "max": 300, "avg": 225},
-  ]
+def show_salary_insights(ctx: RunContext[StateDeps[AppState]], region: str = "UK", engagement_type: str = "fractional") -> dict:
+  """Show salary range insights by executive role type as an area chart. Data from salary_benchmarks database."""
+  print(f"💰 Generating salary insights for {region} ({engagement_type})")
+  try:
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("""
+      SELECT role, min_day_rate, max_day_rate, avg_day_rate
+      FROM salary_benchmarks
+      WHERE region = %s AND engagement_type = %s
+      ORDER BY avg_day_rate DESC
+    """, (region, engagement_type))
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    if rows:
+      salary_data = [
+        {"role": row[0], "min": row[1], "max": row[2], "avg": row[3]}
+        for row in rows
+      ]
+    else:
+      # Fallback if no data
+      salary_data = [
+        {"role": "CEO", "min": 1200, "max": 2500, "avg": 1850},
+        {"role": "CFO", "min": 850, "max": 1500, "avg": 1175},
+        {"role": "CTO", "min": 900, "max": 1600, "avg": 1250},
+        {"role": "CMO", "min": 800, "max": 1400, "avg": 1100},
+        {"role": "COO", "min": 850, "max": 1500, "avg": 1175},
+        {"role": "CHRO", "min": 750, "max": 1300, "avg": 1025},
+        {"role": "CPO", "min": 850, "max": 1500, "avg": 1175},
+        {"role": "CISO", "min": 900, "max": 1600, "avg": 1250},
+      ]
+  except Exception as e:
+    print(f"❌ Error fetching salary data: {e}")
+    # Fallback data
+    salary_data = [
+      {"role": "CEO", "min": 1200, "max": 2500, "avg": 1850},
+      {"role": "CFO", "min": 850, "max": 1500, "avg": 1175},
+      {"role": "CTO", "min": 900, "max": 1600, "avg": 1250},
+      {"role": "CMO", "min": 800, "max": 1400, "avg": 1100},
+    ]
+
+  region_label = "London" if region == "London" else "UK"
+  type_label = engagement_type.title()
   return {
     "chartData": salary_data,
-    "title": "Fractional Executive Day Rates (£)",
-    "subtitle": "Market rate ranges by role"
+    "title": f"{type_label} Executive Day Rates - {region_label} (£)",
+    "subtitle": "Market rate ranges by role from salary benchmarks database"
   }
 
 @agent.tool
@@ -1655,6 +1686,123 @@ def show_market_dashboard(ctx: RunContext[StateDeps[AppState]]) -> dict:
     "title": "Fractional Executive Market Dashboard",
     "lastUpdated": "Live"
   }
+
+@agent.tool
+def get_salary_for_role(ctx: RunContext[StateDeps[AppState]], role: str, region: str = "UK") -> dict:
+  """Get salary benchmarks for a specific role. Use this when user asks about day rates or salaries for a specific role."""
+  print(f"💷 Getting salary for {role} in {region}")
+  try:
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("""
+      SELECT role, min_day_rate, max_day_rate, avg_day_rate, min_annual, max_annual, engagement_type
+      FROM salary_benchmarks
+      WHERE role = %s AND region = %s
+      ORDER BY engagement_type
+    """, (role.upper(), region))
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    if rows:
+      rates = []
+      for row in rows:
+        rates.append({
+          "role": row[0],
+          "min_day_rate": f"£{row[1]:,}",
+          "max_day_rate": f"£{row[2]:,}",
+          "avg_day_rate": f"£{row[3]:,}",
+          "min_annual": f"£{row[4]:,}",
+          "max_annual": f"£{row[5]:,}",
+          "engagement_type": row[6]
+        })
+      return {
+        "role": role.upper(),
+        "region": region,
+        "rates": rates,
+        "summary": f"Fractional {role.upper()} day rates in {region}: £{rows[0][1]:,} - £{rows[0][2]:,}/day (avg £{rows[0][3]:,})"
+      }
+    else:
+      return {"error": f"No salary data found for {role} in {region}"}
+  except Exception as e:
+    print(f"❌ Error: {e}")
+    return {"error": str(e)}
+
+@agent.tool
+def get_faqs_for_role(ctx: RunContext[StateDeps[AppState]], role: str, page_type: str = "jobs") -> dict:
+  """Get FAQs for a specific role. Use this when user asks questions about a fractional role."""
+  print(f"❓ Getting FAQs for {role} ({page_type})")
+  try:
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("""
+      SELECT question, answer FROM content_faqs
+      WHERE role = %s AND page_type = %s
+      ORDER BY sort_order
+    """, (role.upper(), page_type))
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    if rows:
+      faqs = [{"question": row[0], "answer": row[1]} for row in rows]
+      return {"role": role.upper(), "page_type": page_type, "faqs": faqs}
+    else:
+      return {"error": f"No FAQs found for {role}"}
+  except Exception as e:
+    print(f"❌ Error: {e}")
+    return {"error": str(e)}
+
+@agent.tool
+def search_articles(ctx: RunContext[StateDeps[AppState]], query: str = None, role_category: str = None) -> dict:
+  """Search articles in the database. Use for finding guides and content about fractional roles."""
+  print(f"📚 Searching articles: query={query}, role={role_category}")
+  try:
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+
+    if role_category:
+      cur.execute("""
+        SELECT slug, title, meta_description, role_category, article_type
+        FROM articles
+        WHERE published = true AND role_category = %s
+        ORDER BY created_at DESC
+        LIMIT 10
+      """, (role_category.upper(),))
+    elif query:
+      cur.execute("""
+        SELECT slug, title, meta_description, role_category, article_type
+        FROM articles
+        WHERE published = true AND (title ILIKE %s OR content ILIKE %s OR meta_description ILIKE %s)
+        ORDER BY created_at DESC
+        LIMIT 10
+      """, (f"%{query}%", f"%{query}%", f"%{query}%"))
+    else:
+      cur.execute("""
+        SELECT slug, title, meta_description, role_category, article_type
+        FROM articles
+        WHERE published = true
+        ORDER BY created_at DESC
+        LIMIT 10
+      """)
+
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    articles = [{
+      "slug": row[0],
+      "title": row[1],
+      "description": row[2],
+      "role": row[3],
+      "type": row[4],
+      "url": f"https://fractional.quest/articles/{row[0]}"
+    } for row in rows]
+
+    return {"articles": articles, "count": len(articles)}
+  except Exception as e:
+    print(f"❌ Error: {e}")
+    return {"error": str(e)}
 
 @agent.tool
 def get_featured_articles(ctx: RunContext[StateDeps[AppState]]) -> dict:
