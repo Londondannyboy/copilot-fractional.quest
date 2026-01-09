@@ -307,6 +307,437 @@ h3, h4, h5, h6 {
 }
 
 /* ==========================================
+   HERO SECTION - Dynamic Pages
+   ========================================== */
+
+.hero-section {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+}
+
+/* ==========================================
+   CONTENT SECTIONS - Dynamic Pages
+   ========================================== */
+
+.content-section {
+  padding: 4rem 0;
+}
+
+.section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+}
+
+.section-eyebrow {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: var(--font-editorial);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* ==========================================
+   CARD GRID - Responsive Grid Layout
+   ========================================== */
+
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Card with accent border */
+.card-accent {
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================
+   ROLE CARDS
+   ========================================== */
+
+.role-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  padding: 1.5rem;
+  transition: all var(--transition-base);
+}
+
+.role-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.role-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.role-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+}
+
+.role-rate {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.role-description {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   STAT CARDS
+   ========================================== */
+
+.stat-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   CHECK LIST
+   ========================================== */
+
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 2rem;
+  padding-block: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.check-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* ==========================================
+   COMPARISON TABLE
+   ========================================== */
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.comparison-table th {
+  background: var(--surface);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.comparison-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tr:hover td {
+  background: var(--surface);
+}
+
+/* ==========================================
+   STEPS LIST
+   ========================================== */
+
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step-counter;
+}
+
+.steps-list li {
+  position: relative;
+  padding-left: 4rem;
+  padding-block: 1.5rem;
+  border-left: 2px solid var(--border-light);
+  counter-increment: step-counter;
+}
+
+.steps-list li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: -1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.steps-list li:last-child {
+  border-left-color: transparent;
+}
+
+/* ==========================================
+   FAQ ACCORDION
+   ========================================== */
+
+.faq-item {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.faq-question:hover {
+  color: var(--accent);
+}
+
+.faq-answer {
+  padding-bottom: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ==========================================
+   LINK CARDS
+   ========================================== */
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.link-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.link-card-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.link-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.link-card-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-card-domain {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   CTA SECTION
+   ========================================== */
+
+.cta-section {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  color: white;
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.cta-title {
+  font-family: var(--font-editorial);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .cta-title {
+    font-size: 2.5rem;
+  }
+}
+
+.cta-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* ==========================================
+   PROSE CONTENT
+   ========================================== */
+
+.prose-content {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.0625rem;
+}
+
+.prose-content p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   BUTTON VARIANTS (btn, btn-ghost, btn-primary in section contexts)
+   ========================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================
    TEXT UTILITIES
    ========================================== */
 
