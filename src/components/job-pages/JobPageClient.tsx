@@ -16,6 +16,8 @@ import { CaseStudy, CaseStudySchema } from "@/components/CaseStudy";
 import { RoleCalculator } from "@/components/RoleCalculator";
 import { LazyYouTube } from "@/components/LazyYouTube";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
+import { HotJobs } from "@/components/HotJobs";
+import { EmailCapture } from "@/components/EmailCapture";
 
 import { HeroSection, InitialCharts, FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
@@ -527,6 +529,28 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
 
         {/* Charts - render immediately from server data */}
         <InitialCharts stats={stats} location={locationDisplay} />
+
+        {/* Hot Jobs Section */}
+        <section className="py-8 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <HotJobs
+                  location={location === "london" ? "London" : undefined}
+                  maxJobs={8}
+                  title={`🔥 Hot ${locationDisplay} Jobs`}
+                />
+              </div>
+              <div>
+                <EmailCapture
+                  variant="sidebar"
+                  title="Get Job Alerts"
+                  description={`New ${locationDisplay} fractional roles straight to your inbox.`}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Job Board with Filters */}
         <section className="py-12 bg-white">
