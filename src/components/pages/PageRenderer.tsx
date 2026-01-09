@@ -255,6 +255,9 @@ function getSectionContent(section: Section): React.ReactNode {
     case 'common_roles':
       return <RoleCardsGrid items={section.items as unknown as RoleItem[]} />
 
+    case 'role_cards':
+      return <RoleCardsWithLinks items={section.items as unknown as RoleCardWithLinkItem[]} />
+
     case 'market_stats':
       return <StatsGrid stats={section.stats as unknown as StatItem[]} />
 
@@ -450,6 +453,14 @@ interface RoleItem {
   title: string
   rate: string
   description: string
+}
+
+interface RoleCardWithLinkItem {
+  href: string
+  icon: string
+  title: string
+  description?: string
+  rate?: string
 }
 
 interface StatItem {
@@ -732,6 +743,55 @@ function RoleCardsGrid({ items }: { items?: RoleItem[] }) {
           </div>
           <p className="role-description">{item.description}</p>
         </div>
+      ))}
+    </div>
+  )
+}
+
+const iconMap: Record<string, string> = {
+  currency: '💰',
+  chart: '📊',
+  code: '💻',
+  gear: '⚙️',
+  shield: '🛡️',
+  people: '👥',
+  briefcase: '💼',
+  target: '🎯',
+  rocket: '🚀',
+  building: '🏢',
+  globe: '🌍',
+  lightbulb: '💡',
+  handshake: '🤝',
+  scale: '⚖️',
+  megaphone: '📣',
+  search: '🔍',
+}
+
+function RoleCardsWithLinks({ items }: { items?: RoleCardWithLinkItem[] }) {
+  if (!items) return null
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((item, i) => (
+        <Link
+          key={i}
+          href={item.href}
+          className="group bg-white rounded-xl p-6 border border-gray-200 hover:border-accent hover:shadow-lg transition-all duration-200"
+        >
+          <div className="flex items-start gap-4">
+            <span className="text-3xl">{iconMap[item.icon] || '📋'}</span>
+            <div className="flex-1">
+              <h3 className="font-semibold text-lg text-gray-900 group-hover:text-accent mb-2">
+                {item.title}
+              </h3>
+              {item.description && (
+                <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+              )}
+              {item.rate && (
+                <span className="inline-block mt-2 text-sm font-medium text-accent">{item.rate}</span>
+              )}
+            </div>
+          </div>
+        </Link>
       ))}
     </div>
   )
