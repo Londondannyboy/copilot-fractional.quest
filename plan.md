@@ -1,6 +1,6 @@
 # Fractional Quest v2 - Content Migration Plan
 
-Last updated: 2026-01-08 (Session 3 - Database Migration)
+Last updated: 2026-01-09 (Session 4 - Static Page Cleanup)
 
 ---
 
@@ -16,42 +16,45 @@ We're migrating content from the original fractional.quest website to a Neon Pos
 - **Neon Project ID:** `plain-glade-34229418`
 - **Table:** `pages` with JSONB `sections` column for flexible content
 
-## Current State (as of 2026-01-08)
-- 63 pages now exist in the Neon database
+## Current State (as of 2026-01-09)
+- 64 pages now exist in the Neon database (fractional-jobs-uk added)
 - Dynamic route at `/src/app/[slug]/page.tsx` serves pages from database
 - PageRenderer at `/src/components/pages/PageRenderer.tsx` renders section types
-- Static pages being renamed to `-v1` for comparison
+- 18 static page folders renamed to `-v1` (database content now served)
+- PageRenderer extended with interactive component support
 
-## CRITICAL MISSING PAGE
-- `fractional-jobs-uk` is NOT in the database but gets 23 clicks/month! This is the main UK jobs hub.
+## Completed This Session
+1. Verified key pages render from database (fractional-jobs-uk, fractional-jobs-london, london redirect)
+2. Renamed 18 static folders to -v1 so database serves these routes
+3. Extended PageRenderer with interactive components (calculator, job_board, video, definition_box, etc.)
+4. All builds passing
 
-## Immediate Tasks
-1. Insert `fractional-jobs-uk` into Neon (fetch real content from https://fractional.quest/fractional-jobs-uk)
-2. Verify all migrated pages render correctly at their slugs
-3. Add remaining role definition pages (fractional-cfo, fractional-cto, etc.) to database
-4. Add salary pages to database
-5. Rename any remaining static page folders to `-v1`
+## Remaining Tasks
+1. Migrate role definition pages to database (fractional-cfo, fractional-cto, etc.) - uses new interactive component sections
+2. Migrate salary pages to database
+3. Test role pages with new calculator/job_board sections
 
 ## Key Files
 - `/src/app/[slug]/page.tsx` - Dynamic route
-- `/src/components/pages/PageRenderer.tsx` - Renders sections
+- `/src/components/pages/PageRenderer.tsx` - Renders sections (now with interactive components)
 - `/src/lib/pages.ts` - Database queries
 - `PLAN.md` - This migration plan
 - `CLAUDE.md` - Full project documentation
 
 ## Git Remote
-origin = copilot-fractional.quest.git
+origin = https://github.com/Londondannyboy/copilot-fractional.quest.git
 
-Please read PLAN.md and CLAUDE.md first, then continue with the migration tasks.
+Please read PLAN.md first, then continue with the role definition page migration.
 ```
 
 ---
 
-## DATABASE MIGRATION STATUS (2026-01-08)
+## DATABASE MIGRATION STATUS (2026-01-09)
 
-### Pages in Neon Database: 63 total
+### Pages in Neon Database: 64 total
 
-**Jobs UK Pages (14):** ✅
+**Jobs UK Pages (15):** ✅
+- fractional-jobs-uk (ADDED 2026-01-08!)
 - fractional-cfo-jobs-uk, cto, cmo, coo, ciso, ceo, chro, cpo, cro, cdo, cco
 - fractional-finance-director-jobs-uk
 - fractional-vp-engineering-jobs-uk, vp-sales-jobs-uk
@@ -62,10 +65,14 @@ Please read PLAN.md and CLAUDE.md first, then continue with the migration tasks.
 **Hire/Service Pages (10):** ✅
 - hire-fractional-cfo, cto, cmo, coo, chro, cpo, cro, cdo, ciso, cio
 
-**MISSING FROM DATABASE - CRITICAL:**
-- `fractional-jobs-uk` - 23 clicks/month, main UK jobs hub!
-- Role definition pages: fractional-cfo, fractional-cto, fractional-cmo, etc.
-- All salary pages
+**STATIC PAGES RENAMED TO -v1 (database now serves these routes):**
+- Jobs UK: fractional-cfo/cto/cmo/coo/ceo/chro/ciso/cpo/cco-jobs-uk, fractional-jobs-uk
+- Location: birmingham, bristol, edinburgh, manchester
+- Hire: hire-fractional-cfo/cto/cmo/coo/ceo/chro/cpo/ciso
+
+**STILL NEED MIGRATION TO DATABASE:**
+- Role definition pages: fractional-cfo, fractional-cto, fractional-cmo, etc. (8 pages)
+- Salary pages: fractional-cfo-salary, fractional-cto-salary, etc. (8 pages)
 
 ---
 
