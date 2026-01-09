@@ -1,3 +1,4 @@
+// Static route - takes precedence over [slug] dynamic route
 import { Metadata } from "next";
 import { JobPageClient } from "@/components/job-pages";
 import { getJobsPageData } from "@/lib/jobs";
