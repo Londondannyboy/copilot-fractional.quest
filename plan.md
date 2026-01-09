@@ -1,6 +1,73 @@
 # Fractional Quest v2 - Content Migration Plan
 
-Last updated: 2026-01-08 (Session 2)
+Last updated: 2026-01-08 (Session 3 - Database Migration)
+
+---
+
+## RESTART PROMPT (Copy/Paste to Continue)
+
+```
+I'm continuing work on the Fractional Quest v2 migration project in /Users/dankeegan/copilotkit-demo.
+
+## Context
+We're migrating content from the original fractional.quest website to a Neon PostgreSQL database so pages are served dynamically via the [slug] route. The agent (CopilotKit + Pydantic AI) can then see and interact with page content.
+
+## Database
+- **Neon Project ID:** `plain-glade-34229418`
+- **Table:** `pages` with JSONB `sections` column for flexible content
+
+## Current State (as of 2026-01-08)
+- 63 pages now exist in the Neon database
+- Dynamic route at `/src/app/[slug]/page.tsx` serves pages from database
+- PageRenderer at `/src/components/pages/PageRenderer.tsx` renders section types
+- Static pages being renamed to `-v1` for comparison
+
+## CRITICAL MISSING PAGE
+- `fractional-jobs-uk` is NOT in the database but gets 23 clicks/month! This is the main UK jobs hub.
+
+## Immediate Tasks
+1. Insert `fractional-jobs-uk` into Neon (fetch real content from https://fractional.quest/fractional-jobs-uk)
+2. Verify all migrated pages render correctly at their slugs
+3. Add remaining role definition pages (fractional-cfo, fractional-cto, etc.) to database
+4. Add salary pages to database
+5. Rename any remaining static page folders to `-v1`
+
+## Key Files
+- `/src/app/[slug]/page.tsx` - Dynamic route
+- `/src/components/pages/PageRenderer.tsx` - Renders sections
+- `/src/lib/pages.ts` - Database queries
+- `PLAN.md` - This migration plan
+- `CLAUDE.md` - Full project documentation
+
+## Git Remote
+origin = copilot-fractional.quest.git
+
+Please read PLAN.md and CLAUDE.md first, then continue with the migration tasks.
+```
+
+---
+
+## DATABASE MIGRATION STATUS (2026-01-08)
+
+### Pages in Neon Database: 63 total
+
+**Jobs UK Pages (14):** ✅
+- fractional-cfo-jobs-uk, cto, cmo, coo, ciso, ceo, chro, cpo, cro, cdo, cco
+- fractional-finance-director-jobs-uk
+- fractional-vp-engineering-jobs-uk, vp-sales-jobs-uk
+
+**Location Pages (9):** ✅
+- fractional-jobs-london, london, manchester, birmingham, bristol, edinburgh, glasgow, cambridge, remote
+
+**Hire/Service Pages (10):** ✅
+- hire-fractional-cfo, cto, cmo, coo, chro, cpo, cro, cdo, ciso, cio
+
+**MISSING FROM DATABASE - CRITICAL:**
+- `fractional-jobs-uk` - 23 clicks/month, main UK jobs hub!
+- Role definition pages: fractional-cfo, fractional-cto, fractional-cmo, etc.
+- All salary pages
+
+---
 
 ## Session Progress - January 8, 2026
 

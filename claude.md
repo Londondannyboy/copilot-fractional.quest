@@ -2105,6 +2105,60 @@ CREATE TABLE page_content (
 
 ---
 
+# Session Learnings: 2026-01-08 (Session 3) - Database Content Migration
+
+## What Was Completed
+
+### Database Migration Architecture
+Established a database-first content approach where:
+- All page content lives in Neon PostgreSQL `pages` table
+- Dynamic `[slug]` route serves content from database
+- PageRenderer component handles 15+ section types
+- Static pages renamed to `-v1` for comparison
+
+### Pages Migrated to Neon Database: 63 total
+See PLAN.md for full list including:
+- 14 Jobs UK pages
+- 9 Location pages
+- 10 Hire/Service pages
+- Specialist, Guide, Industry, Comparison pages
+
+### Key Database Schema
+```sql
+CREATE TABLE pages (
+  id SERIAL PRIMARY KEY,
+  slug TEXT UNIQUE NOT NULL,
+  page_type TEXT NOT NULL,
+  title TEXT NOT NULL,
+  meta_description TEXT,
+  hero_title TEXT,
+  hero_subtitle TEXT,
+  accent_color TEXT DEFAULT '#059669',
+  sections JSONB DEFAULT '[]',
+  faqs JSONB DEFAULT '[]',
+  status TEXT DEFAULT 'published',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+### Critical Finding
+**`fractional-jobs-uk` is NOT in the database!** This page gets 23 clicks/month and is the main UK jobs hub. Needs immediate migration.
+
+### Workflow Established
+1. WebFetch to get real content from fractional.quest
+2. Transform to sections JSONB format
+3. INSERT into Neon via mcp__neon__run_sql
+4. Verify rendering at localhost:3000/[slug]
+5. Rename static page folder to -v1 if exists
+
+### Files Modified
+- `PLAN.md` - Added restart prompt and database status
+- Dynamic route `/src/app/[slug]/page.tsx` - Serves from database
+- PageRenderer with section type handlers
+
+---
+
 ## Remaining Work (Priority Order)
 
 ### Immediate:
