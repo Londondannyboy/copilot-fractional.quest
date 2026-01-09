@@ -7,9 +7,19 @@ import { PageRenderer } from '@/components/pages/PageRenderer'
 // Static Generation
 // ===========================================
 
+// Slugs that have dedicated static routes - exclude from dynamic generation
+const STATIC_ROUTE_SLUGS = [
+  'fractional-jobs-london',
+  'fractional-jobs-uk',
+  // Add other static routes here as needed
+]
+
 export async function generateStaticParams() {
   const slugs = await getAllPageSlugs()
-  return slugs.map((slug) => ({ slug }))
+  // Filter out slugs that have static routes
+  return slugs
+    .filter((slug) => !STATIC_ROUTE_SLUGS.includes(slug))
+    .map((slug) => ({ slug }))
 }
 
 // ===========================================
@@ -58,6 +68,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params
+
+  // Redirect to static route if one exists
+  if (STATIC_ROUTE_SLUGS.includes(slug)) {
+    notFound() // Let the static route handle it
+  }
+
   const page = await getPageBySlug(slug)
 
   if (!page) {
