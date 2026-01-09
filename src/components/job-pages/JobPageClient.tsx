@@ -15,8 +15,9 @@ import { ExpertProfile, ExpertProfileSchema } from "@/components/ExpertProfile";
 import { CaseStudy, CaseStudySchema } from "@/components/CaseStudy";
 import { RoleCalculator } from "@/components/RoleCalculator";
 import { LazyYouTube } from "@/components/LazyYouTube";
+import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 
-import { HeroSection, InitialCharts, FAQSection, SEOContent, JobGrid } from "./index";
+import { HeroSection, InitialCharts, FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
 import { LondonSEOContent } from "@/lib/seo-content/london";
 import { ImageCategory } from "@/lib/images";
@@ -527,8 +528,18 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* Charts - render immediately from server data */}
         <InitialCharts stats={stats} location={locationDisplay} />
 
-        {/* Job Grid */}
-        <JobGrid jobs={initialJobs} title={`${locationDisplay} Opportunities`} />
+        {/* Job Board with Filters */}
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <EmbeddedJobBoard
+              defaultLocation={location === "london" ? "London" : ""}
+              title={`${locationDisplay} Fractional Jobs`}
+              showFilters={true}
+              jobsPerPage={9}
+              accentColor="indigo"
+            />
+          </div>
+        </section>
 
         {/* SEO Content */}
         <SEOContent content={seoContent.content} />
