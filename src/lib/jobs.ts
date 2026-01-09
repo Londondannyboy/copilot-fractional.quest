@@ -63,7 +63,7 @@ export async function getJobsByLocation(location: string): Promise<Job[]> {
         : undefined,
       description: row.description,
       roleType: row.role_type,
-      url: `https://fractional.quest/fractional-jobs`,
+      url: `/fractional-jobs-uk`,
     }));
   } catch (error) {
     console.error("[jobs] Error fetching by location:", error);
@@ -103,7 +103,7 @@ export async function getJobsByRole(role: string): Promise<Job[]> {
         : undefined,
       description: row.description,
       roleType: row.role_type,
-      url: `https://fractional.quest/fractional-${role.toLowerCase()}-jobs-uk`,
+      url: `/fractional-${role.toLowerCase()}-jobs-uk`,
     }));
   } catch (error) {
     console.error("[jobs] Error fetching by role:", error);
@@ -247,7 +247,7 @@ export async function getAllJobs(): Promise<Job[]> {
         : undefined,
       description: row.description,
       roleType: row.role_type,
-      url: `https://fractional.quest/fractional-jobs`,
+      url: `/fractional-jobs-uk`,
     }));
   } catch (error) {
     console.error("[jobs] Error fetching all jobs:", error);

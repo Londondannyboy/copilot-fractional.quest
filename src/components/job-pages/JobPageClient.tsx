@@ -11,6 +11,10 @@ import {
 } from "@/components/charts";
 import { ForceGraph3DComponent, ForceGraphLoading } from "@/components/ForceGraph3D";
 import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
+import { ExpertProfile, ExpertProfileSchema } from "@/components/ExpertProfile";
+import { CaseStudy, CaseStudySchema } from "@/components/CaseStudy";
+import { RoleCalculator } from "@/components/RoleCalculator";
+import { LazyYouTube } from "@/components/LazyYouTube";
 
 import { HeroSection, InitialCharts, FAQSection, SEOContent, JobGrid } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
@@ -529,8 +533,45 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* SEO Content */}
         <SEOContent content={seoContent.content} />
 
+        {/* Rate Calculator */}
+        <section className="py-12 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              {locationDisplay} Fractional Rate Calculator
+            </h2>
+            <RoleCalculator role="cfo" />
+          </div>
+        </section>
+
+        {/* YouTube Videos */}
+        <section className="py-12 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              Fractional Executive Insights
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <LazyYouTube videoId="zxMG2m6yLdc" title="Fractional Executive Jobs - Market Overview" />
+                <p className="text-sm text-gray-600 mt-2">Market Overview for Fractional Executives</p>
+              </div>
+              <div>
+                <LazyYouTube videoId="m8UOqjRRHHk" title="How to Build a Portfolio Career" />
+                <p className="text-sm text-gray-600 mt-2">Building a Portfolio Career in {locationDisplay}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Case Study */}
+        <CaseStudy />
+        <CaseStudySchema />
+
         {/* FAQ */}
         <FAQSection faqs={seoContent.faqs} location={locationDisplay} />
+
+        {/* Expert Profile */}
+        <ExpertProfile />
+        <ExpertProfileSchema />
       </CopilotSidebar>
     </main>
   );
