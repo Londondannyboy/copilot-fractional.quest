@@ -2198,3 +2198,146 @@ CREATE TABLE pages (
 | `src/app/hire-fractional-cmo/page.tsx` | Added job board section |
 | `src/app/hire-fractional-coo/page.tsx` | Added job board section |
 | `PLAN.md` | Updated with session progress |
+
+---
+
+# Session Learnings: 2026-01-09 - PageRenderer Fixes & CSS Styling
+
+## What Was Completed
+
+### 1. Fixed `role_cards` Section Type Not Rendering
+
+**Problem**: Database pages like `/fractional-jobs-uk` were rendering raw text because the `role_cards` section type wasn't handled by PageRenderer.
+
+**Root Cause**: The database had sections with `type: "role_cards"` containing items with `href`, `icon`, `title` properties, but PageRenderer only had cases for `role_types`, `roles`, `common_roles`.
+
+**Fix** (`src/components/pages/PageRenderer.tsx`):
+- Added `RoleCardWithLinkItem` interface for items with `href`, `icon`, `title`, `description`, `rate`
+- Added `iconMap` object mapping icon names to emoji characters
+- Added `RoleCardsWithLinks` component that renders linked cards with icons
+- Added `case 'role_cards':` to `getSectionContent` switch statement
+
+```typescript
+interface RoleCardWithLinkItem {
+  href: string
+  icon: string
+  title: string
+  description?: string
+  rate?: string
+}
+
+const iconMap: Record<string, string> = {
+  currency: '💰',
+  chart: '📊',
+  code: '💻',
+  gear: '⚙️',
+  shield: '🛡️',
+  people: '👥',
+  briefcase: '💼',
+  target: '🎯',
+  rocket: '🚀',
+  building: '🏢',
+  globe: '🌍',
+  lightbulb: '💡',
+  handshake: '🤝',
+  scale: '⚖️',
+  megaphone: '📣',
+  search: '🔍',
+}
+
+function RoleCardsWithLinks({ items }: { items?: RoleCardWithLinkItem[] }) {
+  // Renders grid of linked cards with icons
+}
+```
+
+### 2. Fixed Hero Section Not Rendering
+
+**Problem**: Hero sections on database pages had no background - just white/plain with hard-to-read text.
+
+**Root Cause**: `hero-section` class was used in PageRenderer but never defined in CSS.
+
+**Fix** (`src/app/globals.css`):
+- Added `.hero-section` with dark gradient background and radial glow effects
+- Added `.hero-badge` for styled badge elements
+
+```css
+.hero-section {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  /* ... radial gradient glow effects */
+}
+```
+
+### 3. Added All Missing CSS Classes for PageRenderer
+
+**Problem**: Many CSS classes used by PageRenderer were undefined, causing unstyled content.
+
+**Classes Added**:
+- `content-section`, `section-container`, `section-header`, `section-eyebrow`, `section-title`
+- `card-grid` (responsive grid layout)
+- `card-accent` (left-bordered accent cards)
+- `role-card`, `role-card-header`, `role-title`, `role-rate`, `role-description`
+- `stat-card`, `stat-value`, `stat-label`
+- `check-list` with checkmark styling
+- `comparison-table` with hover states
+- `steps-list` with numbered circle bullets
+- `faq-item`, `faq-question`, `faq-answer` for FAQ accordions
+- `link-card`, `link-card-icon`, `link-card-content`, `link-card-title`, `link-card-domain`
+- `cta-section`, `cta-title`, `cta-subtitle`
+- `prose-content` for text content
+- `btn`, `btn-ghost` button variants
+
+---
+
+## Files Modified
+
+| File | Changes |
+|------|---------|
+| `src/components/pages/PageRenderer.tsx` | Added `RoleCardWithLinkItem` interface, `iconMap`, `RoleCardsWithLinks` component, `role_cards` case |
+| `src/app/globals.css` | Added ~430 lines of CSS for hero-section, content-section, card-grid, role-card, stat-card, check-list, comparison-table, steps-list, faq, link-card, cta-section, prose-content, btn styles |
+
+---
+
+## Key Insight: PageRenderer Section Type Mapping
+
+When migrating content to the database, ensure section types match what PageRenderer handles:
+
+| Database Section Type | PageRenderer Handler |
+|----------------------|---------------------|
+| `role_cards` | `RoleCardsWithLinks` (NEW) |
+| `role_types`, `roles`, `common_roles` | `RoleCardsGrid` |
+| `stats_bar` | `StatsBar` |
+| `geographic_sectors` | `GeographicSectors` |
+| `emerging_roles` | `EmergingRolesGrid` |
+| `case_study` | `CaseStudySection` |
+| `industry_stats` | `IndustryStatsGrid` |
+| `rate_tiers` | `RateTiersSection` |
+| `ir35_info` | `IR35InfoSection` |
+| `calculator` | `CalculatorSection` |
+| `job_board` | `JobBoardSection` |
+| `video` | `VideoSection` |
+| `definition_box` | `DefinitionBox` |
+| `cta_section` | `CTASection` |
+| `related_resources` | `RelatedResourcesGrid` |
+| `prose_grid` | `ProseGridSection` |
+| `qualifications_links` | `QualificationsLinks` |
+| `intro`, `market_trends`, `qualifications`, etc. | `ProseContent` |
+
+If content renders as raw text, check:
+1. Is the section type in the switch statement?
+2. Does the item structure match the component's expected interface?
+3. Are the CSS classes defined?
+
+---
+
+## Commits
+
+1. `16b82f3` - Add role_cards section handler to PageRenderer
+2. `52625ae` - Add comprehensive CSS styles for PageRenderer sections
