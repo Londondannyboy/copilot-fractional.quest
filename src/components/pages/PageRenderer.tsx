@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import type { PageData, Section, FAQ, ExternalLink } from '@/lib/pages'
+import { RoleCalculator } from '@/components/RoleCalculator'
+import { LazyYouTube } from '@/components/LazyYouTube'
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 
 // ===========================================
 // Main Page Renderer
@@ -218,171 +221,214 @@ function getSectionContent(section: Section): React.ReactNode {
 
     // New section types from content migration
     case 'stats_bar':
-      return <StatsBar items={section.items as StatsBarItem[]} />
+      return <StatsBar items={section.items as unknown as StatsBarItem[]} />
 
     case 'geographic_sectors':
-      return <GeographicSectors items={section.items as GeographicSectorItem[]} />
+      return <GeographicSectors items={section.items as unknown as GeographicSectorItem[]} />
 
     case 'emerging_roles':
-      return <EmergingRolesGrid items={section.items as EmergingRoleItem[]} />
+      return <EmergingRolesGrid items={section.items as unknown as EmergingRoleItem[]} />
 
     case 'case_study':
-      return <CaseStudySection section={section as CaseStudyData} />
+      return <CaseStudySection section={section as unknown as CaseStudyData} />
 
     case 'industry_stats':
-      return <IndustryStatsGrid items={section.items as IndustryStat[]} />
+      return <IndustryStatsGrid items={section.items as unknown as IndustryStat[]} />
 
     case 'rate_tiers':
-      return <RateTiersSection tiers={section.tiers as RateTier[]} />
+      return <RateTiersSection tiers={section.tiers as unknown as RateTier[]} />
 
     case 'ir35_info':
-      return <IR35InfoSection section={section as IR35Data} />
+      return <IR35InfoSection section={section as unknown as IR35Data} />
 
     case 'location_rates':
-      return <LocationRatesGrid items={section.items as LocationRateItem[]} />
+      return <LocationRatesGrid items={section.items as unknown as LocationRateItem[]} />
 
     case 'specializations':
-      return <SpecializationsGrid items={section.items as SpecializationItem[]} />
+      return <SpecializationsGrid items={section.items as unknown as SpecializationItem[]} />
 
     case 'calculator':
-      return <CalculatorSection example={section.example as CalculatorExample} />
+      return <CalculatorSection example={section.example as unknown as CalculatorExample} />
 
     case 'role_types':
     case 'roles':
     case 'common_roles':
-      return <RoleCardsGrid items={section.items as RoleItem[]} />
+      return <RoleCardsGrid items={section.items as unknown as RoleItem[]} />
 
     case 'market_stats':
-      return <StatsGrid stats={section.stats as StatItem[]} />
+      return <StatsGrid stats={section.stats as unknown as StatItem[]} />
 
     case 'responsibilities':
     case 'deliverables':
-      return <CheckList items={section.items as string[]} />
+      return <CheckList items={section.items as unknown as string[]} />
 
     case 'comparison':
     case 'comparison_table':
-      return <ComparisonTable items={section.items as ComparisonItem[]} />
+      return <ComparisonTable items={section.items as unknown as ComparisonItem[]} />
 
     case 'services':
-      return <ServicesGrid items={section.items as ServiceItem[]} />
+      return <ServicesGrid items={section.items as unknown as ServiceItem[]} />
 
     case 'when_to_hire':
     case 'warning_signs':
-      return <SignalsList signals={section.signals as SignalItem[]} />
+      return <SignalsList signals={section.signals as unknown as SignalItem[]} />
 
     case 'costs':
-      return <CostsSection content={section.content} rateTable={section.rateTable as RateTableItem[]} />
+      return <CostsSection content={section.content} rateTable={section.rateTable as unknown as RateTableItem[]} />
 
     case 'how_to_hire':
     case 'hiring_process':
     case 'transition_steps':
     case 'getting_started':
-      return <StepsList steps={section.steps as StepItem[]} />
+      return <StepsList steps={section.steps as unknown as StepItem[]} />
 
     case 'areas':
-      return <AreasGrid items={section.items as AreaItem[]} />
+      return <AreasGrid items={section.items as unknown as AreaItem[]} />
 
     case 'sectors':
     case 'subsectors':
-      return <SectorsGrid items={section.items as SectorItem[]} />
+      return <SectorsGrid items={section.items as unknown as SectorItem[]} />
 
     case 'by_stage':
-      return <StagesGrid items={section.items as StageItem[]} />
+      return <StagesGrid items={section.items as unknown as StageItem[]} />
 
     case 'what_to_look_for':
-      return <CriteriaSection mustHaves={section.mustHaves as CriteriaItem[]} niceToHaves={section.niceToHaves as CriteriaItem[]} />
+      return <CriteriaSection mustHaves={section.mustHaves as unknown as CriteriaItem[]} niceToHaves={section.niceToHaves as unknown as CriteriaItem[]} />
 
     case 'engagement_types':
-      return <EngagementTypes items={section.items as EngagementItem[]} />
+      return <EngagementTypes items={section.items as unknown as EngagementItem[]} />
 
     case 'common_mistakes':
-      return <MistakesList mistakes={section.mistakes as MistakeItem[]} items={section.items as MistakeItem[]} />
+      return <MistakesList mistakes={section.mistakes as unknown as MistakeItem[]} items={section.items as unknown as MistakeItem[]} />
 
     case 'core_benefits':
-      return <BenefitsGrid items={section.items as BenefitItem[]} />
+      return <BenefitsGrid items={section.items as unknown as BenefitItem[]} />
 
     case 'by_situation':
-      return <SituationsList items={section.items as SituationItem[]} />
+      return <SituationsList items={section.items as unknown as SituationItem[]} />
 
     case 'why_saas':
     case 'why_pe':
     case 'why_fintech':
     case 'why_healthtech':
-      return <ReasonsList items={section.items as ReasonItem[]} />
+      return <ReasonsList items={section.items as unknown as ReasonItem[]} />
 
     case 'saas_expertise':
     case 'manufacturing_expertise':
     case 'ecommerce_expertise':
     case 'b2b_expertise':
     case 'ai_expertise':
-      return <ExpertiseGrid items={section.items as ExpertiseItem[]} />
+      return <ExpertiseGrid items={section.items as unknown as ExpertiseItem[]} />
 
     case 'fundraising_services':
-      return <ServicesGrid items={section.items as ServiceItem[]} />
+      return <ServicesGrid items={section.items as unknown as ServiceItem[]} />
 
     case 'by_round':
-      return <RoundsList items={section.items as RoundItem[]} />
+      return <RoundsList items={section.items as unknown as RoundItem[]} />
 
     case 'value_add':
-      return <ValueAddSection stats={section.stats as ValueStat[]} />
+      return <ValueAddSection stats={section.stats as unknown as ValueStat[]} />
 
     case 'how_it_works':
-      return <HowItWorksGrid items={section.items as HowItWorksItem[]} />
+      return <HowItWorksGrid items={section.items as unknown as HowItWorksItem[]} />
 
     case 'benefits':
-      return <BenefitsSplit forCompanies={section.forCompanies as BenefitItem[]} forExecutives={section.forExecutives as BenefitItem[]} />
+      return <BenefitsSplit forCompanies={section.forCompanies as unknown as BenefitItem[]} forExecutives={section.forExecutives as unknown as BenefitItem[]} />
 
     case 'prerequisites':
-      return <PrerequisitesList items={section.items as PrerequisiteItem[]} />
+      return <PrerequisitesList items={section.items as unknown as PrerequisiteItem[]} />
 
     case 'profile_optimization':
     case 'key_terms':
-      return <TipsGrid items={section.items as TipItem[]} />
+      return <TipsGrid items={section.items as unknown as TipItem[]} />
 
     case 'content_strategy':
-      return <ContentStrategyGrid items={section.items as ContentItem[]} />
+      return <ContentStrategyGrid items={section.items as unknown as ContentItem[]} />
 
     case 'ideal_portfolio':
     case 'time_management':
     case 'client_selection':
-      return <TipsGrid items={section.items as TipItem[]} />
+      return <TipsGrid items={section.items as unknown as TipItem[]} />
 
     case 'remote_landscape':
-      return <RemoteStats stats={section.stats as RemoteStat[]} />
+      return <RemoteStats stats={section.stats as unknown as RemoteStat[]} />
 
     case 'best_roles_remote':
-      return <RemoteRolesGrid items={section.items as RemoteRoleItem[]} />
+      return <RemoteRolesGrid items={section.items as unknown as RemoteRoleItem[]} />
 
     case 'making_remote_work':
-      return <TipsList tips={section.tips as TipListItem[]} />
+      return <TipsList tips={section.tips as unknown as TipListItem[]} />
 
     case 'rate_table':
-      return <RateTableSection items={section.items as RateTableItem[]} />
+      return <RateTableSection items={section.items as unknown as RateTableItem[]} />
 
     case 'role_breakdown':
-      return <RoleBreakdownGrid items={section.items as RoleBreakdownItem[]} />
+      return <RoleBreakdownGrid items={section.items as unknown as RoleBreakdownItem[]} />
 
     case 'location_factor':
-      return <LocationFactorGrid items={section.items as LocationFactorItem[]} />
+      return <LocationFactorGrid items={section.items as unknown as LocationFactorItem[]} />
 
     case 'sector_premiums':
-      return <SectorPremiumsGrid items={section.items as SectorPremiumItem[]} />
+      return <SectorPremiumsGrid items={section.items as unknown as SectorPremiumItem[]} />
 
     case 'annual_earnings':
-      return <EarningsSection content={section.content} examples={section.examples as EarningExample[]} />
+      return <EarningsSection content={section.content} examples={section.examples as unknown as EarningExample[]} />
 
     case 'when_interim':
     case 'when_fractional':
     case 'when_consultant':
-      return <ScenariosList scenarios={section.scenarios as ScenarioItem[]} />
+      return <ScenariosList scenarios={section.scenarios as unknown as ScenarioItem[]} />
 
     case 'engagement_model':
       return (
         <>
           {section.content && <ProseContent content={section.content} />}
-          {section.typical_activities && <ActivitiesGrid items={section.typical_activities as ActivityItem[]} />}
+          {section.typical_activities && <ActivitiesGrid items={section.typical_activities as unknown as ActivityItem[]} />}
         </>
       )
+
+    // ===========================================
+    // Interactive Components
+    // ===========================================
+
+    case 'role_calculator':
+      return <RoleCalculatorSection role={section.role as string} />
+
+    case 'video':
+      return <VideoSection videoId={section.videoId as string} title={section.title as string} caption={section.caption as string} />
+
+    case 'job_board':
+      return (
+        <JobBoardSection
+          department={section.department as string}
+          location={section.location as string}
+          title={section.title as string}
+          accentColor={section.accentColor as string}
+          jobsPerPage={section.jobsPerPage as number}
+        />
+      )
+
+    case 'definition_box':
+      return <DefinitionBox label={section.label as string} content={section.content as string} />
+
+    case 'related_resources':
+      return <RelatedResourcesGrid items={section.items as unknown as RelatedResourceItem[]} />
+
+    case 'cta_section':
+      return (
+        <CTASection
+          title={section.title as string}
+          subtitle={section.subtitle as string}
+          primaryLink={section.primaryLink as unknown as CTALink}
+          secondaryLink={section.secondaryLink as unknown as CTALink}
+        />
+      )
+
+    case 'prose_grid':
+      return <ProseGridSection items={section.items as unknown as ProseGridItem[]} />
+
+    case 'qualifications_links':
+      return <QualificationsLinks items={section.items as unknown as QualificationLink[]} intro={section.intro as string} />
 
     default:
       // Generic content fallback
@@ -1241,12 +1287,12 @@ function RateTableSection({ items }: { items?: RateTableItem[] }) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item: Record<string, string>, i: number) => (
+          {items.map((item, i) => (
             <tr key={i}>
-              <td className="font-medium">{item.role}</td>
-              <td className="text-accent font-semibold">{item.range}</td>
-              <td>{item.median}</td>
-              <td className="text-gray-600 text-sm">{item.notes}</td>
+              <td className="font-medium">{(item as unknown as Record<string, string>).role}</td>
+              <td className="text-accent font-semibold">{(item as unknown as Record<string, string>).range}</td>
+              <td>{(item as unknown as Record<string, string>).median}</td>
+              <td className="text-gray-600 text-sm">{(item as unknown as Record<string, string>).notes}</td>
             </tr>
           ))}
         </tbody>
@@ -1717,6 +1763,202 @@ function CalculatorSection({ example }: { example?: CalculatorExample }) {
           <div className="font-bold text-xl text-white">{example.annual}</div>
         </div>
       </div>
+    </div>
+  )
+}
+
+// ===========================================
+// Interactive Component Types
+// ===========================================
+
+interface RelatedResourceItem {
+  icon: string
+  title: string
+  description: string
+  href: string
+}
+
+interface CTALink {
+  label: string
+  href: string
+}
+
+interface ProseGridItem {
+  icon: string
+  title: string
+  description: string
+}
+
+interface QualificationLink {
+  name: string
+  abbr: string
+  url: string
+}
+
+// ===========================================
+// Interactive Component Sections
+// ===========================================
+
+function RoleCalculatorSection({ role }: { role?: string }) {
+  if (!role) return null
+  return (
+    <div className="max-w-4xl mx-auto">
+      <RoleCalculator role={role} />
+    </div>
+  )
+}
+
+function VideoSection({ videoId, title, caption }: { videoId?: string; title?: string; caption?: string }) {
+  if (!videoId) return null
+  return (
+    <div className="max-w-3xl mx-auto">
+      {title && <h3 className="text-lg font-bold text-gray-900 mb-4">{title}</h3>}
+      <LazyYouTube videoId={videoId} title={title || 'Video'} />
+      {caption && <p className="text-gray-500 text-sm mt-3">{caption}</p>}
+    </div>
+  )
+}
+
+function JobBoardSection({
+  department,
+  location,
+  title,
+  accentColor,
+  jobsPerPage = 6,
+}: {
+  department?: string
+  location?: string
+  title?: string
+  accentColor?: string
+  jobsPerPage?: number
+}) {
+  return (
+    <div className="max-w-6xl mx-auto">
+      <EmbeddedJobBoard
+        defaultDepartment={department}
+        defaultLocation={location}
+        title={title || 'Latest Jobs'}
+        accentColor={accentColor || 'emerald'}
+        jobsPerPage={jobsPerPage}
+      />
+    </div>
+  )
+}
+
+function DefinitionBox({ label, content }: { label?: string; content?: string }) {
+  if (!content) return null
+  return (
+    <div className="bg-gray-900 text-white py-12">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="bg-accent/10 border border-accent/30 rounded-lg p-8">
+          {label && (
+            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+              {label}
+            </h2>
+          )}
+          <p className="text-2xl font-light leading-relaxed">{content}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RelatedResourcesGrid({ items }: { items?: RelatedResourceItem[] }) {
+  if (!items) return null
+  return (
+    <div className="grid md:grid-cols-3 gap-6">
+      {items.map((item, i) => (
+        <Link
+          key={i}
+          href={item.href}
+          className="bg-white p-6 rounded-lg border border-gray-200 hover:border-accent transition-colors group"
+        >
+          <span className="text-2xl mb-3 block">{item.icon}</span>
+          <h3 className="font-bold text-gray-900 group-hover:text-accent mb-2">{item.title}</h3>
+          <p className="text-gray-600 text-sm">{item.description}</p>
+        </Link>
+      ))}
+    </div>
+  )
+}
+
+function CTASection({
+  title,
+  subtitle,
+  primaryLink,
+  secondaryLink,
+}: {
+  title?: string
+  subtitle?: string
+  primaryLink?: CTALink
+  secondaryLink?: CTALink
+}) {
+  if (!title) return null
+  return (
+    <div className="bg-gray-900 text-white py-20">
+      <div className="max-w-4xl mx-auto px-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-black mb-6">{title}</h2>
+        {subtitle && (
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">{subtitle}</p>
+        )}
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          {primaryLink && (
+            <Link
+              href={primaryLink.href}
+              className="px-8 py-4 bg-accent text-black font-bold rounded-lg hover:opacity-90 transition-colors"
+            >
+              {primaryLink.label}
+            </Link>
+          )}
+          {secondaryLink && (
+            <Link
+              href={secondaryLink.href}
+              className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors"
+            >
+              {secondaryLink.label}
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ProseGridSection({ items }: { items?: ProseGridItem[] }) {
+  if (!items) return null
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((item, i) => (
+        <div key={i} className="bg-gray-50 p-6 rounded-lg">
+          <span className="text-2xl mb-2 block">{item.icon}</span>
+          <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+          <p className="text-gray-600 text-sm">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function QualificationsLinks({ items, intro }: { items?: QualificationLink[]; intro?: string }) {
+  if (!items) return null
+  return (
+    <div className="prose prose-lg max-w-none">
+      {intro && <p>{intro}</p>}
+      <ul className="space-y-2">
+        {items.map((item, i) => (
+          <li key={i}>
+            <strong>{item.abbr}</strong> -{' '}
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline"
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
