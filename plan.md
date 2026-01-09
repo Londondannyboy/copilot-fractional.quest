@@ -17,22 +17,24 @@ We're migrating content from the original fractional.quest website to a Neon Pos
 - **Table:** `pages` with JSONB `sections` column for flexible content
 
 ## Current State (as of 2026-01-09)
-- 64 pages now exist in the Neon database (fractional-jobs-uk added)
+- 80 pages now exist in the Neon database
 - Dynamic route at `/src/app/[slug]/page.tsx` serves pages from database
 - PageRenderer at `/src/components/pages/PageRenderer.tsx` renders section types
-- 18 static page folders renamed to `-v1` (database content now served)
-- PageRenderer extended with interactive component support
+- 34 static page folders renamed to `-v1` (database content now served)
+- PageRenderer extended with interactive component support (calculator, job_board, video, definition_box, etc.)
 
 ## Completed This Session
 1. Verified key pages render from database (fractional-jobs-uk, fractional-jobs-london, london redirect)
-2. Renamed 18 static folders to -v1 so database serves these routes
-3. Extended PageRenderer with interactive components (calculator, job_board, video, definition_box, etc.)
-4. All builds passing
+2. Renamed 34 static folders to -v1 so database serves these routes
+3. Extended PageRenderer with interactive components
+4. Migrated 8 role definition pages (fractional-cfo/cto/cmo/coo/ceo/chro/cpo/ciso)
+5. Migrated 8 salary guide pages (fractional-*-salary)
+6. All builds passing
 
 ## Remaining Tasks
-1. Migrate role definition pages to database (fractional-cfo, fractional-cto, etc.) - uses new interactive component sections
-2. Migrate salary pages to database
-3. Test role pages with new calculator/job_board sections
+1. Migrate services pages to database if needed
+2. Clean up any remaining static page overrides
+3. Test all interactive components on production
 
 ## Key Files
 - `/src/app/[slug]/page.tsx` - Dynamic route
