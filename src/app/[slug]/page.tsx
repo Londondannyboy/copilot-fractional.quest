@@ -8,10 +8,10 @@ import { PageRenderer } from '@/components/pages/PageRenderer'
 // ===========================================
 
 // Slugs that have dedicated static routes - exclude from dynamic generation
+// Only add slugs here if they have a static /src/app/[slug]/page.tsx folder
 const STATIC_ROUTE_SLUGS = [
   'fractional-jobs-london',
-  'fractional-jobs-uk',
-  // Add other static routes here as needed
+  // fractional-jobs-uk is now served from database
 ]
 
 export async function generateStaticParams() {
