@@ -2500,3 +2500,155 @@ A page is "V2 complete" when:
 3. Add to STATIC_ROUTE_SLUGS
 4. Deploy and verify it matches V1 quality
 5. Repeat for other high-traffic pages
+
+---
+
+# Session Learnings: 2026-01-10 - V2 Quality Enhancement (COMPLETED)
+
+## What Was Completed
+
+### Phase 1: All Key Pages Now Use JobPageClient ✅
+
+All high-traffic job pages now use the correct component-driven architecture:
+
+| Page | Status | Components |
+|------|--------|------------|
+| `/fractional-jobs-uk` | ✅ Created | JobPageClient, CopilotKit, EmbeddedJobBoard, HotJobs, EmailCapture, RoleCalculator |
+| `/fractional-cfo-jobs-uk` | ✅ Created | Same full component set |
+| `/fractional-cto-jobs-uk` | ✅ Created | Same full component set |
+| `/fractional-cmo-jobs-uk` | ✅ Created | Same full component set |
+| `/fractional-coo-jobs-uk` | ✅ Created | Same full component set |
+| `/fractional-chro-jobs-uk` | ✅ Created | Same full component set |
+| `/fractional-ciso-jobs-uk` | ✅ Created | Same full component set |
+| `/fractional-cpo-jobs-uk` | ✅ Created | Same full component set |
+| `/fractional-ceo-jobs-uk` | ✅ Created | Same full component set |
+
+### Phase 2: SEO Content Files Created ✅
+
+Created SEO content files for all roles:
+- `src/lib/seo-content/uk.ts`
+- `src/lib/seo-content/cfo-jobs-uk.ts`
+- `src/lib/seo-content/cto-jobs-uk.ts`
+- `src/lib/seo-content/cmo-jobs-uk.ts`
+- `src/lib/seo-content/coo-jobs-uk.ts`
+- `src/lib/seo-content/chro-jobs-uk.ts`
+- `src/lib/seo-content/ciso-jobs-uk.ts`
+- `src/lib/seo-content/cpo-jobs-uk.ts`
+- `src/lib/seo-content/ceo-jobs-uk.ts`
+
+### Phase 3: STATIC_ROUTE_SLUGS Updated ✅
+
+All new pages added to exclusion list in `[slug]/page.tsx`:
+```typescript
+const STATIC_ROUTE_SLUGS = [
+  'fractional-jobs-london',
+  'fractional-jobs-uk',
+  'fractional-cfo-jobs-uk',
+  'fractional-cto-jobs-uk',
+  'fractional-cmo-jobs-uk',
+  'fractional-coo-jobs-uk',
+  'fractional-chro-jobs-uk',
+  'fractional-ciso-jobs-uk',
+  'fractional-cpo-jobs-uk',
+  'fractional-ceo-jobs-uk',
+]
+```
+
+### Phase 4: Bug Fixes ✅
+
+1. **Fixed jobs query** - Changed from `test_jobs` table (15 jobs) to `jobs` table (213 jobs)
+2. **Fixed column names** - `company_name`, `description_snippet`, `role_category`
+3. **Added image domains** - Unsplash, ui-avatars, Google to next.config.ts
+
+### Phase 5: UI Enhancements ✅
+
+1. **Transparent Header** - White text on job pages when over hero
+2. **Expanded Image Pool** - 60+ Unsplash images across 8 categories
+3. **UK Job Filtering** - API now filters UK-only by default
+4. **JobsSidebar Component** - Popular roles, UK locations, CTAs
+5. **Book Call Page** - Dedicated `/book-call` page for Calendly
+
+## New Files Created
+
+| File | Purpose |
+|------|---------|
+| `src/app/fractional-jobs-uk/page.tsx` | UK jobs page with JobPageClient |
+| `src/app/fractional-cfo-jobs-uk/page.tsx` | CFO jobs page |
+| `src/app/fractional-cto-jobs-uk/page.tsx` | CTO jobs page |
+| `src/app/fractional-cmo-jobs-uk/page.tsx` | CMO jobs page |
+| `src/app/fractional-coo-jobs-uk/page.tsx` | COO jobs page |
+| `src/app/fractional-chro-jobs-uk/page.tsx` | CHRO jobs page |
+| `src/app/fractional-ciso-jobs-uk/page.tsx` | CISO jobs page |
+| `src/app/fractional-cpo-jobs-uk/page.tsx` | CPO jobs page |
+| `src/app/fractional-ceo-jobs-uk/page.tsx` | CEO jobs page |
+| `src/app/book-call/page.tsx` | Calendly booking page |
+| `src/components/JobsSidebar.tsx` | Sidebar with CTAs |
+| `src/lib/seo-content/uk.ts` | UK SEO content |
+| `src/lib/seo-content/cfo-jobs-uk.ts` | CFO SEO content |
+| `src/lib/seo-content/cto-jobs-uk.ts` | CTO SEO content |
+| `src/lib/seo-content/cmo-jobs-uk.ts` | CMO SEO content |
+| `src/lib/seo-content/coo-jobs-uk.ts` | COO SEO content |
+| `src/lib/seo-content/chro-jobs-uk.ts` | CHRO SEO content |
+| `src/lib/seo-content/ciso-jobs-uk.ts` | CISO SEO content |
+| `src/lib/seo-content/cpo-jobs-uk.ts` | CPO SEO content |
+| `src/lib/seo-content/ceo-jobs-uk.ts` | CEO SEO content |
+
+## Files Modified
+
+| File | Changes |
+|------|---------|
+| `src/lib/jobs.ts` | Fixed table name from `test_jobs` to `jobs`, fixed column names |
+| `src/app/api/jobs/search/route.ts` | Added UK-only filtering with `isUKLocation()` |
+| `src/components/EmbeddedJobBoard.tsx` | Expanded to 60+ images across 8 categories |
+| `src/components/navigation/Header.tsx` | Transparent header with white text on job pages |
+| `src/components/job-pages/JobPageClient.tsx` | Added JobsSidebar in 4-column grid layout |
+| `src/app/[slug]/page.tsx` | Updated STATIC_ROUTE_SLUGS |
+| `next.config.ts` | Added Unsplash, ui-avatars, Google image domains |
+
+## Git Commits (2026-01-10)
+
+1. `e1c7711` - Create V2 job pages with JobPageClient pattern
+2. `15eb553` - Add Unsplash image domains to next.config.ts
+3. `79b9616` - Fix job queries to use jobs table
+4. `be640fa` - Add debug logging to EmbeddedJobBoard
+5. `841f50d` - Add transparent header on job pages + update documentation
+6. `f5819ee` - Add sidebar, UK job filtering, expanded images, and Calendly page
+
+## V2 vs V1 Comparison
+
+| Feature | V1 (fractional.quest) | V2 (copilotkit-demo) |
+|---------|----------------------|---------------------|
+| CopilotKit Sidebar | ✅ | ✅ |
+| Job Search with Filters | ✅ | ✅ |
+| EmbeddedJobBoard | ✅ | ✅ |
+| HotJobs Carousel | ✅ | ✅ |
+| EmailCapture | ✅ | ✅ |
+| RoleCalculator | ✅ | ✅ |
+| Expert Profile | ✅ | ✅ |
+| Video Embeds | ✅ | ✅ |
+| Hero Image | ✅ | ✅ |
+| Case Studies | ✅ | ✅ |
+| FAQs | ✅ | ✅ |
+| Schema Markup | ✅ | ✅ |
+| Transparent Header | ❌ | ✅ (NEW) |
+| Jobs Sidebar | ❌ | ✅ (NEW) |
+| UK-only Filtering | ❌ | ✅ (NEW) |
+| Book Call Page | Inline Calendly | ✅ Dedicated page (faster) |
+
+## Success Criteria Met
+
+All V2 pages now meet the success criteria:
+- [x] Visual quality matches or exceeds V1
+- [x] Has CopilotKit sidebar
+- [x] Has working job search with filters
+- [x] Has HotJobs carousel
+- [x] Has EmailCapture
+- [x] Has hero with image
+- [x] All interactive components work
+- [x] Schema markup included
+- [x] FAQs included
+
+## Known Issues (Non-Critical)
+
+1. **RoleNews column error** - `excerpt` column doesn't exist in articles table (pre-existing issue)
+2. **Some V1 pages still in database** - Low-traffic pages served via PageRenderer (acceptable for now)
