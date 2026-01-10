@@ -622,7 +622,13 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
 
               {/* Sidebar - 1 column, sticky */}
               <div className="lg:col-span-1 lg:sticky lg:top-24 h-fit">
-                <JobsSidebar location={location} />
+                <JobsSidebar
+                  location={location}
+                  authorityLinks={seoContent.authorityLinks}
+                  statistics={seoContent.statistics}
+                  relatedPages={seoContent.relatedPages}
+                  currentPath={`/fractional-jobs-${location}`}
+                />
               </div>
             </div>
           </div>

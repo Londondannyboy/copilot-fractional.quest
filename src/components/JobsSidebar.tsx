@@ -1,11 +1,35 @@
 'use client'
 
 import Link from 'next/link'
+import { AuthorityLinks, StatisticsHighlight, RelatedPages } from './sidebar'
+
+interface AuthorityLink {
+  name: string
+  url: string
+  context: string
+}
+
+interface Statistic {
+  value: string
+  description: string
+  source: string
+}
+
+interface RelatedPage {
+  name: string
+  url: string
+}
 
 interface JobsSidebarProps {
   location?: string
   locationDisplay?: string
   showCalendly?: boolean
+  // Enriched SEO content
+  authorityLinks?: AuthorityLink[]
+  statistics?: Record<string, Statistic>
+  relatedPages?: RelatedPage[]
+  accentColor?: 'emerald' | 'blue' | 'amber' | 'purple' | 'red' | 'indigo'
+  currentPath?: string
 }
 
 const POPULAR_ROLES = [
@@ -25,7 +49,16 @@ const UK_LOCATIONS = [
   { name: 'Remote UK', href: '/remote-fractional-jobs' },
 ]
 
-export function JobsSidebar({ location, locationDisplay, showCalendly = true }: JobsSidebarProps) {
+export function JobsSidebar({
+  location,
+  locationDisplay,
+  showCalendly = true,
+  authorityLinks,
+  statistics,
+  relatedPages,
+  accentColor = 'emerald',
+  currentPath,
+}: JobsSidebarProps) {
   return (
     <aside className="space-y-6">
       {/* Book a Call CTA */}
@@ -42,6 +75,15 @@ export function JobsSidebar({ location, locationDisplay, showCalendly = true }: 
             Book a Call
           </Link>
         </div>
+      )}
+
+      {/* Market Statistics - NEW */}
+      {statistics && Object.keys(statistics).length > 0 && (
+        <StatisticsHighlight
+          statistics={statistics}
+          title="Market Insights"
+          accentColor={accentColor}
+        />
       )}
 
       {/* Popular Roles */}
@@ -66,6 +108,15 @@ export function JobsSidebar({ location, locationDisplay, showCalendly = true }: 
         </div>
       </div>
 
+      {/* Related Pages - NEW */}
+      {relatedPages && relatedPages.length > 0 && (
+        <RelatedPages
+          pages={relatedPages}
+          title="Related Pages"
+          currentPath={currentPath}
+        />
+      )}
+
       {/* UK Locations */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">
         <h3 className="font-bold text-gray-900 mb-4">UK Locations</h3>
@@ -85,6 +136,14 @@ export function JobsSidebar({ location, locationDisplay, showCalendly = true }: 
           ))}
         </div>
       </div>
+
+      {/* Authority Links - NEW */}
+      {authorityLinks && authorityLinks.length > 0 && (
+        <AuthorityLinks
+          links={authorityLinks}
+          title="Trusted Sources"
+        />
+      )}
 
       {/* For Candidates */}
       <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-5 border border-indigo-100">
