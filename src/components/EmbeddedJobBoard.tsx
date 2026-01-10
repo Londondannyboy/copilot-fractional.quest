@@ -136,14 +136,20 @@ export function EmbeddedJobBoard({
       params.set('page', page.toString())
       params.set('limit', jobsPerPage.toString())
 
-      const response = await fetch(`/api/jobs/search?${params.toString()}`)
+      const url = `/api/jobs/search?${params.toString()}`
+      console.log('[EmbeddedJobBoard] Fetching:', url)
+      const response = await fetch(url)
+      console.log('[EmbeddedJobBoard] Response status:', response.status)
       if (response.ok) {
         const data = await response.json()
+        console.log('[EmbeddedJobBoard] Got', data.total, 'total jobs')
         setJobs(data.jobs || [])
         setTotalJobs(data.total || 0)
+      } else {
+        console.error('[EmbeddedJobBoard] API returned error:', response.status, response.statusText)
       }
     } catch (error) {
-      console.error('Error fetching jobs:', error)
+      console.error('[EmbeddedJobBoard] Fetch error:', error)
     } finally {
       setLoading(false)
     }
