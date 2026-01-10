@@ -40,29 +40,29 @@ export async function getJobsByLocation(location: string): Promise<Job[]> {
     const rows = await sql`
       SELECT
         title,
-        company,
+        company_name,
         location,
         salary_min,
         salary_max,
-        description,
-        role_type
-      FROM test_jobs
-      WHERE location ILIKE ${searchTerm}
+        description_snippet,
+        role_category
+      FROM jobs
+      WHERE is_active = true AND location ILIKE ${searchTerm}
       LIMIT 50
     `;
 
     return rows.map((row: any, index: number) => ({
       id: `job-${index}`,
       title: row.title,
-      company: row.company || "Unknown",
+      company: row.company_name || "Unknown",
       location: row.location || "UK",
       salaryMin: row.salary_min,
       salaryMax: row.salary_max,
       salary: row.salary_min && row.salary_max
         ? `£${Math.round(row.salary_min / 1000)}k - £${Math.round(row.salary_max / 1000)}k`
         : undefined,
-      description: row.description,
-      roleType: row.role_type,
+      description: row.description_snippet,
+      roleType: row.role_category,
       url: `/fractional-jobs-uk`,
     }));
   } catch (error) {
@@ -80,29 +80,29 @@ export async function getJobsByRole(role: string): Promise<Job[]> {
     const rows = await sql`
       SELECT
         title,
-        company,
+        company_name,
         location,
         salary_min,
         salary_max,
-        description,
-        role_type
-      FROM test_jobs
-      WHERE title ILIKE ${searchTerm} OR role_type ILIKE ${searchTerm}
+        description_snippet,
+        role_category
+      FROM jobs
+      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
       LIMIT 50
     `;
 
     return rows.map((row: any, index: number) => ({
       id: `job-${index}`,
       title: row.title,
-      company: row.company || "Unknown",
+      company: row.company_name || "Unknown",
       location: row.location || "UK",
       salaryMin: row.salary_min,
       salaryMax: row.salary_max,
       salary: row.salary_min && row.salary_max
         ? `£${Math.round(row.salary_min / 1000)}k - £${Math.round(row.salary_max / 1000)}k`
         : undefined,
-      description: row.description,
-      roleType: row.role_type,
+      description: row.description_snippet,
+      roleType: row.role_category,
       url: `/fractional-${role.toLowerCase()}-jobs-uk`,
     }));
   } catch (error) {
@@ -120,25 +120,25 @@ export async function getLocationStats(location: string): Promise<JobStats> {
     // Total count
     const [countResult] = await sql`
       SELECT COUNT(*) as count
-      FROM test_jobs
-      WHERE location ILIKE ${searchTerm}
+      FROM jobs
+      WHERE is_active = true AND location ILIKE ${searchTerm}
     `;
     const total = Number(countResult?.count || 0);
 
     // Average salary
     const [avgResult] = await sql`
       SELECT AVG(salary_max) as avg
-      FROM test_jobs
-      WHERE location ILIKE ${searchTerm} AND salary_max IS NOT NULL
+      FROM jobs
+      WHERE is_active = true AND location ILIKE ${searchTerm} AND salary_max IS NOT NULL
     `;
     const avgDayRate = Math.round(Number(avgResult?.avg || 150000) / 1000);
 
     // Role breakdown
     const roleRows = await sql`
-      SELECT role_type as role, COUNT(*) as count
-      FROM test_jobs
-      WHERE location ILIKE ${searchTerm}
-      GROUP BY role_type
+      SELECT role_category as role, COUNT(*) as count
+      FROM jobs
+      WHERE is_active = true AND location ILIKE ${searchTerm}
+      GROUP BY role_category
       ORDER BY count DESC
     `;
     const topRoles = roleRows.map((r: any) => ({
@@ -225,28 +225,28 @@ export async function getAllJobs(): Promise<Job[]> {
     const rows = await sql`
       SELECT
         title,
-        company,
+        company_name,
         location,
         salary_min,
         salary_max,
-        description,
-        role_type
-      FROM test_jobs
+        description_snippet,
+        role_category
+      FROM jobs WHERE is_active = true
       LIMIT 100
     `;
 
     return rows.map((row: any, index: number) => ({
       id: `job-${index}`,
       title: row.title,
-      company: row.company || "Unknown",
+      company: row.company_name || "Unknown",
       location: row.location || "UK",
       salaryMin: row.salary_min,
       salaryMax: row.salary_max,
       salary: row.salary_min && row.salary_max
         ? `£${Math.round(row.salary_min / 1000)}k - £${Math.round(row.salary_max / 1000)}k`
         : undefined,
-      description: row.description,
-      roleType: row.role_type,
+      description: row.description_snippet,
+      roleType: row.role_category,
       url: `/fractional-jobs-uk`,
     }));
   } catch (error) {
@@ -260,18 +260,18 @@ export async function getAllStats(): Promise<JobStats> {
   const sql = getDb();
 
   try {
-    const [countResult] = await sql`SELECT COUNT(*) as count FROM test_jobs`;
+    const [countResult] = await sql`SELECT COUNT(*) as count FROM jobs WHERE is_active = true`;
     const total = Number(countResult?.count || 0);
 
     const [avgResult] = await sql`
-      SELECT AVG(salary_max) as avg FROM test_jobs WHERE salary_max IS NOT NULL
+      SELECT AVG(salary_max) as avg FROM jobs WHERE is_active = true AND salary_max IS NOT NULL
     `;
     const avgDayRate = Math.round(Number(avgResult?.avg || 150000) / 1000);
 
     const roleRows = await sql`
-      SELECT role_type as role, COUNT(*) as count
-      FROM test_jobs
-      GROUP BY role_type
+      SELECT role_category as role, COUNT(*) as count
+      FROM jobs WHERE is_active = true
+      GROUP BY role_category
       ORDER BY count DESC
     `;
     const topRoles = roleRows.map((r: any) => ({
@@ -320,22 +320,22 @@ export async function getRoleStats(role: string): Promise<JobStats> {
   try {
     const [countResult] = await sql`
       SELECT COUNT(*) as count
-      FROM test_jobs
-      WHERE title ILIKE ${searchTerm} OR role_type ILIKE ${searchTerm}
+      FROM jobs
+      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
     `;
     const total = Number(countResult?.count || 0);
 
     const [avgResult] = await sql`
       SELECT AVG(salary_max) as avg
-      FROM test_jobs
-      WHERE (title ILIKE ${searchTerm} OR role_type ILIKE ${searchTerm}) AND salary_max IS NOT NULL
+      FROM jobs
+      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm}) AND salary_max IS NOT NULL
     `;
     const avgDayRate = Math.round(Number(avgResult?.avg || 150000) / 1000);
 
     const locationRows = await sql`
       SELECT location, COUNT(*) as count
-      FROM test_jobs
-      WHERE title ILIKE ${searchTerm} OR role_type ILIKE ${searchTerm}
+      FROM jobs
+      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
       GROUP BY location
       ORDER BY count DESC
     `;
