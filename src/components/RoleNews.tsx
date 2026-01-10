@@ -10,11 +10,11 @@ interface NewsArticle {
   id: number
   slug: string
   title: string
-  excerpt: string | null
-  category: string | null
+  meta_description: string | null
+  role_category: string | null
   article_type: string | null
-  featured_asset_url: string | null
-  published_at: string | null
+  hero_image_url: string | null
+  created_at: string | null
 }
 
 interface RoleNewsProps {
@@ -67,13 +67,12 @@ export async function RoleNews({
   try {
     const sql = createDbQuery()
     articles = await sql`
-      SELECT id, slug, title, excerpt, category, article_type,
-             featured_asset_url, published_at
+      SELECT id, slug, title, meta_description, role_category, article_type,
+             hero_image_url, created_at
       FROM articles
-      WHERE app = 'fractional'
-        AND status = 'published'
-        AND category = ${category}
-      ORDER BY published_at DESC
+      WHERE published = true
+        AND role_category = ${category}
+      ORDER BY created_at DESC
       LIMIT ${limit}
     ` as NewsArticle[]
   } catch (error) {
@@ -116,10 +115,10 @@ export async function RoleNews({
               className="group block bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md hover:border-amber-200 transition-all duration-200"
             >
               {/* Image */}
-              {article.featured_asset_url && (
+              {article.hero_image_url && (
                 <div className="relative h-32 bg-gray-100 overflow-hidden">
                   <img
-                    src={article.featured_asset_url}
+                    src={article.hero_image_url}
                     alt={article.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -133,9 +132,9 @@ export async function RoleNews({
                   <span className={`inline-block text-xs font-medium px-2 py-0.5 rounded ${badge.color}`}>
                     {badge.label}
                   </span>
-                  {article.published_at && (
+                  {article.created_at && (
                     <span className="text-xs text-gray-500">
-                      {formatDate(article.published_at)}
+                      {formatDate(article.created_at)}
                     </span>
                   )}
                 </div>
@@ -146,9 +145,9 @@ export async function RoleNews({
                 </h4>
 
                 {/* Excerpt */}
-                {article.excerpt && (
+                {article.meta_description && (
                   <p className="text-gray-600 text-xs mt-1 line-clamp-2">
-                    {article.excerpt}
+                    {article.meta_description}
                   </p>
                 )}
               </div>
@@ -172,12 +171,11 @@ export async function RoleNewsCompact({
   try {
     const sql = createDbQuery()
     articles = await sql`
-      SELECT id, slug, title, article_type, published_at
+      SELECT id, slug, title, article_type, created_at
       FROM articles
-      WHERE app = 'fractional'
-        AND status = 'published'
-        AND category = ${category}
-      ORDER BY published_at DESC
+      WHERE published = true
+        AND role_category = ${category}
+      ORDER BY created_at DESC
       LIMIT ${limit}
     ` as NewsArticle[]
   } catch (error) {
