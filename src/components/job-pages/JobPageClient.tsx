@@ -18,6 +18,7 @@ import { LazyYouTube } from "@/components/LazyYouTube";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 import { HotJobs } from "@/components/HotJobs";
 import { EmailCapture } from "@/components/EmailCapture";
+import { JobsSidebar } from "@/components/JobsSidebar";
 
 import { HeroSection, InitialCharts, FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
@@ -552,16 +553,26 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
           </div>
         </section>
 
-        {/* Job Board with Filters */}
-        <section className="py-12 bg-white">
+        {/* Job Board with Sidebar */}
+        <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <EmbeddedJobBoard
-              defaultLocation={location === "london" ? "London" : ""}
-              title={`${locationDisplay} Fractional Jobs`}
-              showFilters={true}
-              jobsPerPage={9}
-              accentColor="indigo"
-            />
+            <div className="grid lg:grid-cols-4 gap-8">
+              {/* Main Job Board - 3 columns */}
+              <div className="lg:col-span-3">
+                <EmbeddedJobBoard
+                  defaultLocation={location === "london" ? "London" : ""}
+                  title={`${locationDisplay} Fractional Jobs`}
+                  showFilters={true}
+                  jobsPerPage={9}
+                  accentColor="emerald"
+                />
+              </div>
+
+              {/* Sidebar - 1 column, sticky */}
+              <div className="lg:col-span-1 lg:sticky lg:top-24 h-fit">
+                <JobsSidebar location={location} />
+              </div>
+            </div>
           </div>
         </section>
 
