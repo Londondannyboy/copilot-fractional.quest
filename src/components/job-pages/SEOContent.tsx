@@ -1,10 +1,35 @@
 "use client";
 
 import { Section, SectionHeading } from "@/components/ui";
-import { LondonSEOContent } from "@/lib/seo-content/london";
+
+// Flexible content interface that works with both enriched and basic pages
+interface SEOContentData {
+  whyLocation: {
+    title: string;
+    paragraphs: string[];
+  };
+  dayRates: {
+    title: string;
+    description: string;
+    rates: Array<{ role: string; range: string; typical: string; annual?: string }>;
+  };
+  locations: {
+    title: string;
+    areas: Array<{ name: string; description: string; sectors?: string[] }>;
+  };
+  emergingRoles: {
+    title: string;
+    roles: Array<{ title: string; description: string; rate?: string }>;
+  };
+  futureOutlook?: {
+    title: string;
+    paragraphs: string[];
+  };
+  [key: string]: unknown;
+}
 
 interface SEOContentProps {
-  content: LondonSEOContent["content"];
+  content: SEOContentData;
 }
 
 export function SEOContent({ content }: SEOContentProps) {

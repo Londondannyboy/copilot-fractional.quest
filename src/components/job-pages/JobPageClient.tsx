@@ -22,11 +22,63 @@ import { JobsSidebar } from "@/components/JobsSidebar";
 
 import { HeroSection, InitialCharts, FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
-import { LondonSEOContent } from "@/lib/seo-content/london";
 import { ImageCategory } from "@/lib/images";
 
-// Generic SEO content type that matches the structure
-export type LocationSEOContent = LondonSEOContent;
+// Flexible SEO content interface that works with both enriched and basic pages
+// Only requires the fields that JobPageClient actually uses
+export interface LocationSEOContent {
+  meta: {
+    title: string;
+    description: string;
+    keywords: string[];
+  };
+  breadcrumb: Array<{ name: string; url: string }>;
+  hero: {
+    headline: string;
+    subtitle: string;
+    stats: {
+      avgDayRate: string;
+      hubStatus: string;
+      hybridOptions: string;
+    };
+  };
+  content: {
+    whyLocation: {
+      title: string;
+      paragraphs: string[];
+    };
+    dayRates: {
+      title: string;
+      description: string;
+      rates: Array<{ role: string; range: string; typical: string; annual?: string }>;
+    };
+    locations: {
+      title: string;
+      areas: Array<{ name: string; description: string; sectors?: string[] }>;
+    };
+    emergingRoles: {
+      title: string;
+      roles: Array<{ title: string; description: string; rate?: string }>;
+    };
+    futureOutlook?: {
+      title: string;
+      paragraphs: string[];
+    };
+    [key: string]: unknown; // Allow additional content sections
+  };
+  faqs: Array<{ question: string; answer: string }>;
+  schema: {
+    organization: {
+      "@type": string;
+      name: string;
+      url: string;
+    };
+  };
+  // Optional enriched fields
+  authorityLinks?: Array<{ name: string; url: string; context: string }>;
+  statistics?: Record<string, { value: string; description: string; source: string }>;
+  relatedPages?: Array<{ name: string; url: string }>;
+}
 
 // Helper to convert annual salary to day rate (assuming ~220 working days)
 function salaryToDayRate(salaryStr: string): string {
@@ -60,7 +112,7 @@ interface JobPageClientProps {
   locationDisplay: string;
   initialJobs: Job[];
   stats: JobStats;
-  seoContent: LondonSEOContent;
+  seoContent: LocationSEOContent;
   imageCategory?: ImageCategory;
 }
 
