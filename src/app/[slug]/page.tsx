@@ -11,7 +11,15 @@ import { PageRenderer } from '@/components/pages/PageRenderer'
 // Only add slugs here if they have a static /src/app/[slug]/page.tsx folder
 const STATIC_ROUTE_SLUGS = [
   'fractional-jobs-london',
-  // fractional-jobs-uk is now served from database
+  'fractional-jobs-uk',
+  'fractional-cfo-jobs-uk',
+  'fractional-cto-jobs-uk',
+  'fractional-cmo-jobs-uk',
+  'fractional-coo-jobs-uk',
+  'fractional-chro-jobs-uk',
+  'fractional-ciso-jobs-uk',
+  'fractional-cpo-jobs-uk',
+  'fractional-ceo-jobs-uk',
 ]
 
 export async function generateStaticParams() {
