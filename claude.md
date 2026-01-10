@@ -2341,3 +2341,162 @@ If content renders as raw text, check:
 
 1. `16b82f3` - Add role_cards section handler to PageRenderer
 2. `52625ae` - Add comprehensive CSS styles for PageRenderer sections
+
+---
+
+# CRITICAL: Restart Plan for V2 Page Quality (2026-01-09)
+
+## Acknowledgment of Failings
+
+### What I Got Wrong
+
+1. **Misunderstood the Goal**: I migrated pages to thin database JSONB content instead of recreating the rich component-driven pages from fractional.quest. The goal was to **replicate the live V1 quality** with CopilotKit enhancements, NOT to create a simplified database-driven CMS.
+
+2. **Wrong Architecture Decision**: The PageRenderer approach renders basic sections but lacks:
+   - CopilotKit sidebar integration
+   - EmbeddedJobBoard with filters
+   - HotJobs carousel
+   - EmailCapture component
+   - RoleCalculator
+   - Expert profiles
+   - Video embeds
+   - Hero images
+   - Interactive components
+
+3. **Compared Text, Not Visual Quality**: When asked to compare V1 vs V2, I used WebFetch text extraction and rated V2 higher based on SEO structure. This was wrong - the user was asking about **visual and functional quality**, which V2 completely fails at.
+
+4. **Wasted Time on CSS Fixes**: I spent time adding CSS for PageRenderer sections when the real problem is that PageRenderer shouldn't be used for key pages at all. These pages need `JobPageClient` with full component integration.
+
+5. **Didn't Follow Established Pattern**: The `fractional-jobs-london` page shows the correct pattern - it uses `JobPageClient` with all rich components. I should have replicated this for `fractional-jobs-uk` instead of serving it from the database.
+
+### What V2 Pages Are Missing (vs V1 fractional.quest)
+
+| Component | V1 Has | V2 Has |
+|-----------|--------|--------|
+| CopilotKit Sidebar | ✅ | ❌ |
+| Job Search with Filters | ✅ | ❌ |
+| EmbeddedJobBoard | ✅ | ❌ |
+| HotJobs Carousel | ✅ | ❌ |
+| EmailCapture | ✅ | ❌ |
+| RoleCalculator | ✅ | ❌ |
+| Expert Profile | ✅ | ❌ |
+| Video Embeds | ✅ | ❌ |
+| Hero Image | ✅ | ❌ |
+| Case Studies | ✅ | ❌ |
+| Rich Interactive UI | ✅ | ❌ |
+| Dark gradient hero | ✅ | Barely |
+
+---
+
+## Correct Architecture
+
+### What Works: `fractional-jobs-london`
+
+```
+src/app/fractional-jobs-london/page.tsx
+  ↓
+Uses JobPageClient component
+  ↓
+Includes: CopilotKit, EmbeddedJobBoard, HotJobs,
+          EmailCapture, RoleCalculator, ExpertProfile,
+          CaseStudy, LazyYouTube, full hero with image
+```
+
+### What Doesn't Work: `fractional-jobs-uk` (and other database pages)
+
+```
+src/app/[slug]/page.tsx
+  ↓
+Reads from Neon database
+  ↓
+Uses PageRenderer with thin JSONB sections
+  ↓
+No interactive components, no sidebar, no calculators
+```
+
+---
+
+## Restart Plan: Fix V2 Quality
+
+### Phase 1: Create Proper Static Pages (Priority)
+
+These pages need to be component-driven like `fractional-jobs-london`:
+
+| Page | Clicks/mo | Status | Action |
+|------|-----------|--------|--------|
+| `/fractional-jobs-uk` | 23 | ❌ Database | Create static with JobPageClient |
+| `/london` | 40 | ❌ Missing | Create redirect or alias |
+| `/fractional-cmo-jobs-uk` | 17 | ❌ Database | Create static with JobPageClient |
+| `/fractional-cto-jobs-uk` | 16 | ❌ Database | Create static with JobPageClient |
+| `/fractional-coo-jobs-uk` | 12 | ❌ Database | Create static with JobPageClient |
+| `/fractional-cfo-jobs-uk` | 9 | ❌ Database | Create static with JobPageClient |
+
+### Phase 2: Create UK SEO Content
+
+Need to create: `src/lib/seo-content/uk.ts` following the pattern of `london.ts`
+
+### Phase 3: Update STATIC_ROUTE_SLUGS
+
+Add all component-driven pages to the exclusion list in `[slug]/page.tsx`:
+
+```typescript
+const STATIC_ROUTE_SLUGS = [
+  'fractional-jobs-london',
+  'fractional-jobs-uk',
+  'fractional-cmo-jobs-uk',
+  'fractional-cto-jobs-uk',
+  'fractional-coo-jobs-uk',
+  'fractional-cfo-jobs-uk',
+  // etc.
+]
+```
+
+### Phase 4: Verify Each Page Has Full Components
+
+Each static page must include:
+- [ ] JobPageClient with CopilotKit sidebar
+- [ ] EmbeddedJobBoard with filters
+- [ ] HotJobs carousel
+- [ ] EmailCapture component
+- [ ] RoleCalculator (where applicable)
+- [ ] Hero section with image
+- [ ] Schema markup
+- [ ] FAQs
+
+---
+
+## Files to Create/Modify
+
+### New Files Needed:
+
+1. `src/lib/seo-content/uk.ts` - UK SEO content (copy pattern from london.ts)
+2. `src/app/fractional-jobs-uk/page.tsx` - Static page using JobPageClient
+3. Similar for each role-specific jobs page
+
+### Existing Files to Modify:
+
+1. `src/app/[slug]/page.tsx` - Add pages to STATIC_ROUTE_SLUGS
+2. `src/lib/images.ts` - Add UK hero images if needed
+
+---
+
+## Success Criteria
+
+A page is "V2 complete" when:
+1. ✅ Visual quality matches or exceeds fractional.quest V1
+2. ✅ Has CopilotKit sidebar
+3. ✅ Has working job search with filters
+4. ✅ Has HotJobs carousel
+5. ✅ Has EmailCapture
+6. ✅ Has hero with image
+7. ✅ All interactive components work
+
+---
+
+## Immediate Next Steps
+
+1. Create `src/lib/seo-content/uk.ts`
+2. Create `src/app/fractional-jobs-uk/page.tsx` using JobPageClient
+3. Add to STATIC_ROUTE_SLUGS
+4. Deploy and verify it matches V1 quality
+5. Repeat for other high-traffic pages

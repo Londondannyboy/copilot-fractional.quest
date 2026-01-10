@@ -4,6 +4,20 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+// Pages that should have transparent header over hero
+const TRANSPARENT_HEADER_PAGES = [
+  '/fractional-jobs-london',
+  '/fractional-jobs-uk',
+  '/fractional-cfo-jobs-uk',
+  '/fractional-cto-jobs-uk',
+  '/fractional-cmo-jobs-uk',
+  '/fractional-coo-jobs-uk',
+  '/fractional-chro-jobs-uk',
+  '/fractional-ciso-jobs-uk',
+  '/fractional-cpo-jobs-uk',
+  '/fractional-ceo-jobs-uk',
+]
+
 // Navigation data structure
 const navigation = {
   roles: {
@@ -79,6 +93,9 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
+  // Check if this page should have transparent header
+  const isTransparentPage = TRANSPARENT_HEADER_PAGES.includes(pathname)
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
@@ -92,21 +109,24 @@ export function Header() {
     setActiveDropdown(null)
   }, [pathname])
 
+  // Determine if header should be transparent (not scrolled + transparent page)
+  const useTransparentStyle = isTransparentPage && !scrolled
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-white'
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : isTransparentPage ? 'bg-transparent' : 'bg-white'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${useTransparentStyle ? 'bg-white/20 backdrop-blur-sm' : 'bg-gradient-to-br from-emerald-500 to-emerald-600'}`}>
               <span className="text-white font-bold text-lg">F</span>
             </div>
-            <span className="font-semibold text-gray-900 text-lg hidden sm:block">
-              Fractional<span className="text-emerald-600">Quest</span>
+            <span className={`font-semibold text-lg hidden sm:block ${useTransparentStyle ? 'text-white' : 'text-gray-900'}`}>
+              Fractional<span className={useTransparentStyle ? 'text-white' : 'text-emerald-600'}>Quest</span>
             </span>
           </Link>
 
@@ -118,7 +138,7 @@ export function Header() {
               onMouseEnter={() => setActiveDropdown('roles')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
+              <button className={`px-4 py-2 font-medium flex items-center gap-1 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}>
                 {navigation.roles.label}
                 <ChevronDownIcon className={`w-4 h-4 transition-transform ${activeDropdown === 'roles' ? 'rotate-180' : ''}`} />
               </button>
@@ -173,7 +193,7 @@ export function Header() {
               onMouseEnter={() => setActiveDropdown('locations')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
+              <button className={`px-4 py-2 font-medium flex items-center gap-1 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}>
                 {navigation.locations.label}
                 <ChevronDownIcon className={`w-4 h-4 transition-transform ${activeDropdown === 'locations' ? 'rotate-180' : ''}`} />
               </button>
@@ -203,7 +223,7 @@ export function Header() {
               onMouseEnter={() => setActiveDropdown('resources')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
+              <button className={`px-4 py-2 font-medium flex items-center gap-1 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}>
                 {navigation.resources.label}
                 <ChevronDownIcon className={`w-4 h-4 transition-transform ${activeDropdown === 'resources' ? 'rotate-180' : ''}`} />
               </button>
@@ -248,7 +268,7 @@ export function Header() {
               onMouseEnter={() => setActiveDropdown('employers')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
+              <button className={`px-4 py-2 font-medium flex items-center gap-1 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}>
                 {navigation.employers.label}
                 <ChevronDownIcon className={`w-4 h-4 transition-transform ${activeDropdown === 'employers' ? 'rotate-180' : ''}`} />
               </button>
@@ -292,20 +312,20 @@ export function Header() {
           <div className="flex items-center gap-3">
             <Link
               href="/auth/sign-in"
-              className="hidden sm:block text-gray-700 hover:text-gray-900 font-medium px-4 py-2"
+              className={`hidden sm:block font-medium px-4 py-2 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}
             >
               Sign In
             </Link>
             <Link
               href="/fractional-jobs-uk"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${useTransparentStyle ? 'bg-white text-gray-900 hover:bg-white/90' : 'bg-emerald-600 hover:bg-emerald-700 text-white'}`}
             >
               Browse Jobs
             </Link>
 
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2 text-gray-700"
+              className={`lg:hidden p-2 ${useTransparentStyle ? 'text-white' : 'text-gray-700'}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
