@@ -23,6 +23,10 @@ import { JobsSidebar } from "@/components/JobsSidebar";
 import { HeroSection, InitialCharts, FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
 import { ImageCategory } from "@/lib/images";
+import { HeyCompanies } from "@/components/HeyCompanies";
+import { MarketStatistics } from "@/components/MarketStatistics";
+import { AuthorityLinks } from "@/components/AuthorityLinks";
+import { SavingsCalculator } from "@/components/SavingsCalculator";
 
 // Flexible SEO content interface that works with both enriched and basic pages
 // Only requires the fields that JobPageClient actually uses
@@ -605,6 +609,9 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
           </div>
         </section>
 
+        {/* Hey Companies - Employer CTA */}
+        <HeyCompanies location={locationDisplay} />
+
         {/* Job Board with Sidebar */}
         <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -634,6 +641,15 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
           </div>
         </section>
 
+        {/* Market Statistics */}
+        {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
+          <MarketStatistics
+            statistics={seoContent.statistics}
+            title={`${locationDisplay} Fractional Market in Numbers`}
+            location={locationDisplay}
+          />
+        )}
+
         {/* SEO Content */}
         <SEOContent content={seoContent.content} />
 
@@ -646,6 +662,9 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
             <RoleCalculator role="cfo" />
           </div>
         </section>
+
+        {/* Savings Calculator */}
+        <SavingsCalculator location={locationDisplay} />
 
         {/* YouTube Videos */}
         <section className="py-12 bg-white">
@@ -665,6 +684,15 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
             </div>
           </div>
         </section>
+
+        {/* Authority Links */}
+        {seoContent.authorityLinks && seoContent.authorityLinks.length > 0 && (
+          <AuthorityLinks
+            links={seoContent.authorityLinks}
+            title="Trusted Industry Resources"
+            location={locationDisplay}
+          />
+        )}
 
         {/* Case Study */}
         <CaseStudy />
