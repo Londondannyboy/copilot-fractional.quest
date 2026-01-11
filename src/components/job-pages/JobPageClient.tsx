@@ -27,6 +27,10 @@ import { HeyCompanies } from "@/components/HeyCompanies";
 import { MarketStatistics } from "@/components/MarketStatistics";
 import { AuthorityLinks } from "@/components/AuthorityLinks";
 import { SavingsCalculator } from "@/components/SavingsCalculator";
+import { AIInsightsPanel } from "@/components/AIInsightsPanel";
+import { LiveMarketPulse } from "@/components/LiveMarketPulse";
+import { SkillsDemandChart } from "@/components/SkillsDemandChart";
+import { RoleComparisonTool } from "@/components/RoleComparisonTool";
 
 // Flexible SEO content interface that works with both enriched and basic pages
 // Only requires the fields that JobPageClient actually uses
@@ -563,6 +567,9 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
           onVoiceMessage={handleVoiceMessage}
         />
 
+        {/* Live Market Pulse - Animated stats bar */}
+        <LiveMarketPulse location={locationDisplay} />
+
         {/* User Interest Graph - show if logged in with data */}
         {user && userGraphData && userGraphData.nodes.length > 1 && (
           <section className="py-8 px-6 bg-gradient-to-r from-indigo-50 to-purple-50">
@@ -612,6 +619,17 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* Hey Companies - Employer CTA */}
         <HeyCompanies location={locationDisplay} />
 
+        {/* AI Insights Panel - Interactive CopilotKit integration */}
+        <AIInsightsPanel
+          location={locationDisplay}
+          initialPrompts={[
+            `What's the ${locationDisplay} market like?`,
+            "Show me salary trends",
+            "Compare roles by day rate",
+            "What skills are in demand?",
+          ]}
+        />
+
         {/* Job Board with Sidebar */}
         <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -654,6 +672,9 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* SEO Content */}
         <SEOContent content={seoContent.content} />
 
+        {/* Skills Demand Chart - Visual skills analysis */}
+        <SkillsDemandChart location={locationDisplay} />
+
         {/* Rate Calculator */}
         <section className="py-12 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -694,6 +715,9 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
             location={locationDisplay}
           />
         )}
+
+        {/* Role Comparison Tool - Interactive comparison */}
+        <RoleComparisonTool />
 
         {/* Case Study */}
         <CaseStudy />
