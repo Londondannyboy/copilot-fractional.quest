@@ -1,6 +1,8 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { AuthorityLinks, StatisticsHighlight, RelatedPages } from './sidebar'
 
 interface AuthorityLink {
@@ -20,9 +22,19 @@ interface RelatedPage {
   url: string
 }
 
+interface SidebarJob {
+  id: string
+  slug: string
+  title: string
+  company_name: string
+  location: string
+  compensation?: string
+}
+
 interface JobsSidebarProps {
   location?: string
   locationDisplay?: string
+  roleCategory?: string // e.g., 'Finance', 'Engineering', 'Marketing'
   showCalendly?: boolean
   // Enriched SEO content
   authorityLinks?: AuthorityLink[]
@@ -49,9 +61,20 @@ const UK_LOCATIONS = [
   { name: 'Remote UK', href: '/remote-fractional-jobs' },
 ]
 
+// Role images for sidebar job cards
+const ROLE_IMAGES: Record<string, string> = {
+  'Finance': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=80&h=80&fit=crop',
+  'Engineering': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=80&h=80&fit=crop',
+  'Marketing': 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=80&h=80&fit=crop',
+  'Operations': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop',
+  'HR': 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=80&h=80&fit=crop',
+  'default': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=80&h=80&fit=crop',
+}
+
 export function JobsSidebar({
   location,
   locationDisplay,
+  roleCategory,
   showCalendly = true,
   authorityLinks,
   statistics,
@@ -59,8 +82,119 @@ export function JobsSidebar({
   accentColor = 'emerald',
   currentPath,
 }: JobsSidebarProps) {
+  const [featuredJobs, setFeaturedJobs] = useState<SidebarJob[]>([])
+  const [loadingJobs, setLoadingJobs] = useState(true)
+
+  // Fetch jobs relevant to the page - fallback to any jobs if not enough
+  useEffect(() => {
+    async function fetchJobs() {
+      setLoadingJobs(true)
+      try {
+        const params = new URLSearchParams()
+        if (location) params.set('location', location === 'london' ? 'London' : location)
+        if (roleCategory) params.set('role', roleCategory)
+        params.set('limit', '5')
+
+        let response = await fetch(`/api/jobs/search?${params.toString()}`)
+        let data = await response.json()
+        let jobs = data.jobs || []
+
+        // If not enough jobs with filters, fetch any jobs as fallback
+        if (jobs.length < 3) {
+          const fallbackResponse = await fetch('/api/jobs/search?limit=5')
+          const fallbackData = await fallbackResponse.json()
+          const existingIds = new Set(jobs.map((j: SidebarJob) => j.id))
+          const extraJobs = (fallbackData.jobs || []).filter((j: SidebarJob) => !existingIds.has(j.id))
+          jobs = [...jobs, ...extraJobs].slice(0, 5)
+        }
+
+        setFeaturedJobs(jobs)
+      } catch (error) {
+        console.error('Error fetching sidebar jobs:', error)
+      } finally {
+        setLoadingJobs(false)
+      }
+    }
+
+    fetchJobs()
+  }, [location, roleCategory])
+
   return (
     <aside className="space-y-6">
+      {/* Featured Jobs - Always show jobs! */}
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-3">
+          <h3 className="font-bold text-white flex items-center gap-2">
+            <span className="animate-pulse">🔥</span>
+            {locationDisplay ? `Hot ${locationDisplay} Jobs` : 'Hot Jobs'}
+          </h3>
+        </div>
+        <div className="divide-y divide-gray-100">
+          {loadingJobs ? (
+            // Loading skeleton
+            Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="p-4 animate-pulse">
+                <div className="flex gap-3">
+                  <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-3/4" />
+                    <div className="h-3 bg-gray-200 rounded w-1/2" />
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : featuredJobs.length > 0 ? (
+            featuredJobs.map((job) => (
+              <Link
+                key={job.id}
+                href={`/fractional-job/${job.slug}`}
+                className="flex gap-3 p-4 hover:bg-amber-50 transition-colors group"
+              >
+                <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                  <Image
+                    src={ROLE_IMAGES[roleCategory || ''] || ROLE_IMAGES.default}
+                    alt={job.title}
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-medium text-gray-900 text-sm truncate group-hover:text-amber-700 transition-colors">
+                    {job.title}
+                  </h4>
+                  <p className="text-xs text-gray-500 truncate">{job.company_name}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xs text-gray-400">{job.location}</span>
+                    {job.compensation && (
+                      <span className="text-xs font-medium text-emerald-600">{job.compensation}</span>
+                    )}
+                  </div>
+                </div>
+                <svg className="w-4 h-4 text-gray-300 group-hover:text-amber-500 transition-colors flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            ))
+          ) : (
+            <div className="p-4 text-center text-gray-500 text-sm">
+              No jobs found. Check back soon!
+            </div>
+          )}
+        </div>
+        <div className="bg-gray-50 px-5 py-3 border-t border-gray-100">
+          <Link
+            href={location ? `/fractional-jobs-${location}` : '/fractional-jobs-uk'}
+            className="text-sm font-medium text-amber-600 hover:text-amber-700 flex items-center justify-center gap-1"
+          >
+            View all jobs
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+
       {/* Book a Call CTA */}
       {showCalendly && (
         <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-xl p-6 text-white">

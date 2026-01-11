@@ -1,6 +1,6 @@
 # Fractional Quest v2 - Migration Plan
 
-Last updated: 2026-01-10 (Session 5 - V2 Quality Enhancement)
+Last updated: 2026-01-10 (Session 7 - Sidebar Components & SEO Enrichment)
 
 ---
 
@@ -10,58 +10,59 @@ Last updated: 2026-01-10 (Session 5 - V2 Quality Enhancement)
 I'm continuing work on the Fractional Quest v2 migration in /Users/dankeegan/copilotkit-demo.
 
 ## CRITICAL CONTEXT
-The V2 migration had a major architecture mistake: pages were migrated to thin database JSONB content instead of recreating the rich component-driven pages from fractional.quest (V1).
+V2 pages must EXCEED V1 (fractional.quest) in quality before switchover to fractional.quest domain.
 
-The CORRECT pattern exists at `/fractional-jobs-london` which uses `JobPageClient` with:
-- CopilotKit sidebar
+The CORRECT pattern uses `JobPageClient` with:
+- CopilotKit sidebar with agent context
 - EmbeddedJobBoard with filters
 - HotJobs carousel
 - EmailCapture
 - RoleCalculator
 - Full hero with images
-- Interactive components
+- JobsSidebar with authority links, statistics, related pages
 
-The WRONG pattern was `/[slug]/page.tsx` serving thin PageRenderer content from Neon database.
+## COMPLETED (2026-01-10 Session 7)
 
-## COMPLETED (2026-01-10)
-1. ✅ Created `/fractional-jobs-uk` static page using JobPageClient pattern
-2. ✅ Created all 8 role-specific jobs pages (CFO, CTO, CMO, COO, CHRO, CISO, CPO, CEO)
-3. ✅ Fixed `jobs` table queries (was using old `test_jobs` table)
-4. ✅ Added Unsplash image domains to next.config.ts
-5. ✅ Transparent header with white text on job pages (when not scrolled)
-6. ✅ All pages committed and pushed to git
+### New Sidebar Components Created
+1. ✅ `src/components/sidebar/AuthorityLinks.tsx` - External authority links with icons
+2. ✅ `src/components/sidebar/StatisticsHighlight.tsx` - Market stats with citations and accent colors
+3. ✅ `src/components/sidebar/RelatedPages.tsx` - Internal links for topical authority
+4. ✅ `src/components/sidebar/index.ts` - Barrel export
 
-## CURRENT ISSUES
-1. Job cards need unique Unsplash images (currently using static role-based images)
-2. Jobs should be pre-filtered for UK/London only (may show US jobs)
-3. Need sidebar with jobs and CTAs like fractional.quest
-4. Calendly should move to separate page for performance
+### JobsSidebar Enhanced
+- Now accepts: authorityLinks, statistics, relatedPages, accentColor, currentPath props
+- Integrates all three new sidebar components
+
+### SEO Content Enriched (10 files total)
+All with 8 authority links, 5 statistics, 6 FAQs, 8 related pages:
+- `london.ts` ✅
+- `uk.ts` ✅
+- `cmo-jobs-uk.ts` ✅
+- `cto-jobs-uk.ts` ✅
+- `cpo-jobs-uk.ts` ✅
+- `ciso-jobs-uk.ts` ✅
+- `cfo-jobs-uk.ts` ✅
+- `coo-jobs-uk.ts` ✅
+- `chro-jobs-uk.ts` ✅
+- `ceo-jobs-uk.ts` ✅
+
+### JobPageClient Updated
+- Passes enriched SEO content to JobsSidebar
 
 ## KEY FILES
-- `/src/components/job-pages/JobPageClient.tsx` - Main page component with CopilotKit
-- `/src/components/EmbeddedJobBoard.tsx` - Job board with filters (client-side)
-- `/src/lib/jobs.ts` - Server-side job queries
-- `/src/app/api/jobs/search/route.ts` - Client-side job search API
-- `/src/components/navigation/Header.tsx` - Transparent header logic
+- `/src/components/sidebar/` - New sidebar components (AuthorityLinks, StatisticsHighlight, RelatedPages)
+- `/src/components/JobsSidebar.tsx` - Enhanced with enriched SEO content props
+- `/src/components/job-pages/JobPageClient.tsx` - Passes enriched content to sidebar
+- `/src/lib/seo-content/*.ts` - All 10 SEO files enriched
 
-## DATABASE
-- **Neon Project:** plain-glade-34229418
-- **Table:** `jobs` (213 active jobs with `is_active = true`)
-- **Columns:** id, slug, title, company_name, location, salary_min, salary_max, description_snippet, role_category, is_remote, workplace_type
+## NEXT STEPS
+1. Enrich remaining location SEO files (manchester, birmingham, edinburgh, bristol, leeds, glasgow)
+2. Verify sidebars render correctly on all pages
+3. Consider adding more authority links for E-E-A-T
 
 ## GIT
 - Remote: https://github.com/Londondannyboy/copilot-fractional.quest.git
-- Latest commits:
-  - Header transparency fix
-  - Job queries fixed to use `jobs` table
-  - All role pages created
-
-## IMMEDIATE TASKS
-1. Add Unsplash API for unique job card images
-2. Pre-filter jobs for UK/London locations
-3. Add sidebar with jobs list and CTAs
-4. Move Calendly to separate page
-5. Verify code quality
+- Latest commit: `3b2678d` - Add sidebar components and enrich remaining SEO content files
 
 Read CLAUDE.md for full session history and patterns.
 ```
@@ -124,27 +125,29 @@ const STATIC_ROUTE_SLUGS = [
 
 ---
 
-## SESSION 5 PROGRESS (2026-01-10)
+## SESSION 7 PROGRESS (2026-01-10) - Sidebar Components & SEO Enrichment
 
 ### Completed
-1. ✅ Created `src/lib/seo-content/uk.ts` - UK SEO content
-2. ✅ Created `src/app/fractional-jobs-uk/page.tsx` - Main UK jobs page
-3. ✅ Created all role-specific SEO content files (cfo, cto, cmo, coo, chro, ciso, cpo, ceo)
-4. ✅ Created all role-specific job pages
-5. ✅ Updated STATIC_ROUTE_SLUGS to include all new pages
-6. ✅ Fixed `src/lib/jobs.ts` to query `jobs` table (was `test_jobs`)
-7. ✅ Fixed column names: company_name, description_snippet, role_category
-8. ✅ Added Unsplash/ui-avatars/Google domains to next.config.ts
-9. ✅ Transparent header with white text on job pages
+1. ✅ Created `src/components/sidebar/AuthorityLinks.tsx` - External links with icons
+2. ✅ Created `src/components/sidebar/StatisticsHighlight.tsx` - Stats with accent colors
+3. ✅ Created `src/components/sidebar/RelatedPages.tsx` - Internal links section
+4. ✅ Created `src/components/sidebar/index.ts` - Barrel export
+5. ✅ Enhanced `JobsSidebar.tsx` with new component integration
+6. ✅ Updated `JobPageClient.tsx` to pass enriched SEO content to sidebar
+7. ✅ Enriched `cfo-jobs-uk.ts` with 8 authority links, 5 statistics, 6 FAQs
+8. ✅ Enriched `coo-jobs-uk.ts` with 8 authority links, 5 statistics, 6 FAQs
+9. ✅ Enriched `chro-jobs-uk.ts` with 8 authority links, 5 statistics, 6 FAQs
+10. ✅ Enriched `ceo-jobs-uk.ts` with 8 authority links, 5 statistics, 6 FAQs
+11. ✅ Build passing (209 pages generated)
+12. ✅ Committed and deployed: `3b2678d`
 
-### In Progress
-1. 🔄 Unsplash API for unique job card images
-2. 🔄 Pre-filter jobs for UK/London only
+### Previous Sessions Completed
+- Session 5: All job pages created with JobPageClient pattern
+- Session 6: 6 SEO files enriched (london, uk, cmo, cto, cpo, ciso)
 
 ### Pending
-1. Add sidebar with jobs and CTAs
-2. Move Calendly to separate page
-3. Verify code cleanliness
+1. Enrich location SEO files (manchester, birmingham, edinburgh, bristol, leeds, glasgow)
+2. Verify sidebars render correctly on all pages
 
 ---
 

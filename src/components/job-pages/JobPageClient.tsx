@@ -631,6 +631,7 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
               <div className="lg:col-span-1 lg:sticky lg:top-24 h-fit">
                 <JobsSidebar
                   location={location}
+                  locationDisplay={locationDisplay}
                   authorityLinks={seoContent.authorityLinks}
                   statistics={seoContent.statistics}
                   relatedPages={seoContent.relatedPages}
