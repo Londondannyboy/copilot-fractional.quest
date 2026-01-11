@@ -33,6 +33,56 @@ export const birminghamSEO = {
     },
   },
 
+  authorityLinks: [
+    { name: "West Midlands Growth Company", url: "https://www.wmgrowth.com", context: "Regional investment" },
+    { name: "Greater Birmingham Chambers", url: "https://www.greaterbirminghamchambers.com", context: "Business network" },
+    { name: "Birmingham Tech", url: "https://birminghamtech.org", context: "Tech community" },
+    { name: "West Midlands Combined Authority", url: "https://www.wmca.org.uk", context: "Regional authority" },
+    { name: "Innovation Birmingham", url: "https://innovationbham.com", context: "Tech hub" },
+    { name: "Bruntwood SciTech", url: "https://bruntwood.co.uk/scitech", context: "Science parks" },
+    { name: "Tech Nation", url: "https://technation.io", context: "UK tech insights" },
+    { name: "CIPD", url: "https://www.cipd.org", context: "HR authority" },
+  ],
+
+  statistics: {
+    hs2Impact: {
+      value: "£15bn",
+      description: "Expected economic boost from HS2 to West Midlands",
+      source: "West Midlands Combined Authority",
+    },
+    techJobs: {
+      value: "90k+",
+      description: "Tech and digital jobs in Greater Birmingham",
+      source: "Birmingham Tech Report",
+    },
+    costSaving: {
+      value: "40%",
+      description: "Lower operating costs vs London",
+      source: "EY UK Regional Analysis",
+    },
+    relocations: {
+      value: "25+",
+      description: "Major company HQ relocations since 2020",
+      source: "West Midlands Growth Company",
+    },
+    growthRate: {
+      value: "32%",
+      description: "Growth in fractional roles in Midlands since 2022",
+      source: "Fractional Quest Data",
+    },
+  },
+
+  relatedPages: [
+    { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
+    { name: "London Jobs", url: "/fractional-jobs-london" },
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Remote Jobs", url: "/remote-fractional-jobs" },
+    { name: "Fractional CFO Jobs", url: "/fractional-cfo-jobs-uk" },
+    { name: "Fractional CTO Jobs", url: "/fractional-cto-jobs-uk" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
+    { name: "Bristol Jobs", url: "/bristol" },
+  ],
+
   content: {
     whyLocation: {
       title: "Why Birmingham is the Midlands' Fractional Hub",

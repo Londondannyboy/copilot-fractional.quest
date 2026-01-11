@@ -34,6 +34,56 @@ export const manchesterSEO = {
     },
   },
 
+  authorityLinks: [
+    { name: "Manchester Digital", url: "https://www.manchesterdigital.com", context: "Tech industry body" },
+    { name: "Marketing Manchester", url: "https://www.marketingmanchester.com", context: "Investment agency" },
+    { name: "Greater Manchester Combined Authority", url: "https://www.greatermanchester-ca.gov.uk", context: "Regional authority" },
+    { name: "Pro Manchester", url: "https://www.pro-manchester.co.uk", context: "Business network" },
+    { name: "Tech Nation", url: "https://technation.io", context: "UK tech insights" },
+    { name: "MIDAS Manchester", url: "https://www.investinmanchester.com", context: "Inward investment" },
+    { name: "The Growth Company", url: "https://www.growthco.uk", context: "Business growth" },
+    { name: "NW Tech Week", url: "https://nwtechweek.com", context: "Tech events" },
+  ],
+
+  statistics: {
+    techGrowth: {
+      value: "47%",
+      description: "Growth in Manchester tech jobs since 2020",
+      source: "Manchester Digital Annual Report",
+    },
+    startupHub: {
+      value: "#2",
+      description: "UK's second largest startup ecosystem outside London",
+      source: "Tech Nation Report",
+    },
+    costSaving: {
+      value: "35%",
+      description: "Lower operating costs vs London for scale-ups",
+      source: "EY UK Regional Analysis",
+    },
+    digitalJobs: {
+      value: "150k+",
+      description: "Digital and tech jobs in Greater Manchester",
+      source: "Greater Manchester Combined Authority",
+    },
+    unicorns: {
+      value: "5",
+      description: "Unicorn companies headquartered in Manchester region",
+      source: "Tech Nation Unicorn Tracker",
+    },
+  },
+
+  relatedPages: [
+    { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
+    { name: "London Jobs", url: "/fractional-jobs-london" },
+    { name: "Remote Jobs", url: "/remote-fractional-jobs" },
+    { name: "Birmingham Jobs", url: "/birmingham" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
+    { name: "Fractional CTO Jobs", url: "/fractional-cto-jobs-uk" },
+    { name: "Fractional CFO Jobs", url: "/fractional-cfo-jobs-uk" },
+    { name: "What is Fractional?", url: "/fractional-cfo" },
+  ],
+
   content: {
     whyLocation: {
       title: "Why Manchester is the North's Fractional Capital",

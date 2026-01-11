@@ -33,6 +33,56 @@ export const bristolSEO = {
     },
   },
 
+  authorityLinks: [
+    { name: "West of England LEP", url: "https://www.westofengland-ca.gov.uk", context: "Regional authority" },
+    { name: "Bristol Technology Showcase", url: "https://bristoltechnologyshowcase.com", context: "Tech community" },
+    { name: "SETsquared Bristol", url: "https://www.setsquared-bristol.co.uk", context: "Business incubator" },
+    { name: "Bristol & Bath Science Park", url: "https://bbsp.co.uk", context: "Science cluster" },
+    { name: "Business West", url: "https://www.businesswest.co.uk", context: "Chamber of commerce" },
+    { name: "Engine Shed", url: "https://www.engine-shed.co.uk", context: "Innovation hub" },
+    { name: "TechSpark", url: "https://techspark.co", context: "Tech news" },
+    { name: "Invest Bristol & Bath", url: "https://www.investbristolbath.com", context: "Inward investment" },
+  ],
+
+  statistics: {
+    techJobs: {
+      value: "75k+",
+      description: "Digital and tech jobs in the Bristol & Bath corridor",
+      source: "West of England Combined Authority",
+    },
+    siliconGorge: {
+      value: "£14bn",
+      description: "Combined value of Bristol tech companies",
+      source: "Tech Nation Report",
+    },
+    costSaving: {
+      value: "25%",
+      description: "Lower operating costs vs London for scale-ups",
+      source: "EY UK Regional Analysis",
+    },
+    startups: {
+      value: "2,500+",
+      description: "Active tech startups in Greater Bristol",
+      source: "SETsquared Report",
+    },
+    growthRate: {
+      value: "35%",
+      description: "Growth in fractional roles in South West since 2022",
+      source: "Fractional Quest Data",
+    },
+  },
+
+  relatedPages: [
+    { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
+    { name: "London Jobs", url: "/fractional-jobs-london" },
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Remote Jobs", url: "/remote-fractional-jobs" },
+    { name: "Fractional CFO Jobs", url: "/fractional-cfo-jobs-uk" },
+    { name: "Fractional CTO Jobs", url: "/fractional-cto-jobs-uk" },
+    { name: "Birmingham Jobs", url: "/birmingham" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
+  ],
+
   content: {
     whyLocation: {
       title: "Why Bristol is the South West's Fractional Capital",

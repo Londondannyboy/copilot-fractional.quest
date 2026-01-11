@@ -33,6 +33,56 @@ export const edinburghSEO = {
     },
   },
 
+  authorityLinks: [
+    { name: "Scottish Enterprise", url: "https://www.scottish-enterprise.com", context: "Economic development" },
+    { name: "Edinburgh Chamber of Commerce", url: "https://www.edinburghchamber.co.uk", context: "Business network" },
+    { name: "Scottish Financial Enterprise", url: "https://www.sfe.org.uk", context: "Financial services body" },
+    { name: "Tech Scaler", url: "https://techscaler.io", context: "Tech ecosystem" },
+    { name: "CodeBase Edinburgh", url: "https://www.thisiscodebase.com", context: "Tech community" },
+    { name: "Invest Edinburgh", url: "https://www.investinedinburgh.com", context: "Inward investment" },
+    { name: "ICAS", url: "https://www.icas.com", context: "Scottish accountancy body" },
+    { name: "FinTech Scotland", url: "https://www.fintechscotland.com", context: "Fintech hub" },
+  ],
+
+  statistics: {
+    financialServices: {
+      value: "£13bn",
+      description: "Assets under management in Edinburgh",
+      source: "Scottish Financial Enterprise",
+    },
+    techJobs: {
+      value: "45k+",
+      description: "Tech and digital jobs in Edinburgh & Lothians",
+      source: "Tech Nation Scotland Report",
+    },
+    dayRatePremium: {
+      value: "10-15%",
+      description: "Premium over other UK cities (excl. London) due to financial expertise",
+      source: "Fractional Quest Data",
+    },
+    startupFunding: {
+      value: "£600m+",
+      description: "VC funding to Edinburgh startups since 2020",
+      source: "Scottish Enterprise",
+    },
+    growthRate: {
+      value: "28%",
+      description: "Growth in fractional roles in Scotland since 2022",
+      source: "Fractional Quest Data",
+    },
+  },
+
+  relatedPages: [
+    { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
+    { name: "London Jobs", url: "/fractional-jobs-london" },
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Remote Jobs", url: "/remote-fractional-jobs" },
+    { name: "Fractional CFO Jobs", url: "/fractional-cfo-jobs-uk" },
+    { name: "Fractional CTO Jobs", url: "/fractional-cto-jobs-uk" },
+    { name: "Birmingham Jobs", url: "/birmingham" },
+    { name: "Bristol Jobs", url: "/bristol" },
+  ],
+
   content: {
     whyLocation: {
       title: "Why Edinburgh Leads Scotland's Fractional Market",
