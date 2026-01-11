@@ -249,10 +249,10 @@ SEO pages targeting "what is X" queries.
 2. ✅ /fractional-jobs-uk - DONE
 3. ✅ All role jobs UK pages - DONE
 4. ✅ /remote-fractional-jobs - DONE
-5. ⬜ /manchester - JobPageClient + SEO
-6. ⬜ /birmingham - JobPageClient + SEO
-7. ⬜ /edinburgh - JobPageClient + SEO
-8. ⬜ /bristol - JobPageClient + SEO
+5. ✅ /manchester - JobPageClient + SEO (enriched with authority links, statistics)
+6. ✅ /birmingham - JobPageClient + SEO (enriched with authority links, statistics)
+7. ✅ /edinburgh - JobPageClient + SEO (enriched with authority links, statistics)
+8. ✅ /bristol - JobPageClient + SEO (enriched with authority links, statistics)
 
 ### Phase 2: High-Value (Next Week)
 **Goal:** Complete role ecosystem pages.
