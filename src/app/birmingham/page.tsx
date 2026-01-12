@@ -5,8 +5,8 @@ import { getJobsPageData } from "@/lib/jobs";
 import { birminghamSEO } from "@/lib/seo-content/birmingham";
 import { getOGImageUrl, getImage } from "@/lib/images";
 
-const ogImage = getOGImageUrl('uk')
-const imageAlt = getImage('uk').alt
+const ogImage = getOGImageUrl('birmingham')
+const imageAlt = getImage('birmingham').alt
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -79,7 +79,7 @@ export default async function BirminghamPage() {
         initialJobs={jobs}
         stats={stats}
         seoContent={birminghamSEO}
-        imageCategory="uk"
+        imageCategory="birmingham"
       />
     </>
   );

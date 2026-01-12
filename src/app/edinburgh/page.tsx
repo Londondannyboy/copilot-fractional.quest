@@ -5,8 +5,8 @@ import { getJobsPageData } from "@/lib/jobs";
 import { edinburghSEO } from "@/lib/seo-content/edinburgh";
 import { getOGImageUrl, getImage } from "@/lib/images";
 
-const ogImage = getOGImageUrl('uk')
-const imageAlt = getImage('uk').alt
+const ogImage = getOGImageUrl('edinburgh')
+const imageAlt = getImage('edinburgh').alt
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -79,7 +79,7 @@ export default async function EdinburghPage() {
         initialJobs={jobs}
         stats={stats}
         seoContent={edinburghSEO}
-        imageCategory="uk"
+        imageCategory="edinburgh"
       />
     </>
   );

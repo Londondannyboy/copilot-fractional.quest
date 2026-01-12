@@ -5,8 +5,8 @@ import { getJobsPageData } from "@/lib/jobs";
 import { remoteSEO } from "@/lib/seo-content/remote";
 import { getOGImageUrl, getImage } from "@/lib/images";
 
-const ogImage = getOGImageUrl('uk')
-const imageAlt = getImage('uk').alt
+const ogImage = getOGImageUrl('remote')
+const imageAlt = getImage('remote').alt
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -79,7 +79,7 @@ export default async function RemoteFractionalJobsPage() {
         initialJobs={jobs}
         stats={stats}
         seoContent={remoteSEO}
-        imageCategory="uk"
+        imageCategory="remote"
       />
     </>
   );
