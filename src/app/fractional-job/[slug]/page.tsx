@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { createDbQuery } from '@/lib/db'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
+import { getRoleImageCategory, getHeroImageUrl, getImage } from '@/lib/images'
 
 export const revalidate = 3600
 
@@ -161,17 +163,6 @@ export default async function JobDetailPage({ params }: Props) {
 
   const relatedJobs = await getRelatedJobs(job)
 
-  // Determine role category for color theming
-  const roleColors: Record<string, string> = {
-    'Finance': 'emerald',
-    'Technology': 'cyan',
-    'Marketing': 'pink',
-    'Operations': 'amber',
-    'HR': 'purple',
-    'Sales': 'green',
-  }
-  const colorTheme = roleColors[job.role_category] || 'slate'
-
   return (
     <div className="min-h-screen bg-white">
       <WebPageSchema
@@ -182,9 +173,23 @@ export default async function JobDetailPage({ params }: Props) {
         dateModified={job.updated_at || job.posted_date}
       />
 
-      {/* Hero */}
-      <section className={`bg-gradient-to-br from-${colorTheme}-950 via-${colorTheme}-900 to-slate-950 text-white py-12 lg:py-16`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero with Image */}
+      <section className="relative min-h-[350px] lg:min-h-[400px] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src={getHeroImageUrl(getRoleImageCategory(job.role_category || 'default'), 1600, 600)}
+            alt={getImage(getRoleImageCategory(job.role_category || 'default')).alt}
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <BreadcrumbsLight
             items={[
               { label: 'Home', href: '/' },
@@ -196,21 +201,21 @@ export default async function JobDetailPage({ params }: Props) {
           <div className="mt-6">
             <div className="flex flex-wrap gap-2 mb-4">
               {job.role_category && (
-                <span className="px-3 py-1 bg-white/10 rounded-full text-sm">{job.role_category}</span>
+                <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white">{job.role_category}</span>
               )}
               {job.workplace_type && (
-                <span className="px-3 py-1 bg-white/10 rounded-full text-sm">{job.workplace_type}</span>
+                <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white">{job.workplace_type}</span>
               )}
               {job.is_remote && (
-                <span className="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Remote</span>
+                <span className="px-3 py-1 bg-green-500/30 backdrop-blur-sm text-green-300 rounded-full text-sm">Remote</span>
               )}
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
               {job.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-gray-300">
+            <div className="flex flex-wrap items-center gap-4 text-gray-200">
               <span className="font-semibold text-white">{job.company_name}</span>
               {job.location && <span>• {job.location}</span>}
               {job.compensation && <span className="text-emerald-400 font-medium">• {job.compensation}</span>}
