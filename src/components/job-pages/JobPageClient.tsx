@@ -617,27 +617,6 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* Live Market Pulse - Animated stats bar */}
         <LiveMarketPulse location={locationDisplay} />
 
-        {/* User Interest Graph - show if logged in with data */}
-        {user && userGraphData && userGraphData.nodes.length > 1 && (
-          <section className="py-8 px-6 bg-gradient-to-r from-indigo-50 to-purple-50">
-            <div className="container-content">
-              <div className="flex items-center gap-3 mb-4">
-                <h2 className="text-xl font-semibold text-gray-800">Your Interest Profile</h2>
-                <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">✨ Built from your conversations</span>
-              </div>
-              <div className="bg-white rounded-xl shadow-lg p-4">
-                <ForceGraph3DComponent
-                  data={userGraphData}
-                  height={300}
-                />
-              </div>
-              <p className="text-sm text-gray-500 mt-2">
-                This graph grows as we learn about your interests. Ask me about roles you like!
-              </p>
-            </div>
-          </section>
-        )}
-
         {/* Personalized Insights Section - Enhanced experience for logged-in users */}
         {user && enablePersonalizedSections && (
           <section className="py-12 bg-gradient-to-br from-emerald-50 via-white to-teal-50">
@@ -651,7 +630,33 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
                 </span>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-8">
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* Interest Profile Graph - Compact sidebar */}
+                {userGraphData && userGraphData.nodes.length > 1 && (
+                  <div className="lg:col-span-1">
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-indigo-100">
+                      <div className="bg-gradient-to-r from-indigo-500 to-purple-500 px-4 py-3">
+                        <h3 className="font-bold text-white text-sm flex items-center gap-2">
+                          <span>✨</span> Your Interest Profile
+                        </h3>
+                      </div>
+                      <div className="p-3">
+                        <ForceGraph3DComponent
+                          data={userGraphData}
+                          height={200}
+                        />
+                      </div>
+                      <div className="px-4 py-2 bg-indigo-50 border-t border-indigo-100">
+                        <p className="text-xs text-indigo-600">
+                          Built from your conversations
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Main insights - 2 columns when graph present, full width otherwise */}
+                <div className={userGraphData && userGraphData.nodes.length > 1 ? "lg:col-span-2 grid md:grid-cols-2 gap-6" : "lg:col-span-3 grid md:grid-cols-2 gap-8"}>
                 {/* Market Overview */}
                 <div>
                   <MarketOverview
@@ -667,6 +672,7 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
                     location={locationDisplay}
                     yourRate={userDayRate || 1000}
                   />
+                </div>
                 </div>
               </div>
 

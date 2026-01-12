@@ -195,19 +195,34 @@ export function JobsSidebar({
         </div>
       </div>
 
-      {/* Book a Call CTA */}
+      {/* Book a Call CTA - Eye-catching with photo */}
       {showCalendly && (
-        <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-xl p-6 text-white">
-          <h3 className="text-lg font-bold mb-2">Looking for Talent?</h3>
-          <p className="text-emerald-100 text-sm mb-4">
-            Book a free consultation to discuss your fractional hiring needs.
-          </p>
-          <Link
-            href="/book-call"
-            className="block w-full bg-white text-emerald-700 text-center font-semibold py-2.5 px-4 rounded-lg hover:bg-emerald-50 transition-colors"
-          >
-            Book a Call
-          </Link>
+        <div className="bg-gradient-to-br from-orange-500 via-rose-500 to-purple-600 rounded-xl overflow-hidden shadow-lg">
+          {/* Photo + Content */}
+          <div className="p-5 text-white">
+            <div className="flex items-center gap-4 mb-4">
+              <Image
+                src="https://ui-avatars.com/api/?name=Dan+Keegan&size=64&background=ffffff&color=7c3aed&bold=true"
+                alt="Dan Keegan"
+                width={56}
+                height={56}
+                className="rounded-full border-2 border-white/30 shadow-lg"
+              />
+              <div>
+                <h3 className="font-bold text-lg">Talk to Dan</h3>
+                <p className="text-white/80 text-sm">Founder, Fractional Quest</p>
+              </div>
+            </div>
+            <p className="text-white/90 text-sm mb-4">
+              Get expert guidance on hiring fractional executives or starting your portfolio career.
+            </p>
+            <Link
+              href="/book-call"
+              className="block w-full bg-white text-purple-700 text-center font-bold py-3 px-4 rounded-lg hover:bg-purple-50 transition-colors shadow-md"
+            >
+              📅 Book a Free Call
+            </Link>
+          </div>
         </div>
       )}
 

@@ -349,7 +349,7 @@ export function EmbeddedJobBoard({
 
                     {/* Title */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="font-bold text-white text-lg leading-tight line-clamp-2">
+                      <h3 className="font-extrabold text-white text-lg leading-tight line-clamp-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {job.title}
                       </h3>
                     </div>
