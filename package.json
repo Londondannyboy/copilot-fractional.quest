@@ -30,6 +30,7 @@
     "@stackframe/stack": "^2.8.56",
     "@stackframe/stack-sc": "^2.8.56",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/mdx": "^2.0.13",
     "next": "16.0.7",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.2.1",

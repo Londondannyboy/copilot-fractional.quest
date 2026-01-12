@@ -222,7 +222,7 @@ export function IntelligentJobPageClient({
 
   // CopilotKit agent state
   useCoAgent<AgentState>({
-    name: "agent",
+    name: "my_agent",
     initialState: {
       jobs: initialJobs,
       search_query: "",
