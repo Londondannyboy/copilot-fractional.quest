@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useCopilotChat } from '@copilotkit/react-core'
+import { useChatContext } from '@copilotkit/react-ui'
 import { Role, TextMessage } from '@copilotkit/runtime-client-gql'
 
 interface AIInsightsPanelProps {
@@ -26,9 +27,18 @@ export function AIInsightsPanel({
   const [lastQuestion, setLastQuestion] = useState<string | null>(null)
   const { appendMessage } = useCopilotChat()
 
+  // Get sidebar control - allows us to open it programmatically
+  // useChatContext gives us setOpen to control the CopilotSidebar
+  const chatContext = useChatContext()
+
   const handleAsk = async (question: string) => {
     setIsAsking(true)
     setLastQuestion(question)
+
+    // Open the sidebar automatically so user sees the response
+    if (chatContext?.setOpen) {
+      chatContext.setOpen(true)
+    }
 
     // Construct contextual question
     const contextualQuestion = roleType
