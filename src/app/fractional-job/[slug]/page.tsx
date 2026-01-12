@@ -7,6 +7,82 @@ import { WebPageSchema } from '@/components/seo/WebPageSchema'
 
 export const revalidate = 3600
 
+// Parse job description into structured sections
+function parseJobDescription(text: string): React.ReactNode[] {
+  if (!text) return []
+
+  const lines = text.split('\n')
+  const elements: React.ReactNode[] = []
+  let currentList: string[] = []
+  let key = 0
+
+  const flushList = () => {
+    if (currentList.length > 0) {
+      elements.push(
+        <ul key={key++} className="list-disc list-inside space-y-2 my-4 text-gray-600">
+          {currentList.map((item, i) => (
+            <li key={i} className="leading-relaxed">{item}</li>
+          ))}
+        </ul>
+      )
+      currentList = []
+    }
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim()
+    if (!line) continue
+
+    // Check if it's a bullet point (starts with ·, •, -, *)
+    if (/^[·•\-\*]\s*/.test(line)) {
+      const bulletText = line.replace(/^[·•\-\*]\s*/, '')
+      currentList.push(bulletText)
+      continue
+    }
+
+    // Flush any pending list
+    flushList()
+
+    // Check if it's a section heading (short line, no ending punctuation, followed by content)
+    const isHeading = line.length < 60 &&
+                      !/[.,:;!?]$/.test(line) &&
+                      i < lines.length - 1 &&
+                      (lines[i + 1]?.trim().length > 0 || /^[·•\-\*]/.test(lines[i + 1]?.trim() || ''))
+
+    // Check if it looks like a metadata line (Key: Value format)
+    const metaMatch = line.match(/^([A-Za-z\s]+):\s*(.+)$/)
+    if (metaMatch && metaMatch[1].length < 30) {
+      elements.push(
+        <div key={key++} className="flex flex-wrap gap-2 my-3 py-2 px-3 bg-gray-50 rounded-lg">
+          <span className="font-semibold text-gray-700">{metaMatch[1]}:</span>
+          <span className="text-gray-600">{metaMatch[2]}</span>
+        </div>
+      )
+      continue
+    }
+
+    if (isHeading) {
+      elements.push(
+        <h3 key={key++} className="text-lg font-semibold text-gray-900 mt-8 mb-3 first:mt-0">
+          {line}
+        </h3>
+      )
+    } else {
+      // Regular paragraph
+      elements.push(
+        <p key={key++} className="text-gray-600 leading-relaxed my-3">
+          {line}
+        </p>
+      )
+    }
+  }
+
+  // Flush any remaining list
+  flushList()
+
+  return elements
+}
+
 type Props = {
   params: Promise<{ slug: string }>
 }
@@ -153,24 +229,15 @@ export default async function JobDetailPage({ params }: Props) {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">About This Role</h2>
 
                 {job.full_description ? (
-                  <div className="prose prose-lg max-w-none text-gray-600 space-y-4">
-                    {/* Parse description into paragraphs - handle both HTML and plain text */}
+                  <div className="max-w-none">
+                    {/* Parse description into structured sections with headings, lists, and paragraphs */}
                     {job.full_description.includes('<p>') || job.full_description.includes('<br') ? (
-                      <div dangerouslySetInnerHTML={{ __html: job.full_description }} />
+                      <div
+                        className="prose prose-lg text-gray-600"
+                        dangerouslySetInnerHTML={{ __html: job.full_description }}
+                      />
                     ) : (
-                      job.full_description
-                        .split(/\n\n+/)
-                        .filter((p: string) => p.trim())
-                        .map((paragraph: string, idx: number) => (
-                          <p key={idx} className="leading-relaxed">
-                            {paragraph.split(/\n/).map((line: string, lineIdx: number) => (
-                              <span key={lineIdx}>
-                                {line}
-                                {lineIdx < paragraph.split(/\n/).length - 1 && <br />}
-                              </span>
-                            ))}
-                          </p>
-                        ))
+                      parseJobDescription(job.full_description)
                     )}
                   </div>
                 ) : job.description_snippet ? (

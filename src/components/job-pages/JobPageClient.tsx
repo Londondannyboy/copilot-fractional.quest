@@ -19,7 +19,6 @@ import { LazyYouTube } from "@/components/LazyYouTube";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 import { HotJobs } from "@/components/HotJobs";
 import { EmailCapture } from "@/components/EmailCapture";
-import { JobsSidebar } from "@/components/JobsSidebar";
 import { AgentMDXRenderer } from "@/components/AgentMDXRenderer";
 import { ProfileCard } from "@/components/ProfileCard";
 
@@ -722,10 +721,51 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
                 />
                 {/* Extra jobs for sidebar - fill space */}
                 <HotJobs
-                  maxJobs={5}
+                  maxJobs={6}
                   title="🚀 More Opportunities"
                   className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-100"
                 />
+                {/* Quick Stats Card - fills remaining space */}
+                <div className="bg-gray-900 text-white rounded-xl p-5">
+                  <h3 className="font-bold mb-4 flex items-center gap-2">
+                    <span>📈</span>
+                    {locationDisplay} Market Snapshot
+                  </h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-2xl font-bold text-emerald-400">£{stats.avgDayRate || 900}</p>
+                      <p className="text-xs text-gray-400">Avg Day Rate</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-emerald-400">{stats.total}</p>
+                      <p className="text-xs text-gray-400">Active Jobs</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-emerald-400">{stats.topRoles?.[0]?.count || 0}</p>
+                      <p className="text-xs text-gray-400">{stats.topRoles?.[0]?.role || 'Top'} Roles</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-emerald-400">78%</p>
+                      <p className="text-xs text-gray-400">Remote Options</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Book a Call CTA */}
+                <a
+                  href="/book-call"
+                  className="block bg-gradient-to-br from-orange-500 via-rose-500 to-purple-600 rounded-xl p-5 text-white hover:opacity-95 transition-opacity"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-2xl">📞</span>
+                    <div>
+                      <h3 className="font-bold">Talk to an Expert</h3>
+                      <p className="text-white/80 text-sm">Free 15-min consultation</p>
+                    </div>
+                  </div>
+                  <span className="inline-block bg-white/20 px-4 py-2 rounded-lg text-sm font-medium">
+                    Book a Call →
+                  </span>
+                </a>
               </div>
             </div>
           </div>
@@ -745,32 +785,29 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
           ]}
         />
 
-        {/* Job Board with Sidebar */}
+        {/* Job Board - Full Width (no sidebar gap) */}
         <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-4 gap-8">
-              {/* Main Job Board - 3 columns */}
-              <div className="lg:col-span-3">
-                <EmbeddedJobBoard
-                  defaultLocation={location === "london" ? "London" : ""}
-                  title={`${locationDisplay} Fractional Jobs`}
-                  showFilters={true}
-                  jobsPerPage={9}
-                  accentColor="emerald"
-                />
-              </div>
+            <EmbeddedJobBoard
+              defaultLocation={location === "london" ? "London" : ""}
+              title={`${locationDisplay} Fractional Jobs`}
+              showFilters={true}
+              jobsPerPage={12}
+              accentColor="emerald"
+            />
+          </div>
+        </section>
 
-              {/* Sidebar - 1 column, sticky */}
-              <div className="lg:col-span-1 lg:sticky lg:top-24 h-fit">
-                <JobsSidebar
-                  location={location}
-                  locationDisplay={locationDisplay}
-                  authorityLinks={seoContent.authorityLinks}
-                  statistics={seoContent.statistics}
-                  relatedPages={seoContent.relatedPages}
-                  currentPath={`/fractional-jobs-${location}`}
-                />
-              </div>
+        {/* Quick Links Bar - Horizontal, no white space */}
+        <section className="py-8 bg-white border-y border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <span className="text-sm text-gray-500 font-medium">Quick Links:</span>
+              <a href="/fractional-cfo-jobs-uk" className="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-100 transition-colors">💰 CFO Jobs</a>
+              <a href="/fractional-cto-jobs-uk" className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors">💻 CTO Jobs</a>
+              <a href="/fractional-cmo-jobs-uk" className="px-4 py-2 bg-pink-50 text-pink-700 rounded-full text-sm font-medium hover:bg-pink-100 transition-colors">📣 CMO Jobs</a>
+              <a href="/fractional-coo-jobs-uk" className="px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium hover:bg-amber-100 transition-colors">⚙️ COO Jobs</a>
+              <a href="/remote-fractional-jobs" className="px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium hover:bg-purple-100 transition-colors">🏠 Remote Jobs</a>
             </div>
           </div>
         </section>
