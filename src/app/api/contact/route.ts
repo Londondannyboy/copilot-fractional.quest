@@ -3,6 +3,20 @@ import { neon } from '@neondatabase/serverless'
 
 const sql = neon(process.env.DATABASE_URL!)
 
+// Ensure table exists
+async function ensureTable() {
+  await sql`
+    CREATE TABLE IF NOT EXISTS contact_requests (
+      id SERIAL PRIMARY KEY,
+      name TEXT,
+      email TEXT NOT NULL,
+      user_type TEXT DEFAULT 'unknown',
+      message TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -11,6 +25,9 @@ export async function POST(request: NextRequest) {
     if (!email) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 })
     }
+
+    // Ensure table exists (no-op if already exists)
+    await ensureTable()
 
     // Insert into contact_requests table
     await sql`
