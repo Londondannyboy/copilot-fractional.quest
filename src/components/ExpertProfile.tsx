@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 interface ExpertProfileProps {
   variant?: 'full' | 'compact'
@@ -64,10 +63,67 @@ export function ExpertProfile({ variant = 'full', className = '' }: ExpertProfil
               <p className="text-gray-400 mb-4">
                 Dan founded Fractional Quest after working as a fractional executive himself, understanding firsthand the challenges of finding quality opportunities and the value fractional leaders bring to growing businesses.
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-6">
                 <span className="px-3 py-1 bg-blue-600/20 text-blue-400 text-sm rounded-full">15+ Years Executive Experience</span>
                 <span className="px-3 py-1 bg-purple-600/20 text-purple-400 text-sm rounded-full">Fractional GTM</span>
                 <span className="px-3 py-1 bg-green-600/20 text-green-400 text-sm rounded-full">Strategy & Growth</span>
+              </div>
+
+              {/* Success Metrics */}
+              <div className="grid grid-cols-4 gap-4 pt-6 border-t border-white/10">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-emerald-400">500+</div>
+                  <div className="text-xs text-gray-400">Executives Placed</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-400">200+</div>
+                  <div className="text-xs text-gray-400">Companies Helped</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-400">50+</div>
+                  <div className="text-xs text-gray-400">Case Studies</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-amber-400">4.9</div>
+                  <div className="text-xs text-gray-400">Client Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Client Logos Row */}
+          <div className="mt-8 pt-6 border-t border-white/10">
+            <p className="text-center text-gray-400 text-sm mb-4">Trusted by executives from</p>
+            <div className="flex justify-center items-center gap-6 flex-wrap">
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 bg-white/10 rounded flex items-center justify-center">
+                  <span className="text-white font-bold text-[10px]">SONY</span>
+                </div>
+                <span className="text-gray-300 text-sm">Sony</span>
+              </div>
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 bg-orange-500/20 rounded flex items-center justify-center">
+                  <span className="text-orange-400 font-bold text-sm">O</span>
+                </div>
+                <span className="text-gray-300 text-sm">Orange</span>
+              </div>
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 bg-red-500/20 rounded flex items-center justify-center">
+                  <span className="text-red-400 font-bold text-[10px]">H3G</span>
+                </div>
+                <span className="text-gray-300 text-sm">Hutchison</span>
+              </div>
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded flex items-center justify-center">
+                  <span className="text-blue-300 font-bold text-[10px]">1U</span>
+                </div>
+                <span className="text-gray-300 text-sm">OneUp</span>
+              </div>
+              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 bg-emerald-500/20 rounded flex items-center justify-center">
+                  <span className="text-emerald-400 font-bold text-[10px]">CKD</span>
+                </div>
+                <span className="text-gray-300 text-sm">CK Delta</span>
               </div>
             </div>
           </div>

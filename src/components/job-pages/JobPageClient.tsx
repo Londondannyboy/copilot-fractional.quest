@@ -13,6 +13,7 @@ import { ForceGraph3DComponent, ForceGraphLoading } from "@/components/ForceGrap
 import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
 import { ExpertProfile, ExpertProfileSchema } from "@/components/ExpertProfile";
 import { CaseStudy, CaseStudySchema } from "@/components/CaseStudy";
+import { Testimonials, TestimonialsSchema } from "@/components/Testimonials";
 import { RoleCalculator } from "@/components/RoleCalculator";
 import { LazyYouTube } from "@/components/LazyYouTube";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
@@ -823,6 +824,10 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* Case Study */}
         <CaseStudy />
         <CaseStudySchema />
+
+        {/* Testimonials - Client Success Stories */}
+        <Testimonials variant="carousel" />
+        <TestimonialsSchema />
 
         {/* FAQ */}
         <FAQSection faqs={seoContent.faqs} location={locationDisplay} />

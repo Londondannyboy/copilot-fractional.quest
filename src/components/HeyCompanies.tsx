@@ -124,6 +124,54 @@ export function HeyCompanies({ location = 'London' }: HeyCompaniesProps) {
             </div>
           </div>
         </div>
+
+        {/* Client Logos - Trusted By Section */}
+        <div className="mt-16 pt-12 border-t border-white/20">
+          <p className="text-center text-white/70 text-sm font-medium mb-8 uppercase tracking-wider">
+            Trusted by executives from leading companies
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            {/* Sony */}
+            <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">SONY</span>
+              </div>
+              <span className="text-white/90 font-semibold hidden sm:block">Sony</span>
+            </div>
+
+            {/* Orange */}
+            <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-orange-300 font-bold text-lg">O</span>
+              </div>
+              <span className="text-white/90 font-semibold hidden sm:block">Orange</span>
+            </div>
+
+            {/* Hutchison */}
+            <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">H3G</span>
+              </div>
+              <span className="text-white/90 font-semibold hidden sm:block">Hutchison</span>
+            </div>
+
+            {/* OneUp Productions */}
+            <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">1U</span>
+              </div>
+              <span className="text-white/90 font-semibold hidden sm:block">OneUp</span>
+            </div>
+
+            {/* CK Delta */}
+            <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-emerald-300 font-bold text-sm">CKD</span>
+              </div>
+              <span className="text-white/90 font-semibold hidden sm:block">CK Delta</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

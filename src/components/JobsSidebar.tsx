@@ -226,6 +226,40 @@ export function JobsSidebar({
         </div>
       )}
 
+      {/* Trusted By - Client Logos */}
+      <div className="bg-white rounded-xl border border-gray-200 p-5">
+        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 text-center">
+          Trusted by executives from
+        </h3>
+        <div className="grid grid-cols-5 gap-2">
+          <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="Sony">
+            <div className="w-8 h-8 bg-gray-800 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-[10px]">SONY</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="Orange">
+            <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-sm">O</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="Hutchison 3G">
+            <div className="w-8 h-8 bg-red-600 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-[10px]">H3G</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="OneUp Productions">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-[10px]">1U</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="CK Delta">
+            <div className="w-8 h-8 bg-emerald-600 rounded flex items-center justify-center">
+              <span className="text-white font-bold text-[10px]">CKD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Market Statistics - NEW */}
       {statistics && Object.keys(statistics).length > 0 && (
         <StatisticsHighlight
