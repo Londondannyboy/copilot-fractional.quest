@@ -1,15 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useCoAgent, useCopilotChat, useRenderToolCall } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
-import { authClient } from "@/lib/auth/client";
+import { useState } from "react";
+import { useCoAgent, useRenderToolCall } from "@copilotkit/react-core";
+import { CopilotSidebar } from "@copilotkit/react-ui";
 
 // Charts and visualizations
 import {
-  JobsBarChart, JobsPieChart, SalaryAreaChart,
-  MarketDashboard, ArticlesGrid, ChartLoading
+  JobsBarChart, SalaryAreaChart,
+  MarketDashboard, ChartLoading
 } from "@/components/charts";
 import { ForceGraph3DComponent, ForceGraphLoading } from "@/components/ForceGraph3D";
 
@@ -35,9 +33,13 @@ import { JobsSidebar } from "@/components/JobsSidebar";
 import { HeyCompanies } from "@/components/HeyCompanies";
 import { TrustSignals, TrustSignalsSchema } from "@/components/TrustSignals";
 
-import { HeroSection, FAQSection, SEOContent } from "./index";
+import { FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
 import { ImageCategory } from "@/lib/images";
+
+// Simple Hero Section for Intelligent Pages (without voice widget complexity)
+import Image from "next/image";
+import { getImage, getHeroImageUrl } from "@/lib/images";
 
 // SEO Content interface
 export interface LocationSEOContent {
@@ -100,7 +102,7 @@ interface IntelligentJobPageClientProps {
   initialJobs: Job[];
   stats: JobStats;
   imageCategory?: ImageCategory;
-  roleFilter?: string; // e.g., "Finance", "Engineering"
+  roleFilter?: string;
   accentColor?: 'emerald' | 'blue' | 'amber' | 'purple' | 'red' | 'indigo';
 }
 
@@ -114,6 +116,88 @@ interface AgentState {
     firstName?: string;
     email?: string;
   } | null;
+}
+
+// Simple Hero for Intelligent Document pages
+function IntelligentHero({
+  headline,
+  subtitle,
+  stats,
+  imageCategory = "uk",
+  breadcrumb,
+}: {
+  headline: string;
+  subtitle: string;
+  stats: { avgDayRate: string; hubStatus: string; hybridOptions: string };
+  imageCategory?: ImageCategory;
+  breadcrumb?: Array<{ name: string; url: string }>;
+}) {
+  const image = getImage(imageCategory);
+  const imageUrl = getHeroImageUrl(imageCategory, 1920, 800);
+
+  return (
+    <section className="relative text-white py-16 px-6 min-h-[400px] flex items-center overflow-hidden">
+      <div className="absolute inset-0">
+        <Image
+          src={imageUrl}
+          alt={`${headline} - ${image.alt}`}
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/70 to-gray-900/50" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        {breadcrumb && (
+          <nav className="text-sm mb-6 opacity-80">
+            {breadcrumb.map((item, i) => (
+              <span key={item.url}>
+                <a href={item.url} className="hover:underline">{item.name}</a>
+                {i < breadcrumb.length - 1 && <span className="mx-2">→</span>}
+              </span>
+            ))}
+          </nav>
+        )}
+
+        <div className="max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance font-playfair text-white">
+            {headline}
+          </h1>
+          <p className="text-xl md:text-2xl opacity-90 mb-8">
+            {subtitle}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-6 mt-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4">
+            <div className="text-2xl font-bold">{stats.avgDayRate}</div>
+            <div className="text-sm opacity-80">Avg Day Rate</div>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4">
+            <div className="text-2xl font-bold">{stats.hubStatus}</div>
+            <div className="text-sm opacity-80">Hub Status</div>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4">
+            <div className="text-2xl font-bold">{stats.hybridOptions}</div>
+            <div className="text-sm opacity-80">Hybrid Options</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-2 right-2 z-10">
+        <a
+          href={image.creditUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-white/50 hover:text-white/70"
+        >
+          Photo: {image.credit}
+        </a>
+      </div>
+    </section>
+  );
 }
 
 /**
@@ -130,37 +214,14 @@ export function IntelligentJobPageClient({
   seoContent,
   initialJobs,
   stats,
-  imageCategory = 'Finance',
+  imageCategory = 'finance',
   roleFilter,
   accentColor = 'emerald',
 }: IntelligentJobPageClientProps) {
   const [user, setUser] = useState<AgentState['user']>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch user on mount
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const authUser = await authClient.getUser();
-        if (authUser) {
-          setUser({
-            id: authUser.id,
-            name: authUser.name || authUser.email || 'User',
-            firstName: authUser.name?.split(' ')[0],
-            email: authUser.email,
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchUser();
-  }, []);
 
   // CopilotKit agent state
-  const { state } = useCoAgent<AgentState>({
+  useCoAgent<AgentState>({
     name: "agent",
     initialState: {
       jobs: initialJobs,
@@ -178,14 +239,14 @@ export function IntelligentJobPageClient({
       return (
         <div className="space-y-3 max-w-md">
           <h4 className="font-semibold text-gray-900">{result.title || 'Job Results'}</h4>
-          {result.jobs.slice(0, 5).map((job: Job) => (
+          {result.jobs.slice(0, 5).map((job: Job, index: number) => (
             <a
-              key={job.id}
-              href={`/fractional-job/${job.slug}`}
+              key={job.id || index}
+              href={`/fractional-jobs-uk`}
               className="block p-3 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-sm transition-all"
             >
               <div className="font-medium text-gray-900 text-sm">{job.title}</div>
-              <div className="text-xs text-gray-500 mt-1">{job.company_name} • {job.location}</div>
+              <div className="text-xs text-gray-500 mt-1">{job.company} • {job.location}</div>
             </a>
           ))}
           {result.jobs.length > 5 && (
@@ -228,7 +289,7 @@ export function IntelligentJobPageClient({
     render: ({ result, status }) => {
       if (status === "executing") return <ForceGraphLoading />;
       if (!result?.nodes) return <></>;
-      return <ForceGraph3DComponent graphData={result} />;
+      return <ForceGraph3DComponent data={result} />;
     },
   });
 
@@ -262,6 +323,7 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
 
 ### Current Page Info
 - Location: ${locationDisplay}
+- Total Jobs: ${stats.total}
 - Average Day Rate: ${seoContent.hero.stats.avgDayRate}
 - Hybrid Options: ${seoContent.hero.stats.hybridOptions}
 
@@ -272,8 +334,20 @@ ${user ? `### User Info
 Remember: When filtering, UPDATE THE PAGE directly using the document actions. Don't just describe what to do - actually call the action.
 `;
 
+  // Get accent color value
+  const accentColorValue = accentColor === 'emerald' ? "#059669" :
+    accentColor === 'blue' ? "#2563eb" :
+    accentColor === 'amber' ? "#d97706" :
+    accentColor === 'purple' ? "#7c3aed" :
+    accentColor === 'red' ? "#dc2626" : "#4f46e5";
+
   return (
     <main className="min-h-screen bg-white">
+      <style jsx global>{`
+        :root {
+          --copilot-kit-primary-color: ${accentColorValue};
+        }
+      `}</style>
       <CopilotSidebar
         instructions={agentInstructions}
         labels={{
@@ -283,13 +357,6 @@ Remember: When filtering, UPDATE THE PAGE directly using the document actions. D
         defaultOpen={false}
         clickOutsideToClose={true}
         className="z-50"
-        style={{
-          "--copilot-kit-primary-color": accentColor === 'emerald' ? "#059669" :
-            accentColor === 'blue' ? "#2563eb" :
-            accentColor === 'amber' ? "#d97706" :
-            accentColor === 'purple' ? "#7c3aed" :
-            accentColor === 'red' ? "#dc2626" : "#4f46e5",
-        } as CopilotKitCSSProperties}
       >
         {/* Wrap everything in IntelligentDocument for state management */}
         <IntelligentDocument
@@ -300,11 +367,10 @@ Remember: When filtering, UPDATE THE PAGE directly using the document actions. D
           }}
         >
           {/* Hero Section */}
-          <HeroSection
+          <IntelligentHero
             headline={seoContent.hero.headline}
             subtitle={seoContent.hero.subtitle}
             stats={seoContent.hero.stats}
-            location={locationDisplay}
             imageCategory={imageCategory}
             breadcrumb={seoContent.breadcrumb}
           />
@@ -368,7 +434,7 @@ Remember: When filtering, UPDATE THE PAGE directly using the document actions. D
                   <HotJobs
                     location={location === "london" ? "London" : undefined}
                     maxJobs={8}
-                    title={`🔥 Hot ${locationDisplay} Jobs`}
+                    title={`Hot ${locationDisplay} Jobs`}
                   />
                 </div>
                 <div>

@@ -1,4 +1,5 @@
-// Case Study Data - Real client engagements
+// Case Study Data - REAL fractional engagements only
+// Note: Only include case studies from actual fractional services provided
 const CASE_STUDIES = {
   oneup: {
     id: 'oneup',
@@ -20,49 +21,9 @@ const CASE_STUDIES = {
       { title: 'Flexible Scale', description: 'Adjusted involvement as needs evolved' },
     ],
     tags: ['Fractional GTM', 'Market Expansion', 'Gaming Industry', 'International Growth'],
+    link: '/case-studies/oneup-productions',
   },
-  sony: {
-    id: 'sony',
-    logo: 'SONY',
-    logoGradient: 'from-gray-800 to-gray-900',
-    company: 'Sony PlayStation',
-    industry: 'Gaming & Entertainment',
-    role: 'Fractional CMO',
-    challenge: 'Sony PlayStation\'s European marketing team needed senior strategic leadership during a product launch cycle. The internal team required guidance on digital transformation and go-to-market execution.',
-    solution: 'Provided Fractional CMO services focused on digital marketing strategy, campaign optimization, and team mentorship over a 6-month engagement.',
-    metrics: [
-      { value: '40%', label: 'Campaign ROI Increase', color: 'blue' },
-      { value: '6', label: 'Month Engagement', color: 'green' },
-      { value: '12', label: 'Team Members Mentored', color: 'purple' },
-    ],
-    benefits: [
-      { title: 'Enterprise Experience', description: 'Brought big-company best practices to the regional team' },
-      { title: 'Knowledge Transfer', description: 'Upskilled internal marketing capabilities' },
-      { title: 'Launch Success', description: 'Delivered results within tight timeline' },
-    ],
-    tags: ['Fractional CMO', 'Digital Marketing', 'Enterprise', 'Product Launch'],
-  },
-  ckdelta: {
-    id: 'ckdelta',
-    logo: 'CKD',
-    logoGradient: 'from-emerald-500 to-teal-600',
-    company: 'CK Delta',
-    industry: 'Data & Analytics',
-    role: 'Fractional CRO',
-    challenge: 'CK Delta, a fast-growing data analytics company, needed to build out their revenue operations but couldn\'t justify a full-time CRO hire at their stage.',
-    solution: 'Implemented Fractional CRO model to establish sales processes, CRM systems, and revenue forecasting working 2 days per week.',
-    metrics: [
-      { value: '3x', label: 'Pipeline Growth', color: 'emerald' },
-      { value: '60%', label: 'Win Rate Improvement', color: 'green' },
-      { value: '£2M', label: 'ARR Milestone', color: 'purple' },
-    ],
-    benefits: [
-      { title: 'Scalable Foundation', description: 'Built processes that scale with growth' },
-      { title: 'Right-sized Investment', description: 'Got CRO expertise at startup budget' },
-      { title: 'Investor Ready', description: 'Metrics and processes for Series A' },
-    ],
-    tags: ['Fractional CRO', 'Revenue Operations', 'Startups', 'SaaS'],
-  },
+  // Additional case studies will be added as we complete more fractional engagements
 }
 
 type CaseStudyId = keyof typeof CASE_STUDIES
@@ -75,11 +36,13 @@ interface CaseStudyProps {
 
 /**
  * E-E-A-T Authority Component - Real Case Studies
- * Demonstrates actual fractional executive experience
- * Shows Google we have real-world expertise, not just content
+ * Demonstrates ACTUAL fractional executive engagements
+ * Only includes verified case studies from real client work
  */
 export function CaseStudy({ variant = 'full', caseStudyId = 'oneup', className = '' }: CaseStudyProps) {
   const study = CASE_STUDIES[caseStudyId]
+
+  if (!study) return null
 
   if (variant === 'card') {
     return (
@@ -98,59 +61,46 @@ export function CaseStudy({ variant = 'full', caseStudyId = 'oneup', className =
         </p>
         <div className="flex flex-wrap gap-2">
           {study.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">{tag}</span>
+            <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+              {tag}
+            </span>
           ))}
         </div>
+        {study.link && (
+          <a href={study.link} className="mt-4 inline-block text-sm text-emerald-600 hover:text-emerald-700 font-medium">
+            Read full case study →
+          </a>
+        )}
       </div>
     )
   }
 
-  // Grid variant - show all case studies as cards
   if (variant === 'grid') {
-    return (
-      <section className={`py-16 bg-gray-50 ${className}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full mb-4">
-              Real Client Success Stories
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Fractional Executive <span className="text-blue-600">Case Studies</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              See how fractional executive leadership delivers real results across industries
-            </p>
-          </div>
+    const studies = Object.values(CASE_STUDIES)
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {Object.values(CASE_STUDIES).map((cs) => (
-              <div key={cs.id} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-12 h-12 bg-gradient-to-br ${cs.logoGradient} rounded-lg flex items-center justify-center text-white font-bold text-sm`}>
-                    {cs.logo}
-                  </div>
-                  <div>
-                    <div className="font-bold text-gray-900">{cs.company}</div>
-                    <div className="text-sm text-gray-500">{cs.role}</div>
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {cs.challenge}
-                </p>
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  {cs.metrics.map((m) => (
-                    <div key={m.label} className="text-center p-2 bg-gray-50 rounded-lg">
-                      <div className={`text-lg font-bold text-${m.color}-600`}>{m.value}</div>
-                      <div className="text-xs text-gray-500">{m.label}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {cs.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">{tag}</span>
-                  ))}
-                </div>
-              </div>
+    // If only one case study, show as featured
+    if (studies.length === 1) {
+      return (
+        <section className={`py-12 bg-white ${className}`}>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center font-playfair">
+              Case Study
+            </h2>
+            <CaseStudy variant="full" caseStudyId={studies[0].id as CaseStudyId} />
+          </div>
+        </section>
+      )
+    }
+
+    return (
+      <section className={`py-12 bg-white ${className}`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center font-playfair">
+            Case Studies
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {studies.map((s) => (
+              <CaseStudy key={s.id} variant="card" caseStudyId={s.id as CaseStudyId} />
             ))}
           </div>
         </div>
@@ -158,126 +108,107 @@ export function CaseStudy({ variant = 'full', caseStudyId = 'oneup', className =
     )
   }
 
-  // Full variant - detailed single case study
+  // Full variant - detailed case study
   return (
-    <section className={`py-16 bg-gray-50 ${className}`}>
+    <section className={`py-12 bg-white ${className}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full mb-4">
-            Real Fractional Experience
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Case Study: <span className="text-blue-600">{study.role} in Action</span>
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            See how fractional executive work delivers real results for growing companies
-          </p>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100">
           {/* Header */}
-          <div className={`bg-gradient-to-r ${study.logoGradient} p-6 text-white`}>
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center text-2xl font-bold">
-                {study.logo}
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold">{study.company}</h3>
-                <p className="text-white/80">{study.industry}</p>
-              </div>
+          <div className="flex items-center gap-4 mb-6">
+            <div className={`w-16 h-16 bg-gradient-to-br ${study.logoGradient} rounded-xl flex items-center justify-center text-white font-bold text-2xl`}>
+              {study.logo}
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900">{study.company}</h3>
+              <p className="text-gray-500">{study.industry}</p>
+              <span className="inline-block mt-1 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">
+                {study.role}
+              </span>
             </div>
           </div>
 
-          {/* Content */}
-          <div className="p-8">
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div>
-                <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">1</span>
-                  The Challenge
-                </h4>
-                <p className="text-gray-600">
-                  {study.challenge}
-                </p>
+          {/* Metrics */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            {study.metrics.map((metric) => (
+              <div key={metric.label} className="text-center p-4 bg-white rounded-xl border border-gray-100">
+                <div className={`text-2xl font-bold text-${metric.color}-600`}>{metric.value}</div>
+                <div className="text-xs text-gray-500">{metric.label}</div>
               </div>
-              <div>
-                <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm">2</span>
-                  The Solution
-                </h4>
-                <p className="text-gray-600">
-                  {study.solution}
-                </p>
-              </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Results */}
-            <div className="bg-gray-50 rounded-xl p-6 mb-8">
-              <h4 className="font-bold text-gray-900 mb-4">Key Deliverables</h4>
-              <div className="grid sm:grid-cols-3 gap-4">
-                {study.metrics.map((metric) => (
-                  <div key={metric.label} className="text-center p-4 bg-white rounded-lg border border-gray-200">
-                    <div className={`text-2xl font-bold text-${metric.color}-600 mb-1`}>{metric.value}</div>
-                    <div className="text-sm text-gray-600">{metric.label}</div>
-                  </div>
-                ))}
-              </div>
+          {/* Challenge & Solution */}
+          <div className="space-y-4 mb-6">
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-2">The Challenge</h4>
+              <p className="text-gray-600 text-sm">{study.challenge}</p>
             </div>
-
-            {/* Why Fractional Works */}
-            <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-              <h4 className="font-bold text-gray-900 mb-3">Why Fractional Worked Here</h4>
-              <ul className="space-y-2 text-gray-600 text-sm">
-                {study.benefits.map((benefit) => (
-                  <li key={benefit.title} className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">✓</span>
-                    <span><strong>{benefit.title}</strong> — {benefit.description}</span>
-                  </li>
-                ))}
-              </ul>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-2">Our Approach</h4>
+              <p className="text-gray-600 text-sm">{study.solution}</p>
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="bg-gray-50 px-8 py-4 border-t border-gray-200">
-            <div className="flex flex-wrap gap-2">
-              {study.tags.map((tag, idx) => {
-                const colors = ['blue', 'purple', 'green', 'orange']
-                const color = colors[idx % colors.length]
-                return (
-                  <span key={tag} className={`px-3 py-1 bg-${color}-100 text-${color}-700 text-sm rounded-full`}>
-                    {tag}
-                  </span>
-                )
-              })}
-            </div>
+          {/* Benefits */}
+          <div className="grid md:grid-cols-3 gap-4 mb-6">
+            {study.benefits.map((benefit) => (
+              <div key={benefit.title} className="p-4 bg-emerald-50 rounded-xl">
+                <h5 className="font-semibold text-emerald-900 text-sm mb-1">{benefit.title}</h5>
+                <p className="text-emerald-700 text-xs">{benefit.description}</p>
+              </div>
+            ))}
           </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {study.tags.map((tag) => (
+              <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* CTA */}
+          {study.link && (
+            <div className="mt-6 text-center">
+              <a
+                href={study.link}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors font-medium"
+              >
+                Read Full Case Study
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </section>
   )
 }
 
-// Export case study IDs for use in pages
-export const CASE_STUDY_IDS = Object.keys(CASE_STUDIES) as CaseStudyId[]
-
-// Schema.org Case Study markup
+/**
+ * Schema.org markup for case study
+ * Provides structured data for search engines
+ */
 export function CaseStudySchema() {
+  const studies = Object.values(CASE_STUDIES)
+
+  if (studies.length === 0) return null
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Fractional GTM Case Study: OneUp Productions Market Expansion",
-    "description": "How fractional executive leadership helped OneUp Productions expand into new international markets.",
+    "headline": `${studies[0].company} Case Study - ${studies[0].role}`,
+    "description": studies[0].challenge,
     "author": {
-      "@id": "https://fractional.quest/#dan-keegan"
+      "@type": "Person",
+      "name": "Dan Keegan"
     },
     "publisher": {
-      "@id": "https://fractional.quest/#organization"
-    },
-    "about": {
-      "@type": "Service",
-      "name": "Fractional GTM Services",
-      "description": "Part-time go-to-market executive leadership for growing companies"
+      "@type": "Organization",
+      "name": "Fractional Quest"
     }
   }
 

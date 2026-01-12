@@ -8,7 +8,7 @@ interface ExpertProfileProps {
 /**
  * E-E-A-T Authority Component
  * Displays Dan Keegan's expert profile to establish credibility and trust
- * Used on ranking pages to demonstrate real expertise in fractional executive work
+ * IMPORTANT: Only include truthful, verifiable information
  */
 export function ExpertProfile({ variant = 'full', className = '' }: ExpertProfileProps) {
   if (variant === 'compact') {
@@ -69,31 +69,26 @@ export function ExpertProfile({ variant = 'full', className = '' }: ExpertProfil
                 <span className="px-3 py-1 bg-green-600/20 text-green-400 text-sm rounded-full">Strategy & Growth</span>
               </div>
 
-              {/* Success Metrics */}
-              <div className="grid grid-cols-4 gap-4 pt-6 border-t border-white/10">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-emerald-400">500+</div>
-                  <div className="text-xs text-gray-400">Executives Placed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-400">200+</div>
-                  <div className="text-xs text-gray-400">Companies Helped</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-400">50+</div>
-                  <div className="text-xs text-gray-400">Case Studies</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-amber-400">4.9</div>
-                  <div className="text-xs text-gray-400">Client Rating</div>
-                </div>
+              {/* Connect */}
+              <div className="pt-6 border-t border-white/10">
+                <a
+                  href="https://linkedin.com/in/dankeegan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                  Connect on LinkedIn
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Client Logos Row */}
+          {/* Prior Experience Row - TRUTHFULLY labeled as employment history */}
           <div className="mt-8 pt-6 border-t border-white/10">
-            <p className="text-center text-gray-400 text-sm mb-4">Trusted by executives from</p>
+            <p className="text-center text-gray-400 text-sm mb-4">Prior executive experience includes</p>
             <div className="flex justify-center items-center gap-6 flex-wrap">
               <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
                 <div className="w-8 h-8 bg-white/10 rounded flex items-center justify-center">
@@ -113,17 +108,18 @@ export function ExpertProfile({ variant = 'full', className = '' }: ExpertProfil
                 </div>
                 <span className="text-gray-300 text-sm">Hutchison</span>
               </div>
+            </div>
+          </div>
+
+          {/* Fractional Client */}
+          <div className="mt-6 pt-4 border-t border-white/10">
+            <p className="text-center text-gray-400 text-sm mb-4">Current fractional client</p>
+            <div className="flex justify-center">
               <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded flex items-center justify-center">
                   <span className="text-blue-300 font-bold text-[10px]">1U</span>
                 </div>
-                <span className="text-gray-300 text-sm">OneUp</span>
-              </div>
-              <div className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                <div className="w-8 h-8 bg-emerald-500/20 rounded flex items-center justify-center">
-                  <span className="text-emerald-400 font-bold text-[10px]">CKD</span>
-                </div>
-                <span className="text-gray-300 text-sm">CK Delta</span>
+                <span className="text-gray-300 text-sm">OneUp Productions</span>
               </div>
             </div>
           </div>
@@ -133,34 +129,32 @@ export function ExpertProfile({ variant = 'full', className = '' }: ExpertProfil
   )
 }
 
-// Schema.org Person markup for SEO
+/**
+ * Schema.org markup for ExpertProfile
+ * Establishes Dan as an authoritative expert in the fractional executive space
+ */
 export function ExpertProfileSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://fractional.quest/#dan-keegan",
     "name": "Dan Keegan",
-    "jobTitle": "Fractional GTM Expert",
-    "description": "Fractional executive expert with 15+ years experience in go-to-market strategy, business development, and executive leadership.",
-    "image": "https://fractional.quest/dan-keegan.webp",
+    "jobTitle": "Founder & Fractional GTM Expert",
+    "description": "Fractional executive expert with 15+ years of experience in GTM strategy and executive leadership. Founder of Fractional Quest.",
     "url": "https://fractional.quest/about",
+    "image": "https://fractional.quest/dan-keegan.webp",
     "sameAs": [
-      "https://www.linkedin.com/in/dankeegan/",
-      "https://www.linkedin.com/company/fractional-quest"
+      "https://linkedin.com/in/dankeegan"
     ],
     "worksFor": {
       "@type": "Organization",
-      "name": "Fractional Quest",
-      "url": "https://fractional.quest"
+      "name": "Fractional Quest"
     },
     "knowsAbout": [
-      "Fractional Executive",
+      "Fractional Executive Work",
       "Go-to-Market Strategy",
+      "Executive Leadership",
       "Business Development",
-      "Fractional CFO",
-      "Fractional CTO",
-      "Fractional CMO",
-      "Portfolio Career"
+      "Portfolio Careers"
     ]
   }
 
