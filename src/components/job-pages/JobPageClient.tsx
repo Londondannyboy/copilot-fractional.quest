@@ -19,6 +19,15 @@ import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 import { HotJobs } from "@/components/HotJobs";
 import { EmailCapture } from "@/components/EmailCapture";
 import { JobsSidebar } from "@/components/JobsSidebar";
+import { AgentMDXRenderer } from "@/components/AgentMDXRenderer";
+
+// Personalized MDX-style components (show when user logged in)
+import dynamic from "next/dynamic";
+const PersonalizedHero = dynamic(() => import("@/components/mdx/PersonalizedHero"), { ssr: false });
+const SalaryBenchmarkChart = dynamic(() => import("@/components/mdx/SalaryBenchmarkChart"), { ssr: false });
+const CareerTimeline = dynamic(() => import("@/components/mdx/CareerTimeline"), { ssr: false });
+const MarketOverview = dynamic(() => import("@/components/mdx/MarketOverview"), { ssr: false });
+const CopilotMainPanel = dynamic(() => import("@/components/mdx/CopilotMainPanel"), { ssr: false });
 
 import { HeroSection, InitialCharts, FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
@@ -122,6 +131,11 @@ interface JobPageClientProps {
   stats: JobStats;
   seoContent: LocationSEOContent;
   imageCategory?: ImageCategory;
+  // Personalized section options (enhanced experience when user logged in)
+  enablePersonalizedSections?: boolean;  // Master toggle for personalized content
+  targetRole?: string;                   // Role for salary benchmark (e.g., "CMO", "CTO")
+  showEmbeddedChat?: boolean;            // Show CopilotMainPanel in content area
+  userDayRate?: number;                  // User's current day rate for comparison
 }
 
 export function JobPageClient({
@@ -131,6 +145,10 @@ export function JobPageClient({
   stats,
   seoContent,
   imageCategory,
+  enablePersonalizedSections = true,
+  targetRole,
+  showEmbeddedChat = false,
+  userDayRate,
 }: JobPageClientProps) {
   // Auth
   const { data: session } = authClient.useSession();
@@ -429,6 +447,35 @@ export function JobPageClient({
     },
   }, []);
 
+  // MDX Response Renderer - Agent can compose rich UI with MDX components
+  useRenderToolCall({
+    name: "compose_mdx_response",
+    render: ({ result, status }) => {
+      if (status !== "complete" || !result) {
+        return (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm animate-pulse">
+            <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+          </div>
+        );
+      }
+
+      // Render the MDX content with the AgentMDXRenderer
+      return (
+        <AgentMDXRenderer
+          mdxContent={result.mdx || ""}
+          title={result.title}
+          suggestedActions={result.suggested_actions || []}
+          onActionClick={(action) => {
+            // Send the action as a new message to the chat
+            console.log("User clicked suggested action:", action);
+          }}
+        />
+      );
+    },
+  }, []);
+
   // Human-in-the-Loop: Confirm job interest and add to Zep memory
   useHumanInTheLoop({
     name: "confirm_job_interest",
@@ -587,6 +634,72 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
               <p className="text-sm text-gray-500 mt-2">
                 This graph grows as we learn about your interests. Ask me about roles you like!
               </p>
+            </div>
+          </section>
+        )}
+
+        {/* Personalized Insights Section - Enhanced experience for logged-in users */}
+        {user && enablePersonalizedSections && (
+          <section className="py-12 bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center gap-3 mb-8">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Your Personalized Insights
+                </h2>
+                <span className="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-medium">
+                  Tailored for {firstName || "you"}
+                </span>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-8">
+                {/* Market Overview */}
+                <div>
+                  <MarketOverview
+                    location={locationDisplay}
+                    role={targetRole || stats.topRoles?.[0]?.role || "Executive"}
+                  />
+                </div>
+
+                {/* Salary Benchmark */}
+                <div>
+                  <SalaryBenchmarkChart
+                    role={targetRole || stats.topRoles?.[0]?.role || "CFO"}
+                    location={locationDisplay}
+                    yourRate={userDayRate || 1000}
+                  />
+                </div>
+              </div>
+
+              {/* Career Timeline - full width */}
+              {targetRole && (
+                <div className="mt-8">
+                  <CareerTimeline
+                    currentRole={`${targetRole} Professional`}
+                    targetRole={`Fractional ${targetRole}`}
+                    userName={firstName || undefined}
+                  />
+                </div>
+              )}
+
+              {/* Embedded Chat Panel - optional */}
+              {showEmbeddedChat && (
+                <div className="mt-8">
+                  <CopilotMainPanel
+                    title={`Ask about ${locationDisplay} opportunities`}
+                    suggestedQuestions={[
+                      `What's the average day rate for ${targetRole || "executives"} in ${locationDisplay}?`,
+                      `Show me ${targetRole || "senior"} jobs here`,
+                      "How can I increase my rate?",
+                      "What skills are most valuable?",
+                    ]}
+                    context={{
+                      pageType: `jobs_${location}`,
+                      location: locationDisplay,
+                      role: targetRole,
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </section>
         )}

@@ -80,6 +80,9 @@ export default async function FractionalJobsLondonPage() {
         stats={stats}
         seoContent={londonSEO}
         imageCategory="london"
+        // Personalized sections for logged-in users
+        enablePersonalizedSections={true}
+        userDayRate={1000}
       />
     </>
   );

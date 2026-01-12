@@ -2275,6 +2275,174 @@ def reply_to_message(ctx: RunContext[StateDeps[AppState]], to_user_id: str, cont
 
 
 # =====
+# MDX Component Tools - Allow agent to compose dynamic UI
+# =====
+
+@agent.tool
+async def get_available_mdx_components(ctx: RunContext[StateDeps[AppState]], category: str = None) -> dict:
+    """Get list of available MDX components the agent can use in responses.
+
+    Call this when you need to understand what UI components are available
+    to compose rich visual responses.
+
+    Args:
+        category: Optional filter by category (hero, chart, visualization, dashboard, chat, job-board, calculator)
+
+    Returns:
+        List of available components with their props and usage examples
+    """
+    if not DATABASE_URL:
+        # Fallback to hardcoded list if DB not available
+        return {
+            "components": [
+                {"name": "SalaryBenchmarkChart", "category": "chart", "example": '<SalaryBenchmarkChart role="CMO" location="London" yourRate={1100} />'},
+                {"name": "EmbeddedJobBoard", "category": "job-board", "example": '<EmbeddedJobBoard defaultDepartment="Marketing" />'},
+                {"name": "MarketOverview", "category": "dashboard", "example": '<MarketOverview location="London" role="CMO" />'},
+                {"name": "RoleCalculator", "category": "calculator", "example": '<RoleCalculator role="CMO" />'},
+                {"name": "HotJobs", "category": "job-board", "example": '<HotJobs limit={5} />'},
+            ],
+            "note": "Use these components in MDX responses to create rich UI"
+        }
+
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+
+        if category:
+            cur.execute("""
+                SELECT name, description, category, props, example_usage
+                FROM mdx_components
+                WHERE category = %s
+                ORDER BY name
+            """, (category,))
+        else:
+            cur.execute("""
+                SELECT name, description, category, props, example_usage
+                FROM mdx_components
+                ORDER BY category, name
+            """)
+
+        rows = cur.fetchall()
+        conn.close()
+
+        components = []
+        for row in rows:
+            components.append({
+                "name": row[0],
+                "description": row[1],
+                "category": row[2],
+                "props": row[3] if row[3] else [],
+                "example": row[4]
+            })
+
+        print(f"🧩 Retrieved {len(components)} MDX components" + (f" in category '{category}'" if category else ""), file=sys.stderr)
+
+        return {
+            "available_components": components,
+            "usage_note": "Return MDX content with these components to render rich UI. The frontend will compile and render them."
+        }
+
+    except Exception as e:
+        print(f"[MDX] Error fetching components: {e}", file=sys.stderr)
+        return {"error": str(e)}
+
+
+@agent.tool
+async def compose_mdx_response(ctx: RunContext[StateDeps[AppState]],
+                                title: str,
+                                mdx_content: str,
+                                suggested_actions: list = None) -> dict:
+    """Compose a rich MDX response with embedded components.
+
+    Use this when you want to return a visual, interactive response
+    rather than plain text. The frontend will render the MDX.
+
+    Args:
+        title: A short title for the response
+        mdx_content: MDX content string with embedded components (e.g., '<SalaryBenchmarkChart role="CMO" />')
+        suggested_actions: Optional list of follow-up action strings
+
+    Returns:
+        Structured MDX response for frontend rendering
+
+    Example MDX content:
+        '''
+        ## Your Salary Position
+
+        Based on your profile, here's how you compare to the market:
+
+        <SalaryBenchmarkChart role="CMO" location="London" yourRate={1100} />
+
+        You're in the 75th percentile - strong position!
+        '''
+    """
+    print(f"🎨 Composing MDX response: {title}", file=sys.stderr)
+
+    return {
+        "type": "mdx_response",
+        "title": title,
+        "mdx": mdx_content,
+        "suggested_actions": suggested_actions or [],
+        "render_instruction": "The frontend should compile this MDX with the registered components"
+    }
+
+
+@agent.tool
+async def query_page_content(ctx: RunContext[StateDeps[AppState]], slug: str) -> dict:
+    """Query the content of a specific page from the database.
+
+    Use this to understand what content is on a page before helping the user
+    or to reference information from other pages.
+
+    Args:
+        slug: The page slug (e.g., 'fractional-cfo-jobs-uk', 'hire-fractional-cmo')
+
+    Returns:
+        Page content including title, description, sections, and FAQs
+    """
+    if not DATABASE_URL:
+        return {"error": "Database not configured"}
+
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT slug, title, meta_description, page_type,
+                   hero_title, hero_subtitle, sections, faqs,
+                   job_board_department, accent_color
+            FROM pages
+            WHERE slug = %s AND is_published = true
+            LIMIT 1
+        """, (slug,))
+
+        row = cur.fetchone()
+        conn.close()
+
+        if not row:
+            return {"error": f"Page '{slug}' not found"}
+
+        print(f"📄 Retrieved page content for: {slug}", file=sys.stderr)
+
+        return {
+            "slug": row[0],
+            "title": row[1],
+            "meta_description": row[2],
+            "page_type": row[3],
+            "hero_title": row[4],
+            "hero_subtitle": row[5],
+            "sections": row[6] if row[6] else [],
+            "faqs": row[7] if row[7] else [],
+            "job_board_department": row[8],
+            "accent_color": row[9]
+        }
+
+    except Exception as e:
+        print(f"[Pages] Error querying page: {e}", file=sys.stderr)
+        return {"error": str(e)}
+
+
+# =====
 # Unified FastAPI App with AG-UI + CLM endpoints
 # =====
 from fastapi import FastAPI, Request
