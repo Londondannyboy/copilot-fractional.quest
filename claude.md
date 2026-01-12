@@ -58,6 +58,47 @@ npm run build            # Production build
 npm run lint             # Type check
 ```
 
+## CSS/Tailwind Architecture (IMPORTANT)
+
+**Never set colors on base HTML elements in globals.css.** This causes Tailwind class overrides to fail.
+
+| Element Type | Set These | DON'T Set |
+|--------------|-----------|-----------|
+| Base (h1-h6, p, a) | font-family, weight, spacing | color, background |
+| Scoped (.card, .section-title) | Anything | - |
+
+**Why:** Tailwind utilities like `text-white` won't work if `h3 { color: #111827 }` exists in CSS.
+
+**The Pattern:**
+```css
+/* CORRECT - let Tailwind control colors */
+h3 { font-weight: 600; }
+
+/* WRONG - blocks Tailwind overrides */
+h3 { font-weight: 600; color: var(--text-primary); }
+```
+
+## CopilotKit Generative UI vs MDX
+
+**Generative UI (useRenderToolCall)** - Powers the charts and job cards in sidebar:
+```
+Agent tool → returns data → useRenderToolCall → renders React component
+```
+This is NATIVE CopilotKit - no MDX needed.
+
+**MDX (compose_mdx_response)** - For dynamic content composition:
+```
+Agent composes MDX string → AgentMDXRenderer → renders with registered components
+```
+This adds flexibility but is NOT required for charts/cards.
+
+| Feature | Powered By |
+|---------|------------|
+| Charts in sidebar | CopilotKit `useRenderToolCall` |
+| Job cards from search | CopilotKit `useRenderToolCall` |
+| Dynamic composed content | MDX `compose_mdx_response` |
+| Database page content | PageRenderer (not MDX) |
+
 ## Context Reset Pattern
 
 **IMPORTANT**: Between planning and execution, clear context:

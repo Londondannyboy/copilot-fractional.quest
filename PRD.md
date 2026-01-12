@@ -46,13 +46,27 @@ Build the UK's premier platform for fractional executive job seekers and hirers,
 Frontend (Next.js 15 + Vercel)
 ├── Static Pages (JobPageClient) → High-traffic, full components
 ├── Database Pages (PageRenderer) → Supporting content, 56 section types
-└── MDX Pages (NEW) → Interactive content with embedded components
+└── MDX (compose_mdx_response) → Dynamic content composition by agent
 
 Backend
 ├── Pydantic AI Agent (Railway) → CopilotKit + Hume CLM
 ├── Neon PostgreSQL → Pages, jobs, user profiles
 └── Zep Memory → Conversation memory, fact extraction
 ```
+
+### Rendering Technologies (Clarification)
+
+| Technology | What It Does | Example |
+|------------|--------------|---------|
+| **CopilotKit Generative UI** | Agent tools return data → `useRenderToolCall` → React component | Charts, job cards in sidebar |
+| **MDX (compose_mdx_response)** | Agent composes MDX string → runtime compile → rich content | Custom composed layouts |
+| **PageRenderer** | JSONB sections from DB → switch/case → React components | Database page content |
+
+**The charts and job cards you see in the CopilotKit sidebar are NOT MDX** - they're native CopilotKit Generative UI via `useRenderToolCall`. MDX adds flexibility for dynamic content composition but is not required for the core chart/card rendering.
+
+### CSS/Tailwind Pattern
+
+**CRITICAL:** Never set colors on base HTML elements (h1-h6, p, a) in `globals.css`. This blocks Tailwind class overrides. Only set: font-family, weight, spacing. Let Tailwind control colors per-context.
 
 ## In Scope - V2 MVP
 
