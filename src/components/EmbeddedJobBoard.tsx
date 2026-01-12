@@ -331,7 +331,8 @@ export function EmbeddedJobBoard({
                       sizes="(max-width: 768px) 100vw, 400px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent" />
+                    {/* Strong gradient overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
                     {/* Badges */}
                     <div className="absolute top-3 left-3 flex gap-2">
@@ -347,9 +348,9 @@ export function EmbeddedJobBoard({
                       )}
                     </div>
 
-                    {/* Title */}
+                    {/* Title - White text with strong shadow */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="font-extrabold text-white text-lg leading-tight line-clamp-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                      <h3 className="font-extrabold text-white text-lg leading-tight line-clamp-2" style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 1px 3px rgba(0,0,0,0.9)' }}>
                         {job.title}
                       </h3>
                     </div>

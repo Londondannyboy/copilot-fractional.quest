@@ -20,6 +20,7 @@ import { HotJobs } from "@/components/HotJobs";
 import { EmailCapture } from "@/components/EmailCapture";
 import { JobsSidebar } from "@/components/JobsSidebar";
 import { AgentMDXRenderer } from "@/components/AgentMDXRenderer";
+import { ProfileCard } from "@/components/ProfileCard";
 
 // Personalized MDX-style components (show when user logged in)
 import dynamic from "next/dynamic";
@@ -631,32 +632,13 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
               </div>
 
               <div className="grid lg:grid-cols-3 gap-8">
-                {/* Interest Profile Graph - Compact sidebar */}
-                {userGraphData && userGraphData.nodes.length > 1 && (
-                  <div className="lg:col-span-1">
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-indigo-100">
-                      <div className="bg-gradient-to-r from-indigo-500 to-purple-500 px-4 py-3">
-                        <h3 className="font-bold text-white text-sm flex items-center gap-2">
-                          <span>✨</span> Your Interest Profile
-                        </h3>
-                      </div>
-                      <div className="p-3">
-                        <ForceGraph3DComponent
-                          data={userGraphData}
-                          height={200}
-                        />
-                      </div>
-                      <div className="px-4 py-2 bg-indigo-50 border-t border-indigo-100">
-                        <p className="text-xs text-indigo-600">
-                          Built from your conversations
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {/* Profile Card - Compact sidebar showing user's saved profile */}
+                <div className="lg:col-span-1">
+                  <ProfileCard />
+                </div>
 
-                {/* Main insights - 2 columns when graph present, full width otherwise */}
-                <div className={userGraphData && userGraphData.nodes.length > 1 ? "lg:col-span-2 grid md:grid-cols-2 gap-6" : "lg:col-span-3 grid md:grid-cols-2 gap-8"}>
+                {/* Main insights - 2 columns */}
+                <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
                 {/* Market Overview */}
                 <div>
                   <MarketOverview
