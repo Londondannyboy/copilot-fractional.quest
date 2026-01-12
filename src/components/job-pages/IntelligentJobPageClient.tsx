@@ -233,7 +233,7 @@ export function IntelligentJobPageClient({
   // Render tool results as UI
   useRenderToolCall({
     name: "search_jobs",
-    render: ({ result, status }) => {
+    render: ({ result, status }: { result: any; status: string }) => {
       if (status === "executing") return <ChartLoading title="Searching jobs..." />;
       if (!result?.jobs) return <></>;
       return (
@@ -259,7 +259,7 @@ export function IntelligentJobPageClient({
 
   useRenderToolCall({
     name: "show_jobs_bar_chart",
-    render: ({ result, status }) => {
+    render: ({ result, status }: { result: any; status: string }) => {
       if (status === "executing") return <ChartLoading title="Loading chart..." />;
       if (!result?.data) return <></>;
       return <JobsBarChart data={result.data} title={result.title} />;
@@ -268,7 +268,7 @@ export function IntelligentJobPageClient({
 
   useRenderToolCall({
     name: "show_salary_area_chart",
-    render: ({ result, status }) => {
+    render: ({ result, status }: { result: any; status: string }) => {
       if (status === "executing") return <ChartLoading title="Loading salary data..." />;
       if (!result?.data) return <></>;
       return <SalaryAreaChart data={result.data} title={result.title} />;
@@ -277,7 +277,7 @@ export function IntelligentJobPageClient({
 
   useRenderToolCall({
     name: "show_market_dashboard",
-    render: ({ result, status }) => {
+    render: ({ result, status }: { result: any; status: string }) => {
       if (status === "executing") return <ChartLoading title="Loading dashboard..." />;
       if (!result) return <></>;
       return <MarketDashboard data={result} />;
@@ -286,7 +286,7 @@ export function IntelligentJobPageClient({
 
   useRenderToolCall({
     name: "show_user_graph",
-    render: ({ result, status }) => {
+    render: ({ result, status }: { result: any; status: string }) => {
       if (status === "executing") return <ForceGraphLoading />;
       if (!result?.nodes) return <></>;
       return <ForceGraph3DComponent data={result} />;
@@ -342,12 +342,10 @@ Remember: When filtering, UPDATE THE PAGE directly using the document actions. D
     accentColor === 'red' ? "#dc2626" : "#4f46e5";
 
   return (
-    <main className="min-h-screen bg-white">
-      <style jsx global>{`
-        :root {
-          --copilot-kit-primary-color: ${accentColorValue};
-        }
-      `}</style>
+    <main
+      className="min-h-screen bg-white"
+      style={{ '--copilot-kit-primary-color': accentColorValue } as React.CSSProperties}
+    >
       <CopilotSidebar
         instructions={agentInstructions}
         labels={{

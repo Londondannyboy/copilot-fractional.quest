@@ -28,9 +28,36 @@ interface DocumentContextType {
 
 const DocumentContext = createContext<DocumentContextType | null>(null)
 
+// Default state for when context is not available
+const defaultDocumentState: DocumentState = {
+  filters: {
+    location: '',
+    role: '',
+    remote: false,
+    minRate: 0,
+    maxRate: 2000,
+  },
+  highlights: [],
+  expandedSections: [],
+  userQuery: '',
+  lastUpdate: new Date().toISOString(),
+}
+
+const defaultContext: DocumentContextType = {
+  state: defaultDocumentState,
+  updateFilters: () => {},
+  highlightSection: () => {},
+  expandSection: () => {},
+  setUserQuery: () => {},
+}
+
 export function useDocument() {
   const ctx = useContext(DocumentContext)
-  if (!ctx) throw new Error('useDocument must be used within IntelligentDocument')
+  // Return default context instead of throwing - makes components more resilient
+  if (!ctx) {
+    console.warn('useDocument called outside IntelligentDocument - using default state')
+    return defaultContext
+  }
   return ctx
 }
 
@@ -89,7 +116,7 @@ export function IntelligentDocument({
       { name: "minRate", type: "number", description: "Minimum day rate in GBP", required: false },
       { name: "maxRate", type: "number", description: "Maximum day rate in GBP", required: false },
     ],
-    handler: async ({ location, role, remote, minRate, maxRate }) => {
+    handler: async ({ location, role, remote, minRate, maxRate }: { location?: string; role?: string; remote?: boolean; minRate?: number; maxRate?: number }) => {
       setState(prev => ({
         ...prev,
         filters: {
@@ -121,7 +148,7 @@ export function IntelligentDocument({
     parameters: [
       { name: "section", type: "string", description: "Section to highlight: 'salary', 'jobs', 'market', 'skills', 'companies'", required: true },
     ],
-    handler: async ({ section }) => {
+    handler: async ({ section }: { section: string }) => {
       setState(prev => ({
         ...prev,
         highlights: [...prev.highlights.filter(s => s !== section), section],

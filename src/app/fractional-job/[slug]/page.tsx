@@ -15,7 +15,14 @@ async function getJob(slug: string) {
   try {
     const sql = createDbQuery()
     const jobs = await sql`
-      SELECT * FROM jobs WHERE slug = ${slug} AND is_active = true
+      SELECT
+        id, slug, title, company_name, location, workplace_type, is_remote,
+        compensation, posted_date, updated_date, description_snippet,
+        full_description, requirements, responsibilities, benefits,
+        qualifications, skills_required, role_category, hours_per_week,
+        url, about_company, about_team, appeal_summary, key_deliverables
+      FROM jobs
+      WHERE slug = ${slug} AND is_active = true
     `
     return jobs[0] as any || null
   } catch {
@@ -145,10 +152,10 @@ export default async function JobDetailPage({ params }: Props) {
               <div className="bg-white rounded-xl border border-gray-200 p-6 lg:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">About This Role</h2>
 
-                {job.description ? (
+                {job.full_description ? (
                   <div
                     className="prose prose-lg max-w-none text-gray-600"
-                    dangerouslySetInnerHTML={{ __html: job.description }}
+                    dangerouslySetInnerHTML={{ __html: job.full_description }}
                   />
                 ) : job.description_snippet ? (
                   <p className="text-gray-600 leading-relaxed">{job.description_snippet}</p>
@@ -217,9 +224,9 @@ export default async function JobDetailPage({ params }: Props) {
                   )}
                 </dl>
 
-                {job.apply_url && (
+                {job.url && (
                   <a
-                    href={job.apply_url}
+                    href={job.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-6 block w-full text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors"
