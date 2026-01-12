@@ -1,7 +1,10 @@
 'use client'
 
-import { CopilotSidebar } from '@copilotkit/react-ui'
+// React hooks available if needed for future enhancements
+import { CopilotSidebar, CopilotChat } from '@copilotkit/react-ui'
+import { useCopilotChatSuggestions } from '@copilotkit/react-ui'
 import '@copilotkit/react-ui/styles.css'
+import { authClient } from '@/lib/auth/client'
 
 import { IntelligentDocument } from '@/components/mdx/IntelligentDocument'
 import {
@@ -19,22 +22,84 @@ import {
  * "The document thinks" - CopilotKit is embedded IN the content,
  * not just a sidebar. The page itself responds to conversation.
  *
- * Try saying:
- * - "Show me remote jobs only"
- * - "Filter to London"
- * - "Focus on the salary section"
- * - "Show me CTO jobs instead"
- * - "Clear all filters"
+ * Key insight: We define useCopilotAction hooks that modify PAGE STATE,
+ * and the agent's instructions tell it to prefer these actions over
+ * its standard tools when on this page.
  */
+
+// Inline chat component for in-content conversation
+function InlineDocumentChat() {
+  // Add suggested prompts
+  useCopilotChatSuggestions({
+    instructions: "Suggest 3 ways to explore this CFO jobs page",
+    maxSuggestions: 3,
+  })
+
+  return (
+    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3">
+        <h3 className="text-white font-semibold flex items-center gap-2">
+          <span>💬</span> Ask About This Page
+        </h3>
+      </div>
+      <div className="h-[300px]">
+        <CopilotChat
+          labels={{
+            initial: "Ask me anything about CFO jobs, salaries, or the market. I can filter the page content for you!",
+          }}
+          className="h-full"
+        />
+      </div>
+    </div>
+  )
+}
+
 export default function IntelligentCFOPage() {
-  // CopilotKit provider is already in the app layout via Providers component
+  const { data: session } = authClient.useSession()
+  const user = session?.user
+  const firstName = user?.name?.split(' ')[0]
+
+  // Instructions that tell the agent to use PAGE ACTIONS not its standard tools
+  const pageInstructions = `
+## INTELLIGENT DOCUMENT MODE - CFO Jobs Page
+
+You are helping the user explore an INTELLIGENT DOCUMENT about Fractional CFO jobs.
+
+CRITICAL: This page has special actions that UPDATE THE PAGE CONTENT directly:
+
+1. **update_document_filters** - Use this to filter jobs/data shown on the page
+   - location: "London", "Manchester", "Remote", etc.
+   - role: "Finance", "Engineering", "Marketing" (changes job category)
+   - remote: true/false (show only remote jobs)
+   - minRate, maxRate: day rate filters
+
+2. **highlight_section** - Use this to visually focus on a section
+   - section: "salary", "jobs", "market", "skills"
+
+3. **clear_highlights** - Remove all highlights
+
+WHEN USER ASKS ABOUT JOBS OR FILTERING:
+- Use update_document_filters to change what the PAGE shows
+- Do NOT use search_jobs (that shows results in sidebar only)
+- The page content will update in real-time
+
+EXAMPLES:
+- "Show me remote jobs" → call update_document_filters with remote=true
+- "Filter to London" → call update_document_filters with location="London"
+- "Show CTO jobs" → call update_document_filters with role="Engineering"
+- "Focus on salary" → call highlight_section with section="salary"
+
+${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
+`
+
   return (
     <CopilotSidebar
-        defaultOpen={true}
-        clickOutsideToClose={false}
+        defaultOpen={false}
+        clickOutsideToClose={true}
+        instructions={pageInstructions}
         labels={{
           title: "Document Assistant",
-          initial: "I can help you explore this page. Try:\n\n• \"Show me remote CFO jobs\"\n• \"Filter to Manchester\"\n• \"Focus on the salary section\"\n• \"Show me CTO jobs instead\"\n\nThe page content will update based on our conversation!",
+          initial: "I can help you explore this page. The content updates based on our conversation!\n\nTry the inline chat below, or ask me here.",
         }}
       >
         <IntelligentDocument
@@ -65,11 +130,11 @@ export default function IntelligentCFOPage() {
 
             {/* Content */}
             <div className="max-w-6xl mx-auto px-4 py-12">
-              {/* Personalized Greeting */}
+              {/* Personalized Greeting - uses real user data */}
               <PersonalizedGreeting
-                userName="Dan"
+                userName={firstName}
                 userRole="CFO"
-                userLocation="London"
+                userLocation={undefined} // Could pull from profile
               />
 
               {/* Active Filters - Shows when conversation changes filters */}
@@ -154,6 +219,11 @@ export default function IntelligentCFOPage() {
                   </div>
                 </div>
               </DocumentSection>
+
+              {/* INLINE CHAT - The key to "document thinks" */}
+              <section className="mt-8 mb-12">
+                <InlineDocumentChat />
+              </section>
 
               {/* How It Works */}
               <section className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100">
