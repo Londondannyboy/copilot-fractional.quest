@@ -44,6 +44,7 @@ const footerLinks = {
       { name: 'CMO Salary Guide', href: '/fractional-cmo-salary' },
       { name: 'Portfolio Career Guide', href: '/articles/portfolio-career' },
       { name: 'IR35 Guide', href: '/articles/ir35-guide' },
+      { name: 'Case Studies', href: '/case-studies' },
       { name: 'Rate Calculator', href: '/rate-calculator' },
     ],
   },

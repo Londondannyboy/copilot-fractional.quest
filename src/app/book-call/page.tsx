@@ -1,18 +1,49 @@
-import { Metadata } from 'next'
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export const metadata: Metadata = {
-  title: 'Book a Call with Dan | Fractional Quest',
-  description: 'Schedule a free consultation to discuss your fractional executive hiring needs or career goals with Dan Keegan, founder of Fractional Quest.',
-}
-
 export default function BookCallPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    userType: 'candidate',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', userType: 'candidate', message: '' })
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch {
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Compact Hero */}
       <section className="bg-gradient-to-br from-orange-500 via-rose-500 to-purple-600 text-white py-10">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-6">
             <Image
               src="/dan-keegan.webp"
@@ -34,66 +65,199 @@ export default function BookCallPage() {
         </div>
       </section>
 
-      {/* Main Content - 2 Column Layout */}
-      <section className="py-8 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid lg:grid-cols-5 gap-8">
+      {/* Main Content */}
+      <section className="py-8">
+        <div className="max-w-5xl mx-auto px-4">
 
-            {/* Left Column - Context (2 cols) */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* What We'll Discuss */}
-              <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="text-xl">💬</span>
-                  What We&apos;ll Discuss
-                </h2>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-700 text-sm">Your career goals or hiring needs</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-700 text-sm">Market rates and positioning</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-700 text-sm">Actionable next steps</span>
-                  </li>
-                </ul>
+          {/* Option 1: Calendly */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">
+                OPTION 1
+              </span>
+              <h2 className="text-xl font-bold text-gray-900">Book Directly</h2>
+            </div>
+
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-4 py-3">
+                <div className="flex items-center gap-2 text-white">
+                  <span>📅</span>
+                  <span className="font-semibold text-sm">Select a Time Below</span>
+                  <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-auto">
+                    Free • 30 min • Zoom
+                  </span>
+                </div>
               </div>
 
-              {/* For Employers */}
+              {/* Calendly iframe */}
+              <div className="relative bg-gray-50">
+                <iframe
+                  src="https://calendly.com/firstquest/quest?hide_gdpr_banner=1&hide_landing_page_details=1&hide_event_type_details=1&background_color=f9fafb"
+                  width="100%"
+                  height="550"
+                  frameBorder={0}
+                  title="Schedule a call with Dan Keegan"
+                  loading="eager"
+                  style={{ border: 'none' }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="flex items-center gap-4 my-8">
+            <div className="flex-1 h-px bg-gray-200" />
+            <span className="text-gray-400 text-sm font-medium">OR</span>
+            <div className="flex-1 h-px bg-gray-200" />
+          </div>
+
+          {/* Option 2: Email Form */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Form */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">
+                  OPTION 2
+                </span>
+                <h2 className="text-xl font-bold text-gray-900">Send a Message</h2>
+              </div>
+
+              <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                {submitStatus === 'success' ? (
+                  <div className="text-center py-8">
+                    <div className="text-5xl mb-4">✅</div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+                    <p className="text-gray-600 mb-4">
+                      Thanks for reaching out. I&apos;ll get back to you within 24 hours.
+                    </p>
+                    <button
+                      onClick={() => setSubmitStatus('idle')}
+                      className="text-purple-600 hover:text-purple-700 font-medium text-sm"
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        placeholder="John Smith"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        placeholder="john@company.com"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        I am a...
+                      </label>
+                      <div className="flex gap-4">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="userType"
+                            value="candidate"
+                            checked={formData.userType === 'candidate'}
+                            onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
+                            className="w-4 h-4 text-purple-600 focus:ring-purple-500"
+                          />
+                          <span className="text-sm text-gray-700">Candidate</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="userType"
+                            value="employer"
+                            checked={formData.userType === 'employer'}
+                            onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
+                            className="w-4 h-4 text-purple-600 focus:ring-purple-500"
+                          />
+                          <span className="text-sm text-gray-700">Employer</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                        Message (optional)
+                      </label>
+                      <textarea
+                        id="message"
+                        rows={4}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                        placeholder="Tell me about your situation or what you're looking for..."
+                      />
+                    </div>
+
+                    {submitStatus === 'error' && (
+                      <div className="bg-red-50 text-red-700 px-4 py-2 rounded-lg text-sm">
+                        Something went wrong. Please try again.
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+
+            {/* Context Cards */}
+            <div className="space-y-4">
               <div className="bg-orange-50 rounded-xl p-5 border border-orange-100">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
                   <span>🎯</span> For Employers
                 </h3>
-                <p className="text-gray-600 text-sm">
-                  Discuss your fractional hiring needs, get matched with vetted executives,
-                  and understand pricing models. No commitment required.
-                </p>
+                <ul className="space-y-2 text-gray-600 text-sm">
+                  <li>• Discuss your fractional hiring needs</li>
+                  <li>• Get matched with vetted executives</li>
+                  <li>• Understand pricing models</li>
+                  <li>• No commitment required</li>
+                </ul>
               </div>
 
-              {/* For Candidates */}
               <div className="bg-purple-50 rounded-xl p-5 border border-purple-100">
                 <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
                   <span>💼</span> For Candidates
                 </h3>
-                <p className="text-gray-600 text-sm">
-                  Explore fractional opportunities, get career guidance,
-                  and receive personalized recommendations for your journey.
-                </p>
+                <ul className="space-y-2 text-gray-600 text-sm">
+                  <li>• Explore fractional opportunities</li>
+                  <li>• Career guidance and advice</li>
+                  <li>• Market rate positioning</li>
+                  <li>• Personalized recommendations</li>
+                </ul>
               </div>
 
-              {/* Alternative Contact */}
               <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
-                <h3 className="font-semibold text-gray-900 mb-3 text-sm">Prefer another way?</h3>
+                <h3 className="font-semibold text-gray-900 mb-3 text-sm">Other ways to connect</h3>
                 <div className="space-y-2">
                   <a
                     href="mailto:dan@fractional.quest"
@@ -118,38 +282,13 @@ export default function BookCallPage() {
                 </div>
               </div>
             </div>
-
-            {/* Right Column - Calendly (3 cols) */}
-            <div className="lg:col-span-3">
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                  <div className="flex items-center gap-2">
-                    <span className="text-emerald-500">📅</span>
-                    <span className="font-semibold text-gray-900 text-sm">Select a Time</span>
-                    <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full ml-auto">
-                      Free • 30 min
-                    </span>
-                  </div>
-                </div>
-
-                {/* Direct iframe embed - loads immediately */}
-                <iframe
-                  src="https://calendly.com/firstquest/quest?hide_gdpr_banner=1&hide_landing_page_details=1&hide_event_type_details=1"
-                  width="100%"
-                  height="600"
-                  frameBorder="0"
-                  title="Schedule a call with Dan Keegan"
-                  className="bg-white"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Back Link */}
       <section className="py-6 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 text-center">
+        <div className="max-w-5xl mx-auto px-4 text-center">
           <Link
             href="/fractional-jobs-uk"
             className="text-gray-500 hover:text-gray-700 text-sm"
