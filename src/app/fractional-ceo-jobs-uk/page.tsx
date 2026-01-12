@@ -80,6 +80,10 @@ export default async function FractionalCEOJobsUKPage() {
         stats={stats}
         seoContent={ceoJobsUkSEO}
         imageCategory="ceo"
+        // Personalized sections for logged-in users
+        enablePersonalizedSections={true}
+        targetRole="CEO"
+        userDayRate={1000}
       />
     </>
   );

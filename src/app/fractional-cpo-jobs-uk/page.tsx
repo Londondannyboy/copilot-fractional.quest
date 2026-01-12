@@ -80,6 +80,10 @@ export default async function FractionalCPOJobsUKPage() {
         stats={stats}
         seoContent={cpoJobsUkSEO}
         imageCategory="cpo"
+        // Personalized sections for logged-in users
+        enablePersonalizedSections={true}
+        targetRole="CPO"
+        userDayRate={1000}
       />
     </>
   );

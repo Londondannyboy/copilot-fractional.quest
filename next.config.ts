@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  // Enable MDX pages
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   serverExternalPackages: ["@copilotkit/runtime"],
   images: {
     remotePatterns: [
@@ -445,4 +448,14 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Wrap config with MDX support
+const withMDX = createMDX({
+  // Optionally provide remark and rehype plugins
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
+// Export with MDX support
+export default withMDX(nextConfig);

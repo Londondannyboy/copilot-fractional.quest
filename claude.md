@@ -1,4 +1,74 @@
-# How We Built This: CopilotKit + Pydantic AI Integration Guide
+# Fractional Quest V2 - Development Guide
+
+> **Cole Medin Methodology**: PRD-first, modular rules, command-ify, context reset, system evolution.
+
+## Quick Start
+
+1. **Read PRD first**: `/PRD.md` - The north star document
+2. **Prime context**: Run `/prime` at start of session
+3. **Plan before execute**: Run `/plan {feature}` then `/execute {plan}`
+4. **Evolve after bugs**: Run `/evolve` to improve the system
+
+## Project Overview
+
+- **347 total pages** (243 database + 104 static)
+- **MDX-powered content** with embedded React components
+- **CopilotKit + Hume voice** on all pages
+- **Neon PostgreSQL** for data
+
+## Commands (/.claude/commands/)
+
+| Command | Purpose |
+|---------|---------|
+| `/prime` | Load project context at session start |
+| `/plan {feature}` | Create structured plan before coding |
+| `/execute {plan}` | Build feature from plan (fresh context) |
+| `/create-prd` | Generate/update PRD |
+| `/create-page {slug}` | Create new page with quality checks |
+| `/evolve` | Improve rules/commands after bugs |
+
+## Modular Rules (/.claude/reference/)
+
+Only load these when working on specific task types:
+
+| Reference | When to Load |
+|-----------|--------------|
+| `mdx-content.md` | Working on MDX pages or components |
+| `copilotkit-integration.md` | CopilotKit features, hooks, agent tools |
+| `database-pages.md` | Neon database pages, PageRenderer |
+| `seo-content.md` | SEO, high-traffic pages, authority links |
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | Next.js 15, React 19, TypeScript, Tailwind |
+| Content | MDX + PageRenderer hybrid |
+| AI Chat | CopilotKit (sidebar + in-content) |
+| Voice | Hume EVI with CLM on Railway |
+| Backend | Pydantic AI agent |
+| Database | Neon PostgreSQL |
+| Auth | Neon Auth |
+
+## Key Commands
+
+```bash
+npm run dev              # Start frontend + agent
+npm run build            # Production build
+npm run lint             # Type check
+```
+
+## Context Reset Pattern
+
+**IMPORTANT**: Between planning and execution, clear context:
+1. Run `/plan {feature}` → outputs `/.claude/plans/{feature}.md`
+2. Clear context (`/clear` or restart)
+3. Run `/execute /.claude/plans/{feature}.md`
+4. Plan contains ALL context needed - no additional priming
+
+---
+
+# Historical Reference: CopilotKit + Pydantic AI Integration Guide
 
 ## The Correct Build Order (Lessons Learned)
 

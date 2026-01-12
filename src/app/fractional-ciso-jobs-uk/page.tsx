@@ -80,6 +80,10 @@ export default async function FractionalCISOJobsUKPage() {
         stats={stats}
         seoContent={cisoJobsUkSEO}
         imageCategory="ciso"
+        // Personalized sections for logged-in users
+        enablePersonalizedSections={true}
+        targetRole="CISO"
+        userDayRate={1000}
       />
     </>
   );

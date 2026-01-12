@@ -80,6 +80,10 @@ export default async function FractionalCHROJobsUKPage() {
         stats={stats}
         seoContent={chroJobsUkSEO}
         imageCategory="chro"
+        // Personalized sections for logged-in users
+        enablePersonalizedSections={true}
+        targetRole="CHRO"
+        userDayRate={1000}
       />
     </>
   );

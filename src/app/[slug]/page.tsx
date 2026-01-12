@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPageBySlug, getAllPageSlugs, getPageTypeLabel } from '@/lib/pages'
-import { PageRenderer } from '@/components/pages/PageRenderer'
+import { PageWithCopilot } from '@/components/pages/PageWithCopilot'
 
 // ===========================================
 // Static Generation
@@ -224,8 +224,8 @@ export default async function DynamicPage({ params }: PageProps) {
         </div>
       </nav>
 
-      {/* Page Content */}
-      <PageRenderer page={page} />
+      {/* Page Content with CopilotKit Sidebar */}
+      <PageWithCopilot page={page} />
     </>
   )
 }

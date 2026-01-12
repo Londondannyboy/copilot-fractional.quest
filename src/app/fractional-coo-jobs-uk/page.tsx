@@ -80,6 +80,10 @@ export default async function FractionalCOOJobsUKPage() {
         stats={stats}
         seoContent={cooJobsUkSEO}
         imageCategory="coo"
+        // Personalized sections for logged-in users
+        enablePersonalizedSections={true}
+        targetRole="COO"
+        userDayRate={1000}
       />
     </>
   );

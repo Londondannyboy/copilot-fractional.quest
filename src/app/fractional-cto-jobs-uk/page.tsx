@@ -80,6 +80,10 @@ export default async function FractionalCTOJobsUKPage() {
         stats={stats}
         seoContent={ctoJobsUkSEO}
         imageCategory="cto"
+        // Personalized sections for logged-in users
+        enablePersonalizedSections={true}
+        targetRole="CTO"
+        userDayRate={1000}
       />
     </>
   );
