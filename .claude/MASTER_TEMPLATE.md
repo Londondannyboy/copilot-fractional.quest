@@ -2,7 +2,7 @@
 
 > **Purpose**: This is the definitive guide for building AI-first web applications using our proven stack.
 > **Use**: Point Claude at this document when starting any new project.
-> **Reference Implementation**: `/Users/dankeegan/copilotkit-demo` (Fractional Quest V2)
+> **Reference Implementation**: `/Users/dankeegan/fractional.quest` (Fractional Quest V2)
 > **Version**: 1.0 (January 2026)
 
 ---
@@ -506,7 +506,7 @@ NEXT_PUBLIC_AGENT_URL=https://your-agent.railway.app
 
 ## Reference Projects
 
-- **Fractional Quest V2**: `/Users/dankeegan/copilotkit-demo` - Full implementation
+- **Fractional Quest V2**: `/Users/dankeegan/fractional.quest` - Full implementation
 - **CopilotKit Examples**: https://github.com/CopilotKit/CopilotKit/tree/main/examples
 - **Pydantic AI Docs**: https://ai.pydantic.dev
 
@@ -518,7 +518,7 @@ When starting a new project, tell Claude:
 
 ```
 I'm starting a new project. Please read the master template at:
-/Users/dankeegan/copilotkit-demo/.claude/MASTER_TEMPLATE.md
+/Users/dankeegan/fractional.quest/.claude/MASTER_TEMPLATE.md
 
 Project name: [Your Project]
 Purpose: [What it does]

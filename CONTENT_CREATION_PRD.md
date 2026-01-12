@@ -1,7 +1,7 @@
 # Content Creation PRD - Fractional Quest V2
 
 ## Objective
-Migrate and enhance all content from fractional.quest (V1) to copilotkit-demo (V2), ensuring V2 exceeds V1 in quality, SEO, and user experience.
+Migrate and enhance all content from fractional.quest (V1) to fractional.quest (V2), ensuring V2 exceeds V1 in quality, SEO, and user experience.
 
 ## Current State (Jan 2026)
 
@@ -10,7 +10,7 @@ Migrate and enhance all content from fractional.quest (V1) to copilotkit-demo (V
 - **Core Pages**: ~150 content pages
 - **Job Listings**: ~350 individual job pages
 
-### V2 (copilotkit-demo)
+### V2 (fractional.quest)
 - **Total Pages**: 115 (from sitemap)
 - **JobPageClient Pages**: 12 (fully upgraded)
 - **PageRenderer Pages**: ~100 (database-served, basic)
@@ -339,7 +339,7 @@ SEO pages targeting "what is X" queries.
 When context runs low, use this to resume:
 
 ```
-I'm working on the Fractional Quest V2 content migration in /Users/dankeegan/copilotkit-demo
+I'm working on the Fractional Quest V2 content migration in /Users/dankeegan/fractional.quest
 
 ## Key Context
 1. **Goal**: V2 must have ALL pages from V1 (500+) with BETTER quality

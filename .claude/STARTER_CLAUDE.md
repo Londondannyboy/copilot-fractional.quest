@@ -2,13 +2,13 @@
 
 > **Stack**: CopilotKit + Pydantic AI + Hume + MDX + Neon
 > **Methodology**: Cole Medin Agentic Engineering
-> **Master Template**: /Users/dankeegan/copilotkit-demo/.claude/MASTER_TEMPLATE.md
+> **Master Template**: /Users/dankeegan/fractional.quest/.claude/MASTER_TEMPLATE.md
 
 ## Quick Start
 
 ```bash
 # 1. Read master template for full architecture
-cat /Users/dankeegan/copilotkit-demo/.claude/MASTER_TEMPLATE.md
+cat /Users/dankeegan/fractional.quest/.claude/MASTER_TEMPLATE.md
 
 # 2. Start development
 npm run dev

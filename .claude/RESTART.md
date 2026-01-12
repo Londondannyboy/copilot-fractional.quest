@@ -6,7 +6,7 @@
 ## Quick Context
 
 **Project**: Fractional Quest V2 - UK's premier fractional executive job platform
-**Location**: `/Users/dankeegan/copilotkit-demo`
+**Location**: `/Users/dankeegan/fractional.quest`
 **Status**: MDX-first architecture being implemented
 
 ## What V2 Must Achieve

@@ -1,7 +1,7 @@
 # Fractional Quest V2 - Comprehensive Restart Prompt
 
 ## Mission
-Migrate and enhance ALL content from fractional.quest (V1) to copilotkit-demo (V2), ensuring V2 EXCEEDS V1 in quality, SEO, and user experience. V2 must have every page that V1 has, plus CopilotKit AI enhancements.
+Migrate and enhance ALL content from fractional.quest (V1) to fractional.quest (V2), ensuring V2 EXCEEDS V1 in quality, SEO, and user experience. V2 must have every page that V1 has, plus CopilotKit AI enhancements.
 
 ---
 
@@ -9,7 +9,7 @@ Migrate and enhance ALL content from fractional.quest (V1) to copilotkit-demo (V
 
 ```bash
 # Navigate to project
-cd /Users/dankeegan/copilotkit-demo
+cd /Users/dankeegan/fractional.quest
 
 # Start development
 npm run dev
@@ -27,7 +27,7 @@ ls src/app/ | wc -l
 
 ### Page Counts
 - **V1 (fractional.quest)**: 304 page directories
-- **V2 (copilotkit-demo)**: 101 page directories
+- **V2 (fractional.quest)**: 101 page directories
 - **Gap**: ~203 pages still to create/migrate
 
 ### What's Complete in V2
@@ -401,7 +401,7 @@ export const exampleSEO = {
 ## Environment
 
 ```
-Working directory: /Users/dankeegan/copilotkit-demo
+Working directory: /Users/dankeegan/fractional.quest
 V1 reference: /Users/dankeegan/fractional.quest
 Platform: macOS Darwin 24.6.0
 Database: Neon PostgreSQL
@@ -428,7 +428,7 @@ Deployment: Vercel (auto-deploy on push)
 ## Copy This Prompt to Continue
 
 ```
-I'm continuing the Fractional Quest V2 migration in /Users/dankeegan/copilotkit-demo
+I'm continuing the Fractional Quest V2 migration in /Users/dankeegan/fractional.quest
 
 ## Mission
 V2 must have ALL pages from V1 (304+) with SUPERIOR quality. Every page should have:
@@ -442,7 +442,7 @@ V2 must have ALL pages from V1 (304+) with SUPERIOR quality. Every page should h
 - Gap: ~203 pages to create
 
 ## Reference Files
-- Restart prompt: /Users/dankeegan/copilotkit-demo/RESTART_PROMPT.md
+- Restart prompt: /Users/dankeegan/fractional.quest/RESTART_PROMPT.md
 - V1 source: /Users/dankeegan/fractional.quest/app/
 - Database: Neon PostgreSQL (pages table)
 

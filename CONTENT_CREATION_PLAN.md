@@ -1,14 +1,14 @@
 # Fractional Quest v2 - Content Creation Plan
 
 ## Project Overview
-Migrating fractional.quest (v1) to copilotkit-demo (v2) with:
+Migrating fractional.quest (v1) to fractional.quest (v2) with:
 - CopilotKit AI sidebar on every page
 - Hume voice widget on every page
 - Improved SEO with rich snippets
 - Consistent design system
 - Full content preservation (word count must not drop)
 
-**Repository**: `/Users/dankeegan/copilotkit-demo`
+**Repository**: `/Users/dankeegan/fractional.quest`
 **Source (for reference)**: `/Users/dankeegan/fractional.quest`
 
 ---
@@ -283,7 +283,7 @@ For each new page, verify:
 
 ```bash
 # Navigate to project
-cd /Users/dankeegan/copilotkit-demo
+cd /Users/dankeegan/fractional.quest
 
 # Create new page directory
 mkdir -p src/app/fractional-[role]-jobs-uk
@@ -315,7 +315,7 @@ git push
 
 ## 🔗 USEFUL URLS
 
-- **Repo**: https://github.com/Londondannyboy/copilot-fractional.quest
+- **Repo**: https://github.com/Londondannyboy/fractional.quest
 - **Vercel**: Auto-deploys on push
 - **Original v1**: /Users/dankeegan/fractional.quest
 

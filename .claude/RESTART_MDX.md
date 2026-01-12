@@ -4,7 +4,7 @@
 
 ## Project Context
 
-**Project**: Fractional Quest V2 (`/Users/dankeegan/copilotkit-demo`)
+**Project**: Fractional Quest V2 (`/Users/dankeegan/fractional.quest`)
 **Goal**: Implement MDX-first content architecture where pages are written in MDX with embedded React components and CopilotKit integration.
 
 ## What Already Exists
@@ -103,4 +103,4 @@ Follow Cole Medin's approach:
 
 ---
 
-**Start by reading**: `/Users/dankeegan/copilotkit-demo/PRD.md` and `/Users/dankeegan/copilotkit-demo/.claude/MASTER_TEMPLATE.md`
+**Start by reading**: `/Users/dankeegan/fractional.quest/PRD.md` and `/Users/dankeegan/fractional.quest/.claude/MASTER_TEMPLATE.md`

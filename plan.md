@@ -7,7 +7,7 @@ Last updated: 2026-01-10 (Session 7 - Sidebar Components & SEO Enrichment)
 ## CRITICAL RESTART PROMPT (Copy/Paste to Continue)
 
 ```
-I'm continuing work on the Fractional Quest v2 migration in /Users/dankeegan/copilotkit-demo.
+I'm continuing work on the Fractional Quest v2 migration in /Users/dankeegan/fractional.quest.
 
 ## CRITICAL CONTEXT
 V2 pages must EXCEED V1 (fractional.quest) in quality before switchover to fractional.quest domain.
@@ -61,7 +61,7 @@ All with 8 authority links, 5 statistics, 6 FAQs, 8 related pages:
 3. Consider adding more authority links for E-E-A-T
 
 ## GIT
-- Remote: https://github.com/Londondannyboy/copilot-fractional.quest.git
+- Remote: https://github.com/Londondannyboy/fractional.quest.git
 - Latest commit: `3b2678d` - Add sidebar components and enrich remaining SEO content files
 
 Read CLAUDE.md for full session history and patterns.

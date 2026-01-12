@@ -176,7 +176,7 @@ CREATE TABLE user_profile_items (
 
 ### 1. Start Local Dev
 ```bash
-cd /Users/dankeegan/copilotkit-demo
+cd /Users/dankeegan/fractional.quest
 
 # Terminal 1: Frontend
 npm run dev
@@ -200,7 +200,7 @@ cd agent && railway up
 railway logs
 
 # Vercel logs
-vercel logs copilotkit-demo --follow
+vercel logs fractional.quest --follow
 ```
 
 ### 4. Database Check
@@ -258,6 +258,6 @@ Email: keegan.dan@gmail.com
 
 ## Git Repo
 ```
-https://github.com/Londondannyboy/copilot-fractional.quest.git
+https://github.com/Londondannyboy/fractional.quest.git
 Branch: main
 ```

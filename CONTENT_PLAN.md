@@ -1,7 +1,7 @@
 # Fractional.Quest v2 Content Migration Plan
 
 ## Overview
-Migrating content from fractional.quest (v1) to copilotkit-demo (v2) with CopilotKit + Pydantic AI integration.
+Migrating content from fractional.quest (v1) to fractional.quest (v2) with CopilotKit + Pydantic AI integration.
 
 ## Quality Standards
 

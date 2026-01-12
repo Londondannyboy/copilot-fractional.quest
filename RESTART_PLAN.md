@@ -1,7 +1,7 @@
 # CopilotKit Demo - Comprehensive Restart Plan
 
 **Created**: 2025-01-06
-**Project**: `/Users/dankeegan/copilotkit-demo`
+**Project**: `/Users/dankeegan/fractional.quest`
 **Goal**: Fix Voice + CopilotKit + Charts integration on SEO job pages
 
 ---
@@ -182,11 +182,11 @@ GOOGLE_API_KEY=xxx
 
 ```bash
 # Start frontend
-cd /Users/dankeegan/copilotkit-demo
+cd /Users/dankeegan/fractional.quest
 npm run dev
 
 # Start agent (separate terminal)
-cd /Users/dankeegan/copilotkit-demo/agent
+cd /Users/dankeegan/fractional.quest/agent
 uv run uvicorn src.main:app --reload --port 8000
 
 # Check build

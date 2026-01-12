@@ -1036,7 +1036,7 @@ After debugging why Voice and CopilotKit were out of sync, we established the co
 
 | Service | Purpose | Why Separate? |
 |---------|---------|---------------|
-| **copilotkit-demo** (Vercel) | Next.js frontend, auth, API routes | Fast edge deployment, static assets |
+| **fractional.quest** (Vercel) | Next.js frontend, auth, API routes | Fast edge deployment, static assets |
 | **simple-clm** (Vercel Python) | OpenAI-compatible SSE endpoint for Hume | Hume requires specific CLM format |
 | **Pydantic AI Agent** (Railway) | Tools, database, Zep memory, business logic | Long-running Python process, needs Railway |
 
@@ -1279,7 +1279,7 @@ useRenderToolCall({
 
 ```
 YOUR DEPLOYMENTS:
-├── Vercel: copilotkit-demo
+├── Vercel: fractional.quest
 │   ├── Next.js frontend
 │   ├── CopilotKit React components (library, runs in browser)
 │   ├── API routes (/api/hume-token, /api/zep-context, etc.)
@@ -1718,7 +1718,7 @@ dateModified={new Date()}  // Called in ServicesTemplate
 
 ## Pages Inventory
 
-### Existing in copilotkit-demo
+### Existing in fractional.quest
 | Page | Status | Notes |
 |------|--------|-------|
 | `/` (homepage) | ✅ Working | Full CopilotKit + Voice |
@@ -2013,7 +2013,7 @@ When updating CMO, CTO, CFO, COO pages, copy the exact pattern from:
 
 ## Content Plan Location
 
-Full content migration plan with checklists: `/Users/dankeegan/copilotkit-demo/CONTENT_PLAN.md`
+Full content migration plan with checklists: `/Users/dankeegan/fractional.quest/CONTENT_PLAN.md`
 
 ---
 
@@ -2787,7 +2787,7 @@ const STATIC_ROUTE_SLUGS = [
 
 ## V2 vs V1 Comparison
 
-| Feature | V1 (fractional.quest) | V2 (copilotkit-demo) |
+| Feature | V1 (fractional.quest) | V2 (fractional.quest) |
 |---------|----------------------|---------------------|
 | CopilotKit Sidebar | ✅ | ✅ |
 | Job Search with Filters | ✅ | ✅ |
@@ -2906,7 +2906,7 @@ Updated `JobPageClient.tsx` and `SEOContent.tsx` to use flexible interfaces:
 Copy this when context runs low:
 
 ```
-I'm working on the Fractional Quest V2 migration in /Users/dankeegan/copilotkit-demo
+I'm working on the Fractional Quest V2 migration in /Users/dankeegan/fractional.quest
 
 ## Critical Context
 
