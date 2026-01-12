@@ -68,6 +68,31 @@ Backend
 
 **CRITICAL:** Never set colors on base HTML elements (h1-h6, p, a) in `globals.css`. This blocks Tailwind class overrides. Only set: font-family, weight, spacing. Let Tailwind control colors per-context.
 
+### Intelligent Document Pattern (NEW)
+
+Inspired by the "Terminal Liberation" article - where content THINKS and responds to conversation.
+
+**Architecture:**
+```
+IntelligentDocument (wrapper)
+├── useCopilotReadable - Exposes document state to agent
+├── useCopilotAction - update_document_filters, highlight_section, clear_highlights
+└── DocumentContext - Shared state for child components
+
+LiveComponents (children)
+├── LiveMarketChart - Responds to state.filters
+├── LiveJobGrid - Refetches based on filters
+├── DocumentSection - Highlights when state.highlights includes its ID
+└── ActiveFilters - Shows current filter tags
+```
+
+**Key Files:**
+- `src/components/mdx/IntelligentDocument.tsx` - Context provider with CopilotKit actions
+- `src/components/mdx/LiveComponents.tsx` - Conversation-reactive components
+- `src/app/intelligent-cfo/page.tsx` - Demo page
+
+**Gap Identified:** Frontend actions (via `useCopilotAction`) are passed to agent via AG-UI, but the Pydantic AI agent may prefer its own tools (like `search_jobs`) over page actions. To fix, agent must bind `state.copilotkit.actions` alongside its tools, or use strong system prompt guidance.
+
 ## In Scope - V2 MVP
 
 ### Phase 1: MDX Migration (Current)
@@ -133,13 +158,16 @@ Backend
 /src/components/
 ├── job-pages/JobPageClient.tsx    # Full-featured job page template
 ├── pages/PageRenderer.tsx         # Database content renderer (56 types)
-├── mdx/                           # NEW: MDX-specific components
+├── mdx/                           # MDX + Intelligent Document components
+│   ├── IntelligentDocument.tsx    # Context provider with CopilotKit actions
+│   ├── LiveComponents.tsx         # Conversation-reactive components
 │   ├── PersonalizedHero.tsx
 │   ├── SalaryBenchmarkChart.tsx
 │   ├── CareerTimeline.tsx
 │   ├── MarketOverview.tsx
 │   └── CopilotMainPanel.tsx
 ├── EmbeddedJobBoard.tsx           # Filterable job listings
+├── JobsSidebar.tsx                # Sidebar with jobs, CTAs, market stats
 ├── RoleCalculator.tsx             # Earnings calculator
 ├── voice-input.tsx                # Hume voice widget
 └── charts.tsx                     # Recharts visualizations

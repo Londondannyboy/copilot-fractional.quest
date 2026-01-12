@@ -99,6 +99,66 @@ This adds flexibility but is NOT required for charts/cards.
 | Dynamic composed content | MDX `compose_mdx_response` |
 | Database page content | PageRenderer (not MDX) |
 
+## Intelligent Document Pattern
+
+The "Intelligent Document" pattern (from "Terminal Liberation" article) creates pages where **content thinks** - the page content responds to conversation in real-time.
+
+### Architecture
+```
+IntelligentDocument (wrapper component)
+├── useCopilotReadable - Exposes current document state to agent
+├── useCopilotAction - Defines actions agent can call:
+│   ├── update_document_filters (location, role, remote, minRate, maxRate)
+│   ├── highlight_section (section ID)
+│   └── clear_highlights
+└── DocumentContext - Shared state for all child components
+
+LiveComponents (children that react to state)
+├── LiveMarketChart - Re-renders when state.filters change
+├── LiveJobGrid - Refetches jobs based on filters
+├── DocumentSection - Adds highlight styling when state.highlights includes its ID
+├── ActiveFilters - Shows clickable filter tags
+└── PersonalizedGreeting - Uses real auth user data
+```
+
+### Key Files
+- `src/components/mdx/IntelligentDocument.tsx` - Context provider with CopilotKit actions
+- `src/components/mdx/LiveComponents.tsx` - Conversation-reactive components
+- `src/app/intelligent-cfo/page.tsx` - Demo page with inline chat
+
+### Usage Pattern
+```tsx
+<CopilotSidebar instructions={pageInstructions}>
+  <IntelligentDocument pageContext="CFO Jobs" initialFilters={{ role: 'Finance' }}>
+    <PersonalizedGreeting userName={firstName} />
+    <ActiveFilters />
+    <DocumentSection id="salary" title="Market Rates">
+      <LiveMarketChart type="bar" />
+    </DocumentSection>
+    <DocumentSection id="jobs" title="Available Opportunities">
+      <LiveJobGrid limit={6} />
+    </DocumentSection>
+    <InlineDocumentChat /> {/* Chat embedded IN content, not just sidebar */}
+  </IntelligentDocument>
+</CopilotSidebar>
+```
+
+### Gap: Frontend Actions vs Agent Tools
+Frontend `useCopilotAction` hooks create actions that are passed to the agent via AG-UI. However, the Pydantic AI agent may still prefer its own tools (like `search_jobs`) over page actions.
+
+**Solution:** Use strong system prompt guidance:
+```typescript
+const pageInstructions = `
+CRITICAL: This page has special actions that UPDATE THE PAGE CONTENT directly:
+1. update_document_filters - Use this to filter jobs/data shown on the page
+2. highlight_section - Use this to visually focus on a section
+
+WHEN USER ASKS ABOUT JOBS OR FILTERING:
+- Use update_document_filters to change what the PAGE shows
+- Do NOT use search_jobs (that shows results in sidebar only)
+`;
+```
+
 ## Context Reset Pattern
 
 **IMPORTANT**: Between planning and execution, clear context:

@@ -343,6 +343,112 @@ export function JobsSidebar({
           </Link>
         </div>
       </div>
+
+      {/* Why Go Fractional - Benefits List */}
+      <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-5 border border-emerald-100">
+        <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span>💡</span>
+          Why Go Fractional?
+        </h3>
+        <ul className="space-y-3">
+          <li className="flex items-start gap-2">
+            <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm text-gray-700">Work with multiple clients</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm text-gray-700">Set your own day rate</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm text-gray-700">Flexible schedule & location</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm text-gray-700">High-impact strategic work</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm text-gray-700">Avoid office politics</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Success Story / Testimonial */}
+      <div className="bg-white rounded-xl border border-gray-200 p-5">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-yellow-400 text-lg">★★★★★</span>
+        </div>
+        <blockquote className="text-gray-700 text-sm italic mb-4">
+          &ldquo;Moving to fractional work was the best decision I ever made. I now work with 3 clients, earn more than my previous salary, and have Fridays off.&rdquo;
+        </blockquote>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+            SM
+          </div>
+          <div>
+            <p className="font-medium text-gray-900 text-sm">Sarah M.</p>
+            <p className="text-xs text-gray-500">Fractional CMO, London</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Market Stats */}
+      <div className="bg-gray-900 text-white rounded-xl p-5">
+        <h3 className="font-bold mb-4 flex items-center gap-2">
+          <span>📈</span>
+          UK Market Snapshot
+        </h3>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <p className="text-2xl font-bold text-emerald-400">£850</p>
+            <p className="text-xs text-gray-400">Avg Day Rate</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-emerald-400">340%</p>
+            <p className="text-xs text-gray-400">Market Growth</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-emerald-400">78%</p>
+            <p className="text-xs text-gray-400">Remote Options</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-emerald-400">2.3</p>
+            <p className="text-xs text-gray-400">Avg Clients</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Newsletter Signup - Compact */}
+      <div className="bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl p-5 text-white">
+        <h3 className="font-bold mb-2">📬 Weekly Insights</h3>
+        <p className="text-sm text-white/80 mb-3">
+          Get the latest fractional jobs and market insights.
+        </p>
+        <form className="space-y-2" onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="email"
+            placeholder="Your email"
+            className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+          />
+          <button
+            type="submit"
+            className="w-full bg-white text-purple-700 font-semibold py-2 rounded-lg hover:bg-purple-50 transition-colors text-sm"
+          >
+            Subscribe Free
+          </button>
+        </form>
+      </div>
     </aside>
   )
 }

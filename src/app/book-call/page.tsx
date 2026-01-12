@@ -14,7 +14,8 @@ export default function BookCallPage() {
       {/* Calendly Script */}
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
+        async
       />
 
       {/* Hero with Dan's photo */}
@@ -47,7 +48,7 @@ export default function BookCallPage() {
             {/* Calendly inline widget */}
             <div
               className="calendly-inline-widget"
-              data-url="https://calendly.com/fractionalquest/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1f2937&primary_color=f97316"
+              data-url="https://calendly.com/firstquest/quest?hide_gdpr_banner=1"
               style={{ minWidth: '320px', height: '700px' }}
             />
           </div>
