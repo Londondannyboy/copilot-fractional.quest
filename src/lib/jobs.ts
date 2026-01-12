@@ -47,7 +47,7 @@ export async function getJobsByLocation(location: string): Promise<Job[]> {
         description_snippet,
         role_category
       FROM jobs
-      WHERE is_active = true AND location ILIKE ${searchTerm}
+      WHERE is_active = true AND is_fractional = true AND location ILIKE ${searchTerm}
       LIMIT 50
     `;
 
@@ -87,7 +87,7 @@ export async function getJobsByRole(role: string): Promise<Job[]> {
         description_snippet,
         role_category
       FROM jobs
-      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
+      WHERE is_active = true AND is_fractional = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
       LIMIT 50
     `;
 
@@ -121,7 +121,7 @@ export async function getLocationStats(location: string): Promise<JobStats> {
     const [countResult] = await sql`
       SELECT COUNT(*) as count
       FROM jobs
-      WHERE is_active = true AND location ILIKE ${searchTerm}
+      WHERE is_active = true AND is_fractional = true AND location ILIKE ${searchTerm}
     `;
     const total = Number(countResult?.count || 0);
 
@@ -129,7 +129,7 @@ export async function getLocationStats(location: string): Promise<JobStats> {
     const [avgResult] = await sql`
       SELECT AVG(salary_max) as avg
       FROM jobs
-      WHERE is_active = true AND location ILIKE ${searchTerm} AND salary_max IS NOT NULL
+      WHERE is_active = true AND is_fractional = true AND location ILIKE ${searchTerm} AND salary_max IS NOT NULL
     `;
     const avgDayRate = Math.round(Number(avgResult?.avg || 150000) / 1000);
 
@@ -137,7 +137,7 @@ export async function getLocationStats(location: string): Promise<JobStats> {
     const roleRows = await sql`
       SELECT role_category as role, COUNT(*) as count
       FROM jobs
-      WHERE is_active = true AND location ILIKE ${searchTerm}
+      WHERE is_active = true AND is_fractional = true AND location ILIKE ${searchTerm}
       GROUP BY role_category
       ORDER BY count DESC
     `;
@@ -231,7 +231,7 @@ export async function getAllJobs(): Promise<Job[]> {
         salary_max,
         description_snippet,
         role_category
-      FROM jobs WHERE is_active = true
+      FROM jobs WHERE is_active = true AND is_fractional = true
       LIMIT 100
     `;
 
@@ -260,17 +260,17 @@ export async function getAllStats(): Promise<JobStats> {
   const sql = getDb();
 
   try {
-    const [countResult] = await sql`SELECT COUNT(*) as count FROM jobs WHERE is_active = true`;
+    const [countResult] = await sql`SELECT COUNT(*) as count FROM jobs WHERE is_active = true AND is_fractional = true`;
     const total = Number(countResult?.count || 0);
 
     const [avgResult] = await sql`
-      SELECT AVG(salary_max) as avg FROM jobs WHERE is_active = true AND salary_max IS NOT NULL
+      SELECT AVG(salary_max) as avg FROM jobs WHERE is_active = true AND is_fractional = true AND salary_max IS NOT NULL
     `;
     const avgDayRate = Math.round(Number(avgResult?.avg || 150000) / 1000);
 
     const roleRows = await sql`
       SELECT role_category as role, COUNT(*) as count
-      FROM jobs WHERE is_active = true
+      FROM jobs WHERE is_active = true AND is_fractional = true
       GROUP BY role_category
       ORDER BY count DESC
     `;
@@ -321,21 +321,21 @@ export async function getRoleStats(role: string): Promise<JobStats> {
     const [countResult] = await sql`
       SELECT COUNT(*) as count
       FROM jobs
-      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
+      WHERE is_active = true AND is_fractional = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
     `;
     const total = Number(countResult?.count || 0);
 
     const [avgResult] = await sql`
       SELECT AVG(salary_max) as avg
       FROM jobs
-      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm}) AND salary_max IS NOT NULL
+      WHERE is_active = true AND is_fractional = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm}) AND salary_max IS NOT NULL
     `;
     const avgDayRate = Math.round(Number(avgResult?.avg || 150000) / 1000);
 
     const locationRows = await sql`
       SELECT location, COUNT(*) as count
       FROM jobs
-      WHERE is_active = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
+      WHERE is_active = true AND is_fractional = true AND (title ILIKE ${searchTerm} OR role_category::text ILIKE ${searchTerm})
       GROUP BY location
       ORDER BY count DESC
     `;

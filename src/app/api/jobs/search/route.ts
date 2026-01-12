@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
       allJobs = await sql`
         SELECT id, slug, title, company_name, location, is_remote, workplace_type, compensation, role_category, skills_required, posted_date, hours_per_week
         FROM jobs
-        WHERE is_active = true
+        WHERE is_active = true AND is_fractional = true
           AND role_category = ${roleType}
           AND LOWER(COALESCE(location, '')) LIKE ${`%${location.toLowerCase()}%`}
         ORDER BY posted_date DESC NULLS LAST
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
       allJobs = await sql`
         SELECT id, slug, title, company_name, location, is_remote, workplace_type, compensation, role_category, skills_required, posted_date, hours_per_week
         FROM jobs
-        WHERE is_active = true
+        WHERE is_active = true AND is_fractional = true
           AND role_category = ${roleType}
         ORDER BY posted_date DESC NULLS LAST
       `
@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
       allJobs = await sql`
         SELECT id, slug, title, company_name, location, is_remote, workplace_type, compensation, role_category, skills_required, posted_date, hours_per_week
         FROM jobs
-        WHERE is_active = true
+        WHERE is_active = true AND is_fractional = true
           AND LOWER(COALESCE(location, '')) LIKE ${`%${location.toLowerCase()}%`}
         ORDER BY posted_date DESC NULLS LAST
       `
@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
       allJobs = await sql`
         SELECT id, slug, title, company_name, location, is_remote, workplace_type, compensation, role_category, skills_required, posted_date, hours_per_week
         FROM jobs
-        WHERE is_active = true
+        WHERE is_active = true AND is_fractional = true
         ORDER BY posted_date DESC NULLS LAST
       `
     }
