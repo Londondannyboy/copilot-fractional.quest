@@ -64,7 +64,7 @@ export function HotJobs({
       jobs={jobs}
       title={title}
       maxJobs={maxJobs}
-      className={className}
+      className={`${className} rounded-xl border`}
       showViewAll={true}
       viewAllHref="/fractional-jobs-uk"
     />

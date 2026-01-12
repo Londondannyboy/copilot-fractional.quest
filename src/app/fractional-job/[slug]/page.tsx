@@ -153,10 +153,26 @@ export default async function JobDetailPage({ params }: Props) {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">About This Role</h2>
 
                 {job.full_description ? (
-                  <div
-                    className="prose prose-lg max-w-none text-gray-600"
-                    dangerouslySetInnerHTML={{ __html: job.full_description }}
-                  />
+                  <div className="prose prose-lg max-w-none text-gray-600 space-y-4">
+                    {/* Parse description into paragraphs - handle both HTML and plain text */}
+                    {job.full_description.includes('<p>') || job.full_description.includes('<br') ? (
+                      <div dangerouslySetInnerHTML={{ __html: job.full_description }} />
+                    ) : (
+                      job.full_description
+                        .split(/\n\n+/)
+                        .filter((p: string) => p.trim())
+                        .map((paragraph: string, idx: number) => (
+                          <p key={idx} className="leading-relaxed">
+                            {paragraph.split(/\n/).map((line: string, lineIdx: number) => (
+                              <span key={lineIdx}>
+                                {line}
+                                {lineIdx < paragraph.split(/\n/).length - 1 && <br />}
+                              </span>
+                            ))}
+                          </p>
+                        ))
+                    )}
+                  </div>
                 ) : job.description_snippet ? (
                   <p className="text-gray-600 leading-relaxed">{job.description_snippet}</p>
                 ) : (

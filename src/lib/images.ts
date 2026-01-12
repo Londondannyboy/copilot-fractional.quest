@@ -93,10 +93,10 @@ const imageMap: Record<ImageCategory, ImageData> = {
     creditUrl: 'https://unsplash.com/@fourcolourblack'
   },
   bristol: {
-    url: 'https://images.unsplash.com/photo-1580137189272-c9379f8864fd?w=1200&h=600&fit=crop&q=80',
-    alt: 'Bristol harbourside and colourful houses',
-    credit: 'Jonny Gios',
-    creditUrl: 'https://unsplash.com/@supergios'
+    url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=600&fit=crop&q=80',
+    alt: 'Bristol Clifton Suspension Bridge and cityscape',
+    credit: 'Tom Sherlock',
+    creditUrl: 'https://unsplash.com/@tomsherlock'
   },
   uk: {
     url: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=1200&h=600&fit=crop&q=80',

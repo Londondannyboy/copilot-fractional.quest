@@ -696,22 +696,35 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* Charts - render immediately from server data */}
         <InitialCharts stats={stats} location={locationDisplay} />
 
-        {/* Hot Jobs Section */}
+        {/* Hot Jobs + Calculator Section - Compact layout */}
         <section className="py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-2 space-y-6">
                 <HotJobs
                   location={location === "london" ? "London" : undefined}
                   maxJobs={8}
                   title={`🔥 Hot ${locationDisplay} Jobs`}
                 />
+                {/* Rate Calculator - Pulled up for better engagement */}
+                <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    Calculate Your {locationDisplay} Day Rate
+                  </h3>
+                  <RoleCalculator role="cfo" />
+                </div>
               </div>
-              <div>
+              <div className="space-y-6">
                 <EmailCapture
                   variant="sidebar"
                   title="Get Job Alerts"
                   description={`New ${locationDisplay} fractional roles straight to your inbox.`}
+                />
+                {/* Extra jobs for sidebar - fill space */}
+                <HotJobs
+                  maxJobs={5}
+                  title="🚀 More Opportunities"
+                  className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-100"
                 />
               </div>
             </div>
@@ -777,15 +790,6 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* Skills Demand Chart - Visual skills analysis */}
         <SkillsDemandChart location={locationDisplay} />
 
-        {/* Rate Calculator */}
-        <section className="py-12 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-              {locationDisplay} Fractional Rate Calculator
-            </h2>
-            <RoleCalculator role="cfo" />
-          </div>
-        </section>
 
         {/* Savings Calculator */}
         <SavingsCalculator location={locationDisplay} />
