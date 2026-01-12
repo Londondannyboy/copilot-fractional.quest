@@ -22,19 +22,20 @@ export default function BookCallPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="flex justify-center mb-6">
             <Image
-              src="https://ui-avatars.com/api/?name=Dan+Keegan&size=128&background=ffffff&color=7c3aed&bold=true"
-              alt="Dan Keegan"
-              width={100}
-              height={100}
-              className="rounded-full border-4 border-white/30 shadow-2xl"
+              src="/dan-keegan.webp"
+              alt="Dan Keegan - Founder of Fractional Quest"
+              width={120}
+              height={120}
+              className="rounded-full border-4 border-white/30 shadow-2xl object-cover"
             />
           </div>
           <h1 className="text-4xl font-bold mb-4">Book a Call with Dan</h1>
           <p className="text-xl text-white/90 mb-2">
-            Founder, Fractional Quest
+            Fractional Executive & Founder
           </p>
-          <p className="text-white/80">
-            Get expert guidance on hiring fractional executives or starting your portfolio career
+          <p className="text-white/80 max-w-2xl mx-auto">
+            With 15+ years in executive roles, I&apos;ve helped dozens of companies find the right fractional talent
+            and guided hundreds of professionals into successful portfolio careers.
           </p>
         </div>
       </section>

@@ -195,26 +195,26 @@ export function JobsSidebar({
         </div>
       </div>
 
-      {/* Book a Call CTA - Eye-catching with photo */}
+      {/* Book a Call CTA - Eye-catching with Dan's photo */}
       {showCalendly && (
         <div className="bg-gradient-to-br from-orange-500 via-rose-500 to-purple-600 rounded-xl overflow-hidden shadow-lg">
           {/* Photo + Content */}
           <div className="p-5 text-white">
             <div className="flex items-center gap-4 mb-4">
               <Image
-                src="https://ui-avatars.com/api/?name=Dan+Keegan&size=64&background=ffffff&color=7c3aed&bold=true"
-                alt="Dan Keegan"
-                width={56}
-                height={56}
-                className="rounded-full border-2 border-white/30 shadow-lg"
+                src="/dan-keegan.webp"
+                alt="Dan Keegan - Founder of Fractional Quest"
+                width={64}
+                height={64}
+                className="rounded-full border-2 border-white/30 shadow-lg object-cover"
               />
               <div>
                 <h3 className="font-bold text-lg">Talk to Dan</h3>
-                <p className="text-white/80 text-sm">Founder, Fractional Quest</p>
+                <p className="text-white/80 text-sm">Fractional Executive & Founder</p>
               </div>
             </div>
             <p className="text-white/90 text-sm mb-4">
-              Get expert guidance on hiring fractional executives or starting your portfolio career.
+              15+ years in executive roles. I&apos;ve been where you are - let me help you navigate your fractional journey.
             </p>
             <Link
               href="/book-call"

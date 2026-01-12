@@ -323,7 +323,7 @@ export function EmbeddedJobBoard({
                   className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all"
                 >
                   {/* Image */}
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-44 overflow-hidden">
                     <Image
                       src={getJobImage(job.id, job.role_category)}
                       alt={job.title}
@@ -331,11 +331,9 @@ export function EmbeddedJobBoard({
                       sizes="(max-width: 768px) 100vw, 400px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    {/* Strong gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
                     {/* Badges */}
-                    <div className="absolute top-3 left-3 flex gap-2">
+                    <div className="absolute top-3 left-3 flex gap-2 z-10">
                       {job.role_category && (
                         <span className="bg-gray-800/90 text-white text-xs font-bold px-2.5 py-1 rounded-full">
                           {job.role_category}
@@ -348,17 +346,17 @@ export function EmbeddedJobBoard({
                       )}
                     </div>
 
-                    {/* Title - White text with strong shadow */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="font-extrabold text-white text-lg leading-tight line-clamp-2" style={{ textShadow: '0 2px 8px rgba(0,0,0,1), 0 1px 3px rgba(0,0,0,0.9)' }}>
+                    {/* SOLID BLACK BAR with white text */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-black px-4 py-3">
+                      <h3 className="font-bold text-white text-base leading-tight line-clamp-2">
                         {job.title}
                       </h3>
+                      <p className="text-white/80 text-sm mt-1">{job.company_name}</p>
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-4">
-                    <p className="text-gray-700 font-medium mb-2">{job.company_name}</p>
 
                     <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-3">
                       <span className="flex items-center gap-1">
