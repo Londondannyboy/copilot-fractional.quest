@@ -1,6 +1,6 @@
 'use client';
 
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react/ui';
 import { CopilotKit } from '@copilotkit/react-core';
 import { authClient } from '@/lib/auth/client';
 

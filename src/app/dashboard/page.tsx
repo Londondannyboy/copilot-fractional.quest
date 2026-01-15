@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { authClient } from "@/lib/auth/client";
-import { UserButton, SignedIn, SignedOut } from "@neondatabase/neon-js/auth/react/ui";
+import { UserButton, SignedIn, SignedOut } from "@neondatabase/auth/react/ui";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 

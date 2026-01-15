@@ -1,6 +1,6 @@
 'use client';
 
-import { UserButton, RedirectToSignIn, SignedIn, SignedOut, AccountSettingsCards } from '@neondatabase/neon-js/auth/react/ui';
+import { UserButton, RedirectToSignIn, SignedIn, SignedOut, AccountSettingsCards } from '@neondatabase/auth/react/ui';
 import { authClient } from '@/lib/auth/client';
 import { useEffect, useState } from 'react';
 import { UserProfileSection } from '@/components/UserProfileSection';
