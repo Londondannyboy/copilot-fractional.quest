@@ -171,34 +171,34 @@ export default function OneUpCaseStudyPage() {
         </div>
       </section>
 
-      {/* Related Case Studies */}
+      {/* Related Resources */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">More Case Studies</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Related Resources</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            <Link href="/case-studies/sony-playstation" className="block bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+            <Link href="/hire-fractional-cmo" className="block bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl flex items-center justify-center text-white font-bold">
-                  SONY
+                <div className="w-14 h-14 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white font-bold">
+                  📊
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900">Sony PlayStation</h3>
-                  <p className="text-sm text-gray-500">Fractional CMO</p>
+                  <h3 className="font-bold text-gray-900">Hire a Fractional CMO</h3>
+                  <p className="text-sm text-gray-500">Marketing Leadership</p>
                 </div>
               </div>
-              <p className="text-gray-600">40% campaign ROI increase through digital marketing transformation</p>
+              <p className="text-gray-600">Learn how to find and hire the right fractional marketing leader for your business</p>
             </Link>
-            <Link href="/case-studies/ck-delta" className="block bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+            <Link href="/fractional-cmo-jobs-uk" className="block bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold">
-                  CKD
+                  💼
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900">CK Delta</h3>
-                  <p className="text-sm text-gray-500">Fractional CRO</p>
+                  <h3 className="font-bold text-gray-900">CMO Jobs UK</h3>
+                  <p className="text-sm text-gray-500">Browse Opportunities</p>
                 </div>
               </div>
-              <p className="text-gray-600">£2M ARR milestone achieved with fractional revenue operations</p>
+              <p className="text-gray-600">Explore fractional and interim CMO positions across the UK</p>
             </Link>
           </div>
         </div>

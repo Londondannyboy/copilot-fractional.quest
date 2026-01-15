@@ -26,10 +26,11 @@ const footerLinks = {
       { name: 'Birmingham', href: '/birmingham' },
       { name: 'Edinburgh', href: '/edinburgh' },
       { name: 'Bristol', href: '/bristol' },
-      { name: 'Glasgow', href: '/glasgow' },
-      { name: 'Leeds', href: '/leeds' },
-      { name: 'Belfast', href: '/belfast' },
-      { name: 'Cambridge', href: '/cambridge' },
+      // TODO: Create pages for these cities
+      // { name: 'Glasgow', href: '/glasgow' },
+      // { name: 'Leeds', href: '/leeds' },
+      // { name: 'Belfast', href: '/belfast' },
+      // { name: 'Cambridge', href: '/cambridge' },
     ],
   },
   resources: {
@@ -43,9 +44,10 @@ const footerLinks = {
       { name: 'CTO Salary Guide', href: '/fractional-cto-salary' },
       { name: 'CMO Salary Guide', href: '/fractional-cmo-salary' },
       { name: 'Portfolio Career Guide', href: '/articles/portfolio-career' },
-      { name: 'IR35 Guide', href: '/articles/ir35-guide' },
-      { name: 'Case Studies', href: '/case-studies' },
-      { name: 'Rate Calculator', href: '/rate-calculator' },
+      // TODO: Create these pages
+      // { name: 'IR35 Guide', href: '/articles/ir35-guide' },
+      // { name: 'Case Studies', href: '/case-studies' },
+      // { name: 'Rate Calculator', href: '/rate-calculator' },
     ],
   },
   forEmployers: {
@@ -224,9 +226,10 @@ export function Footer() {
               <Link href="/terms" className="text-gray-500 hover:text-gray-300 transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/cookies" className="text-gray-500 hover:text-gray-300 transition-colors">
+              {/* TODO: Create cookies page */}
+              {/* <Link href="/cookies" className="text-gray-500 hover:text-gray-300 transition-colors">
                 Cookie Policy
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

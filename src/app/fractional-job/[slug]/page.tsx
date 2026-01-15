@@ -192,7 +192,7 @@ export default async function JobDetailPage({ params }: Props) {
         description={job.description_snippet || `${job.title} role at ${job.company_name}`}
         url={`https://fractional.quest/fractional-job/${slug}`}
         datePublished={job.posted_date}
-        dateModified={job.updated_at || job.posted_date}
+        dateModified={new Date(job.updated_date || job.posted_date || new Date())}
       />
 
       {/* Hero with Image */}
