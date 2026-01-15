@@ -75,6 +75,9 @@ export default async function FractionalJobsUKPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
+      {/* Server-rendered H1 for SEO - visually hidden as client component renders the visual H1 */}
+      <h1 className="sr-only">{ukSEO.hero.headline}</h1>
+
       {/* Intelligent Job Page - content responds to AI conversation */}
       <IntelligentJobPageClient
         location="uk"
