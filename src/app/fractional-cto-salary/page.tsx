@@ -14,8 +14,8 @@ const heroImage = getHeroImageUrl('cto', 1920, 800)
 const imageCredit = getImage('cto')
 
 export const metadata: Metadata = {
-  title: 'Fractional CTO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional CTO salary UK guide for 2025. Day rates £800-£1,600, annual equivalent £85,000-£200,000. Compare fractional CTO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional CTO Salary UK | Guide',
+  description: 'Fractional CTO salary UK: day rates £800-£1,600. Compare costs, pricing factors, and calculate potential earnings.',
   keywords: 'fractional cto salary, fractional cto salary uk, fractional cto day rate, fractional cto cost, cto salary uk, part time cto salary, fractional cto rates, fractional technology salary',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cto-salary',

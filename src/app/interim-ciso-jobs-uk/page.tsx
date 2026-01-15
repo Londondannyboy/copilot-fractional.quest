@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim CISO Jobs UK 2025 | Interim Security Director Roles',
-  description: 'Interim CISO jobs UK for experienced security leaders. Find interim Chief Information Security Officer, interim Security Director roles. Day rates £1,000-£1,500. Updated daily.',
+  title: 'Interim CISO Jobs UK',
+  description: 'Interim CISO jobs UK for security leaders. Find interim Chief Security Officer and Security Director roles. £1,000-£1,500/day.',
   keywords: 'interim ciso jobs uk, interim ciso, interim security director jobs, interim chief information security officer, interim infosec roles uk',
   alternates: { canonical: 'https://fractional.quest/interim-ciso-jobs-uk' },
   openGraph: {

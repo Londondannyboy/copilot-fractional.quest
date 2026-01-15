@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim CPO Jobs UK 2025 | Interim Product Director Roles',
-  description: 'Interim CPO jobs UK for experienced product leaders. Find interim Chief Product Officer, interim Product Director roles. Day rates £900-£1,300. Updated daily.',
+  title: 'Interim CPO Jobs UK',
+  description: 'Interim CPO jobs UK for product leaders. Find interim Chief Product Officer and Product Director roles. £900-£1,300/day.',
   keywords: 'interim cpo jobs uk, interim cpo, interim product director jobs, interim chief product officer, interim product roles uk',
   alternates: { canonical: 'https://fractional.quest/interim-cpo-jobs-uk' },
   openGraph: {

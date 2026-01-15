@@ -14,8 +14,8 @@ const heroImage = getHeroImageUrl('cfo', 1920, 800)
 const imageCredit = getImage('cfo')
 
 export const metadata: Metadata = {
-  title: 'Fractional CFO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional CFO salary UK guide for 2025. Day rates £700-£1,400, annual equivalent £70,000-£170,000. Compare fractional CFO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional CFO Salary UK | Guide',
+  description: 'Fractional CFO salary UK: day rates £700-£1,400. Compare costs, pricing factors, and calculate potential earnings.',
   keywords: 'fractional cfo salary, fractional cfo salary uk, fractional cfo day rate, fractional cfo cost, cfo salary uk, part time cfo salary, fractional cfo rates, fractional finance salary',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cfo-salary',

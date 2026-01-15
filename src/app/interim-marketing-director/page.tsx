@@ -17,8 +17,8 @@ import { HotJobsLines } from '@/components/HotJobsLines'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim Marketing Director Jobs UK 2025 | Senior Marketing Roles',
-  description: 'Interim Marketing Director jobs UK for experienced marketing leaders. Find interim Head of Marketing, interim VP Marketing roles. Day rates £700-£1,200. Updated daily.',
+  title: 'Interim Marketing Director Jobs UK',
+  description: 'Interim Marketing Director jobs UK. Find interim Head of Marketing and VP Marketing roles. Day rates £700-£1,200.',
   keywords: 'interim marketing director jobs uk, interim marketing director, interim head of marketing, interim vp marketing, interim marketing jobs uk',
   alternates: { canonical: 'https://fractional.quest/interim-marketing-director' },
   openGraph: {

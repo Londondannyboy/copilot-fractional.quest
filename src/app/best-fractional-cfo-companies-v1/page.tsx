@@ -10,7 +10,7 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
   title: 'Best Fractional CFO Companies UK 2025 | Top CFO Service Providers',
-  description: 'Compare the best fractional CFO companies in the UK. Find top-rated CFO service providers, boutique firms, and independent fractional CFOs. Pricing from £850/day.',
+  description: 'Compare the best fractional CFO companies in the UK. Find top CFO service providers and boutique firms. Pricing from £850/day.',
   keywords: 'best fractional cfo companies, fractional cfo firms uk, top fractional cfo providers, cfo services companies uk, outsourced cfo firms',
   alternates: { canonical: 'https://fractional.quest/best-fractional-cfo-companies' },
   openGraph: {

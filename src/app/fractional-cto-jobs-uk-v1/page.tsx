@@ -27,7 +27,7 @@ const imageAlt = getImage('cto').alt
 // Target keywords: "fractional cto jobs uk", "fractional cto uk", "fractional technology jobs", "cto salary uk", "part time cto"
 export const metadata: Metadata = {
   title: 'Fractional CTO Jobs UK | Part-Time CTO & Technology Leadership Roles 2025',
-  description: 'Fractional CTO jobs UK for experienced technology leaders. Part-time CTO and fractional technology jobs paying £800-£1,600/day. Browse fractional CTO UK roles, CTO salary UK rates, and fractional CTO services across London, Manchester, Bristol.',
+  description: 'Fractional CTO jobs UK: part-time CTO roles paying £800-£1,600/day. Browse tech leadership positions across London and UK.',
   keywords: 'fractional cto jobs uk, fractional cto jobs, fractional cto uk, fractional technology jobs, part time cto, part-time cto, cto salary uk, fractional cto roles, fractional cto services, cto jobs uk, part time chief technology officer, fractional cto bristol',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cto-jobs-uk',

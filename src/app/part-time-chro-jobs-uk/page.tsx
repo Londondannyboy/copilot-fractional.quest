@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CHRO Jobs UK 2025 | Fractional HR Director Roles',
-  description: 'Part-time CHRO jobs UK for experienced HR leaders. Find part-time Chief HR Officer, fractional HR Director roles. 1-3 days per week. Day rates £800-£1,200.',
+  title: 'Part-Time CHRO Jobs UK',
+  description: 'Part-time CHRO jobs UK for HR leaders. Find Chief HR Officer and HR Director roles. 1-3 days/week, £800-£1,200/day.',
   keywords: 'part time chro jobs uk, part time chro, part time hr director jobs, fractional chro jobs, part time people director',
   alternates: { canonical: 'https://fractional.quest/part-time-chro-jobs-uk' },
   openGraph: {

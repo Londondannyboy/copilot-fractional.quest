@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim CMO Jobs UK 2025 | Interim Marketing Director Roles',
-  description: 'Interim CMO jobs UK for experienced marketing leaders. Find interim Chief Marketing Officer, interim Marketing Director roles. Day rates £850-£1,300. Updated daily.',
+  title: 'Interim CMO Jobs UK',
+  description: 'Interim CMO jobs UK for marketing leaders. Find interim Chief Marketing Officer and Marketing Director roles. £850-£1,300/day.',
   keywords: 'interim cmo jobs uk, interim cmo, interim marketing director jobs, interim chief marketing officer, interim cmo roles uk, interim marketing jobs',
   alternates: { canonical: 'https://fractional.quest/interim-cmo-jobs-uk' },
   openGraph: {

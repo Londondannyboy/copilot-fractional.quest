@@ -16,8 +16,8 @@ const heroImage = getHeroImageUrl('ciso', 1920, 800)
 const imageCredit = getImage('ciso')
 
 export const metadata: Metadata = {
-  title: 'Fractional CISO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional CISO salary UK guide for 2025. Day rates £900-£1,500, annual equivalent £90,000-£180,000. Compare fractional CISO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional CISO Salary UK | Guide',
+  description: 'Fractional CISO salary UK: day rates £900-£1,500. Compare costs, pricing factors, and calculate potential earnings.',
   keywords: 'fractional ciso salary, fractional ciso salary uk, fractional ciso day rate, fractional ciso cost, ciso salary uk, part time ciso salary, fractional security officer salary',
   alternates: { canonical: 'https://fractional.quest/fractional-ciso-salary' },
   openGraph: {

@@ -16,8 +16,8 @@ const heroImage = getHeroImageUrl('ceo', 1920, 800)
 const imageCredit = getImage('ceo')
 
 export const metadata: Metadata = {
-  title: 'Fractional CEO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional CEO salary UK guide for 2025. Day rates £1,000-£2,000, annual equivalent £100,000-£250,000. Compare fractional CEO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional CEO Salary UK | Guide',
+  description: 'Fractional CEO salary UK: day rates £1,000-£2,000. Compare costs, pricing factors, and calculate earnings.',
   keywords: 'fractional ceo salary, fractional ceo salary uk, fractional ceo day rate, fractional ceo cost, ceo salary uk, part time ceo salary, interim ceo salary uk',
   alternates: { canonical: 'https://fractional.quest/fractional-ceo-salary' },
   openGraph: {

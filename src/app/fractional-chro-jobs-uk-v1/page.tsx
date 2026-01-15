@@ -25,7 +25,7 @@ const imageAlt = getImage('chro').alt
 
 export const metadata: Metadata = {
   title: 'Fractional CHRO Jobs UK | Part-Time HR Director & People Leadership Roles 2025',
-  description: 'Fractional CHRO jobs UK for experienced HR leaders. Part-time CHRO and fractional HR director jobs paying £600-£1,100/day. Browse fractional CHRO UK roles and HR leadership positions.',
+  description: 'Fractional CHRO jobs UK: part-time CHRO roles paying £600-£1,100/day. Browse HR leadership positions across London and UK.',
   keywords: 'fractional chro jobs uk, fractional chro uk, fractional hr director, part time chro, fractional hr jobs, chro salary uk, fractional people officer',
   alternates: {
     canonical: 'https://fractional.quest/fractional-chro-jobs-uk',

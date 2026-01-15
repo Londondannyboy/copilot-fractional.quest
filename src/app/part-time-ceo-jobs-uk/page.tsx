@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CEO Jobs UK 2025 | Fractional Chief Executive Roles',
-  description: 'Part-time CEO jobs UK for experienced executive leaders. Find part-time Chief Executive Officer, fractional MD roles. 1-3 days per week. Day rates £1,200-£2,000.',
+  title: 'Part-Time CEO Jobs UK',
+  description: 'Part-time CEO jobs UK for executive leaders. Find Chief Executive and Managing Director roles. 1-3 days/week, £1,200-£2,000/day.',
   keywords: 'part time ceo jobs uk, part time ceo, part time chief executive jobs, fractional ceo jobs, part time managing director',
   alternates: { canonical: 'https://fractional.quest/part-time-ceo-jobs-uk' },
   openGraph: {

@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional CEO Services UK | Part-Time Executive Leadership',
-  description: 'Fractional CEO services for UK businesses. Get experienced executive leadership 1-3 days per week. Strategic direction, board management, fundraising, turnarounds. Day rates from £1,200.',
+  title: 'Fractional CEO Services UK',
+  description: 'Fractional CEO services for UK businesses. Executive leadership 1-3 days/week. Strategy, board management, fundraising from £1,200/day.',
   keywords: 'fractional ceo services, fractional ceo uk, part time ceo, interim ceo services, outsourced ceo services, ceo as a service',
   alternates: { canonical: 'https://fractional.quest/fractional-ceo-services' },
   openGraph: {

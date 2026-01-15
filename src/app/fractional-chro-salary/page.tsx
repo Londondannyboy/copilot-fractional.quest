@@ -16,8 +16,8 @@ const heroImage = getHeroImageUrl('chro', 1920, 800)
 const imageCredit = getImage('chro')
 
 export const metadata: Metadata = {
-  title: 'Fractional CHRO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional CHRO salary UK guide for 2025. Day rates £600-£1,100, annual equivalent £60,000-£130,000. Compare fractional CHRO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional CHRO Salary UK | Guide',
+  description: 'Fractional CHRO salary UK: day rates £600-£1,100. Compare costs, pricing factors, and calculate potential earnings.',
   keywords: 'fractional chro salary, fractional chro salary uk, fractional chro day rate, fractional chro cost, chro salary uk, part time chro salary, fractional hr director salary',
   alternates: { canonical: 'https://fractional.quest/fractional-chro-salary' },
   openGraph: {

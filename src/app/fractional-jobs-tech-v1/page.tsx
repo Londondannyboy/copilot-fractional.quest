@@ -16,7 +16,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Fractional Jobs in Tech 2025 | Technology Industry Executive Roles',
-  description: 'Fractional jobs in tech and technology companies. Find fractional CTO, CPO, CISO roles in startups, SaaS, fintech, and tech scale-ups. Day rates £900-£1,500.',
+  description: 'Fractional jobs in tech: CTO, CPO, CISO roles in startups, SaaS, and fintech. Day rates £900-£1,500.',
   keywords: 'fractional jobs tech, fractional cto startup, tech industry executive jobs, saas fractional jobs, fintech fractional jobs, technology leadership',
   alternates: { canonical: 'https://fractional.quest/fractional-jobs-tech' },
   openGraph: {

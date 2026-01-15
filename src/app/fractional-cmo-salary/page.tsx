@@ -14,8 +14,8 @@ const heroImage = getHeroImageUrl('cmo', 1920, 800)
 const imageCredit = getImage('cmo')
 
 export const metadata: Metadata = {
-  title: 'Fractional CMO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional CMO salary UK guide for 2025. Day rates £700-£1,400, annual equivalent £70,000-£170,000. Compare fractional CMO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional CMO Salary UK | Guide',
+  description: 'Fractional CMO salary UK: day rates £700-£1,400. Compare costs, pricing factors, and calculate potential earnings.',
   keywords: 'fractional cmo salary, fractional cmo salary uk, fractional cmo day rate, fractional cmo cost, cmo salary uk, part time cmo salary, fractional cmo rates, fractional marketing salary',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cmo-salary',

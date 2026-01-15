@@ -2,9 +2,9 @@
 
 export const bristolSEO = {
   meta: {
-    title: "Fractional Jobs Bristol | CTO, CFO, CMO Executive Roles",
+    title: "Fractional Jobs Bristol | Exec Roles",
     description:
-      "Premium fractional executive jobs in Bristol. Find CTO, CFO, CMO, COO and CHRO roles with day rates from £700-£1,150. The South West's leading hub for fractional C-suite talent.",
+      "Fractional executive jobs in Bristol. CTO, CFO, CMO roles with day rates £700-£1,150 in the South West hub.",
     keywords: [
       "fractional jobs bristol",
       "fractional cto bristol",

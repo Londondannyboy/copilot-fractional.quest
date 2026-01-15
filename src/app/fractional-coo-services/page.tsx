@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional COO Services UK | Part-Time Operations Leadership',
-  description: 'Fractional COO services for UK businesses. Get experienced operations leadership 1-3 days per week. Operational transformation, process optimisation, scale-up support. Day rates from £900.',
+  title: 'Fractional COO Services UK',
+  description: 'Fractional COO services for UK businesses. Operations leadership 1-3 days/week. Process optimisation, scale-up support from £900/day.',
   keywords: 'fractional coo services, fractional coo uk, part time coo, fractional operations director, outsourced coo services',
   alternates: { canonical: 'https://fractional.quest/fractional-coo-services' },
   openGraph: {

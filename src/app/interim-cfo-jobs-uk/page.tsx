@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim CFO Jobs UK 2025 | Interim Finance Director & CFO Roles',
-  description: 'Interim CFO jobs UK for experienced finance leaders. Find interim Chief Financial Officer, interim Finance Director and interim FD roles. Day rates £900-£1,500. Updated daily.',
+  title: 'Interim CFO Jobs UK',
+  description: 'Interim CFO jobs UK for finance leaders. Find interim Chief Financial Officer and Finance Director roles. £900-£1,500/day.',
   keywords: 'interim cfo jobs uk, interim cfo, interim finance director jobs, interim fd jobs, interim chief financial officer, interim cfo roles uk, interim finance jobs',
   alternates: { canonical: 'https://fractional.quest/interim-cfo-jobs-uk' },
   openGraph: {

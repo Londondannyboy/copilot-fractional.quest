@@ -18,7 +18,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Remote Fractional HR Jobs UK 2025 | Work From Home HR Director Roles',
-  description: 'Remote fractional HR jobs for experienced HR professionals. Find fully remote fractional CHRO, HR Director, and People Director roles. Work from anywhere. Day rates £600-£1,000.',
+  description: 'Remote fractional HR jobs UK: CHRO, HR Director roles. Work from anywhere with day rates £600-£1,000.',
   keywords: 'remote fractional hr jobs, remote hr director jobs, fractional chro remote, work from home hr jobs, remote people director',
   alternates: { canonical: 'https://fractional.quest/fractional-hr-jobs-remote' },
   openGraph: {

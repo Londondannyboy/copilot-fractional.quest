@@ -27,7 +27,7 @@ const imageAlt = getImage('cfo').alt
 // Target keywords: "fractional cfo jobs uk", "fractional cfo uk", "fractional finance jobs", "cfo salary uk", "part time cfo"
 export const metadata: Metadata = {
   title: 'Fractional CFO Jobs UK | Part-Time CFO & Finance Leadership Roles 2025',
-  description: 'Fractional CFO jobs UK for experienced finance leaders. Part-time CFO and fractional finance jobs paying £700-£1,400/day. Browse fractional CFO UK roles, CFO salary UK rates, and fractional CFO services across London, Manchester, Bristol.',
+  description: 'Fractional CFO jobs UK: part-time CFO roles paying £700-£1,400/day. Browse finance leadership positions across London and UK.',
   keywords: 'fractional cfo jobs uk, fractional cfo jobs, fractional cfo uk, fractional finance jobs, part time cfo, part-time cfo, cfo salary uk, fractional cfo roles, fractional cfo services, cfo jobs uk, part time chief financial officer, fractional cfo bristol',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cfo-jobs-uk',

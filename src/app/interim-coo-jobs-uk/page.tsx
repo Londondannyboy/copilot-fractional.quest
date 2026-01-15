@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim COO Jobs UK 2025 | Interim Operations Director Roles',
-  description: 'Interim COO jobs UK for experienced operations leaders. Find interim Chief Operating Officer, interim Operations Director roles. Day rates £900-£1,300. Updated daily.',
+  title: 'Interim COO Jobs UK',
+  description: 'Interim COO jobs UK for operations leaders. Find interim Chief Operating Officer and Operations Director roles. £900-£1,300/day.',
   keywords: 'interim coo jobs uk, interim coo, interim operations director jobs, interim chief operating officer, interim coo roles uk, interim operations jobs',
   alternates: { canonical: 'https://fractional.quest/interim-coo-jobs-uk' },
   openGraph: {

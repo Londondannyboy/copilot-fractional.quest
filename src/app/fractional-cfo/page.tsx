@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('cfo', 1920, 800)
 const imageCredit = getImage('cfo')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CFO? | Part-Time Chief Financial Officer Guide 2025',
-  description: 'What is a fractional CFO? A part-time Chief Financial Officer who provides strategic financial leadership to multiple companies. Learn about fractional CFO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional CFO? | Guide',
+  description: 'What is a fractional CFO? A part-time finance leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional cfo, fractional cfo meaning, fractional cfo definition, part time cfo, fractional finance officer, fractional chief financial officer, what does a fractional cfo do',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cfo',

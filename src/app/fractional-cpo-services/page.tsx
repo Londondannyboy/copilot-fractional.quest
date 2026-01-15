@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional CPO Services UK | Part-Time Product Leadership',
-  description: 'Fractional CPO services for UK businesses. Get experienced product leadership 1-3 days per week. Product strategy, roadmap development, team building, user research. Day rates from £850.',
+  title: 'Fractional CPO Services UK',
+  description: 'Fractional CPO services for UK businesses. Product leadership 1-3 days/week. Strategy, roadmap, user research from £850/day.',
   keywords: 'fractional cpo services, fractional cpo uk, part time cpo, fractional product director, outsourced cpo services, cpo as a service',
   alternates: { canonical: 'https://fractional.quest/fractional-cpo-services' },
   openGraph: {

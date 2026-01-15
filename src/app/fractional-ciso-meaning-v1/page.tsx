@@ -10,7 +10,7 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
   title: 'Fractional CISO Meaning | What Does Fractional CISO Mean?',
-  description: 'What does fractional CISO mean? A fractional CISO is a part-time Chief Information Security Officer who provides senior security leadership on a flexible basis. Learn the definition, benefits, and when to hire one.',
+  description: 'What does fractional CISO mean? A part-time CISO providing senior security leadership. Learn the definition, benefits, and when to hire.',
   keywords: 'fractional ciso meaning, what is a fractional ciso, fractional ciso definition, part time ciso meaning, virtual ciso meaning',
   alternates: { canonical: 'https://fractional.quest/fractional-ciso-meaning' },
   openGraph: {

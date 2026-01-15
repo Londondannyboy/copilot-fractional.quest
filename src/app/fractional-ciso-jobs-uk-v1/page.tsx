@@ -25,7 +25,7 @@ const imageAlt = getImage('ciso').alt
 
 export const metadata: Metadata = {
   title: 'Fractional CISO Jobs UK | Part-Time Security Leadership Roles 2025',
-  description: 'Fractional CISO jobs UK for experienced security leaders. Part-time CISO and fractional security director jobs paying £900-£1,500/day. Browse fractional CISO UK roles and cybersecurity leadership positions.',
+  description: 'Fractional CISO jobs UK: part-time CISO roles paying £900-£1,500/day. Browse security leadership positions across London and UK.',
   keywords: 'fractional ciso jobs uk, fractional ciso uk, fractional security officer, part time ciso, fractional security jobs, ciso salary uk, fractional head of security',
   alternates: { canonical: 'https://fractional.quest/fractional-ciso-jobs-uk' },
   openGraph: {

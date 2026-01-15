@@ -10,7 +10,7 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
   title: 'Fractional CFO Meaning | What Does Fractional CFO Mean?',
-  description: 'What does fractional CFO mean? A fractional CFO is a part-time Chief Financial Officer who provides senior finance leadership on a flexible basis. Learn the definition, benefits, and when to hire one.',
+  description: 'What does fractional CFO mean? A part-time CFO providing senior finance leadership. Learn the definition, benefits, and when to hire.',
   keywords: 'fractional cfo meaning, what is a fractional cfo, fractional cfo definition, part time cfo meaning, fractional finance director meaning',
   alternates: { canonical: 'https://fractional.quest/fractional-cfo-meaning' },
   openGraph: {

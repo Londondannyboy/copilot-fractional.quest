@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional CMO Services UK | Part-Time Marketing Leadership',
-  description: 'Fractional CMO services for UK businesses. Get experienced marketing leadership 1-3 days per week. Brand strategy, demand generation, marketing transformation. Day rates from £850.',
+  title: 'Fractional CMO Services UK',
+  description: 'Fractional CMO services for UK businesses. Marketing leadership 1-3 days/week. Brand strategy, demand generation from £850/day.',
   keywords: 'fractional cmo services, fractional cmo uk, part time cmo, fractional marketing director, outsourced cmo services',
   alternates: { canonical: 'https://fractional.quest/fractional-cmo-services' },
   openGraph: {

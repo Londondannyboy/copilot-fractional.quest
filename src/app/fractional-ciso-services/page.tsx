@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional CISO Services UK | Part-Time Security Leadership',
-  description: 'Fractional CISO services for UK businesses. Get experienced security leadership 1-3 days per week. Security strategy, compliance (SOC 2, ISO 27001), risk management. Day rates from £900.',
+  title: 'Fractional CISO Services UK',
+  description: 'Fractional CISO services for UK businesses. Security leadership 1-3 days/week. SOC 2, ISO 27001 compliance from £900/day.',
   keywords: 'fractional ciso services, fractional ciso uk, part time ciso, fractional security director, outsourced ciso services, ciso as a service',
   alternates: { canonical: 'https://fractional.quest/fractional-ciso-services' },
   openGraph: {

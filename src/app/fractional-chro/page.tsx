@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('chro', 1920, 800)
 const imageCredit = getImage('chro')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CHRO? | Part-Time Chief HR Officer Guide 2025',
-  description: 'What is a fractional CHRO? A part-time Chief Human Resources Officer who provides strategic HR leadership to multiple companies. Learn about fractional CHRO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional CHRO? | Guide',
+  description: 'What is a fractional CHRO? A part-time HR leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional chro, fractional chro meaning, fractional chro definition, part time chro, fractional hr officer, fractional chief hr officer, what does a fractional chro do',
   alternates: { canonical: 'https://fractional.quest/fractional-chro' },
   openGraph: {

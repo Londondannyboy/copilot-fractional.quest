@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CTO Jobs UK 2025 | Fractional Technology Director Roles',
-  description: 'Part-time CTO jobs UK for experienced technology leaders. Find part-time Chief Technology Officer, fractional Technology Director roles. 1-3 days per week. Day rates £900-£1,400.',
+  title: 'Part-Time CTO Jobs UK',
+  description: 'Part-time CTO jobs UK for technology leaders. Find Chief Technology Officer and Tech Director roles. 1-3 days/week, £900-£1,400/day.',
   keywords: 'part time cto jobs uk, part time cto, part time technology director jobs, fractional cto jobs, part time chief technology officer',
   alternates: { canonical: 'https://fractional.quest/part-time-cto-jobs-uk' },
   openGraph: {

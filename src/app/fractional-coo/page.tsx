@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('coo', 1920, 800)
 const imageCredit = getImage('coo')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional COO? | Part-Time Chief Operating Officer Guide 2025',
-  description: 'What is a fractional COO? A part-time Chief Operating Officer who provides strategic operations leadership to multiple companies. Learn about fractional COO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional COO? | Guide',
+  description: 'What is a fractional COO? A part-time operations leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional coo, fractional coo meaning, fractional coo definition, part time coo, fractional operations officer, fractional chief operating officer, what does a fractional coo do',
   alternates: {
     canonical: 'https://fractional.quest/fractional-coo',

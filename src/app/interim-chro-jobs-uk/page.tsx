@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim CHRO Jobs UK 2025 | Interim HR Director Roles',
-  description: 'Interim CHRO jobs UK for experienced HR leaders. Find interim Chief Human Resources Officer, interim HR Director roles. Day rates £800-£1,200. Updated daily.',
+  title: 'Interim CHRO Jobs UK',
+  description: 'Interim CHRO jobs UK for HR leaders. Find interim Chief HR Officer and HR Director roles. £800-£1,200/day.',
   keywords: 'interim chro jobs uk, interim chro, interim hr director jobs, interim chief human resources officer, interim people director',
   alternates: { canonical: 'https://fractional.quest/interim-chro-jobs-uk' },
   openGraph: {

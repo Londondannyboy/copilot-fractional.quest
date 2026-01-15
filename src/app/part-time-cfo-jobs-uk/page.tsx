@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CFO Jobs UK 2025 | Fractional Finance Director Roles',
-  description: 'Part-time CFO jobs UK for experienced finance leaders. Find part-time Chief Financial Officer, fractional Finance Director and FD roles. 1-3 days per week. Day rates £900-£1,500.',
+  title: 'Part-Time CFO Jobs UK',
+  description: 'Part-time CFO jobs UK for finance leaders. Find Chief Financial Officer and Finance Director roles. 1-3 days/week, £900-£1,500/day.',
   keywords: 'part time cfo jobs uk, part time cfo, part time finance director jobs, part time fd jobs, fractional cfo jobs, part time chief financial officer',
   alternates: { canonical: 'https://fractional.quest/part-time-cfo-jobs-uk' },
   openGraph: {

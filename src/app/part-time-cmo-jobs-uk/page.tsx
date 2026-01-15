@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CMO Jobs UK 2025 | Fractional Marketing Director Roles',
-  description: 'Part-time CMO jobs UK for experienced marketing leaders. Find part-time Chief Marketing Officer, fractional Marketing Director roles. 1-3 days per week. Day rates £850-£1,300.',
+  title: 'Part-Time CMO Jobs UK',
+  description: 'Part-time CMO jobs UK for marketing leaders. Find Chief Marketing Officer and Marketing Director roles. 1-3 days/week, £850-£1,300/day.',
   keywords: 'part time cmo jobs uk, part time cmo, part time marketing director jobs, fractional cmo jobs, part time chief marketing officer',
   alternates: { canonical: 'https://fractional.quest/part-time-cmo-jobs-uk' },
   openGraph: {

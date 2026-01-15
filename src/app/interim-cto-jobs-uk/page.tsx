@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim CTO Jobs UK 2025 | Interim Technology Director Roles',
-  description: 'Interim CTO jobs UK for experienced technology leaders. Find interim Chief Technology Officer, interim IT Director and interim Tech Director roles. Day rates £900-£1,400. Updated daily.',
+  title: 'Interim CTO Jobs UK',
+  description: 'Interim CTO jobs UK for technology leaders. Find interim Chief Technology Officer and Tech Director roles. £900-£1,400/day.',
   keywords: 'interim cto jobs uk, interim cto, interim technology director jobs, interim it director jobs, interim chief technology officer, interim cto roles uk, interim tech jobs',
   alternates: { canonical: 'https://fractional.quest/interim-cto-jobs-uk' },
   openGraph: {

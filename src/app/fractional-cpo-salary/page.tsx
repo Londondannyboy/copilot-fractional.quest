@@ -16,8 +16,8 @@ const heroImage = getHeroImageUrl('cpo', 1920, 800)
 const imageCredit = getImage('cpo')
 
 export const metadata: Metadata = {
-  title: 'Fractional CPO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional CPO salary UK guide for 2025. Day rates £800-£1,400, annual equivalent £80,000-£170,000. Compare fractional CPO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional CPO Salary UK | Guide',
+  description: 'Fractional CPO salary UK: day rates £800-£1,400. Compare costs, pricing factors, and calculate potential earnings.',
   keywords: 'fractional cpo salary, fractional cpo salary uk, fractional cpo day rate, fractional cpo cost, cpo salary uk, part time cpo salary, fractional product officer salary',
   alternates: { canonical: 'https://fractional.quest/fractional-cpo-salary' },
   openGraph: {

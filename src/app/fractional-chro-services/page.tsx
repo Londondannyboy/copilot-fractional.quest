@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional CHRO Services UK | Part-Time HR Leadership',
-  description: 'Fractional CHRO services for UK businesses. Get experienced HR leadership 1-3 days per week. People strategy, talent acquisition, culture transformation, employment law. Day rates from £800.',
+  title: 'Fractional CHRO Services UK',
+  description: 'Fractional CHRO services for UK businesses. HR leadership 1-3 days/week. People strategy, talent acquisition from £800/day.',
   keywords: 'fractional chro services, fractional chro uk, part time chro, fractional hr director, outsourced hr services, chro as a service',
   alternates: { canonical: 'https://fractional.quest/fractional-chro-services' },
   openGraph: {

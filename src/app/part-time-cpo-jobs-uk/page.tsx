@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CPO Jobs UK 2025 | Fractional Product Director Roles',
-  description: 'Part-time CPO jobs UK for experienced product leaders. Find part-time Chief Product Officer, fractional Product Director roles. 1-3 days per week. Day rates £900-£1,300.',
+  title: 'Part-Time CPO Jobs UK',
+  description: 'Part-time CPO jobs UK for product leaders. Find Chief Product Officer and Product Director roles. 1-3 days/week, £900-£1,300/day.',
   keywords: 'part time cpo jobs uk, part time cpo, part time product director jobs, fractional cpo jobs, part time chief product officer',
   alternates: { canonical: 'https://fractional.quest/part-time-cpo-jobs-uk' },
   openGraph: {

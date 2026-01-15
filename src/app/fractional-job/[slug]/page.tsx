@@ -149,17 +149,39 @@ async function getRelatedJobs(job: any) {
   return getRelatedJobsCached(job.id, job.role_category, job.company_name)
 }
 
+// Truncate title to fit SEO requirements (layout adds " | Fractional Quest" = 19 chars)
+function truncateTitle(title: string, company: string, maxLength: number = 40): string {
+  const fullTitle = `${title} at ${company}`
+  if (fullTitle.length <= maxLength) return fullTitle
+
+  // Try shorter format: "Title | Company"
+  const shortTitle = `${title} | ${company}`
+  if (shortTitle.length <= maxLength) return shortTitle
+
+  // Truncate company name if needed
+  const truncatedCompany = company.length > 15 ? company.slice(0, 12) + '...' : company
+  const truncatedTitle = `${title} | ${truncatedCompany}`
+  if (truncatedTitle.length <= maxLength) return truncatedTitle
+
+  // Last resort: truncate job title
+  return title.slice(0, maxLength - 3) + '...'
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const job = await getJob(slug)
 
   if (!job) {
-    return { title: 'Job Not Found | Fractional Quest' }
+    return { title: 'Job Not Found' }
   }
 
-  const title = `${job.title} at ${job.company_name} | Fractional Quest`
-  const description = job.description_snippet ||
-    `${job.title} - ${job.workplace_type || 'Flexible'} role at ${job.company_name}. ${job.compensation || 'Competitive salary'}. Apply now on Fractional Quest.`
+  // Title without "| Fractional Quest" - layout template adds it
+  const title = truncateTitle(job.title, job.company_name)
+
+  // Description under 160 chars
+  const rawDescription = job.description_snippet ||
+    `${job.title} at ${job.company_name}. ${job.workplace_type || 'Flexible'} role. ${job.compensation || 'Competitive salary'}. Apply now.`
+  const description = rawDescription.length > 155 ? rawDescription.slice(0, 152) + '...' : rawDescription
 
   return {
     title,
@@ -168,9 +190,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://fractional.quest/fractional-job/${slug}`,
     },
     openGraph: {
-      title,
+      title: `${title} | Fractional Quest`,
       description,
       url: `https://fractional.quest/fractional-job/${slug}`,
+      siteName: 'Fractional Quest',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: `${title} | Fractional Quest`,
+      description,
     },
   }
 }

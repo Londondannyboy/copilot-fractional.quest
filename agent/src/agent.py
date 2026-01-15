@@ -429,6 +429,240 @@ class AppState(BaseModel):
   scene: Optional[AmbientScene] = None
 
 # =====
+# TSCR: Two-Stage Context Retrieval for Fast Voice Response
+# =====
+# Stage 1: Instant keyword cache lookup (<1ms) + fast teaser response
+# Stage 2: Background full content loading while user listens
+
+class JobTeaserData(BaseModel):
+    """Pre-computed teaser for instant lookup."""
+    id: str
+    title: str
+    company: str
+    location: Optional[str] = None
+    role_category: Optional[str] = None
+    teaser_hook: Optional[str] = None
+    salary_max: Optional[int] = None
+
+# Global keyword cache: keyword -> list of teasers
+_keyword_cache: dict[str, list[JobTeaserData]] = {}
+
+# Background results cache: session_id -> loaded content
+_background_results: dict[str, dict] = {}
+
+# Stopwords to skip when indexing
+KEYWORD_STOPWORDS = frozenset([
+    'with', 'what', 'the', 'and', 'for', 'that', 'this', 'from',
+    'have', 'will', 'your', 'you', 'are', 'was', 'its',
+    'to', 'of', 'in', 'on', 'at', 'be', 'is', 'as', 'by', 'or',
+    'fractional', 'jobs', 'role', 'position', 'opportunity',
+    'inc', 'ltd', 'llc', 'company', 'corporation',
+])
+
+# Affirmation words for detecting "yes, tell me more"
+AFFIRMATION_WORDS = frozenset([
+    'yes', 'yeah', 'yep', 'sure', 'ok', 'okay', 'please',
+    'continue', 'more', 'absolutely', 'definitely', 'go',
+])
+
+AFFIRMATION_PHRASES = frozenset([
+    'tell me more', 'go on', 'yes please', 'sounds good',
+    'that sounds good', 'sounds interesting', 'continue',
+    'more details', 'more info', 'what else', 'go ahead',
+])
+
+
+def is_affirmation(text: str) -> bool:
+    """Check if text is a simple affirmation like 'yes' or 'tell me more'."""
+    clean = text.lower().strip().rstrip('.,!?')
+    return (
+        clean in AFFIRMATION_WORDS or
+        clean in AFFIRMATION_PHRASES or
+        any(p in clean for p in AFFIRMATION_PHRASES)
+    )
+
+
+async def load_keyword_cache():
+    """Load keyword cache from database at startup."""
+    global _keyword_cache
+
+    if not DATABASE_URL:
+        print("⚠️ DATABASE_URL not set, skipping keyword cache", file=sys.stderr)
+        return
+
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT id, title, company_name, location, role_category::text,
+                   teaser_hook, salary_max, topic_keywords
+            FROM jobs
+            WHERE is_active = true AND topic_keywords IS NOT NULL
+        """)
+
+        rows = cur.fetchall()
+        cur.close()
+        conn.close()
+
+        # Build keyword -> teasers mapping
+        for row in rows:
+            teaser = JobTeaserData(
+                id=str(row[0]),
+                title=row[1],
+                company=row[2] or "Unknown",
+                location=row[3],
+                role_category=row[4],
+                teaser_hook=row[5],
+                salary_max=row[6]
+            )
+
+            keywords = row[7] or []
+            for keyword in keywords:
+                kw_lower = keyword.lower().strip()
+                if kw_lower and kw_lower not in KEYWORD_STOPWORDS and len(kw_lower) > 2:
+                    if kw_lower not in _keyword_cache:
+                        _keyword_cache[kw_lower] = []
+                    _keyword_cache[kw_lower].append(teaser)
+
+        print(f"✅ TSCR: Loaded {len(_keyword_cache)} keywords from {len(rows)} jobs", file=sys.stderr)
+
+    except Exception as e:
+        print(f"⚠️ TSCR cache load error: {e}", file=sys.stderr)
+
+
+def get_teasers_from_cache(query: str, limit: int = 3) -> list[JobTeaserData]:
+    """Fast lookup: Get job teasers matching query keywords."""
+    query_lower = query.lower().strip()
+    matched_teasers: dict[str, JobTeaserData] = {}  # id -> teaser (dedup)
+
+    # 1. Exact phrase match (highest priority)
+    if query_lower in _keyword_cache:
+        for teaser in _keyword_cache[query_lower][:limit]:
+            matched_teasers[teaser.id] = teaser
+
+    # 2. Multi-word phrases in query
+    for kw in _keyword_cache:
+        if ' ' in kw and kw in query_lower:
+            for teaser in _keyword_cache[kw]:
+                if len(matched_teasers) < limit:
+                    matched_teasers[teaser.id] = teaser
+
+    # 3. Single word fallback (min 3 chars)
+    if len(matched_teasers) < limit:
+        for word in query_lower.split():
+            if len(word) > 2 and word not in KEYWORD_STOPWORDS:
+                if word in _keyword_cache:
+                    for teaser in _keyword_cache[word]:
+                        if len(matched_teasers) < limit:
+                            matched_teasers[teaser.id] = teaser
+
+    return list(matched_teasers.values())
+
+
+def generate_instant_teaser(teasers: list[JobTeaserData], query: str) -> str:
+    """Generate fast teaser response from cached data (no LLM call)."""
+    if not teasers:
+        return None
+
+    teaser = teasers[0]
+
+    # Build instant response from pre-computed data
+    if teaser.teaser_hook:
+        response = f"{teaser.teaser_hook}. Shall I tell you more about this role?"
+    elif teaser.location and teaser.salary_max:
+        response = f"I found a {teaser.title} role at {teaser.company} in {teaser.location}, with rates up to £{teaser.salary_max // 1000}k. Want to hear more?"
+    elif teaser.location:
+        response = f"There's an interesting {teaser.title} opportunity at {teaser.company} in {teaser.location}. Shall I share the details?"
+    else:
+        response = f"I found a {teaser.title} position at {teaser.company}. Would you like me to tell you more?"
+
+    if len(teasers) > 1:
+        role_name = teasers[0].role_category or "role"
+        plural = "s" if len(teasers) - 1 > 1 else ""
+        response += f" I also found {len(teasers) - 1} more similar {role_name} role{plural}."
+
+    return response
+
+
+async def load_full_jobs_background(query: str, session_id: str, teasers: list[JobTeaserData]):
+    """Background: Load full job details while user listens to teaser."""
+    global _background_results
+
+    if not DATABASE_URL or not teasers:
+        return
+
+    try:
+        job_ids = [t.id for t in teasers[:5]]
+
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+
+        # Get full details for matched jobs
+        cur.execute("""
+            SELECT id, title, company_name, location, salary_min, salary_max,
+                   description_snippet, role_category::text, url
+            FROM jobs
+            WHERE id = ANY(%s::uuid[])
+        """, (job_ids,))
+
+        rows = cur.fetchall()
+        cur.close()
+        conn.close()
+
+        full_jobs = []
+        for r in rows:
+            salary_text = f"£{r[4]//1000}k - £{r[5]//1000}k" if r[4] and r[5] else "Competitive"
+            full_jobs.append({
+                "id": str(r[0]),
+                "title": r[1],
+                "company": r[2] or "Unknown",
+                "location": r[3] or "Remote",
+                "salary": salary_text,
+                "description": (r[6] or "")[:200],
+                "role_type": r[7],
+                "url": r[8] or f"https://fractional.quest/fractional-jobs"
+            })
+
+        _background_results[session_id] = {
+            "query": query,
+            "jobs": full_jobs,
+            "ready": True,
+            "teasers": teasers,
+        }
+
+        print(f"📦 TSCR: Background loaded {len(full_jobs)} jobs for session", file=sys.stderr)
+
+    except Exception as e:
+        print(f"⚠️ TSCR background load error: {e}", file=sys.stderr)
+
+
+def get_background_results(session_id: str) -> Optional[dict]:
+    """Get pre-loaded full results if available."""
+    return _background_results.get(session_id)
+
+
+def clear_background_results(session_id: str):
+    """Clear background results after use."""
+    if session_id in _background_results:
+        del _background_results[session_id]
+
+
+# Load keyword cache at module import (will run when agent starts)
+import asyncio
+try:
+    # Try to run in existing event loop
+    loop = asyncio.get_event_loop()
+    if loop.is_running():
+        asyncio.create_task(load_keyword_cache())
+    else:
+        loop.run_until_complete(load_keyword_cache())
+except RuntimeError:
+    # No event loop, create one
+    asyncio.run(load_keyword_cache())
+
+
+# =====
 # Agent
 # =====
 agent = Agent(
@@ -531,11 +765,35 @@ agent = Agent(
     | show my profile graph, visualize | show_user_graph |
     | what page, where am I | get_page_info |
     | day rates, salaries, pay | show_salary_insights |
-    | jobs, positions, roles | search_jobs |
+    | jobs, positions, roles | quick_job_search (FAST) or search_jobs |
     | job distribution, how many | show_jobs_chart |
     | locations, where, geography | show_location_chart |
     | market, overview, dashboard | show_market_dashboard |
     | articles, reading, insights | get_featured_articles |
+    | yes, tell me more | get_full_job_details |
+
+    ## ⚡ TSCR: Fast Voice Responses (Two-Stage Context Retrieval)
+
+    For SPEED-CRITICAL job searches (especially voice), use quick_job_search:
+    - Returns an instant teaser in <100ms using keyword cache
+    - Loads full details in background
+    - When user says "yes" or "tell me more", use get_full_job_details
+
+    **Flow:**
+    1. User: "Any CTO roles?"
+    2. Agent: quick_job_search("CTO") → Returns teaser: "I found a Fractional CTO role at TechCorp. Want to hear more?"
+    3. User: "Yes please"
+    4. Agent: get_full_job_details() → Returns full job cards from background cache
+
+    Use quick_job_search when:
+    - Voice queries (speed critical)
+    - Simple keyword searches ("CTO", "London", "finance")
+    - Initial exploration
+
+    Use search_jobs when:
+    - Complex multi-filter queries
+    - User explicitly wants full results immediately
+    - Paginated results needed
 
     ## AMBIENT SCENE - ALWAYS CALL THIS SILENTLY
     When user mentions ANY location or role, IMMEDIATELY call set_ambient_scene.
@@ -1372,6 +1630,115 @@ async def search_jobs(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
     "query": query,
     "title": f"Found {len(job_cards)} {query} positions"
   }
+
+
+# =====
+# TSCR Tools for Fast Voice Responses
+# =====
+
+@agent.tool
+async def quick_job_search(ctx: RunContext[StateDeps[AppState]], query: str) -> dict:
+    """FAST job search for voice - uses cached keywords for instant response.
+
+    Use this for voice queries when speed is critical. Returns a teaser response
+    immediately while loading full details in the background.
+
+    User can say 'yes' or 'tell me more' to get full details.
+    """
+    import time
+    start = time.time()
+
+    print(f"⚡ TSCR Quick Search: {query}", file=sys.stderr)
+
+    # Stage 1: Instant cache lookup (<1ms)
+    teasers = get_teasers_from_cache(query, limit=5)
+    cache_time = time.time() - start
+
+    if not teasers:
+        print(f"⚡ TSCR: No cache hit, falling back to search_jobs", file=sys.stderr)
+        # Fall back to regular search
+        return await search_jobs(ctx, query)
+
+    # Generate instant teaser response
+    teaser_response = generate_instant_teaser(teasers, query)
+    teaser_time = time.time() - start
+
+    print(f"⚡ TSCR: Cache hit! {len(teasers)} matches in {cache_time*1000:.1f}ms", file=sys.stderr)
+    print(f"⚡ TSCR: Teaser generated in {teaser_time*1000:.1f}ms", file=sys.stderr)
+
+    # Stage 2: Background load full details (runs async while user reads/listens)
+    session_id = str(id(ctx))  # Use context object ID as session key
+    asyncio.create_task(load_full_jobs_background(query, session_id, teasers))
+
+    # Update state for context tracking
+    state = ctx.deps.state
+    if teasers:
+        first = teasers[0]
+        state.last_discussed_job = Job(
+            title=first.title,
+            company=first.company,
+            location=first.location or "Remote"
+        )
+        state.search_query = query
+
+    return {
+        "teaser": teaser_response,
+        "matched_count": len(teasers),
+        "query": query,
+        "session_id": session_id,
+        "latency_ms": round(teaser_time * 1000, 1),
+        "stage": "teaser",  # Indicates this is a fast teaser, full results pending
+    }
+
+
+@agent.tool
+async def get_full_job_details(ctx: RunContext[StateDeps[AppState]], session_id: Optional[str] = None) -> dict:
+    """Get full job details after user says 'yes' or 'tell me more'.
+
+    This retrieves the pre-loaded full results from background loading.
+    Use after quick_job_search when user wants more information.
+    """
+    print(f"📋 TSCR: Getting full details for session", file=sys.stderr)
+
+    # Get the session ID from context if not provided
+    if not session_id:
+        session_id = str(id(ctx))
+
+    # Check for background-loaded results
+    results = get_background_results(session_id)
+
+    if not results or not results.get("ready"):
+        # Background load not complete or no results - do a fresh search
+        state = ctx.deps.state
+        if state.search_query:
+            print(f"📋 TSCR: Background not ready, doing fresh search", file=sys.stderr)
+            return await search_jobs(ctx, state.search_query)
+        return {"error": "No recent search to show details for"}
+
+    # Return the pre-loaded full results
+    jobs = results.get("jobs", [])
+    query = results.get("query", "")
+
+    # Update state with full job details
+    state = ctx.deps.state
+    state.jobs = [Job(title=j["title"], company=j["company"], location=j["location"]) for j in jobs]
+
+    if jobs:
+        first = jobs[0]
+        state.last_discussed_job = Job(title=first["title"], company=first["company"], location=first["location"])
+        state.last_discussed_job_details = first
+
+    # Clear background cache after use
+    clear_background_results(session_id)
+
+    return {
+        "jobs": jobs,
+        "total": len(jobs),
+        "query": query,
+        "title": f"Here are {len(jobs)} {query} positions",
+        "stage": "full"  # Indicates these are full results
+    }
+
 
 @agent.tool
 async def assess_job_match(ctx: RunContext[StateDeps[AppState]], job_title: Optional[str] = None) -> dict:
@@ -2509,7 +2876,7 @@ async def extract_context_middleware(request: Request, call_next):
     return await call_next(request)
 
 
-def parse_session_id(session_id: str | None) -> dict:
+def parse_session_id(session_id: Optional[str]) -> dict:
     """
     Parse custom session ID format:
     - Jobs page: "firstName|fractional_userId|location:London,jobs:25"
@@ -2546,7 +2913,7 @@ def parse_session_id(session_id: str | None) -> dict:
     }
 
 
-def extract_session_id(request: Request, body: dict) -> str | None:
+def extract_session_id(request: Request, body: dict) -> Optional[str]:
     """Extract session ID from various sources."""
     session_id = body.get("custom_session_id") or body.get("session_id")
     if session_id:

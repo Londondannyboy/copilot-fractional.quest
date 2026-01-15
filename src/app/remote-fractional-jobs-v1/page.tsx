@@ -20,7 +20,7 @@ const imageAlt = getImage('remote').alt
 
 export const metadata: Metadata = {
   title: 'Remote Fractional Jobs UK 2025 | Work From Home Executive Roles',
-  description: 'Remote fractional jobs for experienced executives. Find remote fractional CFO, CTO, CMO, COO roles you can do from anywhere. Fully remote and hybrid options available.',
+  description: 'Remote fractional jobs UK: find fully remote CFO, CTO, CMO, COO roles. Work from anywhere with hybrid options available.',
   keywords: 'remote fractional jobs, remote fractional cfo, remote fractional cto, work from home executive jobs, remote c-suite jobs uk',
   alternates: { canonical: 'https://fractional.quest/remote-fractional-jobs' },
   openGraph: {

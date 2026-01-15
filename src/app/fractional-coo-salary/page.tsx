@@ -14,8 +14,8 @@ const heroImage = getHeroImageUrl('coo', 1920, 800)
 const imageCredit = getImage('coo')
 
 export const metadata: Metadata = {
-  title: 'Fractional COO Salary UK 2025 | Day Rates, Costs & Compensation Guide',
-  description: 'Fractional COO salary UK guide for 2025. Day rates £600-£1,200, annual equivalent £60,000-£145,000. Compare fractional COO costs, understand pricing factors, and calculate your potential earnings.',
+  title: 'Fractional COO Salary UK | Guide',
+  description: 'Fractional COO salary UK: day rates £600-£1,200. Compare costs, pricing factors, and calculate potential earnings.',
   keywords: 'fractional coo salary, fractional coo salary uk, fractional coo day rate, fractional coo cost, coo salary uk, part time coo salary, fractional coo rates, fractional operations salary',
   alternates: {
     canonical: 'https://fractional.quest/fractional-coo-salary',

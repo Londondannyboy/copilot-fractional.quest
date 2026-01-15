@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('cmo', 1920, 800)
 const imageCredit = getImage('cmo')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CMO? | Part-Time Chief Marketing Officer Guide 2025',
-  description: 'What is a fractional CMO? A part-time Chief Marketing Officer who provides strategic marketing leadership to multiple companies. Learn about fractional CMO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional CMO? | Guide',
+  description: 'What is a fractional CMO? A part-time marketing leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional cmo, fractional cmo meaning, fractional cmo definition, part time cmo, fractional marketing officer, fractional chief marketing officer, what does a fractional cmo do',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cmo',

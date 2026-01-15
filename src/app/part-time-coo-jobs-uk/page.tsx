@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time COO Jobs UK 2025 | Fractional Operations Director Roles',
-  description: 'Part-time COO jobs UK for experienced operations leaders. Find part-time Chief Operating Officer, fractional Operations Director roles. 1-3 days per week. Day rates £900-£1,300.',
+  title: 'Part-Time COO Jobs UK',
+  description: 'Part-time COO jobs UK for operations leaders. Find Chief Operating Officer and Ops Director roles. 1-3 days/week, £900-£1,300/day.',
   keywords: 'part time coo jobs uk, part time coo, part time operations director jobs, fractional coo jobs, part time chief operating officer',
   alternates: { canonical: 'https://fractional.quest/part-time-coo-jobs-uk' },
   openGraph: {

@@ -2,9 +2,9 @@
 
 export const birminghamSEO = {
   meta: {
-    title: "Fractional Jobs Birmingham | CTO, CFO, CMO Executive Roles",
+    title: "Fractional Jobs Birmingham | Exec Roles",
     description:
-      "Premium fractional executive jobs in Birmingham. Find CTO, CFO, CMO, COO and CHRO roles with day rates from £650-£1,100. The Midlands' leading hub for fractional C-suite talent.",
+      "Fractional executive jobs in Birmingham. CTO, CFO, CMO roles with day rates £650-£1,100 in the Midlands hub.",
     keywords: [
       "fractional jobs birmingham",
       "fractional cto birmingham",

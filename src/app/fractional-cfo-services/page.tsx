@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional CFO Services UK | Part-Time Finance Leadership',
-  description: 'Fractional CFO services for UK businesses. Get experienced finance leadership 1-3 days per week. Financial strategy, fundraising support, reporting, and compliance. Day rates from £850.',
+  title: 'Fractional CFO Services UK',
+  description: 'Fractional CFO services for UK businesses. Finance leadership 1-3 days/week. Strategy, fundraising, reporting from £850/day.',
   keywords: 'fractional cfo services, fractional cfo uk, part time cfo, fractional finance director, outsourced cfo services, cfo as a service',
   alternates: { canonical: 'https://fractional.quest/fractional-cfo-services' },
   openGraph: {

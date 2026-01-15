@@ -14,8 +14,8 @@ import { HotJobsLines } from '@/components/HotJobsLines'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim Executive Jobs UK 2025 | Interim C-Suite & Director Roles',
-  description: 'Interim executive jobs UK for experienced leaders. Find interim CEO, CFO, CTO, CMO, COO, CHRO roles. Full-time temporary positions, day rates £800-£2,000. Updated daily.',
+  title: 'Interim Executive Jobs UK',
+  description: 'Interim executive jobs UK. Find interim CEO, CFO, CTO, CMO, COO, CHRO roles. Day rates £800-£2,000.',
   keywords: 'interim executive jobs uk, interim c-suite jobs, interim director jobs, interim management, interim leadership roles uk',
   alternates: { canonical: 'https://fractional.quest/interim-executive' },
   openGraph: {

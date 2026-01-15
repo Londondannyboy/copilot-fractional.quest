@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('ceo', 1920, 800)
 const imageCredit = getImage('ceo')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CEO? | Part-Time Chief Executive Officer Guide 2025',
-  description: 'What is a fractional CEO? A part-time Chief Executive Officer who provides strategic executive leadership to multiple companies. Learn about fractional CEO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional CEO? | Guide',
+  description: 'What is a fractional CEO? A part-time executive leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional ceo, fractional ceo meaning, fractional ceo definition, part time ceo, interim ceo, fractional chief executive, what does a fractional ceo do',
   alternates: { canonical: 'https://fractional.quest/fractional-ceo' },
   openGraph: {

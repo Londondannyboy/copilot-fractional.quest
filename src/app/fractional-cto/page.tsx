@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('cto', 1920, 800)
 const imageCredit = getImage('cto')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CTO? | Part-Time Chief Technology Officer Guide 2025',
-  description: 'What is a fractional CTO? A part-time Chief Technology Officer who provides strategic technology leadership to multiple companies. Learn about fractional CTO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional CTO? | Guide',
+  description: 'What is a fractional CTO? A part-time tech leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional cto, fractional cto meaning, fractional cto definition, part time cto, fractional technology officer, fractional chief technology officer, what does a fractional cto do',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cto',

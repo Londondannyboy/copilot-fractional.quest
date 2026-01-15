@@ -9,8 +9,8 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Fractional CTO Services UK | Part-Time Technology Leadership',
-  description: 'Fractional CTO services for UK businesses. Get experienced technology leadership 1-3 days per week. Tech strategy, architecture, team building, and digital transformation. Day rates from £900.',
+  title: 'Fractional CTO Services UK',
+  description: 'Fractional CTO services for UK businesses. Tech leadership 1-3 days/week. Strategy, architecture, team building from £900/day.',
   keywords: 'fractional cto services, fractional cto uk, part time cto, fractional technology director, outsourced cto services, cto as a service',
   alternates: { canonical: 'https://fractional.quest/fractional-cto-services' },
   openGraph: {

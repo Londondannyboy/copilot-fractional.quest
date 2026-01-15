@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('ciso', 1920, 800)
 const imageCredit = getImage('ciso')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CISO? | Part-Time Chief Security Officer Guide 2025',
-  description: 'What is a fractional CISO? A part-time Chief Information Security Officer who provides strategic cybersecurity leadership to multiple companies. Learn about fractional CISO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional CISO? | Guide',
+  description: 'What is a fractional CISO? A part-time security leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional ciso, fractional ciso meaning, fractional ciso definition, part time ciso, fractional security officer, fractional chief security officer, what does a fractional ciso do',
   alternates: { canonical: 'https://fractional.quest/fractional-ciso' },
   openGraph: {

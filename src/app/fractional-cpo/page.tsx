@@ -17,8 +17,8 @@ const heroImage = getHeroImageUrl('cpo', 1920, 800)
 const imageCredit = getImage('cpo')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CPO? | Part-Time Chief Product Officer Guide 2025',
-  description: 'What is a fractional CPO? A part-time Chief Product Officer who provides strategic product leadership to multiple companies. Learn about fractional CPO meaning, responsibilities, costs, and when to hire one.',
+  title: 'What is a Fractional CPO? | Guide',
+  description: 'What is a fractional CPO? A part-time product leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
   keywords: 'what is a fractional cpo, fractional cpo meaning, fractional cpo definition, part time cpo, fractional product officer, fractional chief product officer, what does a fractional cpo do',
   alternates: { canonical: 'https://fractional.quest/fractional-cpo' },
   openGraph: {

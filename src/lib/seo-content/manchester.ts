@@ -3,9 +3,9 @@
 
 export const manchesterSEO = {
   meta: {
-    title: "Fractional Jobs Manchester | CTO, CFO, CMO Executive Roles",
+    title: "Fractional Jobs Manchester | Exec Roles",
     description:
-      "Premium fractional executive jobs in Manchester. Find CTO, CFO, CMO, COO and CHRO roles with day rates from £700-£1,200. The North's leading hub for fractional C-suite talent.",
+      "Fractional executive jobs in Manchester. CTO, CFO, CMO roles with day rates £700-£1,200 in the North's tech hub.",
     keywords: [
       "fractional jobs manchester",
       "fractional cto manchester",

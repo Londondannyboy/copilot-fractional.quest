@@ -4,7 +4,7 @@
 
 export const ukSEO = {
   meta: {
-    title: "Fractional Jobs UK | CTO, CFO, CMO Executive Roles Nationwide",
+    title: "Fractional Executive Jobs UK",
     description:
       "Fractional executive jobs UK. CTO, CFO, CMO, COO roles paying £800-£1,500/day. 200+ opportunities nationwide.",
     keywords: [

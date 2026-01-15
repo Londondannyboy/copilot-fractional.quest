@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CISO Jobs UK 2025 | Fractional Security Director Roles',
-  description: 'Part-time CISO jobs UK for experienced security leaders. Find part-time Chief Information Security Officer, fractional Security Director roles. 1-3 days per week. Day rates £1,000-£1,500.',
+  title: 'Part-Time CISO Jobs UK',
+  description: 'Part-time CISO jobs UK for security leaders. Find Chief Security Officer and Security Director roles. 1-3 days/week, £1,000-£1,500/day.',
   keywords: 'part time ciso jobs uk, part time ciso, part time security director jobs, fractional ciso jobs, part time chief information security officer',
   alternates: { canonical: 'https://fractional.quest/part-time-ciso-jobs-uk' },
   openGraph: {

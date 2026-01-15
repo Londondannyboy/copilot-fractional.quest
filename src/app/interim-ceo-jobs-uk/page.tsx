@@ -18,8 +18,8 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Interim CEO Jobs UK 2025 | Interim Chief Executive Roles',
-  description: 'Interim CEO jobs UK for experienced executive leaders. Find interim Chief Executive Officer, interim Managing Director roles. Day rates £1,200-£2,000. Updated daily.',
+  title: 'Interim CEO Jobs UK',
+  description: 'Interim CEO jobs UK for executive leaders. Find interim Chief Executive and Managing Director roles. £1,200-£2,000/day.',
   keywords: 'interim ceo jobs uk, interim ceo, interim chief executive jobs, interim managing director, interim ceo roles uk',
   alternates: { canonical: 'https://fractional.quest/interim-ceo-jobs-uk' },
   openGraph: {
