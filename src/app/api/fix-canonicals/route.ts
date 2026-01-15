@@ -50,7 +50,7 @@ export async function GET(request: Request) {
       wrongCanonicalsBefore: wrongCanonicals[0]?.count || 0,
       examplesBefore: examples,
       pagesUpdated: result.length,
-      updatedSlugs: result.map((r: { slug: string }) => r.slug)
+      updatedSlugs: result.map((r) => r.slug)
     })
   } catch (error) {
     console.error('Error fixing canonicals:', error)

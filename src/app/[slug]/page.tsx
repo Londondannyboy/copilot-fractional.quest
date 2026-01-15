@@ -84,6 +84,8 @@ const STATIC_ROUTE_SLUGS = [
   'part-time-ciso-jobs-uk',
   'part-time-cpo-jobs-uk',
   'part-time-ceo-jobs-uk',
+  // Guide pages
+  'fractional-recruitment-agency',
 ]
 
 export async function generateStaticParams() {

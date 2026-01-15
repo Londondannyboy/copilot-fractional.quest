@@ -104,7 +104,7 @@ async function main() {
     if (examples.length === 0) {
       console.log('No pages have canonical_url set (this is good!)')
     } else {
-      examples.forEach((row: { slug: string; canonical_url: string }) => {
+      examples.forEach((row) => {
         console.log(`  ${row.slug} → ${row.canonical_url}`)
       })
     }
@@ -124,7 +124,7 @@ async function main() {
 
     if (result.length > 0) {
       console.log('Updated slugs:')
-      result.forEach((row: { slug: string }) => {
+      result.forEach((row) => {
         console.log(`  - ${row.slug}`)
       })
     }
