@@ -2834,6 +2834,20 @@ main_app.add_middleware(
 )
 
 
+# Health endpoint with TSCR status
+@main_app.get("/health")
+async def health_check():
+    """Health check endpoint with TSCR cache status."""
+    return {
+        "status": "healthy",
+        "tscr": {
+            "keywords_loaded": len(_keyword_cache),
+            "cache_ready": len(_keyword_cache) > 0,
+        },
+        "version": "2.0.0-tscr"
+    }
+
+
 # Middleware to extract user AND page context from CopilotKit instructions
 @main_app.middleware("http")
 async def extract_context_middleware(request: Request, call_next):
