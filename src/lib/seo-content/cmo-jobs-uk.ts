@@ -4,9 +4,9 @@
 
 export const cmoJobsUkSEO = {
   meta: {
-    title: "Fractional CMO Jobs UK | Part-Time Marketing Leadership Roles",
+    title: "Fractional CMO Jobs UK | Marketing Roles",
     description:
-      "Find fractional CMO and part-time marketing director jobs across the UK. Day rates £850-£1,300. B2B, D2C, and growth-stage companies seeking interim marketing leadership.",
+      "Fractional CMO jobs UK. Part-time marketing director roles paying £850-£1,300/day. B2B, D2C, and growth-stage companies.",
     keywords: [
       "fractional cmo jobs uk",
       "fractional cmo",

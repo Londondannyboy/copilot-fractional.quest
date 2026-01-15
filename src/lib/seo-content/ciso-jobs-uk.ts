@@ -4,9 +4,9 @@
 
 export const cisoJobsUkSEO = {
   meta: {
-    title: "Fractional CISO Jobs UK | Part-Time Security Leadership Roles",
+    title: "Fractional CISO Jobs UK | Security Roles",
     description:
-      "Find fractional CISO and part-time security leadership jobs across the UK. Day rates £1,000-£1,500. Companies seeking interim cybersecurity leadership.",
+      "Fractional CISO jobs UK. Part-time Security Director roles paying £1,000-£1,500/day. Financial services and tech companies.",
     keywords: [
       "fractional ciso jobs uk",
       "fractional ciso",

@@ -4,9 +4,9 @@
 
 export const cooJobsUkSEO = {
   meta: {
-    title: "Fractional COO Jobs UK | Part-Time Operations Leadership Roles",
+    title: "Fractional COO Jobs UK | Ops Roles",
     description:
-      "Find fractional COO and part-time operations director jobs across the UK. Day rates £900-£1,300. Scale-ups and SMEs seeking interim operations leadership.",
+      "Fractional COO jobs UK. Part-time Operations Director roles paying £900-£1,300/day. Scale-ups and PE-backed companies.",
     keywords: [
       "fractional coo jobs uk",
       "fractional coo",

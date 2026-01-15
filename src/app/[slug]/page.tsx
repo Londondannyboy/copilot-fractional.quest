@@ -114,6 +114,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
+  const pageUrl = `https://fractional.quest/${slug}`
+  const ogImage = page.og_image || 'https://fractional.quest/og-default.png'
+
   return {
     title: page.title,
     description: page.meta_description || undefined,
@@ -122,6 +125,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: page.title,
       description: page.meta_description || undefined,
       type: 'article',
+      url: pageUrl,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: page.title,
+        },
+      ],
       locale: 'en_GB',
       siteName: 'Fractional Quest',
     },
@@ -129,9 +141,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: 'summary_large_image',
       title: page.title,
       description: page.meta_description || undefined,
+      images: [ogImage],
     },
     alternates: {
-      canonical: page.canonical_url || `https://fractional.quest/${slug}`,
+      canonical: page.canonical_url || pageUrl,
     },
   }
 }

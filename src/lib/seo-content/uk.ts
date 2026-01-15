@@ -6,7 +6,7 @@ export const ukSEO = {
   meta: {
     title: "Fractional Jobs UK | CTO, CFO, CMO Executive Roles Nationwide",
     description:
-      "Browse 200+ fractional executive jobs across the UK. Find CTO, CFO, CMO, COO and CHRO roles with day rates from £800-£1,500. The UK's leading fractional talent marketplace.",
+      "Fractional executive jobs UK. CTO, CFO, CMO, COO roles paying £800-£1,500/day. 200+ opportunities nationwide.",
     keywords: [
       "fractional jobs uk",
       "fractional executive uk",

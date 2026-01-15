@@ -6,7 +6,7 @@ export const londonSEO = {
   meta: {
     title: "Fractional Jobs London | CTO, CFO, CMO Executive Roles - Hiring Now",
     description:
-      "Premium fractional executive jobs in London. Find CTO, CFO, CMO, COO and CHRO roles with day rates from £900-£1,500. Browse 50+ live positions in the City, Canary Wharf & Shoreditch.",
+      "Fractional executive jobs London. CTO, CFO, CMO roles paying £900-£1,500/day. City, Canary Wharf and Shoreditch.",
     keywords: [
       "fractional jobs london",
       "fractional cto london",

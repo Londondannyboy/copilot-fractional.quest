@@ -4,9 +4,9 @@
 
 export const ctoJobsUkSEO = {
   meta: {
-    title: "Fractional CTO Jobs UK | Part-Time Tech Leadership Roles",
+    title: "Fractional CTO Jobs UK | Tech Roles",
     description:
-      "Find fractional CTO and part-time technology leadership jobs across the UK. Day rates £900-£1,400. Startups, scale-ups, and enterprises seeking interim tech leadership.",
+      "Fractional CTO jobs UK. Part-time technology leadership roles paying £900-£1,400/day. Startups, scale-ups, and enterprises.",
     keywords: [
       "fractional cto jobs uk",
       "fractional cto",

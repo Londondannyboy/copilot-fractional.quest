@@ -4,9 +4,9 @@
 
 export const cfoJobsUkSEO = {
   meta: {
-    title: "Fractional CFO Jobs UK | Part-Time Finance Director Roles",
+    title: "Fractional CFO Jobs UK | Finance Roles",
     description:
-      "Find fractional CFO and part-time Finance Director jobs across the UK. Day rates £1,000-£1,500. FCA-regulated, PE-backed, and high-growth companies seeking interim finance leadership.",
+      "Fractional CFO jobs UK. Part-time Finance Director roles paying £1,000-£1,500/day. PE-backed and high-growth companies.",
     keywords: [
       "fractional cfo jobs uk",
       "fractional cfo",
