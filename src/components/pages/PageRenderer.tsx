@@ -31,6 +31,11 @@ export function PageRenderer({ page }: PageRendererProps) {
         <FAQSection faqs={page.faqs} />
       )}
 
+      {/* Internal Links */}
+      {page.internal_links && page.internal_links.length > 0 && (
+        <InternalLinksSection links={page.internal_links} />
+      )}
+
       {/* External Links */}
       {page.external_links && page.external_links.length > 0 && (
         <ExternalLinksSection links={page.external_links} />
@@ -1520,6 +1525,55 @@ function FAQSection({ faqs }: { faqs: FAQ[] }) {
               )}
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ===========================================
+// Internal Links Section
+// ===========================================
+
+interface InternalLinkItem {
+  href?: string
+  url?: string
+  title?: string
+  label?: string
+  description?: string
+}
+
+function InternalLinksSection({ links }: { links: InternalLinkItem[] }) {
+  if (!links || links.length === 0) return null
+
+  return (
+    <section className="content-section bg-gray-50">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="section-eyebrow">Related Content</div>
+          <h2 className="section-title">Explore More</h2>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {links.map((link, i) => {
+            const linkUrl = link.href || link.url || '#'
+            const linkTitle = link.title || link.label || 'Related Page'
+            return (
+              <Link
+                key={i}
+                href={linkUrl}
+                className="link-card hover:border-emerald-500 transition-colors"
+              >
+                <div className="link-card-icon">📄</div>
+                <div className="link-card-content">
+                  <div className="link-card-title">{linkTitle}</div>
+                  {link.description && (
+                    <div className="link-card-domain text-gray-500">{link.description}</div>
+                  )}
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </section>
