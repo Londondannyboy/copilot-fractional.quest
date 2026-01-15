@@ -314,6 +314,23 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
+      // Short URL redirects (fixes meta refresh issues from Ahrefs report)
+      {
+        source: '/remote',
+        destination: '/remote-fractional-jobs',
+        permanent: true,
+      },
+      {
+        source: '/hr',
+        destination: '/fractional-chro-jobs-uk',
+        permanent: true,
+      },
+      // Job URL pattern redirect (old /job/* to new /fractional-job/*)
+      {
+        source: '/job/:path*',
+        destination: '/fractional-job/:path*',
+        permanent: true,
+      },
       // Query string URLs - let them 404 naturally or redirect base
       {
         source: '/fractional-jobs-articles',
