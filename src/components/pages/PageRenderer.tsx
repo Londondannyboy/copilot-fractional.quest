@@ -21,6 +21,21 @@ export function PageRenderer({ page }: PageRendererProps) {
       {/* Hero Section */}
       <HeroSection page={page} />
 
+      {/* Job Board - Prominently at top for job seekers */}
+      {page.job_board_enabled && (
+        <section className="content-section py-12">
+          <div className="section-container">
+            <EmbeddedJobBoard
+              defaultDepartment={page.job_board_department || undefined}
+              defaultLocation={page.job_board_location || undefined}
+              title={page.job_board_title || 'Latest Fractional Jobs'}
+              accentColor={(page.accent_color as 'emerald' | 'blue' | 'amber' | 'purple' | 'red' | 'indigo') || 'emerald'}
+              jobsPerPage={6}
+            />
+          </div>
+        </section>
+      )}
+
       {/* Content Sections */}
       {page.sections?.map((section, index) => (
         <SectionRenderer key={index} section={section} index={index} />
@@ -729,6 +744,19 @@ interface CalculatorExample {
 
 function ProseContent({ content }: { content?: string }) {
   if (!content) return null
+
+  // Check if content contains HTML tags
+  const hasHtml = /<[a-z][\s\S]*>/i.test(content)
+
+  if (hasHtml) {
+    return (
+      <div
+        className="prose-content max-w-3xl prose prose-lg prose-gray"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    )
+  }
+
   return (
     <div className="prose-content max-w-3xl">
       <p>{content}</p>
