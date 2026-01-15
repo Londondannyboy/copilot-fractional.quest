@@ -51,8 +51,13 @@ const nextConfig: NextConfig = {
       // High-impression missing pages - redirect to closest match
       {
         source: '/top-fractional-recruitment-agencies',
-        destination: '/fractional-jobs-uk',
-        permanent: false, // 302 until we build dedicated page
+        destination: '/fractional-recruitment-agency',
+        permanent: true, // Dedicated page now exists
+      },
+      {
+        source: '/top-fractional-recruitment-agencies-best-fractional-recruitment-agency-fractional-recruiter',
+        destination: '/fractional-recruitment-agency',
+        permanent: true,
       },
       {
         source: '/fractional-hr',
