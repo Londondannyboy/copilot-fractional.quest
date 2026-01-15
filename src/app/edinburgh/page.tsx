@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: edinburghSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/edinburgh",
+  },
 };
 
 // Revalidate every hour for fresh job data

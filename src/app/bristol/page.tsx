@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: bristolSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/bristol",
+  },
 };
 
 // Revalidate every hour for fresh job data

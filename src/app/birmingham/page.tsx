@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: birminghamSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/birmingham",
+  },
 };
 
 // Revalidate every hour for fresh job data

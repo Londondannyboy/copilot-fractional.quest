@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: remoteSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/remote-fractional-jobs",
+  },
 };
 
 // Revalidate every hour for fresh job data
