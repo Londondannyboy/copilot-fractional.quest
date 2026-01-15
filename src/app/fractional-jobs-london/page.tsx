@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: londonSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/fractional-jobs-london",
+  },
 };
 
 // Revalidate every hour for fresh job data

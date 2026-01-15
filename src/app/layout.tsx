@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     template: "%s | Fractional Quest"
   },
   description: "AI-powered fractional job search platform. Find executive roles paying $1,200-$2,500/day.",
+  metadataBase: new URL("https://fractional.quest"),
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({

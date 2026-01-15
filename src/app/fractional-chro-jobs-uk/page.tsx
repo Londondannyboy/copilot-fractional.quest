@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: chroJobsUkSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/fractional-chro-jobs-uk",
+  },
 };
 
 // Revalidate every hour for fresh job data

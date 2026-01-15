@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: ctoJobsUkSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/fractional-cto-jobs-uk",
+  },
 };
 
 // Revalidate every hour for fresh job data

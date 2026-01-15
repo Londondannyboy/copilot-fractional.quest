@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: cisoJobsUkSEO.meta.description,
     images: [ogImage],
   },
+  alternates: {
+    canonical: "/fractional-ciso-jobs-uk",
+  },
 };
 
 // Revalidate every hour for fresh job data
