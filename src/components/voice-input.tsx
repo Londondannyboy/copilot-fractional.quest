@@ -247,7 +247,7 @@ Then confirm: "So you're interested in [role] in [location] - I'll remember that
         console.log("🎤 Quick reconnect?", isQuickReconnect, "Was greeted?", wasGreeted);
         await connect({
           auth: { type: "accessToken", value: accessToken },
-          configId: "acb5575c-e22f-44c0-a9c8-b03305d1ea92",
+          configId: process.env.NEXT_PUBLIC_HUME_CONFIG_ID || "5900eabb-8de1-42cf-ba18-3a718257b3e7",
           sessionSettings: {
             type: "session_settings",
             systemPrompt: systemPrompt,
