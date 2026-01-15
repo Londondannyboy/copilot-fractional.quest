@@ -238,7 +238,7 @@ export default async function DynamicPage({ params }: PageProps) {
             </li>
             <li>/</li>
             <li>
-              <a href="/jobs" className="hover:text-gray-700">{getPageTypeLabel(page.page_type)}</a>
+              <a href="/fractional-jobs-uk" className="hover:text-gray-700">{getPageTypeLabel(page.page_type)}</a>
             </li>
             <li>/</li>
             <li className="text-gray-900 font-medium truncate max-w-xs">

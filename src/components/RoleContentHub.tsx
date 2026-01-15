@@ -58,8 +58,10 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cto', path: '/fractional-cto', label: 'What is a Fractional CTO' },
     { role: 'cmo', path: '/fractional-cmo', label: 'What is a Fractional CMO' },
     { role: 'coo', path: '/fractional-coo', label: 'What is a Fractional COO' },
+    { role: 'ceo', path: '/fractional-ceo', label: 'What is a Fractional CEO' },
     { role: 'chro', path: '/fractional-chro', label: 'What is a Fractional CHRO' },
     { role: 'ciso', path: '/fractional-ciso', label: 'What is a Fractional CISO' },
+    { role: 'cpo', path: '/fractional-cpo', label: 'What is a Fractional CPO' },
   ];
 
   const salaryGuides: RoleLink[] = [
@@ -67,6 +69,30 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cto', path: '/fractional-cto-salary', label: 'CTO Salary' },
     { role: 'cmo', path: '/fractional-cmo-salary', label: 'CMO Salary' },
     { role: 'coo', path: '/fractional-coo-salary', label: 'COO Salary' },
+    { role: 'chro', path: '/fractional-chro-salary', label: 'CHRO Salary' },
+    { role: 'ciso', path: '/fractional-ciso-salary', label: 'CISO Salary' },
+    { role: 'cpo', path: '/fractional-cpo-salary', label: 'CPO Salary' },
+    { role: 'ceo', path: '/fractional-ceo-salary', label: 'CEO Salary' },
+  ];
+
+  const costGuides: RoleLink[] = [
+    { role: 'cfo', path: '/fractional-cfo-cost', label: 'CFO Cost Guide' },
+    { role: 'cto', path: '/fractional-cto-cost', label: 'CTO Cost Guide' },
+    { role: 'cmo', path: '/fractional-cmo-cost', label: 'CMO Cost Guide' },
+    { role: 'coo', path: '/fractional-coo-cost', label: 'COO Cost Guide' },
+    { role: 'chro', path: '/fractional-chro-cost', label: 'CHRO Cost Guide' },
+    { role: 'ciso', path: '/fractional-ciso-cost', label: 'CISO Cost Guide' },
+    { role: 'cpo', path: '/fractional-cpo-cost', label: 'CPO Cost Guide' },
+  ];
+
+  const careerGuides: RoleLink[] = [
+    { role: 'cfo', path: '/how-to-become-fractional-cfo', label: 'Become a CFO' },
+    { role: 'cto', path: '/how-to-become-a-fractional-cto', label: 'Become a CTO' },
+    { role: 'cmo', path: '/how-to-become-a-fractional-cmo', label: 'Become a CMO' },
+    { role: 'coo', path: '/how-to-become-fractional-coo', label: 'Become a COO' },
+    { role: 'chro', path: '/how-to-become-fractional-chro', label: 'Become a CHRO' },
+    { role: 'ciso', path: '/how-to-become-fractional-ciso', label: 'Become a CISO' },
+    { role: 'cpo', path: '/how-to-become-fractional-cpo', label: 'Become a CPO' },
   ];
 
   const services: RoleLink[] = [
@@ -74,6 +100,10 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cto', path: '/hire-fractional-cto', label: 'Hire a CTO' },
     { role: 'cmo', path: '/hire-fractional-cmo', label: 'Hire a CMO' },
     { role: 'coo', path: '/hire-fractional-coo', label: 'Hire a COO' },
+    { role: 'chro', path: '/hire-fractional-chro', label: 'Hire a CHRO' },
+    { role: 'ciso', path: '/hire-fractional-ciso', label: 'Hire a CISO' },
+    { role: 'cpo', path: '/hire-fractional-cpo', label: 'Hire a CPO' },
+    { role: 'ceo', path: '/hire-fractional-ceo', label: 'Hire a CEO' },
   ];
 
   const renderRoleLink = (roleLink: RoleLink) => {
@@ -153,13 +183,33 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
             </div>
           </div>
 
-          {/* Salary & Cost Guides */}
+          {/* Salary Guides */}
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-4">
               Salary Guides
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {salaryGuides.map(renderRoleLink)}
+            </div>
+          </div>
+
+          {/* Cost Guides */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Cost Guides
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {costGuides.map(renderRoleLink)}
+            </div>
+          </div>
+
+          {/* Career Guides */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Career Guides
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {careerGuides.map(renderRoleLink)}
             </div>
           </div>
 

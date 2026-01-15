@@ -1689,7 +1689,7 @@ function JobBoardCTA({ page }: { page: PageData }) {
           Find your next fractional opportunity. Updated daily with new roles.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link href="/jobs" className="btn btn-primary">
+          <Link href="/fractional-jobs-uk" className="btn btn-primary">
             View All Jobs
           </Link>
           <Link href="/" className="btn btn-ghost">

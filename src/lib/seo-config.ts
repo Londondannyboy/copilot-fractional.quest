@@ -446,16 +446,14 @@ export function getRelatedRoleLinks(role: RoleType, currentPage: 'jobs' | 'servi
 export const locationPages = [
   { label: 'UK', href: '/fractional-jobs-uk' },
   { label: 'London', href: '/fractional-jobs-london' },
-  { label: 'Manchester', href: '/fractional-jobs-manchester' },
-  { label: 'Birmingham', href: '/fractional-jobs-birmingham' },
+  { label: 'Manchester', href: '/manchester' },  // Direct link (was redirect)
+  { label: 'Birmingham', href: '/birmingham' },  // Direct link (was redirect)
+  { label: 'Edinburgh', href: '/edinburgh' },    // Direct link (was redirect)
+  { label: 'Bristol', href: '/bristol' },        // Direct link (was redirect)
+  // These go to article pages via rewrites
   { label: 'Leeds', href: '/fractional-jobs-leeds' },
-  { label: 'Edinburgh', href: '/fractional-jobs-edinburgh' },
-  { label: 'Bristol', href: '/fractional-jobs-bristol' },
   { label: 'Glasgow', href: '/fractional-jobs-glasgow' },
-  { label: 'Cambridge', href: '/fractional-jobs-cambridge' },
-  { label: 'Oxford', href: '/fractional-jobs-oxford' },
   { label: 'Belfast', href: '/fractional-jobs-belfast' },
-  { label: 'Cardiff', href: '/fractional-jobs-cardiff' },
 ]
 
 /**
