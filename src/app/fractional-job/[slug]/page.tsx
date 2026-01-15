@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { unstable_cache } from 'next/cache'
 import { createDbQuery } from '@/lib/db'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
@@ -89,7 +90,8 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
-async function getJob(slug: string) {
+// Internal function to fetch job from database
+async function fetchJob(slug: string) {
   try {
     const sql = createDbQuery()
     const jobs = await sql`
@@ -108,16 +110,23 @@ async function getJob(slug: string) {
   }
 }
 
-async function getRelatedJobs(job: any) {
-  if (!job) return []
+// Cached version - revalidates every hour
+const getJob = unstable_cache(
+  fetchJob,
+  ['job-by-slug'],
+  { revalidate: 3600, tags: ['jobs'] }
+)
+
+// Internal function to fetch related jobs
+async function fetchRelatedJobs(jobId: number, roleCategory: string | null, companyName: string | null) {
   try {
     const sql = createDbQuery()
     const jobs = await sql`
       SELECT id, slug, title, company_name, location, compensation
       FROM jobs
       WHERE is_active = true
-        AND id != ${job.id}
-        AND (role_category = ${job.role_category} OR company_name = ${job.company_name})
+        AND id != ${jobId}
+        AND (role_category = ${roleCategory} OR company_name = ${companyName})
       ORDER BY posted_date DESC NULLS LAST
       LIMIT 6
     `
@@ -125,6 +134,19 @@ async function getRelatedJobs(job: any) {
   } catch {
     return []
   }
+}
+
+// Cached version - revalidates every hour
+const getRelatedJobsCached = unstable_cache(
+  fetchRelatedJobs,
+  ['related-jobs'],
+  { revalidate: 3600, tags: ['jobs'] }
+)
+
+// Wrapper to match original interface
+async function getRelatedJobs(job: any) {
+  if (!job) return []
+  return getRelatedJobsCached(job.id, job.role_category, job.company_name)
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -4,6 +4,14 @@ import { getPageBySlug, getAllPageSlugs, getPageTypeLabel } from '@/lib/pages'
 import { PageWithCopilot } from '@/components/pages/PageWithCopilot'
 
 // ===========================================
+// Caching Configuration
+// ===========================================
+
+// Revalidate pages every hour for ISR (Incremental Static Regeneration)
+// This dramatically improves TTFB for database-served pages
+export const revalidate = 3600
+
+// ===========================================
 // Static Generation
 // ===========================================
 
@@ -115,7 +123,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const pageUrl = `https://fractional.quest/${slug}`
-  const ogImage = page.og_image || 'https://fractional.quest/og-default.png'
+  // Use dynamic OG image service
+  const ogImage = `https://fractional.quest/api/og?title=${encodeURIComponent(page.hero_title || page.title)}`
 
   return {
     title: page.title,

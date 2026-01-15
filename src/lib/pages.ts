@@ -1,4 +1,5 @@
 import { neon } from '@neondatabase/serverless'
+import { unstable_cache } from 'next/cache'
 
 // Create SQL client
 function createSql(): ReturnType<typeof neon> {
@@ -96,7 +97,8 @@ export interface FAQ {
 // Query Functions
 // ===========================================
 
-export async function getPageBySlug(slug: string): Promise<PageData | null> {
+// Internal function for actual database query
+async function fetchPageBySlug(slug: string): Promise<PageData | null> {
   try {
     const pages = await sql`
       SELECT *
@@ -111,6 +113,14 @@ export async function getPageBySlug(slug: string): Promise<PageData | null> {
     return null
   }
 }
+
+// Cached version - revalidates every hour (3600 seconds)
+// This dramatically improves TTFB for database-served pages
+export const getPageBySlug = unstable_cache(
+  fetchPageBySlug,
+  ['page-by-slug'],
+  { revalidate: 3600, tags: ['pages'] }
+)
 
 export async function getAllPublishedPages(): Promise<PageData[]> {
   try {
