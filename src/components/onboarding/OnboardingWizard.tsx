@@ -4,6 +4,7 @@ import { CopilotChat } from '@copilotkit/react-ui'
 import { OnboardingProgress } from './OnboardingProgress'
 import { ProfilePreview } from './ProfilePreview'
 import { VoiceInput } from '@/components/voice-input'
+import { UserButton } from '@neondatabase/auth/react/ui'
 
 interface ProfileItem {
   id: number
@@ -169,25 +170,29 @@ ${profileItems.length > 0
     <div className="flex flex-col lg:flex-row h-screen bg-gray-950">
       {/* Main Chat Panel */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Header */}
-        <header className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-          <div>
-            <h1 className="text-white text-xl font-semibold">
-              {isComplete ? "Find Your Next Role" : "Welcome to Fractional Quest"}
-            </h1>
-            <p className="text-white/60 text-sm mt-0.5">
-              {isComplete
-                ? "Your profile is complete - let's find opportunities"
-                : `Building your profile - Step ${currentStep} of 5`
-              }
-            </p>
+        {/* Header with auth */}
+        <header className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-gray-900">
+          {/* Left - Logo */}
+          <div className="flex items-center gap-3">
+            <span className="text-white font-bold text-lg">Fractional Quest</span>
+            {isComplete && (
+              <span className="hidden sm:inline-flex items-center gap-1 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">
+                <span>✓</span> Profile Complete
+              </span>
+            )}
           </div>
 
-          {/* Voice button */}
-          <div className="flex items-center gap-3">
-            <span className="text-white/40 text-xs hidden sm:block">
-              Or use voice
-            </span>
+          {/* Center - Step indicator (mobile) */}
+          <div className="sm:hidden">
+            {!isComplete && (
+              <span className="text-white/60 text-sm">
+                Step {currentStep}/5
+              </span>
+            )}
+          </div>
+
+          {/* Right - User info + Voice */}
+          <div className="flex items-center gap-2 sm:gap-4">
             <VoiceInput
               onMessage={onVoiceMessage}
               firstName={userName}
@@ -198,8 +203,68 @@ ${profileItems.length > 0
                 pageUrl: '/',
               }}
             />
+            <span className="hidden sm:block text-white text-sm">{userName}</span>
+            <UserButton />
           </div>
         </header>
+
+        {/* Welcome banner - only on step 1 */}
+        {currentStep === 1 && (
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
+            <h1 className="text-white text-xl sm:text-2xl font-bold">
+              Welcome, {userName}! 👋
+            </h1>
+            <p className="text-white/80 text-sm mt-1">
+              Let's build your profile in 5 quick steps so we can find you perfect opportunities.
+            </p>
+          </div>
+        )}
+
+        {/* Progress banner - steps 2-5 */}
+        {currentStep > 1 && currentStep <= 5 && (
+          <div className="bg-gray-800 px-6 py-3 flex items-center justify-between">
+            <div>
+              <p className="text-white font-medium">Building your profile</p>
+              <p className="text-white/60 text-sm">Step {currentStep} of 5</p>
+            </div>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((step) => (
+                <div
+                  key={step}
+                  className={`w-8 h-2 rounded-full transition-all ${
+                    step < currentStep
+                      ? 'bg-emerald-500'
+                      : step === currentStep
+                        ? 'bg-white'
+                        : 'bg-white/20'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Completion banner */}
+        {isComplete && (
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-white text-xl font-bold flex items-center gap-2">
+                  <span>🎉</span> Profile Complete!
+                </h2>
+                <p className="text-white/80 text-sm mt-1">
+                  You're all set. Ask me to find jobs matching your profile.
+                </p>
+              </div>
+              <a
+                href="/dashboard"
+                className="hidden sm:block bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              >
+                View Dashboard →
+              </a>
+            </div>
+          </div>
+        )}
 
         {/* CopilotChat - Main Panel */}
         <div className="flex-1 overflow-hidden">
@@ -219,7 +284,7 @@ ${profileItems.length > 0
       <aside className="hidden lg:flex lg:flex-col w-80 bg-gray-900 border-l border-white/10">
         <OnboardingProgress currentStep={currentStep} />
         <div className="flex-1 overflow-y-auto border-t border-white/10">
-          <ProfilePreview items={profileItems} userName={userName} />
+          <ProfilePreview items={profileItems} userName={userName} currentStep={currentStep} />
         </div>
       </aside>
 
