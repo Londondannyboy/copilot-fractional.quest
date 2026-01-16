@@ -159,6 +159,94 @@ WHEN USER ASKS ABOUT JOBS OR FILTERING:
 `;
 ```
 
+## Onboarding Wizard Pattern (NEW - Jan 2026)
+
+The homepage uses a **visual wizard** for new users, with **CopilotChat as the main panel** (not sidebar).
+
+### Architecture
+```
+HomePageClient.tsx
+├── calculateOnboardingStep(profileItems) → 1-6
+├── isOnboardingComplete = step > 5
+│
+├── if (!complete) → OnboardingWizard
+│   ├── Header (logo, voice, UserButton)
+│   ├── Welcome/Progress/Completion banners
+│   ├── CopilotChat (main panel)
+│   └── Sidebar
+│       ├── OnboardingProgress (Step X of 5)
+│       └── ProfilePreview (checklist)
+│
+└── if (complete) → CopilotSidebar + 3D Graph
+```
+
+### Key Files
+```
+/src/components/onboarding/
+├── OnboardingWizard.tsx       # Main wizard with CopilotChat
+├── OnboardingProgress.tsx     # Visual step progress sidebar
+├── ProfilePreview.tsx         # Stage 1 checklist with status
+└── index.ts                   # Exports
+```
+
+### Stage 1 Profile Fields
+| Step | Field | item_type | HITL Tool |
+|------|-------|-----------|-----------|
+| 1 | Your Goals | `trinity` | `confirm_trinity` |
+| 2 | Current Status | `employment_status` | `confirm_employment_status` |
+| 3 | Your Domain | `professional_vertical` | `confirm_professional_vertical` |
+| 4 | Location | `location` | `confirm_location` |
+| 5 | Target Role | `role_preference` | `save_user_preference` |
+
+### Step Calculation
+```typescript
+function calculateOnboardingStep(items: ProfileItem[]): number {
+  const has = (type: string) => items.some(i => i.item_type === type);
+
+  if (!has('trinity')) return 1;
+  if (!has('employment_status')) return 2;
+  if (!has('professional_vertical')) return 3;
+  if (!has('location')) return 4;
+  if (!has('role_preference') || !has('experience_level')) return 5;
+  return 6; // Complete
+}
+```
+
+### Using CopilotChat (vs CopilotSidebar)
+```tsx
+import { CopilotChat } from '@copilotkit/react-ui'
+
+// CopilotChat is a full-panel chat component (not a sidebar)
+<CopilotChat
+  instructions={wizardInstructions}
+  labels={{
+    title: "Your Fractional Journey",
+    initial: `Hey ${userName}! Let's build your profile...`,
+    placeholder: "Type your answer or use voice...",
+  }}
+  className="h-full"
+/>
+```
+
+### Agent Instructions for Wizard
+The agent receives step-specific instructions:
+```typescript
+const instructions = `
+## ONBOARDING WIZARD MODE
+Current step: ${currentStep} of 5
+
+### BEHAVIOR:
+1. Ask ONE question at a time
+2. Use HITL tools - they render beautiful UI
+3. Acknowledge answers before moving on
+4. Keep responses SHORT
+
+### CURRENT STEP: ${getStepInstructions(currentStep)}
+`
+```
+
+---
+
 ## Context Reset Pattern
 
 **IMPORTANT**: Between planning and execution, clear context:
@@ -166,6 +254,48 @@ WHEN USER ASKS ABOUT JOBS OR FILTERING:
 2. Clear context (`/clear` or restart)
 3. Run `/execute /.claude/plans/{feature}.md`
 4. Plan contains ALL context needed - no additional priming
+
+---
+
+## Next Phase: Personalization (Phase 4)
+
+The next phase focuses on making the platform personalized based on the Stage 1 profile data.
+
+### Planned Features
+1. **Profile Dashboard** (`/dashboard` or `/profile`)
+   - View/edit Stage 1 data
+   - See what the AI knows about you
+   - Edit preferences inline
+
+2. **Job Matching**
+   - Score jobs based on profile match
+   - "Best matches for you" section
+   - Filter by match percentage
+
+3. **Salary Benchmarking**
+   - Compare your expectations vs market
+   - Role + location + experience combination
+   - Visual charts showing percentiles
+
+4. **Saved Jobs**
+   - Bookmark interesting opportunities
+   - Track application status
+   - Notes per job
+
+5. **Email Alerts**
+   - Notify when new matching jobs appear
+   - Configurable frequency
+   - One-click unsubscribe
+
+### Key Files to Create
+```
+/src/app/profile/page.tsx          # Profile dashboard
+/src/components/profile/
+├── ProfileEditor.tsx              # Inline editing
+├── JobMatches.tsx                 # Matched jobs list
+├── SalaryBenchmark.tsx            # Salary comparison
+└── SavedJobs.tsx                  # Bookmarked jobs
+```
 
 ---
 

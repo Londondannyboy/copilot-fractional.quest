@@ -26,9 +26,9 @@ Build the UK's premier platform for fractional executive job seekers and hirers,
 ## Current State (Jan 2026)
 
 ### Metrics
-- **Total Pages**: 347 (243 database + 104 static)
+- **Total Pages**: 374 (243 database + 131 static)
 - **Database Pages**: 243 in Neon PostgreSQL
-- **Static Pages**: 104 with JobPageClient components
+- **Static Pages**: 131 with JobPageClient components
 - **Top Traffic**: /fractional-jobs-london (115 clicks), /london (40), /fractional-jobs-uk (23)
 
 ### Working Features
@@ -39,7 +39,13 @@ Build the UK's premier platform for fractional executive job seekers and hirers,
 - EmbeddedJobBoard with filters
 - RoleCalculator for earnings
 - 3D ForceGraph for user interests
-- MDX infrastructure (just completed)
+- MDX infrastructure
+- **Onboarding Wizard** (NEW - Jan 2026):
+  - 5-step visual wizard for new users
+  - CopilotChat as main panel (not sidebar)
+  - Stage 1 Profile collection (trinity, employment_status, professional_vertical, location, role_preference)
+  - Progress indicators and completion banners
+  - Profile checklist with real-time status
 
 ### Architecture
 ```
@@ -95,7 +101,7 @@ LiveComponents (children)
 
 ## In Scope - V2 MVP
 
-### Phase 1: MDX Migration (Current)
+### Phase 1: MDX Migration ✅ COMPLETE
 - [x] Install MDX dependencies
 - [x] Create component registry
 - [x] Create MDXRenderer
@@ -105,24 +111,41 @@ LiveComponents (children)
 - [ ] Migrate high-traffic pages to MDX format
 - [ ] Enable CopilotKit to generate MDX responses
 
-### Phase 2: Content Quality
-- [ ] Ensure all 9 core job pages exceed V1 quality
-- [ ] All pages have CopilotKit + voice
-- [ ] All pages have EmbeddedJobBoard where relevant
-- [ ] Authority links and statistics on all pages
+### Phase 2: Content Quality ✅ COMPLETE
+- [x] Ensure all 9 core job pages exceed V1 quality
+- [x] All pages have CopilotKit + voice
+- [x] All pages have EmbeddedJobBoard where relevant
+- [x] Authority links and statistics on all pages
+- [x] Mobile responsive calculators and sections
 
-### Phase 3: Personalization
-- [ ] Personalized job recommendations based on profile
-- [ ] Salary benchmarking against market data
-- [ ] Career trajectory planning
-- [ ] Saved job collections
-- [ ] Email alerts for matching jobs
+### Phase 3: Onboarding & User Experience ✅ COMPLETE
+- [x] Visual 5-step onboarding wizard
+- [x] CopilotChat as main panel (not sidebar) during onboarding
+- [x] Stage 1 Profile collection:
+  - [x] Trinity (user's purpose: job search, coaching, lifestyle, curious)
+  - [x] Employment status
+  - [x] Professional vertical
+  - [x] Location
+  - [x] Target role preference
+- [x] Progress indicators (Step X of 5)
+- [x] Completion banners and celebration
+- [x] Profile checklist with real-time status
+- [x] Auth state in header (avatar, sign out)
 
-### Phase 4: AI Features
+### Phase 4: Personalization (NEXT)
+- [ ] **Profile Dashboard** - Dedicated page to view/edit Stage 1 data
+- [ ] **Job Matching** - Personalized job recommendations based on profile
+- [ ] **Salary Benchmarking** - Compare against market data for their role/location
+- [ ] **Saved Jobs** - Bookmark and track interesting opportunities
+- [ ] **Email Alerts** - Notify when new matching jobs appear
+- [ ] **Career Trajectory** - Visualize potential career paths
+
+### Phase 5: AI Features (Future)
 - [ ] CopilotKit generates MDX with embedded components
-- [ ] AI-powered job matching
+- [ ] AI-powered job matching scoring
 - [ ] AI career advisor (voice + chat)
 - [ ] Interview preparation assistant
+- [ ] CV/Resume analysis
 
 ## Out of Scope (V2)
 
@@ -153,11 +176,16 @@ LiveComponents (children)
 ├── [slug]/page.tsx                # Dynamic database pages
 ├── fractional-jobs-london/        # Static high-traffic pages
 ├── fractional-jobs-london-mdx/    # MDX demo page
+├── HomePageClient.tsx             # Homepage with onboarding wizard
 └── api/                           # API routes
 
 /src/components/
 ├── job-pages/JobPageClient.tsx    # Full-featured job page template
 ├── pages/PageRenderer.tsx         # Database content renderer (56 types)
+├── onboarding/                    # Onboarding wizard components (NEW)
+│   ├── OnboardingWizard.tsx       # Main wizard with CopilotChat
+│   ├── OnboardingProgress.tsx     # Step X of 5 progress sidebar
+│   └── ProfilePreview.tsx         # Stage 1 checklist with status
 ├── mdx/                           # MDX + Intelligent Document components
 │   ├── IntelligentDocument.tsx    # Context provider with CopilotKit actions
 │   ├── LiveComponents.tsx         # Conversation-reactive components
@@ -169,6 +197,7 @@ LiveComponents (children)
 ├── EmbeddedJobBoard.tsx           # Filterable job listings
 ├── JobsSidebar.tsx                # Sidebar with jobs, CTAs, market stats
 ├── RoleCalculator.tsx             # Earnings calculator
+├── SavingsCalculator.tsx          # Fractional vs full-time comparison
 ├── voice-input.tsx                # Hume voice widget
 └── charts.tsx                     # Recharts visualizations
 
@@ -238,11 +267,12 @@ user_profile_items (
 
 ## Timeline (Flexible - No Dates)
 
-1. **MDX Foundation** - Complete infrastructure, demo page ✓
-2. **High-Traffic Migration** - Convert top 9 job pages to MDX-enhanced
-3. **Personalization** - Profile-based recommendations, benchmarking
-4. **AI Generation** - CopilotKit returns MDX with components
-5. **Polish** - Performance, edge cases, monitoring
+1. **MDX Foundation** ✅ - Complete infrastructure, demo page
+2. **Content Quality** ✅ - All 9 core job pages exceed V1 quality
+3. **Onboarding Wizard** ✅ - 5-step visual onboarding with CopilotChat
+4. **Personalization** 🔄 NEXT - Profile dashboard, job matching, saved jobs
+5. **AI Generation** - CopilotKit returns MDX with components
+6. **Polish** - Performance, edge cases, monitoring
 
 ## Appendix
 
@@ -267,5 +297,5 @@ See `/.claude/commands/` for full list:
 
 ---
 
-*Last Updated: 2026-01-12*
+*Last Updated: 2026-01-16*
 *Maintained by: Claude Code + Dan Keegan*
