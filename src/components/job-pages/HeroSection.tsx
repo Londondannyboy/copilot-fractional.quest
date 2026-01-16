@@ -72,8 +72,8 @@ export function HeroSection({
             {subtitle}
           </p>
 
-          {/* Voice button */}
-          <div className="flex items-center gap-4 mb-8">
+          {/* Voice button - centered on mobile */}
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3 sm:gap-4 mb-8">
             <VoiceInput
               onMessage={onVoiceMessage}
               firstName={firstName}
@@ -84,7 +84,7 @@ export function HeroSection({
                 topRoles: stats.topRoles.slice(0, 3).map(r => r.role),
               }}
             />
-            <span className="text-sm opacity-70">
+            <span className="text-sm opacity-70 text-center sm:text-left">
               Ask about {location} jobs
             </span>
           </div>

@@ -137,6 +137,9 @@ interface JobPageClientProps {
   targetRole?: string;                   // Role for salary benchmark (e.g., "CMO", "CTO")
   showEmbeddedChat?: boolean;            // Show CopilotMainPanel in content area
   userDayRate?: number;                  // User's current day rate for comparison
+  // Job filtering options
+  roleCategory?: string;                 // Filter jobs by category (Finance, Engineering, Marketing, etc.)
+  hideMoreOpportunities?: boolean;       // Hide the "More Opportunities" sidebar section
 }
 
 export function JobPageClient({
@@ -150,6 +153,8 @@ export function JobPageClient({
   targetRole,
   showEmbeddedChat = false,
   userDayRate,
+  roleCategory,
+  hideMoreOpportunities = false,
 }: JobPageClientProps) {
   // Auth
   const { data: session } = authClient.useSession();
@@ -695,6 +700,20 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
         {/* Charts - render immediately from server data */}
         <InitialCharts stats={stats} location={locationDisplay} />
 
+        {/* Primary Job Board - Full Width, ABOVE Hot Jobs for role-specific pages */}
+        <section className="py-8 md:py-12 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <EmbeddedJobBoard
+              defaultDepartment={roleCategory}
+              defaultLocation={location === "london" ? "London" : ""}
+              title={`${locationDisplay} Fractional Jobs`}
+              showFilters={true}
+              jobsPerPage={9}
+              accentColor="emerald"
+            />
+          </div>
+        </section>
+
         {/* Hot Jobs + Calculator Section - Compact layout */}
         <section className="py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -702,12 +721,13 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
               <div className="lg:col-span-2 space-y-6">
                 <HotJobs
                   location={location === "london" ? "London" : undefined}
+                  department={roleCategory}
                   maxJobs={8}
                   title={`🔥 Hot ${locationDisplay} Jobs`}
                 />
-                {/* Rate Calculator - Pulled up for better engagement */}
-                <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                {/* Rate Calculator - mobile responsive container */}
+                <div className="bg-gray-50 rounded-xl p-4 sm:p-6 border border-gray-200">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">
                     Calculate Your {locationDisplay} Day Rate
                   </h3>
                   <RoleCalculator role="cfo" />
@@ -719,12 +739,14 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
                   title="Get Job Alerts"
                   description={`New ${locationDisplay} fractional roles straight to your inbox.`}
                 />
-                {/* Extra jobs for sidebar - fill space */}
-                <HotJobs
-                  maxJobs={6}
-                  title="🚀 More Opportunities"
-                  className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-100"
-                />
+                {/* More Opportunities - only show if not hidden */}
+                {!hideMoreOpportunities && (
+                  <HotJobs
+                    maxJobs={6}
+                    title="🚀 More Opportunities"
+                    className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-100"
+                  />
+                )}
                 {/* Quick Stats Card - fills remaining space */}
                 <div className="bg-gray-900 text-white rounded-xl p-5">
                   <h3 className="font-bold mb-4 flex items-center gap-2">
@@ -784,19 +806,6 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
             "What skills are in demand?",
           ]}
         />
-
-        {/* Job Board - Full Width (no sidebar gap) */}
-        <section className="py-12 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <EmbeddedJobBoard
-              defaultLocation={location === "london" ? "London" : ""}
-              title={`${locationDisplay} Fractional Jobs`}
-              showFilters={true}
-              jobsPerPage={12}
-              accentColor="emerald"
-            />
-          </div>
-        </section>
 
         {/* Quick Links Bar - Horizontal, no white space */}
         <section className="py-8 bg-white border-y border-gray-200">

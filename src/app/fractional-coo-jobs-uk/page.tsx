@@ -87,6 +87,9 @@ export default async function FractionalCOOJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="COO"
         userDayRate={1000}
+        // Filter for Operations jobs only
+        roleCategory="Operations"
+        hideMoreOpportunities={true}
       />
     </>
   );

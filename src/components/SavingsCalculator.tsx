@@ -7,9 +7,10 @@ interface SavingsCalculatorProps {
 }
 
 export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProps) {
-  const [fullTimeSalary, setFullTimeSalary] = useState(180000)
+  // Start with more accessible defaults - £80k salary is common entry point
+  const [fullTimeSalary, setFullTimeSalary] = useState(80000)
   const [daysPerWeek, setDaysPerWeek] = useState(2)
-  const [dayRate, setDayRate] = useState(1200)
+  const [dayRate, setDayRate] = useState(850)
 
   const calculations = useMemo(() => {
     // Full-time costs
@@ -54,10 +55,10 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-          <div className="grid lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
+          <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
             {/* Inputs */}
-            <div className="p-8">
-              <h3 className="text-lg font-bold text-gray-900 mb-6">Adjust Your Scenario</h3>
+            <div className="p-4 sm:p-6 lg:p-8">
+              <h3 className="text-lg font-bold text-gray-900 mb-4 sm:mb-6">Adjust Your Scenario</h3>
 
               <div className="space-y-6">
                 <div>
@@ -68,17 +69,17 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
                     <input
                       type="range"
-                      min="100000"
-                      max="350000"
-                      step="10000"
+                      min="40000"
+                      max="250000"
+                      step="5000"
                       value={fullTimeSalary}
                       onChange={(e) => setFullTimeSalary(Number(e.target.value))}
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
                     />
-                    <div className="flex justify-between text-sm text-gray-500 mt-1">
-                      <span>£100k</span>
+                    <div className="flex justify-between text-xs sm:text-sm text-gray-500 mt-1">
+                      <span>£40k</span>
                       <span className="font-semibold text-emerald-700">£{(fullTimeSalary / 1000).toFixed(0)}k/year</span>
-                      <span>£350k</span>
+                      <span>£250k</span>
                     </div>
                   </div>
                 </div>
@@ -87,18 +88,18 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Fractional Days Per Week
                   </label>
-                  <div className="flex gap-2">
+                  <div className="grid grid-cols-4 gap-1 sm:gap-2">
                     {[1, 2, 3, 4].map((days) => (
                       <button
                         key={days}
                         onClick={() => setDaysPerWeek(days)}
-                        className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+                        className={`py-2 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold text-sm sm:text-base transition-all ${
                           daysPerWeek === days
                             ? 'bg-emerald-600 text-white shadow-md'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                       >
-                        {days} {days === 1 ? 'day' : 'days'}
+                        {days}d
                       </button>
                     ))}
                   </div>
@@ -106,23 +107,23 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Day Rate ({location} Average: £1,150)
+                    Fractional Day Rate
                   </label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
                     <input
                       type="range"
-                      min="700"
-                      max="2000"
+                      min="500"
+                      max="1500"
                       step="50"
                       value={dayRate}
                       onChange={(e) => setDayRate(Number(e.target.value))}
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
                     />
-                    <div className="flex justify-between text-sm text-gray-500 mt-1">
-                      <span>£700</span>
+                    <div className="flex justify-between text-xs sm:text-sm text-gray-500 mt-1">
+                      <span>£500</span>
                       <span className="font-semibold text-emerald-700">£{dayRate}/day</span>
-                      <span>£2,000</span>
+                      <span>£1,500</span>
                     </div>
                   </div>
                 </div>
@@ -130,8 +131,8 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
             </div>
 
             {/* Results */}
-            <div className="p-8 bg-gray-50">
-              <h3 className="text-lg font-bold text-gray-900 mb-6">Your Potential Savings</h3>
+            <div className="p-4 sm:p-6 lg:p-8 bg-gray-50">
+              <h3 className="text-lg font-bold text-gray-900 mb-4 sm:mb-6">Your Potential Savings</h3>
 
               <div className="space-y-4">
                 <div className="bg-white rounded-xl p-4 border border-gray-200">

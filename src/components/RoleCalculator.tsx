@@ -128,27 +128,28 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
   }
 
   return (
-    <div className={`bg-black text-white overflow-hidden ${className}`}>
+    <div className={`bg-black text-white overflow-hidden rounded-lg ${className}`}>
+      {/* Mode Toggle - stacked on mobile, side by side on tablet+ */}
       <div className="flex flex-col sm:flex-row border-b border-gray-800">
         <button
           onClick={() => setMode('candidate')}
-          className={`flex-1 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors ${
+          className={`flex-1 px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-bold uppercase tracking-wider transition-colors ${
             mode === 'candidate'
               ? 'bg-amber-500 text-black'
               : 'bg-gray-900 text-gray-400 hover:text-white'
           }`}
         >
-          I'm a {roleData.label} - Earnings
+          I&apos;m a {roleData.label} - Earnings
         </button>
         <button
           onClick={() => setMode('employer')}
-          className={`flex-1 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors ${
+          className={`flex-1 px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-bold uppercase tracking-wider transition-colors ${
             mode === 'employer'
               ? 'bg-amber-500 text-black'
               : 'bg-gray-900 text-gray-400 hover:text-white'
           }`}
         >
-          I'm Hiring - Savings
+          I&apos;m Hiring - Savings
         </button>
       </div>
 
@@ -243,14 +244,14 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
               <h3 className="text-2xl font-black mt-1">Calculate Your Savings</h3>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
               <div className="space-y-6">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Full-Time {roleData.label} Salary (Base)</label>
-                  <div className="text-2xl sm:text-3xl font-black text-white mb-3 truncate">{formatCurrency(fullTimeSalary)}</div>
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-3 truncate">{formatCurrency(fullTimeSalary)}</div>
                   <input
                     type="range"
-                    min="80000"
+                    min="50000"
                     max="250000"
                     step="5000"
                     value={fullTimeSalary}
@@ -258,7 +259,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                     className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-1">
-                    <span>£80k</span>
+                    <span>£50k</span>
                     <span className="text-amber-500">Avg: £{(roleData.avgSalary / 1000).toFixed(0)}k</span>
                     <span>£250k</span>
                   </div>

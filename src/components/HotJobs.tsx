@@ -5,6 +5,7 @@ import { HotJobsLines } from './HotJobsLines'
 
 interface HotJobsProps {
   location?: string
+  department?: string  // Filter by role category (Finance, Engineering, Marketing, etc.)
   maxJobs?: number
   title?: string
   className?: string
@@ -12,6 +13,7 @@ interface HotJobsProps {
 
 export function HotJobs({
   location,
+  department,
   maxJobs = 6,
   title = 'Hot Jobs',
   className = ''
@@ -24,6 +26,7 @@ export function HotJobs({
       try {
         const params = new URLSearchParams()
         if (location) params.set('location', location)
+        if (department) params.set('role', department)
         params.set('limit', maxJobs.toString())
 
         const response = await fetch(`/api/jobs/search?${params.toString()}`)
@@ -39,7 +42,7 @@ export function HotJobs({
     }
 
     fetchJobs()
-  }, [location, maxJobs])
+  }, [location, department, maxJobs])
 
   if (loading) {
     return (

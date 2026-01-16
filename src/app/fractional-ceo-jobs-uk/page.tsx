@@ -87,6 +87,9 @@ export default async function FractionalCEOJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="CEO"
         userDayRate={1000}
+        // Filter for Executive/Operations jobs
+        roleCategory="Operations"
+        hideMoreOpportunities={true}
       />
     </>
   );

@@ -87,6 +87,9 @@ export default async function FractionalCFOJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="CFO"
         userDayRate={1000}
+        // Filter for Finance jobs only
+        roleCategory="Finance"
+        hideMoreOpportunities={true}
       />
     </>
   );

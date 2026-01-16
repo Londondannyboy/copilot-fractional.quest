@@ -87,6 +87,9 @@ export default async function FractionalCISOJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="CISO"
         userDayRate={1000}
+        // Filter for Security/Engineering jobs only
+        roleCategory="Engineering"
+        hideMoreOpportunities={true}
       />
     </>
   );

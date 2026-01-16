@@ -87,6 +87,9 @@ export default async function FractionalCMOJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="CMO"
         userDayRate={1100}
+        // Filter for Marketing jobs only
+        roleCategory="Marketing"
+        hideMoreOpportunities={true}
       />
     </>
   );

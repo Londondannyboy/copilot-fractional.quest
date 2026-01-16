@@ -87,6 +87,9 @@ export default async function FractionalCPOJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="CPO"
         userDayRate={1000}
+        // Filter for Product jobs only
+        roleCategory="Product"
+        hideMoreOpportunities={true}
       />
     </>
   );

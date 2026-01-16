@@ -87,6 +87,9 @@ export default async function FractionalCHROJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="CHRO"
         userDayRate={1000}
+        // Filter for HR jobs only
+        roleCategory="HR"
+        hideMoreOpportunities={true}
       />
     </>
   );

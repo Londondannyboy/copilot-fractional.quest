@@ -87,6 +87,9 @@ export default async function FractionalCTOJobsUKPage() {
         enablePersonalizedSections={true}
         targetRole="CTO"
         userDayRate={1000}
+        // Filter for Engineering/Tech jobs only
+        roleCategory="Engineering"
+        hideMoreOpportunities={true}
       />
     </>
   );

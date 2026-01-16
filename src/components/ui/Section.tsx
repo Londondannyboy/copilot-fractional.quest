@@ -18,9 +18,9 @@ export function Section({
   id,
 }: SectionProps) {
   const sizeClasses = {
-    default: "py-16 px-6",
-    sm: "py-8 px-6",
-    lg: "py-24 px-6",
+    default: "py-10 sm:py-12 md:py-16 px-4 sm:px-6",
+    sm: "py-6 sm:py-8 px-4 sm:px-6",
+    lg: "py-16 sm:py-20 md:py-24 px-4 sm:px-6",
   };
 
   const bgClasses = {
