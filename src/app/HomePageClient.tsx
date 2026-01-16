@@ -11,7 +11,25 @@ import { VoiceInput } from "@/components/voice-input";
 import { DynamicBackground } from "@/components/DynamicBackground";
 import { LiveProfileGraph } from "@/components/LiveProfileGraph";
 import { UserProfileSection } from "@/components/UserProfileSection";
+import { OnboardingWizard } from "@/components/onboarding";
 import dynamic from "next/dynamic";
+
+// Calculate onboarding step based on profile items
+interface ProfileItemForStep {
+  item_type: string
+  value: string
+}
+
+function calculateOnboardingStep(items: ProfileItemForStep[]): number {
+  const has = (type: string) => items.some(i => i.item_type === type);
+
+  if (!has('trinity')) return 1;
+  if (!has('employment_status')) return 2;
+  if (!has('professional_vertical')) return 3;
+  if (!has('location')) return 4;
+  if (!has('role_preference') || !has('experience_level')) return 5;
+  return 6; // Complete
+}
 
 // Dynamic import for editable 3D graph (same as dashboard - works!)
 const EditableGraph3D = dynamic(
@@ -1402,6 +1420,10 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
   if (!profileItems.employmentStatus) missingStage1.push('Employment Status');
   if (!profileItems.vertical) missingStage1.push('Professional Vertical');
 
+  // Calculate onboarding step for wizard
+  const onboardingStep = calculateOnboardingStep(fullProfileItems);
+  const isOnboardingComplete = onboardingStep > 5;
+
   const agentInstructions = user
     ? `CRITICAL USER CONTEXT:
 - User Name: ${firstName || user.name}
@@ -1442,6 +1464,19 @@ Always greet them as ${firstName || user.name} and be friendly.`
 This user is not logged in. Encourage them to sign in for personalized recommendations.
 Reference the page context when discussing jobs.`;
 
+  // Show OnboardingWizard if user is logged in but hasn't completed onboarding
+  if (user && !isOnboardingComplete && !isSessionLoading) {
+    return (
+      <OnboardingWizard
+        userId={user.id}
+        userName={firstName || user.name || 'You'}
+        profileItems={fullProfileItems}
+        currentStep={onboardingStep}
+        onVoiceMessage={handleVoiceMessage}
+      />
+    );
+  }
+
   return (
     <CopilotSidebar
       disableSystemMessage={true}
@@ -1449,7 +1484,7 @@ Reference the page context when discussing jobs.`;
       instructions={agentInstructions}
       labels={{
         title: "Fractional AI",
-        initial: firstName ? `Hey ${firstName}! Ask me about fractional executive jobs, salaries, or market trends.` : "Welcome! Use voice or text to explore jobs, charts, and A2UI widgets.",
+        initial: firstName ? `Hey ${firstName}! Your profile is complete. Ask me about jobs, salaries, or market trends.` : "Welcome! Use voice or text to explore jobs, charts, and A2UI widgets.",
       }}
       suggestions={suggestions}
     >
@@ -1514,7 +1549,7 @@ Reference the page context when discussing jobs.`;
             </div>
           ) : user ? (
             <>
-              {/* 3D Profile Graph - Takes most of screen (same component as dashboard!) */}
+              {/* Profile Complete - Show 3D Graph */}
               <div className="flex-1 min-h-0">
                 <EditableGraph3D
                   userId={user.id}
@@ -1533,7 +1568,7 @@ Reference the page context when discussing jobs.`;
                   <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user.id} />
                   <div className="flex-1">
                     <p className="text-white text-sm font-medium">Talk to your AI assistant</p>
-                    <p className="text-gray-400 text-xs">Ask about jobs, update your profile, or get recommendations</p>
+                    <p className="text-gray-400 text-xs">Search for jobs, get recommendations, or explore the market</p>
                   </div>
                 </div>
               </div>
