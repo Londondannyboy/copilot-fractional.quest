@@ -805,6 +805,18 @@ h3, h4, h5, h6 {
   display: none !important;
 }
 
+/* Hide CopilotKit version announcement banner */
+[class*="copilotKit"] [class*="announcement"],
+[class*="copilotKit"] [class*="banner"],
+[class*="copilotKit"] [class*="version"],
+[class*="copilotKit"] [class*="promo"],
+[class*="copilotKit"] [class*="notification"],
+.copilotKitHeader [role="banner"],
+.copilotKitWindow > div:first-child:has([href*="copilotkit"]),
+[class*="copilotKit"] > div:first-child:has(button) {
+  display: none !important;
+}
+
 /* ==========================================
    NEON AUTH UI CUSTOMIZATION
    Clean, elegant auth modal styling

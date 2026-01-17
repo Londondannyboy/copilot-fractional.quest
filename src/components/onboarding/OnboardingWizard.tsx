@@ -1,11 +1,12 @@
 'use client'
 
 import { CopilotChat, ComponentsMap } from '@copilotkit/react-ui'
-import { useCoAgent, useCoAgentStateRender } from '@copilotkit/react-core'
+import { useCoAgent, useCoAgentStateRender, useCopilotChat } from '@copilotkit/react-core'
 import { OnboardingProgress } from './OnboardingProgress'
 import { ProfilePreview } from './ProfilePreview'
 import { VoiceInput } from '@/components/voice-input'
 import { UserButton } from '@neondatabase/auth/react/ui'
+import { Role, TextMessage } from '@copilotkit/runtime-client-gql'
 
 // Agent state type - matches Pydantic AI AppState.onboarding
 interface OnboardingState {
@@ -155,17 +156,19 @@ Say something like:
     5: `
 ## STEP 5: Experience & Expectations
 
-Final step! Get their target role, experience level, and salary expectations.
+Final step! Get their target role and experience level in their professional area.
 
 YOUR TASK:
-1. Ask what role they're targeting (CTO, CFO, CMO, COO, etc.)
-2. Ask about their experience level (C-Suite, VP, Director, Senior Manager)
-3. Ask about day rate expectations (you can use save_user_preference for each)
+1. Ask what fractional executive role they're targeting (Fractional CTO, Fractional CFO, Fractional CMO, Fractional COO, etc.)
+2. Ask about their years of experience IN THAT SPECIFIC ROLE/DOMAIN (e.g., "How many years of finance leadership experience do you have?" or "How many years of tech leadership experience?")
+3. Optionally ask about day rate expectations
+
+IMPORTANT: When asking about experience, be SPECIFIC about the domain. Don't just say "years of experience" - say "years of [their professional vertical] leadership experience"
 
 Say something like:
-"Last step! What role are you targeting, and what's your experience level?"
+"Last step! What fractional role are you targeting? And how many years of leadership experience do you have in that field?"
 
-Save each piece of information using save_user_preference.
+Save each piece of information using save_user_preference with item_type="role_preference" and item_type="experience_level".
 `,
     6: `
 ## ONBOARDING COMPLETE! 🎉
@@ -199,6 +202,54 @@ export function OnboardingWizard({
   currentStep,
   onVoiceMessage,
 }: OnboardingWizardProps) {
+  // Handle profile item edit
+  const handleEditItem = async (item: ProfileItem, newValue: string) => {
+    try {
+      const response = await fetch('/api/user-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId,
+          itemType: item.item_type,
+          value: newValue,
+          metadata: item.metadata,
+        }),
+      })
+      if (!response.ok) throw new Error('Failed to update')
+      // Trigger page refresh to get updated items
+      window.location.reload()
+    } catch (e) {
+      console.error('Edit failed:', e)
+      throw e
+    }
+  }
+
+  // Handle profile item delete
+  const handleDeleteItem = async (item: ProfileItem) => {
+    try {
+      const response = await fetch(`/api/user-profile?id=${item.id}&userId=${userId}`, {
+        method: 'DELETE',
+      })
+      if (!response.ok) throw new Error('Failed to delete')
+      // Trigger page refresh to get updated items
+      window.location.reload()
+    } catch (e) {
+      console.error('Delete failed:', e)
+      throw e
+    }
+  }
+
+  // CopilotChat hook for sending messages programmatically
+  const { appendMessage } = useCopilotChat()
+
+  // Handle quick option button click
+  const handleQuickOption = (option: string) => {
+    appendMessage(new TextMessage({
+      role: Role.User,
+      content: option,
+    }))
+  }
+
   // Sync with Pydantic AI agent state via CopilotKit
   const { state: agentState } = useCoAgent<AgentState>({
     name: "my_agent",
@@ -280,164 +331,237 @@ ${profileItems.length > 0
       ? `Hey ${userName}! 👋 Welcome to Fractional Quest!\n\nI'm here to help you find incredible fractional executive opportunities. Let's get to know each other in just 5 quick steps.\n\nFirst up - what brings you here today?`
       : `Let's continue building your profile, ${userName}! We're on step ${currentStep} of 5.`
 
+  // Step descriptions for guidance
+  const STEP_INFO = [
+    { title: "Your Goals", description: "What brings you to Fractional Quest?", hint: "Job search, career coaching, lifestyle change, or just exploring" },
+    { title: "Current Status", description: "What's your employment situation?", hint: "Employed, between roles, freelancing, or founder" },
+    { title: "Your Domain", description: "What's your professional expertise?", hint: "Technology, Finance, Marketing, Operations, HR, Product" },
+    { title: "Location", description: "Where are you based?", hint: "London, Manchester, Remote UK, or other" },
+    { title: "Target Role", description: "What role are you targeting?", hint: "Fractional CTO, CFO, CMO, COO + years of experience" },
+  ]
+
+  const currentStepInfo = STEP_INFO[currentStep - 1] || STEP_INFO[0]
+
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-gray-950">
-      {/* Main Chat Panel */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Header with auth */}
-        <header className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-gray-900">
+    <div className="min-h-screen bg-gray-950">
+      {/* Top Header Bar - Fixed */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3">
           {/* Left - Logo */}
           <div className="flex items-center gap-3">
             <span className="text-white font-bold text-lg">Fractional Quest</span>
-            {isComplete && (
-              <span className="hidden sm:inline-flex items-center gap-1 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">
-                <span>✓</span> Profile Complete
-              </span>
-            )}
+            <span className="hidden sm:inline text-white/40 text-sm">Profile Builder</span>
           </div>
 
-          {/* Center - Step indicator (mobile) */}
-          <div className="sm:hidden">
-            {!isComplete && (
-              <span className="text-white/60 text-sm">
-                Step {currentStep}/5
-              </span>
-            )}
+          {/* Center - Progress indicator */}
+          <div className="hidden md:flex items-center gap-2">
+            {[1, 2, 3, 4, 5].map((step) => (
+              <div key={step} className="flex items-center">
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
+                    step < currentStep
+                      ? 'bg-emerald-500 text-white'
+                      : step === currentStep
+                        ? 'bg-white text-gray-900'
+                        : 'bg-white/10 text-white/40'
+                  }`}
+                >
+                  {step < currentStep ? '✓' : step}
+                </div>
+                {step < 5 && (
+                  <div className={`w-8 h-0.5 ${step < currentStep ? 'bg-emerald-500' : 'bg-white/10'}`} />
+                )}
+              </div>
+            ))}
           </div>
 
-          {/* Right - User info + Voice */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            <VoiceInput
-              onMessage={onVoiceMessage}
-              firstName={userName}
-              userId={userId}
-              pageContext={{
-                pageType: 'home',
-                pageH1: 'Onboarding Wizard',
-                pageUrl: '/',
-              }}
-            />
+          {/* Right - User */}
+          <div className="flex items-center gap-3">
             <span className="hidden sm:block text-white text-sm">{userName}</span>
             <UserButton />
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* Welcome banner - only on step 1 */}
-        {currentStep === 1 && (
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
-            <h1 className="text-white text-xl sm:text-2xl font-bold">
-              Welcome, {userName}! 👋
-            </h1>
-            <p className="text-white/80 text-sm mt-1">
-              Let's build your profile in 5 quick steps so we can find you perfect opportunities.
+      {/* Main Content - Below fixed header */}
+      <div className="pt-16 flex flex-col lg:flex-row min-h-screen">
+        {/* Left Panel - Instructions & Voice */}
+        <div className="flex-1 flex flex-col">
+          {/* Step Header Card */}
+          <div className="p-6 border-b border-white/10">
+            <div className="max-w-2xl mx-auto">
+              {/* Step Badge */}
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  STEP {currentStep} OF 5
+                </span>
+                {currentStep > 1 && (
+                  <span className="text-emerald-400 text-sm">
+                    {currentStep - 1} completed
+                  </span>
+                )}
+              </div>
+
+              {/* Current Step Info */}
+              <h1 className="text-white text-2xl sm:text-3xl font-bold mb-2">
+                {currentStepInfo.title}
+              </h1>
+              <p className="text-white/70 text-lg mb-3">
+                {currentStepInfo.description}
+              </p>
+              <p className="text-white/40 text-sm">
+                💡 Options: {currentStepInfo.hint}
+              </p>
+            </div>
+          </div>
+
+          {/* Voice Input Section - Prominent */}
+          <div className="p-6 bg-gradient-to-b from-gray-900 to-gray-950">
+            <div className="max-w-2xl mx-auto">
+              <div className="bg-gray-800/50 rounded-2xl p-6 border border-white/10">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-white font-semibold">Talk or Type</h3>
+                    <p className="text-white/50 text-sm">Click the mic to speak, or type below</p>
+                  </div>
+                  <VoiceInput
+                    onMessage={onVoiceMessage}
+                    firstName={userName}
+                    userId={userId}
+                    pageContext={{
+                      pageType: 'home',
+                      pageH1: 'Onboarding Wizard',
+                      pageUrl: '/',
+                    }}
+                  />
+                </div>
+
+                {/* Quick Action Buttons based on step */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {currentStep === 1 && ['Job Search', 'Career Coaching', 'Lifestyle Change', 'Just Curious'].map(opt => (
+                    <button key={opt} onClick={() => handleQuickOption(opt)} className="px-4 py-2 bg-white/10 hover:bg-indigo-500 text-white rounded-lg text-sm transition-colors">
+                      {opt}
+                    </button>
+                  ))}
+                  {currentStep === 2 && ['Currently Employed', 'Between Roles', 'Freelancing', 'Founder'].map(opt => (
+                    <button key={opt} onClick={() => handleQuickOption(opt)} className="px-4 py-2 bg-white/10 hover:bg-indigo-500 text-white rounded-lg text-sm transition-colors">
+                      {opt}
+                    </button>
+                  ))}
+                  {currentStep === 3 && ['Technology', 'Finance', 'Marketing', 'Operations', 'HR/People', 'Product'].map(opt => (
+                    <button key={opt} onClick={() => handleQuickOption(opt)} className="px-4 py-2 bg-white/10 hover:bg-indigo-500 text-white rounded-lg text-sm transition-colors">
+                      {opt}
+                    </button>
+                  ))}
+                  {currentStep === 4 && ['London', 'Manchester', 'Birmingham', 'Remote UK', 'Other'].map(opt => (
+                    <button key={opt} onClick={() => handleQuickOption(opt)} className="px-4 py-2 bg-white/10 hover:bg-indigo-500 text-white rounded-lg text-sm transition-colors">
+                      {opt}
+                    </button>
+                  ))}
+                  {currentStep === 5 && ['Fractional CTO', 'Fractional CFO', 'Fractional CMO', 'Fractional COO'].map(opt => (
+                    <button key={opt} onClick={() => handleQuickOption(opt)} className="px-4 py-2 bg-white/10 hover:bg-indigo-500 text-white rounded-lg text-sm transition-colors">
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+
+                <p className="text-white/30 text-xs text-center">
+                  Or type something custom - I'll understand!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CopilotChat - Conversation Panel */}
+          <div className="flex-1 overflow-hidden border-t border-white/10">
+            <CopilotChat
+              instructions={instructions}
+              labels={{
+                title: "Your Fractional Journey",
+                initial: initialMessage,
+                placeholder: `Type your ${currentStepInfo.title.toLowerCase()} or ask a question...`,
+              }}
+              markdownTagRenderers={gifMarkdownRenderer}
+              className="h-full"
+            />
+          </div>
+        </div>
+
+        {/* Right Panel - Profile Dashboard */}
+        <aside className="hidden lg:block w-96 bg-gray-900 border-l border-white/10 overflow-y-auto">
+          {/* Profile Header */}
+          <div className="p-6 border-b border-white/10 bg-gray-800">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-white font-bold text-lg">Your Profile</h2>
+              <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full">
+                Building...
+              </span>
+            </div>
+            <p className="text-white/50 text-sm">
+              We're building your profile to find perfect matches. You can edit anything below.
             </p>
           </div>
-        )}
 
-        {/* Progress banner - steps 2-5 */}
-        {currentStep > 1 && currentStep <= 5 && (
-          <div className="bg-gray-800 px-6 py-3 flex items-center justify-between">
-            <div>
-              <p className="text-white font-medium">Building your profile</p>
-              <p className="text-white/60 text-sm">Step {currentStep} of 5</p>
+          {/* Progress Section */}
+          <div className="p-4 border-b border-white/10">
+            <OnboardingProgress currentStep={currentStep} />
+          </div>
+
+          {/* Profile Items */}
+          <div className="p-4">
+            <ProfilePreview
+              items={profileItems}
+              userName={userName}
+              currentStep={currentStep}
+              onEdit={handleEditItem}
+              onDelete={handleDeleteItem}
+            />
+          </div>
+
+          {/* Help Section */}
+          <div className="p-4 border-t border-white/10">
+            <div className="bg-indigo-500/10 rounded-xl p-4 border border-indigo-500/20">
+              <h4 className="text-indigo-400 font-medium text-sm mb-2">💡 Tips</h4>
+              <ul className="text-white/60 text-xs space-y-1">
+                <li>• Click any item above to edit it</li>
+                <li>• Use voice or text - both work great</li>
+                <li>• Your answers help us find better matches</li>
+                <li>• You can always update later from your dashboard</li>
+              </ul>
             </div>
+          </div>
+        </aside>
+      </div>
+
+      {/* Mobile Bottom Bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-white/10 p-4 z-40">
+        <div className="flex items-center justify-between">
+          {/* Progress */}
+          <div className="flex items-center gap-2">
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((step) => (
                 <div
                   key={step}
-                  className={`w-8 h-2 rounded-full transition-all ${
-                    step < currentStep
-                      ? 'bg-emerald-500'
-                      : step === currentStep
-                        ? 'bg-white'
-                        : 'bg-white/20'
+                  className={`w-2 h-2 rounded-full ${
+                    step < currentStep ? 'bg-emerald-500' : step === currentStep ? 'bg-white' : 'bg-white/20'
                   }`}
                 />
               ))}
             </div>
+            <span className="text-white/60 text-sm">Step {currentStep}/5</span>
           </div>
-        )}
 
-        {/* Completion banner */}
-        {isComplete && (
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-white text-xl font-bold flex items-center gap-2">
-                  <span>🎉</span> Profile Complete!
-                </h2>
-                <p className="text-white/80 text-sm mt-1">
-                  You're all set. Ask me to find jobs matching your profile.
-                </p>
-              </div>
-              <a
-                href="/dashboard"
-                className="hidden sm:block bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-              >
-                View Dashboard →
-              </a>
-            </div>
-          </div>
-        )}
-
-        {/* CopilotChat - Main Panel */}
-        <div className="flex-1 overflow-hidden">
-          <CopilotChat
-            instructions={instructions}
-            labels={{
-              title: "Your Fractional Journey",
-              initial: initialMessage,
-              placeholder: "Type your answer or use voice...",
+          {/* Voice button */}
+          <VoiceInput
+            onMessage={onVoiceMessage}
+            firstName={userName}
+            userId={userId}
+            pageContext={{
+              pageType: 'home',
+              pageH1: 'Onboarding Wizard',
+              pageUrl: '/',
             }}
-            markdownTagRenderers={gifMarkdownRenderer}
-            className="h-full"
           />
-        </div>
-      </div>
-
-      {/* Progress Sidebar - Hidden on mobile, visible on desktop */}
-      <aside className="hidden lg:flex lg:flex-col w-80 bg-gray-900 border-l border-white/10">
-        <OnboardingProgress currentStep={currentStep} />
-        <div className="flex-1 overflow-y-auto border-t border-white/10">
-          <ProfilePreview items={profileItems} userName={userName} currentStep={currentStep} />
-        </div>
-      </aside>
-
-      {/* Mobile Progress Bar - Visible only on mobile */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-white/10 p-4">
-        <div className="flex items-center gap-3">
-          {/* Progress dots */}
-          <div className="flex gap-1.5">
-            {[1, 2, 3, 4, 5].map((step) => (
-              <div
-                key={step}
-                className={`
-                  w-2.5 h-2.5 rounded-full transition-all
-                  ${step < currentStep
-                    ? 'bg-emerald-500'
-                    : step === currentStep
-                      ? 'bg-white'
-                      : 'bg-white/20'
-                  }
-                `}
-              />
-            ))}
-          </div>
-          <span className="text-white/60 text-sm">
-            {isComplete ? "Complete!" : `Step ${currentStep} of 5`}
-          </span>
-
-          {/* Mini profile preview */}
-          <div className="flex-1 flex justify-end gap-1 overflow-hidden">
-            {profileItems.slice(-3).map((item) => (
-              <span
-                key={item.id}
-                className="text-xs bg-white/10 text-white/70 px-2 py-1 rounded truncate max-w-20"
-              >
-                {item.value}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </div>

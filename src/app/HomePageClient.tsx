@@ -12,6 +12,7 @@ import { DynamicBackground } from "@/components/DynamicBackground";
 import { LiveProfileGraph } from "@/components/LiveProfileGraph";
 import { UserProfileSection } from "@/components/UserProfileSection";
 import { OnboardingWizard } from "@/components/onboarding";
+import { PublicLanding } from "@/components/PublicLanding";
 import dynamic from "next/dynamic";
 
 // Calculate onboarding step based on profile items
@@ -1574,19 +1575,8 @@ Reference the page context when discussing jobs.`;
               </div>
             </>
           ) : (
-            /* Not signed in */
-            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900">
-              <h2 className="text-4xl font-bold text-white mb-4">Your Career Universe</h2>
-              <p className="text-gray-400 text-lg mb-8 text-center max-w-md">
-                Sign in to visualize your professional profile in 3D
-              </p>
-              <button
-                onClick={() => window.location.href = '/auth/sign-in'}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-xl font-medium transition-colors"
-              >
-                Sign In to Begin
-              </button>
-            </div>
+            /* Not signed in - Show full landing page */
+            <PublicLanding />
           )}
         </div>
 

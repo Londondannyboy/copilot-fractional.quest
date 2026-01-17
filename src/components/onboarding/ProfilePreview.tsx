@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 interface ProfileItem {
   id: number
   item_type: string
@@ -12,6 +14,8 @@ interface ProfilePreviewProps {
   items: ProfileItem[]
   userName?: string
   currentStep?: number
+  onEdit?: (item: ProfileItem, newValue: string) => Promise<void>
+  onDelete?: (item: ProfileItem) => Promise<void>
 }
 
 // Stage 1 required fields in order
@@ -36,7 +40,11 @@ const ITEM_CONFIG: Record<string, { icon: string; label: string; color: string }
   salary_expectation: { icon: "💰", label: "Day Rate", color: "text-emerald-400" },
 }
 
-export function ProfilePreview({ items, userName, currentStep = 1 }: ProfilePreviewProps) {
+export function ProfilePreview({ items, userName, currentStep = 1, onEdit, onDelete }: ProfilePreviewProps) {
+  const [editingItem, setEditingItem] = useState<ProfileItem | null>(null)
+  const [editValue, setEditValue] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
   // Check what Stage 1 fields are complete
   const completedTypes = new Set(items.map(i => i.item_type))
   const stage1Complete = STAGE_1_FIELDS.slice(0, 3).every(f => completedTypes.has(f.type))
@@ -49,8 +57,88 @@ export function ProfilePreview({ items, userName, currentStep = 1 }: ProfilePrev
     return (item.metadata?.label as string) || item.value
   }
 
+  // Get full item for a field type
+  const getItem = (type: string) => items.find(i => i.item_type === type)
+
+  // Handle edit click
+  const handleEditClick = (item: ProfileItem) => {
+    setEditingItem(item)
+    setEditValue(item.value)
+  }
+
+  // Handle save edit
+  const handleSaveEdit = async () => {
+    if (!editingItem || !onEdit || editValue.trim() === editingItem.value) {
+      setEditingItem(null)
+      return
+    }
+    setIsLoading(true)
+    try {
+      await onEdit(editingItem, editValue.trim())
+      setEditingItem(null)
+    } catch (e) {
+      console.error('Failed to update:', e)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Handle delete
+  const handleDelete = async (item: ProfileItem) => {
+    if (!onDelete) return
+    if (!confirm(`Remove "${item.value}" from your profile?`)) return
+    setIsLoading(true)
+    try {
+      await onDelete(item)
+    } catch (e) {
+      console.error('Failed to delete:', e)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="p-4 sm:p-6">
+      {/* Edit Modal */}
+      {editingItem && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-800 rounded-xl p-6 max-w-sm w-full shadow-xl">
+            <h4 className="text-white font-semibold mb-4">
+              Edit {ITEM_CONFIG[editingItem.item_type]?.label || editingItem.item_type}
+            </h4>
+            <input
+              type="text"
+              value={editValue}
+              onChange={(e) => setEditValue(e.target.value)}
+              onKeyDown={(e) => {
+                e.stopPropagation()
+                if (e.key === 'Enter') handleSaveEdit()
+                if (e.key === 'Escape') setEditingItem(null)
+              }}
+              className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg border border-white/20 focus:border-emerald-500 focus:outline-none"
+              autoFocus
+              disabled={isLoading}
+            />
+            <div className="flex gap-2 mt-4">
+              <button
+                onClick={() => setEditingItem(null)}
+                className="flex-1 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+                disabled={isLoading}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveEdit}
+                className="flex-1 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                disabled={isLoading || editValue.trim() === editingItem.value}
+              >
+                {isLoading ? 'Saving...' : 'Save'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-white font-semibold">
@@ -116,14 +204,32 @@ export function ProfilePreview({ items, userName, currentStep = 1 }: ProfilePrev
                 )}
               </div>
 
-              {/* Edit button for completed items */}
+              {/* Edit/Delete buttons for completed items */}
               {isComplete && (
-                <button
-                  className="text-white/30 hover:text-white/60 text-xs transition-colors"
-                  title="Edit coming soon"
-                >
-                  ✎
-                </button>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => {
+                      const item = getItem(field.type)
+                      if (item) handleEditClick(item)
+                    }}
+                    className="text-white/30 hover:text-white/60 text-xs transition-colors p-1"
+                    title="Edit"
+                    disabled={isLoading}
+                  >
+                    ✎
+                  </button>
+                  <button
+                    onClick={() => {
+                      const item = getItem(field.type)
+                      if (item) handleDelete(item)
+                    }}
+                    className="text-white/30 hover:text-red-400 text-xs transition-colors p-1"
+                    title="Delete"
+                    disabled={isLoading}
+                  >
+                    ✕
+                  </button>
+                </div>
               )}
             </div>
           )
