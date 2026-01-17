@@ -252,6 +252,72 @@ export default function FractionalCtoPage() {
               <li><strong>Flexibility:</strong> Scale engagement as product evolves</li>
             </ul>
 
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Professional Bodies & Certifications</h2>
+
+            <p>
+              Many <strong>fractional CTOs</strong> hold certifications from recognized technology and engineering bodies. Key organizations include:
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4 not-prose my-8">
+              <a href="https://www.bcs.org" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-cyan-700">BCS</h4>
+                    <p className="text-sm text-gray-600">British Computer Society - Chartered Institute for IT</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.theiet.org" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-cyan-700">IET</h4>
+                    <p className="text-sm text-gray-600">Institution of Engineering and Technology</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://technation.io" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">💼</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-cyan-700">Tech Nation</h4>
+                    <p className="text-sm text-gray-600">UK tech sector growth network</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.gov.uk/government/organisations/government-digital-service" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏢</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-cyan-700">GDS</h4>
+                    <p className="text-sm text-gray-600">Government Digital Service - UK digital standards</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">External Resources</h2>
+
+            <div className="grid md:grid-cols-4 gap-4 not-prose my-8">
+              <a href="https://www.gartner.com/en/information-technology" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-all group text-center">
+                <span className="text-xl">📊</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-cyan-700">Gartner IT</p>
+              </a>
+              <a href="https://stackoverflow.com/jobs" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-all group text-center">
+                <span className="text-xl">💻</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-cyan-700">Stack Overflow</p>
+              </a>
+              <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-all group text-center">
+                <span className="text-xl">💼</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-cyan-700">LinkedIn</p>
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-all group text-center">
+                <span className="text-xl">🐙</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-cyan-700">GitHub</p>
+              </a>
+            </div>
+
           </article>
         </div>
       </section>
@@ -284,24 +350,71 @@ export default function FractionalCtoPage() {
 
       {/* Related Links */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <Link href="/hire-fractional-cto" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-cyan-300 transition-colors group">
-              <span className="text-2xl mb-3 block">📋</span>
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="mb-8">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Related Resources</span>
+            <h2 className="text-2xl font-black text-gray-900">Explore More CTO Resources</h2>
+          </div>
+
+          {/* Primary Links */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <Link href="/hire-fractional-cto" className="bg-white p-6 rounded-lg border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all group">
+              <span className="text-3xl mb-3 block">📋</span>
               <h3 className="font-bold text-gray-900 group-hover:text-cyan-700 mb-2">How to Hire a Fractional CTO</h3>
-              <p className="text-gray-600 text-sm">Complete guide to hiring process</p>
+              <p className="text-gray-600 text-sm">Complete guide to the hiring process, technical assessment, and contract terms</p>
             </Link>
-            <Link href="/fractional-cto-jobs-uk" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-cyan-300 transition-colors group">
-              <span className="text-2xl mb-3 block">💼</span>
+            <Link href="/fractional-cto-jobs-uk" className="bg-white p-6 rounded-lg border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all group">
+              <span className="text-3xl mb-3 block">💼</span>
               <h3 className="font-bold text-gray-900 group-hover:text-cyan-700 mb-2">Fractional CTO Jobs UK</h3>
-              <p className="text-gray-600 text-sm">Browse live fractional CTO roles</p>
+              <p className="text-gray-600 text-sm">Browse live fractional CTO and technical leadership roles</p>
             </Link>
-            <Link href="/fractional-cto-salary" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-cyan-300 transition-colors group">
-              <span className="text-2xl mb-3 block">💰</span>
+            <Link href="/fractional-cto-salary" className="bg-white p-6 rounded-lg border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all group">
+              <span className="text-3xl mb-3 block">💰</span>
               <h3 className="font-bold text-gray-900 group-hover:text-cyan-700 mb-2">Fractional CTO Salary Guide</h3>
-              <p className="text-gray-600 text-sm">UK salary benchmarks and rates</p>
+              <p className="text-gray-600 text-sm">UK day rates, annual earnings, and IR35 considerations for fractional CTOs</p>
             </Link>
+          </div>
+
+          {/* Secondary Links */}
+          <div className="grid md:grid-cols-4 gap-4">
+            <Link href="/fractional-cto-services" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-colors group">
+              <span className="text-xl mb-2 block">⚙️</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-cyan-700 text-sm">CTO Services</h4>
+              <p className="text-gray-500 text-xs">What CTOs deliver</p>
+            </Link>
+            <Link href="/part-time-cto-jobs-uk" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-colors group">
+              <span className="text-xl mb-2 block">🕐</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-cyan-700 text-sm">Part-Time CTO Jobs</h4>
+              <p className="text-gray-500 text-xs">2-3 days per week</p>
+            </Link>
+            <Link href="/interim-cto-jobs-uk" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-colors group">
+              <span className="text-xl mb-2 block">⏳</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-cyan-700 text-sm">Interim CTO Jobs</h4>
+              <p className="text-gray-500 text-xs">Contract tech roles</p>
+            </Link>
+            <Link href="/fractional-jobs-london" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-colors group">
+              <span className="text-xl mb-2 block">🏙️</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-cyan-700 text-sm">London Tech Jobs</h4>
+              <p className="text-gray-500 text-xs">London-based roles</p>
+            </Link>
+          </div>
+
+          {/* Cross-role links */}
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <p className="text-sm text-gray-500 mb-3">Other Fractional Executive Roles:</p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/fractional-cfo" className="text-sm text-cyan-700 hover:underline">Fractional CFO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cmo" className="text-sm text-cyan-700 hover:underline">Fractional CMO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-coo" className="text-sm text-cyan-700 hover:underline">Fractional COO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-chro" className="text-sm text-cyan-700 hover:underline">Fractional CHRO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-ciso" className="text-sm text-cyan-700 hover:underline">Fractional CISO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cpo" className="text-sm text-cyan-700 hover:underline">Fractional CPO</Link>
+            </div>
           </div>
         </div>
       </section>
