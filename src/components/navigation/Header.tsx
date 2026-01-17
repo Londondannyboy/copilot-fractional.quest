@@ -64,7 +64,7 @@ const navigation = {
     ],
     guides: [
       { name: 'Portfolio Career Guide', href: '/articles/portfolio-career' },
-      { name: 'Salary Guide 2025', href: '/articles/fractional-executive-salary-guide-2025' },
+      { name: 'Salary Guide 2026', href: '/articles/fractional-executive-salary-guide-2026' },
       { name: 'Benefits of Fractional', href: '/articles/benefits-of-fractional-executives' },
     ]
   },

@@ -163,7 +163,7 @@ export const cmoJobsUkSEO = {
     futureOutlook: {
       title: "The Future of Fractional CMO Work",
       paragraphs: [
-        "The IPA forecasts marketing budgets will grow 4.3% in 2025, with increasing allocation to strategic leadership versus execution. This creates sustained demand for fractional CMOs who can guide strategy while building internal capabilities.",
+        "The IPA forecasts marketing budgets will grow 4.3% in 2026, with increasing allocation to strategic leadership versus execution. This creates sustained demand for fractional CMOs who can guide strategy while building internal capabilities.",
         "Key trends shaping the fractional CMO market include: the rise of AI-augmented marketing requiring strategic oversight, growing importance of first-party data strategies, and the need for marketing leaders who understand both brand and performance.",
       ],
     },

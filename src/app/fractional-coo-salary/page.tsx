@@ -21,14 +21,14 @@ export const metadata: Metadata = {
     canonical: 'https://fractional.quest/fractional-coo-salary',
   },
   openGraph: {
-    title: 'Fractional COO Salary UK 2025 | Complete Compensation Guide',
+    title: 'Fractional COO Salary UK 2026 | Complete Compensation Guide',
     description: 'Fractional COO salary UK: Day rates £600-£1,200. Complete guide to fractional COO costs.',
     url: 'https://fractional.quest/fractional-coo-salary',
     images: [{ url: ogImage, width: 1200, height: 630, alt: 'Fractional COO Salary UK Guide' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fractional COO Salary UK 2025 | Complete Compensation Guide',
+    title: 'Fractional COO Salary UK 2026 | Complete Compensation Guide',
     description: 'Fractional COO salary UK: Day rates £600-£1,200. Complete guide to fractional COO costs.',
     images: [ogImage],
   },
@@ -44,10 +44,10 @@ export default function FractionalCooSalaryPage() {
   return (
     <div className="min-h-screen bg-white">
       <WebPageSchema
-        title="Fractional COO Salary UK 2025 | Day Rates & Compensation Guide"
+        title="Fractional COO Salary UK 2026 | Day Rates & Compensation Guide"
         description="Complete guide to fractional COO salary UK. Day rates, annual equivalents, and factors affecting compensation."
         url="https://fractional.quest/fractional-coo-salary"
-        dateModified={new Date('2025-01-07')}
+        dateModified={new Date('2026-01-07')}
       />
 
       {/* Hero Section */}
@@ -66,7 +66,7 @@ export default function FractionalCooSalaryPage() {
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                Salary Guide 2025
+                Salary Guide 2026
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair">
                 <strong>Fractional COO Salary</strong> UK

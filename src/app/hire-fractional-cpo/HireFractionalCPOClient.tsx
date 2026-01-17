@@ -71,7 +71,7 @@ export default function HireFractionalCPOClient() {
 
   return (
     <main style={{ "--copilot-kit-primary-color": "#6366f1" } as CopilotKitCSSProperties}>
-      <WebPageSchema title="Hire a Fractional CPO UK 2025" description="How to hire a fractional CPO." url="https://fractional.quest/hire-fractional-cpo" dateModified={new Date('2025-01-07T00:00:00Z')} />
+      <WebPageSchema title="Hire a Fractional CPO UK 2026" description="How to hire a fractional CPO." url="https://fractional.quest/hire-fractional-cpo" dateModified={new Date('2026-01-07T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
       <CopilotSidebar

@@ -77,7 +77,7 @@ export default async function InterimCHROJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim CHRO Jobs UK | HR Director Roles 2025" description="Find interim CHRO and HR Director jobs across the UK." url="https://fractional.quest/interim-chro-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim CHRO Jobs UK | HR Director Roles 2026" description="Find interim CHRO and HR Director jobs across the UK." url="https://fractional.quest/interim-chro-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_CHRO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-chro-jobs-uk" />
 

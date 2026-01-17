@@ -48,7 +48,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/
 export default function FractionalCEOServicesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CEO Services UK | Part-Time Executive Leadership" description="Get experienced CEO leadership without full-time commitment." url="https://fractional.quest/fractional-ceo-services" dateModified={new Date('2025-01-08')} />
+      <WebPageSchema title="Fractional CEO Services UK | Part-Time Executive Leadership" description="Get experienced CEO leadership without full-time commitment." url="https://fractional.quest/fractional-ceo-services" dateModified={new Date('2026-01-08')} />
       <FAQPageSchema faqs={SERVICE_FAQS} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">

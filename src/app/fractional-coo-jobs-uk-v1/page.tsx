@@ -26,7 +26,7 @@ const imageAlt = getImage('coo').alt
 
 // Target keywords: "fractional coo jobs uk", "fractional coo uk", "fractional operations jobs", "coo salary uk", "part time coo"
 export const metadata: Metadata = {
-  title: 'Fractional COO Jobs UK | Part-Time COO & Operations Leadership Roles 2025',
+  title: 'Fractional COO Jobs UK | Part-Time COO & Operations Leadership Roles 2026',
   description: 'Fractional COO jobs UK: part-time COO roles paying £600-£1,200/day. Browse operations leadership positions across London and UK.',
   keywords: 'fractional coo jobs uk, fractional coo jobs, fractional coo uk, fractional operations jobs, part time coo, part-time coo, coo salary uk, fractional coo roles, fractional coo services, coo jobs uk, part time chief operating officer, fractional coo bristol',
   alternates: {
@@ -447,7 +447,7 @@ export default async function FractionalCooJobsUkPage() {
               <strong>COO salary UK</strong> rates for <strong>fractional COO</strong> positions vary significantly based on experience, specialisation, and location. Understanding <strong>COO salary UK</strong> benchmarks is essential for both candidates seeking <strong>fractional COO roles</strong> and companies hiring <strong>part-time COO</strong> talent.
             </p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">COO Salary UK - Typical Day Rates (2025)</h4>
+              <h4 className="font-bold text-gray-900 mb-4">COO Salary UK - Typical Day Rates (2026)</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>Entry-level Fractional COO:</strong> £550-£750/day</li>
                 <li><strong>Mid-level Fractional COO UK:</strong> £750-£950/day</li>

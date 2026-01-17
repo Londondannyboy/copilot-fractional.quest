@@ -77,7 +77,7 @@ export default async function InterimCOOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim COO Jobs UK | Operations Director Roles 2025" description="Find interim COO and Operations Director jobs across the UK." url="https://fractional.quest/interim-coo-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim COO Jobs UK | Operations Director Roles 2026" description="Find interim COO and Operations Director jobs across the UK." url="https://fractional.quest/interim-coo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_COO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-coo-jobs-uk" />
 

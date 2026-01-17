@@ -77,7 +77,7 @@ export default async function InterimCISOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim CISO Jobs UK | Security Director Roles 2025" description="Find interim CISO and Security Director jobs across the UK." url="https://fractional.quest/interim-ciso-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim CISO Jobs UK | Security Director Roles 2026" description="Find interim CISO and Security Director jobs across the UK." url="https://fractional.quest/interim-ciso-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_CISO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-ciso-jobs-uk" />
 

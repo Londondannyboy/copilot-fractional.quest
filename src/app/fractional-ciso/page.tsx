@@ -43,7 +43,7 @@ const breadcrumbs = [
 export default function FractionalCisoPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="What is a Fractional CISO? | Part-Time Chief Security Officer Guide" description="Complete guide to fractional CISO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-ciso" dateModified={new Date('2025-01-07')} />
+      <WebPageSchema title="What is a Fractional CISO? | Part-Time Chief Security Officer Guide" description="Complete guide to fractional CISO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-ciso" dateModified={new Date('2026-01-07')} />
       <FAQPageSchema faqs={CISO_FAQS} />
 
       {/* Hero Section */}

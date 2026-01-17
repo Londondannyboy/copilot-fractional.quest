@@ -77,7 +77,7 @@ export default async function InterimCEOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim CEO Jobs UK | Chief Executive Roles 2025" description="Find interim CEO and Chief Executive jobs across the UK." url="https://fractional.quest/interim-ceo-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim CEO Jobs UK | Chief Executive Roles 2026" description="Find interim CEO and Chief Executive jobs across the UK." url="https://fractional.quest/interim-ceo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_CEO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-ceo-jobs-uk" />
 

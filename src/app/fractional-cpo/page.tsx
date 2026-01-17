@@ -43,7 +43,7 @@ const breadcrumbs = [
 export default function FractionalCpoPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="What is a Fractional CPO? | Part-Time Chief Product Officer Guide" description="Complete guide to fractional CPO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-cpo" dateModified={new Date('2025-01-07')} />
+      <WebPageSchema title="What is a Fractional CPO? | Part-Time Chief Product Officer Guide" description="Complete guide to fractional CPO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-cpo" dateModified={new Date('2026-01-07')} />
       <FAQPageSchema faqs={CPO_FAQS} />
 
       {/* Hero Section */}

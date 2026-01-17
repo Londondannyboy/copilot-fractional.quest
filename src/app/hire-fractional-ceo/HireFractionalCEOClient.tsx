@@ -71,7 +71,7 @@ export default function HireFractionalCEOClient() {
 
   return (
     <main style={{ "--copilot-kit-primary-color": "#ca8a04" } as CopilotKitCSSProperties}>
-      <WebPageSchema title="Hire a Fractional CEO UK 2025" description="How to hire a fractional CEO." url="https://fractional.quest/hire-fractional-ceo" dateModified={new Date('2025-01-07T00:00:00Z')} />
+      <WebPageSchema title="Hire a Fractional CEO UK 2026" description="How to hire a fractional CEO." url="https://fractional.quest/hire-fractional-ceo" dateModified={new Date('2026-01-07T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
       <CopilotSidebar

@@ -69,12 +69,12 @@ export type OnboardingGifContext =
  * Real Klipy GIF URLs for onboarding (verified working)
  */
 export const ONBOARDING_GIFS: Record<OnboardingGifContext, string> = {
-  welcome: 'https://static.klipy.com/ii/935d7ab9d8c6202580a668421940ec81/9a/fb/DZ2Ib2g1.gif',
+  welcome: 'https://static.klipy.com/ii/935d7ab9d8c6202680a668421940ec81/9a/fb/DZ2Ib2g1.gif',
   goals_complete: 'https://static.klipy.com/ii/50d7c955398dfd7e3c8ba5281154280f/79/6d/dl3FgmslCLcFr3bHDBtQ.gif',
   status_complete: 'https://static.klipy.com/ii/50d7c955398dfd7e3c8ba5281154280f/79/6d/dl3FgmslCLcFr3bHDBtQ.gif',
   domain_complete: 'https://static.klipy.com/ii/c3a19a0b747a76e98651f2b9a3cca5ff/29/ef/ttocqdWS.gif',
   location_complete: 'https://static.klipy.com/ii/ce286d05b8e1a47cd4f32b0e1b6dec0e/b1/02/K4ZWIqVO.gif',
-  profile_complete: 'https://static.klipy.com/ii/935d7ab9d8c6202580a668421940ec81/d2/27/iQ5M3MEP.gif',
+  profile_complete: 'https://static.klipy.com/ii/935d7ab9d8c6202680a668421940ec81/d2/27/iQ5M3MEP.gif',
   encouragement: 'https://static.klipy.com/ii/c3a19a0b747a76e98651f2b9a3cca5ff/29/ef/ttocqdWS.gif',
 }
 

@@ -77,7 +77,7 @@ export default async function PartTimeCISOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Part-Time CISO Jobs UK | Fractional Security Director Roles 2025" description="Find part-time CISO and Security Director jobs across the UK." url="https://fractional.quest/part-time-ciso-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Part-Time CISO Jobs UK | Fractional Security Director Roles 2026" description="Find part-time CISO and Security Director jobs across the UK." url="https://fractional.quest/part-time-ciso-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={PART_TIME_CISO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/part-time-ciso-jobs-uk" />
 

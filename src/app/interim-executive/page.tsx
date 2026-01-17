@@ -69,7 +69,7 @@ export default async function InterimExecutivePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim Executive Jobs UK | C-Suite & Director Roles 2025" description="Find interim executive and C-suite jobs across the UK." url="https://fractional.quest/interim-executive" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim Executive Jobs UK | C-Suite & Director Roles 2026" description="Find interim executive and C-suite jobs across the UK." url="https://fractional.quest/interim-executive" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_EXECUTIVE_FAQS} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">

@@ -77,7 +77,7 @@ export default async function PartTimeCHROJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Part-Time CHRO Jobs UK | Fractional HR Director Roles 2025" description="Find part-time CHRO and HR Director jobs across the UK." url="https://fractional.quest/part-time-chro-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Part-Time CHRO Jobs UK | Fractional HR Director Roles 2026" description="Find part-time CHRO and HR Director jobs across the UK." url="https://fractional.quest/part-time-chro-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={PART_TIME_CHRO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/part-time-chro-jobs-uk" />
 

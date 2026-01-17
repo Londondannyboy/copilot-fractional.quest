@@ -77,7 +77,7 @@ export default async function PartTimeCTOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Part-Time CTO Jobs UK | Fractional Technology Director Roles 2025" description="Find part-time CTO and Technology Director jobs across the UK." url="https://fractional.quest/part-time-cto-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Part-Time CTO Jobs UK | Fractional Technology Director Roles 2026" description="Find part-time CTO and Technology Director jobs across the UK." url="https://fractional.quest/part-time-cto-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={PART_TIME_CTO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/part-time-cto-jobs-uk" />
 

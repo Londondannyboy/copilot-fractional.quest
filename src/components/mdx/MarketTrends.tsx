@@ -32,10 +32,10 @@ const DEFAULT_DEMAND_DATA: TrendData[] = [
   { period: 'Q2 2024', value: 115 },
   { period: 'Q3 2024', value: 128 },
   { period: 'Q4 2024', value: 142 },
-  { period: 'Q1 2025', value: 158 },
-  { period: 'Q2 2025', value: 175 },
-  { period: 'Q3 2025', value: 190, forecast: true },
-  { period: 'Q4 2025', value: 210, forecast: true },
+  { period: 'Q1 2026', value: 158 },
+  { period: 'Q2 2026', value: 175 },
+  { period: 'Q3 2026', value: 190, forecast: true },
+  { period: 'Q4 2026', value: 210, forecast: true },
 ]
 
 /**

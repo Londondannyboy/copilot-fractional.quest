@@ -77,7 +77,7 @@ export default async function PartTimeCEOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Part-Time CEO Jobs UK | Fractional Chief Executive Roles 2025" description="Find part-time CEO and Chief Executive jobs across the UK." url="https://fractional.quest/part-time-ceo-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Part-Time CEO Jobs UK | Fractional Chief Executive Roles 2026" description="Find part-time CEO and Chief Executive jobs across the UK." url="https://fractional.quest/part-time-ceo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={PART_TIME_CEO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/part-time-ceo-jobs-uk" />
 

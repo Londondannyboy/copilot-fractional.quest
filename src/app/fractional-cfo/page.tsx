@@ -49,7 +49,7 @@ export default function FractionalCfoPage() {
         title="What is a Fractional CFO? | Part-Time Chief Financial Officer Guide"
         description="Complete guide to fractional CFO meaning, responsibilities, costs, and when to hire one. Learn what a part-time Chief Financial Officer does."
         url="https://fractional.quest/fractional-cfo"
-        dateModified={new Date('2025-01-07')}
+        dateModified={new Date('2026-01-07')}
       />
       <FAQPageSchema faqs={CFO_FAQS} />
 

@@ -49,7 +49,7 @@ export default function FractionalCmoPage() {
         title="What is a Fractional CMO? | Part-Time Chief Marketing Officer Guide"
         description="Complete guide to fractional CMO meaning, responsibilities, costs, and when to hire one. Learn what a part-time Chief Marketing Officer does."
         url="https://fractional.quest/fractional-cmo"
-        dateModified={new Date('2025-01-07')}
+        dateModified={new Date('2026-01-07')}
       />
       <FAQPageSchema faqs={CMO_FAQS} />
 

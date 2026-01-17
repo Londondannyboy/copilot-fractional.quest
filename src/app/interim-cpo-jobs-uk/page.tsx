@@ -77,7 +77,7 @@ export default async function InterimCPOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim CPO Jobs UK | Product Director Roles 2025" description="Find interim CPO and Product Director jobs across the UK." url="https://fractional.quest/interim-cpo-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim CPO Jobs UK | Product Director Roles 2026" description="Find interim CPO and Product Director jobs across the UK." url="https://fractional.quest/interim-cpo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_CPO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-cpo-jobs-uk" />
 

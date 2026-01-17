@@ -211,10 +211,10 @@ export default function HireFractionalCMOClient() {
     >
       {/* Schema Markup */}
       <WebPageSchema
-        title="Hire a Fractional CMO UK 2025"
+        title="Hire a Fractional CMO UK 2026"
         description="How to hire a fractional CMO. Where to find them, interview questions, red flags, contract terms."
         url="https://fractional.quest/hire-fractional-cmo"
-        dateModified={new Date('2025-01-07T00:00:00Z')}
+        dateModified={new Date('2026-01-07T00:00:00Z')}
       />
       <FAQPageSchema faqs={faqItems} />
 

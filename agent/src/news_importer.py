@@ -23,6 +23,8 @@ from pydantic_ai import Agent
 from pydantic_ai.models.google import GoogleModel
 
 from src.data_sources.serper_client import RawNewsArticle, fetch_serper_news, fetch_trending_fractional_news
+from src.data_sources.web_scraper import scrape_url, generate_slug, ScrapedContent
+from src.data_sources.unsplash_client import get_image_for_article, UnsplashImage
 
 
 # ============
@@ -45,6 +47,11 @@ class NewsEnrichmentResult(BaseModel):
     sentiment: str = Field(description="positive, neutral, or negative sentiment about fractional work")
 
 
+class FullArticleResult(BaseModel):
+    """Result of AI full article generation"""
+    full_content: str = Field(description="500-800 word original article about the news, written for fractional executives")
+
+
 class EnrichedArticle(BaseModel):
     """Article ready for database insertion"""
     title: str
@@ -58,6 +65,12 @@ class EnrichedArticle(BaseModel):
     sentiment: str
     image_url: Optional[str]
     content_hash: str
+    slug: str
+    full_content: Optional[str] = None
+    # Unsplash attribution fields
+    image_photographer: Optional[str] = None
+    image_photographer_url: Optional[str] = None
+    image_unsplash_url: Optional[str] = None
 
 
 class NewsImportStats(BaseModel):
@@ -137,6 +150,41 @@ Generate:
 Focus on extracting value for fractional executives."""
 )
 
+# Article writer agent generates comprehensive original content
+article_writer_agent = Agent(
+    model=GoogleModel('gemini-2.0-flash'),
+    output_type=FullArticleResult,
+    system_prompt="""You are a business journalist writing for a fractional executive platform.
+
+Your task is to write an ORIGINAL article based on a news story. The article should be:
+
+## STYLE & TONE
+- Professional business journalism, not marketing copy
+- Written for experienced C-suite executives
+- Informative and analytical, not promotional
+- UK English spelling and conventions
+
+## STRUCTURE (500-800 words)
+1. **Opening hook** (1 paragraph) - Why this matters to fractional executives
+2. **The news** (1-2 paragraphs) - What happened, who's involved
+3. **Analysis** (2-3 paragraphs) - What this means for the fractional executive market
+4. **Implications** (1-2 paragraphs) - How fractional CFOs/CTOs/CMOs etc. should respond
+5. **Closing thought** (1 paragraph) - Forward-looking perspective
+
+## REQUIREMENTS
+- DO NOT copy text verbatim from the source - write original content
+- Include specific data points and quotes if available in source material
+- Make it relevant to fractional/interim executives specifically
+- Avoid hyperbole and marketing language
+- Be balanced and analytical
+
+## ATTRIBUTION
+- Reference the source publication naturally in the text
+- Example: "According to a Financial Times report..." or "As reported by TechCrunch..."
+
+Write content that executives would want to read and share."""
+)
+
 
 # ============
 # Core Functions
@@ -170,8 +218,53 @@ URL: {article.url}
         )
 
 
-async def enrich_article(article: RawNewsArticle, filter_result: NewsFilterResult) -> EnrichedArticle:
-    """Generate enriched content for an article."""
+async def generate_full_article(article: RawNewsArticle, filter_result: NewsFilterResult, scraped: ScrapedContent) -> str:
+    """Generate a comprehensive original article based on the news source."""
+    # Combine available content
+    content_parts = []
+    if scraped.success and scraped.main_content:
+        content_parts.append(f"SCRAPED CONTENT:\n{scraped.main_content[:5000]}")
+    if article.snippet:
+        content_parts.append(f"ORIGINAL SNIPPET:\n{article.snippet}")
+
+    combined_content = "\n\n".join(content_parts) if content_parts else "Limited information available"
+
+    prompt = f"""Write an original article based on this news story:
+
+TITLE: {article.title}
+SOURCE: {article.source}
+CATEGORY: {filter_result.category}
+DATE: {article.date or 'Recent'}
+
+SOURCE CONTENT:
+{combined_content}
+
+Remember: Write an ORIGINAL 500-800 word article, don't copy verbatim. Make it relevant to fractional executives."""
+
+    try:
+        result = await article_writer_agent.run(prompt)
+        return result.output.full_content
+    except Exception as e:
+        print(f"[ArticleWriter] Error: {e}", file=sys.stderr)
+        # Return fallback content
+        return f"""The fractional executive market continues to evolve, as highlighted by recent developments reported by {article.source}.
+
+{article.snippet}
+
+This news underscores the growing importance of flexible executive leadership in today's business environment. Fractional executives, who work with multiple companies on a part-time basis, are increasingly sought after for their ability to provide strategic guidance without the commitment of a full-time hire.
+
+For professionals considering or already working in fractional roles, staying informed about market developments like these is essential for maintaining a competitive edge and understanding where opportunities may arise.
+
+The trend towards fractional leadership shows no signs of slowing, with more companies recognising the value of accessing senior expertise on a flexible basis."""
+
+
+async def enrich_article(article: RawNewsArticle, filter_result: NewsFilterResult, generate_content: bool = True) -> EnrichedArticle:
+    """Generate enriched content for an article, optionally with full article generation."""
+    import os
+
+    # Generate slug
+    slug = generate_slug(article.title)
+
     prompt = f"""Enrich this news article about fractional executives:
 
 Title: {article.title}
@@ -183,6 +276,41 @@ Date: {article.date or 'Unknown'}
     try:
         result = await news_enrich_agent.run(prompt)
 
+        # Optionally generate full article
+        full_content = None
+        if generate_content:
+            print(f"[NewsEnrich] Scraping {article.url[:60]}...", file=sys.stderr)
+            scraped = await scrape_url(article.url)
+            full_content = await generate_full_article(article, filter_result, scraped)
+
+        # Get contextual image from Unsplash instead of source image
+        image_url = None
+        image_photographer = None
+        image_photographer_url = None
+        image_unsplash_url = None
+
+        unsplash_key = os.getenv("UNSPLASH_ACCESS_KEY")
+        if unsplash_key:
+            print(f"[NewsEnrich] Fetching Unsplash image for category: {filter_result.category}...", file=sys.stderr)
+            unsplash_image = await get_image_for_article(
+                category=filter_result.category,
+                tags=result.output.tags,
+                title=article.title,
+                access_key=unsplash_key
+            )
+            if unsplash_image:
+                image_url = unsplash_image.url
+                image_photographer = unsplash_image.photographer
+                image_photographer_url = unsplash_image.photographer_url
+                image_unsplash_url = unsplash_image.unsplash_url
+                print(f"[NewsEnrich] Got Unsplash image by {unsplash_image.photographer}", file=sys.stderr)
+            else:
+                print(f"[NewsEnrich] No Unsplash image found, using source image", file=sys.stderr)
+                image_url = article.image_url
+        else:
+            print(f"[NewsEnrich] UNSPLASH_ACCESS_KEY not set, using source image", file=sys.stderr)
+            image_url = article.image_url
+
         return EnrichedArticle(
             title=article.title,
             url=article.url,
@@ -193,8 +321,13 @@ Date: {article.date or 'Unknown'}
             category=filter_result.category,
             tags=result.output.tags[:10],
             sentiment=result.output.sentiment,
-            image_url=article.image_url,
-            content_hash=compute_article_hash(article)
+            image_url=image_url,
+            content_hash=compute_article_hash(article),
+            slug=slug,
+            full_content=full_content,
+            image_photographer=image_photographer,
+            image_photographer_url=image_photographer_url,
+            image_unsplash_url=image_unsplash_url
         )
     except Exception as e:
         print(f"[NewsEnrich] Error: {e}", file=sys.stderr)
@@ -210,7 +343,9 @@ Date: {article.date or 'Unknown'}
             tags=["fractional", "executive"],
             sentiment="neutral",
             image_url=article.image_url,
-            content_hash=compute_article_hash(article)
+            content_hash=compute_article_hash(article),
+            slug=slug,
+            full_content=None
         )
 
 
@@ -241,16 +376,17 @@ def check_article_duplicate(conn, article: RawNewsArticle) -> bool:
 
 
 def insert_article(conn, article: EnrichedArticle) -> Optional[str]:
-    """Insert enriched article into database."""
+    """Insert enriched article into database with full content and Unsplash attribution."""
     cur = conn.cursor()
     try:
         cur.execute("""
             INSERT INTO news_articles (
                 title, url, source_name, published_date, summary,
                 key_insights, category, tags, sentiment, image_url,
-                content_hash, imported_at, status
+                content_hash, imported_at, status, slug, full_content,
+                image_photographer, image_photographer_url, image_unsplash_url
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), 'published'
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), 'published', %s, %s, %s, %s, %s
             ) RETURNING id
         """, (
             article.title,
@@ -263,11 +399,17 @@ def insert_article(conn, article: EnrichedArticle) -> Optional[str]:
             article.tags,
             article.sentiment,
             article.image_url,
-            article.content_hash
+            article.content_hash,
+            article.slug,
+            article.full_content,
+            article.image_photographer,
+            article.image_photographer_url,
+            article.image_unsplash_url
         ))
         article_id = cur.fetchone()[0]
         conn.commit()
         cur.close()
+        print(f"[NewsInsert] Inserted article with slug: {article.slug}", file=sys.stderr)
         return str(article_id)
     except Exception as e:
         conn.rollback()

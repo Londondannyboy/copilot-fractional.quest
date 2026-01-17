@@ -49,7 +49,7 @@ export default function FractionalCtoPage() {
         title="What is a Fractional CTO? | Part-Time Chief Technology Officer Guide"
         description="Complete guide to fractional CTO meaning, responsibilities, costs, and when to hire one. Learn what a part-time Chief Technology Officer does."
         url="https://fractional.quest/fractional-cto"
-        dateModified={new Date('2025-01-07')}
+        dateModified={new Date('2026-01-07')}
       />
       <FAQPageSchema faqs={CTO_FAQS} />
 

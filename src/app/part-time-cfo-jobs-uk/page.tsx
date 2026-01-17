@@ -77,7 +77,7 @@ export default async function PartTimeCFOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Part-Time CFO Jobs UK | Fractional Finance Director Roles 2025" description="Find part-time CFO and Finance Director jobs across the UK." url="https://fractional.quest/part-time-cfo-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Part-Time CFO Jobs UK | Fractional Finance Director Roles 2026" description="Find part-time CFO and Finance Director jobs across the UK." url="https://fractional.quest/part-time-cfo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={PART_TIME_CFO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/part-time-cfo-jobs-uk" />
 

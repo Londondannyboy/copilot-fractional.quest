@@ -132,7 +132,7 @@ export default async function InterimCFOJobsUKPage() {
   return (
     <div className="min-h-screen bg-white">
       <WebPageSchema
-        title="Interim CFO Jobs UK | Interim Finance Director Roles 2025"
+        title="Interim CFO Jobs UK | Interim Finance Director Roles 2026"
         description="Find interim CFO and Finance Director jobs across the UK. Premium interim finance leadership roles."
         url="https://fractional.quest/interim-cfo-jobs-uk"
         dateModified={lastUpdatedDate}

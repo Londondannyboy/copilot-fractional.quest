@@ -48,7 +48,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/
 export default function FractionalCPOServicesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CPO Services UK | Part-Time Product Leadership" description="Get experienced CPO leadership without full-time commitment." url="https://fractional.quest/fractional-cpo-services" dateModified={new Date('2025-01-08')} />
+      <WebPageSchema title="Fractional CPO Services UK | Part-Time Product Leadership" description="Get experienced CPO leadership without full-time commitment." url="https://fractional.quest/fractional-cpo-services" dateModified={new Date('2026-01-08')} />
       <FAQPageSchema faqs={SERVICE_FAQS} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">

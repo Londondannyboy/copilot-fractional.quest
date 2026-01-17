@@ -15,7 +15,7 @@ import { HotJobsLines } from '@/components/HotJobsLines'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Fractional Jobs in Tech 2025 | Technology Industry Executive Roles',
+  title: 'Fractional Jobs in Tech 2026 | Technology Industry Executive Roles',
   description: 'Fractional jobs in tech: CTO, CPO, CISO roles in startups, SaaS, and fintech. Day rates £900-£1,500.',
   keywords: 'fractional jobs tech, fractional cto startup, tech industry executive jobs, saas fractional jobs, fintech fractional jobs, technology leadership',
   alternates: { canonical: 'https://fractional.quest/fractional-jobs-tech' },
@@ -68,7 +68,7 @@ export default async function FractionalJobsTechPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional Jobs in Tech | Technology Industry Executive Roles 2025" description="Find fractional executive jobs in tech startups and technology companies." url="https://fractional.quest/fractional-jobs-tech" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Fractional Jobs in Tech | Technology Industry Executive Roles 2026" description="Find fractional executive jobs in tech startups and technology companies." url="https://fractional.quest/fractional-jobs-tech" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={TECH_FRACTIONAL_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/fractional-jobs-tech" />
 

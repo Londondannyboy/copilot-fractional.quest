@@ -26,7 +26,7 @@ const imageAlt = getImage('cfo').alt
 
 // Target keywords: "fractional cfo jobs uk", "fractional cfo uk", "fractional finance jobs", "cfo salary uk", "part time cfo"
 export const metadata: Metadata = {
-  title: 'Fractional CFO Jobs UK | Part-Time CFO & Finance Leadership Roles 2025',
+  title: 'Fractional CFO Jobs UK | Part-Time CFO & Finance Leadership Roles 2026',
   description: 'Fractional CFO jobs UK: part-time CFO roles paying £700-£1,400/day. Browse finance leadership positions across London and UK.',
   keywords: 'fractional cfo jobs uk, fractional cfo jobs, fractional cfo uk, fractional finance jobs, part time cfo, part-time cfo, cfo salary uk, fractional cfo roles, fractional cfo services, cfo jobs uk, part time chief financial officer, fractional cfo bristol',
   alternates: {
@@ -447,7 +447,7 @@ export default async function FractionalCfoJobsUkPage() {
               <strong>CFO salary UK</strong> rates for <strong>fractional CFO</strong> positions vary significantly based on experience, specialisation, and location. Understanding <strong>CFO salary UK</strong> benchmarks is essential for both candidates seeking <strong>fractional CFO roles</strong> and companies hiring <strong>part-time CFO</strong> talent.
             </p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">CFO Salary UK - Typical Day Rates (2025)</h4>
+              <h4 className="font-bold text-gray-900 mb-4">CFO Salary UK - Typical Day Rates (2026)</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>Entry-level Fractional CFO:</strong> £650-£850/day</li>
                 <li><strong>Mid-level Fractional CFO UK:</strong> £850-£1,100/day</li>

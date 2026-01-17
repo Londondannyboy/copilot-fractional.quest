@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   keywords: 'fractional cpo salary, fractional cpo salary uk, fractional cpo day rate, fractional cpo cost, cpo salary uk, part time cpo salary, fractional product officer salary',
   alternates: { canonical: 'https://fractional.quest/fractional-cpo-salary' },
   openGraph: {
-    title: 'Fractional CPO Salary UK 2025 | Complete Compensation Guide',
+    title: 'Fractional CPO Salary UK 2026 | Complete Compensation Guide',
     description: 'Fractional CPO salary UK: Day rates £800-£1,400. Complete guide to fractional CPO costs and compensation.',
     url: 'https://fractional.quest/fractional-cpo-salary',
     images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fractional CPO Salary UK 2025 | Complete Compensation Guide',
+    title: 'Fractional CPO Salary UK 2026 | Complete Compensation Guide',
     description: 'Fractional CPO salary UK: Day rates £800-£1,400. Complete guide to fractional CPO costs and compensation.',
     images: [ogImage],
   },
@@ -43,7 +43,7 @@ const breadcrumbs = [
 export default function FractionalCpoSalaryPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CPO Salary UK 2025 | Day Rates & Compensation Guide" description="Complete guide to fractional CPO salary UK. Day rates, annual equivalents, and factors affecting compensation." url="https://fractional.quest/fractional-cpo-salary" dateModified={new Date('2025-01-07')} />
+      <WebPageSchema title="Fractional CPO Salary UK 2026 | Day Rates & Compensation Guide" description="Complete guide to fractional CPO salary UK. Day rates, annual equivalents, and factors affecting compensation." url="https://fractional.quest/fractional-cpo-salary" dateModified={new Date('2026-01-07')} />
 
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden">
@@ -53,7 +53,7 @@ export default function FractionalCpoSalaryPage() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
-              <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Salary Guide 2025</span>
+              <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Salary Guide 2026</span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair text-white mb-6 leading-tight"><strong>Fractional CPO Salary</strong> UK</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Complete guide to <strong>fractional CPO salary UK</strong> rates. Understand day rates, annual equivalents, and factors affecting compensation.</p>
             </div>

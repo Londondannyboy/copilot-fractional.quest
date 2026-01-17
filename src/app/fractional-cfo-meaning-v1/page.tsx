@@ -33,7 +33,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Guides', href: '/fr
 export default function FractionalCFOMeaningPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CFO Meaning | What Does Fractional CFO Mean?" description="Learn what fractional CFO means and when to hire one." url="https://fractional.quest/fractional-cfo-meaning" dateModified={new Date('2025-01-08')} />
+      <WebPageSchema title="Fractional CFO Meaning | What Does Fractional CFO Mean?" description="Learn what fractional CFO means and when to hire one." url="https://fractional.quest/fractional-cfo-meaning" dateModified={new Date('2026-01-08')} />
       <FAQPageSchema faqs={CFO_MEANING_FAQS} />
 
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">

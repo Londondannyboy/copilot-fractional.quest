@@ -26,7 +26,7 @@ const defaultMilestones: Milestone[] = [
     status: "completed",
   },
   {
-    year: 2025,
+    year: 2026,
     title: "First Fractional Role",
     description: "1-2 clients, establish credentials",
     icon: "🚀",
@@ -64,7 +64,7 @@ const defaultMilestones: Milestone[] = [
  *   currentRole="Marketing Director"
  *   targetRole="Fractional CMO"
  *   milestones={[
- *     { year: 2025, title: "First Client", description: "Launch fractional practice" }
+ *     { year: 2026, title: "First Client", description: "Launch fractional practice" }
  *   ]}
  * />
  * ```

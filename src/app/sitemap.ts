@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getAllPublishedPages } from '@/lib/pages'
+import { neon } from '@neondatabase/serverless'
 
 // Slugs that redirect to other URLs (from next.config.ts)
 // These should NOT appear in the sitemap - only the destination URLs should
@@ -335,6 +336,64 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     })
 
+  // ============================================
+  // INDIVIDUAL JOB & NEWS PAGES - From database
+  // ============================================
+
+  let jobDetailPages: MetadataRoute.Sitemap = []
+  let newsArticlePages: MetadataRoute.Sitemap = []
+
+  try {
+    const sql = neon(process.env.DATABASE_URL!)
+
+    // Fetch individual job pages with slugs
+    const jobs = await sql`
+      SELECT slug, posted_date, imported_at
+      FROM jobs
+      WHERE is_active = true AND slug IS NOT NULL AND slug != ''
+      ORDER BY posted_date DESC NULLS LAST
+      LIMIT 500
+    `
+
+    jobDetailPages = jobs.map((job) => ({
+      url: `${baseUrl}/job/${job.slug}`,
+      lastModified: job.posted_date ? new Date(job.posted_date) : (job.imported_at ? new Date(job.imported_at) : new Date()),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    }))
+
+    // Fetch individual news article pages with slugs
+    const articles = await sql`
+      SELECT slug, published_date, imported_at
+      FROM news_articles
+      WHERE status = 'published' AND slug IS NOT NULL AND slug != ''
+      ORDER BY imported_at DESC
+      LIMIT 200
+    `
+
+    newsArticlePages = articles.map((article) => ({
+      url: `${baseUrl}/news/${article.slug}`,
+      lastModified: article.published_date ? new Date(article.published_date) : (article.imported_at ? new Date(article.imported_at) : new Date()),
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
+    }))
+
+    console.log(`[Sitemap] Added ${jobDetailPages.length} job pages, ${newsArticlePages.length} news pages`)
+  } catch (error) {
+    console.error('[Sitemap] Error fetching job/news pages:', error)
+    // Continue without them
+  }
+
+  // News index page
+  const newsIndexPage: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/news`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
+    },
+  ]
+
   // Combine all pages
   return [
     ...homepage,
@@ -350,5 +409,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...toolPages,
     ...guidePages,
     ...dynamicPages,
+    ...newsIndexPage,
+    ...jobDetailPages,
+    ...newsArticlePages,
   ]
 }

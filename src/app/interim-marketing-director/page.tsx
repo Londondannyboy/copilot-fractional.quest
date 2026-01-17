@@ -76,7 +76,7 @@ export default async function InterimMarketingDirectorPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim Marketing Director Jobs UK | Senior Marketing Roles 2025" description="Find interim Marketing Director jobs across the UK." url="https://fractional.quest/interim-marketing-director" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim Marketing Director Jobs UK | Senior Marketing Roles 2026" description="Find interim Marketing Director jobs across the UK." url="https://fractional.quest/interim-marketing-director" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_MD_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 5)} pageUrl="https://fractional.quest/interim-marketing-director" />
 

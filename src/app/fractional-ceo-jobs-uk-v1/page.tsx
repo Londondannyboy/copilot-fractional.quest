@@ -24,7 +24,7 @@ const ogImage = getOGImageUrl('ceo')
 const imageAlt = getImage('ceo').alt
 
 export const metadata: Metadata = {
-  title: 'Fractional CEO Jobs UK | Part-Time CEO & Interim Executive Roles 2025',
+  title: 'Fractional CEO Jobs UK | Part-Time CEO & Interim Executive Roles 2026',
   description: 'Fractional CEO jobs UK: part-time CEO roles paying £1,000-£2,000/day. Browse executive leadership positions across London and UK.',
   keywords: 'fractional ceo jobs uk, fractional ceo uk, interim ceo, part time ceo, fractional executive jobs, ceo salary uk, fractional managing director',
   alternates: { canonical: 'https://fractional.quest/fractional-ceo-jobs-uk' },

@@ -43,7 +43,7 @@ const breadcrumbs = [
 export default function FractionalChroPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="What is a Fractional CHRO? | Part-Time Chief HR Officer Guide" description="Complete guide to fractional CHRO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-chro" dateModified={new Date('2025-01-07')} />
+      <WebPageSchema title="What is a Fractional CHRO? | Part-Time Chief HR Officer Guide" description="Complete guide to fractional CHRO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-chro" dateModified={new Date('2026-01-07')} />
       <FAQPageSchema faqs={CHRO_FAQS} />
 
       {/* Hero Section */}

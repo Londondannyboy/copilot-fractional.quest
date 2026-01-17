@@ -9,12 +9,12 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 
 export const metadata: Metadata = {
-  title: 'Best Fractional CFO Companies UK 2025 | Top CFO Service Providers',
+  title: 'Best Fractional CFO Companies UK 2026 | Top CFO Service Providers',
   description: 'Compare the best fractional CFO companies in the UK. Find top CFO service providers and boutique firms. Pricing from £850/day.',
   keywords: 'best fractional cfo companies, fractional cfo firms uk, top fractional cfo providers, cfo services companies uk, outsourced cfo firms',
   alternates: { canonical: 'https://fractional.quest/best-fractional-cfo-companies' },
   openGraph: {
-    title: 'Best Fractional CFO Companies UK 2025',
+    title: 'Best Fractional CFO Companies UK 2026',
     description: 'Compare top fractional CFO providers in the UK. Find the right CFO services for your business.',
     url: 'https://fractional.quest/best-fractional-cfo-companies',
   },
@@ -79,7 +79,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Guides', href: '/fr
 export default function BestFractionalCFOCompaniesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Best Fractional CFO Companies UK 2025 | Top CFO Service Providers" description="Compare the best fractional CFO companies in the UK." url="https://fractional.quest/best-fractional-cfo-companies" dateModified={new Date('2025-01-08')} />
+      <WebPageSchema title="Best Fractional CFO Companies UK 2026 | Top CFO Service Providers" description="Compare the best fractional CFO companies in the UK." url="https://fractional.quest/best-fractional-cfo-companies" dateModified={new Date('2026-01-08')} />
       <FAQPageSchema faqs={COMPANIES_FAQS} />
 
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">

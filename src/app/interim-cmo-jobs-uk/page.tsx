@@ -77,7 +77,7 @@ export default async function InterimCMOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Interim CMO Jobs UK | Marketing Director Roles 2025" description="Find interim CMO and Marketing Director jobs across the UK." url="https://fractional.quest/interim-cmo-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Interim CMO Jobs UK | Marketing Director Roles 2026" description="Find interim CMO and Marketing Director jobs across the UK." url="https://fractional.quest/interim-cmo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_CMO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-cmo-jobs-uk" />
 

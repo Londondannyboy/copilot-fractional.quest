@@ -71,7 +71,7 @@ export default function HireFractionalCISOClient() {
 
   return (
     <main style={{ "--copilot-kit-primary-color": "#dc2626" } as CopilotKitCSSProperties}>
-      <WebPageSchema title="Hire a Fractional CISO UK 2025" description="How to hire a fractional CISO." url="https://fractional.quest/hire-fractional-ciso" dateModified={new Date('2025-01-07T00:00:00Z')} />
+      <WebPageSchema title="Hire a Fractional CISO UK 2026" description="How to hire a fractional CISO." url="https://fractional.quest/hire-fractional-ciso" dateModified={new Date('2026-01-07T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
       <CopilotSidebar

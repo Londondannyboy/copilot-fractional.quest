@@ -49,7 +49,7 @@ export default function FractionalCooPage() {
         title="What is a Fractional COO? | Part-Time Chief Operating Officer Guide"
         description="Complete guide to fractional COO meaning, responsibilities, costs, and when to hire one. Learn what a part-time Chief Operating Officer does."
         url="https://fractional.quest/fractional-coo"
-        dateModified={new Date('2025-01-07')}
+        dateModified={new Date('2026-01-07')}
       />
       <FAQPageSchema faqs={COO_FAQS} />
 

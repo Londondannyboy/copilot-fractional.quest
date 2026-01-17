@@ -63,7 +63,7 @@ export default function HireFractionalCOOClient() {
 
   return (
     <main style={{ "--copilot-kit-primary-color": "#6b7280" } as CopilotKitCSSProperties}>
-      <WebPageSchema title="Hire a Fractional COO UK 2025" description="How to hire a fractional COO. Where to find them, interview questions, red flags, contract terms." url="https://fractional.quest/hire-fractional-coo" dateModified={new Date('2025-01-07T00:00:00Z')} />
+      <WebPageSchema title="Hire a Fractional COO UK 2026" description="How to hire a fractional COO. Where to find them, interview questions, red flags, contract terms." url="https://fractional.quest/hire-fractional-coo" dateModified={new Date('2026-01-07T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
       <CopilotSidebar

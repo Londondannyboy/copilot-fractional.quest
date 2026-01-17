@@ -359,7 +359,7 @@ export function JobsSidebar({
             className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
             <span>📊</span>
-            <span>Salary Guide 2025</span>
+            <span>Salary Guide 2026</span>
           </Link>
           <Link
             href="/articles/portfolio-career"

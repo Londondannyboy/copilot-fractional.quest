@@ -77,7 +77,7 @@ export default async function PartTimeCPOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Part-Time CPO Jobs UK | Fractional Product Director Roles 2025" description="Find part-time CPO and Product Director jobs across the UK." url="https://fractional.quest/part-time-cpo-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Part-Time CPO Jobs UK | Fractional Product Director Roles 2026" description="Find part-time CPO and Product Director jobs across the UK." url="https://fractional.quest/part-time-cpo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={PART_TIME_CPO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/part-time-cpo-jobs-uk" />
 

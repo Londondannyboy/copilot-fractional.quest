@@ -26,7 +26,7 @@ const imageAlt = getImage('cmo').alt
 
 // Target keywords: "fractional cmo jobs uk", "fractional cmo uk", "fractional marketing jobs", "cmo salary uk", "part time cmo"
 export const metadata: Metadata = {
-  title: 'Fractional CMO Jobs UK | Part-Time CMO & Marketing Leadership Roles 2025',
+  title: 'Fractional CMO Jobs UK | Part-Time CMO & Marketing Leadership Roles 2026',
   description: 'Fractional CMO jobs UK: part-time CMO roles paying £700-£1,400/day. Browse marketing leadership positions across London and UK.',
   keywords: 'fractional cmo jobs uk, fractional cmo jobs, fractional cmo uk, fractional marketing jobs, part time cmo, part-time cmo, cmo salary uk, fractional cmo roles, fractional cmo services, cmo jobs uk, part time chief marketing officer, fractional cmo bristol',
   alternates: {
@@ -450,7 +450,7 @@ export default async function FractionalCmoJobsUkPage() {
               <strong>CMO salary UK</strong> rates for <strong>fractional CMO</strong> positions vary significantly based on experience, specialisation, and location. Understanding <strong>CMO salary UK</strong> benchmarks is essential for both candidates seeking <strong>fractional CMO roles</strong> and companies hiring <strong>part-time CMO</strong> talent.
             </p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">CMO Salary UK - Typical Day Rates (2025)</h4>
+              <h4 className="font-bold text-gray-900 mb-4">CMO Salary UK - Typical Day Rates (2026)</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>Entry-level Fractional CMO:</strong> £600-£850/day</li>
                 <li><strong>Mid-level Fractional CMO UK:</strong> £850-£1,100/day</li>

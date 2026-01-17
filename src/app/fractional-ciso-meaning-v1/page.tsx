@@ -33,7 +33,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Guides', href: '/fr
 export default function FractionalCISOMeaningPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CISO Meaning | What Does Fractional CISO Mean?" description="Learn what fractional CISO means and when to hire one." url="https://fractional.quest/fractional-ciso-meaning" dateModified={new Date('2025-01-08')} />
+      <WebPageSchema title="Fractional CISO Meaning | What Does Fractional CISO Mean?" description="Learn what fractional CISO means and when to hire one." url="https://fractional.quest/fractional-ciso-meaning" dateModified={new Date('2026-01-08')} />
       <FAQPageSchema faqs={CISO_MEANING_FAQS} />
 
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">

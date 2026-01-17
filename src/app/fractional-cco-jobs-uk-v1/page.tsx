@@ -17,7 +17,7 @@ import { HotJobsLines } from '@/components/HotJobsLines'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Fractional CCO Jobs UK 2025 | Chief Commercial Officer Roles',
+  title: 'Fractional CCO Jobs UK 2026 | Chief Commercial Officer Roles',
   description: 'Fractional CCO jobs UK: part-time CCO roles paying £900-£1,400/day. Browse commercial leadership positions across London and UK.',
   keywords: 'fractional cco jobs uk, fractional cco, fractional chief commercial officer, part time commercial director, fractional commercial director jobs',
   alternates: { canonical: 'https://fractional.quest/fractional-cco-jobs-uk' },
@@ -76,7 +76,7 @@ export default async function FractionalCCOJobsUKPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CCO Jobs UK | Chief Commercial Officer Roles 2025" description="Find fractional CCO and Commercial Director jobs across the UK." url="https://fractional.quest/fractional-cco-jobs-uk" dateModified={lastUpdatedDate} />
+      <WebPageSchema title="Fractional CCO Jobs UK | Chief Commercial Officer Roles 2026" description="Find fractional CCO and Commercial Director jobs across the UK." url="https://fractional.quest/fractional-cco-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={FRACTIONAL_CCO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/fractional-cco-jobs-uk" />
 

@@ -24,7 +24,7 @@ const ogImage = getOGImageUrl('cpo')
 const imageAlt = getImage('cpo').alt
 
 export const metadata: Metadata = {
-  title: 'Fractional CPO Jobs UK | Part-Time Chief Product Officer Roles 2025',
+  title: 'Fractional CPO Jobs UK | Part-Time Chief Product Officer Roles 2026',
   description: 'Fractional CPO jobs UK: part-time CPO roles paying £800-£1,400/day. Browse product leadership positions across London and UK.',
   keywords: 'fractional cpo jobs uk, fractional cpo uk, fractional product officer, part time cpo, fractional product jobs, cpo salary uk, fractional head of product',
   alternates: { canonical: 'https://fractional.quest/fractional-cpo-jobs-uk' },

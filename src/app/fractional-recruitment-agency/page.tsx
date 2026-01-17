@@ -83,7 +83,7 @@ export default function FractionalRecruitmentAgencyPage() {
 
   return (
     <main style={{ "--copilot-kit-primary-color": "#059669" } as CopilotKitCSSProperties}>
-      <WebPageSchema title="Fractional Recruitment Agency UK 2025 - Best Agencies for Fractional Executives" description="Find the best fractional recruitment agencies in the UK. Compare agencies specialising in fractional CFO, CTO, CMO, and C-suite placements. Understand fees, timelines, and how to choose." url="https://fractional.quest/fractional-recruitment-agency" dateModified={new Date('2025-01-15T00:00:00Z')} />
+      <WebPageSchema title="Fractional Recruitment Agency UK 2026 - Best Agencies for Fractional Executives" description="Find the best fractional recruitment agencies in the UK. Compare agencies specialising in fractional CFO, CTO, CMO, and C-suite placements. Understand fees, timelines, and how to choose." url="https://fractional.quest/fractional-recruitment-agency" dateModified={new Date('2026-01-15T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
       <CopilotSidebar

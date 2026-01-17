@@ -24,6 +24,7 @@ from pydantic_ai import Agent
 from pydantic_ai.models.google import GoogleModel
 
 from src.data_sources.apify_client import RawJob, fetch_apify_jobs
+from src.data_sources.web_scraper import scrape_url, generate_slug, ScrapedContent
 
 
 # ============
@@ -45,6 +46,15 @@ class EnrichmentResult(BaseModel):
     topic_keywords: List[str] = Field(description="5-10 searchable keywords")
 
 
+class FullContentResult(BaseModel):
+    """Result of AI full content generation"""
+    full_description: str = Field(description="Comprehensive 3-5 paragraph job description written in engaging prose")
+    responsibilities: List[str] = Field(description="5-8 key responsibilities as bullet points")
+    requirements: List[str] = Field(description="5-8 key requirements/qualifications as bullet points")
+    benefits: List[str] = Field(description="3-5 benefits or perks if mentioned, empty list if not")
+    about_company: str = Field(description="1-2 paragraph company description based on available info")
+
+
 class EnrichedJob(BaseModel):
     """Job ready for database insertion"""
     title: str
@@ -60,6 +70,17 @@ class EnrichedJob(BaseModel):
     source: str
     external_id: str
     content_hash: str
+    # New fields for full content
+    slug: str
+    full_description: Optional[str] = None
+    responsibilities: Optional[List[str]] = None
+    requirements: Optional[List[str]] = None
+    benefits: Optional[List[str]] = None
+    about_company: Optional[str] = None
+    posted_date: Optional[str] = None
+    workplace_type: Optional[str] = None
+    is_fractional: bool = True
+    is_interim: bool = False
 
 
 class ImportStats(BaseModel):
@@ -161,6 +182,53 @@ Given a job, generate:
 Be professional, specific, and focus on what makes executives excited about opportunities."""
 )
 
+# Content generation agent writes comprehensive job content
+content_agent = Agent(
+    model=GoogleModel('gemini-2.0-flash'),
+    output_type=FullContentResult,
+    system_prompt="""You are a professional copywriter creating job listings for a premium fractional executive platform.
+
+Given a job posting (title, company, location, and scraped content), generate comprehensive, ORIGINAL content:
+
+## WRITING STYLE
+- Professional, engaging tone suitable for senior executives
+- DO NOT copy text verbatim - rewrite everything in your own words
+- Focus on what makes this role appealing to experienced executives
+- Be specific where you have info, gracefully general where you don't
+
+## FULL DESCRIPTION (3-5 paragraphs)
+Write an engaging narrative covering:
+1. Opening hook - what makes this opportunity exciting
+2. The company context and why they need this role
+3. The strategic impact this person will have
+4. Working arrangement (fractional/part-time details if known)
+5. Call to action
+
+## RESPONSIBILITIES (5-8 bullet points)
+Extract or infer key responsibilities. Each should:
+- Start with an action verb
+- Be specific to the role level (executive, not junior)
+- Focus on strategic impact, not tasks
+
+## REQUIREMENTS (5-8 bullet points)
+Extract or infer qualifications. Include:
+- Experience level (years, previous titles)
+- Industry experience if relevant
+- Skills and competencies
+- Qualifications if mentioned
+
+## BENEFITS (3-5 bullet points)
+If mentioned, extract benefits. If not clear, leave empty list.
+
+## ABOUT COMPANY (1-2 paragraphs)
+Write about the company based on available info. If minimal info:
+- Use what you know about the industry
+- Keep it professional but brief
+- Don't make up specific details
+
+IMPORTANT: Generate ORIGINAL content. This is for a job board that creates its own listings, not just aggregation."""
+)
+
 
 # ============
 # Core Functions
@@ -231,8 +299,53 @@ URL: {job.url}
         )
 
 
-async def enrich_job(job: RawJob, filter_result: FilterResult) -> EnrichedJob:
-    """Generate enriched content for a job listing."""
+async def generate_full_content(job: RawJob, filter_result: FilterResult, scraped: ScrapedContent) -> FullContentResult:
+    """Generate comprehensive original content for a job listing."""
+    # Combine available content
+    content_parts = []
+    if scraped.success and scraped.main_content:
+        content_parts.append(f"SCRAPED PAGE CONTENT:\n{scraped.main_content[:4000]}")
+    if job.description:
+        content_parts.append(f"ORIGINAL DESCRIPTION:\n{job.description[:2000]}")
+
+    combined_content = "\n\n".join(content_parts) if content_parts else "Limited information available"
+
+    prompt = f"""Generate comprehensive job listing content for:
+
+Title: {job.title}
+Company: {job.company}
+Role Category: {filter_result.role_category}
+Location: {job.location or 'UK'}
+Salary: {f'£{job.salary_min}-{job.salary_max} per day' if job.salary_min else 'Not specified'}
+
+SOURCE CONTENT:
+{combined_content}
+
+Remember: Write ORIGINAL content, don't copy verbatim. Make it engaging for senior executives."""
+
+    try:
+        result = await content_agent.run(prompt)
+        return result.output
+    except Exception as e:
+        print(f"[Content] Error generating content: {e}", file=sys.stderr)
+        # Return basic fallback
+        return FullContentResult(
+            full_description=job.description[:1000] if job.description else f"Exciting {filter_result.role_category} opportunity at {job.company}.",
+            responsibilities=["Lead strategic initiatives", "Drive business growth", "Build and manage teams"],
+            requirements=["Senior executive experience", "Proven track record", "Strong leadership skills"],
+            benefits=[],
+            about_company=f"{job.company} is seeking a fractional executive to join their leadership team."
+        )
+
+
+async def enrich_job(job: RawJob, filter_result: FilterResult, generate_content: bool = True) -> EnrichedJob:
+    """Generate enriched content for a job listing, optionally with full content generation."""
+    from datetime import datetime
+
+    # Generate slug
+    slug = generate_slug(job.title, job.company)
+
+    # Get basic enrichment
     prompt = f"""Enrich this fractional executive job listing:
 
 Title: {job.title}
@@ -241,23 +354,56 @@ Role Category: {filter_result.role_category}
 Location: {job.location or 'UK'}
 Description: {job.description[:2500]}
 """
+
+    # Determine if fractional or interim based on title/description
+    title_lower = job.title.lower()
+    desc_lower = (job.description or "").lower()
+    is_fractional = "fractional" in title_lower or "part-time" in title_lower or "part time" in title_lower
+    is_interim = "interim" in title_lower or "temporary" in title_lower
+
+    # Determine workplace type
+    workplace_type = None
+    if "remote" in title_lower or "remote" in desc_lower:
+        workplace_type = "Remote"
+    elif "hybrid" in title_lower or "hybrid" in desc_lower:
+        workplace_type = "Hybrid"
+    elif "on-site" in title_lower or "onsite" in desc_lower or "office" in desc_lower:
+        workplace_type = "On-site"
+
     try:
         result = await enrich_agent.run(prompt)
+
+        # Optionally generate full content
+        full_content = None
+        if generate_content:
+            print(f"[Enrich] Scraping {job.url[:60]}...", file=sys.stderr)
+            scraped = await scrape_url(job.url)
+            full_content = await generate_full_content(job, filter_result, scraped)
 
         return EnrichedJob(
             title=job.title,
             company_name=job.company,
             location=job.location,
-            description_snippet=result.output.description_snippet[:150],  # Enforce limit
+            description_snippet=result.output.description_snippet[:150],
             role_category=filter_result.role_category or "OTHER",
             url=job.url,
             salary_min=job.salary_min,
             salary_max=job.salary_max,
             teaser_hook=result.output.teaser_hook,
-            topic_keywords=result.output.topic_keywords[:10],  # Limit to 10
+            topic_keywords=result.output.topic_keywords[:10],
             source=job.source,
             external_id=job.external_id,
-            content_hash=compute_content_hash(job)
+            content_hash=compute_content_hash(job),
+            slug=slug,
+            full_description=full_content.full_description if full_content else None,
+            responsibilities=full_content.responsibilities if full_content else None,
+            requirements=full_content.requirements if full_content else None,
+            benefits=full_content.benefits if full_content else None,
+            about_company=full_content.about_company if full_content else None,
+            posted_date=datetime.now().strftime("%Y-%m-%d"),
+            workplace_type=workplace_type,
+            is_fractional=is_fractional or not is_interim,  # Default to fractional
+            is_interim=is_interim
         )
     except Exception as e:
         print(f"[Enrich] Error enriching job '{job.title}': {e}", file=sys.stderr)
@@ -275,7 +421,11 @@ Description: {job.description[:2500]}
             topic_keywords=["fractional", filter_result.role_category.lower() if filter_result.role_category else "executive"],
             source=job.source,
             external_id=job.external_id,
-            content_hash=compute_content_hash(job)
+            content_hash=compute_content_hash(job),
+            slug=slug,
+            posted_date=datetime.now().strftime("%Y-%m-%d"),
+            is_fractional=True,
+            is_interim=False
         )
 
 
@@ -347,7 +497,7 @@ def map_role_to_category(role: str) -> str:
 
 def insert_job(conn, job: EnrichedJob) -> Optional[str]:
     """
-    Insert enriched job into database.
+    Insert enriched job into database with full content.
 
     Returns the job ID if successful, None otherwise.
     """
@@ -361,16 +511,19 @@ def insert_job(conn, job: EnrichedJob) -> Optional[str]:
                 title, company_name, location, description_snippet,
                 role_category, url, salary_min, salary_max,
                 teaser_hook, topic_keywords, source, external_id,
-                content_hash, imported_at, is_active, is_fractional
+                content_hash, imported_at, is_active, is_fractional, is_interim,
+                slug, full_description, responsibilities, requirements,
+                benefits, about_company, posted_date, workplace_type
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), true, true
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), true, %s, %s,
+                %s, %s, %s, %s, %s, %s, %s, %s
             ) RETURNING id
         """, (
             job.title,
             job.company_name,
             job.location,
             job.description_snippet,
-            category,  # Use mapped category
+            category,
             job.url,
             job.salary_min,
             job.salary_max,
@@ -378,11 +531,22 @@ def insert_job(conn, job: EnrichedJob) -> Optional[str]:
             job.topic_keywords,
             job.source,
             job.external_id,
-            job.content_hash
+            job.content_hash,
+            job.is_fractional,
+            job.is_interim,
+            job.slug,
+            job.full_description,
+            job.responsibilities,
+            job.requirements,
+            job.benefits,
+            job.about_company,
+            job.posted_date,
+            job.workplace_type
         ))
         job_id = cur.fetchone()[0]
         conn.commit()
         cur.close()
+        print(f"[Insert] Inserted job with slug: {job.slug}", file=sys.stderr)
         return str(job_id)
     except Exception as e:
         conn.rollback()

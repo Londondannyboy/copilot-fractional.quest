@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   keywords: 'fractional chro salary, fractional chro salary uk, fractional chro day rate, fractional chro cost, chro salary uk, part time chro salary, fractional hr director salary',
   alternates: { canonical: 'https://fractional.quest/fractional-chro-salary' },
   openGraph: {
-    title: 'Fractional CHRO Salary UK 2025 | Complete Compensation Guide',
+    title: 'Fractional CHRO Salary UK 2026 | Complete Compensation Guide',
     description: 'Fractional CHRO salary UK: Day rates £600-£1,100. Complete guide to fractional CHRO costs and compensation.',
     url: 'https://fractional.quest/fractional-chro-salary',
     images: [{ url: ogImage, width: 1200, height: 630, alt: 'Fractional CHRO Salary UK Guide' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fractional CHRO Salary UK 2025 | Complete Compensation Guide',
+    title: 'Fractional CHRO Salary UK 2026 | Complete Compensation Guide',
     description: 'Fractional CHRO salary UK: Day rates £600-£1,100. Complete guide to fractional CHRO costs and compensation.',
     images: [ogImage],
   },
@@ -43,7 +43,7 @@ const breadcrumbs = [
 export default function FractionalChroSalaryPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CHRO Salary UK 2025 | Day Rates & Compensation Guide" description="Complete guide to fractional CHRO salary UK. Day rates, annual equivalents, and factors affecting compensation." url="https://fractional.quest/fractional-chro-salary" dateModified={new Date('2025-01-07')} />
+      <WebPageSchema title="Fractional CHRO Salary UK 2026 | Day Rates & Compensation Guide" description="Complete guide to fractional CHRO salary UK. Day rates, annual equivalents, and factors affecting compensation." url="https://fractional.quest/fractional-chro-salary" dateModified={new Date('2026-01-07')} />
 
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden">
@@ -53,7 +53,7 @@ export default function FractionalChroSalaryPage() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
-              <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Salary Guide 2025</span>
+              <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Salary Guide 2026</span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair"><strong>Fractional CHRO Salary</strong> UK</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Complete guide to <strong>fractional CHRO salary UK</strong> rates. Understand day rates, annual equivalents, and factors affecting compensation.</p>
             </div>

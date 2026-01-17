@@ -43,7 +43,7 @@ const breadcrumbs = [
 export default function FractionalCeoPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="What is a Fractional CEO? | Part-Time Chief Executive Officer Guide" description="Complete guide to fractional CEO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-ceo" dateModified={new Date('2025-01-07')} />
+      <WebPageSchema title="What is a Fractional CEO? | Part-Time Chief Executive Officer Guide" description="Complete guide to fractional CEO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-ceo" dateModified={new Date('2026-01-07')} />
       <FAQPageSchema faqs={CEO_FAQS} />
 
       {/* Hero Section */}

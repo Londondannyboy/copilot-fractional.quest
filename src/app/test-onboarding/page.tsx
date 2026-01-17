@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 
 // Real Klipy GIF URLs (verified working)
 const ONBOARDING_GIFS = {
-  welcome: 'https://static.klipy.com/ii/935d7ab9d8c6202580a668421940ec81/9a/fb/DZ2Ib2g1.gif',
+  welcome: 'https://static.klipy.com/ii/935d7ab9d8c6202680a668421940ec81/9a/fb/DZ2Ib2g1.gif',
   step_complete: 'https://static.klipy.com/ii/50d7c955398dfd7e3c8ba5281154280f/79/6d/dl3FgmslCLcFr3bHDBtQ.gif',
   almost_there: 'https://static.klipy.com/ii/ce286d05b8e1a47cd4f32b0e1b6dec0e/b1/02/K4ZWIqVO.gif',
-  celebration: 'https://static.klipy.com/ii/935d7ab9d8c6202580a668421940ec81/d2/27/iQ5M3MEP.gif',
+  celebration: 'https://static.klipy.com/ii/935d7ab9d8c6202680a668421940ec81/d2/27/iQ5M3MEP.gif',
   encouragement: 'https://static.klipy.com/ii/c3a19a0b747a76e98651f2b9a3cca5ff/29/ef/ttocqdWS.gif',
 }
 
