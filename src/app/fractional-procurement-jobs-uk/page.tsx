@@ -1,6 +1,6 @@
 // Static route - takes precedence over [slug] dynamic route
 import { Metadata } from "next";
-import { JobPageClient } from "@/components/job-pages";
+import { IntelligentJobPageClient } from "@/components/job-pages/IntelligentJobPageClient";
 import { getJobsPageData } from "@/lib/jobs";
 import { procurementJobsUkSEO } from "@/lib/seo-content/procurement-jobs-uk";
 
@@ -71,21 +71,16 @@ export default async function FractionalProcurementJobsUKPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      {/* Page Content */}
-      <JobPageClient
+      {/* Page Content - Using IntelligentDocument pattern for reactive updates */}
+      <IntelligentJobPageClient
         location="procurement"
-        locationDisplay="Procurement"
+        locationDisplay="Fractional Procurement UK"
         initialJobs={jobs}
         stats={stats}
         seoContent={procurementJobsUkSEO}
         imageCategory="operations"
-        // Personalized sections for logged-in users
-        enablePersonalizedSections={true}
-        targetRole="Procurement Director"
-        userDayRate={1000}
-        // Filter for Operations/Procurement jobs
-        roleCategory="Operations"
-        hideMoreOpportunities={true}
+        roleFilter="Procurement"
+        accentColor="purple"
       />
     </>
   );

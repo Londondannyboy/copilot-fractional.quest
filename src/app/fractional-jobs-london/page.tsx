@@ -1,6 +1,6 @@
 // Static route - takes precedence over [slug] dynamic route
 import { Metadata } from "next";
-import { JobPageClient } from "@/components/job-pages";
+import { IntelligentJobPageClient } from "@/components/job-pages/IntelligentJobPageClient";
 import { getJobsPageData } from "@/lib/jobs";
 import { londonSEO } from "@/lib/seo-content/london";
 import { getOGImageUrl, getImage } from "@/lib/images";
@@ -75,19 +75,15 @@ export default async function FractionalJobsLondonPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      {/* Page Content */}
-      <JobPageClient
+      {/* Page Content - Using IntelligentDocument pattern for reactive updates */}
+      <IntelligentJobPageClient
         location="london"
         locationDisplay="London"
         initialJobs={jobs}
         stats={stats}
         seoContent={londonSEO}
         imageCategory="london"
-        // Enable personalized sections for logged-in users
-        enablePersonalizedSections={true}
-        targetRole="Executive"
-        showEmbeddedChat={true}
-        userDayRate={1150}
+        accentColor="emerald"
       />
     </>
   );

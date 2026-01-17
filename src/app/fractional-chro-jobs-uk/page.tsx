@@ -1,6 +1,6 @@
 // Static route - takes precedence over [slug] dynamic route
 import { Metadata } from "next";
-import { JobPageClient } from "@/components/job-pages";
+import { IntelligentJobPageClient } from "@/components/job-pages/IntelligentJobPageClient";
 import { getJobsPageData } from "@/lib/jobs";
 import { chroJobsUkSEO } from "@/lib/seo-content/chro-jobs-uk";
 import { getOGImageUrl, getImage } from "@/lib/images";
@@ -75,21 +75,16 @@ export default async function FractionalCHROJobsUKPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      {/* Page Content */}
-      <JobPageClient
+      {/* Page Content - Using IntelligentDocument pattern for reactive updates */}
+      <IntelligentJobPageClient
         location="chro"
-        locationDisplay="CHRO"
+        locationDisplay="Fractional CHRO UK"
         initialJobs={jobs}
         stats={stats}
         seoContent={chroJobsUkSEO}
         imageCategory="chro"
-        // Personalized sections for logged-in users
-        enablePersonalizedSections={true}
-        targetRole="CHRO"
-        userDayRate={1000}
-        // Filter for HR jobs only
-        roleCategory="HR"
-        hideMoreOpportunities={true}
+        roleFilter="CHRO"
+        accentColor="purple"
       />
     </>
   );

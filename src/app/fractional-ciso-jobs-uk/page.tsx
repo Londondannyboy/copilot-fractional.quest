@@ -1,6 +1,6 @@
 // Static route - takes precedence over [slug] dynamic route
 import { Metadata } from "next";
-import { JobPageClient } from "@/components/job-pages";
+import { IntelligentJobPageClient } from "@/components/job-pages/IntelligentJobPageClient";
 import { getJobsPageData } from "@/lib/jobs";
 import { cisoJobsUkSEO } from "@/lib/seo-content/ciso-jobs-uk";
 import { getOGImageUrl, getImage } from "@/lib/images";
@@ -75,21 +75,16 @@ export default async function FractionalCISOJobsUKPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      {/* Page Content */}
-      <JobPageClient
+      {/* Page Content - Using IntelligentDocument pattern for reactive updates */}
+      <IntelligentJobPageClient
         location="ciso"
-        locationDisplay="CISO"
+        locationDisplay="Fractional CISO UK"
         initialJobs={jobs}
         stats={stats}
         seoContent={cisoJobsUkSEO}
         imageCategory="ciso"
-        // Personalized sections for logged-in users
-        enablePersonalizedSections={true}
-        targetRole="CISO"
-        userDayRate={1000}
-        // Filter for Security/Engineering jobs only
-        roleCategory="Engineering"
-        hideMoreOpportunities={true}
+        roleFilter="CISO"
+        accentColor="red"
       />
     </>
   );

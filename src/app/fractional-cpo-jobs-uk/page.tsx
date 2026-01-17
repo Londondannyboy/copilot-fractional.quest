@@ -1,6 +1,6 @@
 // Static route - takes precedence over [slug] dynamic route
 import { Metadata } from "next";
-import { JobPageClient } from "@/components/job-pages";
+import { IntelligentJobPageClient } from "@/components/job-pages/IntelligentJobPageClient";
 import { getJobsPageData } from "@/lib/jobs";
 import { cpoJobsUkSEO } from "@/lib/seo-content/cpo-jobs-uk";
 import { getOGImageUrl, getImage } from "@/lib/images";
@@ -75,21 +75,16 @@ export default async function FractionalCPOJobsUKPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      {/* Page Content */}
-      <JobPageClient
+      {/* Page Content - Using IntelligentDocument pattern for reactive updates */}
+      <IntelligentJobPageClient
         location="cpo"
-        locationDisplay="CPO"
+        locationDisplay="Fractional CPO UK"
         initialJobs={jobs}
         stats={stats}
         seoContent={cpoJobsUkSEO}
         imageCategory="cpo"
-        // Personalized sections for logged-in users
-        enablePersonalizedSections={true}
-        targetRole="CPO"
-        userDayRate={1000}
-        // Filter for Product jobs only
-        roleCategory="Product"
-        hideMoreOpportunities={true}
+        roleFilter="CPO"
+        accentColor="indigo"
       />
     </>
   );

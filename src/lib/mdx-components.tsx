@@ -58,6 +58,22 @@ const CompanyInsights = dynamic(
   () => import("@/components/mdx/CompanyInsights"),
   { ssr: false }
 );
+const SkillGapAnalysis = dynamic(
+  () => import("@/components/mdx/SkillGapAnalysis"),
+  { ssr: false }
+);
+const MarketTrends = dynamic(
+  () => import("@/components/mdx/MarketTrends"),
+  { ssr: false }
+);
+const InterviewPrep = dynamic(
+  () => import("@/components/mdx/InterviewPrep"),
+  { ssr: false }
+);
+const NetworkConnections = dynamic(
+  () => import("@/components/mdx/NetworkConnections"),
+  { ssr: false }
+);
 
 // MDX component registry - all components available in MDX content
 export const mdxComponents = {
@@ -82,6 +98,10 @@ export const mdxComponents = {
   // AI-rendered components (CopilotKit can compose these)
   JobMatchScore,
   CompanyInsights,
+  SkillGapAnalysis,
+  MarketTrends,
+  InterviewPrep,
+  NetworkConnections,
 
   // HTML element overrides for MDX styling
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
