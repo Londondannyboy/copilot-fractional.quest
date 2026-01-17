@@ -182,8 +182,16 @@ export default function FractionalCpoPage() {
       {/* Related Links */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 block mb-2">Explore More</span>
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
+
+          {/* Primary Resources - 3 cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <Link href="/hire-fractional-cpo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
+              <span className="text-2xl mb-3 block">📋</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">How to Hire a Fractional CPO</h3>
+              <p className="text-gray-600 text-sm">Complete hiring guide and evaluation</p>
+            </Link>
             <Link href="/fractional-cpo-jobs-uk" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
               <span className="text-2xl mb-3 block">💼</span>
               <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">Fractional CPO Jobs UK</h3>
@@ -194,14 +202,27 @@ export default function FractionalCpoPage() {
               <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">Fractional CPO Salary Guide</h3>
               <p className="text-gray-600 text-sm">Day rates and salary benchmarks</p>
             </Link>
-            <Link href="/hire-fractional-cpo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
-              <span className="text-2xl mb-3 block">📋</span>
-              <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 mb-2">How to Hire a Fractional CPO</h3>
-              <p className="text-gray-600 text-sm">Complete hiring guide and evaluation</p>
+          </div>
+
+          {/* Secondary Resources - 4 compact links */}
+          <div className="flex flex-wrap gap-3 pb-6 border-b border-gray-200">
+            <Link href="/fractional-cpo-services" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-indigo-700 hover:border-indigo-300 transition-colors">
+              ⚙️ CPO Services
+            </Link>
+            <Link href="/part-time-cpo-jobs-uk" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-indigo-700 hover:border-indigo-300 transition-colors">
+              ⏰ Part-Time CPO Jobs
+            </Link>
+            <Link href="/interim-cpo-jobs-uk" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-indigo-700 hover:border-indigo-300 transition-colors">
+              📅 Interim CPO Roles
+            </Link>
+            <Link href="/fractional-jobs-london" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-indigo-700 hover:border-indigo-300 transition-colors">
+              📍 London Product Jobs
             </Link>
           </div>
-          <h3 className="text-lg font-bold text-gray-900 mb-4">External Resources for Product Leaders</h3>
-          <div className="grid md:grid-cols-2 gap-4">
+
+          {/* External Resources */}
+          <h3 className="text-lg font-bold text-gray-900 mb-4 mt-8">External Resources for Product Leaders</h3>
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
             <a href="https://www.mindtheproduct.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
               <span className="text-lg">🎯</span>
               <div>
@@ -219,7 +240,7 @@ export default function FractionalCpoPage() {
             <a href="https://www.lennysnewsletter.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-300 transition-colors group">
               <span className="text-lg">📰</span>
               <div>
-                <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">Lenny's Newsletter</h4>
+                <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">Lenny&apos;s Newsletter</h4>
                 <p className="text-gray-500 text-xs">Product leadership insights and interviews</p>
               </div>
             </a>
@@ -230,6 +251,22 @@ export default function FractionalCpoPage() {
                 <p className="text-gray-500 text-xs">Search all fractional product positions</p>
               </div>
             </Link>
+          </div>
+
+          {/* Cross-role linking */}
+          <div className="pt-6 border-t border-gray-200">
+            <p className="text-sm text-gray-500 mb-3">Explore other fractional roles:</p>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/fractional-cfo" className="text-sm text-gray-600 hover:text-indigo-700">Fractional CFO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cto" className="text-sm text-gray-600 hover:text-indigo-700">Fractional CTO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cmo" className="text-sm text-gray-600 hover:text-indigo-700">Fractional CMO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-coo" className="text-sm text-gray-600 hover:text-indigo-700">Fractional COO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-chro" className="text-sm text-gray-600 hover:text-indigo-700">Fractional CHRO</Link>
+            </div>
           </div>
         </div>
       </section>

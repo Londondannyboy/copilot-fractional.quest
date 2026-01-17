@@ -175,8 +175,16 @@ export default function FractionalChroPage() {
       {/* Related Links */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 block mb-2">Explore More</span>
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
+
+          {/* Primary Resources - 3 cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <Link href="/hire-fractional-chro" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
+              <span className="text-2xl mb-3 block">📋</span>
+              <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">How to Hire a Fractional CHRO</h3>
+              <p className="text-gray-600 text-sm">Complete hiring guide and evaluation</p>
+            </Link>
             <Link href="/fractional-chro-jobs-uk" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
               <span className="text-2xl mb-3 block">💼</span>
               <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">Fractional CHRO Jobs UK</h3>
@@ -187,14 +195,27 @@ export default function FractionalChroPage() {
               <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">Fractional CHRO Salary Guide</h3>
               <p className="text-gray-600 text-sm">Day rates and salary benchmarks</p>
             </Link>
-            <Link href="/hire-fractional-chro" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
-              <span className="text-2xl mb-3 block">📋</span>
-              <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">How to Hire a Fractional CHRO</h3>
-              <p className="text-gray-600 text-sm">Complete hiring guide and evaluation</p>
+          </div>
+
+          {/* Secondary Resources - 4 compact links */}
+          <div className="flex flex-wrap gap-3 pb-6 border-b border-gray-200">
+            <Link href="/fractional-chro-services" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-purple-700 hover:border-purple-300 transition-colors">
+              ⚙️ CHRO Services
+            </Link>
+            <Link href="/part-time-chro-jobs-uk" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-purple-700 hover:border-purple-300 transition-colors">
+              ⏰ Part-Time CHRO Jobs
+            </Link>
+            <Link href="/interim-chro-jobs-uk" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-purple-700 hover:border-purple-300 transition-colors">
+              📅 Interim CHRO Roles
+            </Link>
+            <Link href="/fractional-jobs-london" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-purple-700 hover:border-purple-300 transition-colors">
+              📍 London HR Jobs
             </Link>
           </div>
-          <h3 className="text-lg font-bold text-gray-900 mb-4">External Resources for HR Leaders</h3>
-          <div className="grid md:grid-cols-2 gap-4">
+
+          {/* External Resources */}
+          <h3 className="text-lg font-bold text-gray-900 mb-4 mt-8">External Resources for HR Leaders</h3>
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
             <a href="https://www.cipd.org/uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors group">
               <span className="text-lg">🏛️</span>
               <div>
@@ -223,6 +244,22 @@ export default function FractionalChroPage() {
                 <p className="text-gray-500 text-xs">Search all fractional HR positions</p>
               </div>
             </Link>
+          </div>
+
+          {/* Cross-role linking */}
+          <div className="pt-6 border-t border-gray-200">
+            <p className="text-sm text-gray-500 mb-3">Explore other fractional roles:</p>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/fractional-cfo" className="text-sm text-gray-600 hover:text-purple-700">Fractional CFO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cto" className="text-sm text-gray-600 hover:text-purple-700">Fractional CTO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cmo" className="text-sm text-gray-600 hover:text-purple-700">Fractional CMO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-coo" className="text-sm text-gray-600 hover:text-purple-700">Fractional COO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-ciso" className="text-sm text-gray-600 hover:text-purple-700">Fractional CISO</Link>
+            </div>
           </div>
         </div>
       </section>

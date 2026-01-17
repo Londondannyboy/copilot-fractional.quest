@@ -3446,6 +3446,65 @@ async def clm_health():
     return {"status": "ok", "message": "Use POST for chat completions"}
 
 
+@main_app.post("/test/insert-uk-job")
+async def insert_test_uk_job():
+    """Insert a test UK-based job for demonstration purposes."""
+    import psycopg2
+    import uuid
+    from datetime import datetime
+
+    if not DATABASE_URL:
+        return {"error": "DATABASE_URL not configured"}
+
+    job_id = str(uuid.uuid4())
+    slug = f"fractional-cfo-fintech-{job_id[:8]}"
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+
+    try:
+        cur.execute("""
+            INSERT INTO jobs (
+                id, title, company_name, location, description_snippet,
+                role_category, url, is_active, is_fractional,
+                source, external_id, imported_at, posted_date, slug,
+                workplace_type, is_remote, country
+            ) VALUES (
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW(), %s, %s, %s, %s
+            ) RETURNING id, title, slug
+        """, (
+            job_id,
+            "Fractional CFO - Series A Fintech",
+            "TechGrowth Ventures",
+            "London, UK",
+            "Lead financial strategy for a fast-growing Series A fintech startup. Part-time role, 2-3 days per week. Equity participation available.",
+            "Finance",
+            f"https://fractional.quest/job/{slug}",
+            True,
+            True,
+            "test_import",
+            f"test-uk-{job_id[:8]}",
+            slug,
+            "Hybrid",
+            False,
+            "UK"
+        ))
+        result = cur.fetchone()
+        conn.commit()
+        return {
+            "success": True,
+            "job_id": result[0],
+            "title": result[1],
+            "slug": result[2],
+            "view_at": "https://fractional.quest/fractional-cfo-jobs-uk"
+        }
+    except Exception as e:
+        conn.rollback()
+        return {"error": str(e)}
+    finally:
+        cur.close()
+        conn.close()
+
+
 @main_app.get("/")
 async def health():
     return {
@@ -3457,6 +3516,7 @@ async def health():
             "/jobs/import-daily (POST - job import only)",
             "/jobs/import-status (GET - import history)",
             "/news/import-daily (POST - news import only)",
+            "/test/insert-uk-job (POST - insert test UK job)",
             "/agui/* (AG-UI for CopilotKit)"
         ]
     }

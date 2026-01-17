@@ -302,6 +302,72 @@ export default function FractionalCmoPage() {
               <li><strong>Mentorship:</strong> Develop your internal team under senior leadership</li>
             </ul>
 
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Professional Bodies & Industry Associations</h2>
+
+            <p>
+              Many <strong>fractional CMOs</strong> are members of recognized marketing and advertising bodies. Key organizations include:
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4 not-prose my-8">
+              <a href="https://www.cim.co.uk" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-amber-700">CIM</h4>
+                    <p className="text-sm text-gray-600">Chartered Institute of Marketing - UK&apos;s leading marketing body</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://dma.org.uk" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-amber-700">DMA</h4>
+                    <p className="text-sm text-gray-600">Data & Marketing Association - data-driven marketing</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://ipa.co.uk" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-amber-700">IPA</h4>
+                    <p className="text-sm text-gray-600">Institute of Practitioners in Advertising</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.marketingweek.com" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">📰</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-amber-700">Marketing Week</h4>
+                    <p className="text-sm text-gray-600">UK&apos;s leading marketing publication</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">External Resources</h2>
+
+            <div className="grid md:grid-cols-4 gap-4 not-prose my-8">
+              <a href="https://www.warc.com" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-amber-300 transition-all group text-center">
+                <span className="text-xl">📊</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-amber-700">WARC</p>
+              </a>
+              <a href="https://www.glassdoor.co.uk/Salaries/cmo-salary-SRCH_KO0,3.htm" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-amber-300 transition-all group text-center">
+                <span className="text-xl">💰</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-amber-700">Glassdoor Salaries</p>
+              </a>
+              <a href="https://www.hubspot.com" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-amber-300 transition-all group text-center">
+                <span className="text-xl">🚀</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-amber-700">HubSpot</p>
+              </a>
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-amber-300 transition-all group text-center">
+                <span className="text-xl">💼</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-amber-700">LinkedIn</p>
+              </a>
+            </div>
+
           </article>
         </div>
       </section>
@@ -335,8 +401,11 @@ export default function FractionalCmoPage() {
       {/* Related Links */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 block mb-2">Explore More</span>
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+
+          {/* Primary Resources - 3 cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
             <Link href="/hire-fractional-cmo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-amber-300 transition-colors group">
               <span className="text-2xl mb-3 block">📋</span>
               <h3 className="font-bold text-gray-900 group-hover:text-amber-700 mb-2">How to Hire a Fractional CMO</h3>
@@ -352,6 +421,38 @@ export default function FractionalCmoPage() {
               <h3 className="font-bold text-gray-900 group-hover:text-amber-700 mb-2">Fractional CMO Salary Guide</h3>
               <p className="text-gray-600 text-sm">UK salary benchmarks and rates</p>
             </Link>
+          </div>
+
+          {/* Secondary Resources - 4 compact links */}
+          <div className="flex flex-wrap gap-3 pb-6 border-b border-gray-200">
+            <Link href="/fractional-cmo-services" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-amber-700 hover:border-amber-300 transition-colors">
+              ⚙️ CMO Services
+            </Link>
+            <Link href="/part-time-cmo-jobs-uk" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-amber-700 hover:border-amber-300 transition-colors">
+              ⏰ Part-Time CMO Jobs
+            </Link>
+            <Link href="/interim-cmo-jobs-uk" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-amber-700 hover:border-amber-300 transition-colors">
+              📅 Interim CMO Roles
+            </Link>
+            <Link href="/fractional-jobs-london" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-amber-700 hover:border-amber-300 transition-colors">
+              📍 London Marketing Jobs
+            </Link>
+          </div>
+
+          {/* Cross-role linking */}
+          <div className="pt-6">
+            <p className="text-sm text-gray-500 mb-3">Explore other fractional roles:</p>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/fractional-cfo" className="text-sm text-gray-600 hover:text-amber-700">Fractional CFO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cto" className="text-sm text-gray-600 hover:text-amber-700">Fractional CTO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-coo" className="text-sm text-gray-600 hover:text-amber-700">Fractional COO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-chro" className="text-sm text-gray-600 hover:text-amber-700">Fractional CHRO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-ciso" className="text-sm text-gray-600 hover:text-amber-700">Fractional CISO</Link>
+            </div>
           </div>
         </div>
       </section>
