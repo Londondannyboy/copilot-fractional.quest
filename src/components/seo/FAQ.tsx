@@ -237,6 +237,29 @@ export const CISO_FAQS: FAQItem[] = [
   },
 ]
 
+export const CRO_FAQS: FAQItem[] = [
+  {
+    question: 'What is a Fractional CRO?',
+    answer: 'A Fractional CRO (Chief Revenue Officer) is an experienced revenue executive who works with companies on a part-time basis, typically 1-3 days per week. They provide strategic revenue leadership, build sales teams, develop go-to-market strategies, and drive revenue growth without the cost of a full-time CRO hire.',
+  },
+  {
+    question: 'How much do Fractional CRO jobs pay in the UK?',
+    answer: 'Fractional CRO day rates in the UK typically range from £1,000 to £1,500 per day, with PE-backed and high-growth SaaS roles at the premium end (£1,200-£1,800). Annual earnings for experienced fractional CROs with multiple clients can range from £200,000 to £360,000.',
+  },
+  {
+    question: 'What qualifications do I need for Fractional CRO jobs?',
+    answer: 'Fractional CROs typically need 10-15+ years of sales leadership experience with a proven track record of scaling revenue. Prior VP Sales, CRO, or CCO experience is essential. Sector-specific expertise (SaaS metrics, enterprise sales cycles) adds significant value. Revenue operations and Salesforce/HubSpot proficiency is expected.',
+  },
+  {
+    question: 'What is the difference between a CRO and VP Sales?',
+    answer: 'A CRO has broader responsibility than VP Sales, typically owning all revenue-generating functions: sales, marketing, customer success, and partnerships. Fractional CROs often report to the CEO and may have board-level involvement. The role focuses on revenue strategy and growth, not just sales execution.',
+  },
+  {
+    question: 'When should a company hire a Fractional CRO?',
+    answer: 'Companies hire Fractional CROs when building or scaling sales teams, developing go-to-market strategy, expanding into new markets, preparing for fundraising, improving revenue predictability, or when they need senior revenue leadership without full-time commitment.',
+  },
+]
+
 // Service-focused FAQs (for company/employer audience)
 export const CMO_SERVICE_FAQS: FAQItem[] = [
   {
@@ -319,6 +342,29 @@ export const COO_SERVICE_FAQS: FAQItem[] = [
   {
     question: 'What does a Fractional COO do?',
     answer: 'A Fractional COO optimises operations and processes, implements systems and tools, manages key initiatives and projects, builds operational teams, creates playbooks and SOPs, oversees vendor relationships, drives cross-functional alignment, and frees the CEO to focus on strategy and growth.',
+  },
+]
+
+export const CRO_SERVICE_FAQS: FAQItem[] = [
+  {
+    question: 'What is a Fractional CRO?',
+    answer: 'A Fractional CRO is an experienced Chief Revenue Officer who works with your company part-time, typically 1-3 days per week. You get revenue leadership, sales team management, and go-to-market expertise without the cost of a full-time CRO.',
+  },
+  {
+    question: 'When should my company hire a Fractional CRO?',
+    answer: 'Consider hiring a fractional CRO when: you need to scale revenue but cannot justify a full-time CRO; your sales team needs senior leadership; you\'re expanding into new markets; you\'re preparing for fundraising and need to demonstrate revenue predictability; or you need to build sales infrastructure and processes.',
+  },
+  {
+    question: 'How much does a Fractional CRO cost?',
+    answer: 'Fractional CROs typically charge £1,000-£1,500 per day in the UK, with PE-backed and high-growth SaaS roles at £1,200-£1,800. At 2 days per week, this translates to roughly £100,000-£180,000 annually—compared to £200,000-£350,000+ for a full-time CRO.',
+  },
+  {
+    question: 'What does a Fractional CRO do?',
+    answer: 'A Fractional CRO develops revenue strategy, builds and manages sales teams, creates sales playbooks and processes, oversees pipeline management, aligns sales with marketing and customer success, manages key customer relationships, and reports to the board on revenue performance and forecasts.',
+  },
+  {
+    question: 'Can a Fractional CRO help with fundraising?',
+    answer: 'Yes—demonstrating revenue predictability and growth is crucial for fundraising. A fractional CRO can build the sales infrastructure, metrics, and forecasting that investors want to see, while also participating in investor meetings to add credibility to your revenue story.',
   },
 ]
 

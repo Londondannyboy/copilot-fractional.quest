@@ -3,9 +3,9 @@
 // Credit: All images from Unsplash (unsplash.com)
 
 export type ImageCategory =
-  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso'
+  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso' | 'cro'
   | 'london' | 'manchester' | 'birmingham' | 'edinburgh' | 'bristol' | 'uk'
-  | 'remote' | 'tech' | 'finance' | 'marketing' | 'operations' | 'hr'
+  | 'remote' | 'tech' | 'finance' | 'marketing' | 'operations' | 'hr' | 'sales'
   | 'interim' | 'part-time' | 'services' | 'guide' | 'salary' | 'default'
 
 interface ImageData {
@@ -65,6 +65,12 @@ const imageMap: Record<ImageCategory, ImageData> = {
     alt: 'Cybersecurity professional monitoring systems',
     credit: 'Adi Goldstein',
     creditUrl: 'https://unsplash.com/@adigold1'
+  },
+  cro: {
+    url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&h=600&fit=crop&q=80',
+    alt: 'Revenue leader in sales strategy meeting',
+    credit: 'LinkedIn Sales Solutions',
+    creditUrl: 'https://unsplash.com/@linkedinsalesnavigator'
   },
 
   // Location-specific images
@@ -142,6 +148,12 @@ const imageMap: Record<ImageCategory, ImageData> = {
     credit: 'Annie Spratt',
     creditUrl: 'https://unsplash.com/@anniespratt'
   },
+  sales: {
+    url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&h=600&fit=crop&q=80',
+    alt: 'Sales team in revenue strategy meeting',
+    credit: 'LinkedIn Sales Solutions',
+    creditUrl: 'https://unsplash.com/@linkedinsalesnavigator'
+  },
 
   // Job type images
   interim: {
@@ -218,11 +230,13 @@ export function getRoleImageCategory(role: string): ImageCategory {
     'chro': 'chro',
     'cpo': 'cpo',
     'ciso': 'ciso',
+    'cro': 'cro',
     'finance': 'finance',
     'technology': 'tech',
     'marketing': 'marketing',
     'operations': 'operations',
     'hr': 'hr',
+    'sales': 'sales',
   }
   return roleMap[role.toLowerCase()] || 'default'
 }

@@ -31,6 +31,7 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-ciso-jobs-uk',
   'fractional-cpo-jobs-uk',
   'fractional-ceo-jobs-uk',
+  'fractional-cro-jobs-uk',
   // Location pages
   'manchester',
   'birmingham',
@@ -45,6 +46,7 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-ciso',
   'fractional-cpo',
   'fractional-ceo',
+  'fractional-cro',
   // Salary guide pages
   'fractional-cfo-salary',
   'fractional-cto-salary',
@@ -54,6 +56,7 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-ciso-salary',
   'fractional-cpo-salary',
   'fractional-ceo-salary',
+  'fractional-cro-salary',
   // Services pages
   'fractional-cfo-services',
   'fractional-cto-services',
@@ -63,6 +66,7 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-ciso-services',
   'fractional-cpo-services',
   'fractional-ceo-services',
+  'fractional-cro-services',
   // Hire pages
   'hire-fractional-cfo',
   'hire-fractional-cto',
@@ -72,6 +76,7 @@ const STATIC_ROUTE_SLUGS = [
   'hire-fractional-ciso',
   'hire-fractional-cpo',
   'hire-fractional-ceo',
+  'hire-fractional-cro',
   // Interim job pages
   'interim-cfo-jobs-uk',
   'interim-cto-jobs-uk',
@@ -94,6 +99,13 @@ const STATIC_ROUTE_SLUGS = [
   'part-time-ceo-jobs-uk',
   // Guide pages
   'fractional-recruitment-agency',
+  // Procurement pages
+  'fractional-procurement',
+  'fractional-procurement-jobs-uk',
+  'fractional-procurement-services',
+  'hire-fractional-procurement',
+  // Finance Director pages
+  'fractional-finance-director',
 ]
 
 export async function generateStaticParams() {
