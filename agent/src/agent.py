@@ -2254,6 +2254,71 @@ def get_featured_articles(ctx: RunContext[StateDeps[AppState]]) -> dict:
   ]
   return {"articles": articles, "title": "Featured Insights"}
 
+
+@agent.tool
+def get_latest_news(ctx: RunContext[StateDeps[AppState]], limit: int = 5) -> dict:
+  """Get the latest fractional executive industry news articles.
+
+  Use this when users ask about:
+  - Industry news
+  - Recent developments
+  - Market updates
+  - Executive appointments
+  - Fractional/interim trends
+
+  Args:
+    limit: Number of articles to return (default 5, max 10)
+  """
+  print(f"📰 Getting latest {limit} news articles")
+
+  if limit > 10:
+    limit = 10
+
+  try:
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("""
+      SELECT
+        id, title, url, source_name, summary,
+        key_insights, category, sentiment, imported_at
+      FROM news_articles
+      WHERE status = 'published'
+      ORDER BY imported_at DESC
+      LIMIT %s
+    """, (limit,))
+
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    articles = []
+    for row in rows:
+      articles.append({
+        "id": row[0],
+        "title": row[1],
+        "url": row[2],
+        "source": row[3],
+        "summary": row[4],
+        "key_insights": row[5] if row[5] else [],
+        "category": row[6],
+        "sentiment": row[7],
+        "date": row[8].isoformat() if row[8] else None
+      })
+
+    print(f"📰 Found {len(articles)} news articles")
+
+    return {
+      "articles": articles,
+      "count": len(articles),
+      "title": "Latest Industry News",
+      "view_all_url": "https://fractional.quest/news"
+    }
+
+  except Exception as e:
+    print(f"❌ News error: {e}")
+    return {"error": str(e), "articles": []}
+
+
 @agent.tool
 def show_a2ui_job_card(ctx: RunContext[StateDeps[AppState]], role: str) -> dict:
   """Show a rich A2UI job card widget for a specific role. Returns A2UI JSON format."""
