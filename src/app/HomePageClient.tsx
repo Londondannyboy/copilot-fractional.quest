@@ -1478,6 +1478,11 @@ Reference the page context when discussing jobs.`;
     );
   }
 
+  // If not signed in, show the public landing page (outside CopilotSidebar)
+  if (!isSessionLoading && !user) {
+    return <PublicLanding />;
+  }
+
   return (
     <CopilotSidebar
       disableSystemMessage={true}
@@ -1575,8 +1580,10 @@ Reference the page context when discussing jobs.`;
               </div>
             </>
           ) : (
-            /* Not signed in - Show full landing page */
-            <PublicLanding />
+            /* Loading state */
+            <div className="flex-1 flex items-center justify-center">
+              <div className="text-white">Loading...</div>
+            </div>
           )}
         </div>
 
