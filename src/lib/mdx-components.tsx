@@ -49,6 +49,16 @@ const CopilotMainPanel = dynamic(
   { ssr: false }
 );
 
+// New AI-rendered components for CopilotKit
+const JobMatchScore = dynamic(
+  () => import("@/components/mdx/JobMatchScore"),
+  { ssr: false }
+);
+const CompanyInsights = dynamic(
+  () => import("@/components/mdx/CompanyInsights"),
+  { ssr: false }
+);
+
 // MDX component registry - all components available in MDX content
 export const mdxComponents = {
   // Interactive job components
@@ -68,6 +78,10 @@ export const mdxComponents = {
   CareerTimeline,
   MarketOverview,
   CopilotMainPanel,
+
+  // AI-rendered components (CopilotKit can compose these)
+  JobMatchScore,
+  CompanyInsights,
 
   // HTML element overrides for MDX styling
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (

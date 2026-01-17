@@ -14,6 +14,8 @@ import SalaryBenchmarkChart from "./mdx/SalaryBenchmarkChart";
 import CareerTimeline from "./mdx/CareerTimeline";
 import MarketOverview from "./mdx/MarketOverview";
 import CopilotMainPanel from "./mdx/CopilotMainPanel";
+import JobMatchScore from "./mdx/JobMatchScore";
+import CompanyInsights from "./mdx/CompanyInsights";
 
 // Component registry for client-side MDX rendering
 const mdxComponents = {
@@ -25,6 +27,8 @@ const mdxComponents = {
   CareerTimeline,
   MarketOverview,
   CopilotMainPanel,
+  JobMatchScore,
+  CompanyInsights,
   // HTML element styling
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1 className="text-2xl font-bold text-gray-900 mb-4" {...props} />

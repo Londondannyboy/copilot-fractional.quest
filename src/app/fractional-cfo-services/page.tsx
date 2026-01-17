@@ -7,11 +7,12 @@ import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 
 export const metadata: Metadata = {
-  title: 'Fractional CFO Services UK',
-  description: 'Fractional CFO services for UK businesses. Finance leadership 1-3 days/week. Strategy, fundraising, reporting from £850/day.',
-  keywords: 'fractional cfo services, fractional cfo uk, part time cfo, fractional finance director, outsourced cfo services, cfo as a service',
+  title: 'Fractional CFO Services UK | Part-Time Finance Leadership',
+  description: 'Fractional CFO services for UK businesses. Finance leadership 1-3 days/week. Strategy, fundraising, reporting from £850/day. London, Manchester, Birmingham.',
+  keywords: 'fractional cfo services, fractional cfo uk, part time cfo services, fractional finance director, outsourced cfo services, cfo as a service, virtual cfo services uk',
   alternates: { canonical: 'https://fractional.quest/fractional-cfo-services' },
   openGraph: {
     title: 'Fractional CFO Services UK | Part-Time Finance Leadership',
@@ -26,6 +27,7 @@ const SERVICE_FAQS = [
   { question: "What's the difference between fractional CFO and bookkeeper/accountant?", answer: "Bookkeepers record transactions. Accountants produce accounts and tax returns. Fractional CFOs provide strategic finance leadership - financial strategy, fundraising, investor relations, business partnering, and driving commercial decisions. They're C-suite leaders, not back-office." },
   { question: "How much do fractional CFO services cost?", answer: "Fractional CFO day rates in the UK range from £850-£1,200. A typical 2-day per week engagement costs £6,800-£9,600 per month (£81,600-£115,200 annually). This is 40-60% less than a full-time CFO with benefits, bonus, and equity." },
   { question: "When should a company use fractional CFO services?", answer: "Ideal situations: preparing for fundraising (Series A onwards), post-investment reporting requirements, scaling beyond founder-managed finances, M&A preparation, implementing financial systems, or professionalising the finance function pre-exit." },
+  { question: "Where are your fractional CFOs based?", answer: "Our fractional CFOs are based across the UK, with strong presence in London (our largest market), Manchester, Birmingham, Edinburgh, Bristol, and Leeds. Most work hybrid arrangements combining remote work with on-site client days." },
 ]
 
 const SERVICES = [
@@ -48,7 +50,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/
 export default function FractionalCFOServicesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CFO Services UK | Part-Time Finance Leadership" description="Get experienced CFO leadership without full-time commitment." url="https://fractional.quest/fractional-cfo-services" dateModified={new Date('2025-01-08')} />
+      <WebPageSchema title="Fractional CFO Services UK | Part-Time Finance Leadership" description="Get experienced CFO leadership without full-time commitment." url="https://fractional.quest/fractional-cfo-services" dateModified={new Date('2026-01-17')} />
       <FAQPageSchema faqs={SERVICE_FAQS} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
@@ -63,7 +65,7 @@ export default function FractionalCFOServicesPage() {
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Get <strong>experienced CFO leadership</strong> without the full-time commitment. Financial strategy, fundraising support, and board-level finance leadership with a senior CFO working 1-3 days per week.</p>
               <div className="flex flex-wrap gap-4 mt-8">
                 <Link href="/fractional-cfo-jobs-uk" className="px-6 py-3 bg-white text-emerald-900 font-bold rounded-lg hover:bg-emerald-50 transition-colors">Find a Fractional CFO</Link>
-                <Link href="/hire-fractional-cfo" className="px-6 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">How to Hire</Link>
+                <Link href="/fractional-jobs-london" className="px-6 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">London CFO Jobs</Link>
               </div>
             </div>
           </div>
@@ -114,11 +116,157 @@ export default function FractionalCFOServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white"><div className="max-w-4xl mx-auto px-6 lg:px-8"><article className="prose prose-lg prose-gray max-w-none"><h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional CFO Services</h2><p className="text-xl text-gray-600 leading-relaxed mb-8">A <strong>fractional CFO</strong> provides senior finance leadership without the cost and commitment of a full-time hire. This is particularly valuable for venture-backed companies that need investor-grade financial management but aren't yet at the scale to justify a full-time CFO.</p><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Ideal Situations for Fractional CFO Services</h3><ul className="space-y-2 text-gray-600"><li><strong>Fundraising</strong> - Preparing for Series A, B, or growth rounds</li><li><strong>Post-investment</strong> - Meeting investor reporting requirements</li><li><strong>Scaling finance</strong> - Growing beyond founder-managed finances</li><li><strong>M&A preparation</strong> - Sell-side or buy-side transaction support</li><li><strong>Systems implementation</strong> - ERP, FP&A tools, and reporting infrastructure</li><li><strong>Interim cover</strong> - Bridging gap while recruiting permanent CFO</li></ul><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Fractional CFO vs Bookkeeper vs Accountant</h3><div className="not-prose overflow-x-auto"><table className="min-w-full text-sm"><thead><tr className="border-b"><th className="text-left py-3 px-4">Role</th><th className="text-left py-3 px-4">Focus</th><th className="text-left py-3 px-4">Output</th></tr></thead><tbody><tr className="border-b"><td className="py-3 px-4 font-semibold">Bookkeeper</td><td className="py-3 px-4">Transaction recording</td><td className="py-3 px-4">Accurate books</td></tr><tr className="border-b"><td className="py-3 px-4 font-semibold">Accountant</td><td className="py-3 px-4">Compliance, tax</td><td className="py-3 px-4">Accounts, returns</td></tr><tr><td className="py-3 px-4 font-semibold">Fractional CFO</td><td className="py-3 px-4">Strategy, fundraising, decisions</td><td className="py-3 px-4">Growth, capital, value</td></tr></tbody></table></div><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Services</h3><div className="grid md:grid-cols-2 gap-4 not-prose"><Link href="/fractional-cfo-jobs-uk" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">Find Fractional CFOs</h4><p className="text-sm text-gray-600">Browse available fractional CFOs</p></Link><Link href="/hire-fractional-cfo" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">How to Hire</h4><p className="text-sm text-gray-600">Guide to hiring a fractional CFO</p></Link><Link href="/fractional-cfo-salary" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">CFO Salary Guide</h4><p className="text-sm text-gray-600">Day rates and benchmarks</p></Link><Link href="/fractional-cfo" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">What is a Fractional CFO?</h4><p className="text-sm text-gray-600">Understanding the role</p></Link></div></article></div></section>
+      {/* Job Board Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="mb-8 text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Opportunities</span>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Current Fractional CFO Jobs</h2>
+          </div>
+          <EmbeddedJobBoard defaultDepartment="Finance" title="" accentColor="emerald" jobsPerPage={6} />
+        </div>
+      </section>
+
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <article className="prose prose-lg prose-gray max-w-none">
+            <h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional CFO Services</h2>
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">A <strong>fractional CFO</strong> provides senior finance leadership without the cost and commitment of a full-time hire. This is particularly valuable for venture-backed companies that need investor-grade financial management but aren't yet at the scale to justify a full-time CFO.</p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Ideal Situations for Fractional CFO Services</h3>
+            <ul className="space-y-2 text-gray-600">
+              <li><strong>Fundraising</strong> - Preparing for Series A, B, or growth rounds</li>
+              <li><strong>Post-investment</strong> - Meeting investor reporting requirements</li>
+              <li><strong>Scaling finance</strong> - Growing beyond founder-managed finances</li>
+              <li><strong>M&A preparation</strong> - Sell-side or buy-side transaction support</li>
+              <li><strong>Systems implementation</strong> - ERP, FP&A tools, and reporting infrastructure</li>
+              <li><strong>Interim cover</strong> - Bridging gap while recruiting permanent CFO</li>
+            </ul>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">UK Locations We Serve</h3>
+            <p>Our fractional CFOs operate across the UK, with particular strength in:</p>
+            <div className="grid md:grid-cols-3 gap-4 not-prose my-6">
+              <Link href="/fractional-jobs-london" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">London</h4>
+                <p className="text-sm text-gray-600">Our largest market - tech, VC-backed, financial services</p>
+              </Link>
+              <Link href="/manchester" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">Manchester</h4>
+                <p className="text-sm text-gray-600">Growing tech hub, strong SME market</p>
+              </Link>
+              <Link href="/birmingham" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">Birmingham</h4>
+                <p className="text-sm text-gray-600">Manufacturing, professional services</p>
+              </Link>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Fractional CFO vs Bookkeeper vs Accountant</h3>
+            <div className="not-prose overflow-x-auto">
+              <table className="min-w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-3 px-4">Role</th>
+                    <th className="text-left py-3 px-4">Focus</th>
+                    <th className="text-left py-3 px-4">Output</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b"><td className="py-3 px-4 font-semibold">Bookkeeper</td><td className="py-3 px-4">Transaction recording</td><td className="py-3 px-4">Accurate books</td></tr>
+                  <tr className="border-b"><td className="py-3 px-4 font-semibold">Accountant</td><td className="py-3 px-4">Compliance, tax</td><td className="py-3 px-4">Accounts, returns</td></tr>
+                  <tr><td className="py-3 px-4 font-semibold">Fractional CFO</td><td className="py-3 px-4">Strategy, fundraising, decisions</td><td className="py-3 px-4">Growth, capital, value</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Services</h3>
+            <div className="grid md:grid-cols-2 gap-4 not-prose">
+              <Link href="/fractional-cfo-jobs-uk" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">Find Fractional CFOs</h4>
+                <p className="text-sm text-gray-600">Browse available fractional CFOs</p>
+              </Link>
+              <Link href="/hire-fractional-cfo" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">How to Hire</h4>
+                <p className="text-sm text-gray-600">Guide to hiring a fractional CFO</p>
+              </Link>
+              <Link href="/fractional-cfo-salary" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">CFO Salary Guide</h4>
+                <p className="text-sm text-gray-600">Day rates and benchmarks</p>
+              </Link>
+              <Link href="/fractional-cfo" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">What is a Fractional CFO?</h4>
+                <p className="text-sm text-gray-600">Understanding the role</p>
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* External Authority Links */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <h2 className="text-2xl font-black text-gray-900 mb-8">Professional Resources</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
+              <span className="text-lg">📚</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">ICAEW</h4>
+                <p className="text-gray-500 text-xs">Institute of Chartered Accountants in England & Wales</p>
+              </div>
+            </a>
+            <a href="https://www.accaglobal.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
+              <span className="text-lg">🎓</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">ACCA</h4>
+                <p className="text-gray-500 text-xs">Association of Chartered Certified Accountants</p>
+              </div>
+            </a>
+            <a href="https://www.cimaglobal.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
+              <span className="text-lg">📊</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">CIMA</h4>
+                <p className="text-gray-500 text-xs">Chartered Institute of Management Accountants</p>
+              </div>
+            </a>
+            <a href="https://www.frc.org.uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
+              <span className="text-lg">⚖️</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">FRC</h4>
+                <p className="text-gray-500 text-xs">Financial Reporting Council</p>
+              </div>
+            </a>
+            <a href="https://www.british-business-bank.co.uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
+              <span className="text-lg">🏦</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">British Business Bank</h4>
+                <p className="text-gray-500 text-xs">SME finance and growth support</p>
+              </div>
+            </a>
+            <a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
+              <span className="text-lg">💼</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">BVCA</h4>
+                <p className="text-gray-500 text-xs">British Private Equity & Venture Capital Association</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 bg-emerald-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional CFO Services</h2></div><FAQ items={SERVICE_FAQS} title="" /></div></section>
 
       <ExpertProfile /><ExpertProfileSchema /><CaseStudy /><CaseStudySchema />
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gray-900 text-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Get Started with Fractional CFO Services?</h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Connect with experienced fractional CFOs who can transform your finance function. London, Manchester, Birmingham and across the UK.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link href="/fractional-cfo-jobs-uk" className="px-8 py-4 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-400 transition-colors">Find Fractional CFOs</Link>
+            <Link href="/fractional-jobs-london" className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors">London CFO Jobs</Link>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

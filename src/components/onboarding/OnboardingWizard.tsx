@@ -43,13 +43,13 @@ interface OnboardingWizardProps {
   onVoiceMessage: (text: string, role?: "user" | "assistant") => void
 }
 
-// Klipy GIF URLs for different onboarding moments
+// Real Klipy GIF URLs for different onboarding moments (verified working)
 const ONBOARDING_GIFS = {
-  welcome: 'https://media.klipy.com/gifs/hello-wave.gif',
-  step_complete: 'https://media.klipy.com/gifs/thumbs-up.gif',
-  almost_there: 'https://media.klipy.com/gifs/almost-there.gif',
-  celebration: 'https://media.klipy.com/gifs/celebration.gif',
-  encouragement: 'https://media.klipy.com/gifs/you-got-this.gif',
+  welcome: 'https://static.klipy.com/ii/935d7ab9d8c6202580a668421940ec81/9a/fb/DZ2Ib2g1.gif',
+  step_complete: 'https://static.klipy.com/ii/50d7c955398dfd7e3c8ba5281154280f/79/6d/dl3FgmslCLcFr3bHDBtQ.gif',
+  almost_there: 'https://static.klipy.com/ii/ce286d05b8e1a47cd4f32b0e1b6dec0e/b1/02/K4ZWIqVO.gif',
+  celebration: 'https://static.klipy.com/ii/935d7ab9d8c6202580a668421940ec81/d2/27/iQ5M3MEP.gif',
+  encouragement: 'https://static.klipy.com/ii/c3a19a0b747a76e98651f2b9a3cca5ff/29/ef/ttocqdWS.gif',
 }
 
 // Step-specific agent instructions

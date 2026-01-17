@@ -13,5 +13,5 @@ dependencies = [
     "python-dotenv",
     "logfire>=4.10.0",
     "psycopg2-binary",
-    "httpx",  # For Zep API calls
+    "httpx",  # For Zep API calls and Apify API
 ]

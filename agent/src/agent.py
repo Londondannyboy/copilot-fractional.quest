@@ -3183,6 +3183,217 @@ async def clm_endpoint(request: Request):
     )
 
 
+# ============
+# Daily Job Import Endpoints
+# ============
+
+@main_app.post("/jobs/import-daily")
+async def import_jobs_daily(request: Request):
+    """
+    Triggered by Railway cron at 6 AM UTC daily.
+    Fetches jobs from the pre-scheduled Apify task, filters with AI, deduplicates, and inserts.
+
+    The Apify task (definable_field/career-site-job-listing-api-daily) runs daily and
+    scrapes original job postings from company career sites and LinkedIn company pages
+    (not recruiter posts).
+
+    Query params:
+    - dry_run: If "true", don't insert jobs, just log what would be done
+    """
+    from src.job_importer import run_import_pipeline
+
+    # Optional: Verify cron secret for security
+    auth_header = request.headers.get("Authorization", "")
+    cron_secret = os.getenv("CRON_SECRET", "")
+    if cron_secret and auth_header != f"Bearer {cron_secret}":
+        # Allow requests without auth if no secret is configured
+        if cron_secret:
+            return {"error": "Unauthorized"}, 401
+
+    # Parse query params
+    dry_run = request.query_params.get("dry_run", "").lower() == "true"
+
+    apify_token = os.getenv("APIFY_TOKEN")
+    if not apify_token:
+        return {"status": "error", "message": "APIFY_TOKEN not configured"}
+
+    try:
+        print(f"[Import] Starting daily job import (dry_run={dry_run})", file=sys.stderr)
+
+        stats = await run_import_pipeline(
+            database_url=DATABASE_URL,
+            apify_token=apify_token,
+            dry_run=dry_run
+        )
+
+        return {
+            "status": "completed",
+            "dry_run": dry_run,
+            "stats": {
+                "fetched": stats.fetched,
+                "filtered": stats.filtered,
+                "duplicates": stats.duplicates,
+                "inserted": stats.inserted,
+                "errors": len(stats.errors)
+            },
+            "message": f"Imported {stats.inserted} new jobs" + (" (dry run)" if dry_run else "")
+        }
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"status": "failed", "error": str(e)}
+
+
+@main_app.get("/jobs/import-status")
+async def import_status():
+    """Get recent import run history for monitoring."""
+    from job_importer import get_import_status
+
+    try:
+        runs = await get_import_status(DATABASE_URL, limit=10)
+        return {"runs": runs}
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@main_app.post("/news/import-daily")
+async def import_news_daily(request: Request):
+    """
+    Import news articles about fractional executives from Google News.
+    Uses Serper.dev API for news search.
+
+    Query params:
+    - dry_run: If "true", don't insert, just log what would be done
+    """
+    from news_importer import run_news_import_pipeline
+
+    # Optional auth check
+    auth_header = request.headers.get("Authorization", "")
+    cron_secret = os.getenv("CRON_SECRET", "")
+    if cron_secret and auth_header != f"Bearer {cron_secret}":
+        if cron_secret:
+            return {"error": "Unauthorized"}, 401
+
+    dry_run = request.query_params.get("dry_run", "").lower() == "true"
+
+    serper_key = os.getenv("SERPER_API_KEY")
+    if not serper_key:
+        return {"status": "error", "message": "SERPER_API_KEY not configured"}
+
+    try:
+        print(f"[NewsImport] Starting news import (dry_run={dry_run})", file=sys.stderr)
+
+        stats = await run_news_import_pipeline(
+            database_url=DATABASE_URL,
+            serper_api_key=serper_key,
+            dry_run=dry_run
+        )
+
+        return {
+            "status": "completed",
+            "dry_run": dry_run,
+            "stats": {
+                "fetched": stats.fetched,
+                "filtered": stats.filtered,
+                "duplicates": stats.duplicates,
+                "inserted": stats.inserted,
+                "errors": len(stats.errors)
+            },
+            "message": f"Imported {stats.inserted} news articles" + (" (dry run)" if dry_run else "")
+        }
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"status": "failed", "error": str(e)}
+
+
+@main_app.post("/import/daily")
+async def import_all_daily(request: Request):
+    """
+    Combined daily import: jobs + news.
+    This is the main endpoint for Railway cron to call at 6 AM UTC.
+
+    Query params:
+    - dry_run: If "true", don't insert anything
+    - skip_jobs: If "true", skip job import
+    - skip_news: If "true", skip news import
+    """
+    from src.job_importer import run_import_pipeline
+    from news_importer import run_news_import_pipeline
+
+    # Optional auth check
+    auth_header = request.headers.get("Authorization", "")
+    cron_secret = os.getenv("CRON_SECRET", "")
+    if cron_secret and auth_header != f"Bearer {cron_secret}":
+        if cron_secret:
+            return {"error": "Unauthorized"}, 401
+
+    dry_run = request.query_params.get("dry_run", "").lower() == "true"
+    skip_jobs = request.query_params.get("skip_jobs", "").lower() == "true"
+    skip_news = request.query_params.get("skip_news", "").lower() == "true"
+
+    results = {
+        "status": "completed",
+        "dry_run": dry_run,
+        "jobs": None,
+        "news": None
+    }
+
+    # Import jobs from pre-scheduled Apify task
+    if not skip_jobs:
+        apify_token = os.getenv("APIFY_TOKEN")
+        if apify_token:
+            try:
+                print("[DailyImport] Running job import from Apify task...", file=sys.stderr)
+                job_stats = await run_import_pipeline(
+                    database_url=DATABASE_URL,
+                    apify_token=apify_token,
+                    dry_run=dry_run
+                )
+                results["jobs"] = {
+                    "source": "apify_task:definable_field/career-site-job-listing-api-daily",
+                    "fetched": job_stats.fetched,
+                    "filtered": job_stats.filtered,
+                    "duplicates": job_stats.duplicates,
+                    "inserted": job_stats.inserted
+                }
+            except Exception as e:
+                results["jobs"] = {"error": str(e)}
+        else:
+            results["jobs"] = {"skipped": "APIFY_TOKEN not configured"}
+
+    # Import news
+    if not skip_news:
+        serper_key = os.getenv("SERPER_API_KEY")
+        if serper_key:
+            try:
+                print("[DailyImport] Running news import...", file=sys.stderr)
+                news_stats = await run_news_import_pipeline(
+                    database_url=DATABASE_URL,
+                    serper_api_key=serper_key,
+                    dry_run=dry_run
+                )
+                results["news"] = {
+                    "fetched": news_stats.fetched,
+                    "filtered": news_stats.filtered,
+                    "duplicates": news_stats.duplicates,
+                    "inserted": news_stats.inserted
+                }
+            except Exception as e:
+                results["news"] = {"error": str(e)}
+        else:
+            results["news"] = {"skipped": "SERPER_API_KEY not configured"}
+
+    # Summary message
+    jobs_count = results["jobs"].get("inserted", 0) if isinstance(results["jobs"], dict) else 0
+    news_count = results["news"].get("inserted", 0) if isinstance(results["news"], dict) else 0
+    results["message"] = f"Imported {jobs_count} jobs and {news_count} news articles" + (" (dry run)" if dry_run else "")
+
+    return results
+
+
 @main_app.get("/chat/completions")
 async def clm_health():
     return {"status": "ok", "message": "Use POST for chat completions"}
@@ -3190,7 +3401,18 @@ async def clm_health():
 
 @main_app.get("/")
 async def health():
-    return {"status": "ok", "service": "fractional-quest-agent", "endpoints": ["/chat/completions (CLM)", "/* (AG-UI)"]}
+    return {
+        "status": "ok",
+        "service": "fractional-quest-agent",
+        "endpoints": [
+            "/chat/completions (POST - CLM for Hume Voice)",
+            "/import/daily (POST - combined jobs + news import)",
+            "/jobs/import-daily (POST - job import only)",
+            "/jobs/import-status (GET - import history)",
+            "/news/import-daily (POST - news import only)",
+            "/agui/* (AG-UI for CopilotKit)"
+        ]
+    }
 
 
 # Mount AG-UI app for CopilotKit (catch-all)

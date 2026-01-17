@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
         // Return random GIF from results
         const randomGif = gifs[Math.floor(Math.random() * gifs.length)]
         return NextResponse.json({
-          url: randomGif.preview_url || randomGif.url,
+          url: randomGif.media_formats?.tinygif?.url || randomGif.url,
           title: randomGif.title,
         })
       }
