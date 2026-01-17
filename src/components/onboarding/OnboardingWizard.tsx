@@ -1,10 +1,31 @@
 'use client'
 
-import { CopilotChat } from '@copilotkit/react-ui'
+import { CopilotChat, ComponentsMap } from '@copilotkit/react-ui'
 import { OnboardingProgress } from './OnboardingProgress'
 import { ProfilePreview } from './ProfilePreview'
 import { VoiceInput } from '@/components/voice-input'
 import { UserButton } from '@neondatabase/auth/react/ui'
+
+// GIF component for rendering Klipy GIFs in chat messages
+function GifMessage({ src, alt }: { src?: string; alt?: string; children?: React.ReactNode }) {
+  if (!src) return null
+  return (
+    <div className="my-3 flex justify-center">
+      <img
+        src={src}
+        alt={alt || 'GIF'}
+        className="rounded-xl max-w-[240px] max-h-[180px] object-cover shadow-lg"
+        loading="lazy"
+      />
+    </div>
+  )
+}
+
+// Custom markdown tag renderers for CopilotChat
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const gifMarkdownRenderer: ComponentsMap<any> = {
+  gif: GifMessage,
+}
 
 interface ProfileItem {
   id: number
@@ -22,6 +43,15 @@ interface OnboardingWizardProps {
   onVoiceMessage: (text: string, role?: "user" | "assistant") => void
 }
 
+// Klipy GIF URLs for different onboarding moments
+const ONBOARDING_GIFS = {
+  welcome: 'https://media.klipy.com/gifs/hello-wave.gif',
+  step_complete: 'https://media.klipy.com/gifs/thumbs-up.gif',
+  almost_there: 'https://media.klipy.com/gifs/almost-there.gif',
+  celebration: 'https://media.klipy.com/gifs/celebration.gif',
+  encouragement: 'https://media.klipy.com/gifs/you-got-this.gif',
+}
+
 // Step-specific agent instructions
 function getStepInstructions(step: number, userName: string): string {
   const stepPrompts: Record<number, string> = {
@@ -36,8 +66,19 @@ YOUR TASK: Call the confirm_trinity HITL tool with these options:
 - Lifestyle Change: "I'm seeking more flexibility"
 - Just Curious: "I'm exploring what's out there"
 
-Be warm and friendly. Say something like:
-"Hey ${userName}! 👋 Great to meet you. I'm here to help you find amazing fractional opportunities.
+### HOW TO USE GIFS
+You can include GIFs in your messages to make them more engaging! Use this format:
+<gif src="URL_HERE" alt="description" />
+
+Example GIF URLs you can use:
+- Welcome: ${ONBOARDING_GIFS.welcome}
+- Thumbs up: ${ONBOARDING_GIFS.step_complete}
+- You got this: ${ONBOARDING_GIFS.encouragement}
+
+Be warm and friendly. Start with a GIF! Say something like:
+"<gif src="${ONBOARDING_GIFS.welcome}" alt="welcome wave" />
+
+Hey ${userName}! Great to meet you. I'm here to help you find amazing fractional opportunities.
 
 First up - what brings you to Fractional Quest today?"
 
@@ -54,6 +95,9 @@ YOUR TASK: Call the confirm_employment_status HITL tool with these options:
 - Freelancing: Already doing contract/consulting work
 - Founder: Running their own business
 
+Include a celebratory GIF after they complete step 1:
+<gif src="${ONBOARDING_GIFS.step_complete}" alt="thumbs up" />
+
 Acknowledge their previous answer warmly, then ask:
 "Perfect! And what's your current work situation?"
 
@@ -66,6 +110,9 @@ ${userName} is making great progress! Now find out their professional domain.
 
 YOUR TASK: Call the confirm_professional_vertical HITL tool with options like:
 Technology, Finance, Marketing, Operations, HR/People, Sales, Product, General Management
+
+You can include an encouraging GIF:
+<gif src="${ONBOARDING_GIFS.encouragement}" alt="you got this" />
 
 Acknowledge their status, then ask:
 "What's your professional area of expertise?"
@@ -80,6 +127,9 @@ Almost there! Find out where ${userName} is based and their work style preferenc
 YOUR TASK:
 1. Call confirm_location HITL to get their base location (London, Manchester, Remote, etc.)
 2. Ask about their preferred work arrangement (remote/hybrid/onsite)
+
+Include an "almost there" GIF:
+<gif src="${ONBOARDING_GIFS.almost_there}" alt="almost there" />
 
 Say something like:
 "Brilliant! Where are you based, and what's your preferred work style?"
@@ -101,6 +151,9 @@ Save each piece of information using save_user_preference.
 `,
     6: `
 ## ONBOARDING COMPLETE! 🎉
+
+Include a big celebration GIF:
+<gif src="${ONBOARDING_GIFS.celebration}" alt="celebration" />
 
 ${userName} has completed their profile! Celebrate this moment.
 
@@ -275,6 +328,7 @@ ${profileItems.length > 0
               initial: initialMessage,
               placeholder: "Type your answer or use voice...",
             }}
+            markdownTagRenderers={gifMarkdownRenderer}
             className="h-full"
           />
         </div>
