@@ -22,7 +22,7 @@ from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.models.google import GoogleModel
 
-from data_sources.serper_client import RawNewsArticle, fetch_serper_news, fetch_trending_fractional_news
+from src.data_sources.serper_client import RawNewsArticle, fetch_serper_news, fetch_trending_fractional_news
 
 
 # ============
@@ -75,7 +75,7 @@ class NewsImportStats(BaseModel):
 
 news_filter_agent = Agent(
     model=GoogleModel('gemini-2.0-flash'),
-    result_type=NewsFilterResult,
+    output_type=NewsFilterResult,
     system_prompt="""You are a news classifier for a fractional executive platform.
 
 RELEVANT articles are about:
@@ -108,7 +108,7 @@ Be selective - quality over quantity. Score 0.7+ for inclusion."""
 
 news_enrich_agent = Agent(
     model=GoogleModel('gemini-2.0-flash'),
-    result_type=NewsEnrichmentResult,
+    output_type=NewsEnrichmentResult,
     system_prompt="""You enrich news articles for a fractional executive platform.
 
 Generate:
@@ -159,7 +159,7 @@ URL: {article.url}
 """
     try:
         result = await news_filter_agent.run(prompt)
-        return result.data
+        return result.output
     except Exception as e:
         print(f"[NewsFilter] Error: {e}", file=sys.stderr)
         return NewsFilterResult(
@@ -188,11 +188,11 @@ Date: {article.date or 'Unknown'}
             url=article.url,
             source_name=article.source,
             published_date=article.date,
-            summary=result.data.summary,
-            key_insights=result.data.key_insights[:5],
+            summary=result.output.summary,
+            key_insights=result.output.key_insights[:5],
             category=filter_result.category,
-            tags=result.data.tags[:10],
-            sentiment=result.data.sentiment,
+            tags=result.output.tags[:10],
+            sentiment=result.output.sentiment,
             image_url=article.image_url,
             content_hash=compute_article_hash(article)
         )
@@ -216,23 +216,28 @@ Date: {article.date or 'Unknown'}
 
 def check_article_duplicate(conn, article: RawNewsArticle) -> bool:
     """Check if article already exists in database."""
-    cur = conn.cursor()
+    try:
+        cur = conn.cursor()
 
-    # Check by URL
-    cur.execute("SELECT id FROM articles WHERE url = %s", (article.url,))
-    if cur.fetchone():
+        # Check by URL
+        cur.execute("SELECT id FROM news_articles WHERE url = %s", (article.url,))
+        if cur.fetchone():
+            cur.close()
+            return True
+
+        # Check by content hash
+        content_hash = compute_article_hash(article)
+        cur.execute("SELECT id FROM news_articles WHERE content_hash = %s", (content_hash,))
+        if cur.fetchone():
+            cur.close()
+            return True
+
         cur.close()
-        return True
-
-    # Check by content hash
-    content_hash = compute_article_hash(article)
-    cur.execute("SELECT id FROM articles WHERE content_hash = %s", (content_hash,))
-    if cur.fetchone():
-        cur.close()
-        return True
-
-    cur.close()
-    return False
+        return False
+    except Exception as e:
+        conn.rollback()  # Reset transaction state
+        print(f"[NewsDupe] Error checking duplicate: {e}", file=sys.stderr)
+        return False  # Allow insertion attempt if check fails
 
 
 def insert_article(conn, article: EnrichedArticle) -> Optional[str]:
@@ -240,7 +245,7 @@ def insert_article(conn, article: EnrichedArticle) -> Optional[str]:
     cur = conn.cursor()
     try:
         cur.execute("""
-            INSERT INTO articles (
+            INSERT INTO news_articles (
                 title, url, source_name, published_date, summary,
                 key_insights, category, tags, sentiment, image_url,
                 content_hash, imported_at, status

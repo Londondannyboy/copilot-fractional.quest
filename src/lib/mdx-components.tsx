@@ -75,6 +75,24 @@ const NetworkConnections = dynamic(
   { ssr: false }
 );
 
+// SEO-focused components
+const AuthorityLinksPanel = dynamic(
+  () => import("@/components/mdx/AuthorityLinksPanel"),
+  { ssr: false }
+);
+const StatisticsPanel = dynamic(
+  () => import("@/components/mdx/StatisticsPanel"),
+  { ssr: false }
+);
+const InternalLinksGrid = dynamic(
+  () => import("@/components/mdx/InternalLinksGrid"),
+  { ssr: false }
+);
+const SEOContentSection = dynamic(
+  () => import("@/components/mdx/SEOContentSection"),
+  { ssr: false }
+);
+
 // MDX component registry - all components available in MDX content
 export const mdxComponents = {
   // Interactive job components
@@ -102,6 +120,12 @@ export const mdxComponents = {
   MarketTrends,
   InterviewPrep,
   NetworkConnections,
+
+  // SEO-focused components
+  AuthorityLinksPanel,
+  StatisticsPanel,
+  InternalLinksGrid,
+  SEOContentSection,
 
   // HTML element overrides for MDX styling
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (

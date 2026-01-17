@@ -232,17 +232,71 @@ export default function FractionalCfoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Qualifications</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Qualifications & Professional Bodies</h2>
 
             <p>
-              Most <strong>fractional CFOs</strong> hold professional accounting qualifications from bodies like:
+              Most <strong>fractional CFOs</strong> hold professional accounting qualifications from recognized bodies. Key professional organizations include:
             </p>
 
-            <ul className="space-y-2">
-              <li><strong>ACA</strong> - <a href="https://www.icaew.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">ICAEW</a> (Institute of Chartered Accountants)</li>
-              <li><strong>ACCA</strong> - <a href="https://www.accaglobal.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">Association of Chartered Certified Accountants</a></li>
-              <li><strong>CIMA</strong> - Chartered Institute of Management Accountants</li>
-            </ul>
+            <div className="grid md:grid-cols-2 gap-4 not-prose my-8">
+              <a href="https://www.icaew.com" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">ICAEW</h4>
+                    <p className="text-sm text-gray-600">Institute of Chartered Accountants in England & Wales</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.accaglobal.com" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">ACCA</h4>
+                    <p className="text-sm text-gray-600">Association of Chartered Certified Accountants</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.cimaglobal.com" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">CIMA</h4>
+                    <p className="text-sm text-gray-600">Chartered Institute of Management Accountants</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.frc.org.uk" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏢</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">FRC</h4>
+                    <p className="text-sm text-gray-600">Financial Reporting Council - UK regulator</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">External Resources</h2>
+
+            <div className="grid md:grid-cols-4 gap-4 not-prose my-8">
+              <a href="https://www.gov.uk/government/organisations/companies-house" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">🏢</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">Companies House</p>
+              </a>
+              <a href="https://www.gov.uk/government/organisations/hm-revenue-customs" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">🏢</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">HMRC</p>
+              </a>
+              <a href="https://www.glassdoor.co.uk/Salaries/cfo-salary-SRCH_KO0,3.htm" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">📊</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">Glassdoor Salaries</p>
+              </a>
+              <a href="https://www.bvca.co.uk" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">💼</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">BVCA</p>
+              </a>
+            </div>
 
           </article>
         </div>
@@ -276,24 +330,71 @@ export default function FractionalCfoPage() {
 
       {/* Related Links */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <Link href="/hire-fractional-cfo" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
-              <span className="text-2xl mb-3 block">📋</span>
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="mb-8">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Related Resources</span>
+            <h2 className="text-2xl font-black text-gray-900">Explore More CFO Resources</h2>
+          </div>
+
+          {/* Primary Links */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <Link href="/hire-fractional-cfo" className="bg-white p-6 rounded-lg border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all group">
+              <span className="text-3xl mb-3 block">📋</span>
               <h3 className="font-bold text-gray-900 group-hover:text-emerald-700 mb-2">How to Hire a Fractional CFO</h3>
-              <p className="text-gray-600 text-sm">Complete guide to hiring process</p>
+              <p className="text-gray-600 text-sm">Complete guide to the hiring process, interview questions, and contract templates</p>
             </Link>
-            <Link href="/fractional-cfo-jobs-uk" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
-              <span className="text-2xl mb-3 block">💼</span>
+            <Link href="/fractional-cfo-jobs-uk" className="bg-white p-6 rounded-lg border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all group">
+              <span className="text-3xl mb-3 block">💼</span>
               <h3 className="font-bold text-gray-900 group-hover:text-emerald-700 mb-2">Fractional CFO Jobs UK</h3>
-              <p className="text-gray-600 text-sm">Browse live fractional CFO roles</p>
+              <p className="text-gray-600 text-sm">Browse 200+ live fractional CFO and Finance Director roles across the UK</p>
             </Link>
-            <Link href="/fractional-cfo-salary" className="bg-white p-6 rounded-lg border border-gray-200 hover:border-emerald-300 transition-colors group">
-              <span className="text-2xl mb-3 block">💰</span>
+            <Link href="/fractional-cfo-salary" className="bg-white p-6 rounded-lg border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all group">
+              <span className="text-3xl mb-3 block">💰</span>
               <h3 className="font-bold text-gray-900 group-hover:text-emerald-700 mb-2">Fractional CFO Salary Guide</h3>
-              <p className="text-gray-600 text-sm">UK salary benchmarks and rates</p>
+              <p className="text-gray-600 text-sm">UK day rates, annual earnings, and IR35 considerations for fractional CFOs</p>
             </Link>
+          </div>
+
+          {/* Secondary Links - More internal pages */}
+          <div className="grid md:grid-cols-4 gap-4">
+            <Link href="/fractional-cfo-services" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-colors group">
+              <span className="text-xl mb-2 block">⚙️</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">CFO Services</h4>
+              <p className="text-gray-500 text-xs">What CFOs deliver</p>
+            </Link>
+            <Link href="/part-time-cfo-jobs-uk" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-colors group">
+              <span className="text-xl mb-2 block">🕐</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">Part-Time CFO Jobs</h4>
+              <p className="text-gray-500 text-xs">2-3 days per week</p>
+            </Link>
+            <Link href="/interim-cfo-jobs-uk" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-colors group">
+              <span className="text-xl mb-2 block">⏳</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">Interim CFO Jobs</h4>
+              <p className="text-gray-500 text-xs">Contract CFO roles</p>
+            </Link>
+            <Link href="/fractional-jobs-london" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-colors group">
+              <span className="text-xl mb-2 block">🏙️</span>
+              <h4 className="font-semibold text-gray-900 group-hover:text-emerald-700 text-sm">London Jobs</h4>
+              <p className="text-gray-500 text-xs">London-based roles</p>
+            </Link>
+          </div>
+
+          {/* Cross-role links */}
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <p className="text-sm text-gray-500 mb-3">Other Fractional Executive Roles:</p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/fractional-cto" className="text-sm text-emerald-700 hover:underline">Fractional CTO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cmo" className="text-sm text-emerald-700 hover:underline">Fractional CMO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-coo" className="text-sm text-emerald-700 hover:underline">Fractional COO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-chro" className="text-sm text-emerald-700 hover:underline">Fractional CHRO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-ciso" className="text-sm text-emerald-700 hover:underline">Fractional CISO</Link>
+              <span className="text-gray-300">•</span>
+              <Link href="/fractional-cpo" className="text-sm text-emerald-700 hover:underline">Fractional CPO</Link>
+            </div>
           </div>
         </div>
       </section>

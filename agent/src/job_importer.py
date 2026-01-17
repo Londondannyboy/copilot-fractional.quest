@@ -23,7 +23,7 @@ from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.models.google import GoogleModel
 
-from data_sources.apify_client import RawJob, fetch_apify_jobs
+from src.data_sources.apify_client import RawJob, fetch_apify_jobs
 
 
 # ============
@@ -78,7 +78,7 @@ class ImportStats(BaseModel):
 # Filter agent determines if a job is a relevant fractional/interim role
 filter_agent = Agent(
     model=GoogleModel('gemini-2.0-flash'),
-    result_type=FilterResult,
+    output_type=FilterResult,
     system_prompt="""You are a job classification expert for a fractional executive jobs platform.
 
 FRACTIONAL roles are:
@@ -98,26 +98,43 @@ RELEVANT role categories (choose one):
 - CEO (Chief Executive Officer, Managing Director)
 - OTHER (relevant executive role not fitting above)
 
+## RECRUITER DETECTION - CRITICAL!
+REJECT jobs posted by recruitment/staffing agencies. Signs of recruiter posts:
+- Company name contains: Recruitment, Staffing, Talent, HR Solutions, Search, Partners, Associates, Consulting (when recruiting)
+- Common recruiter company patterns: "X Recruitment", "X Staffing", "X Talent", "X Search", "X Partners"
+- Job description mentions "our client" repeatedly (hiding the actual employer)
+- Vague company descriptions like "leading organization" without naming the company
+- Multiple similar roles posted by same company (aggregator behavior)
+- LinkedIn company pages that are recruitment agencies
+
+KNOWN RECRUITER COMPANY PATTERNS (auto-reject):
+- Hays, Robert Half, Michael Page, Reed, Adecco, Manpower, Randstad, Harvey Nash
+- Grayson HR, Frazer Jones, Goodman Masson, Marks Sattin, Robert Walters
+- Any company with "Recruitment", "Recruiters", "Staffing", "Talent Acquisition" in name
+
+We ONLY want jobs posted DIRECTLY by the hiring company (original postings), NOT recruiter listings.
+
 NOT relevant (reject these):
 - Full-time permanent positions (unless explicitly interim)
 - Junior or mid-level roles
 - Non-executive positions
-- Recruiting/staffing agency internal roles
+- Recruiting/staffing agency listings (see above)
 - Contract developer/engineer roles (unless CTO-level)
+- Jobs where the actual employer is hidden ("our client seeks...")
 
 Analyze the job and determine:
-1. is_relevant: true only if this is clearly a fractional/interim/portfolio executive role
+1. is_relevant: true only if this is clearly a fractional/interim/portfolio executive role FROM A DIRECT EMPLOYER
 2. role_category: The best matching category from the list above
 3. confidence: 0.0-1.0 how certain you are (use 0.7+ threshold for inclusion)
-4. reasoning: Brief explanation (1-2 sentences)
+4. reasoning: Brief explanation - MUST mention if rejected due to recruiter detection
 
-Be conservative - when in doubt, reject. Quality over quantity."""
+Be conservative - when in doubt, reject. Quality over quantity. NO RECRUITERS."""
 )
 
 # Enrichment agent generates compelling content
 enrich_agent = Agent(
     model=GoogleModel('gemini-2.0-flash'),
-    result_type=EnrichmentResult,
+    output_type=EnrichmentResult,
     system_prompt="""You enrich job listings for a premium fractional executive platform.
 
 Given a job, generate:
@@ -149,6 +166,41 @@ Be professional, specific, and focus on what makes executives excited about oppo
 # Core Functions
 # ============
 
+# Known recruitment agencies - auto-reject without AI call
+KNOWN_RECRUITERS = {
+    # Major UK recruitment agencies
+    "hays", "robert half", "michael page", "reed", "adecco", "manpower", "randstad",
+    "harvey nash", "grayson hr", "frazer jones", "goodman masson", "marks sattin",
+    "robert walters", "korn ferry", "spencer stuart", "egon zehnder", "heidrick",
+    "russell reynolds", "boyden", "stanton chase", "odgers berndtson",
+    # Pattern matches
+    "recruitment", "recruiters", "staffing", "talent acquisition", "search partners",
+    "executive search", "talent solutions", "hr solutions", "consulting partners",
+}
+
+def is_likely_recruiter(company_name: str) -> bool:
+    """Quick check if company is a known recruiter (before AI call)."""
+    if not company_name:
+        return False
+    company_lower = company_name.lower().strip()
+
+    # Check exact matches and patterns
+    for pattern in KNOWN_RECRUITERS:
+        if pattern in company_lower:
+            return True
+
+    # Check for common recruiter naming patterns
+    recruiter_patterns = [
+        company_lower.endswith(" recruitment"),
+        company_lower.endswith(" staffing"),
+        company_lower.endswith(" talent"),
+        company_lower.endswith(" search"),
+        company_lower.endswith(" partners") and "law" not in company_lower,  # Exclude law firms
+        company_lower.endswith(" associates") and ("law" not in company_lower and "legal" not in company_lower),
+    ]
+    return any(recruiter_patterns)
+
+
 def compute_content_hash(job: RawJob) -> str:
     """Create hash for fuzzy deduplication based on title + company + location."""
     content = f"{job.title.lower().strip()}|{job.company.lower().strip()}|{(job.location or '').lower().strip()}"
@@ -167,7 +219,7 @@ URL: {job.url}
 """
     try:
         result = await filter_agent.run(prompt)
-        return result.data
+        return result.output
     except Exception as e:
         print(f"[Filter] Error filtering job '{job.title}': {e}", file=sys.stderr)
         # Default to rejecting on error
@@ -196,13 +248,13 @@ Description: {job.description[:2500]}
             title=job.title,
             company_name=job.company,
             location=job.location,
-            description_snippet=result.data.description_snippet[:150],  # Enforce limit
+            description_snippet=result.output.description_snippet[:150],  # Enforce limit
             role_category=filter_result.role_category or "OTHER",
             url=job.url,
             salary_min=job.salary_min,
             salary_max=job.salary_max,
-            teaser_hook=result.data.teaser_hook,
-            topic_keywords=result.data.topic_keywords[:10],  # Limit to 10
+            teaser_hook=result.output.teaser_hook,
+            topic_keywords=result.output.topic_keywords[:10],  # Limit to 10
             source=job.source,
             external_id=job.external_id,
             content_hash=compute_content_hash(job)
@@ -270,12 +322,38 @@ def check_duplicate(conn, job: RawJob) -> bool:
     return False
 
 
+# Map AI role categories to database enum values
+ROLE_TO_CATEGORY = {
+    "CTO": "Engineering",
+    "CFO": "Finance",
+    "CMO": "Marketing",
+    "COO": "Operations",
+    "CPO": "Product",
+    "CHRO": "HR",
+    "CISO": "Engineering",  # Security often falls under Engineering
+    "CEO": "Executive",
+    "CRO": "Sales",
+    "CIO": "Engineering",
+    "CDO": "Data",
+    "CLO": "Legal",
+    "OTHER": "Other",
+}
+
+
+def map_role_to_category(role: str) -> str:
+    """Map AI-detected role to database category enum."""
+    return ROLE_TO_CATEGORY.get(role.upper(), "Other")
+
+
 def insert_job(conn, job: EnrichedJob) -> Optional[str]:
     """
     Insert enriched job into database.
 
     Returns the job ID if successful, None otherwise.
     """
+    # Map role to database category enum
+    category = map_role_to_category(job.role_category)
+
     cur = conn.cursor()
     try:
         cur.execute("""
@@ -292,7 +370,7 @@ def insert_job(conn, job: EnrichedJob) -> Optional[str]:
             job.company_name,
             job.location,
             job.description_snippet,
-            job.role_category,
+            category,  # Use mapped category
             job.url,
             job.salary_min,
             job.salary_max,
@@ -411,6 +489,12 @@ async def run_import_pipeline(
                 if check_duplicate(conn, job):
                     stats.duplicates += 1
                     print(f"[Import]   -> Duplicate, skipping", file=sys.stderr)
+                    continue
+
+                # Pre-filter: Check for known recruiters (fast, no AI cost)
+                if is_likely_recruiter(job.company):
+                    stats.filtered += 1
+                    print(f"[Import]   -> Recruiter detected: {job.company}", file=sys.stderr)
                     continue
 
                 # AI filter (slower, costs API credits)

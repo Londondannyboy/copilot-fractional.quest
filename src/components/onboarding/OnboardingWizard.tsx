@@ -1,10 +1,28 @@
 'use client'
 
 import { CopilotChat, ComponentsMap } from '@copilotkit/react-ui'
+import { useCoAgent, useCoAgentStateRender } from '@copilotkit/react-core'
 import { OnboardingProgress } from './OnboardingProgress'
 import { ProfilePreview } from './ProfilePreview'
 import { VoiceInput } from '@/components/voice-input'
 import { UserButton } from '@neondatabase/auth/react/ui'
+
+// Agent state type - matches Pydantic AI AppState.onboarding
+interface OnboardingState {
+  current_step: number
+  is_complete: boolean
+  trinity: string | null
+  employment_status: string | null
+  professional_vertical: string | null
+  location: string | null
+  role_preference: string | null
+  experience_level: string | null
+  profile_nodes: Array<{ label: string; type: string; confirmed: boolean }>
+}
+
+interface AgentState {
+  onboarding: OnboardingState
+}
 
 // GIF component for rendering Klipy GIFs in chat messages
 function GifMessage({ src, alt }: { src?: string; alt?: string; children?: React.ReactNode }) {
@@ -181,7 +199,50 @@ export function OnboardingWizard({
   currentStep,
   onVoiceMessage,
 }: OnboardingWizardProps) {
-  const isComplete = currentStep > 5
+  // Sync with Pydantic AI agent state via CopilotKit
+  const { state: agentState } = useCoAgent<AgentState>({
+    name: "my_agent",
+    initialState: {
+      onboarding: {
+        current_step: currentStep,
+        is_complete: currentStep > 5,
+        trinity: null,
+        employment_status: null,
+        professional_vertical: null,
+        location: null,
+        role_preference: null,
+        experience_level: null,
+        profile_nodes: [],
+      }
+    }
+  })
+
+  // Render agent's onboarding progress in the chat (Generative UI)
+  useCoAgentStateRender<AgentState>({
+    name: "my_agent",
+    render: ({ state }) => {
+      if (!state?.onboarding?.profile_nodes?.length) return null
+      return (
+        <div className="my-3 p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
+          <p className="text-xs text-emerald-400 mb-2 font-medium">Profile Updated</p>
+          <div className="flex flex-wrap gap-2">
+            {state.onboarding.profile_nodes.map((node, i) => (
+              <span
+                key={i}
+                className="bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-full text-xs"
+              >
+                {node.confirmed ? '✓ ' : ''}{node.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      )
+    },
+  })
+
+  // Use agent state if available, fallback to props
+  const effectiveStep = agentState?.onboarding?.current_step || currentStep
+  const isComplete = effectiveStep > 5
 
   // Build agent instructions for current step
   const instructions = `

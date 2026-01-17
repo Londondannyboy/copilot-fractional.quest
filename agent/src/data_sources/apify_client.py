@@ -31,7 +31,8 @@ class RawJob(BaseModel):
 APIFY_BASE_URL = "https://api.apify.com/v2"
 
 # The saved task that runs daily - fetches original job postings (not recruiter posts)
-APIFY_TASK_ID = "definable_field/career-site-job-listing-api-daily"
+# Can use either format: "definable_field~career-site-job-listing-api-daily" or the ID "wt40fkjKVQoerBzTL"
+APIFY_TASK_ID = "definable_field~career-site-job-listing-api-daily"
 
 
 def parse_salary(salary_str: Optional[str], is_max: bool = False) -> Optional[int]:
@@ -146,23 +147,43 @@ async def fetch_apify_jobs(token: str, max_items: int = 100) -> List[RawJob]:
         jobs = []
         for item in items:
             try:
-                # Parse job data - adapt to your task's output format
-                # Common fields from career site scrapers
+                # Parse job data from career-site-job-listing-api format
+                # Fields: id, title, organization, url, description_text, locations_derived, etc.
+                title = item.get("title", "")
+                company = item.get("organization") or item.get("company") or "Unknown"
+
+                # Get location - prefer derived locations, fallback to cities
+                location = None
+                if item.get("locations_derived"):
+                    location = item["locations_derived"][0] if isinstance(item["locations_derived"], list) else item["locations_derived"]
+                elif item.get("cities_derived"):
+                    location = item["cities_derived"][0] if isinstance(item["cities_derived"], list) else item["cities_derived"]
+                elif item.get("location"):
+                    location = item["location"]
+
+                # Get description
+                description = item.get("description_text") or item.get("description") or ""
+
+                # Get salary if available
+                salary_min = item.get("ai_salary_minvalue") or parse_salary(item.get("salary_raw"))
+                salary_max = item.get("ai_salary_maxvalue") or parse_salary(item.get("salary_raw"), is_max=True)
+
                 job = RawJob(
-                    title=item.get("title") or item.get("positionName") or item.get("jobTitle", ""),
-                    company=item.get("company") or item.get("companyName") or item.get("employer", "Unknown"),
-                    location=item.get("location") or item.get("jobLocation") or "UK",
-                    description=item.get("description") or item.get("jobDescription") or "",
-                    url=item.get("url") or item.get("applyUrl") or item.get("jobUrl", ""),
-                    salary_min=parse_salary(item.get("salary") or item.get("salaryRange")),
-                    salary_max=parse_salary(item.get("salary") or item.get("salaryRange"), is_max=True),
+                    title=title,
+                    company=company,
+                    location=location or "Remote",
+                    description=description,
+                    url=item.get("url", ""),
+                    salary_min=int(salary_min) if salary_min else None,
+                    salary_max=int(salary_max) if salary_max else None,
                     source="apify_career_site",
-                    external_id=item.get("id") or item.get("jobId") or item.get("url", str(hash(str(item))))
+                    external_id=str(item.get("id", item.get("url", hash(str(item)))))
                 )
 
                 # Only include if we have minimum required fields
                 if job.title and job.url:
                     jobs.append(job)
+                    print(f"[Apify] Parsed: {job.title[:50]} at {job.company}")
                 else:
                     print(f"[Apify] Skipping item missing title or url: {item.get('title', 'no title')}")
 

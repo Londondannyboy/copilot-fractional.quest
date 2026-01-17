@@ -416,6 +416,51 @@ class AmbientScene(BaseModel):
   mood: str = "professional"  # "professional", "energetic", "calm"
   query: Optional[str] = None  # The Unsplash search query to use
 
+class OnboardingProgress(BaseModel):
+  """Tracks user's onboarding progress - synced with frontend via CopilotKit"""
+  current_step: int = 1  # 1-5, or 6 if complete
+  is_complete: bool = False
+  # Confirmed profile items (Pydantic-confirmed via HITL)
+  trinity: Optional[str] = None  # Goal: job_search, career_coaching, lifestyle, curious
+  employment_status: Optional[str] = None  # employed, between_roles, freelancing, founder
+  professional_vertical: Optional[str] = None  # technology, finance, marketing, etc.
+  location: Optional[str] = None  # london, manchester, remote, etc.
+  role_preference: Optional[str] = None  # cto, cfo, cmo, etc.
+  experience_level: Optional[str] = None  # c_suite, vp, director, senior_manager
+  # Graph nodes for visualization
+  profile_nodes: list[dict] = Field(default_factory=list)  # [{label, type, confirmed}]
+
+  def calculate_step(self) -> int:
+    """Calculate current step based on what's been confirmed"""
+    if not self.trinity:
+      return 1
+    if not self.employment_status:
+      return 2
+    if not self.professional_vertical:
+      return 3
+    if not self.location:
+      return 4
+    if not self.role_preference or not self.experience_level:
+      return 5
+    return 6  # Complete
+
+  def update_nodes(self):
+    """Rebuild profile_nodes list from confirmed items"""
+    nodes = []
+    if self.trinity:
+      nodes.append({"label": self.trinity.replace("_", " ").title(), "type": "goal", "confirmed": True})
+    if self.employment_status:
+      nodes.append({"label": self.employment_status.replace("_", " ").title(), "type": "status", "confirmed": True})
+    if self.professional_vertical:
+      nodes.append({"label": self.professional_vertical.title(), "type": "domain", "confirmed": True})
+    if self.location:
+      nodes.append({"label": self.location.title(), "type": "location", "confirmed": True})
+    if self.role_preference:
+      nodes.append({"label": self.role_preference.upper(), "type": "role", "confirmed": True})
+    if self.experience_level:
+      nodes.append({"label": self.experience_level.replace("_", " ").title(), "type": "experience", "confirmed": True})
+    self.profile_nodes = nodes
+
 class AppState(BaseModel):
   jobs: list[Job] = Field(default_factory=list)
   search_query: str = ""
@@ -427,6 +472,8 @@ class AppState(BaseModel):
   page_context: Optional[PageContext] = None
   # Dynamic ambient background scene
   scene: Optional[AmbientScene] = None
+  # Onboarding progress - synced with frontend via useCoAgent
+  onboarding: OnboardingProgress = Field(default_factory=OnboardingProgress)
 
 # =====
 # TSCR: Two-Stage Context Retrieval for Fast Voice Response
@@ -3248,7 +3295,7 @@ async def import_jobs_daily(request: Request):
 @main_app.get("/jobs/import-status")
 async def import_status():
     """Get recent import run history for monitoring."""
-    from job_importer import get_import_status
+    from src.job_importer import get_import_status
 
     try:
         runs = await get_import_status(DATABASE_URL, limit=10)
@@ -3266,7 +3313,7 @@ async def import_news_daily(request: Request):
     Query params:
     - dry_run: If "true", don't insert, just log what would be done
     """
-    from news_importer import run_news_import_pipeline
+    from src.news_importer import run_news_import_pipeline
 
     # Optional auth check
     auth_header = request.headers.get("Authorization", "")
@@ -3321,7 +3368,7 @@ async def import_all_daily(request: Request):
     - skip_news: If "true", skip news import
     """
     from src.job_importer import run_import_pipeline
-    from news_importer import run_news_import_pipeline
+    from src.news_importer import run_news_import_pipeline
 
     # Optional auth check
     auth_header = request.headers.get("Authorization", "")

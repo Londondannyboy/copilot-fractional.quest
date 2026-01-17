@@ -32,6 +32,12 @@ import { EmailCapture } from "@/components/EmailCapture";
 import { JobsSidebar } from "@/components/JobsSidebar";
 import { HeyCompanies } from "@/components/HeyCompanies";
 import { TrustSignals, TrustSignalsSchema } from "@/components/TrustSignals";
+import Link from "next/link";
+
+// SEO Content Components
+import AuthorityLinksPanel from "@/components/mdx/AuthorityLinksPanel";
+import StatisticsPanel from "@/components/mdx/StatisticsPanel";
+import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
 
 import { FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
@@ -387,6 +393,20 @@ Remember: When filtering, UPDATE THE PAGE directly using the document actions. D
             </div>
           </section>
 
+          {/* Statistics Banner - Prominent market data with citations */}
+          {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
+            <section className="py-8 bg-gray-50 border-y border-gray-200">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <StatisticsPanel
+                  title={`${locationDisplay} Market Statistics`}
+                  statistics={seoContent.statistics}
+                  variant="horizontal"
+                  accentColor={accentColor}
+                />
+              </div>
+            </section>
+          )}
+
           {/* Live Market Chart - Responds to conversation */}
           <DocumentSection id="salary" title={`${locationDisplay} Day Rates`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -456,6 +476,49 @@ Remember: When filtering, UPDATE THE PAGE directly using the document actions. D
           <DocumentSection id="market" title="">
             <SEOContent content={seoContent.content} />
           </DocumentSection>
+
+          {/* Authority Links - External resources for E-E-A-T */}
+          {seoContent.authorityLinks && seoContent.authorityLinks.length > 0 && (
+            <section className="py-12 bg-white border-t border-gray-200">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <AuthorityLinksPanel
+                  title="Industry Resources & Professional Bodies"
+                  links={seoContent.authorityLinks.map(link => ({
+                    ...link,
+                    type: link.url.includes('gov.uk') ? 'government' as const :
+                          link.url.includes('icaew') || link.url.includes('acca') || link.url.includes('cima') ? 'professional_body' as const :
+                          link.url.includes('glassdoor') || link.url.includes('linkedin') ? 'research' as const :
+                          'industry' as const
+                  }))}
+                  variant="grid"
+                  accentColor={accentColor}
+                />
+              </div>
+            </section>
+          )}
+
+          {/* Internal Links - Related pages for topical authority */}
+          {seoContent.relatedPages && seoContent.relatedPages.length > 0 && (
+            <section className="py-12 bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <InternalLinksGrid
+                  title={`Explore More ${roleFilter || 'Fractional'} Resources`}
+                  subtitle="Discover related guides, job boards, and resources"
+                  links={seoContent.relatedPages.map(page => ({
+                    name: page.name,
+                    url: page.url,
+                    category: page.url.includes('jobs') ? 'jobs' as const :
+                              page.url.includes('salary') ? 'salary' as const :
+                              page.url.includes('hire') ? 'hire' as const :
+                              'guide' as const
+                  }))}
+                  variant="featured"
+                  columns={3}
+                  accentColor={accentColor}
+                />
+              </div>
+            </section>
+          )}
 
           {/* Rate Calculator */}
           <section className="py-12 bg-gray-50">

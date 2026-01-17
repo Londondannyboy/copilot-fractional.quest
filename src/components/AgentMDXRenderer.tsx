@@ -20,6 +20,10 @@ import SkillGapAnalysis from "./mdx/SkillGapAnalysis";
 import MarketTrends from "./mdx/MarketTrends";
 import InterviewPrep from "./mdx/InterviewPrep";
 import NetworkConnections from "./mdx/NetworkConnections";
+import AuthorityLinksPanel from "./mdx/AuthorityLinksPanel";
+import StatisticsPanel from "./mdx/StatisticsPanel";
+import InternalLinksGrid from "./mdx/InternalLinksGrid";
+import SEOContentSection from "./mdx/SEOContentSection";
 
 // Component registry for client-side MDX rendering
 const mdxComponents = {
@@ -37,6 +41,11 @@ const mdxComponents = {
   MarketTrends,
   InterviewPrep,
   NetworkConnections,
+  // SEO components
+  AuthorityLinksPanel,
+  StatisticsPanel,
+  InternalLinksGrid,
+  SEOContentSection,
   // HTML element styling
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1 className="text-2xl font-bold text-gray-900 mb-4" {...props} />
