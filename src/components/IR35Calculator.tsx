@@ -162,9 +162,10 @@ export function IR35Calculator({ defaultDayRate = 800, className = '' }: IR35Cal
       <div className="p-6 bg-gray-50 border-b border-gray-200">
         <div className="grid md:grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Day Rate</label>
+            <label htmlFor="ir35-day-rate" className="block text-sm font-medium text-gray-700 mb-2">Day Rate</label>
             <div className="text-2xl font-black text-gray-900 mb-2">{formatCurrency(dayRate)}</div>
             <input
+              id="ir35-day-rate"
               type="range"
               min="400"
               max="2000"
@@ -172,12 +173,14 @@ export function IR35Calculator({ defaultDayRate = 800, className = '' }: IR35Cal
               value={dayRate}
               onChange={(e) => setDayRate(Number(e.target.value))}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+              aria-label="Day rate slider"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Days Per Week</label>
+            <label htmlFor="ir35-days-week" className="block text-sm font-medium text-gray-700 mb-2">Days Per Week</label>
             <div className="text-2xl font-black text-gray-900 mb-2">{daysPerWeek} days</div>
             <input
+              id="ir35-days-week"
               type="range"
               min="1"
               max="5"
@@ -185,12 +188,14 @@ export function IR35Calculator({ defaultDayRate = 800, className = '' }: IR35Cal
               value={daysPerWeek}
               onChange={(e) => setDaysPerWeek(Number(e.target.value))}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+              aria-label="Days per week slider"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Weeks Per Year</label>
+            <label htmlFor="ir35-weeks-year" className="block text-sm font-medium text-gray-700 mb-2">Weeks Per Year</label>
             <div className="text-2xl font-black text-gray-900 mb-2">{weeksPerYear} weeks</div>
             <input
+              id="ir35-weeks-year"
               type="range"
               min="40"
               max="52"
@@ -198,6 +203,7 @@ export function IR35Calculator({ defaultDayRate = 800, className = '' }: IR35Cal
               value={weeksPerYear}
               onChange={(e) => setWeeksPerYear(Number(e.target.value))}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+              aria-label="Weeks per year slider"
             />
           </div>
         </div>

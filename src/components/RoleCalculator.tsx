@@ -163,9 +163,10 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Your Day Rate</label>
+                <label htmlFor="calc-day-rate" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Your Day Rate</label>
                 <div className="text-2xl sm:text-3xl font-black text-amber-400 mb-3 truncate">{formatCurrency(dayRate)}</div>
                 <input
+                  id="calc-day-rate"
                   type="range"
                   min={roleData.minDayRate}
                   max={roleData.maxDayRate}
@@ -173,6 +174,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                   value={dayRate}
                   onChange={(e) => setDayRate(Number(e.target.value))}
                   className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  aria-label="Day rate slider"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>£{roleData.minDayRate}</span>
@@ -182,9 +184,10 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
               </div>
 
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Days Per Client/Week</label>
+                <label htmlFor="calc-days-week" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Days Per Client/Week</label>
                 <div className="text-2xl sm:text-3xl font-black text-white mb-3">{daysPerWeek} days</div>
                 <input
+                  id="calc-days-week"
                   type="range"
                   min="1"
                   max="5"
@@ -192,6 +195,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                   value={daysPerWeek}
                   onChange={(e) => setDaysPerWeek(Number(e.target.value))}
                   className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  aria-label="Days per week slider"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>1 day</span>
@@ -200,9 +204,10 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
               </div>
 
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Number of Clients</label>
+                <label htmlFor="calc-clients" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Number of Clients</label>
                 <div className="text-2xl sm:text-3xl font-black text-white mb-3">{clients} {clients === 1 ? 'client' : 'clients'}</div>
                 <input
+                  id="calc-clients"
                   type="range"
                   min="1"
                   max="4"
@@ -210,6 +215,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                   value={clients}
                   onChange={(e) => setClients(Number(e.target.value))}
                   className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  aria-label="Number of clients slider"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>1</span>
@@ -247,9 +253,10 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
               <div className="space-y-6">
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Full-Time {roleData.label} Salary (Base)</label>
+                  <label htmlFor="calc-ft-salary" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Full-Time {roleData.label} Salary (Base)</label>
                   <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-3 truncate">{formatCurrency(fullTimeSalary)}</div>
                   <input
+                    id="calc-ft-salary"
                     type="range"
                     min="50000"
                     max="250000"
@@ -257,6 +264,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                     value={fullTimeSalary}
                     onChange={(e) => setFullTimeSalary(Number(e.target.value))}
                     className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    aria-label="Full-time salary slider"
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-1">
                     <span>£50k</span>
@@ -266,11 +274,12 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                 </div>
 
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Hours Per Week You Actually Need</label>
+                  <label htmlFor="calc-hours-needed" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Hours Per Week You Actually Need</label>
                   <div className="text-2xl sm:text-3xl font-black text-white mb-3">
                     {hoursNeeded} hrs <span className="text-sm sm:text-lg font-normal text-gray-500">({daysPerWeekNeeded.toFixed(1)} days)</span>
                   </div>
                   <input
+                    id="calc-hours-needed"
                     type="range"
                     min="4"
                     max="40"
@@ -278,6 +287,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                     value={hoursNeeded}
                     onChange={(e) => setHoursNeeded(Number(e.target.value))}
                     className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    aria-label="Hours needed per week slider"
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-1">
                     <span>4 hrs (0.5 days)</span>

@@ -470,10 +470,13 @@ export function JobsSidebar({
           Get the latest fractional jobs and market insights.
         </p>
         <form className="space-y-2" onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="sidebar-email" className="sr-only">Email address</label>
           <input
+            id="sidebar-email"
             type="email"
             placeholder="Your email"
             className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+            aria-label="Email address for newsletter"
           />
           <button
             type="submit"

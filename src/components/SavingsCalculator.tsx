@@ -62,12 +62,13 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="savings-ft-salary" className="block text-sm font-medium text-gray-700 mb-2">
                     Full-Time Executive Salary
                   </label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
                     <input
+                      id="savings-ft-salary"
                       type="range"
                       min="40000"
                       max="250000"
@@ -75,6 +76,7 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
                       value={fullTimeSalary}
                       onChange={(e) => setFullTimeSalary(Number(e.target.value))}
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+                      aria-label="Full-time executive salary slider"
                     />
                     <div className="flex justify-between text-xs sm:text-sm text-gray-500 mt-1">
                       <span>£40k</span>
@@ -106,12 +108,13 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="savings-day-rate" className="block text-sm font-medium text-gray-700 mb-2">
                     Fractional Day Rate
                   </label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
                     <input
+                      id="savings-day-rate"
                       type="range"
                       min="500"
                       max="1500"
@@ -119,6 +122,7 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
                       value={dayRate}
                       onChange={(e) => setDayRate(Number(e.target.value))}
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+                      aria-label="Fractional day rate slider"
                     />
                     <div className="flex justify-between text-xs sm:text-sm text-gray-500 mt-1">
                       <span>£500</span>
