@@ -706,7 +706,7 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
             <EmbeddedJobBoard
               defaultDepartment={roleCategory}
               defaultLocation={location === "london" ? "London" : ""}
-              title={`${locationDisplay} Fractional Jobs`}
+              title={`Fractional Jobs ${locationDisplay}`}
               showFilters={true}
               jobsPerPage={9}
               accentColor="emerald"

@@ -54,13 +54,16 @@ export function EmailCapture({
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3">
+            <label htmlFor="email-sidebar" className="sr-only">Email address</label>
             <input
+              id="email-sidebar"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               className="w-full px-4 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
               required
+              aria-label="Email address for job alerts"
             />
             <button
               type="submit"
@@ -92,13 +95,16 @@ export function EmailCapture({
             <span className="text-green-200">✓ {message}</span>
           ) : (
             <form onSubmit={handleSubmit} className="flex gap-2 w-full md:w-auto">
+              <label htmlFor="email-banner" className="sr-only">Email address</label>
               <input
+                id="email-banner"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 className="flex-1 md:w-64 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
                 required
+                aria-label="Email address for job alerts"
               />
               <button
                 type="submit"
@@ -129,13 +135,16 @@ export function EmailCapture({
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex gap-2">
+          <label htmlFor="email-inline" className="sr-only">Email address</label>
           <input
+            id="email-inline"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
             className="flex-1 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             required
+            aria-label="Email address for job alerts"
           />
           <button
             type="submit"

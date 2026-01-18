@@ -4,9 +4,9 @@
 
 export const londonSEO = {
   meta: {
-    title: "Fractional Jobs London | Executive Roles",
+    title: "Fractional Jobs London 🌍 UK & Global",
     description:
-      "Fractional executive jobs in London. CTO, CFO, CMO roles paying £900-£1,500/day in City and Canary Wharf.",
+      "Fractional jobs London, UK and the rest of the world. CFO, CTO, CMO roles paying £900-£1,500/day in the City and beyond.",
     keywords: [
       "fractional jobs london",
       "fractional cto london",
@@ -79,11 +79,11 @@ export const londonSEO = {
 
   content: {
     whyLocation: {
-      title: "Why London Leads the UK Fractional Market",
+      title: "Fractional Jobs London: Why the Capital Leads",
       paragraphs: [
-        "London has emerged as the UK's premier hub for fractional executive talent, accounting for over 60% of all UK fractional appointments. The capital's unique concentration of high-growth startups, scale-ups, PE-backed companies, and established enterprises creates unparalleled demand for flexible C-suite expertise.",
-        "According to the ScaleUp Institute, 70% of UK companies using fractional leadership are London-based, drawn by the city's diverse business ecosystem spanning fintech (Revolut, Monzo), healthtech, proptech, and traditional sectors. The CBI reports that London businesses are leading the shift toward flexible executive models, driven by the need for specialist expertise without full-time overhead.",
-        "For executives, London offers the highest day rates in the UK (£900-£1,500 vs £700-£1,100 regionally), access to the broadest range of sectors, and the opportunity to build prestigious portfolio careers with multiple high-growth companies.",
+        "Fractional jobs London dominate the UK market, with the capital accounting for over 60% of all UK fractional executive appointments. London's unique concentration of high-growth startups, scale-ups, PE-backed companies, and established enterprises creates unparalleled demand for flexible C-suite expertise.",
+        "According to the ScaleUp Institute, 70% of UK companies using fractional leadership are London-based. When searching for fractional jobs London offers the most diverse business ecosystem—spanning fintech (Revolut, Monzo), healthtech, proptech, and traditional sectors. The CBI reports that London businesses are leading the shift toward flexible executive models.",
+        "For executives seeking fractional jobs London provides the highest day rates in the UK (£900-£1,500 vs £700-£1,100 regionally), access to the broadest range of sectors, and the opportunity to build prestigious portfolio careers with multiple high-growth companies.",
       ],
     },
 

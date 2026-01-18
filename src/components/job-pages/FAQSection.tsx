@@ -35,8 +35,8 @@ export function FAQSection({ faqs, location }: FAQSectionProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <SectionHeading subtitle={`Common questions about fractional roles in ${location}`}>
-        Frequently Asked Questions
+      <SectionHeading subtitle={`Common questions about fractional jobs ${location}`}>
+        Fractional Jobs {location}: FAQs
       </SectionHeading>
 
       <div className="max-w-3xl space-y-4">
