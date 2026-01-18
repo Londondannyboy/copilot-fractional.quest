@@ -30,7 +30,13 @@ export function PersonalizedGreeting({
   userLocation
 }: PersonalizedGreetingProps) {
   const { state } = useDocument()
-  const timeOfDay = new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening'
+  const [timeOfDay, setTimeOfDay] = useState('day')
+
+  // Calculate time of day on client only to avoid hydration mismatch
+  useEffect(() => {
+    const hours = new Date().getHours()
+    setTimeOfDay(hours < 12 ? 'morning' : hours < 17 ? 'afternoon' : 'evening')
+  }, [])
 
   if (!userName) {
     return (
