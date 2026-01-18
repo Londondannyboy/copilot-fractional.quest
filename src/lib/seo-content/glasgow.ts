@@ -2,9 +2,9 @@
 
 export const glasgowSEO = {
   meta: {
-    title: "Fractional Jobs Glasgow | CTO, CFO, CMO Executive Roles",
+    title: "Fractional Jobs Glasgow 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland's Largest City",
     description:
-      "Premium fractional executive jobs in Glasgow. Find CTO, CFO, CMO, COO and CHRO roles with day rates from £650-£1,100. Scotland's largest city for fractional C-suite talent.",
+      "Fractional jobs Glasgow, Scotland's largest business city. CFO, CTO, CMO roles with day rates £650-£1,100.",
     keywords: [
       "fractional jobs glasgow",
       "fractional cto glasgow",

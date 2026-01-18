@@ -2,9 +2,9 @@
 
 export const leedsSEO = {
   meta: {
-    title: "Fractional Jobs Leeds | CTO, CFO, CMO Executive Roles",
+    title: "Fractional Jobs Leeds 🏙️ Yorkshire's Hub",
     description:
-      "Premium fractional executive jobs in Leeds. Find CTO, CFO, CMO, COO and CHRO roles with day rates from £650-£1,100. Yorkshire's leading hub for fractional C-suite talent.",
+      "Fractional jobs Leeds, Yorkshire's leading business hub. CFO, CTO, CMO roles with day rates £650-£1,100.",
     keywords: [
       "fractional jobs leeds",
       "fractional cto leeds",

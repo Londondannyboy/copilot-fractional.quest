@@ -3,9 +3,9 @@
 
 export const croJobsUkSEO = {
   meta: {
-    title: "Fractional CRO Jobs UK | Chief Revenue Officer Roles",
+    title: "Fractional CRO Jobs UK 📈 Revenue Leadership",
     description:
-      "Fractional CRO jobs UK. Part-time Chief Revenue Officer roles paying £1,000-£1,500/day. Drive revenue growth for high-growth and PE-backed companies.",
+      "Fractional CRO jobs UK for high-growth and PE-backed companies. Part-time Chief Revenue Officer roles paying £1,000-£1,500/day.",
     keywords: [
       "fractional cro jobs uk",
       "fractional cro",

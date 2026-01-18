@@ -2,9 +2,9 @@
 
 export const remoteSEO = {
   meta: {
-    title: "Remote Fractional Jobs UK | Work From Anywhere Executive Roles",
+    title: "Remote Fractional Jobs 🏠 100% Work From Home",
     description:
-      "Find remote fractional executive jobs across the UK. CTO, CFO, CMO roles with £800-£1,400 day rates. 100% remote positions with flexible schedules.",
+      "Remote fractional jobs UK, 100% work from anywhere. CFO, CTO, CMO roles with £800-£1,400 day rates.",
     keywords: [
       "remote fractional jobs",
       "remote fractional cfo",

@@ -4,9 +4,9 @@
 
 export const ceoJobsUkSEO = {
   meta: {
-    title: "Fractional CEO Jobs UK | Executive Roles",
+    title: "Fractional CEO Jobs UK 👔 Executive Leadership",
     description:
-      "Fractional CEO jobs UK. Part-time Executive and MD roles paying £1,200-£2,000/day. PE-backed and turnaround situations.",
+      "Fractional CEO jobs UK for PE-backed and turnaround situations. Part-time Executive and MD roles paying £1,200-£2,000/day.",
     keywords: [
       "fractional ceo jobs uk",
       "fractional ceo",

@@ -4,9 +4,9 @@
 
 export const chroJobsUkSEO = {
   meta: {
-    title: "Fractional CHRO Jobs UK | HR Roles",
+    title: "Fractional CHRO Jobs UK 👥 HR Leadership",
     description:
-      "Fractional CHRO jobs UK. Part-time HR Director roles paying £800-£1,200/day. Scale-ups and PE-backed companies.",
+      "Fractional CHRO jobs UK for scale-ups and PE-backed companies. Part-time HR Director roles paying £800-£1,200/day.",
     keywords: [
       "fractional chro jobs uk",
       "fractional chro",

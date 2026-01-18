@@ -2,9 +2,9 @@
 
 export const edinburghSEO = {
   meta: {
-    title: "Fractional Jobs Edinburgh | Exec Roles",
+    title: "Fractional Jobs Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland's Capital",
     description:
-      "Fractional executive jobs in Edinburgh. CTO, CFO, CMO roles with day rates £700-£1,200 in Scotland's capital.",
+      "Fractional jobs Edinburgh, Scotland's financial capital. CFO, CTO, CMO roles with day rates £700-£1,200.",
     keywords: [
       "fractional jobs edinburgh",
       "fractional cto edinburgh",
