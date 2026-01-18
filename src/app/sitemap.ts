@@ -355,9 +355,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       LIMIT 500
     `
 
+    // Helper to safely parse dates
+    const safeDate = (dateVal: unknown): Date => {
+      if (!dateVal) return new Date()
+      try {
+        const d = new Date(dateVal as string)
+        return isNaN(d.getTime()) ? new Date() : d
+      } catch {
+        return new Date()
+      }
+    }
+
     jobDetailPages = jobs.map((job) => ({
       url: `${baseUrl}/fractional-job/${job.slug}`,
-      lastModified: job.posted_date ? new Date(job.posted_date) : (job.imported_at ? new Date(job.imported_at) : new Date()),
+      lastModified: safeDate(job.posted_date || job.imported_at),
       changeFrequency: 'weekly' as const,
       priority: 0.6,
     }))
@@ -373,7 +384,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     newsArticlePages = articles.map((article) => ({
       url: `${baseUrl}/news/${article.slug}`,
-      lastModified: article.published_date ? new Date(article.published_date) : (article.imported_at ? new Date(article.imported_at) : new Date()),
+      lastModified: safeDate(article.published_date || article.imported_at),
       changeFrequency: 'weekly' as const,
       priority: 0.5,
     }))
