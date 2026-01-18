@@ -281,16 +281,69 @@ RECRUITER_DESCRIPTION_PATTERNS = [
     "contact us for more",
 ]
 
-def is_likely_recruiter(company_name: str, description: str = "", source: str = "") -> bool:
+def fetch_db_recruiters(conn) -> set:
+    """Fetch known recruiters from database for fast lookup."""
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT company_name, pattern_type
+            FROM known_recruiters
+            WHERE is_active = true
+        """)
+        rows = cur.fetchall()
+        cur.close()
+        # Return as set of tuples for fast lookup
+        return {(row[0].lower(), row[1]) for row in rows}
+    except Exception as e:
+        print(f"[Recruiter] Error fetching from DB: {e}", file=sys.stderr)
+        return set()
+
+
+def increment_recruiter_block_count(conn, company_name: str):
+    """Increment the jobs_blocked counter for a recruiter."""
+    try:
+        cur = conn.cursor()
+        company_lower = company_name.lower().strip()
+        cur.execute("""
+            UPDATE known_recruiters
+            SET jobs_blocked = jobs_blocked + 1, updated_at = NOW()
+            WHERE is_active = true
+            AND (
+                (pattern_type = 'exact' AND LOWER(company_name) = %s)
+                OR (pattern_type = 'contains' AND %s LIKE '%%' || LOWER(company_name) || '%%')
+                OR (pattern_type = 'starts_with' AND %s LIKE LOWER(company_name) || '%%')
+                OR (pattern_type = 'ends_with' AND %s LIKE '%%' || LOWER(company_name))
+            )
+        """, (company_lower, company_lower, company_lower, company_lower))
+        conn.commit()
+        cur.close()
+    except Exception as e:
+        print(f"[Recruiter] Error incrementing block count: {e}", file=sys.stderr)
+
+
+def is_likely_recruiter(company_name: str, description: str = "", source: str = "", db_recruiters: set = None) -> bool:
     """
     Quick check if job is from a recruiter (before AI call).
 
     LinkedIn posts especially need aggressive filtering as many are from recruiters.
+    Checks both hardcoded patterns AND database table.
     """
     if not company_name:
         return False
     company_lower = company_name.lower().strip()
     desc_lower = (description or "").lower()
+
+    # Check database recruiters if available
+    if db_recruiters:
+        for pattern, pattern_type in db_recruiters:
+            if pattern_type == 'exact' and pattern == company_lower:
+                return True
+            elif pattern_type == 'contains' and pattern in company_lower:
+                return True
+            elif pattern_type == 'starts_with' and company_lower.startswith(pattern):
+                return True
+            elif pattern_type == 'ends_with' and company_lower.endswith(pattern):
+                return True
 
     # Check company name against known recruiters
     for pattern in KNOWN_RECRUITERS:
@@ -694,6 +747,10 @@ async def run_import_pipeline(
 
     print(f"[Import] Started run {run_id}", file=sys.stderr)
 
+    # Fetch known recruiters from database for fast lookup
+    db_recruiters = fetch_db_recruiters(conn)
+    print(f"[Import] Loaded {len(db_recruiters)} recruiter patterns from database", file=sys.stderr)
+
     try:
         # 1. Fetch jobs from all Apify sources (career sites + LinkedIn)
         # Career sites task runs at 6 AM UTC, LinkedIn task runs at 10 PM GMT
@@ -716,9 +773,11 @@ async def run_import_pipeline(
                     continue
 
                 # Pre-filter: Check for known recruiters (fast, no AI cost)
+                # Checks both hardcoded patterns and database table
                 # LinkedIn sources get extra scrutiny with description checking
-                if is_likely_recruiter(job.company, job.description, job.source):
+                if is_likely_recruiter(job.company, job.description, job.source, db_recruiters):
                     stats.filtered += 1
+                    increment_recruiter_block_count(conn, job.company)
                     print(f"[Import]   -> Recruiter detected: {job.company} (source: {job.source})", file=sys.stderr)
                     continue
 
