@@ -4,9 +4,9 @@
 
 export const ukSEO = {
   meta: {
-    title: "Fractional Executive Jobs UK",
+    title: "Fractional Jobs UK 🇬🇧 Executive Roles Nationwide",
     description:
-      "Fractional executive jobs UK. CTO, CFO, CMO, COO roles paying £800-£1,500/day. 200+ opportunities nationwide.",
+      "Fractional jobs UK, from London to Edinburgh. CFO, CTO, CMO roles paying £800-£1,500/day. 200+ opportunities nationwide.",
     keywords: [
       "fractional jobs uk",
       "fractional executive uk",
@@ -78,11 +78,11 @@ export const ukSEO = {
 
   content: {
     whyLocation: {
-      title: "Why the UK Leads in Fractional Executive Hiring",
+      title: "Fractional Jobs UK: Why Britain Leads",
       paragraphs: [
-        "The UK has emerged as a global leader in the fractional executive model. According to the British Business Bank, over 5.5 million SMEs in the UK are increasingly turning to flexible leadership solutions to access C-suite expertise without full-time overhead costs.",
-        "From London's thriving tech scene to Manchester's growing business hub, Scottish innovation centres to Birmingham's manufacturing heartland, UK companies increasingly value flexible C-suite expertise. The ScaleUp Institute reports that 78% of UK scale-ups have either used or are considering fractional executives.",
-        "This shift reflects broader changes in how businesses access leadership talent. The CBI notes that flexible working arrangements at the executive level are now seen as a competitive advantage, with companies reporting 23% higher retention rates when offering portfolio career opportunities.",
+        "Fractional jobs UK have grown 340% since 2019, making Britain a global leader in flexible executive hiring. According to the British Business Bank, over 5.5 million SMEs are increasingly turning to fractional leadership to access C-suite expertise without full-time overhead costs.",
+        "When searching for fractional jobs UK offers unmatched variety—from London's thriving tech scene to Manchester's growing business hub, Scottish innovation centres to Birmingham's manufacturing heartland. The ScaleUp Institute reports that 78% of UK scale-ups have either used or are considering fractional executives.",
+        "For executives seeking fractional jobs UK provides excellent earning potential (£800-£1,500/day) with flexibility. The CBI notes that flexible working at executive level is now a competitive advantage, with companies reporting 23% higher retention when offering portfolio career opportunities.",
       ],
     },
 

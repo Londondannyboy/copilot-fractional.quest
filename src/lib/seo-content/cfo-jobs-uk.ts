@@ -4,9 +4,9 @@
 
 export const cfoJobsUkSEO = {
   meta: {
-    title: "Fractional CFO Jobs UK | Finance Roles",
+    title: "Fractional CFO Jobs UK 💰 Finance Leadership",
     description:
-      "Fractional CFO jobs UK. Part-time Finance Director roles paying £1,000-£1,500/day. PE-backed and high-growth companies.",
+      "Fractional CFO jobs UK for PE-backed and high-growth companies. Part-time Finance Director roles paying £1,000-£1,500/day.",
     keywords: [
       "fractional cfo jobs uk",
       "fractional cfo",
@@ -79,11 +79,11 @@ export const cfoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional CFO Demand is Surging",
+      title: "Fractional CFO Jobs UK: Finance Leadership on Demand",
       paragraphs: [
-        "The fractional CFO model has become mainstream in the UK. According to ICAEW research, 45% of growing SMEs now use some form of part-time finance leadership. PE-backed companies, high-growth startups, and established SMEs increasingly prefer flexible finance leadership to full-time hires.",
-        "The BVCA reports that 78% of portfolio companies have engaged fractional CFOs for specific initiatives - from fundraising to M&A to financial system implementations. This creates exceptional opportunities for experienced finance leaders to build portfolio careers.",
-        "Whether you're an ACA/ACCA qualified accountant seeking portfolio work, a former Finance Director exploring flexibility, or a CFO ready for varied challenges, the UK market offers compelling fractional opportunities across all sectors.",
+        "Fractional CFO jobs UK have grown 250% since 2020 as PE-backed companies, high-growth startups, and SMEs prefer flexible finance leadership. According to ICAEW, 45% of growing UK SMEs now use part-time finance leadership.",
+        "When searching for fractional CFO jobs UK offers the most premium rates—£1,000-£1,500/day. The BVCA reports 78% of portfolio companies have engaged fractional CFOs for fundraising, M&A, and financial system implementations.",
+        "For finance leaders seeking fractional CFO jobs UK provides exceptional opportunities across all sectors. Whether you're ACA/ACCA qualified, a former Finance Director, or CFO ready for variety, the market is thriving.",
       ],
     },
 

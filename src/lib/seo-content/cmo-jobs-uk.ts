@@ -4,9 +4,9 @@
 
 export const cmoJobsUkSEO = {
   meta: {
-    title: "Fractional CMO Jobs UK | Marketing Roles",
+    title: "Fractional CMO Jobs UK 📣 Marketing Leadership",
     description:
-      "Fractional CMO jobs UK. Part-time marketing director roles paying £850-£1,300/day. B2B, D2C, and growth-stage companies.",
+      "Fractional CMO jobs UK, B2B, D2C and growth-stage companies. Part-time marketing director roles paying £850-£1,300/day.",
     keywords: [
       "fractional cmo jobs uk",
       "fractional cmo",
@@ -79,11 +79,11 @@ export const cmoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional CMO Demand is Accelerating",
+      title: "Fractional CMO Jobs UK: Marketing Leadership on Demand",
       paragraphs: [
-        "UK companies increasingly recognise that senior marketing leadership doesn't require a full-time hire. According to the Chartered Institute of Marketing, 78% of UK businesses now view flexible marketing leadership as essential for agile market response.",
-        "The fractional CMO model delivers brand strategy, growth marketing, and team leadership on a flexible basis that scales with business needs. Marketing Week reports that companies using fractional CMOs see 34% faster time-to-market on campaigns compared to those struggling without senior marketing guidance.",
-        "Whether you're a former CMO seeking portfolio work, a Marketing Director ready for C-suite challenges, or a growth leader looking to diversify, the UK fractional CMO market offers compelling opportunities across B2B SaaS, D2C, professional services, and enterprise sectors.",
+        "Fractional CMO jobs UK have grown 280% since 2020 as companies recognise senior marketing leadership doesn't require a full-time hire. According to the Chartered Institute of Marketing, 78% of UK businesses now view flexible marketing leadership as essential.",
+        "When searching for fractional CMO jobs UK offers the most diverse opportunities—B2B SaaS, D2C, professional services, and enterprise sectors. Marketing Week reports that companies using fractional CMOs see 34% faster time-to-market on campaigns.",
+        "For marketing leaders seeking fractional CMO jobs UK provides excellent earning potential (£850-£1,300/day) with flexibility. Whether you're a former CMO, Marketing Director ready for C-suite challenges, or growth leader looking to diversify, the market is thriving.",
       ],
     },
 

@@ -4,9 +4,9 @@
 
 export const cooJobsUkSEO = {
   meta: {
-    title: "Fractional COO Jobs UK | Ops Roles",
+    title: "Fractional COO Jobs UK ⚙️ Operations Leadership",
     description:
-      "Fractional COO jobs UK. Part-time Operations Director roles paying £900-£1,300/day. Scale-ups and PE-backed companies.",
+      "Fractional COO jobs UK for scale-ups and PE-backed companies. Part-time Operations Director roles paying £900-£1,300/day.",
     keywords: [
       "fractional coo jobs uk",
       "fractional coo",
@@ -79,11 +79,11 @@ export const cooJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional COO Demand is Rising",
+      title: "Fractional COO Jobs UK: Operations Leadership on Demand",
       paragraphs: [
-        "As companies scale, operational complexity grows faster than many founders can manage. The ScaleUp Institute reports that 65% of UK scale-ups now use some form of fractional operations leadership to bridge the gap between founder capability and operational requirements.",
-        "The fractional COO model delivers experienced operational leadership - process optimisation, team scaling, and systems implementation - without full-time overhead. CMI research shows that companies with fractional COOs scale 40% faster than those without dedicated operations leadership.",
-        "Whether you're a former COO seeking portfolio work, an Operations Director ready for broader challenges, or a general manager looking to share your scaling expertise, the UK fractional COO market offers exceptional opportunities across tech, professional services, and manufacturing.",
+        "Fractional COO jobs UK have grown 220% since 2020 as companies need experienced operational leadership without full-time overhead. The ScaleUp Institute reports that 65% of UK scale-ups now use fractional operations leadership.",
+        "When searching for fractional COO jobs UK offers diverse opportunities—PE-backed companies, scale-ups, tech, professional services, and manufacturing. CMI research shows companies with fractional COOs scale 40% faster.",
+        "For operations leaders seeking fractional COO jobs UK provides excellent earning potential (£900-£1,300/day) with variety. Whether you're a former COO, Operations Director, or general manager, the market is thriving.",
       ],
     },
 
