@@ -23,7 +23,7 @@ from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.models.google import GoogleModel
 
-from src.data_sources.apify_client import RawJob, fetch_apify_jobs
+from src.data_sources.apify_client import RawJob, fetch_apify_jobs, fetch_linkedin_jobs, fetch_all_apify_jobs
 from src.data_sources.web_scraper import scrape_url, generate_slug, ScrapedContent
 
 
@@ -241,18 +241,58 @@ KNOWN_RECRUITERS = {
     "harvey nash", "grayson hr", "frazer jones", "goodman masson", "marks sattin",
     "robert walters", "korn ferry", "spencer stuart", "egon zehnder", "heidrick",
     "russell reynolds", "boyden", "stanton chase", "odgers berndtson",
+    # Major global recruiters
+    "linkedin talent solutions", "indeed", "glassdoor", "ziprecruiter", "monster",
+    "careerbuilder", "dice", "totaljobs", "cv-library", "jobsite", "reed.co.uk",
+    # Executive search firms
+    "executive network", "search partners", "talent partners", "people partners",
+    "resource solutions", "talent point", "talent works", "talent hub",
+    # Common LinkedIn recruiter patterns
+    "talent lab", "talent group", "talent connect", "talent bridge", "talent spot",
+    "hire", "hiring", "recruited", "placements", "headhunters", "headhunting",
+    # More UK agencies
+    "harnham", "la fosse", "computer futures", "investigo", "page personnel",
+    "page executive", "progress sales", "nicoll curtin", "fintellect",
+    "eames consulting", "opus recruitment", "harris hill", "athona recruitment",
     # Pattern matches
     "recruitment", "recruiters", "staffing", "talent acquisition", "search partners",
     "executive search", "talent solutions", "hr solutions", "consulting partners",
+    "resourcing", "personnel", "careers", "jobs board", "job board",
 }
 
-def is_likely_recruiter(company_name: str) -> bool:
-    """Quick check if company is a known recruiter (before AI call)."""
+# Description patterns that indicate recruiter posts
+RECRUITER_DESCRIPTION_PATTERNS = [
+    "our client",
+    "on behalf of our client",
+    "our prestigious client",
+    "a leading",  # When used without naming the company
+    "a well-known",
+    "a major",
+    "confidential client",
+    "undisclosed client",
+    "my client",
+    "we are recruiting for",
+    "we're recruiting for",
+    "we are looking for",  # When from recruiter
+    "get in touch",
+    "send your cv",
+    "submit your cv",
+    "email your cv",
+    "contact us for more",
+]
+
+def is_likely_recruiter(company_name: str, description: str = "", source: str = "") -> bool:
+    """
+    Quick check if job is from a recruiter (before AI call).
+
+    LinkedIn posts especially need aggressive filtering as many are from recruiters.
+    """
     if not company_name:
         return False
     company_lower = company_name.lower().strip()
+    desc_lower = (description or "").lower()
 
-    # Check exact matches and patterns
+    # Check company name against known recruiters
     for pattern in KNOWN_RECRUITERS:
         if pattern in company_lower:
             return True
@@ -265,8 +305,28 @@ def is_likely_recruiter(company_name: str) -> bool:
         company_lower.endswith(" search"),
         company_lower.endswith(" partners") and "law" not in company_lower,  # Exclude law firms
         company_lower.endswith(" associates") and ("law" not in company_lower and "legal" not in company_lower),
+        company_lower.endswith(" consulting") and "tech" not in company_lower,
+        company_lower.endswith(" resourcing"),
+        company_lower.endswith(" personnel"),
+        company_lower.startswith("recruit"),
     ]
-    return any(recruiter_patterns)
+    if any(recruiter_patterns):
+        return True
+
+    # For LinkedIn sources, also check description for recruiter language
+    if source == "apify_linkedin" and desc_lower:
+        recruiter_phrase_count = 0
+        for pattern in RECRUITER_DESCRIPTION_PATTERNS:
+            if pattern in desc_lower:
+                recruiter_phrase_count += 1
+        # If multiple recruiter phrases, likely a recruiter
+        if recruiter_phrase_count >= 2:
+            return True
+        # "Our client" is a strong indicator
+        if "our client" in desc_lower or "my client" in desc_lower:
+            return True
+
+    return False
 
 
 def compute_content_hash(job: RawJob) -> str:
@@ -635,11 +695,11 @@ async def run_import_pipeline(
     print(f"[Import] Started run {run_id}", file=sys.stderr)
 
     try:
-        # 1. Fetch jobs from the pre-scheduled Apify task
-        # This task runs daily and scrapes original job postings (not recruiter posts)
-        print("[Import] Fetching from Apify scheduled task...", file=sys.stderr)
-        raw_jobs = await fetch_apify_jobs(apify_token)
-        print(f"[Import] Got {len(raw_jobs)} jobs from Apify task", file=sys.stderr)
+        # 1. Fetch jobs from all Apify sources (career sites + LinkedIn)
+        # Career sites task runs at 6 AM UTC, LinkedIn task runs at 10 PM GMT
+        print("[Import] Fetching from all Apify sources...", file=sys.stderr)
+        raw_jobs = await fetch_all_apify_jobs(apify_token)
+        print(f"[Import] Got {len(raw_jobs)} jobs from Apify sources", file=sys.stderr)
 
         stats.fetched = len(raw_jobs)
         print(f"[Import] Total fetched: {stats.fetched}", file=sys.stderr)
@@ -656,9 +716,10 @@ async def run_import_pipeline(
                     continue
 
                 # Pre-filter: Check for known recruiters (fast, no AI cost)
-                if is_likely_recruiter(job.company):
+                # LinkedIn sources get extra scrutiny with description checking
+                if is_likely_recruiter(job.company, job.description, job.source):
                     stats.filtered += 1
-                    print(f"[Import]   -> Recruiter detected: {job.company}", file=sys.stderr)
+                    print(f"[Import]   -> Recruiter detected: {job.company} (source: {job.source})", file=sys.stderr)
                     continue
 
                 # AI filter (slower, costs API credits)

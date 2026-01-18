@@ -30,9 +30,16 @@ class RawJob(BaseModel):
 
 APIFY_BASE_URL = "https://api.apify.com/v2"
 
-# The saved task that runs daily - fetches original job postings (not recruiter posts)
-# Can use either format: "definable_field~career-site-job-listing-api-daily" or the ID "wt40fkjKVQoerBzTL"
-APIFY_TASK_ID = "definable_field~career-site-job-listing-api-daily"
+# The saved tasks that run daily
+# Career sites task - fetches original job postings from company career sites
+APIFY_TASK_CAREER_SITES = "definable_field~career-site-job-listing-api-daily"
+
+# LinkedIn job search task - fetches jobs from LinkedIn (scheduled 10pm GMT)
+# IMPORTANT: This includes recruiter posts that need extra filtering
+APIFY_TASK_LINKEDIN = "definable_field~advanced-linkedin-job-search-api-daily"
+
+# Legacy alias for backward compatibility
+APIFY_TASK_ID = APIFY_TASK_CAREER_SITES
 
 
 def parse_salary(salary_str: Optional[str], is_max: bool = False) -> Optional[int]:
@@ -193,6 +200,162 @@ async def fetch_apify_jobs(token: str, max_items: int = 100) -> List[RawJob]:
 
         print(f"[Apify] Parsed {len(jobs)} valid jobs")
         return jobs
+
+
+async def fetch_linkedin_jobs(token: str, max_items: int = 100) -> List[RawJob]:
+    """
+    Fetch job listings from the LinkedIn job search Apify task.
+
+    The task (definable_field/advanced-linkedin-job-search-api-daily) is scheduled
+    to run daily at 10pm GMT and scrapes LinkedIn job postings.
+
+    IMPORTANT: LinkedIn has many recruiter postings - these need extra filtering.
+    The job_importer.py handles recruiter detection.
+
+    Args:
+        token: Apify API token
+        max_items: Maximum jobs to fetch from the dataset
+
+    Returns:
+        List of RawJob objects
+    """
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        # Get the latest run of the LinkedIn task
+        print(f"[Apify LinkedIn] Fetching latest run from task: {APIFY_TASK_LINKEDIN}")
+
+        runs_response = await client.get(
+            f"{APIFY_BASE_URL}/actor-tasks/{APIFY_TASK_LINKEDIN}/runs",
+            params={"token": token, "limit": 1, "desc": "true"}
+        )
+
+        if runs_response.status_code != 200:
+            print(f"[Apify LinkedIn] Error fetching task runs: {runs_response.status_code}")
+            print(f"[Apify LinkedIn] Response: {runs_response.text}")
+            return []
+
+        runs_data = runs_response.json()
+        runs = runs_data.get("data", {}).get("items", [])
+
+        if not runs:
+            print("[Apify LinkedIn] No runs found for task")
+            return []
+
+        latest_run = runs[0]
+        run_status = latest_run.get("status")
+        dataset_id = latest_run.get("defaultDatasetId")
+
+        print(f"[Apify LinkedIn] Latest run status: {run_status}, dataset: {dataset_id}")
+
+        if run_status != "SUCCEEDED":
+            print(f"[Apify LinkedIn] Latest run not successful, status: {run_status}")
+            # Try to get the last successful run
+            runs_response = await client.get(
+                f"{APIFY_BASE_URL}/actor-tasks/{APIFY_TASK_LINKEDIN}/runs",
+                params={"token": token, "limit": 10, "desc": "true", "status": "SUCCEEDED"}
+            )
+            runs_data = runs_response.json()
+            successful_runs = runs_data.get("data", {}).get("items", [])
+            if successful_runs:
+                dataset_id = successful_runs[0].get("defaultDatasetId")
+                print(f"[Apify LinkedIn] Using last successful run dataset: {dataset_id}")
+            else:
+                print("[Apify LinkedIn] No successful runs found")
+                return []
+
+        # Fetch items from the dataset
+        print(f"[Apify LinkedIn] Fetching items from dataset: {dataset_id}")
+
+        results_response = await client.get(
+            f"{APIFY_BASE_URL}/datasets/{dataset_id}/items",
+            params={"token": token, "format": "json", "limit": max_items}
+        )
+
+        if results_response.status_code != 200:
+            print(f"[Apify LinkedIn] Error fetching dataset: {results_response.status_code}")
+            return []
+
+        items = results_response.json()
+        print(f"[Apify LinkedIn] Fetched {len(items)} items from dataset")
+
+        jobs = []
+        for item in items:
+            try:
+                # Parse job data from LinkedIn job search format
+                # Fields vary but typically: title, companyName, location, description, link/url, etc.
+                title = item.get("title") or item.get("jobTitle") or ""
+                company = item.get("companyName") or item.get("company") or item.get("organization") or "Unknown"
+
+                # Get location
+                location = item.get("location") or item.get("jobLocation") or None
+
+                # Get description
+                description = item.get("description") or item.get("jobDescription") or ""
+
+                # Get URL - LinkedIn uses various field names
+                url = item.get("link") or item.get("url") or item.get("jobUrl") or item.get("applyUrl") or ""
+
+                # Get salary if available
+                salary_raw = item.get("salary") or item.get("salaryRange") or item.get("compensation")
+                salary_min = parse_salary(salary_raw)
+                salary_max = parse_salary(salary_raw, is_max=True)
+
+                job = RawJob(
+                    title=title,
+                    company=company,
+                    location=location or "Remote",
+                    description=description,
+                    url=url,
+                    salary_min=salary_min,
+                    salary_max=salary_max,
+                    source="apify_linkedin",  # Different source tag for tracking
+                    external_id=str(item.get("id") or item.get("jobId") or item.get("link") or hash(str(item)))
+                )
+
+                # Only include if we have minimum required fields
+                if job.title and job.url:
+                    jobs.append(job)
+                    print(f"[Apify LinkedIn] Parsed: {job.title[:50]} at {job.company}")
+                else:
+                    print(f"[Apify LinkedIn] Skipping item missing title or url: {item.get('title', 'no title')}")
+
+            except Exception as e:
+                print(f"[Apify LinkedIn] Error parsing job item: {e}")
+                continue
+
+        print(f"[Apify LinkedIn] Parsed {len(jobs)} valid jobs")
+        return jobs
+
+
+async def fetch_all_apify_jobs(token: str, max_items_per_source: int = 100) -> List[RawJob]:
+    """
+    Fetch jobs from all configured Apify sources (career sites + LinkedIn).
+
+    This is the recommended function for the daily import pipeline as it
+    combines jobs from multiple sources.
+
+    Args:
+        token: Apify API token
+        max_items_per_source: Maximum jobs to fetch from each source
+
+    Returns:
+        Combined list of RawJob objects from all sources
+    """
+    all_jobs = []
+
+    # Fetch from career sites task
+    print("[Apify] Fetching from career sites task...")
+    career_jobs = await fetch_apify_jobs(token, max_items_per_source)
+    all_jobs.extend(career_jobs)
+    print(f"[Apify] Got {len(career_jobs)} jobs from career sites")
+
+    # Fetch from LinkedIn task
+    print("[Apify] Fetching from LinkedIn task...")
+    linkedin_jobs = await fetch_linkedin_jobs(token, max_items_per_source)
+    all_jobs.extend(linkedin_jobs)
+    print(f"[Apify] Got {len(linkedin_jobs)} jobs from LinkedIn")
+
+    print(f"[Apify] Total combined: {len(all_jobs)} jobs")
+    return all_jobs
 
 
 async def trigger_apify_task(token: str) -> Optional[str]:
