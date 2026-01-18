@@ -43,7 +43,7 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
     <section className="py-16 bg-gradient-to-br from-emerald-50 to-teal-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wider">
+          <span className="text-emerald-700 font-semibold text-sm uppercase tracking-wider">
             Cost Comparison
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 font-playfair">
@@ -152,7 +152,7 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
 
                 <div className="bg-white rounded-xl p-4 border border-gray-200">
                   <div className="text-sm text-gray-500 mb-1">Fractional Cost ({daysPerWeek}d/week)</div>
-                  <div className="text-2xl font-bold text-emerald-600">
+                  <div className="text-2xl font-bold text-emerald-700">
                     £{calculations.fractionalAnnualCost.toLocaleString()}
                     <span className="text-sm font-normal text-gray-500">/year</span>
                   </div>

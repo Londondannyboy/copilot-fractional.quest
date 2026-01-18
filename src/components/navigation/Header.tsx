@@ -126,7 +126,7 @@ export function Header() {
               <span className="text-white font-bold text-lg">F</span>
             </div>
             <span className={`font-semibold text-lg hidden sm:block ${useTransparentStyle ? 'text-white' : 'text-gray-900'}`}>
-              Fractional<span className={useTransparentStyle ? 'text-white' : 'text-emerald-600'}>Quest</span>
+              Fractional<span className={useTransparentStyle ? 'text-white' : 'text-emerald-700'}>Quest</span>
             </span>
           </Link>
 
@@ -146,7 +146,7 @@ export function Header() {
               {activeDropdown === 'roles' && (
                 <div className="absolute top-full left-0 w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">By Role</h3>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">By Role</p>
                     <div className="space-y-1">
                       {navigation.roles.items.map((item) => (
                         <Link
@@ -161,7 +161,7 @@ export function Header() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Featured</h3>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Featured</p>
                     <div className="space-y-2">
                       {navigation.roles.featured.map((item) => (
                         <Link
@@ -177,7 +177,7 @@ export function Header() {
                     <div className="mt-4 pt-4 border-t border-gray-100">
                       <Link
                         href="/fractional-jobs-uk"
-                        className="text-emerald-600 hover:text-emerald-700 font-medium text-sm flex items-center gap-1"
+                        className="text-emerald-700 hover:text-emerald-800 font-medium text-sm flex items-center gap-1"
                       >
                         View all jobs <ArrowRightIcon className="w-4 h-4" />
                       </Link>
@@ -200,7 +200,7 @@ export function Header() {
 
               {activeDropdown === 'locations' && (
                 <div className="absolute top-full left-0 w-[320px] bg-white rounded-xl shadow-xl border border-gray-100 p-4">
-                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">UK Locations</h3>
+                  <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">UK Locations</p>
                   <div className="space-y-1">
                     {navigation.locations.items.map((item) => (
                       <Link
@@ -231,7 +231,7 @@ export function Header() {
               {activeDropdown === 'resources' && (
                 <div className="absolute top-full left-0 w-[500px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Role Guides</h3>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Role Guides</p>
                     <div className="space-y-1">
                       {navigation.resources.items.map((item) => (
                         <Link
@@ -245,7 +245,7 @@ export function Header() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Guides</h3>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Guides</p>
                     <div className="space-y-1">
                       {navigation.resources.guides.map((item) => (
                         <Link
@@ -276,7 +276,7 @@ export function Header() {
               {activeDropdown === 'employers' && (
                 <div className="absolute top-full right-0 w-[400px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Hire Talent</h3>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Hire Talent</p>
                     <div className="space-y-1">
                       {navigation.employers.items.map((item) => (
                         <Link
@@ -290,7 +290,7 @@ export function Header() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Services</h3>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Services</p>
                     <div className="space-y-1">
                       {navigation.employers.services.map((item) => (
                         <Link

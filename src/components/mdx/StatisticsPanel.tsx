@@ -16,12 +16,12 @@ interface StatisticsPanelProps {
 }
 
 const accentColors = {
-  emerald: { value: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
-  blue: { value: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-200' },
-  amber: { value: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
-  purple: { value: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-200' },
-  red: { value: 'text-red-600', bg: 'bg-red-50', border: 'border-red-200' },
-  indigo: { value: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-200' },
+  emerald: { value: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+  blue: { value: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200' },
+  amber: { value: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200' },
+  purple: { value: 'text-purple-700', bg: 'bg-purple-50', border: 'border-purple-200' },
+  red: { value: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200' },
+  indigo: { value: 'text-indigo-700', bg: 'bg-indigo-50', border: 'border-indigo-200' },
 }
 
 const trendIcons = {

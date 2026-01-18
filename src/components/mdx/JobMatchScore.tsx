@@ -57,8 +57,8 @@ export default function JobMatchScore({
 
   // Determine score color
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-emerald-600'
-    if (score >= 60) return 'text-amber-600'
+    if (score >= 80) return 'text-emerald-700'
+    if (score >= 60) return 'text-amber-700'
     return 'text-red-500'
   }
 

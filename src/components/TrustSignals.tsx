@@ -77,15 +77,15 @@ export function TrustSignals({ variant = 'full', className = '', showCTA = true 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center items-center gap-8">
             <div className="text-center">
-              <div className="text-2xl font-bold text-emerald-600">213+</div>
+              <div className="text-2xl font-bold text-emerald-700">213+</div>
               <div className="text-xs text-gray-500">Jobs Listed</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">£1,000+</div>
+              <div className="text-2xl font-bold text-blue-700">£1,000+</div>
               <div className="text-xs text-gray-500">Avg Day Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">15+</div>
+              <div className="text-2xl font-bold text-purple-700">15+</div>
               <div className="text-xs text-gray-500">Years Experience</div>
             </div>
             <div className="flex items-center gap-2">

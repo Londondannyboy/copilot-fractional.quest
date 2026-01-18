@@ -167,7 +167,7 @@ export function JobsSidebar({
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-xs text-gray-500">{job.location}</span>
                     {job.compensation && (
-                      <span className="text-xs font-medium text-emerald-600">{job.compensation}</span>
+                      <span className="text-xs font-medium text-emerald-700">{job.compensation}</span>
                     )}
                   </div>
                 </div>
@@ -185,7 +185,7 @@ export function JobsSidebar({
         <div className="bg-gray-50 px-5 py-3 border-t border-gray-100">
           <Link
             href={location ? `/fractional-jobs-${location}` : '/fractional-jobs-uk'}
-            className="text-sm font-medium text-amber-600 hover:text-amber-700 flex items-center justify-center gap-1"
+            className="text-sm font-medium text-amber-700 hover:text-amber-800 flex items-center justify-center gap-1"
           >
             View all jobs
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -446,19 +446,19 @@ export function JobsSidebar({
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="text-2xl font-bold text-emerald-400">£850</p>
-            <p className="text-xs text-gray-500">Avg Day Rate</p>
+            <p className="text-xs text-gray-300">Avg Day Rate</p>
           </div>
           <div>
             <p className="text-2xl font-bold text-emerald-400">340%</p>
-            <p className="text-xs text-gray-500">Market Growth</p>
+            <p className="text-xs text-gray-300">Market Growth</p>
           </div>
           <div>
             <p className="text-2xl font-bold text-emerald-400">78%</p>
-            <p className="text-xs text-gray-500">Remote Options</p>
+            <p className="text-xs text-gray-300">Remote Options</p>
           </div>
           <div>
             <p className="text-2xl font-bold text-emerald-400">2.3</p>
-            <p className="text-xs text-gray-500">Avg Clients</p>
+            <p className="text-xs text-gray-300">Avg Clients</p>
           </div>
         </div>
       </div>

@@ -14,7 +14,6 @@ import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
 import { ExpertProfile, ExpertProfileSchema } from "@/components/ExpertProfile";
 import { CaseStudy, CaseStudySchema } from "@/components/CaseStudy";
 import { Testimonials, TestimonialsSchema } from "@/components/Testimonials";
-import { RoleCalculator } from "@/components/RoleCalculator";
 import { LazyYouTube } from "@/components/LazyYouTube";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 import { HotJobs } from "@/components/HotJobs";
@@ -22,8 +21,28 @@ import { EmailCapture } from "@/components/EmailCapture";
 import { AgentMDXRenderer } from "@/components/AgentMDXRenderer";
 import { ProfileCard } from "@/components/ProfileCard";
 
-// Personalized MDX-style components (show when user logged in)
+// Dynamic imports for heavy components (lazy loading for LCP optimization)
 import dynamic from "next/dynamic";
+
+// Calculator and chart components - only load when scrolled into view
+const RoleCalculator = dynamic(
+  () => import("@/components/RoleCalculator").then(mod => ({ default: mod.RoleCalculator })),
+  { ssr: false, loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-xl" /> }
+);
+const SavingsCalculator = dynamic(
+  () => import("@/components/SavingsCalculator").then(mod => ({ default: mod.SavingsCalculator })),
+  { ssr: false, loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-xl" /> }
+);
+const SkillsDemandChart = dynamic(
+  () => import("@/components/SkillsDemandChart").then(mod => ({ default: mod.SkillsDemandChart })),
+  { ssr: false, loading: () => <div className="h-80 bg-gray-100 animate-pulse rounded-xl" /> }
+);
+const RoleComparisonTool = dynamic(
+  () => import("@/components/RoleComparisonTool").then(mod => ({ default: mod.RoleComparisonTool })),
+  { ssr: false, loading: () => <div className="h-72 bg-gray-100 animate-pulse rounded-xl" /> }
+);
+
+// Personalized MDX-style components (show when user logged in)
 const PersonalizedHero = dynamic(() => import("@/components/mdx/PersonalizedHero"), { ssr: false });
 const SalaryBenchmarkChart = dynamic(() => import("@/components/mdx/SalaryBenchmarkChart"), { ssr: false });
 const CareerTimeline = dynamic(() => import("@/components/mdx/CareerTimeline"), { ssr: false });
@@ -36,11 +55,8 @@ import { ImageCategory } from "@/lib/images";
 import { HeyCompanies } from "@/components/HeyCompanies";
 import { MarketStatistics } from "@/components/MarketStatistics";
 import { AuthorityLinks } from "@/components/AuthorityLinks";
-import { SavingsCalculator } from "@/components/SavingsCalculator";
 import { AIInsightsPanel } from "@/components/AIInsightsPanel";
 import { LiveMarketPulse } from "@/components/LiveMarketPulse";
-import { SkillsDemandChart } from "@/components/SkillsDemandChart";
-import { RoleComparisonTool } from "@/components/RoleComparisonTool";
 
 // Flexible SEO content interface that works with both enriched and basic pages
 // Only requires the fields that JobPageClient actually uses
@@ -222,7 +238,7 @@ export function JobPageClient({
                 <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">{job.location}</span>
               </div>
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-sm font-semibold text-green-600">
+                <span className="text-sm font-semibold text-green-700">
                   £{Math.round((job.salaryMin || 150000) / 220)} - £{Math.round((job.salaryMax || 200000) / 220)}/day
                 </span>
                 <span className="text-xs text-gray-500">
@@ -390,7 +406,7 @@ export function JobPageClient({
                 </div>
                 {/* Show both day rate and annual salary */}
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-sm font-semibold text-green-600">{salaryToDayRate(job.salary)}</span>
+                  <span className="text-sm font-semibold text-green-700">{salaryToDayRate(job.salary)}</span>
                   <span className="text-xs text-gray-500">({job.salary}/yr)</span>
                 </div>
                 {job.description && <p className="text-sm text-gray-600 mb-3">{job.description}</p>}

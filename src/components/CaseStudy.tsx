@@ -67,7 +67,7 @@ export function CaseStudy({ variant = 'full', caseStudyId = 'oneup', className =
           ))}
         </div>
         {study.link && (
-          <a href={study.link} className="mt-4 inline-block text-sm text-emerald-600 hover:text-emerald-700 font-medium">
+          <a href={study.link} className="mt-4 inline-block text-sm text-emerald-700 hover:text-emerald-800 font-medium">
             Read full case study →
           </a>
         )}

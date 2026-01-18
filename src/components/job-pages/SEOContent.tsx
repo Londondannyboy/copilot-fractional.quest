@@ -59,7 +59,7 @@ export function SEOContent({ content }: SEOContentProps) {
               <div className="font-semibold text-gray-900 mb-2">{rate.role}</div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-gray-600">{rate.range}</span>
-                <span className="font-bold text-emerald-600">{rate.typical}</span>
+                <span className="font-bold text-emerald-700">{rate.typical}</span>
               </div>
             </div>
           ))}
@@ -87,7 +87,7 @@ export function SEOContent({ content }: SEOContentProps) {
                     {rate.role}
                   </td>
                   <td className="py-3 px-4 text-gray-600">{rate.range}</td>
-                  <td className="py-3 px-4 text-emerald-600 font-medium">
+                  <td className="py-3 px-4 text-emerald-700 font-medium">
                     {rate.typical}
                   </td>
                 </tr>
@@ -130,7 +130,7 @@ export function SEOContent({ content }: SEOContentProps) {
               <div className="flex items-start justify-between mb-2">
                 <h3 className="font-bold text-gray-900">{role.title}</h3>
                 {role.rate && (
-                  <span className="text-xs sm:text-sm font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
+                  <span className="text-xs sm:text-sm font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
                     {role.rate}
                   </span>
                 )}

@@ -312,7 +312,7 @@ export function LiveJobGrid({ role, location, limit = 6 }: LiveJobGridProps) {
               <div className="flex items-center gap-2 mt-3 text-xs text-gray-500">
                 <span>{job.location}</span>
                 {job.compensation && (
-                  <span className="font-medium text-green-600">{job.compensation}</span>
+                  <span className="font-medium text-green-700">{job.compensation}</span>
                 )}
               </div>
             </Link>

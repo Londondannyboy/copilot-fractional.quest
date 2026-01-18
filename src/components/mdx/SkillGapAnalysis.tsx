@@ -51,8 +51,8 @@ export default function SkillGapAnalysis({
 
   const getGapStatus = (current: number, required: number) => {
     const gap = required - current
-    if (gap <= 0) return { status: 'Ready', color: 'text-emerald-600', icon: '✓' }
-    if (gap <= 10) return { status: 'Close', color: 'text-amber-600', icon: '○' }
+    if (gap <= 0) return { status: 'Ready', color: 'text-emerald-700', icon: '✓' }
+    if (gap <= 10) return { status: 'Close', color: 'text-amber-700', icon: '○' }
     return { status: 'Gap', color: 'text-red-500', icon: '!' }
   }
 

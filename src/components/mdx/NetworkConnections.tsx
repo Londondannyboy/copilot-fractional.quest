@@ -84,7 +84,7 @@ export default function NetworkConnections({
           <p className="text-xs text-gray-500">Connections</p>
         </div>
         <div className="px-4 py-3 text-center">
-          <p className="text-2xl font-bold text-emerald-600">
+          <p className="text-2xl font-bold text-emerald-700">
             {connections.filter(c => c.relevance === 'high').length}
           </p>
           <p className="text-xs text-gray-500">Key Contacts</p>

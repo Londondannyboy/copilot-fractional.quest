@@ -71,7 +71,7 @@ export default function MarketTrends({
   }
 
   const getTrendColor = () => {
-    if (trend === 'up') return 'text-emerald-600'
+    if (trend === 'up') return 'text-emerald-700'
     if (trend === 'down') return 'text-red-500'
     return 'text-gray-600'
   }

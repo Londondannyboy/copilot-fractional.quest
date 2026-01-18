@@ -100,7 +100,7 @@ export function NewsSection({ limit = 6 }: { limit?: number }) {
           </div>
           <Link
             href="/news"
-            className="text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1"
+            className="text-emerald-700 hover:text-emerald-800 font-medium flex items-center gap-1"
           >
             View all news
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,7 +129,7 @@ export function NewsSection({ limit = 6 }: { limit?: number }) {
                   href={article.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-emerald-600 transition-colors"
+                  className="hover:text-emerald-700 transition-colors"
                 >
                   {article.title}
                 </a>

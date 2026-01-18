@@ -104,7 +104,7 @@ export default function SalaryBenchmarkChart({
         {userRate && (
           <div className="text-right">
             <div className="text-sm text-gray-500">Your rate</div>
-            <div className="text-2xl font-bold text-emerald-600">
+            <div className="text-2xl font-bold text-emerald-700">
               {"\u00A3"}{userRate.toLocaleString()}
             </div>
             <div className="text-sm text-gray-600">
