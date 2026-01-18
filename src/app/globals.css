@@ -812,8 +812,7 @@ h3, h4, h5, h6 {
 [class*="copilotKit"] [class*="promo"],
 [class*="copilotKit"] [class*="notification"],
 .copilotKitHeader [role="banner"],
-.copilotKitWindow > div:first-child:has([href*="copilotkit"]),
-[class*="copilotKit"] > div:first-child:has(button) {
+.copilotKitWindow > div:first-child:has([href*="copilotkit"]) {
   display: none !important;
 }
 
