@@ -16,7 +16,7 @@ export function AuthorityLinks({ links, title = "Trusted Sources" }: AuthorityLi
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5">
-      <h3 className="font-bold text-gray-900 mb-1">{title}</h3>
+      <p className="font-bold text-gray-900 mb-1">{title}</p>
       <p className="text-xs text-gray-500 mb-4">Industry authorities & official data</p>
       <div className="space-y-3">
         {links.slice(0, 6).map((link) => (
@@ -54,7 +54,7 @@ export function AuthorityLinks({ links, title = "Trusted Sources" }: AuthorityLi
         ))}
       </div>
       {links.length > 6 && (
-        <p className="text-xs text-gray-400 mt-3 text-center">
+        <p className="text-xs text-gray-500 mt-3 text-center">
           +{links.length - 6} more sources
         </p>
       )}

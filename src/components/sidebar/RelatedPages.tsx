@@ -23,7 +23,7 @@ export function RelatedPages({ pages, title = "Related Pages", currentPath }: Re
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5">
-      <h3 className="font-bold text-gray-900 mb-4">{title}</h3>
+      <p className="font-bold text-gray-900 mb-4">{title}</p>
       <div className="space-y-2">
         {filteredPages.slice(0, 8).map((page) => (
           <Link

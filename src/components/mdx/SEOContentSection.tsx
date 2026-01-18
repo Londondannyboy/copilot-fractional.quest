@@ -193,7 +193,7 @@ export function FullSEOContent({
               <div key={key} className="text-center">
                 <div className={`text-2xl md:text-3xl font-black ${colors.text}`}>{stat.value}</div>
                 <p className="text-xs text-gray-600 mt-1">{stat.description}</p>
-                <p className="text-xs text-gray-400 mt-0.5">({stat.source})</p>
+                <p className="text-xs text-gray-500 mt-0.5">({stat.source})</p>
               </div>
             ))}
           </div>
@@ -309,7 +309,7 @@ export function FullSEOContent({
               >
                 <h4 className={`font-bold text-gray-900 group-hover:${colors.text} mb-1`}>{link.name}</h4>
                 <p className="text-xs text-gray-600">{link.context}</p>
-                <p className="text-xs text-gray-400 mt-2">{new URL(link.url).hostname}</p>
+                <p className="text-xs text-gray-500 mt-2">{new URL(link.url).hostname}</p>
               </a>
             ))}
           </div>

@@ -119,7 +119,7 @@ export function NewsSection({ limit = 6 }: { limit?: number }) {
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${categoryColors[article.category] || categoryColors.other}`}>
                   {article.category.replace('_', ' ')}
                 </span>
-                <span className="text-gray-400 text-sm">
+                <span className="text-gray-500 text-sm">
                   {sentimentIcons[article.sentiment] || '📰'}
                 </span>
               </div>

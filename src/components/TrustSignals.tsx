@@ -89,7 +89,7 @@ export function TrustSignals({ variant = 'full', className = '', showCTA = true 
               <div className="text-xs text-gray-500">Years Experience</div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-400">Founder&apos;s background:</span>
+              <span className="text-xs text-gray-500">Founder&apos;s background:</span>
               {EMPLOYMENT_HISTORY.slice(0, 3).map((client) => (
                 <div
                   key={client.name}

@@ -124,10 +124,10 @@ export function JobsSidebar({
       {/* Featured Jobs - Always show jobs! */}
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-3">
-          <h3 className="font-bold text-white flex items-center gap-2">
+          <p className="font-bold text-white flex items-center gap-2">
             <span className="animate-pulse">🔥</span>
             {locationDisplay ? `Hot ${locationDisplay} Jobs` : 'Hot Jobs'}
-          </h3>
+          </p>
         </div>
         <div className="divide-y divide-gray-100">
           {loadingJobs ? (
@@ -165,7 +165,7 @@ export function JobsSidebar({
                   </h4>
                   <p className="text-xs text-gray-500 truncate">{job.company_name}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs text-gray-400">{job.location}</span>
+                    <span className="text-xs text-gray-500">{job.location}</span>
                     {job.compensation && (
                       <span className="text-xs font-medium text-emerald-600">{job.compensation}</span>
                     )}
@@ -209,7 +209,7 @@ export function JobsSidebar({
                 className="rounded-full border-2 border-white/30 shadow-lg object-cover"
               />
               <div>
-                <h3 className="font-bold text-lg">Talk to Dan</h3>
+                <p className="font-bold text-lg">Talk to Dan</p>
                 <p className="text-white/80 text-sm">Fractional Executive & Founder</p>
               </div>
             </div>
@@ -228,9 +228,9 @@ export function JobsSidebar({
 
       {/* Trusted By - Client Logos */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">
-        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 text-center">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 text-center">
           Trusted by executives from
-        </h3>
+        </p>
         <div className="grid grid-cols-5 gap-2">
           <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="Sony">
             <div className="w-8 h-8 bg-gray-800 rounded flex items-center justify-center">
@@ -271,7 +271,7 @@ export function JobsSidebar({
 
       {/* Popular Roles */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">
-        <h3 className="font-bold text-gray-900 mb-4">Popular Roles</h3>
+        <p className="font-bold text-gray-900 mb-4">Popular Roles</p>
         <div className="space-y-2">
           {POPULAR_ROLES.map((role) => (
             <Link
@@ -302,7 +302,7 @@ export function JobsSidebar({
 
       {/* UK Locations */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">
-        <h3 className="font-bold text-gray-900 mb-4">UK Locations</h3>
+        <p className="font-bold text-gray-900 mb-4">UK Locations</p>
         <div className="flex flex-wrap gap-2">
           {UK_LOCATIONS.map((loc) => (
             <Link
@@ -330,7 +330,7 @@ export function JobsSidebar({
 
       {/* For Candidates */}
       <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-5 border border-indigo-100">
-        <h3 className="font-bold text-gray-900 mb-2">For Candidates</h3>
+        <p className="font-bold text-gray-900 mb-2">For Candidates</p>
         <p className="text-gray-600 text-sm mb-4">
           Ready to start your fractional career?
         </p>
@@ -352,7 +352,7 @@ export function JobsSidebar({
 
       {/* Resources */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">
-        <h3 className="font-bold text-gray-900 mb-4">Resources</h3>
+        <p className="font-bold text-gray-900 mb-4">Resources</p>
         <div className="space-y-3">
           <Link
             href="/fractional-cfo-salary"
@@ -380,10 +380,10 @@ export function JobsSidebar({
 
       {/* Why Go Fractional - Benefits List */}
       <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-5 border border-emerald-100">
-        <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <p className="font-bold text-gray-900 mb-4 flex items-center gap-2">
           <span>💡</span>
           Why Go Fractional?
-        </h3>
+        </p>
         <ul className="space-y-3">
           <li className="flex items-start gap-2">
             <svg className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -439,33 +439,33 @@ export function JobsSidebar({
 
       {/* Quick Market Stats */}
       <div className="bg-gray-900 text-white rounded-xl p-5">
-        <h3 className="font-bold mb-4 flex items-center gap-2">
+        <p className="font-bold mb-4 flex items-center gap-2">
           <span>📈</span>
           UK Market Snapshot
-        </h3>
+        </p>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="text-2xl font-bold text-emerald-400">£850</p>
-            <p className="text-xs text-gray-400">Avg Day Rate</p>
+            <p className="text-xs text-gray-500">Avg Day Rate</p>
           </div>
           <div>
             <p className="text-2xl font-bold text-emerald-400">340%</p>
-            <p className="text-xs text-gray-400">Market Growth</p>
+            <p className="text-xs text-gray-500">Market Growth</p>
           </div>
           <div>
             <p className="text-2xl font-bold text-emerald-400">78%</p>
-            <p className="text-xs text-gray-400">Remote Options</p>
+            <p className="text-xs text-gray-500">Remote Options</p>
           </div>
           <div>
             <p className="text-2xl font-bold text-emerald-400">2.3</p>
-            <p className="text-xs text-gray-400">Avg Clients</p>
+            <p className="text-xs text-gray-500">Avg Clients</p>
           </div>
         </div>
       </div>
 
       {/* Newsletter Signup - Compact */}
       <div className="bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl p-5 text-white">
-        <h3 className="font-bold mb-2">📬 Weekly Insights</h3>
+        <p className="font-bold mb-2">📬 Weekly Insights</p>
         <p className="text-sm text-white/80 mb-3">
           Get the latest fractional jobs and market insights.
         </p>

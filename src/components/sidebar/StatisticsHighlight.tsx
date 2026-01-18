@@ -65,7 +65,7 @@ export function StatisticsHighlight({
     <div className={`${colors.bg} rounded-xl border ${colors.border} p-5`}>
       <div className="flex items-center gap-2 mb-4">
         <div className={`w-1 h-5 ${colors.accent} rounded-full`}></div>
-        <h3 className="font-bold text-gray-900">{title}</h3>
+        <p className="font-bold text-gray-900">{title}</p>
       </div>
       <div className="space-y-4">
         {stats.map((stat, index) => (
@@ -76,7 +76,7 @@ export function StatisticsHighlight({
             <p className="text-sm text-gray-700 mt-1">
               {stat.description}
             </p>
-            <p className="text-xs text-gray-400 mt-1 italic">
+            <p className="text-xs text-gray-500 mt-1 italic">
               Source: {stat.source}
             </p>
           </div>

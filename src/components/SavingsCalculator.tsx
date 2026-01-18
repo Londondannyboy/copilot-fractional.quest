@@ -145,7 +145,7 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
                     £{calculations.totalFullTimeCost.toLocaleString()}
                     <span className="text-sm font-normal text-gray-500">/year</span>
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">
+                  <div className="text-xs text-gray-500 mt-1">
                     Includes salary + NI + pension + benefits + recruitment
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export function SavingsCalculator({ location = 'London' }: SavingsCalculatorProp
                     £{calculations.fractionalAnnualCost.toLocaleString()}
                     <span className="text-sm font-normal text-gray-500">/year</span>
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">
+                  <div className="text-xs text-gray-500 mt-1">
                     £{dayRate} × {daysPerWeek} days × 48 weeks
                   </div>
                 </div>

@@ -133,7 +133,7 @@ export default function AuthorityLinksPanel({
               <div className="flex-1 min-w-0">
                 <h4 className={`font-bold ${colors.text} group-hover:underline mb-1`}>{link.name}</h4>
                 <p className="text-sm text-gray-600 line-clamp-2">{link.context}</p>
-                <p className="text-xs text-gray-400 mt-2 truncate">{new URL(link.url).hostname}</p>
+                <p className="text-xs text-gray-500 mt-2 truncate">{new URL(link.url).hostname}</p>
               </div>
             </div>
           </a>

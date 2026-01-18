@@ -225,7 +225,7 @@ export function JobPageClient({
                 <span className="text-sm font-semibold text-green-600">
                   £{Math.round((job.salaryMin || 150000) / 220)} - £{Math.round((job.salaryMax || 200000) / 220)}/day
                 </span>
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-gray-500">
                   (£{Math.round((job.salaryMin || 150000) / 1000)}k - £{Math.round((job.salaryMax || 200000) / 1000)}k/yr)
                 </span>
               </div>
@@ -391,7 +391,7 @@ export function JobPageClient({
                 {/* Show both day rate and annual salary */}
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-sm font-semibold text-green-600">{salaryToDayRate(job.salary)}</span>
-                  <span className="text-xs text-gray-400">({job.salary}/yr)</span>
+                  <span className="text-xs text-gray-500">({job.salary}/yr)</span>
                 </div>
                 {job.description && <p className="text-sm text-gray-600 mb-3">{job.description}</p>}
                 <div className="flex gap-2">
@@ -756,19 +756,19 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-2xl font-bold text-emerald-400">£{stats.avgDayRate || 900}</p>
-                      <p className="text-xs text-gray-400">Avg Day Rate</p>
+                      <p className="text-xs text-gray-500">Avg Day Rate</p>
                     </div>
                     <div>
                       <p className="text-2xl font-bold text-emerald-400">{stats.total}</p>
-                      <p className="text-xs text-gray-400">Active Jobs</p>
+                      <p className="text-xs text-gray-500">Active Jobs</p>
                     </div>
                     <div>
                       <p className="text-2xl font-bold text-emerald-400">{stats.topRoles?.[0]?.count || 0}</p>
-                      <p className="text-xs text-gray-400">{stats.topRoles?.[0]?.role || 'Top'} Roles</p>
+                      <p className="text-xs text-gray-500">{stats.topRoles?.[0]?.role || 'Top'} Roles</p>
                     </div>
                     <div>
                       <p className="text-2xl font-bold text-emerald-400">78%</p>
-                      <p className="text-xs text-gray-400">Remote Options</p>
+                      <p className="text-xs text-gray-500">Remote Options</p>
                     </div>
                   </div>
                 </div>
