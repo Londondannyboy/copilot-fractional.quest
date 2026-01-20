@@ -10,13 +10,13 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 
 export const metadata: Metadata = {
-  title: 'Fractional CFO Services UK | Part-Time Finance Leadership',
-  description: 'Fractional CFO services for UK businesses. Finance leadership 1-3 days/week. Strategy, fundraising, reporting from £850/day. London, Manchester, Birmingham.',
-  keywords: 'fractional cfo services, fractional cfo uk, part time cfo services, fractional finance director, outsourced cfo services, cfo as a service, virtual cfo services uk',
+  title: 'Fractional CFO Services UK | Virtual CFO & Part-Time Finance Leadership',
+  description: 'Fractional CFO & Virtual CFO services for UK businesses. Finance leadership 1-3 days/week. Strategy, fundraising, reporting from £850/day. London, Manchester, Birmingham.',
+  keywords: 'fractional cfo services, virtual cfo, virtual cfo services, fractional cfo uk, part time cfo services, fractional finance director, outsourced cfo services, cfo as a service, virtual cfo services uk, virtual cfo uk',
   alternates: { canonical: 'https://fractional.quest/fractional-cfo-services' },
   openGraph: {
-    title: 'Fractional CFO Services UK | Part-Time Finance Leadership',
-    description: 'Get experienced CFO leadership without full-time commitment. Financial strategy, fundraising, reporting, compliance.',
+    title: 'Fractional CFO Services UK | Virtual CFO & Part-Time Finance Leadership',
+    description: 'Get experienced CFO leadership without full-time commitment. Fractional CFO and Virtual CFO services: financial strategy, fundraising, reporting, compliance.',
     url: 'https://fractional.quest/fractional-cfo-services',
   },
 }
@@ -62,7 +62,7 @@ export default function FractionalCFOServicesPage() {
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Finance Leadership</span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">Fractional CFO Services</h1>
-              <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Get <strong>experienced CFO leadership</strong> without the full-time commitment. Financial strategy, fundraising support, and board-level finance leadership with a senior CFO working 1-3 days per week.</p>
+              <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Get <strong>experienced CFO leadership</strong> without the full-time commitment. Our <strong>fractional CFO services</strong> (also known as <strong>virtual CFO services</strong>) provide financial strategy, fundraising support, and board-level finance leadership with a senior CFO working 1-3 days per week.</p>
               <div className="flex flex-wrap gap-4 mt-8">
                 <Link href="/fractional-cfo-jobs-uk" className="px-6 py-3 bg-white text-emerald-900 font-bold rounded-lg hover:bg-emerald-50 transition-colors">Find a Fractional CFO</Link>
                 <Link href="/fractional-jobs-london" className="px-6 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">London CFO Jobs</Link>
@@ -132,6 +132,11 @@ export default function FractionalCFOServicesPage() {
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional CFO Services</h2>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">A <strong>fractional CFO</strong> provides senior finance leadership without the cost and commitment of a full-time hire. This is particularly valuable for venture-backed companies that need investor-grade financial management but aren't yet at the scale to justify a full-time CFO.</p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Virtual CFO vs Fractional CFO - What&apos;s the Difference?</h3>
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              <strong>Virtual CFO</strong> and <strong>fractional CFO</strong> are essentially the same thing - both refer to a part-time Chief Financial Officer who works with your company on a retained basis. The term &quot;virtual CFO&quot; became popular during the remote work era, emphasising that these finance leaders can work effectively without being physically present every day. Whether you search for <strong>virtual CFO services</strong> or fractional CFO services, you&apos;re looking for the same solution: experienced finance leadership without full-time cost.
+            </p>
 
             <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Ideal Situations for Fractional CFO Services</h3>
             <ul className="space-y-2 text-gray-600">

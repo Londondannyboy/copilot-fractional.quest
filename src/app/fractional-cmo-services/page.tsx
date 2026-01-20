@@ -10,13 +10,13 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 
 export const metadata: Metadata = {
-  title: 'Fractional CMO Services UK | Part-Time Marketing Leadership',
-  description: 'Fractional CMO services for UK businesses. Marketing leadership 1-3 days/week. Brand strategy, demand generation from £850/day. London, Manchester, Birmingham.',
-  keywords: 'fractional cmo services, fractional cmo uk, part time cmo services, fractional marketing director, outsourced cmo services, cmo as a service, fractional chief marketing officer',
+  title: 'Fractional CMO Services UK | Virtual CMO & Part-Time Marketing Leadership',
+  description: 'Fractional CMO & Virtual CMO services for UK businesses. Marketing leadership 1-3 days/week. Brand strategy, demand generation from £850/day. London, Manchester, Birmingham.',
+  keywords: 'fractional cmo services, virtual cmo, virtual cmo services, fractional cmo uk, part time cmo services, fractional marketing director, outsourced cmo services, cmo as a service, fractional chief marketing officer, virtual cmo uk',
   alternates: { canonical: 'https://fractional.quest/fractional-cmo-services' },
   openGraph: {
-    title: 'Fractional CMO Services UK | Part-Time Marketing Leadership',
-    description: 'Get experienced CMO leadership without full-time commitment. Brand strategy, demand generation, marketing transformation.',
+    title: 'Fractional CMO Services UK | Virtual CMO & Part-Time Marketing Leadership',
+    description: 'Get experienced CMO leadership without full-time commitment. Fractional CMO and Virtual CMO services: brand strategy, demand generation, marketing transformation.',
     url: 'https://fractional.quest/fractional-cmo-services',
   },
 }
@@ -62,7 +62,7 @@ export default function FractionalCMOServicesPage() {
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Marketing Leadership</span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">Fractional CMO Services</h1>
-              <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Get <strong>experienced CMO leadership</strong> without the full-time commitment. Build your brand, drive demand generation, and scale marketing with a senior marketing leader working 1-3 days per week.</p>
+              <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Get <strong>experienced CMO leadership</strong> without the full-time commitment. Our <strong>fractional CMO services</strong> (also known as <strong>virtual CMO services</strong>) help you build your brand, drive demand generation, and scale marketing with a senior marketing leader working 1-3 days per week.</p>
               <div className="flex flex-wrap gap-4 mt-8">
                 <Link href="/fractional-cmo-jobs-uk" className="px-6 py-3 bg-white text-amber-900 font-bold rounded-lg hover:bg-amber-50 transition-colors">Find a Fractional CMO</Link>
                 <Link href="/fractional-jobs-london" className="px-6 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">London CMO Jobs</Link>
@@ -132,6 +132,11 @@ export default function FractionalCMOServicesPage() {
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional CMO Services</h2>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">A <strong>fractional CMO</strong> provides senior marketing leadership without the cost and commitment of a full-time hire. This model is particularly effective for companies that need strategic marketing expertise but are not yet ready for a full-time C-suite marketing leader.</p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Virtual CMO vs Fractional CMO - What&apos;s the Difference?</h3>
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              <strong>Virtual CMO</strong> and <strong>fractional CMO</strong> mean the same thing - both refer to a part-time Chief Marketing Officer who works with your company on a retained basis. The term &quot;virtual CMO&quot; gained popularity with remote work, emphasising that marketing leaders can drive strategy effectively without being on-site every day. Whether you search for <strong>virtual CMO services</strong> or fractional CMO services, you&apos;re looking for the same solution: experienced marketing leadership without full-time cost.
+            </p>
 
             <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Ideal Situations for Fractional CMO Services</h3>
             <ul className="space-y-2 text-gray-600">

@@ -23,6 +23,98 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Virtual CFO/CMO redirects - same as fractional
+      {
+        source: '/virtual-cfo',
+        destination: '/fractional-cfo-services',
+        permanent: true,
+      },
+      {
+        source: '/virtual-cfo-services',
+        destination: '/fractional-cfo-services',
+        permanent: true,
+      },
+      {
+        source: '/virtual-cmo',
+        destination: '/fractional-cmo-services',
+        permanent: true,
+      },
+      {
+        source: '/virtual-cmo-services',
+        destination: '/fractional-cmo-services',
+        permanent: true,
+      },
+      // 404 fixes - redirect to closest relevant pages
+      {
+        source: '/product-manager-jobs-uk',
+        destination: '/fractional-cpo-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/fractional-head-of-product-jobs-uk',
+        destination: '/fractional-cpo-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/fractional-cmo-responsibilities',
+        destination: '/fractional-cmo',
+        permanent: true,
+      },
+      {
+        source: '/fractional-executive-contract-template',
+        destination: '/fractional-jobs-uk',
+        permanent: false,
+      },
+      {
+        source: '/destinations/:path*',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/signs-you-need-fractional-compliance-officer',
+        destination: '/fractional-ciso-jobs-uk',
+        permanent: false,
+      },
+      {
+        source: '/compliance',
+        destination: '/fractional-ciso-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/marketing-director-jobs-uk',
+        destination: '/fractional-cmo-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/fractional-head-of-marketing-jobs-uk',
+        destination: '/fractional-cmo-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/engineering-manager-jobs-uk',
+        destination: '/fractional-cto-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/fractional-vp-engineering-jobs-uk',
+        destination: '/fractional-cto-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/fractional-director-jobs-uk',
+        destination: '/fractional-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/how-to-become-a-fractional-executive',
+        destination: '/fractional-jobs-uk',
+        permanent: false,
+      },
+      {
+        source: '/fractional-talent',
+        destination: '/fractional-jobs-uk',
+        permanent: true,
+      },
       {
         source: '/london',
         destination: '/fractional-jobs-london',
