@@ -202,16 +202,33 @@ export const ctoJobsUkSEO = {
     },
   ],
 
-  // Internal links for topical authority
+  // Internal links for topical authority - comprehensive coverage
   relatedPages: [
+    // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Tech Jobs", url: "/fractional-jobs-london" },
+    // CTO Resources
     { name: "What is a Fractional CTO?", url: "/fractional-cto" },
     { name: "CTO Salary Guide", url: "/fractional-cto-salary" },
     { name: "Hire a Fractional CTO", url: "/hire-fractional-cto" },
+    { name: "Fractional CTO vs Dev Agency", url: "/fractional-cto-vs-dev-agency" },
+    // Related Tech Roles
+    { name: "VP Engineering Jobs", url: "/fractional-vp-engineering-jobs-uk" },
+    { name: "Product Manager Jobs", url: "/fractional-product-manager-jobs-uk" },
+    { name: "Fractional CPO Jobs UK", url: "/fractional-cpo-jobs-uk" },
     { name: "Fractional CISO Jobs UK", url: "/fractional-ciso-jobs-uk" },
+    // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CTO Jobs UK", url: "/part-time-cto-jobs-uk" },
+    { name: "Interim CTO Jobs UK", url: "/interim-cto-jobs-uk" },
+    // Tools & Guides
+    { name: "Rate Calculator", url: "/rate-calculator" },
+    { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
+    { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Tech Locations
+    { name: "Cambridge Jobs", url: "/cambridge" },
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
   ],
 
   schema: {

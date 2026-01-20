@@ -26,11 +26,13 @@ const footerLinks = {
       { name: 'Birmingham', href: '/birmingham' },
       { name: 'Edinburgh', href: '/edinburgh' },
       { name: 'Bristol', href: '/bristol' },
-      // TODO: Create pages for these cities
-      // { name: 'Glasgow', href: '/glasgow' },
-      // { name: 'Leeds', href: '/leeds' },
-      // { name: 'Belfast', href: '/belfast' },
-      // { name: 'Cambridge', href: '/cambridge' },
+      { name: 'Glasgow', href: '/glasgow' },
+      { name: 'Leeds', href: '/leeds' },
+      { name: 'Belfast', href: '/belfast' },
+      { name: 'Cambridge', href: '/cambridge' },
+      { name: 'Newcastle', href: '/fractional-jobs-newcastle' },
+      { name: 'Liverpool', href: '/fractional-jobs-liverpool' },
+      { name: 'Cardiff', href: '/fractional-jobs-cardiff' },
     ],
   },
   resources: {
@@ -40,14 +42,13 @@ const footerLinks = {
       { name: 'What is a Fractional CTO?', href: '/fractional-cto' },
       { name: 'What is a Fractional CMO?', href: '/fractional-cmo' },
       { name: 'What is a Fractional COO?', href: '/fractional-coo' },
+      { name: 'What is a Fractional CISO?', href: '/what-is-fractional-ciso' },
       { name: 'CFO Salary Guide', href: '/fractional-cfo-salary' },
       { name: 'CTO Salary Guide', href: '/fractional-cto-salary' },
-      { name: 'CMO Salary Guide', href: '/fractional-cmo-salary' },
-      { name: 'Portfolio Career Guide', href: '/articles/portfolio-career' },
-      // TODO: Create these pages
-      // { name: 'IR35 Guide', href: '/articles/ir35-guide' },
-      // { name: 'Case Studies', href: '/case-studies' },
-      // { name: 'Rate Calculator', href: '/rate-calculator' },
+      { name: 'Portfolio Career Guide', href: '/fractional-executive-portfolio' },
+      { name: 'Rate Calculator', href: '/rate-calculator' },
+      { name: 'Executive Finder', href: '/fractional-executive-finder' },
+      { name: 'Fractional HR vs Full-Time', href: '/fractional-hr-vs-full-time' },
     ],
   },
   forEmployers: {
@@ -57,10 +58,12 @@ const footerLinks = {
       { name: 'Hire a Fractional CTO', href: '/hire-fractional-cto' },
       { name: 'Hire a Fractional CMO', href: '/hire-fractional-cmo' },
       { name: 'Hire a Fractional COO', href: '/hire-fractional-coo' },
-      { name: 'Hire a Fractional CHRO', href: '/hire-fractional-chro' },
       { name: 'CFO Services', href: '/fractional-cfo-services' },
-      { name: 'CTO Services', href: '/fractional-cto-services' },
       { name: 'CMO Services', href: '/fractional-cmo-services' },
+      { name: 'CEO Services', href: '/fractional-ceo-services' },
+      { name: 'CFO Agency', href: '/fractional-cfo-agency' },
+      { name: 'CMO Agency', href: '/fractional-cmo-agency' },
+      { name: 'Recruitment Agency Guide', href: '/fractional-recruitment-agency' },
       { name: 'Book a Call', href: '/book-call' },
     ],
   },
@@ -82,9 +85,26 @@ const footerLinks = {
       { name: 'Tech & SaaS', href: '/fractional-jobs-tech' },
       { name: 'Startups', href: '/fractional-jobs-startups' },
       { name: 'E-commerce', href: '/fractional-jobs-ecommerce' },
-      { name: 'Healthcare', href: '/fractional-jobs-healthcare' },
-      { name: 'Finance', href: '/fractional-jobs-finance' },
-      { name: 'Manufacturing', href: '/fractional-jobs-manufacturing' },
+      { name: 'Proptech', href: '/fractional-jobs-proptech' },
+      { name: 'Energy', href: '/fractional-jobs-energy' },
+      { name: 'Remote', href: '/fractional-jobs-remote' },
+    ],
+  },
+  specialistRoles: {
+    title: 'Specialist Roles',
+    links: [
+      { name: 'Head of Growth', href: '/fractional-head-of-growth-jobs-uk' },
+      { name: 'Product Manager', href: '/fractional-product-manager-jobs-uk' },
+      { name: 'VP Engineering', href: '/fractional-vp-engineering-jobs-uk' },
+      { name: 'Financial Controller', href: '/fractional-financial-controller-jobs-uk' },
+      { name: 'Managing Director', href: '/fractional-managing-director-jobs-uk' },
+      { name: 'NED Roles', href: '/fractional-neds-jobs-uk' },
+      { name: 'Legal', href: '/fractional-legal-jobs-uk' },
+      { name: 'Recruiter', href: '/fractional-recruiter-jobs-uk' },
+      { name: 'Sales', href: '/fractional-sales' },
+      { name: 'CSO Jobs', href: '/fractional-cso-jobs-uk' },
+      { name: 'Project Manager', href: '/fractional-project-manager-jobs-uk' },
+      { name: 'Client Services', href: '/fractional-client-services-director-jobs-uk' },
     ],
   },
 }
@@ -101,7 +121,7 @@ export function Footer() {
     <footer className="bg-gray-900 text-gray-300">
       {/* Main footer content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -209,6 +229,19 @@ export function Footer() {
               ))}
             </ul>
           </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">{footerLinks.specialistRoles.title}</h3>
+            <ul className="space-y-2">
+              {footerLinks.specialistRoles.links.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -226,10 +259,12 @@ export function Footer() {
               <Link href="/terms" className="text-gray-500 hover:text-gray-300 transition-colors">
                 Terms of Service
               </Link>
-              {/* TODO: Create cookies page */}
-              {/* <Link href="/cookies" className="text-gray-500 hover:text-gray-300 transition-colors">
+              <Link href="/cookies" className="text-gray-500 hover:text-gray-300 transition-colors">
                 Cookie Policy
-              </Link> */}
+              </Link>
+              <Link href="/compliance" className="text-gray-500 hover:text-gray-300 transition-colors">
+                Compliance
+              </Link>
             </div>
           </div>
         </div>

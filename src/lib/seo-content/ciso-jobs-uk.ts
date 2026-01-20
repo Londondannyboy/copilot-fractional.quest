@@ -202,16 +202,34 @@ export const cisoJobsUkSEO = {
     },
   ],
 
-  // Internal links for topical authority
+  // Internal links for topical authority - comprehensive coverage
   relatedPages: [
+    // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Security Jobs", url: "/fractional-jobs-london" },
-    { name: "What is a Fractional CISO?", url: "/fractional-ciso" },
+    // CISO Resources
+    { name: "What is a Fractional CISO?", url: "/what-is-fractional-ciso" },
+    { name: "What is a CISO?", url: "/what-is-ciso-chief-information-security-officer" },
     { name: "CISO Salary Guide", url: "/fractional-ciso-salary" },
     { name: "Hire a Fractional CISO", url: "/hire-fractional-ciso" },
+    { name: "CISO Advisory Services", url: "/ciso-advisory-services" },
+    { name: "vCISO vs CISO Comparison", url: "/vciso-vs-ciso-comparison" },
+    // Related Tech Roles
     { name: "Fractional CTO Jobs UK", url: "/fractional-cto-jobs-uk" },
+    { name: "VP Engineering Jobs", url: "/fractional-vp-engineering-jobs-uk" },
+    { name: "Compliance Roles", url: "/compliance" },
+    // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
-    { name: "Virtual CISO UK", url: "/virtual-ciso-uk" },
+    { name: "Part-Time CISO Jobs UK", url: "/part-time-ciso-jobs-uk" },
+    { name: "Interim CISO Jobs UK", url: "/interim-ciso-jobs-uk" },
+    // Tools & Guides
+    { name: "Rate Calculator", url: "/rate-calculator" },
+    { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
+    { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Locations
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Cambridge Jobs", url: "/cambridge" },
   ],
 
   schema: {

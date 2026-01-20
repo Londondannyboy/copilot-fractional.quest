@@ -202,16 +202,34 @@ export const cfoJobsUkSEO = {
     },
   ],
 
-  // Internal links for topical authority
+  // Internal links for topical authority - comprehensive coverage
   relatedPages: [
+    // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Finance Jobs", url: "/fractional-jobs-london" },
+    // CFO Resources
     { name: "What is a Fractional CFO?", url: "/fractional-cfo" },
     { name: "CFO Salary Guide", url: "/fractional-cfo-salary" },
     { name: "Hire a Fractional CFO", url: "/hire-fractional-cfo" },
+    { name: "Fractional CFO Services", url: "/fractional-cfo-services" },
+    { name: "Fractional CFO Agency", url: "/fractional-cfo-agency" },
+    { name: "Interim CFO vs Fractional CFO", url: "/interim-cfo-vs-fractional-cfo" },
+    // Related Finance Roles
+    { name: "Financial Controller Jobs", url: "/fractional-financial-controller-jobs-uk" },
     { name: "Fractional COO Jobs UK", url: "/fractional-coo-jobs-uk" },
+    { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
+    // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CFO Jobs UK", url: "/part-time-cfo-jobs-uk" },
+    { name: "Interim CFO Jobs UK", url: "/interim-cfo-jobs-uk" },
+    // Tools & Guides
+    { name: "Rate Calculator", url: "/rate-calculator" },
+    { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
+    { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Other Locations
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Birmingham Jobs", url: "/birmingham" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
   ],
 
   schema: {

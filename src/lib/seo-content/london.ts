@@ -202,16 +202,42 @@ export const londonSEO = {
     },
   ],
 
-  // Internal links for topical authority
+  // Internal links for topical authority - comprehensive coverage
   relatedPages: [
+    // Main UK Hub
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
+    // C-Suite Roles
     { name: "Fractional CFO Jobs UK", url: "/fractional-cfo-jobs-uk" },
     { name: "Fractional CTO Jobs UK", url: "/fractional-cto-jobs-uk" },
     { name: "Fractional CMO Jobs UK", url: "/fractional-cmo-jobs-uk" },
+    { name: "Fractional COO Jobs UK", url: "/fractional-coo-jobs-uk" },
+    { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
+    { name: "Fractional CISO Jobs UK", url: "/fractional-ciso-jobs-uk" },
+    { name: "Fractional CPO Jobs UK", url: "/fractional-cpo-jobs-uk" },
+    { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
+    // Other UK Cities
     { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Birmingham Jobs", url: "/birmingham" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
+    { name: "Bristol Jobs", url: "/bristol" },
+    { name: "Leeds Jobs", url: "/leeds" },
+    { name: "Glasgow Jobs", url: "/glasgow" },
+    { name: "Cambridge Jobs", url: "/cambridge" },
+    // Specialist Roles
+    { name: "Head of Growth Jobs", url: "/fractional-head-of-growth-jobs-uk" },
+    { name: "VP Engineering Jobs", url: "/fractional-vp-engineering-jobs-uk" },
+    { name: "Financial Controller Jobs", url: "/fractional-financial-controller-jobs-uk" },
+    { name: "Product Manager Jobs", url: "/fractional-product-manager-jobs-uk" },
+    { name: "Managing Director Jobs", url: "/fractional-managing-director-jobs-uk" },
+    // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    { name: "Part-Time CFO Jobs", url: "/part-time-cfo-jobs-uk" },
+    // Services & Guides
     { name: "What is a Fractional CFO?", url: "/fractional-cfo" },
     { name: "CFO Salary Guide", url: "/fractional-cfo-salary" },
+    { name: "Rate Calculator", url: "/rate-calculator" },
+    { name: "Fractional CFO Services", url: "/fractional-cfo-services" },
+    { name: "Fractional CFO Agency", url: "/fractional-cfo-agency" },
   ],
 
   schema: {
