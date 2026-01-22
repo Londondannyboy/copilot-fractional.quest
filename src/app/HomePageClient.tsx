@@ -31,6 +31,7 @@ function calculateOnboardingStep(items: ProfileItemForStep[]): number {
 
 // EditableGraph3D removed for performance (uses Three.js)
 import { AgentState } from "@/lib/types";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { useCoAgent, useRenderToolCall, useCopilotChat, useHumanInTheLoop } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
@@ -112,14 +113,14 @@ export default function HomePageClient() {
   const [lastQuery, setLastQuery] = useState("");
 
   return (
-    <>
+    <CopilotProvider>
       {/* SEO H1 - Visually hidden but accessible to crawlers */}
       <h1 className="sr-only">Fractional Executive Jobs UK - AI-Powered Job Search Platform</h1>
 
       <main style={{ "--copilot-kit-primary-color": themeColor } as CopilotKitCSSProperties}>
         <YourMainContent themeColor={themeColor} lastQuery={lastQuery} setLastQuery={setLastQuery} />
       </main>
-    </>
+    </CopilotProvider>
   );
 }
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
@@ -51,7 +52,17 @@ const benefits = [
   { title: 'Replacement Guarantee', description: 'Most agencies offer replacement guarantees (typically 3-6 months) if the placement doesn\'t work out.', icon: '🛡️' },
 ];
 
+// Outer component that provides CopilotKit context
 export default function FractionalCFOAgencyPage() {
+  return (
+    <CopilotProvider>
+      <FractionalCFOAgencyPageInner />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function FractionalCFOAgencyPageInner() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;

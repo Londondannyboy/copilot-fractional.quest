@@ -4,6 +4,7 @@ import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
@@ -39,7 +40,17 @@ const evaluationCriteria = [
   { criteria: 'Fractional Model Fit', description: 'Do they understand fractional working? Managing time, being effective in 2 days/week, clear priorities.', lookFor: '2-4 current clients, clear systems, portfolio approach', redFlag: 'First fractional role, wants full-time really' },
 ];
 
+// Outer component that provides CopilotKit context
 export default function HireFractionalCEOClient() {
+  return (
+    <CopilotProvider>
+      <HireFractionalCEOClientInner />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function HireFractionalCEOClientInner() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;

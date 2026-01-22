@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
@@ -129,7 +130,17 @@ const evaluationCriteria = [
   },
 ];
 
+// Outer component that provides CopilotKit context
 export default function HireFractionalCMOClient() {
+  return (
+    <CopilotProvider>
+      <HireFractionalCMOClientInner />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function HireFractionalCMOClientInner() {
   // Hero image
   const heroImage = getHeroImageUrl('services', 1920, 800)
   const imageCredit = getImage('services')

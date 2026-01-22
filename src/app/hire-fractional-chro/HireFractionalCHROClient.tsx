@@ -4,6 +4,7 @@ import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
@@ -39,7 +40,17 @@ const evaluationCriteria = [
   { criteria: 'Fractional Working Model', description: 'Do they know how to work fractionally? Clear communication, async updates, prioritisation.', lookFor: 'Works with 2-4 companies, clear systems, communication cadence', redFlag: 'First fractional role or working with 6+ companies' },
 ];
 
+// Outer component that provides CopilotKit context
 export default function HireFractionalCHROClient() {
+  return (
+    <CopilotProvider>
+      <HireFractionalCHROClientInner />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function HireFractionalCHROClientInner() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;

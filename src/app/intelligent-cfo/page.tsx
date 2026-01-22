@@ -4,6 +4,7 @@
 import { CopilotSidebar, CopilotChat } from '@copilotkit/react-ui'
 import { useCopilotChatSuggestions } from '@copilotkit/react-ui'
 import '@copilotkit/react-ui/styles.css'
+import { CopilotProvider } from '@/components/CopilotProvider'
 import { authClient } from '@/lib/auth/client'
 
 import { IntelligentDocument } from '@/components/mdx/IntelligentDocument'
@@ -54,7 +55,17 @@ function InlineDocumentChat() {
   )
 }
 
+// Outer component that provides CopilotKit context
 export default function IntelligentCFOPage() {
+  return (
+    <CopilotProvider>
+      <IntelligentCFOPageInner />
+    </CopilotProvider>
+  )
+}
+
+// Inner component with CopilotKit hooks
+function IntelligentCFOPageInner() {
   const { data: session } = authClient.useSession()
   const user = session?.user
   const firstName = user?.name?.split(' ')[0]

@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { CopilotSidebar } from "@copilotkit/react-ui";
 import { useCopilotChat } from "@copilotkit/react-core";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { PageRenderer } from "./PageRenderer";
 import { VoiceInput } from "@/components/voice-input";
 import { authClient } from "@/lib/auth/client";
@@ -13,7 +14,17 @@ interface PageWithCopilotProps {
   page: PageData;
 }
 
+// Outer component that provides CopilotKit context
 export function PageWithCopilot({ page }: PageWithCopilotProps) {
+  return (
+    <CopilotProvider>
+      <PageWithCopilotInner page={page} />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function PageWithCopilotInner({ page }: PageWithCopilotProps) {
   // Get user from Neon Auth
   const { data: session } = authClient.useSession();
   const user = session?.user;

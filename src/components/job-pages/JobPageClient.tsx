@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useCoAgent, useCopilotChat, useRenderToolCall, useHumanInTheLoop } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { authClient } from "@/lib/auth/client";
 import {
   JobsBarChart, JobsPieChart, SalaryAreaChart,
@@ -158,7 +159,17 @@ interface JobPageClientProps {
   hideMoreOpportunities?: boolean;       // Hide the "More Opportunities" sidebar section
 }
 
-export function JobPageClient({
+// Outer component that provides CopilotKit context
+export function JobPageClient(props: JobPageClientProps) {
+  return (
+    <CopilotProvider>
+      <JobPageClientInner {...props} />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks (must be inside CopilotProvider)
+function JobPageClientInner({
   location,
   locationDisplay,
   initialJobs,

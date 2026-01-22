@@ -4,6 +4,7 @@ import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
@@ -39,7 +40,17 @@ const evaluationCriteria = [
   { criteria: 'Fractional Effectiveness', description: 'Can they be impactful part-time? Security requires consistent presence and quick response times.', lookFor: '2-4 clients, clear escalation procedures, responsive communication', redFlag: 'First fractional role, slow response times, overcommitted' },
 ];
 
+// Outer component that provides CopilotKit context
 export default function HireFractionalCISOClient() {
+  return (
+    <CopilotProvider>
+      <HireFractionalCISOClientInner />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function HireFractionalCISOClientInner() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;

@@ -1,9 +1,10 @@
 'use client';
 
 import { NeonAuthUIProvider } from '@neondatabase/auth/react/ui';
-import { CopilotKit } from '@copilotkit/react-core';
 import { authClient } from '@/lib/auth/client';
 
+// Auth provider only - CopilotKit moved to page-level for performance
+// Pages that need AI chat import CopilotProvider separately
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <NeonAuthUIProvider
@@ -11,9 +12,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       redirectTo="/"
       social={{ providers: ['google'] }}
     >
-      <CopilotKit runtimeUrl="/api/copilotkit" agent="my_agent">
-        {children}
-      </CopilotKit>
+      {children}
     </NeonAuthUIProvider>
   );
 }

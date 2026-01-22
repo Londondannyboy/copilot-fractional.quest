@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CopilotSidebar } from "@copilotkit/react-ui";
 import { useCopilotChat } from "@copilotkit/react-core";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
 
@@ -16,7 +17,17 @@ import { VoiceInput } from "@/components/voice-input";
  * - Passes user context to the AI agent
  * - Listens for events from CopilotMainPanel
  */
+// Outer component that provides CopilotKit context
 export function MDXDemoWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <CopilotProvider>
+      <MDXDemoWrapperInner>{children}</MDXDemoWrapperInner>
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function MDXDemoWrapperInner({ children }: { children: React.ReactNode }) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;

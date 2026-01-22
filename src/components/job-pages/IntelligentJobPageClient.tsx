@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useCoAgent, useRenderToolCall } from "@copilotkit/react-core";
 import { CopilotSidebar } from "@copilotkit/react-ui";
+import { CopilotProvider } from "@/components/CopilotProvider";
 
 // Charts and visualizations
 import {
@@ -214,7 +215,17 @@ function IntelligentHero({
  * - Filters, highlights, and charts update when user talks to the agent
  * - Maintains all SEO and credibility components from JobPageClient
  */
-export function IntelligentJobPageClient({
+// Outer component that provides CopilotKit context
+export function IntelligentJobPageClient(props: IntelligentJobPageClientProps) {
+  return (
+    <CopilotProvider>
+      <IntelligentJobPageClientInner {...props} />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function IntelligentJobPageClientInner({
   location,
   locationDisplay,
   seoContent,

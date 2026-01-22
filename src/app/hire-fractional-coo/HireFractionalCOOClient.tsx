@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { getHeroImageUrl, getImage } from '@/lib/images';
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
@@ -41,7 +42,17 @@ const evaluationCriteria = [
   { criteria: 'Fractional Working Model Fit', description: 'Do they know how to work fractionally? This requires discipline, clear communication, and asynchronous collaboration. Ask how they manage multiple clients and make impact in 2 days/week.', lookFor: 'Works with 2-4 companies currently, systems for time management, clear communication cadence', redFlag: 'First fractional engagement or working with 6+ companies (spread too thin)' },
 ];
 
+// Outer component that provides CopilotKit context
 export default function HireFractionalCOOClient() {
+  return (
+    <CopilotProvider>
+      <HireFractionalCOOClientInner />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function HireFractionalCOOClientInner() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;

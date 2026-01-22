@@ -4,6 +4,7 @@ import { useEffect, useCallback, useState } from "react";
 import { CopilotSidebar } from "@copilotkit/react-ui";
 import { useCopilotChat } from "@copilotkit/react-core";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { CopilotProvider } from "@/components/CopilotProvider";
 import { authClient } from "@/lib/auth/client";
 import { VoiceInput } from "@/components/voice-input";
 
@@ -27,7 +28,17 @@ import { RoleCalculator } from "@/components/RoleCalculator";
  * - Career trajectory visualization
  * - Salary benchmarking
  */
+// Outer component that provides CopilotKit context
 export default function MDXDemoPage() {
+  return (
+    <CopilotProvider>
+      <MDXDemoPageInner />
+    </CopilotProvider>
+  );
+}
+
+// Inner component with CopilotKit hooks
+function MDXDemoPageInner() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;
