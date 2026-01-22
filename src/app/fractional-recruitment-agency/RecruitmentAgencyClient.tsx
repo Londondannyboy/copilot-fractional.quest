@@ -2,11 +2,38 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { authClient } from "@/lib/auth/client";
-import { FAQ, FAQItem } from "@/components/seo";
-import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
+import { FAQItem } from "@/components/seo";
 import { getHeroImageUrl, getImage } from '@/lib/images';
 import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
+
+// Lazy-load below-fold components to reduce initial JS execution
+const EmbeddedJobBoard = dynamic(
+  () => import("@/components/EmbeddedJobBoard").then(mod => ({ default: mod.EmbeddedJobBoard })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-100 rounded-xl h-96 flex items-center justify-center">
+        <span className="text-gray-400">Loading jobs...</span>
+      </div>
+    )
+  }
+);
+
+const FAQ = dynamic(
+  () => import("@/components/seo").then(mod => ({ default: mod.FAQ })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse space-y-4">
+        {[1,2,3,4,5,6].map(i => (
+          <div key={i} className="bg-gray-100 rounded-lg h-16" />
+        ))}
+      </div>
+    )
+  }
+);
 
 const CALENDLY_URL = 'https://calendly.com/firstquest/quest';
 
