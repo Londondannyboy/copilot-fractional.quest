@@ -215,6 +215,9 @@ export const londonSEO = {
     { name: "Fractional CISO Jobs UK", url: "/fractional-ciso-jobs-uk" },
     { name: "Fractional CPO Jobs UK", url: "/fractional-cpo-jobs-uk" },
     { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
+    { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
+    { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
+    { name: "Fractional CCO Jobs UK", url: "/fractional-cco-jobs-uk" },
     // Other UK Cities
     { name: "Manchester Jobs", url: "/manchester" },
     { name: "Birmingham Jobs", url: "/birmingham" },

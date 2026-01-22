@@ -217,6 +217,10 @@ export const ctoJobsUkSEO = {
     { name: "Product Manager Jobs", url: "/fractional-product-manager-jobs-uk" },
     { name: "Fractional CPO Jobs UK", url: "/fractional-cpo-jobs-uk" },
     { name: "Fractional CISO Jobs UK", url: "/fractional-ciso-jobs-uk" },
+    { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
+    // Related C-Suite Roles
+    { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
+    { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
     // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CTO Jobs UK", url: "/part-time-cto-jobs-uk" },

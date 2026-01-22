@@ -218,6 +218,10 @@ export const cfoJobsUkSEO = {
     { name: "Financial Controller Jobs", url: "/fractional-financial-controller-jobs-uk" },
     { name: "Fractional COO Jobs UK", url: "/fractional-coo-jobs-uk" },
     { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
+    // Related C-Suite Roles
+    { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
+    { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
+    { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
     // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CFO Jobs UK", url: "/part-time-cfo-jobs-uk" },

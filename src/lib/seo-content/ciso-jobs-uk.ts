@@ -216,8 +216,12 @@ export const cisoJobsUkSEO = {
     { name: "vCISO vs CISO Comparison", url: "/vciso-vs-ciso-comparison" },
     // Related Tech Roles
     { name: "Fractional CTO Jobs UK", url: "/fractional-cto-jobs-uk" },
+    { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
     { name: "VP Engineering Jobs", url: "/fractional-vp-engineering-jobs-uk" },
     { name: "Compliance Roles", url: "/compliance" },
+    // Related C-Suite Roles
+    { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
+    { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
     // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CISO Jobs UK", url: "/part-time-ciso-jobs-uk" },

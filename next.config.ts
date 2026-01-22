@@ -422,6 +422,12 @@ const nextConfig: NextConfig = {
         destination: '/fractional-chro-jobs-uk',
         permanent: true,
       },
+      // Procurement page redirect
+      {
+        source: '/fractional-procurement-jobs',
+        destination: '/fractional-procurement-jobs-uk',
+        permanent: true,
+      },
       // Job URL pattern redirect (old /job/* to new /fractional-job/*)
       {
         source: '/job/:path*',

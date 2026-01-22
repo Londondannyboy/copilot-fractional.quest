@@ -202,16 +202,36 @@ export const croJobsUkSEO = {
     },
   ],
 
-  // Internal links for topical authority
+  // Internal links for topical authority - comprehensive coverage
   relatedPages: [
+    // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Revenue Jobs", url: "/fractional-jobs-london" },
+    // CRO Resources
     { name: "What is a Fractional CRO?", url: "/fractional-cro" },
     { name: "CRO Salary Guide", url: "/fractional-cro-salary" },
     { name: "Hire a Fractional CRO", url: "/hire-fractional-cro" },
+    // Related Revenue Roles
+    { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
     { name: "Fractional CMO Jobs UK", url: "/fractional-cmo-jobs-uk" },
-    { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    { name: "Fractional CCO Jobs UK", url: "/fractional-cco-jobs-uk" },
+    { name: "Head of Growth Jobs", url: "/fractional-head-of-growth-jobs-uk" },
+    { name: "Fractional Sales Jobs", url: "/fractional-sales" },
+    // Related Operations Roles
     { name: "Fractional COO Jobs UK", url: "/fractional-coo-jobs-uk" },
+    { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
+    // Work Types
+    { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    { name: "Part-Time CRO Jobs UK", url: "/part-time-cro-jobs-uk" },
+    { name: "Interim CRO Jobs UK", url: "/interim-cro-jobs-uk" },
+    // Tools & Guides
+    { name: "Rate Calculator", url: "/rate-calculator" },
+    { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
+    { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Locations
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
+    { name: "Bristol Jobs", url: "/bristol" },
   ],
 
   schema: {

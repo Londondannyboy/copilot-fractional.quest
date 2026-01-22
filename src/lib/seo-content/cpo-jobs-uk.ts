@@ -202,16 +202,36 @@ export const cpoJobsUkSEO = {
     },
   ],
 
-  // Internal links for topical authority
+  // Internal links for topical authority - comprehensive coverage
   relatedPages: [
+    // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Product Jobs", url: "/fractional-jobs-london" },
+    // CPO Resources
     { name: "What is a Fractional CPO?", url: "/fractional-cpo" },
     { name: "CPO Salary Guide", url: "/fractional-cpo-salary" },
     { name: "Hire a Fractional CPO", url: "/hire-fractional-cpo" },
+    // Related Product & Tech Roles
     { name: "Fractional CTO Jobs UK", url: "/fractional-cto-jobs-uk" },
+    { name: "Product Manager Jobs", url: "/fractional-product-manager-jobs-uk" },
+    { name: "Head of Growth Jobs", url: "/fractional-head-of-growth-jobs-uk" },
+    // Related C-Suite Roles
+    { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
+    { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
+    { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
+    { name: "Fractional CMO Jobs UK", url: "/fractional-cmo-jobs-uk" },
+    // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CPO Jobs UK", url: "/part-time-cpo-jobs-uk" },
+    { name: "Interim CPO Jobs UK", url: "/interim-cpo-jobs-uk" },
+    // Tools & Guides
+    { name: "Rate Calculator", url: "/rate-calculator" },
+    { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
+    { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Locations
+    { name: "Cambridge Jobs", url: "/cambridge" },
+    { name: "Manchester Jobs", url: "/manchester" },
+    { name: "Edinburgh Jobs", url: "/edinburgh" },
   ],
 
   schema: {

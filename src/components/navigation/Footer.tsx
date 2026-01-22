@@ -93,6 +93,9 @@ const footerLinks = {
   specialistRoles: {
     title: 'Specialist Roles',
     links: [
+      { name: 'CRO Jobs', href: '/fractional-cro-jobs-uk' },
+      { name: 'CSO Jobs', href: '/fractional-cso-jobs-uk' },
+      { name: 'CIO Jobs', href: '/fractional-cio-jobs-uk' },
       { name: 'Head of Growth', href: '/fractional-head-of-growth-jobs-uk' },
       { name: 'Product Manager', href: '/fractional-product-manager-jobs-uk' },
       { name: 'VP Engineering', href: '/fractional-vp-engineering-jobs-uk' },
@@ -102,7 +105,6 @@ const footerLinks = {
       { name: 'Legal', href: '/fractional-legal-jobs-uk' },
       { name: 'Recruiter', href: '/fractional-recruiter-jobs-uk' },
       { name: 'Sales', href: '/fractional-sales' },
-      { name: 'CSO Jobs', href: '/fractional-cso-jobs-uk' },
       { name: 'Project Manager', href: '/fractional-project-manager-jobs-uk' },
       { name: 'Client Services', href: '/fractional-client-services-director-jobs-uk' },
     ],
