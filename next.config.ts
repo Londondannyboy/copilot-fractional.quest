@@ -156,11 +156,7 @@ const nextConfig: NextConfig = {
         destination: '/fractional-chro-jobs-uk',
         permanent: true,
       },
-      {
-        source: '/part-time-cfo',
-        destination: '/part-time-cfo-jobs-uk',
-        permanent: true,
-      },
+      // /part-time-cfo now has dedicated page in database
       {
         source: '/interim-executive',
         destination: '/fractional-jobs-uk',
@@ -182,11 +178,7 @@ const nextConfig: NextConfig = {
         destination: '/fractional-ciso-jobs-uk',
         permanent: true,
       },
-      {
-        source: '/interim-cfo',
-        destination: '/interim-cfo-jobs-uk',
-        permanent: true,
-      },
+      // /interim-cfo now has dedicated page in database
       {
         source: '/interim-cmo',
         destination: '/interim-cmo-jobs-uk',
@@ -202,27 +194,7 @@ const nextConfig: NextConfig = {
         destination: '/interim-coo-jobs-uk',
         permanent: true,
       },
-      // Short role URLs
-      {
-        source: '/cfo',
-        destination: '/fractional-cfo',
-        permanent: true,
-      },
-      {
-        source: '/cmo',
-        destination: '/fractional-cmo',
-        permanent: true,
-      },
-      {
-        source: '/cto',
-        destination: '/fractional-cto',
-        permanent: true,
-      },
-      {
-        source: '/coo',
-        destination: '/fractional-coo',
-        permanent: true,
-      },
+      // Short role URLs - /cfo, /cmo, /cto, /coo now have dedicated pages in database
       // Other GSC URLs
       {
         source: '/fractional-jobs',
