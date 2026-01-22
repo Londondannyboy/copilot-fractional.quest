@@ -65,6 +65,22 @@ export default async function FractionalCMOJobsUKPage() {
 
   return (
     <>
+      {/* Preload hero image for faster LCP - WebP format */}
+      <link
+        rel="preload"
+        href="/images/hero/cmo-mobile.webp"
+        as="image"
+        type="image/webp"
+        media="(max-width: 768px)"
+      />
+      <link
+        rel="preload"
+        href="/images/hero/cmo-desktop.webp"
+        as="image"
+        type="image/webp"
+        media="(min-width: 769px)"
+      />
+
       {/* Schema Markup */}
       <script
         type="application/ld+json"

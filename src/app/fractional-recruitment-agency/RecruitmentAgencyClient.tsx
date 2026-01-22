@@ -92,14 +92,15 @@ export function RecruitmentAgencyClient() {
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-emerald-600 to-emerald-500 py-24">
-        {/* Responsive hero image: mobile (800w) for phones, desktop (1920w) for larger screens */}
+        {/* Responsive hero image: mobile (800w) for phones, desktop (1920w) for larger screens - WebP format */}
         <picture>
           <source
             media="(max-width: 768px)"
-            srcSet={localImage?.mobile || '/images/hero/services-mobile.jpg'}
+            srcSet={localImage?.mobile || '/images/hero/services-mobile.webp'}
+            type="image/webp"
           />
           <Image
-            src={localImage?.desktop || '/images/hero/services-desktop.jpg'}
+            src={localImage?.desktop || '/images/hero/services-desktop.webp'}
             alt="Fractional Recruitment Agency UK - Find the best agencies for hiring fractional executives"
             fill
             priority

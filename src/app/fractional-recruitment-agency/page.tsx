@@ -80,19 +80,19 @@ const faqItems: FAQItem[] = [
 export default function FractionalRecruitmentAgencyPage() {
   return (
     <>
-      {/* Preload hero image for faster LCP */}
+      {/* Preload hero image for faster LCP - WebP format */}
       <link
         rel="preload"
-        href="/images/hero/services-mobile.jpg"
+        href="/images/hero/services-mobile.webp"
         as="image"
-        type="image/jpeg"
+        type="image/webp"
         media="(max-width: 768px)"
       />
       <link
         rel="preload"
-        href="/images/hero/services-desktop.jpg"
+        href="/images/hero/services-desktop.webp"
         as="image"
-        type="image/jpeg"
+        type="image/webp"
         media="(min-width: 769px)"
       />
 

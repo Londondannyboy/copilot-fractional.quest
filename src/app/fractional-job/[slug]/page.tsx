@@ -6,7 +6,320 @@ import { unstable_cache } from 'next/cache'
 import { createDbQuery } from '@/lib/db'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
-import { getRoleImageCategory, getHeroImageUrl, getImage } from '@/lib/images'
+import { JobPostingSchema, parseCompensation } from '@/components/seo/JobPostingSchema'
+import { getRoleImageCategory, getHeroImageUrl } from '@/lib/images'
+
+// Comprehensive role data for SEO optimization
+interface RoleData {
+  displayName: string
+  shortDescription: string
+  fullDescription: string
+  typicalDayRate: { min: number; max: number; typical: number }
+  occupationalCategory: string
+  pageSlug: string
+  salaryPageSlug: string
+  hirePageSlug: string
+  faqs: Array<{ question: string; answer: string }>
+}
+
+const ROLE_DATA: Record<string, RoleData> = {
+  cfo: {
+    displayName: 'Fractional CFO',
+    shortDescription: 'Part-time Chief Financial Officer providing strategic financial leadership',
+    fullDescription: 'A Fractional CFO provides part-time strategic financial leadership to growing businesses. They bring the expertise of a full-time CFO—financial strategy, fundraising support, cash flow management, and board reporting—without the full-time cost. Ideal for scale-ups, PE-backed companies, and businesses preparing for exit.',
+    typicalDayRate: { min: 900, max: 1500, typical: 1100 },
+    occupationalCategory: '11-3031.00',
+    pageSlug: 'fractional-cfo',
+    salaryPageSlug: 'fractional-cfo-salary',
+    hirePageSlug: 'hire-fractional-cfo',
+    faqs: [
+      { question: 'What does a Fractional CFO do?', answer: 'A Fractional CFO provides part-time strategic financial leadership, including financial planning, cash flow management, fundraising support, investor relations, and board reporting.' },
+      { question: 'How much does a Fractional CFO cost?', answer: 'Fractional CFOs typically charge £900-£1,500 per day in the UK, working 1-3 days per week. This is significantly less than a full-time CFO salary of £150,000-£250,000+.' },
+      { question: 'When should I hire a Fractional CFO?', answer: 'Consider a Fractional CFO when you need strategic financial guidance but cannot justify a full-time hire—typically at £2-20M revenue, during fundraising, or preparing for exit.' },
+    ]
+  },
+  cto: {
+    displayName: 'Fractional CTO',
+    shortDescription: 'Part-time Chief Technology Officer providing technical strategy and leadership',
+    fullDescription: 'A Fractional CTO provides part-time technical leadership to businesses that need senior technology expertise. They oversee technology strategy, team building, architecture decisions, and digital transformation—without the commitment of a full-time executive hire.',
+    typicalDayRate: { min: 850, max: 1600, typical: 1100 },
+    occupationalCategory: '11-3021.00',
+    pageSlug: 'fractional-cto',
+    salaryPageSlug: 'fractional-cto-salary',
+    hirePageSlug: 'hire-fractional-cto',
+    faqs: [
+      { question: 'What does a Fractional CTO do?', answer: 'A Fractional CTO provides part-time technical leadership including technology strategy, team management, architecture decisions, vendor selection, and digital transformation guidance.' },
+      { question: 'How much does a Fractional CTO cost?', answer: 'Fractional CTOs typically charge £850-£1,600 per day in the UK, often working 1-2 days per week initially.' },
+      { question: 'When should I hire a Fractional CTO?', answer: 'Consider a Fractional CTO when you need senior technical leadership but your business is not ready for a £180,000+ full-time hire—common at seed to Series B stage.' },
+    ]
+  },
+  cmo: {
+    displayName: 'Fractional CMO',
+    shortDescription: 'Part-time Chief Marketing Officer driving growth and brand strategy',
+    fullDescription: 'A Fractional CMO provides part-time marketing leadership to businesses seeking growth. They bring strategic marketing expertise—brand positioning, demand generation, team building, and marketing ROI optimization—at a fraction of the cost of a full-time CMO.',
+    typicalDayRate: { min: 800, max: 1400, typical: 1000 },
+    occupationalCategory: '11-2021.00',
+    pageSlug: 'fractional-cmo',
+    salaryPageSlug: 'fractional-cmo-salary',
+    hirePageSlug: 'hire-fractional-cmo',
+    faqs: [
+      { question: 'What does a Fractional CMO do?', answer: 'A Fractional CMO provides part-time marketing leadership including brand strategy, demand generation, marketing team management, and growth planning.' },
+      { question: 'How much does a Fractional CMO cost?', answer: 'Fractional CMOs typically charge £800-£1,400 per day in the UK, often working 2-3 days per week.' },
+      { question: 'When should I hire a Fractional CMO?', answer: 'Consider a Fractional CMO when you need senior marketing strategy but cannot justify a £150,000+ full-time salary—typically at £1-15M revenue.' },
+    ]
+  },
+  coo: {
+    displayName: 'Fractional COO',
+    shortDescription: 'Part-time Chief Operating Officer optimizing business operations',
+    fullDescription: 'A Fractional COO provides part-time operational leadership to businesses needing to scale efficiently. They focus on process optimization, team structure, operational excellence, and turning strategy into execution.',
+    typicalDayRate: { min: 850, max: 1400, typical: 1050 },
+    occupationalCategory: '11-1021.00',
+    pageSlug: 'fractional-coo',
+    salaryPageSlug: 'fractional-coo-salary',
+    hirePageSlug: 'hire-fractional-coo',
+    faqs: [
+      { question: 'What does a Fractional COO do?', answer: 'A Fractional COO provides part-time operational leadership including process optimization, team structure, KPI frameworks, and scaling operations.' },
+      { question: 'How much does a Fractional COO cost?', answer: 'Fractional COOs typically charge £850-£1,400 per day in the UK.' },
+      { question: 'When should I hire a Fractional COO?', answer: 'Consider a Fractional COO when your business is growing but operations are becoming a bottleneck—common at £3-30M revenue.' },
+    ]
+  },
+  chro: {
+    displayName: 'Fractional CHRO',
+    shortDescription: 'Part-time Chief Human Resources Officer building people strategy',
+    fullDescription: 'A Fractional CHRO provides part-time HR leadership to businesses building their people function. They bring expertise in talent strategy, culture development, HR compliance, and organizational design.',
+    typicalDayRate: { min: 800, max: 1300, typical: 950 },
+    occupationalCategory: '11-3121.00',
+    pageSlug: 'fractional-chro',
+    salaryPageSlug: 'fractional-chro-salary',
+    hirePageSlug: 'hire-fractional-chro',
+    faqs: [
+      { question: 'What does a Fractional CHRO do?', answer: 'A Fractional CHRO provides part-time HR leadership including talent strategy, culture development, HR compliance, compensation design, and organizational development.' },
+      { question: 'How much does a Fractional CHRO cost?', answer: 'Fractional CHROs typically charge £800-£1,300 per day in the UK.' },
+      { question: 'When should I hire a Fractional CHRO?', answer: 'Consider a Fractional CHRO when you have 30+ employees and need strategic HR leadership but not a full-time hire.' },
+    ]
+  },
+  ciso: {
+    displayName: 'Fractional CISO',
+    shortDescription: 'Part-time Chief Information Security Officer protecting digital assets',
+    fullDescription: 'A Fractional CISO provides part-time cybersecurity leadership to businesses that need to protect their digital assets and meet compliance requirements. They bring expertise in security strategy, risk management, and regulatory compliance.',
+    typicalDayRate: { min: 900, max: 1500, typical: 1150 },
+    occupationalCategory: '11-3021.00',
+    pageSlug: 'fractional-ciso',
+    salaryPageSlug: 'fractional-ciso-salary',
+    hirePageSlug: 'hire-fractional-ciso',
+    faqs: [
+      { question: 'What does a Fractional CISO do?', answer: 'A Fractional CISO provides part-time security leadership including security strategy, risk assessment, compliance management, incident response planning, and security awareness training.' },
+      { question: 'How much does a Fractional CISO cost?', answer: 'Fractional CISOs typically charge £900-£1,500 per day in the UK due to specialized expertise.' },
+      { question: 'When should I hire a Fractional CISO?', answer: 'Consider a Fractional CISO when you handle sensitive data, need compliance (SOC2, ISO27001), or have regulatory requirements.' },
+    ]
+  },
+  cpo: {
+    displayName: 'Fractional CPO',
+    shortDescription: 'Part-time Chief Product Officer driving product strategy',
+    fullDescription: 'A Fractional CPO provides part-time product leadership to businesses building and scaling products. They bring expertise in product strategy, roadmap development, user research, and product team management.',
+    typicalDayRate: { min: 800, max: 1300, typical: 1000 },
+    occupationalCategory: '11-2021.00',
+    pageSlug: 'fractional-cpo',
+    salaryPageSlug: 'fractional-cpo-salary',
+    hirePageSlug: 'hire-fractional-cpo',
+    faqs: [
+      { question: 'What does a Fractional CPO do?', answer: 'A Fractional CPO provides part-time product leadership including product strategy, roadmap development, user research, and product team management.' },
+      { question: 'How much does a Fractional CPO cost?', answer: 'Fractional CPOs typically charge £800-£1,300 per day in the UK.' },
+      { question: 'When should I hire a Fractional CPO?', answer: 'Consider a Fractional CPO when you need product strategy expertise but are too early for a £160,000+ full-time hire.' },
+    ]
+  },
+  ceo: {
+    displayName: 'Fractional CEO',
+    shortDescription: 'Part-time Chief Executive Officer providing executive leadership',
+    fullDescription: 'A Fractional CEO provides part-time executive leadership to businesses in transition. They bring experience in strategic direction, board management, fundraising, and organizational leadership during growth phases or turnarounds.',
+    typicalDayRate: { min: 1000, max: 2000, typical: 1400 },
+    occupationalCategory: '11-1011.00',
+    pageSlug: 'fractional-ceo',
+    salaryPageSlug: 'fractional-ceo-salary',
+    hirePageSlug: 'hire-fractional-ceo',
+    faqs: [
+      { question: 'What does a Fractional CEO do?', answer: 'A Fractional CEO provides part-time executive leadership including strategic direction, board management, fundraising support, and organizational leadership.' },
+      { question: 'How much does a Fractional CEO cost?', answer: 'Fractional CEOs typically charge £1,000-£2,000 per day in the UK, reflecting their senior experience.' },
+      { question: 'When should I hire a Fractional CEO?', answer: 'Consider a Fractional CEO during transitions, turnarounds, or when you need experienced executive leadership without a permanent hire.' },
+    ]
+  },
+  cro: {
+    displayName: 'Fractional CRO',
+    shortDescription: 'Part-time Chief Revenue Officer driving revenue growth',
+    fullDescription: 'A Fractional CRO provides part-time revenue leadership aligning sales, marketing, and customer success. They focus on revenue strategy, sales process optimization, and predictable revenue growth.',
+    typicalDayRate: { min: 850, max: 1400, typical: 1100 },
+    occupationalCategory: '11-2022.00',
+    pageSlug: 'fractional-cro-jobs-uk',
+    salaryPageSlug: 'fractional-cro-salary',
+    hirePageSlug: 'hire-fractional-cro',
+    faqs: [
+      { question: 'What does a Fractional CRO do?', answer: 'A Fractional CRO provides part-time revenue leadership aligning sales, marketing, and customer success for predictable growth.' },
+      { question: 'How much does a Fractional CRO cost?', answer: 'Fractional CROs typically charge £850-£1,400 per day in the UK.' },
+      { question: 'When should I hire a Fractional CRO?', answer: 'Consider a Fractional CRO when you need to align revenue functions and scale from founder-led sales.' },
+    ]
+  },
+  finance: {
+    displayName: 'Fractional Finance Director',
+    shortDescription: 'Part-time Finance Director managing financial operations',
+    fullDescription: 'A Fractional Finance Director provides part-time financial management to growing businesses. They handle financial reporting, budgeting, cash flow management, and financial controls—a step before needing a full CFO.',
+    typicalDayRate: { min: 700, max: 1200, typical: 900 },
+    occupationalCategory: '11-3031.00',
+    pageSlug: 'fractional-cfo-jobs-uk',
+    salaryPageSlug: 'fractional-cfo-salary',
+    hirePageSlug: 'hire-fractional-cfo',
+    faqs: [
+      { question: 'What does a Fractional Finance Director do?', answer: 'A Fractional Finance Director manages financial operations including reporting, budgeting, cash flow, and controls.' },
+      { question: 'How is this different from a Fractional CFO?', answer: 'A Finance Director is more operational (day-to-day finance) while a CFO is more strategic (fundraising, M&A, board).' },
+      { question: 'How much does a Fractional Finance Director cost?', answer: 'Fractional Finance Directors typically charge £700-£1,200 per day in the UK.' },
+    ]
+  },
+  marketing: {
+    displayName: 'Fractional Marketing Director',
+    shortDescription: 'Part-time Marketing Director executing growth strategies',
+    fullDescription: 'A Fractional Marketing Director provides part-time marketing leadership focused on execution. They manage marketing teams, campaigns, and day-to-day marketing operations.',
+    typicalDayRate: { min: 650, max: 1100, typical: 850 },
+    occupationalCategory: '11-2021.00',
+    pageSlug: 'fractional-cmo-jobs-uk',
+    salaryPageSlug: 'fractional-cmo-salary',
+    hirePageSlug: 'hire-fractional-cmo',
+    faqs: [
+      { question: 'What does a Fractional Marketing Director do?', answer: 'A Fractional Marketing Director manages marketing execution including campaigns, team management, and performance.' },
+      { question: 'How is this different from a Fractional CMO?', answer: 'A Marketing Director focuses on execution while a CMO focuses on strategy and board-level marketing leadership.' },
+      { question: 'How much does a Fractional Marketing Director cost?', answer: 'Fractional Marketing Directors typically charge £650-£1,100 per day in the UK.' },
+    ]
+  },
+  sales: {
+    displayName: 'Fractional Sales Director',
+    shortDescription: 'Part-time Sales Director building and leading sales teams',
+    fullDescription: 'A Fractional Sales Director provides part-time sales leadership to businesses scaling their sales function. They focus on sales process, team building, pipeline management, and revenue acceleration.',
+    typicalDayRate: { min: 700, max: 1200, typical: 900 },
+    occupationalCategory: '11-2022.00',
+    pageSlug: 'fractional-cro-jobs-uk',
+    salaryPageSlug: 'fractional-cro-salary',
+    hirePageSlug: 'hire-fractional-cro',
+    faqs: [
+      { question: 'What does a Fractional Sales Director do?', answer: 'A Fractional Sales Director builds and leads sales teams, optimizes sales processes, and drives revenue growth.' },
+      { question: 'How much does a Fractional Sales Director cost?', answer: 'Fractional Sales Directors typically charge £700-£1,200 per day in the UK.' },
+      { question: 'When should I hire a Fractional Sales Director?', answer: 'Consider a Fractional Sales Director when transitioning from founder-led sales to a scalable sales team.' },
+    ]
+  },
+  hr: {
+    displayName: 'Fractional HR Director',
+    shortDescription: 'Part-time HR Director building people operations',
+    fullDescription: 'A Fractional HR Director provides part-time HR leadership to growing businesses. They establish HR processes, policies, and the foundation for scaling the people function.',
+    typicalDayRate: { min: 600, max: 1000, typical: 750 },
+    occupationalCategory: '11-3121.00',
+    pageSlug: 'fractional-chro-jobs-uk',
+    salaryPageSlug: 'fractional-chro-salary',
+    hirePageSlug: 'hire-fractional-chro',
+    faqs: [
+      { question: 'What does a Fractional HR Director do?', answer: 'A Fractional HR Director establishes HR processes, policies, and infrastructure for scaling businesses.' },
+      { question: 'How is this different from a Fractional CHRO?', answer: 'An HR Director is more operational (policies, compliance) while a CHRO is more strategic (culture, board-level people strategy).' },
+      { question: 'How much does a Fractional HR Director cost?', answer: 'Fractional HR Directors typically charge £600-£1,000 per day in the UK.' },
+    ]
+  },
+  operations: {
+    displayName: 'Fractional Operations Director',
+    shortDescription: 'Part-time Operations Director optimizing business processes',
+    fullDescription: 'A Fractional Operations Director provides part-time operational leadership focused on process optimization, efficiency improvements, and operational excellence.',
+    typicalDayRate: { min: 650, max: 1100, typical: 850 },
+    occupationalCategory: '11-1021.00',
+    pageSlug: 'fractional-coo-jobs-uk',
+    salaryPageSlug: 'fractional-coo-salary',
+    hirePageSlug: 'hire-fractional-coo',
+    faqs: [
+      { question: 'What does a Fractional Operations Director do?', answer: 'A Fractional Operations Director optimizes business processes, improves efficiency, and implements operational best practices.' },
+      { question: 'How is this different from a Fractional COO?', answer: 'An Operations Director focuses on execution while a COO takes a more strategic, cross-functional leadership role.' },
+      { question: 'How much does a Fractional Operations Director cost?', answer: 'Fractional Operations Directors typically charge £650-£1,100 per day in the UK.' },
+    ]
+  },
+  technology: {
+    displayName: 'Fractional Technology Director',
+    shortDescription: 'Part-time Technology Director managing technical delivery',
+    fullDescription: 'A Fractional Technology Director provides part-time technical leadership focused on delivery. They manage development teams, technical projects, and engineering operations.',
+    typicalDayRate: { min: 700, max: 1200, typical: 900 },
+    occupationalCategory: '11-3021.00',
+    pageSlug: 'fractional-cto-jobs-uk',
+    salaryPageSlug: 'fractional-cto-salary',
+    hirePageSlug: 'hire-fractional-cto',
+    faqs: [
+      { question: 'What does a Fractional Technology Director do?', answer: 'A Fractional Technology Director manages technical delivery, development teams, and engineering operations.' },
+      { question: 'How is this different from a Fractional CTO?', answer: 'A Technology Director focuses on delivery and team management while a CTO focuses on strategy and architecture.' },
+      { question: 'How much does a Fractional Technology Director cost?', answer: 'Fractional Technology Directors typically charge £700-£1,200 per day in the UK.' },
+    ]
+  },
+}
+
+// Default role data for unknown categories
+const DEFAULT_ROLE_DATA: RoleData = {
+  displayName: 'Fractional Executive',
+  shortDescription: 'Part-time executive leadership for growing businesses',
+  fullDescription: 'A Fractional Executive provides part-time senior leadership to businesses that need expertise without the commitment of a full-time hire. They bring years of experience and can make an immediate impact.',
+  typicalDayRate: { min: 700, max: 1200, typical: 900 },
+  occupationalCategory: '11-1021.00',
+  pageSlug: 'fractional-jobs-uk',
+  salaryPageSlug: 'fractional-jobs-uk',
+  hirePageSlug: 'fractional-jobs-uk',
+  faqs: [
+    { question: 'What is a fractional executive?', answer: 'A fractional executive is a senior leader who works part-time across multiple companies, bringing C-suite expertise at a fraction of the cost.' },
+    { question: 'How much does a fractional executive cost?', answer: 'Fractional executives typically charge £700-£1,500 per day depending on the role and seniority.' },
+    { question: 'When should I hire a fractional executive?', answer: 'Consider a fractional executive when you need senior expertise but cannot justify a full-time hire—common for growing businesses.' },
+  ]
+}
+
+function getRoleData(roleCategory: string | null): RoleData {
+  if (!roleCategory) return DEFAULT_ROLE_DATA
+  return ROLE_DATA[roleCategory.toLowerCase()] || DEFAULT_ROLE_DATA
+}
+
+// Calculate validThrough date (30 days from posted date)
+function calculateValidThrough(datePosted: string | null, days: number = 30): string {
+  const base = datePosted ? new Date(datePosted) : new Date()
+  base.setDate(base.getDate() + days)
+  return base.toISOString().split('T')[0]
+}
+
+// BreadcrumbList Schema Component
+function BreadcrumbListSchema({ items }: { items: Array<{ name: string; url: string }> }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+// FAQ Schema Component
+function FAQSchema({ faqs }: { faqs: Array<{ question: string; answer: string }> }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
 
 export const revalidate = 3600
 
@@ -187,17 +500,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Job Not Found' }
   }
 
-  // Title without "| Fractional Quest" - layout template adds it
-  const title = truncateTitle(job.title, job.company_name)
+  // Get role data for SEO optimization
+  const roleData = getRoleData(job.role_category)
+  const roleKeyword = roleData.displayName
 
-  // Description under 160 chars
-  const rawDescription = job.description_snippet ||
-    `${job.title} at ${job.company_name}. ${job.workplace_type || 'Flexible'} role. ${job.compensation || 'Competitive salary'}. Apply now.`
-  const description = rawDescription.length > 155 ? rawDescription.slice(0, 152) + '...' : rawDescription
+  // SEO-optimized title: Put normalized role keyword FIRST for ranking
+  // Pattern: "Fractional CFO Role | Sales Director at Acme"
+  const jobAtCompany = truncateTitle(job.title, job.company_name, 35)
+  const title = roleKeyword !== 'Fractional Executive'
+    ? `${roleKeyword} Role | ${jobAtCompany}`
+    : jobAtCompany
+
+  // SEO-optimized description: Lead with keyword
+  const description = [
+    `${roleKeyword} opportunity:`,
+    job.title,
+    `at ${job.company_name}.`,
+    job.location ? `Based in ${job.location}.` : null,
+    job.compensation || `Typical rate: £${roleData.typicalDayRate.min}-£${roleData.typicalDayRate.max}/day.`,
+    'Apply now.'
+  ].filter(Boolean).join(' ').slice(0, 155)
 
   return {
     title,
     description,
+    keywords: [
+      roleKeyword,
+      `${roleKeyword} jobs`,
+      `${roleKeyword} UK`,
+      job.location ? `${roleKeyword} ${job.location}` : null,
+      'fractional executive',
+      'part-time executive',
+      job.role_category,
+    ].filter(Boolean).join(', '),
     alternates: {
       canonical: `https://fractional.quest/fractional-job/${slug}`,
     },
@@ -207,11 +542,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://fractional.quest/fractional-job/${slug}`,
       siteName: 'Fractional Quest',
       type: 'website',
+      images: [{
+        url: getHeroImageUrl(getRoleImageCategory(job.role_category || 'default'), 1200, 630),
+        width: 1200,
+        height: 630,
+        alt: `${roleKeyword} - ${job.title} at ${job.company_name}`,
+      }],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: `${title} | Fractional Quest`,
       description,
+      images: [getHeroImageUrl(getRoleImageCategory(job.role_category || 'default'), 1200, 630)],
     },
   }
 }
@@ -226,23 +568,74 @@ export default async function JobDetailPage({ params }: Props) {
 
   const relatedJobs = await getRelatedJobs(job)
 
+  // Get comprehensive role data for SEO
+  const roleData = getRoleData(job.role_category)
+  const roleKeyword = roleData.displayName
+
+  // Parse compensation for schema, fallback to role estimates
+  const parsedSalary = parseCompensation(job.compensation) || {
+    currency: 'GBP',
+    minValue: roleData.typicalDayRate.min,
+    maxValue: roleData.typicalDayRate.max,
+    unitText: 'DAY' as const,
+  }
+
+  // Breadcrumb items for schema
+  const breadcrumbItems = [
+    { name: 'Home', url: 'https://fractional.quest/' },
+    { name: `${roleKeyword} Jobs`, url: `https://fractional.quest/${roleData.pageSlug}` },
+    { name: job.title, url: `https://fractional.quest/fractional-job/${slug}` },
+  ]
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
+      {/* Schema Markup for SEO */}
       <WebPageSchema
-        title={`${job.title} at ${job.company_name}`}
-        description={job.description_snippet || `${job.title} role at ${job.company_name}`}
+        title={`${roleKeyword} - ${job.title} at ${job.company_name}`}
+        description={job.description_snippet || `${roleKeyword} role at ${job.company_name}`}
         url={`https://fractional.quest/fractional-job/${slug}`}
         datePublished={job.posted_date}
         dateModified={new Date(job.updated_date || job.posted_date || new Date())}
       />
 
-      {/* Hero with Image */}
+      <BreadcrumbListSchema items={breadcrumbItems} />
+
+      <FAQSchema faqs={roleData.faqs} />
+
+      {/* Enhanced JobPosting Schema for Google Jobs */}
+      <JobPostingSchema
+        title={`${job.title} - ${roleKeyword}`}
+        description={job.full_description || job.description_snippet || `${roleKeyword} position at ${job.company_name}. ${roleData.shortDescription}`}
+        datePosted={job.posted_date || new Date().toISOString().split('T')[0]}
+        validThrough={calculateValidThrough(job.posted_date, 30)}
+        company={{
+          name: job.company_name,
+          logo: undefined,
+          url: undefined,
+        }}
+        location={{
+          city: job.location?.split(',')[0]?.trim(),
+          region: job.location?.split(',')[1]?.trim(),
+          country: 'GB',
+        }}
+        isRemote={job.is_remote || job.workplace_type === 'Remote'}
+        employmentType="CONTRACTOR"
+        salary={parsedSalary}
+        jobUrl={`https://fractional.quest/fractional-job/${slug}`}
+        skills={job.skills_required ? (Array.isArray(job.skills_required) ? job.skills_required : job.skills_required.split(',').map((s: string) => s.trim())) : undefined}
+        qualifications={job.qualifications ? [job.qualifications] : undefined}
+        responsibilities={job.responsibilities ? [job.responsibilities] : undefined}
+        benefits={job.benefits ? [job.benefits] : undefined}
+        directApply={true}
+      />
+
+      {/* Hero with Image - SEO optimized alt text */}
       <section className="relative min-h-[350px] lg:min-h-[400px] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src={getHeroImageUrl(getRoleImageCategory(job.role_category || 'default'), 1600, 600)}
-            alt={getImage(getRoleImageCategory(job.role_category || 'default')).alt}
+            alt={`${roleKeyword} job opportunity - ${job.title} at ${job.company_name}`}
             fill
             className="object-cover"
             priority
@@ -256,16 +649,19 @@ export default async function JobDetailPage({ params }: Props) {
           <BreadcrumbsLight
             items={[
               { label: 'Home', href: '/' },
-              { label: 'Jobs', href: '/fractional-jobs-uk' },
+              { label: `${roleKeyword} Jobs`, href: `/${roleData.pageSlug}` },
               { label: job.title },
             ]}
           />
 
           <div className="mt-6">
             <div className="flex flex-wrap gap-2 mb-4">
-              {job.role_category && (
-                <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white">{job.role_category}</span>
-              )}
+              <Link
+                href={`/${roleData.pageSlug}`}
+                className="px-3 py-1 bg-emerald-500/30 backdrop-blur-sm rounded-full text-sm text-emerald-300 hover:bg-emerald-500/50 transition-colors"
+              >
+                {roleKeyword}
+              </Link>
               {job.workplace_type && (
                 <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white">{job.workplace_type}</span>
               )}
@@ -274,14 +670,20 @@ export default async function JobDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white break-words">
-              {job.title}
+            {/* H1: Normalized role keyword for SEO ranking */}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-white break-words">
+              {roleKeyword} Opportunity
             </h1>
 
+            {/* H2: Specific job title */}
+            <h2 className="text-lg sm:text-xl lg:text-2xl text-emerald-400 font-medium mb-4">
+              {job.title} at {job.company_name}
+            </h2>
+
             <div className="flex flex-wrap items-center gap-4 text-gray-200">
-              <span className="font-semibold text-white">{job.company_name}</span>
-              {job.location && <span>• {job.location}</span>}
-              {job.compensation && <span className="text-emerald-400 font-medium">• {job.compensation}</span>}
+              {job.location && <span className="flex items-center gap-1">📍 {job.location}</span>}
+              {job.compensation && <span className="text-emerald-400 font-medium">💰 {job.compensation}</span>}
+              {job.hours_per_week && <span>⏰ {job.hours_per_week} hrs/week</span>}
             </div>
           </div>
         </div>
@@ -398,12 +800,100 @@ export default async function JobDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* What is a {Role}? - SEO Content Section */}
+      <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+              What is a {roleKeyword}?
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              {roleData.fullDescription}
+            </p>
+
+            {/* Salary Benchmarks */}
+            <div className="bg-emerald-50 rounded-xl p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                {roleKeyword} Day Rates (UK Market)
+              </h3>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-emerald-600">£{roleData.typicalDayRate.min}</div>
+                  <div className="text-sm text-gray-500">Minimum</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-emerald-600">£{roleData.typicalDayRate.typical}</div>
+                  <div className="text-sm text-gray-500">Typical</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-emerald-600">£{roleData.typicalDayRate.max}</div>
+                  <div className="text-sm text-gray-500">Maximum</div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-500 mt-3 text-center">
+                Based on UK market rates for {roleKeyword} roles working 2-3 days per week
+              </p>
+            </div>
+
+            {/* Internal Links for Topical Authority */}
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              Learn More About {roleKeyword} Roles
+            </h3>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <Link
+                href={`/${roleData.pageSlug}`}
+                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <div className="font-medium text-gray-900 mb-1">Browse All {roleKeyword} Jobs</div>
+                <div className="text-sm text-gray-500">View all available opportunities</div>
+              </Link>
+              <Link
+                href={`/${roleData.salaryPageSlug}`}
+                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <div className="font-medium text-gray-900 mb-1">{roleKeyword} Salary Guide</div>
+                <div className="text-sm text-gray-500">Comprehensive rate benchmarks</div>
+              </Link>
+              <Link
+                href={`/${roleData.hirePageSlug}`}
+                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <div className="font-medium text-gray-900 mb-1">Hire a {roleKeyword}</div>
+                <div className="text-sm text-gray-500">Guide for businesses</div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section - Rendered for users (schema already added above) */}
+      <section className="py-8 sm:py-12 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+              Frequently Asked Questions About {roleKeyword} Roles
+            </h2>
+            <div className="space-y-4">
+              {roleData.faqs.map((faq, index) => (
+                <details key={index} className="bg-white rounded-lg p-4 border border-gray-200 group">
+                  <summary className="font-medium text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                    {faq.question}
+                    <span className="text-emerald-600 group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <p className="mt-3 text-gray-600 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Related Jobs */}
       {relatedJobs.length > 0 && (
-        <section className="bg-gray-50 py-8 sm:py-12 lg:py-16">
+        <section className="py-8 sm:py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">
-              Related {job.role_category || ''} Jobs
+              More {roleKeyword} Opportunities
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {relatedJobs.map((relatedJob: any) => (

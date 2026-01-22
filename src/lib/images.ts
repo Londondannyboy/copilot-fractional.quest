@@ -25,42 +25,56 @@ interface LocalImageData {
   creditUrl: string
 }
 
-// Categories with local images for best performance
+// Categories with local images for best performance (WebP format for smaller file sizes)
 const localImageMap: Partial<Record<ImageCategory, LocalImageData>> = {
   services: {
-    desktop: '/images/hero/services-desktop.jpg',
-    mobile: '/images/hero/services-mobile.jpg',
+    desktop: '/images/hero/services-desktop.webp',
+    mobile: '/images/hero/services-mobile.webp',
     alt: 'Professional consulting services',
     credit: 'Amy Hirschi',
     creditUrl: 'https://unsplash.com/@amyhirschi'
   },
   london: {
-    desktop: '/images/hero/london-desktop.jpg',
-    mobile: '/images/hero/london-mobile.jpg',
+    desktop: '/images/hero/london-desktop.webp',
+    mobile: '/images/hero/london-mobile.webp',
     alt: 'London city skyline with Tower Bridge',
     credit: 'Charles Postiaux',
     creditUrl: 'https://unsplash.com/@charlpost'
   },
   cfo: {
-    desktop: '/images/hero/cfo-desktop.jpg',
-    mobile: '/images/hero/cfo-mobile.jpg',
+    desktop: '/images/hero/cfo-desktop.webp',
+    mobile: '/images/hero/cfo-mobile.webp',
     alt: 'Professional finance executive reviewing financial data',
     credit: 'Austin Distel',
     creditUrl: 'https://unsplash.com/@austindistel'
   },
   cto: {
-    desktop: '/images/hero/cto-desktop.jpg',
-    mobile: '/images/hero/cto-mobile.jpg',
+    desktop: '/images/hero/cto-desktop.webp',
+    mobile: '/images/hero/cto-mobile.webp',
     alt: 'Technology team collaborating on software development',
     credit: 'Marvin Meyer',
     creditUrl: 'https://unsplash.com/@marvelous'
   },
   cmo: {
-    desktop: '/images/hero/cmo-desktop.jpg',
-    mobile: '/images/hero/cmo-mobile.jpg',
+    desktop: '/images/hero/cmo-desktop.webp',
+    mobile: '/images/hero/cmo-mobile.webp',
     alt: 'Marketing team in strategy meeting',
     credit: 'Jason Goodman',
     creditUrl: 'https://unsplash.com/@jasongoodman_youxventures'
+  },
+  coo: {
+    desktop: '/images/hero/coo-desktop.webp',
+    mobile: '/images/hero/coo-mobile.webp',
+    alt: 'Operations team reviewing business processes',
+    credit: 'Austin Distel',
+    creditUrl: 'https://unsplash.com/@austindistel'
+  },
+  uk: {
+    desktop: '/images/hero/uk-desktop.webp',
+    mobile: '/images/hero/uk-mobile.webp',
+    alt: 'United Kingdom business landscape',
+    credit: 'Eva Dang',
+    creditUrl: 'https://unsplash.com/@evantdang'
   },
 }
 

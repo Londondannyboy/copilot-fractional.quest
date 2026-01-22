@@ -65,6 +65,22 @@ export default async function FractionalJobsLondonPage() {
 
   return (
     <>
+      {/* Preload hero image for faster LCP - WebP format */}
+      <link
+        rel="preload"
+        href="/images/hero/london-mobile.webp"
+        as="image"
+        type="image/webp"
+        media="(max-width: 768px)"
+      />
+      <link
+        rel="preload"
+        href="/images/hero/london-desktop.webp"
+        as="image"
+        type="image/webp"
+        media="(min-width: 769px)"
+      />
+
       {/* Schema Markup */}
       <script
         type="application/ld+json"

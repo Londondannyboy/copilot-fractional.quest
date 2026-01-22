@@ -46,7 +46,7 @@ import { ImageCategory } from "@/lib/images";
 
 // Simple Hero Section for Intelligent Pages (without voice widget complexity)
 import Image from "next/image";
-import { getImage, getHeroImageUrl } from "@/lib/images";
+import { getImage, getHeroImageUrl, getLocalImage, hasLocalImage } from "@/lib/images";
 
 // SEO Content interface
 export interface LocationSEOContent {
@@ -140,19 +140,42 @@ function IntelligentHero({
   breadcrumb?: Array<{ name: string; url: string }>;
 }) {
   const image = getImage(imageCategory);
-  const imageUrl = getHeroImageUrl(imageCategory, 1920, 800);
+  const localImage = getLocalImage(imageCategory);
+  const hasLocal = hasLocalImage(imageCategory);
+  // Fallback to Unsplash if no local image available
+  const fallbackUrl = getHeroImageUrl(imageCategory, 1920, 800);
 
   return (
     <section className="relative text-white py-16 px-6 min-h-[400px] flex items-center overflow-hidden">
       <div className="absolute inset-0">
-        <Image
-          src={imageUrl}
-          alt={`${headline} - ${image.alt}`}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
+        {hasLocal && localImage ? (
+          // Use local WebP images with responsive sizing for better performance
+          <picture>
+            <source
+              media="(max-width: 768px)"
+              srcSet={localImage.mobile}
+              type="image/webp"
+            />
+            <Image
+              src={localImage.desktop}
+              alt={`${headline} - ${image.alt}`}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+          </picture>
+        ) : (
+          // Fallback to Unsplash for categories without local images
+          <Image
+            src={fallbackUrl}
+            alt={`${headline} - ${image.alt}`}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/70 to-gray-900/50" />
       </div>
 

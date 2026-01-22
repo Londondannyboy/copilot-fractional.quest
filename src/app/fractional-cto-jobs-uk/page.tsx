@@ -65,6 +65,22 @@ export default async function FractionalCTOJobsUKPage() {
 
   return (
     <>
+      {/* Preload hero image for faster LCP - WebP format */}
+      <link
+        rel="preload"
+        href="/images/hero/cto-mobile.webp"
+        as="image"
+        type="image/webp"
+        media="(max-width: 768px)"
+      />
+      <link
+        rel="preload"
+        href="/images/hero/cto-desktop.webp"
+        as="image"
+        type="image/webp"
+        media="(min-width: 769px)"
+      />
+
       {/* Schema Markup */}
       <script
         type="application/ld+json"
