@@ -117,19 +117,31 @@ const getJob = unstable_cache(
   { revalidate: 3600, tags: ['jobs'] }
 )
 
-// Internal function to fetch related jobs
+// Internal function to fetch related jobs - only same role category for relevance
 async function fetchRelatedJobs(jobId: number, roleCategory: string | null, companyName: string | null) {
   try {
     const sql = createDbQuery()
-    const jobs = await sql`
-      SELECT id, slug, title, company_name, location, compensation
-      FROM jobs
-      WHERE is_active = true
-        AND id != ${jobId}
-        AND (role_category = ${roleCategory} OR company_name = ${companyName})
-      ORDER BY posted_date DESC NULLS LAST
-      LIMIT 6
-    `
+    // First try to find jobs with the same role category (most relevant)
+    // If no role category, fall back to same company
+    const jobs = roleCategory
+      ? await sql`
+          SELECT id, slug, title, company_name, location, compensation, role_category
+          FROM jobs
+          WHERE is_active = true
+            AND id != ${jobId}
+            AND role_category = ${roleCategory}
+          ORDER BY posted_date DESC NULLS LAST
+          LIMIT 6
+        `
+      : await sql`
+          SELECT id, slug, title, company_name, location, compensation, role_category
+          FROM jobs
+          WHERE is_active = true
+            AND id != ${jobId}
+            AND company_name = ${companyName}
+          ORDER BY posted_date DESC NULLS LAST
+          LIMIT 6
+        `
     return jobs as any[]
   } catch {
     return []
@@ -215,7 +227,7 @@ export default async function JobDetailPage({ params }: Props) {
   const relatedJobs = await getRelatedJobs(job)
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <WebPageSchema
         title={`${job.title} at ${job.company_name}`}
         description={job.description_snippet || `${job.title} role at ${job.company_name}`}
@@ -240,7 +252,7 @@ export default async function JobDetailPage({ params }: Props) {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <BreadcrumbsLight
             items={[
               { label: 'Home', href: '/' },
@@ -262,7 +274,7 @@ export default async function JobDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white break-words">
               {job.title}
             </h1>
 
@@ -276,20 +288,20 @@ export default async function JobDetailPage({ params }: Props) {
       </section>
 
       {/* Job Details */}
-      <section className="py-12 lg:py-16">
+      <section className="py-8 sm:py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-2">
-              <div className="bg-white rounded-xl border border-gray-200 p-6 lg:p-8">
+            <div className="lg:col-span-2 min-w-0">
+              <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 lg:p-8 overflow-hidden">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">About This Role</h2>
 
                 {job.full_description ? (
-                  <div className="max-w-none">
+                  <div className="max-w-none overflow-hidden">
                     {/* Parse description into structured sections with headings, lists, and paragraphs */}
                     {job.full_description.includes('<p>') || job.full_description.includes('<br') ? (
                       <div
-                        className="prose prose-lg text-gray-600"
+                        className="prose prose-sm sm:prose-lg text-gray-600 max-w-none break-words overflow-wrap-anywhere"
                         dangerouslySetInnerHTML={{ __html: job.full_description }}
                       />
                     ) : (
@@ -323,7 +335,7 @@ export default async function JobDetailPage({ params }: Props) {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-gray-50 rounded-xl p-6 sticky top-24">
+              <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:sticky lg:top-24">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Job Details</h3>
 
                 <dl className="space-y-4">
@@ -388,22 +400,29 @@ export default async function JobDetailPage({ params }: Props) {
 
       {/* Related Jobs */}
       {relatedJobs.length > 0 && (
-        <section className="bg-gray-50 py-12 lg:py-16">
+        <section className="bg-gray-50 py-8 sm:py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">Related Jobs</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">
+              Related {job.role_category || ''} Jobs
+            </h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {relatedJobs.map((relatedJob: any) => (
                 <Link
                   key={relatedJob.id}
                   href={`/fractional-job/${relatedJob.slug}`}
-                  className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-lg hover:border-emerald-200 transition-all"
                 >
-                  <h3 className="font-semibold text-gray-900 mb-2">{relatedJob.title}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{relatedJob.company_name}</p>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">{relatedJob.location}</span>
+                  {relatedJob.role_category && (
+                    <span className="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-xs font-medium mb-2">
+                      {relatedJob.role_category}
+                    </span>
+                  )}
+                  <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{relatedJob.title}</h3>
+                  <p className="text-sm text-gray-600 mb-2 truncate">{relatedJob.company_name}</p>
+                  <div className="flex items-center justify-between text-sm gap-2">
+                    <span className="text-gray-500 truncate">{relatedJob.location}</span>
                     {relatedJob.compensation && (
-                      <span className="text-emerald-600 font-medium">{relatedJob.compensation}</span>
+                      <span className="text-emerald-600 font-medium whitespace-nowrap">{relatedJob.compensation}</span>
                     )}
                   </div>
                 </Link>
@@ -414,13 +433,13 @@ export default async function JobDetailPage({ params }: Props) {
       )}
 
       {/* CTA */}
-      <section className="bg-gray-900 text-white py-12">
+      <section className="bg-gray-900 text-white py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Find Your Next Fractional Role</h2>
-          <p className="text-gray-400 mb-6">Browse hundreds of fractional and interim executive positions</p>
+          <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Find Your Next Fractional Role</h2>
+          <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">Browse hundreds of fractional and interim executive positions</p>
           <Link
             href="/fractional-jobs-uk"
-            className="inline-flex items-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors"
+            className="inline-flex items-center px-5 sm:px-6 py-2.5 sm:py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors text-sm sm:text-base"
           >
             View All Jobs
           </Link>
