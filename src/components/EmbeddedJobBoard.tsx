@@ -251,7 +251,7 @@ export function EmbeddedJobBoard({
                 id="department"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
+                className={`w-full px-4 py-3 min-h-[48px] bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
               >
                 {DEPARTMENT_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>{option.label}</option>
@@ -267,7 +267,7 @@ export function EmbeddedJobBoard({
                 id="location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
+                className={`w-full px-4 py-3 min-h-[48px] bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
               >
                 {LOCATION_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>{option.label}</option>
@@ -283,7 +283,7 @@ export function EmbeddedJobBoard({
                 id="workType"
                 value={workType}
                 onChange={(e) => setWorkType(e.target.value)}
-                className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
+                className={`w-full px-4 py-3 min-h-[48px] bg-white border border-gray-200 rounded-lg text-gray-900 focus:ring-2 ${accent.ring} focus:border-transparent transition-colors`}
               >
                 {WORK_TYPE_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>{option.label}</option>
@@ -309,14 +309,14 @@ export function EmbeddedJobBoard({
             <p className="text-gray-600 mb-4">Try adjusting your search criteria</p>
             <button
               onClick={() => { setDepartment(''); setLocation(''); setWorkType(''); }}
-              className={`px-6 py-2.5 ${accent.bg} text-white rounded-lg ${accent.hover} font-semibold transition-colors`}
+              className={`px-6 py-3 min-h-[48px] ${accent.bg} text-white rounded-lg ${accent.hover} font-semibold transition-colors`}
             >
               Clear All Filters
             </button>
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6">
               {jobs.filter(job => job.slug).map((job) => (
                 <Link
                   key={job.id}
@@ -386,22 +386,22 @@ export function EmbeddedJobBoard({
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 pt-4 border-t border-gray-200">
+              <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 pt-4 border-t border-gray-200">
                 {page > 1 && (
                   <button
                     onClick={() => setPage(page - 1)}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                    className="px-4 py-3 min-h-[44px] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-medium transition-colors active:scale-95"
                   >
                     ← Previous
                   </button>
                 )}
-                <span className="px-4 py-2 text-gray-600">
+                <span className="px-4 py-3 text-gray-600">
                   Page {page} of {totalPages}
                 </span>
                 {page < totalPages && (
                   <button
                     onClick={() => setPage(page + 1)}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                    className="px-4 py-3 min-h-[44px] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-medium transition-colors active:scale-95"
                   >
                     Next →
                   </button>
@@ -413,10 +413,10 @@ export function EmbeddedJobBoard({
       </div>
 
       {/* Footer */}
-      <div className="bg-gray-50 border-t border-gray-200 p-6 text-center">
+      <div className="bg-gray-50 border-t border-gray-200 p-4 sm:p-6 text-center">
         <Link
           href="/fractional-jobs-uk"
-          className={`inline-flex items-center gap-2 px-8 py-3 ${accent.bg} text-white rounded-lg font-semibold ${accent.hover} transition-colors`}
+          className={`inline-flex items-center gap-2 px-6 sm:px-8 py-3 min-h-[48px] ${accent.bg} text-white rounded-lg font-semibold ${accent.hover} transition-colors active:scale-95`}
         >
           View All UK Jobs
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -38,7 +38,7 @@ export function HeroSection({
   ];
 
   return (
-    <section className="relative text-white py-16 px-6 min-h-[500px] flex items-center overflow-hidden">
+    <section className="relative text-white py-12 sm:py-16 px-4 sm:px-6 min-h-[400px] sm:min-h-[500px] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -55,20 +55,20 @@ export function HeroSection({
 
       <div className="container-content relative z-10 w-full">
         {/* Breadcrumb */}
-        <nav className="text-sm mb-6 opacity-80">
+        <nav className="text-xs sm:text-sm mb-4 sm:mb-6 opacity-80">
           <a href="/" className="hover:underline">Home</a>
-          <span className="mx-2">→</span>
+          <span className="mx-1 sm:mx-2">→</span>
           <a href="/fractional-jobs-uk" className="hover:underline">UK Jobs</a>
-          <span className="mx-2">→</span>
+          <span className="mx-1 sm:mx-2">→</span>
           <span>{location}</span>
         </nav>
 
         {/* Main content */}
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance font-playfair">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-balance font-playfair">
             {headline}
           </h1>
-          <p className="text-xl md:text-2xl opacity-90 mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl opacity-90 mb-6 sm:mb-8">
             {subtitle}
           </p>
 
