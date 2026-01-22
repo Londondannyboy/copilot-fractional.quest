@@ -871,6 +871,22 @@ h3, h4, h5, h6 {
   display: none !important;
 }
 
+/* Fix CopilotKit header contrast for accessibility */
+.copilotKitHeader {
+  background: #1f2937 !important; /* gray-800 for better contrast */
+}
+
+.copilotKitHeader * {
+  color: #ffffff !important; /* White text for contrast */
+}
+
+/* Ensure "Powered by" text has good contrast if visible */
+.poweredBy,
+[class*="poweredBy"] {
+  color: #9ca3af !important; /* gray-400 - meets AA on dark background */
+  background: transparent !important;
+}
+
 /* ==========================================
    NEON AUTH UI CUSTOMIZATION
    Clean, elegant auth modal styling

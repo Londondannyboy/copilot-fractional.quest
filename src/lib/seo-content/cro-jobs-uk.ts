@@ -222,8 +222,8 @@ export const croJobsUkSEO = {
     { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
     // Work Types
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
-    { name: "Part-Time CRO Jobs UK", url: "/part-time-cro-jobs-uk" },
-    { name: "Interim CRO Jobs UK", url: "/interim-cro-jobs-uk" },
+    { name: "Fractional Sales Jobs", url: "/fractional-sales" },
+    { name: "Fractional CFO Jobs UK", url: "/fractional-cfo-jobs-uk" },
     // Tools & Guides
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },

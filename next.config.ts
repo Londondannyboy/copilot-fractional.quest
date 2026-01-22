@@ -434,6 +434,23 @@ const nextConfig: NextConfig = {
         destination: '/fractional-job/:path*',
         permanent: true,
       },
+      // Fix broken job URLs from 404 audit (Jan 2026)
+      {
+        source: '/fractional-job/null',
+        destination: '/fractional-jobs-uk',
+        permanent: false, // Bug fix, not permanent redirect
+      },
+      // CRO variant pages - redirect to main CRO page
+      {
+        source: '/interim-cro-jobs-uk',
+        destination: '/fractional-cro-jobs-uk',
+        permanent: true,
+      },
+      {
+        source: '/part-time-cro-jobs-uk',
+        destination: '/fractional-cro-jobs-uk',
+        permanent: true,
+      },
       // Query string URLs - let them 404 naturally or redirect base
       {
         source: '/fractional-jobs-articles',

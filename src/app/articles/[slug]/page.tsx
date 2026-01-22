@@ -242,7 +242,7 @@ export default async function ArticlePage({ params }: Props) {
               Related {roleName} Jobs
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedJobs.map((job: any) => (
+              {relatedJobs.filter((job: any) => job.slug).map((job: any) => (
                 <Link
                   key={job.id}
                   href={`/fractional-job/${job.slug}`}

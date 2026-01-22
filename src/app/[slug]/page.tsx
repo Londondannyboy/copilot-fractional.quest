@@ -22,7 +22,7 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-jobs-london',
   'fractional-jobs-uk',
   'remote-fractional-jobs',
-  // Role-specific job pages
+  // Role-specific job pages (UK)
   'fractional-cfo-jobs-uk',
   'fractional-cto-jobs-uk',
   'fractional-cmo-jobs-uk',
@@ -32,6 +32,16 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-cpo-jobs-uk',
   'fractional-ceo-jobs-uk',
   'fractional-cro-jobs-uk',
+  // Role hub pages (global)
+  'fractional-jobs-cfo',
+  'fractional-jobs-cto',
+  'fractional-jobs-cmo',
+  'fractional-jobs-coo',
+  'fractional-jobs-ceo',
+  'fractional-jobs-chro',
+  'fractional-jobs-cpo',
+  'fractional-jobs-ciso',
+  'fractional-jobs-cro',
   // Location pages
   'manchester',
   'birmingham',

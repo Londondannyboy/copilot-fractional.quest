@@ -299,7 +299,7 @@ export function LiveJobGrid({ role, location, limit = 6 }: LiveJobGridProps) {
         </div>
       ) : jobs.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {jobs.map((job) => (
+          {jobs.filter(job => job.slug).map((job) => (
             <Link
               key={job.id}
               href={`/fractional-job/${job.slug}`}

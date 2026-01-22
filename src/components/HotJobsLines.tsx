@@ -125,7 +125,7 @@ export function HotJobsLines({
       </div>
 
       <div className="divide-y divide-gray-100">
-        {displayJobs.map((job) => {
+        {displayJobs.filter(job => job.slug).map((job) => {
           const daysAgo = isClient && now ? getDaysAgo(job.posted_date, now) : getStaticDate(job.posted_date)
 
           return (

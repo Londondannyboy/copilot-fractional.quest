@@ -144,7 +144,7 @@ export function JobsSidebar({
               </div>
             ))
           ) : featuredJobs.length > 0 ? (
-            featuredJobs.map((job) => (
+            featuredJobs.filter(job => job.slug).map((job) => (
               <Link
                 key={job.id}
                 href={`/fractional-job/${job.slug}`}

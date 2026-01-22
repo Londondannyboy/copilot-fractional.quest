@@ -134,7 +134,7 @@ export function ServerJobGrid({
     <div>
       {/* Server-rendered job grid - visible to search engines */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {displayJobs.map((job, index) => {
+        {displayJobs.filter(job => job.slug).map((job, index) => {
           const daysAgo = getDaysAgo(job.posted_date)
           const jobImage = getFallbackImage(job.role_category || roleCategory)
           const jobColors = getRoleColors(job.role_category || roleCategory)

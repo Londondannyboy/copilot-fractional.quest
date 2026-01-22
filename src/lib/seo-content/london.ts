@@ -241,6 +241,11 @@ export const londonSEO = {
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Fractional CFO Services", url: "/fractional-cfo-services" },
     { name: "Fractional CFO Agency", url: "/fractional-cfo-agency" },
+    // Articles
+    { name: "Benefits of Fractional Executives", url: "/articles/benefits-of-fractional-executives" },
+    { name: "Fractional Controller Jobs Guide", url: "/articles/fractional-controller-jobs" },
+    { name: "Fractional Compliance in FinTech", url: "/articles/fractional-compliance-fintech" },
+    { name: "Fractional Head of AI Jobs", url: "/articles/fractional-head-of-ai-jobs-uk" },
   ],
 
   schema: {

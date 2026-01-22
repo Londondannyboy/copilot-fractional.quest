@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 interface RoleContentHubProps {
-  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'compliance' | 'product' | 'pm';
+  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'cro' | 'controller' | 'growth' | 'compliance' | 'product' | 'pm';
 }
 
 interface RoleLink {
@@ -20,14 +20,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'chro', path: '/fractional-chro-jobs-uk', label: 'CHRO Jobs' },
     { role: 'ciso', path: '/fractional-ciso-jobs-uk', label: 'CISO Jobs' },
     { role: 'cpo', path: '/fractional-cpo-jobs-uk', label: 'CPO Jobs' },
-    // TODO: Create pages for these roles
-    // { role: 'cio', path: '/fractional-cio-jobs-uk', label: 'CIO Jobs' },
-    // { role: 'cdo', path: '/fractional-cdo-jobs-uk', label: 'CDO Jobs' },
-    // { role: 'cro', path: '/fractional-cro-jobs-uk', label: 'CRO Jobs' },
-    // { role: 'cco', path: '/fractional-cco-jobs-uk', label: 'CCO Jobs' },
-    // { role: 'cao', path: '/fractional-cao-jobs-uk', label: 'CAO Jobs' },
-    // { role: 'cgo', path: '/fractional-cgo-jobs-uk', label: 'CGO Jobs' },
-    // { role: 'cso', path: '/fractional-cso-jobs-uk', label: 'CSO Jobs' },
+    { role: 'cro', path: '/fractional-cro-jobs-uk', label: 'CRO Jobs' },
   ];
 
   // TODO: Create pages for leadership roles
@@ -62,6 +55,9 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'chro', path: '/fractional-chro', label: 'What is a Fractional CHRO' },
     { role: 'ciso', path: '/fractional-ciso', label: 'What is a Fractional CISO' },
     { role: 'cpo', path: '/fractional-cpo', label: 'What is a Fractional CPO' },
+    { role: 'cro', path: '/fractional-cro', label: 'What is a Fractional CRO' },
+    { role: 'controller', path: '/fractional-controller', label: 'What is a Fractional Controller' },
+    { role: 'growth', path: '/fractional-growth', label: 'What is a Fractional Growth Lead' },
   ];
 
   const salaryGuides: RoleLink[] = [
@@ -81,8 +77,9 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cmo', path: '/fractional-cmo-cost', label: 'CMO Cost Guide' },
     { role: 'coo', path: '/fractional-coo-cost', label: 'COO Cost Guide' },
     { role: 'chro', path: '/fractional-chro-cost', label: 'CHRO Cost Guide' },
-    { role: 'ciso', path: '/fractional-ciso-cost', label: 'CISO Cost Guide' },
+    { role: 'ciso', path: '/fractional-ciso-pricing-cost-guide', label: 'CISO Cost Guide' },
     { role: 'cpo', path: '/fractional-cpo-cost', label: 'CPO Cost Guide' },
+    { role: 'cro', path: '/fractional-cro-cost', label: 'CRO Cost Guide' },
   ];
 
   const careerGuides: RoleLink[] = [
@@ -93,6 +90,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'chro', path: '/how-to-become-fractional-chro', label: 'Become a CHRO' },
     { role: 'ciso', path: '/how-to-become-fractional-ciso', label: 'Become a CISO' },
     { role: 'cpo', path: '/how-to-become-fractional-cpo', label: 'Become a CPO' },
+    { role: 'cro', path: '/how-to-become-fractional-cro', label: 'Become a CRO' },
   ];
 
   const services: RoleLink[] = [
@@ -104,6 +102,37 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'ciso', path: '/hire-fractional-ciso', label: 'Hire a CISO' },
     { role: 'cpo', path: '/hire-fractional-cpo', label: 'Hire a CPO' },
     { role: 'ceo', path: '/hire-fractional-ceo', label: 'Hire a CEO' },
+    { role: 'cro', path: '/hire-fractional-cro', label: 'Hire a CRO' },
+  ];
+
+  // Industry Verticals
+  const industryVerticals: RoleLink[] = [
+    { role: 'charity', path: '/fractional-jobs-charity', label: 'Charity Jobs' },
+    { role: 'education', path: '/fractional-jobs-education', label: 'Education Jobs' },
+    { role: 'media', path: '/fractional-jobs-media', label: 'Media Jobs' },
+    { role: 'professional', path: '/fractional-jobs-professional-services', label: 'Professional Services' },
+  ];
+
+  // UK Location Pages
+  const ukLocations: RoleLink[] = [
+    { role: 'london', path: '/fractional-jobs-london', label: 'London Jobs' },
+    { role: 'manchester', path: '/manchester', label: 'Manchester Jobs' },
+    { role: 'birmingham', path: '/birmingham', label: 'Birmingham Jobs' },
+    { role: 'edinburgh', path: '/edinburgh', label: 'Edinburgh Jobs' },
+    { role: 'glasgow', path: '/fractional-jobs-glasgow', label: 'Glasgow Jobs' },
+    { role: 'bristol', path: '/bristol', label: 'Bristol Jobs' },
+    { role: 'belfast', path: '/fractional-jobs-belfast', label: 'Belfast Jobs' },
+    { role: 'dundee', path: '/fractional-jobs-dundee', label: 'Dundee Jobs' },
+    { role: 'norwich', path: '/fractional-jobs-norwich', label: 'Norwich Jobs' },
+    { role: 'reading', path: '/fractional-jobs-reading', label: 'Reading Jobs' },
+    { role: 'miltonkeynes', path: '/fractional-jobs-milton-keynes', label: 'Milton Keynes Jobs' },
+  ];
+
+  // Comparison Guides
+  const comparisonGuides: RoleLink[] = [
+    { role: 'consultant', path: '/fractional-executive-vs-consultant', label: 'Fractional vs Consultant' },
+    { role: 'fulltimecoo', path: '/fractional-coo-vs-full-time', label: 'COO: Fractional vs Full-Time' },
+    { role: 'outsourced', path: '/fractional-cfo-vs-outsourced-accounting', label: 'CFO vs Outsourced' },
   ];
 
   const renderRoleLink = (roleLink: RoleLink) => {
@@ -220,6 +249,36 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {services.map(renderRoleLink)}
+            </div>
+          </div>
+
+          {/* UK Locations */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Jobs by Location
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {ukLocations.map(renderRoleLink)}
+            </div>
+          </div>
+
+          {/* Industry Verticals */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Jobs by Industry
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {industryVerticals.map(renderRoleLink)}
+            </div>
+          </div>
+
+          {/* Comparison Guides */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Comparison Guides
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {comparisonGuides.map(renderRoleLink)}
             </div>
           </div>
         </div>

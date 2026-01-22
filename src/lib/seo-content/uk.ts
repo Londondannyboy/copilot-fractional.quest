@@ -282,6 +282,11 @@ export const ukSEO = {
     { name: "Fractional CFO Agency", url: "/fractional-cfo-agency" },
     { name: "Fractional CMO Agency", url: "/fractional-cmo-agency" },
     { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    // Articles
+    { name: "Benefits of Fractional Executives", url: "/articles/benefits-of-fractional-executives" },
+    { name: "Fractional Controller Jobs Guide", url: "/articles/fractional-controller-jobs" },
+    { name: "Fractional Compliance in FinTech", url: "/articles/fractional-compliance-fintech" },
+    { name: "Fractional Head of AI Jobs", url: "/articles/fractional-head-of-ai-jobs-uk" },
   ],
 
   schema: {
