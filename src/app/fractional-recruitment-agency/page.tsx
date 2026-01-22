@@ -80,6 +80,22 @@ const faqItems: FAQItem[] = [
 export default function FractionalRecruitmentAgencyPage() {
   return (
     <>
+      {/* Preload hero image for faster LCP */}
+      <link
+        rel="preload"
+        href="/images/hero/services-mobile.jpg"
+        as="image"
+        type="image/jpeg"
+        media="(max-width: 768px)"
+      />
+      <link
+        rel="preload"
+        href="/images/hero/services-desktop.jpg"
+        as="image"
+        type="image/jpeg"
+        media="(min-width: 769px)"
+      />
+
       {/* Schema Markup */}
       <WebPageSchema
         title="Fractional Recruitment Agency UK - Best Agencies for Fractional Executives 2026"

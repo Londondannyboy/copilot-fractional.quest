@@ -5,7 +5,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
-import { getHeroImageUrl, getImage } from '@/lib/images';
+import { getLocalImage, getImage } from '@/lib/images';
 import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
 
 // Lazy-load below-fold components to reduce initial JS execution
@@ -83,22 +83,31 @@ export function RecruitmentAgencyClient() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || null;
-  const heroImage = getHeroImageUrl('services', 1920, 800);
+
+  // Use local images for faster loading (served from Vercel CDN)
+  const localImage = getLocalImage('services');
   const imageCredit = getImage('services');
 
   const pageContent = (
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-emerald-600 to-emerald-500 py-24">
-        <Image
-          src={heroImage}
-          alt="Fractional Recruitment Agency UK - Find the best agencies for hiring fractional executives"
-          fill
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-          className="object-cover"
-        />
+        {/* Responsive hero image: mobile (800w) for phones, desktop (1920w) for larger screens */}
+        <picture>
+          <source
+            media="(max-width: 768px)"
+            srcSet={localImage?.mobile || '/images/hero/services-mobile.jpg'}
+          />
+          <Image
+            src={localImage?.desktop || '/images/hero/services-desktop.jpg'}
+            alt="Fractional Recruitment Agency UK - Find the best agencies for hiring fractional executives"
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover"
+          />
+        </picture>
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <Link href="/fractional-jobs-uk" className="text-emerald-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional Jobs UK</Link>
           <div className="max-w-4xl">

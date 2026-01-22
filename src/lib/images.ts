@@ -1,5 +1,6 @@
-// Curated Unsplash images for hero sections and OG images
-// Using direct Unsplash URLs with optimized parameters for fast loading
+// Curated images for hero sections and OG images
+// Local images hosted on Vercel CDN for better performance
+// Fallback to Unsplash for categories without local images
 // Credit: All images from Unsplash (unsplash.com)
 
 export type ImageCategory =
@@ -13,6 +14,86 @@ interface ImageData {
   alt: string
   credit: string
   creditUrl: string
+}
+
+// Local images for faster loading (served from Vercel CDN)
+interface LocalImageData {
+  desktop: string  // 1920x800 for desktop
+  mobile: string   // 800x400 for mobile
+  alt: string
+  credit: string
+  creditUrl: string
+}
+
+// Categories with local images for best performance
+const localImageMap: Partial<Record<ImageCategory, LocalImageData>> = {
+  services: {
+    desktop: '/images/hero/services-desktop.jpg',
+    mobile: '/images/hero/services-mobile.jpg',
+    alt: 'Professional consulting services',
+    credit: 'Amy Hirschi',
+    creditUrl: 'https://unsplash.com/@amyhirschi'
+  },
+  london: {
+    desktop: '/images/hero/london-desktop.jpg',
+    mobile: '/images/hero/london-mobile.jpg',
+    alt: 'London city skyline with Tower Bridge',
+    credit: 'Charles Postiaux',
+    creditUrl: 'https://unsplash.com/@charlpost'
+  },
+  cfo: {
+    desktop: '/images/hero/cfo-desktop.jpg',
+    mobile: '/images/hero/cfo-mobile.jpg',
+    alt: 'Professional finance executive reviewing financial data',
+    credit: 'Austin Distel',
+    creditUrl: 'https://unsplash.com/@austindistel'
+  },
+  cto: {
+    desktop: '/images/hero/cto-desktop.jpg',
+    mobile: '/images/hero/cto-mobile.jpg',
+    alt: 'Technology team collaborating on software development',
+    credit: 'Marvin Meyer',
+    creditUrl: 'https://unsplash.com/@marvelous'
+  },
+  cmo: {
+    desktop: '/images/hero/cmo-desktop.jpg',
+    mobile: '/images/hero/cmo-mobile.jpg',
+    alt: 'Marketing team in strategy meeting',
+    credit: 'Jason Goodman',
+    creditUrl: 'https://unsplash.com/@jasongoodman_youxventures'
+  },
+}
+
+/**
+ * Check if a category has local images available
+ */
+export function hasLocalImage(category: ImageCategory): boolean {
+  return category in localImageMap
+}
+
+/**
+ * Get local image data for responsive hero images
+ * Returns null if no local image available
+ */
+export function getLocalImage(category: ImageCategory): LocalImageData | null {
+  return localImageMap[category] || null
+}
+
+/**
+ * Get preload link data for a category's hero image
+ * Use this in page metadata for preloading
+ */
+export function getHeroPreloadData(category: ImageCategory): { href: string; as: string; type: string } | null {
+  const localImage = localImageMap[category]
+  if (localImage) {
+    // Preload the mobile image since it's smaller and loads first
+    return {
+      href: localImage.mobile,
+      as: 'image',
+      type: 'image/jpeg'
+    }
+  }
+  return null
 }
 
 // Curated professional images by category
