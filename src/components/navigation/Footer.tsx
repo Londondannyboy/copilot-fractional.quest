@@ -251,20 +251,20 @@ export function Footer() {
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-400">
               &copy; {currentYear} Fractional Quest. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <Link href="/privacy" className="text-gray-500 hover:text-gray-300 transition-colors">
+              <Link href="/privacy" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-gray-500 hover:text-gray-300 transition-colors">
+              <Link href="/terms" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/cookies" className="text-gray-500 hover:text-gray-300 transition-colors">
+              <Link href="/cookies" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Cookie Policy
               </Link>
-              <Link href="/compliance" className="text-gray-500 hover:text-gray-300 transition-colors">
+              <Link href="/compliance" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Compliance
               </Link>
             </div>

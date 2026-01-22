@@ -178,13 +178,14 @@ export function EmbeddedJobBoard({
   const [workType, setWorkType] = useState(defaultWorkType)
   const [page, setPage] = useState(1)
 
+  // Use darker shades (700+) for better accessibility contrast with white text
   const accentClasses = {
-    emerald: { bg: 'bg-emerald-600', hover: 'hover:bg-emerald-700', text: 'text-emerald-700', ring: 'focus:ring-emerald-500' },
-    blue: { bg: 'bg-blue-600', hover: 'hover:bg-blue-700', text: 'text-blue-700', ring: 'focus:ring-blue-500' },
-    amber: { bg: 'bg-amber-600', hover: 'hover:bg-amber-700', text: 'text-amber-700', ring: 'focus:ring-amber-500' },
-    purple: { bg: 'bg-purple-600', hover: 'hover:bg-purple-700', text: 'text-purple-700', ring: 'focus:ring-purple-500' },
-    red: { bg: 'bg-red-600', hover: 'hover:bg-red-700', text: 'text-red-700', ring: 'focus:ring-red-500' },
-    indigo: { bg: 'bg-indigo-600', hover: 'hover:bg-indigo-700', text: 'text-indigo-700', ring: 'focus:ring-indigo-500' },
+    emerald: { bg: 'bg-emerald-700', hover: 'hover:bg-emerald-800', text: 'text-emerald-800', ring: 'focus:ring-emerald-600' },
+    blue: { bg: 'bg-blue-700', hover: 'hover:bg-blue-800', text: 'text-blue-800', ring: 'focus:ring-blue-600' },
+    amber: { bg: 'bg-amber-700', hover: 'hover:bg-amber-800', text: 'text-amber-800', ring: 'focus:ring-amber-600' },
+    purple: { bg: 'bg-purple-700', hover: 'hover:bg-purple-800', text: 'text-purple-800', ring: 'focus:ring-purple-600' },
+    red: { bg: 'bg-red-700', hover: 'hover:bg-red-800', text: 'text-red-800', ring: 'focus:ring-red-600' },
+    indigo: { bg: 'bg-indigo-700', hover: 'hover:bg-indigo-800', text: 'text-indigo-800', ring: 'focus:ring-indigo-600' },
   }
   const accent = accentClasses[accentColor as keyof typeof accentClasses] || accentClasses.emerald
 
@@ -340,7 +341,7 @@ export function EmbeddedJobBoard({
                         </span>
                       )}
                       {job.is_remote && (
-                        <span className="bg-teal-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                        <span className="bg-teal-800 text-white text-xs font-bold px-2.5 py-1 rounded-full">
                           Remote
                         </span>
                       )}

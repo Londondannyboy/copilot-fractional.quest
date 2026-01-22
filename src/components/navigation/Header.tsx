@@ -318,7 +318,7 @@ export function Header() {
             </Link>
             <Link
               href="/fractional-jobs-uk"
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${useTransparentStyle ? 'bg-white text-gray-900 hover:bg-white/90' : 'bg-emerald-600 hover:bg-emerald-700 text-white'}`}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${useTransparentStyle ? 'bg-white text-gray-900 hover:bg-white/90' : 'bg-emerald-700 hover:bg-emerald-800 text-white'}`}
             >
               Browse Jobs
             </Link>

@@ -107,7 +107,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
             <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
               <Link href="/fractional-jobs-uk" className="text-emerald-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional Jobs UK</Link>
               <div className="max-w-4xl">
-                <span className="inline-block bg-white text-emerald-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Guide</span>
+                <span className="inline-block bg-white text-emerald-800 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Guide</span>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">Fractional<br /><span className="text-emerald-200">Recruitment Agency</span></h1>
                 <p className="text-2xl md:text-3xl text-emerald-50 leading-relaxed font-light mb-10">Find the best <strong>fractional recruitment agencies</strong> for hiring fractional executives. Compare specialists in CFO, CTO, CMO, and C-suite placements across the UK.</p>
                 <div className="flex flex-wrap gap-10 mb-12">
@@ -121,7 +121,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                     href={CALENDLY_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-8 py-4 bg-white text-emerald-600 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors inline-flex items-center gap-2"
+                    className="px-8 py-4 bg-white text-gray-900 font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
                   >
                     <span>📅</span> Book a Free Call
                   </a>
@@ -153,7 +153,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                     href={CALENDLY_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-white text-purple-600 text-lg font-bold py-4 px-8 hover:bg-purple-50 transition-all shadow-lg hover:shadow-xl"
+                    className="inline-flex items-center gap-3 bg-white text-gray-900 text-lg font-bold py-4 px-8 hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
                   >
                     <span className="text-2xl">📅</span>
                     <span>Book Your Free Call</span>
@@ -230,7 +230,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="whitespace-nowrap px-6 py-3 bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-colors inline-flex items-center gap-2"
+                  className="whitespace-nowrap px-6 py-3 bg-gray-900 text-white font-bold hover:bg-gray-800 transition-colors inline-flex items-center gap-2"
                 >
                   <span>📅</span> Book Free Call
                 </a>
@@ -268,7 +268,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 text-white font-bold uppercase tracking-wider hover:bg-emerald-600 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-700 text-white font-bold uppercase tracking-wider hover:bg-emerald-800 transition-colors"
                 >
                   <span>📅</span> Book a Free Call
                 </a>
@@ -294,7 +294,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                     <h3 className="text-xl font-bold text-gray-900 mb-3">{agency.name}</h3>
                     <p className="text-gray-600 text-sm mb-4">{agency.description}</p>
                     <div className="mb-3"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Speciality:</div><div className="text-sm text-gray-700">{agency.speciality}</div></div>
-                    <div><div className="text-xs font-bold text-gray-500 uppercase mb-1">Model:</div><div className="text-sm text-emerald-600">{agency.model}</div></div>
+                    <div><div className="text-xs font-bold text-gray-500 uppercase mb-1">Model:</div><div className="text-sm font-semibold text-emerald-800">{agency.model}</div></div>
                   </div>
                 ))}
               </div>
@@ -311,7 +311,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
               </div>
               <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                 <table className="w-full">
-                  <thead className="bg-emerald-600 text-white">
+                  <thead className="bg-gray-900 text-white">
                     <tr>
                       <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm">Factor</th>
                       <th className="px-6 py-4 text-left font-bold uppercase tracking-wider text-sm">Direct Hire</th>
@@ -460,11 +460,11 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-600 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors"
                 >
                   <span>📅</span> Book Your Free Call
                 </a>
-                <Link href="/fractional-jobs-uk" className="px-8 py-4 bg-emerald-700 text-white font-bold uppercase tracking-wider hover:bg-emerald-800 transition-colors border border-emerald-500">Browse All Jobs</Link>
+                <Link href="/fractional-jobs-uk" className="px-8 py-4 bg-emerald-800 text-white font-bold uppercase tracking-wider hover:bg-emerald-900 transition-colors border border-emerald-600">Browse All Jobs</Link>
               </div>
               <p className="text-emerald-200 text-sm mt-8">No fees • No commitment • 30 minute consultation</p>
             </div>
