@@ -21,11 +21,7 @@ const MarketDashboard = dynamic(
   { ssr: false }
 );
 
-// 3D Graph (lazy loaded, no SSR)
-const ForceGraph3D = dynamic(
-  () => import("@/components/ForceGraph3D").then((mod) => mod.ForceGraph3DComponent),
-  { ssr: false }
-);
+// ForceGraph3D removed for performance
 
 // New personalized components for MDX demo
 const PersonalizedHero = dynamic(
@@ -104,7 +100,6 @@ export const mdxComponents = {
   JobsBarChart,
   SalaryAreaChart,
   MarketDashboard,
-  ForceGraph3D,
 
   // Personalized MDX components
   PersonalizedHero,

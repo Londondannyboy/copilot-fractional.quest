@@ -6,11 +6,7 @@ import { UserButton, SignedIn, SignedOut } from "@neondatabase/auth/react/ui";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-// Dynamic import for 3D graph (SSR issues)
-const EditableGraph3D = dynamic(
-  () => import("@/components/EditableGraph3D").then(mod => mod.EditableGraph3D),
-  { ssr: false, loading: () => <div className="h-[500px] bg-gray-100 rounded-xl animate-pulse" /> }
-);
+// 3D Graph removed for performance
 
 // Types
 interface Message {
@@ -836,17 +832,19 @@ function ProfileTab({ userId, userName }: { userId: string; userName?: string | 
         </div>
       </div>
 
-      {/* Graph View */}
+      {/* Graph View - Removed for performance */}
       {viewMode === "graph" && (
-        <EditableGraph3D
-          userId={userId}
-          userName={userName || "You"}
-          items={items}
-          onEdit={handleGraphEdit}
-          onDelete={handleGraphDelete}
-          onAdd={handleGraphAdd}
-          height={500}
-        />
+        <div className="bg-gray-50 rounded-xl p-12 text-center">
+          <div className="text-4xl mb-4">📊</div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">Graph View Coming Soon</h3>
+          <p className="text-gray-600 mb-4">We&apos;ve optimized the site for speed. Use List View to manage your profile.</p>
+          <button
+            onClick={() => setViewMode("list")}
+            className="px-4 py-2 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors"
+          >
+            Switch to List View
+          </button>
+        </div>
       )}
 
       {/* List View - Profile Sections */}

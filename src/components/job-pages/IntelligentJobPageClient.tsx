@@ -9,7 +9,7 @@ import {
   JobsBarChart, SalaryAreaChart,
   MarketDashboard, ChartLoading
 } from "@/components/charts";
-import { ForceGraph3DComponent, ForceGraphLoading } from "@/components/ForceGraph3D";
+// ForceGraph3D removed for performance
 
 // Intelligent Document components
 import { IntelligentDocument } from "@/components/mdx/IntelligentDocument";
@@ -290,14 +290,7 @@ export function IntelligentJobPageClient({
     },
   });
 
-  useRenderToolCall({
-    name: "show_user_graph",
-    render: ({ result, status }: { result: any; status: string }) => {
-      if (status === "executing") return <ForceGraphLoading />;
-      if (!result?.nodes) return <></>;
-      return <ForceGraph3DComponent data={result} />;
-    },
-  });
+  // show_user_graph disabled for performance (3D removed)
 
   // Build page context for the agent
   const pageContext = `${locationDisplay} Fractional Executive Jobs`;

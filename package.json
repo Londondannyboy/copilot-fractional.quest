@@ -35,10 +35,7 @@
     "next-mdx-remote": "^5.0.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "react-force-graph-3d": "^1.29.0",
     "recharts": "^3.6.0",
-    "three": "^0.182.0",
-    "three-spritetext": "^1.10.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {
@@ -46,7 +43,6 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/three": "^0.182.0",
     "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",

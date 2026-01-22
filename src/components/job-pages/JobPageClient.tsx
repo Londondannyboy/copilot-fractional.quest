@@ -9,7 +9,7 @@ import {
   JobsBarChart, JobsPieChart, SalaryAreaChart,
   MarketDashboard, ArticlesGrid, ChartLoading
 } from "@/components/charts";
-import { ForceGraph3DComponent, ForceGraphLoading } from "@/components/ForceGraph3D";
+// ForceGraph3D removed for performance - 3D visualizations disabled
 import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
 import { ExpertProfile, ExpertProfileSchema } from "@/components/ExpertProfile";
 import { CaseStudy, CaseStudySchema } from "@/components/CaseStudy";
@@ -455,19 +455,8 @@ export function JobPageClient({
     },
   }, []);
 
-  // 3D Force Graph - User's Interest Graph from Zep memory
-  useRenderToolCall({
-    name: "show_user_graph",
-    render: ({ result, status }) => {
-      if (status !== "complete" || !result) return <ForceGraphLoading title="Building your interest graph..." />;
-      return (
-        <div className="space-y-2">
-          <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full font-medium">3D Interest Graph</span>
-          <ForceGraph3DComponent data={result} height={400} />
-        </div>
-      );
-    },
-  }, []);
+  // 3D Force Graph removed for performance optimization
+  // show_user_graph tool disabled
 
   // MDX Response Renderer - Agent can compose rich UI with MDX components
   useRenderToolCall({

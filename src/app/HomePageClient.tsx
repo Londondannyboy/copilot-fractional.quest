@@ -5,12 +5,9 @@ import {
   JobsBarChart, JobsPieChart, SalaryAreaChart,
   MarketDashboard, ArticlesGrid, ChartLoading
 } from "@/components/charts";
-import { ForceGraph3DComponent, ForceGraphLoading } from "@/components/ForceGraph3D";
+// ForceGraph3D, LiveProfileGraph, UserProfileSection removed for performance
 import { A2UIRenderer, A2UILoading } from "@/components/a2ui-renderer";
 import { VoiceInput } from "@/components/voice-input";
-import { DynamicBackground } from "@/components/DynamicBackground";
-import { LiveProfileGraph } from "@/components/LiveProfileGraph";
-import { UserProfileSection } from "@/components/UserProfileSection";
 import { OnboardingWizard } from "@/components/onboarding";
 import { PublicLanding } from "@/components/PublicLanding";
 import dynamic from "next/dynamic";
@@ -32,11 +29,7 @@ function calculateOnboardingStep(items: ProfileItemForStep[]): number {
   return 6; // Complete
 }
 
-// Dynamic import for editable 3D graph (same as dashboard - works!)
-const EditableGraph3D = dynamic(
-  () => import("@/components/EditableGraph3D").then(mod => mod.EditableGraph3D),
-  { ssr: false, loading: () => <div className="w-full h-full bg-gray-900 flex items-center justify-center"><div className="text-white">Loading graph...</div></div> }
-);
+// EditableGraph3D removed for performance (uses Three.js)
 import { AgentState } from "@/lib/types";
 import { useCoAgent, useRenderToolCall, useCopilotChat, useHumanInTheLoop } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
@@ -414,19 +407,7 @@ function YourMainContent({ themeColor, lastQuery, setLastQuery }: {
     },
   }, []);
 
-  // 3D Force Graph - User's Interest Graph
-  useRenderToolCall({
-    name: "show_user_graph",
-    render: ({ result, status }) => {
-      if (status !== "complete" || !result) return <ForceGraphLoading title="Building your interest graph..." />;
-      return (
-        <div className="space-y-2">
-          <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full font-medium">3D Interest Graph</span>
-          <ForceGraph3DComponent data={result} height={400} />
-        </div>
-      );
-    },
-  }, []);
+  // 3D Force Graph removed for performance
 
   // Ambient Scene - Dynamic background (no UI needed, just state sync)
   useRenderToolCall({
@@ -1555,17 +1536,24 @@ Reference the page context when discussing jobs.`;
             </div>
           ) : user ? (
             <>
-              {/* Profile Complete - Show 3D Graph */}
-              <div className="flex-1 min-h-0">
-                <EditableGraph3D
-                  userId={user.id}
-                  userName={firstName || user.name || 'You'}
-                  items={fullProfileItems}
-                  onEdit={handleGraphEdit}
-                  onDelete={handleGraphDelete}
-                  onAdd={handleGraphAdd}
-                  height={typeof window !== 'undefined' ? window.innerHeight - 160 : 600}
-                />
+              {/* Profile Section - Welcome and quick actions */}
+              <div className="flex-1 min-h-0 flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+                <div className="text-center px-6 max-w-2xl">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Welcome back, {firstName || user.name || 'there'}!
+                  </h2>
+                  <p className="text-gray-300 text-lg mb-8">
+                    Ready to explore fractional executive opportunities? Use the chat to search for jobs, get salary insights, or find your next role.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <a href="/fractional-jobs-uk" className="px-6 py-3 bg-emerald-700 text-white font-semibold rounded-lg hover:bg-emerald-800 transition-colors">
+                      Browse Jobs
+                    </a>
+                    <a href="/rate-calculator" className="px-6 py-3 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors">
+                      Rate Calculator
+                    </a>
+                  </div>
+                </div>
               </div>
 
               {/* Voice Input - Fixed at bottom */}
