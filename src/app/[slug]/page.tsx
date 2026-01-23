@@ -2,6 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPageBySlug, getAllPageSlugs, getPageTypeLabel } from '@/lib/pages'
 import { PageWithCopilot } from '@/components/pages/PageWithCopilot'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import { mdxComponents } from '../../../mdx-components'
 
 // ===========================================
 // Caching Configuration
@@ -270,8 +272,16 @@ export default async function DynamicPage({ params }: PageProps) {
         </div>
       </nav>
 
-      {/* Page Content with CopilotKit Sidebar */}
-      <PageWithCopilot page={page} />
+      {/* Page Content */}
+      {page.mdx_content ? (
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <article className="prose prose-lg max-w-none">
+            <MDXRemote source={page.mdx_content} components={mdxComponents} />
+          </article>
+        </div>
+      ) : (
+        <PageWithCopilot page={page} />
+      )}
     </>
   )
 }

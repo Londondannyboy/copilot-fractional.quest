@@ -56,6 +56,9 @@ export interface PageData {
   // Stats
   stats: Record<string, unknown>
 
+  // MDX Content (optional - if present, rendered with MDXRemote instead of PageRenderer)
+  mdx_content: string | null
+
   // Meta
   is_published: boolean
   created_at: string
