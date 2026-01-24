@@ -4,44 +4,38 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const ROLE_IMAGES: Record<string, string[]> = {
-  'CFO': [
-    'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=100&q=60&auto=format',
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&q=60&auto=format',
-  ],
-  'CTO': [
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=100&q=60&auto=format',
-    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=100&q=60&auto=format',
-  ],
-  'CMO': [
-    'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=100&q=60&auto=format',
-    'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=100&q=60&auto=format',
-  ],
-  'COO': [
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=60&auto=format',
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&q=60&auto=format',
-  ],
-  'CHRO': [
-    'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=100&q=60&auto=format',
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=100&q=60&auto=format',
-  ],
-  'default': [
-    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&q=60&auto=format',
-    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=100&q=60&auto=format',
-    'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100&q=60&auto=format',
-  ]
-}
+// Generate a unique colored initials thumbnail for each job
+// This ensures no two adjacent jobs ever look the same
+const THUMB_COLORS = [
+  '0ea5e9', '8b5cf6', '06b6d4', 'f59e0b', 'ef4444',
+  '10b981', '6366f1', 'ec4899', '14b8a6', 'f97316',
+  '3b82f6', 'a855f7', '22c55e', 'e11d48', '0891b2',
+  '7c3aed', 'd97706', '059669', 'dc2626', '2563eb',
+]
 
-function getJobImage(jobId: string, roleCategory?: string, title?: string): string {
-  const hashSource = `${jobId}-${title || ''}-${roleCategory || ''}`
+function getJobImage(jobId: string, _roleCategory?: string, title?: string): string {
+  // Use a hash of the job ID + title to pick a unique color
+  const hashSource = `${jobId}-${title || ''}`
   let hash = 0
   for (let i = 0; i < hashSource.length; i++) {
     const char = hashSource.charCodeAt(i)
     hash = ((hash << 5) - hash) + char
     hash = hash & hash
   }
-  const images = ROLE_IMAGES[roleCategory || ''] || ROLE_IMAGES['default']
-  return images[Math.abs(hash) % images.length]
+  const colorIndex = Math.abs(hash) % THUMB_COLORS.length
+  const bgColor = THUMB_COLORS[colorIndex]
+
+  // Extract initials from job title (up to 2 chars)
+  const words = (title || 'Job').split(/[\s\-\/]+/).filter(w => w.length > 0)
+  let initials = ''
+  if (words.length >= 2) {
+    initials = (words[0][0] + words[1][0]).toUpperCase()
+  } else if (words.length === 1) {
+    initials = words[0].substring(0, 2).toUpperCase()
+  }
+
+  // Use ui-avatars.com to generate a unique colored thumbnail with initials
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bgColor}&color=ffffff&size=80&font-size=0.4&bold=true&format=svg`
 }
 
 interface HotJobLine {

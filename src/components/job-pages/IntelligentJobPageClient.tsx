@@ -434,15 +434,15 @@ Remember: When filtering, UPDATE THE PAGE directly using the document actions. D
           )}
 
           {/* Live Market Chart - Responds to conversation */}
-          <DocumentSection id="salary" title={`${locationDisplay} Day Rates`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <DocumentSection id="salary" title={`${locationDisplay} Day Rates`}>
               <LiveMarketChart
                 location={locationDisplay}
                 role={roleFilter}
                 type="bar"
               />
-            </div>
-          </DocumentSection>
+            </DocumentSection>
+          </div>
 
           {/* Main Content + Sidebar Layout */}
           <section className="py-8 bg-white">
