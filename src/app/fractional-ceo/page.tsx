@@ -48,7 +48,7 @@ export default function FractionalCeoPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <Image src={heroImage} alt={`${imageAlt} - What is a Fractional CEO`} fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`${imageAlt} - What is a Fractional CEO`} title="Fractional CEO - Part-Time Executive Leadership" fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/90 via-amber-500/80 to-orange-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -71,7 +71,7 @@ export default function FractionalCeoPage() {
       <section className="py-12 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-8">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-yellow-400 mb-4">Fractional CEO Definition</h2>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-yellow-400 mb-4">Role Definition</h2>
             <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CEO</strong> (Fractional Chief Executive Officer) is an experienced executive who works with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic leadership and operational oversight without the cost of a full-time hire.</p>
           </div>
         </div>
@@ -82,10 +82,10 @@ export default function FractionalCeoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CEO? Understanding the Role</h2>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CEO meaning</strong> centres on flexible, senior executive leadership. Unlike traditional full-time CEOs or interim CEOs on fixed contracts, a <strong>fractional Chief Executive</strong> works with multiple companies simultaneously, bringing diverse experience and fresh perspectives to each engagement.</p>
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CEO meaning</strong> centres on flexible, senior executive leadership. Unlike traditional full-time CEOs or interim CEOs on fixed contracts, a <strong>part-time chief executive</strong> works with multiple companies simultaneously, bringing diverse experience and fresh perspectives to each engagement.</p>
             <p>This model is particularly valuable for founder-led companies that need experienced executive guidance, portfolio companies requiring operational leadership, or businesses in transition seeking temporary C-suite expertise.</p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional CEO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities</h2>
             <p>A <strong>fractional CEO</strong> performs strategic and operational leadership functions on a part-time basis:</p>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
@@ -105,7 +105,7 @@ export default function FractionalCeoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CEO vs Interim CEO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Comparison: Fractional vs Interim</h2>
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-50">
@@ -125,7 +125,7 @@ export default function FractionalCeoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional CEO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When to Hire</h2>
             <ul className="space-y-3">
               <li><strong>Founder growth:</strong> When a founder needs experienced executive mentorship alongside their own leadership</li>
               <li><strong>Portfolio oversight:</strong> PE/VC firms needing operational leadership across portfolio companies</li>
@@ -135,10 +135,10 @@ export default function FractionalCeoPage() {
               <li><strong>Specific initiatives:</strong> Exit preparation, fundraising, or market expansion</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CEO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">UK Cost Guide</h2>
             <p><strong>Fractional CEO</strong> costs in the UK typically range from £1,000-£2,000 per day:</p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional CEO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £4,000-£8,000/month (£48,000-£96,000/year)</li>
                 <li><strong>2 days/week:</strong> £8,000-£16,000/month (£96,000-£192,000/year)</li>
@@ -155,7 +155,7 @@ export default function FractionalCeoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Fractional CEO Cost Calculator</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Cost Calculator</h2>
           </div>
           <RoleCalculator role="ceo" />
         </div>
@@ -166,7 +166,7 @@ export default function FractionalCeoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions About Fractional CEOs</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions</h2>
           </div>
           <FAQ items={CEO_FAQS} title="" />
         </div>
@@ -238,8 +238,8 @@ export default function FractionalCeoPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Work with a Fractional CEO?</h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted fractional CEO candidates or post your requirements to find the perfect match.</p>
+          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Get Started?</h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted executive leadership candidates or post your requirements to find the perfect match.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/fractional-ceo-jobs-uk" className="px-8 py-4 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-400 transition-colors">Browse Fractional CEOs</Link>
             <Link href="/fractional-jobs-uk?department=Executive" className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors">All Executive Jobs</Link>

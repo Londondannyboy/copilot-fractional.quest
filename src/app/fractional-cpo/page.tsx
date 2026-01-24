@@ -48,7 +48,7 @@ export default function FractionalCpoPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <Image src={heroImage} alt={`What is a Fractional CPO - ${imageAlt}`} fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`What is a Fractional CPO - ${imageAlt}`} title="Fractional CPO - Part-Time Product Leadership" fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 via-violet-500/80 to-purple-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -78,8 +78,8 @@ export default function FractionalCpoPage() {
       <section className="py-12 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-8">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4">Fractional CPO Definition</h2>
-            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CPO</strong> (Fractional Chief Product Officer) is an experienced product executive who works with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic product leadership without the cost of a full-time hire.</p>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4">Role Definition</h2>
+            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CPO</strong> (Fractional Chief Product Officer) is an experienced product executive who partners with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic product leadership without the cost of a full-time hire.</p>
           </div>
         </div>
       </section>
@@ -89,10 +89,10 @@ export default function FractionalCpoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CPO? Understanding the Role</h2>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CPO meaning</strong> centres on flexible, senior-level product leadership. Unlike traditional full-time CPOs earning £140,000-£220,000 annually, a <strong>fractional Chief Product Officer</strong> works with multiple companies simultaneously, bringing diverse product experience and methodologies to each engagement.</p>
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CPO meaning</strong> centres on flexible, senior-level product leadership. Unlike traditional full-time CPOs earning £140,000-£220,000 annually, a <strong>part-time product executive</strong> works with multiple companies simultaneously, bringing diverse product experience and methodologies to each engagement.</p>
             <p>This model is especially valuable for product-led companies building their first product teams, startups pivoting their product strategy, or scale-ups needing to professionalise their product function without full-time executive overhead.</p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional CPO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities</h2>
             <p>A <strong>fractional CPO</strong> performs the same functions as a full-time Chief Product Officer, but on a part-time basis:</p>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
@@ -112,7 +112,7 @@ export default function FractionalCpoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CPO vs VP of Product</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Comparison: Fractional vs Full-Time</h2>
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-50">
@@ -132,7 +132,7 @@ export default function FractionalCpoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional CPO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When to Hire</h2>
             <ul className="space-y-3">
               <li><strong>Product-market fit:</strong> When searching for or validating product-market fit</li>
               <li><strong>First product hire:</strong> Building the initial product team and establishing processes</li>
@@ -142,10 +142,10 @@ export default function FractionalCpoPage() {
               <li><strong>PLG implementation:</strong> Implementing product-led growth strategies</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CPO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">UK Cost Guide</h2>
             <p><strong>Fractional CPO</strong> costs in the UK typically range from £800-£1,400 per day:</p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional CPO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £3,200-£5,600/month (£38,000-£67,000/year)</li>
                 <li><strong>2 days/week:</strong> £6,400-£11,200/month (£77,000-£134,000/year)</li>
@@ -162,7 +162,7 @@ export default function FractionalCpoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Fractional CPO Cost Calculator</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Cost Calculator</h2>
           </div>
           <RoleCalculator role="cpo" />
         </div>
@@ -173,7 +173,7 @@ export default function FractionalCpoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions About Fractional CPOs</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions</h2>
           </div>
           <FAQ items={CPO_FAQS} title="" />
         </div>
@@ -282,8 +282,8 @@ export default function FractionalCpoPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Work with a Fractional CPO?</h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted fractional CPO candidates or post your requirements to find the perfect match.</p>
+          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Get Started?</h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted product leadership candidates or post your requirements to find the perfect match.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/fractional-cpo-jobs-uk" className="px-8 py-4 bg-indigo-500 text-white font-bold rounded-lg hover:bg-indigo-400 transition-colors">Browse Fractional CPOs</Link>
             <Link href="/fractional-jobs-uk?department=Product" className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors">All Product Jobs</Link>

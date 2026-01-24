@@ -8,12 +8,11 @@ import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { LazyYouTube } from '@/components/LazyYouTube'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
-import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+import { getOGImageUrl, getImage } from '@/lib/images'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 
 const ogImage = getOGImageUrl('cmo')
 const imageAlt = getImage('cmo').alt
-const heroImage = getHeroImageUrl('cmo', 1920, 800)
 const imageCredit = getImage('cmo')
 
 export const metadata: Metadata = {
@@ -56,8 +55,9 @@ export default function FractionalCmoPage() {
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <Image
-          src={heroImage}
+          src="/images/hero/fractional-cmo-jobs-uk-desktop.webp"
           alt={`What is a Fractional CMO - ${imageAlt}`}
+          title="Fractional CMO - Part-Time Marketing Leadership"
           fill
           priority
           sizes="100vw"
@@ -126,7 +126,7 @@ export default function FractionalCmoPage() {
               <p className="text-gray-500 text-sm mt-3">Video: Understanding the fractional CMO role and responsibilities</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional CMO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities and Deliverables</h2>
 
             <p>
               A <strong>fractional CMO</strong> performs the same functions as a full-time Chief Marketing Officer, but on a part-time basis. Their responsibilities typically include:
@@ -149,7 +149,7 @@ export default function FractionalCmoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CMO vs Full-Time CMO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Part-Time vs Full-Time: How They Compare</h2>
 
             <p>
               Understanding the difference between a <strong>fractional CMO</strong> and full-time CMO helps companies make the right hiring decision:
@@ -199,7 +199,7 @@ export default function FractionalCmoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional CMO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Does Your Business Need One?</h2>
 
             <p>
               Companies typically hire a <strong>fractional CMO</strong> in these situations:
@@ -221,14 +221,14 @@ export default function FractionalCmoPage() {
               </Link>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CMO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Cost and Pricing UK</h2>
 
             <p>
               <strong>Fractional CMO</strong> costs in the UK typically range from £700-£1,400 per day, depending on experience and specialisation. Most engagements are structured as:
             </p>
 
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional CMO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing Breakdown</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £3,000-£5,600/month (£36,000-£67,000/year)</li>
                 <li><strong>2 days/week:</strong> £6,000-£11,200/month (£72,000-£134,000/year)</li>
@@ -305,7 +305,7 @@ export default function FractionalCmoPage() {
             <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Professional Bodies & Industry Associations</h2>
 
             <p>
-              Many <strong>fractional CMOs</strong> are members of recognized marketing and advertising bodies. Key organizations include:
+              Many <strong>part-time marketing leaders</strong> are members of recognized marketing and advertising bodies. Key organizations include:
             </p>
 
             <div className="grid md:grid-cols-2 gap-4 not-prose my-8">
@@ -378,7 +378,7 @@ export default function FractionalCmoPage() {
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
             <h2 className="text-2xl md:text-3xl font-black text-gray-900">
-              Fractional CMO Cost Calculator
+              Day Rate Calculator
             </h2>
           </div>
           <RoleCalculator role="cmo" />
@@ -391,7 +391,7 @@ export default function FractionalCmoPage() {
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
             <h2 className="text-3xl md:text-4xl font-black text-gray-900">
-              Frequently Asked Questions About Fractional CMOs
+              Frequently Asked Questions
             </h2>
           </div>
           <FAQ items={CMO_FAQS} title="" />
@@ -461,10 +461,10 @@ export default function FractionalCmoPage() {
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Work with a Fractional CMO?
+            Ready to Get Started?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted fractional CMO candidates or post your requirements to find the perfect match.
+            Browse pre-vetted marketing leaders or post your requirements to find the perfect match.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
@@ -488,8 +488,8 @@ export default function FractionalCmoPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional CMO Jobs UK</h2>
-            <p className="text-xl text-gray-500">Find your next fractional CMO opportunity</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Latest Marketing Leadership Jobs</h2>
+            <p className="text-xl text-gray-500">Find your next part-time marketing opportunity</p>
           </div>
           <EmbeddedJobBoard
             defaultDepartment="Marketing"

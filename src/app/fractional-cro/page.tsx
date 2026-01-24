@@ -5,7 +5,6 @@ import { FAQ, CRO_FAQS } from '@/components/seo/FAQ'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
-import { LazyYouTube } from '@/components/LazyYouTube'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
@@ -57,6 +56,7 @@ export default function FractionalCroPage() {
         <Image
           src={heroImage}
           alt={`What is a Fractional CRO - ${imageAlt}`}
+          title="Fractional CRO - Part-Time Revenue Leadership"
           fill
           priority
           sizes="100vw"
@@ -96,9 +96,9 @@ export default function FractionalCroPage() {
       <section className="py-12 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-8">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-4">Fractional CRO Definition</h2>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-4">Role Definition</h2>
             <p className="text-2xl font-light leading-relaxed">
-              A <strong className="font-semibold">Fractional CRO</strong> (Fractional Chief Revenue Officer) is an experienced revenue executive who works with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic revenue leadership and sales team management without the cost of a full-time hire.
+              A <strong className="font-semibold">Fractional CRO</strong> (Fractional Chief Revenue Officer) is an experienced revenue executive who partners with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic revenue leadership and sales team management without the cost of a full-time hire.
             </p>
           </div>
         </div>
@@ -112,14 +112,14 @@ export default function FractionalCroPage() {
             <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CRO? Understanding the Role</h2>
 
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              The <strong>fractional CRO meaning</strong> centres on flexible, senior-level revenue leadership. Unlike traditional full-time CROs earning £180,000-£300,000 annually, a <strong>fractional Chief Revenue Officer</strong> works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.
+              The <strong>fractional CRO meaning</strong> centres on flexible, senior-level revenue leadership. Unlike traditional full-time CROs earning £180,000-£300,000 annually, a part-time revenue executive works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.
             </p>
 
             <p>
               This model emerged from the SaaS and tech ecosystem where companies need CRO-level expertise for scaling revenue, building sales teams, and developing go-to-market strategies but cannot justify the cost of a full-time revenue executive.
             </p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional CRO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities</h2>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -138,7 +138,7 @@ export default function FractionalCroPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CRO vs VP Sales</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Comparison: Fractional vs VP Sales</h2>
 
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
@@ -174,7 +174,7 @@ export default function FractionalCroPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional CRO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When to Hire</h2>
 
             <ul className="space-y-3">
               <li><strong>Scaling Revenue:</strong> Need to grow from £1M to £10M+ ARR</li>
@@ -192,10 +192,10 @@ export default function FractionalCroPage() {
               </Link>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CRO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">UK Cost Guide</h2>
 
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional CRO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £4,000-£6,000/month (£48,000-£72,000/year)</li>
                 <li><strong>2 days/week:</strong> £8,000-£12,000/month (£96,000-£144,000/year)</li>
@@ -204,7 +204,7 @@ export default function FractionalCroPage() {
               <p className="text-sm text-gray-600 mt-4">Compare to full-time CRO: £200,000-£350,000+ (salary + benefits + equity)</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Types of Fractional CRO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Specialist Types</h2>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -244,7 +244,7 @@ export default function FractionalCroPage() {
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
             <h2 className="text-2xl md:text-3xl font-black text-gray-900">
-              Fractional CRO Cost Calculator
+              Cost Calculator
             </h2>
           </div>
           <RoleCalculator role="cro" />
@@ -257,7 +257,7 @@ export default function FractionalCroPage() {
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
             <h2 className="text-3xl md:text-4xl font-black text-gray-900">
-              Frequently Asked Questions About Fractional CROs
+              Frequently Asked Questions
             </h2>
           </div>
           <FAQ items={CRO_FAQS} title="" />
@@ -292,10 +292,10 @@ export default function FractionalCroPage() {
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Work with a Fractional CRO?
+            Ready to Get Started?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted fractional CRO candidates or post your requirements.
+            Browse pre-vetted revenue leadership candidates or post your requirements.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
@@ -319,7 +319,7 @@ export default function FractionalCroPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional CRO Jobs UK</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Latest Revenue Leadership Jobs</h2>
             <p className="text-xl text-gray-500">Find your next fractional CRO opportunity</p>
           </div>
           <EmbeddedJobBoard

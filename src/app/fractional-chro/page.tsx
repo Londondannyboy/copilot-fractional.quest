@@ -48,7 +48,7 @@ export default function FractionalChroPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <Image src={heroImage} alt={`What is a Fractional CHRO - ${imageAlt}`} fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`What is a Fractional CHRO - ${imageAlt}`} title="Fractional CHRO - Part-Time HR Leadership" fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 via-violet-500/80 to-fuchsia-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -71,8 +71,8 @@ export default function FractionalChroPage() {
       <section className="py-12 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-8">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-purple-400 mb-4">Fractional CHRO Definition</h2>
-            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CHRO</strong> (Fractional Chief Human Resources Officer) is an experienced HR executive who works with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic people leadership without the cost of a full-time hire.</p>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-purple-400 mb-4">Role Definition</h2>
+            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CHRO</strong> (Fractional Chief Human Resources Officer) is an experienced HR executive who partners with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic people leadership without the cost of a full-time hire.</p>
           </div>
         </div>
       </section>
@@ -82,10 +82,10 @@ export default function FractionalChroPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CHRO? Understanding the Role</h2>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CHRO meaning</strong> centres on flexible, senior-level HR leadership. Unlike traditional full-time CHROs earning £120,000-£200,000 annually, a <strong>fractional Chief HR Officer</strong> works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.</p>
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CHRO meaning</strong> centres on flexible, senior-level HR leadership. Unlike traditional full-time CHROs earning £120,000-£200,000 annually, a part-time HR executive works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.</p>
             <p>This model emerged from the need for companies to access senior HR expertise during critical phases - scaling teams, building culture, or navigating complex employment situations - without the overhead of a full-time executive.</p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional CHRO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities</h2>
             <p>A <strong>fractional CHRO</strong> performs the same functions as a full-time Chief Human Resources Officer, but on a part-time basis:</p>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
@@ -105,7 +105,7 @@ export default function FractionalChroPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CHRO vs Full-Time CHRO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Comparison: Fractional vs Full-Time</h2>
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-50">
@@ -125,7 +125,7 @@ export default function FractionalChroPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional CHRO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When to Hire</h2>
             <ul className="space-y-3">
               <li><strong>Rapid scaling:</strong> When team is growing 50%+ annually and needs HR infrastructure</li>
               <li><strong>Culture challenges:</strong> When company culture needs deliberate development or repair</li>
@@ -135,10 +135,10 @@ export default function FractionalChroPage() {
               <li><strong>Compliance needs:</strong> Ensuring employment law compliance as complexity grows</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CHRO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">UK Cost Guide</h2>
             <p><strong>Fractional CHRO</strong> costs in the UK typically range from £600-£1,100 per day:</p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional CHRO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £2,400-£4,400/month (£29,000-£53,000/year)</li>
                 <li><strong>2 days/week:</strong> £4,800-£8,800/month (£58,000-£106,000/year)</li>
@@ -155,7 +155,7 @@ export default function FractionalChroPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Fractional CHRO Cost Calculator</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Cost Calculator</h2>
           </div>
           <RoleCalculator role="chro" />
         </div>
@@ -166,7 +166,7 @@ export default function FractionalChroPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions About Fractional CHROs</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions</h2>
           </div>
           <FAQ items={CHRO_FAQS} title="" />
         </div>
@@ -275,8 +275,8 @@ export default function FractionalChroPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Work with a Fractional CHRO?</h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted fractional CHRO candidates or post your requirements to find the perfect match.</p>
+          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Get Started?</h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted HR leadership candidates or post your requirements to find the perfect match.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/fractional-chro-jobs-uk" className="px-8 py-4 bg-purple-500 text-white font-bold rounded-lg hover:bg-purple-400 transition-colors">Browse Fractional CHROs</Link>
             <Link href="/fractional-jobs-uk?department=HR" className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors">All HR Jobs</Link>

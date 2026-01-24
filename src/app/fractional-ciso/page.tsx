@@ -48,7 +48,7 @@ export default function FractionalCisoPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <Image src={heroImage} alt={`${imageAlt} - What is a Fractional CISO`} fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src={heroImage} alt={`${imageAlt} - What is a Fractional CISO`} title="Fractional CISO - Part-Time Security Leadership" fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/90 via-rose-500/80 to-orange-500/60" />
         <div className="relative z-10 w-full py-16">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -78,8 +78,8 @@ export default function FractionalCisoPage() {
       <section className="py-12 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-8">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-red-400 mb-4">Fractional CISO Definition</h2>
-            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CISO</strong> (Fractional Chief Information Security Officer) is an experienced cybersecurity executive who works with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic security leadership without the cost of a full-time hire.</p>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-red-400 mb-4">Role Definition</h2>
+            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CISO</strong> (Fractional Chief Information Security Officer) is an experienced cybersecurity executive who partners with organisations on a part-time or contract basis, typically 1-3 days per week, providing strategic security leadership without the cost of a full-time hire.</p>
           </div>
         </div>
       </section>
@@ -89,10 +89,10 @@ export default function FractionalCisoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CISO? Understanding the Role</h2>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CISO meaning</strong> centres on flexible, senior-level cybersecurity leadership. Unlike traditional full-time CISOs earning £150,000-£250,000 annually, a <strong>fractional Chief Security Officer</strong> works with multiple companies simultaneously, bringing diverse security experience across industries and compliance frameworks.</p>
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CISO meaning</strong> centres on flexible, senior-level cybersecurity leadership. Unlike traditional full-time CISOs earning £150,000-£250,000 annually, a <strong>part-time security executive</strong> works with multiple companies simultaneously, bringing diverse security experience across industries and compliance frameworks.</p>
             <p>With increasing cyber threats, regulatory requirements (GDPR, SOC 2, ISO 27001), and customer security questionnaires, companies need senior security leadership but often cannot justify or afford a full-time CISO. The fractional model provides enterprise-grade security expertise at a fraction of the cost.</p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional CISO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities</h2>
             <p>A <strong>fractional CISO</strong> performs the same functions as a full-time Chief Information Security Officer, but on a part-time basis:</p>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
@@ -112,7 +112,7 @@ export default function FractionalCisoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CISO vs Security Consultant</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Comparison: Fractional vs Consultant</h2>
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-50">
@@ -132,7 +132,7 @@ export default function FractionalCisoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional CISO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When to Hire</h2>
             <ul className="space-y-3">
               <li><strong>SOC 2 certification:</strong> When pursuing SOC 2 Type I or Type II compliance</li>
               <li><strong>Enterprise sales:</strong> When large customers require security questionnaires and audits</li>
@@ -142,10 +142,10 @@ export default function FractionalCisoPage() {
               <li><strong>Incident preparation:</strong> Building incident response capabilities before a breach occurs</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CISO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">UK Cost Guide</h2>
             <p><strong>Fractional CISO</strong> costs in the UK typically range from £900-£1,500 per day:</p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional CISO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £3,600-£6,000/month (£43,000-£72,000/year)</li>
                 <li><strong>2 days/week:</strong> £7,200-£12,000/month (£86,000-£144,000/year)</li>
@@ -167,7 +167,7 @@ export default function FractionalCisoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Fractional CISO Cost Calculator</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Cost Calculator</h2>
           </div>
           <RoleCalculator role="ciso" />
         </div>
@@ -178,7 +178,7 @@ export default function FractionalCisoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions About Fractional CISOs</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Frequently Asked Questions</h2>
           </div>
           <FAQ items={CISO_FAQS} title="" />
         </div>
@@ -287,8 +287,8 @@ export default function FractionalCisoPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Work with a Fractional CISO?</h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted fractional CISO candidates or post your requirements to find the perfect match.</p>
+          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Get Started?</h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Browse pre-vetted security leadership candidates or post your requirements to find the perfect match.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/fractional-ciso-jobs-uk" className="px-8 py-4 bg-red-500 text-white font-bold rounded-lg hover:bg-red-400 transition-colors">Browse Fractional CISOs</Link>
             <Link href="/fractional-jobs-uk?department=Security" className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors">All Security Jobs</Link>

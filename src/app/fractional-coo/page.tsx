@@ -9,11 +9,10 @@ import { LazyYouTube } from '@/components/LazyYouTube'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { RoleCalculator } from '@/components/RoleCalculator'
-import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 const ogImage = getOGImageUrl('coo')
 const imageAlt = getImage('coo').alt
-const heroImage = getHeroImageUrl('coo', 1920, 800)
 const imageCredit = getImage('coo')
 
 export const metadata: Metadata = {
@@ -56,8 +55,9 @@ export default function FractionalCooPage() {
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <Image
-          src={heroImage}
+          src="/images/hero/fractional-coo-jobs-uk-desktop.webp"
           alt={`What is a Fractional COO - ${imageAlt}`}
+          title="Fractional COO - Part-Time Operations Leadership"
           fill
           priority
           sizes="100vw"
@@ -125,7 +125,7 @@ export default function FractionalCooPage() {
               <p className="text-gray-500 text-sm mt-3">Video: Understanding the fractional COO role and responsibilities</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional COO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities and Deliverables</h2>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -144,7 +144,7 @@ export default function FractionalCooPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional COO vs Full-Time COO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Part-Time vs Full-Time: How They Compare</h2>
 
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
@@ -180,7 +180,7 @@ export default function FractionalCooPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional COO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Does Your Business Need One?</h2>
 
             <ul className="space-y-3">
               <li><strong>Rapid growth:</strong> Operations struggling to keep up with sales</li>
@@ -198,10 +198,10 @@ export default function FractionalCooPage() {
               </Link>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional COO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Cost and Pricing UK</h2>
 
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional COO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing Breakdown</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £2,500-£4,800/month (£30,000-£58,000/year)</li>
                 <li><strong>2 days/week:</strong> £5,000-£9,600/month (£60,000-£115,000/year)</li>
@@ -210,7 +210,7 @@ export default function FractionalCooPage() {
               <p className="text-sm text-gray-600 mt-4">Compare to full-time COO: £130,000-£230,000+ (salary + benefits + equity)</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Types of Fractional COO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Types of Operations Leadership Engagement</h2>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -248,7 +248,7 @@ export default function FractionalCooPage() {
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
             <h2 className="text-2xl md:text-3xl font-black text-gray-900">
-              Fractional COO Cost Calculator
+              Day Rate Calculator
             </h2>
           </div>
           <RoleCalculator role="coo" />
@@ -261,7 +261,7 @@ export default function FractionalCooPage() {
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
             <h2 className="text-3xl md:text-4xl font-black text-gray-900">
-              Frequently Asked Questions About Fractional COOs
+              Frequently Asked Questions
             </h2>
           </div>
           <FAQ items={COO_FAQS} title="" />
@@ -274,7 +274,7 @@ export default function FractionalCooPage() {
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">Professional Bodies & Industry Associations</h2>
             <p>
-              Many <strong>fractional COOs</strong> are members of recognized operations and management bodies. Key organizations include:
+              Many <strong>part-time operations leaders</strong> are members of recognized operations and management bodies. Key organizations include:
             </p>
             <div className="grid md:grid-cols-2 gap-4 not-prose my-8">
               <a href="https://www.managers.org.uk" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-slate-400 hover:shadow-md transition-all group">
@@ -401,10 +401,10 @@ export default function FractionalCooPage() {
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Work with a Fractional COO?
+            Ready to Get Started?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted fractional COO candidates or post your requirements.
+            Browse pre-vetted operations leaders or post your requirements.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
@@ -428,8 +428,8 @@ export default function FractionalCooPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional COO Jobs UK</h2>
-            <p className="text-xl text-gray-500">Find your next fractional COO opportunity</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Latest Operations Leadership Jobs</h2>
+            <p className="text-xl text-gray-500">Find your next part-time operations opportunity</p>
           </div>
           <EmbeddedJobBoard
             defaultDepartment="Operations"
