@@ -79,16 +79,16 @@ export const cmoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Fractional CMO Jobs UK: Marketing Leadership on Demand",
+      title: "Marketing Leadership on Demand: The UK Market",
       paragraphs: [
-        "Fractional CMO jobs UK have grown 280% since 2020 as companies recognise senior marketing leadership doesn't require a full-time hire. According to the Chartered Institute of Marketing, 78% of UK businesses now view flexible marketing leadership as essential.",
-        "When searching for fractional CMO jobs UK offers the most diverse opportunities—B2B SaaS, D2C, professional services, and enterprise sectors. Marketing Week reports that companies using fractional CMOs see 34% faster time-to-market on campaigns.",
-        "For marketing leaders seeking fractional CMO jobs UK provides excellent earning potential (£850-£1,300/day) with flexibility. Whether you're a former CMO, Marketing Director ready for C-suite challenges, or growth leader looking to diversify, the market is thriving.",
+        "<strong>Fractional CMO jobs</strong> UK have grown 280% since 2020 as companies recognise senior marketing leadership doesn't require a full-time hire. According to the Chartered Institute of Marketing, 78% of UK businesses now view flexible marketing leadership as essential.",
+        "When searching for <strong>fractional CMO jobs</strong> UK offers the most diverse opportunities—B2B SaaS, D2C, professional services, and enterprise sectors. Marketing Week reports that companies using fractional CMOs see 34% faster time-to-market on campaigns.",
+        "For marketing leaders seeking <strong>fractional CMO jobs</strong> UK provides excellent earning potential (£850-£1,300/day) with flexibility. Whether you're a former CMO, Marketing Director ready for C-suite challenges, or growth leader looking to diversify, the market is thriving.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CMO Day Rates by Sector",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary by sector and marketing complexity (Source: Marketing Week, CIM):",
       rates: [
@@ -101,7 +101,7 @@ export const cmoJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CMO Sectors and Locations",
+      title: "Key Marketing Sectors and Hubs",
       areas: [
         {
           name: "B2B SaaS & Tech",
@@ -131,7 +131,7 @@ export const cmoJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CMO Roles",
+      title: "Specialist Marketing Leadership Roles",
       roles: [
         {
           title: "Growth CMO",
@@ -161,9 +161,9 @@ export const cmoJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CMO Work",
+      title: "The Future of Fractional Marketing Leadership",
       paragraphs: [
-        "The IPA forecasts marketing budgets will grow 4.3% in 2026, with increasing allocation to strategic leadership versus execution. This creates sustained demand for fractional CMOs who can guide strategy while building internal capabilities.",
+        "The IPA forecasts marketing budgets will grow 4.3% in 2026, with increasing allocation to strategic leadership versus execution. This creates sustained demand for <strong>fractional CMO</strong> professionals who can guide strategy while building internal capabilities.",
         "Key trends shaping the fractional CMO market include: the rise of AI-augmented marketing requiring strategic oversight, growing importance of first-party data strategies, and the need for marketing leaders who understand both brand and performance.",
       ],
     },

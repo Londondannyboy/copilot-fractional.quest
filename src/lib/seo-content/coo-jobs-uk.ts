@@ -79,16 +79,16 @@ export const cooJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Fractional COO Jobs UK: Operations Leadership on Demand",
+      title: "Operations Leadership on Demand: The UK Market",
       paragraphs: [
-        "Fractional COO jobs UK have grown 220% since 2020 as companies need experienced operational leadership without full-time overhead. The ScaleUp Institute reports that 65% of UK scale-ups now use fractional operations leadership.",
-        "When searching for fractional COO jobs UK offers diverse opportunities—PE-backed companies, scale-ups, tech, professional services, and manufacturing. CMI research shows companies with fractional COOs scale 40% faster.",
-        "For operations leaders seeking fractional COO jobs UK provides excellent earning potential (£900-£1,300/day) with variety. Whether you're a former COO, Operations Director, or general manager, the market is thriving.",
+        "<strong>Fractional COO jobs</strong> UK have grown 220% since 2020 as companies need experienced operational leadership without full-time overhead. The ScaleUp Institute reports that 65% of UK scale-ups now use fractional operations leadership.",
+        "When searching for <strong>fractional COO jobs</strong> UK offers diverse opportunities—PE-backed companies, scale-ups, tech, professional services, and manufacturing. CMI research shows companies with fractional COOs scale 40% faster.",
+        "For operations leaders seeking <strong>fractional COO jobs</strong> UK provides excellent earning potential (£900-£1,300/day) with variety. Whether you're a former COO, Operations Director, or general manager, the market is thriving.",
       ],
     },
 
     dayRates: {
-      title: "Fractional COO Day Rates by Company Type",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary by company size and operational complexity (Source: CMI, IoD):",
       rates: [
@@ -101,7 +101,7 @@ export const cooJobsUkSEO = {
     },
 
     locations: {
-      title: "Key COO Sectors",
+      title: "Key Operations Sectors and Hubs",
       areas: [
         {
           name: "Tech Scale-ups",
@@ -131,7 +131,7 @@ export const cooJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist COO Roles",
+      title: "Specialist Operations Leadership Roles",
       roles: [
         {
           title: "Integrator/EOS COO",
@@ -161,9 +161,9 @@ export const cooJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional COO Work",
+      title: "The Future of Fractional Operations Leadership",
       paragraphs: [
-        "The CMI forecasts continued strong demand for fractional operations leaders through 2028, driven by the ongoing complexity of scaling businesses, the popularity of operating systems like EOS, and the increasing acceptance of portfolio careers among senior operators.",
+        "The CMI forecasts continued strong demand for <strong>fractional COO</strong> professionals through 2028, driven by the ongoing complexity of scaling businesses, the popularity of operating systems like EOS, and the increasing acceptance of portfolio careers among senior operators.",
         "Key trends shaping the fractional COO market include: growing demand for COOs with AI implementation experience, increasing importance of operational resilience post-pandemic, and the rise of hybrid operational models requiring sophisticated coordination.",
       ],
     },

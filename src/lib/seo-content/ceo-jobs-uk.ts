@@ -79,16 +79,16 @@ export const ceoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional CEO Demand is Emerging",
+      title: "Executive Leadership on Demand: The UK Market",
       paragraphs: [
-        "An emerging model in the UK, fractional CEO roles serve companies in transition - founder-led businesses seeking experienced leadership, PE portfolio companies needing interim management, or organisations navigating strategic pivots. According to the IoD, 45% of PE-backed companies now use some form of interim executive leadership.",
-        "McKinsey research shows that companies with experienced interim CEOs achieve 35% better outcomes during transitions than those promoting internally or hiring externally into permanent roles. The fractional model provides proven leadership without long-term commitment risk.",
-        "Whether you're a former CEO seeking portfolio work, an MD ready for broader challenges, or an experienced operator looking to guide multiple businesses, the UK fractional CEO market offers unique opportunities to leverage your experience across diverse situations.",
+        "An emerging model in the UK, <strong>fractional CEO jobs</strong> serve companies in transition - founder-led businesses seeking experienced leadership, PE portfolio companies needing interim management, or organisations navigating strategic pivots. According to the IoD, 45% of PE-backed companies now use some form of interim executive leadership.",
+        "McKinsey research shows that companies with experienced interim CEOs achieve 35% better outcomes during transitions than those promoting internally or hiring externally into permanent roles. The fractional model provides proven leadership without long-term commitment risk, making <strong>fractional CEO jobs</strong> increasingly attractive.",
+        "Whether you're a former CEO seeking portfolio work, an MD ready for broader challenges, or an experienced operator looking to guide multiple businesses, the UK market for <strong>fractional CEO jobs</strong> offers unique opportunities to leverage your experience across diverse situations.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CEO Day Rates by Situation",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary by company situation and complexity (Source: IoD, BVCA):",
       rates: [
@@ -101,7 +101,7 @@ export const ceoJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CEO Sectors",
+      title: "Key Executive Sectors and Hubs",
       areas: [
         {
           name: "PE Portfolio Companies",
@@ -131,7 +131,7 @@ export const ceoJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CEO Roles",
+      title: "Specialist Executive Leadership Roles",
       roles: [
         {
           title: "Operating Partner",
@@ -161,9 +161,9 @@ export const ceoJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CEO Work",
+      title: "The Future of Fractional Executive Leadership",
       paragraphs: [
-        "The IoD forecasts continued growth in fractional executive leadership through 2028, driven by increasing PE activity, the complexity of scaling businesses, and the growing acceptance of portfolio careers among senior executives.",
+        "The IoD forecasts continued growth in <strong>fractional CEO</strong> leadership through 2028, driven by increasing PE activity, the complexity of scaling businesses, and the growing acceptance of portfolio careers among senior executives.",
         "Key trends shaping the fractional CEO market include: growing demand for CEOs with AI/digital transformation experience, increasing importance of ESG and stakeholder leadership, and the rise of operating partner models in private equity.",
       ],
     },

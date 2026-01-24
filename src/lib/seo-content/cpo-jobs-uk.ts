@@ -79,16 +79,16 @@ export const cpoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional CPO Demand is Growing",
+      title: "Product Leadership on Demand: The UK Market",
       paragraphs: [
-        "Tech companies increasingly need senior product leadership to drive roadmap strategy, user research, and product-market fit. According to Mind the Product, 65% of UK tech companies struggle to hire permanent product leaders, making fractional CPOs an essential solution.",
-        "The fractional CPO model delivers experienced product expertise without full-time overhead. Silicon Valley Product Group research shows that companies with strong product leadership are 3x more likely to achieve product-market fit and 2x more likely to succeed in fundraising.",
-        "Whether you're a former CPO seeking portfolio work, a VP Product ready for broader challenges, or a product leader looking to mentor multiple teams, the UK fractional CPO market offers compelling opportunities across B2B SaaS, fintech, marketplaces, and consumer tech.",
+        "Tech companies increasingly need senior product leadership to drive roadmap strategy, user research, and product-market fit. According to Mind the Product, 65% of UK tech companies struggle to hire permanent product leaders, making <strong>fractional CPO jobs</strong> an essential solution.",
+        "The fractional CPO model delivers experienced product expertise without full-time overhead. Silicon Valley Product Group research shows that companies with strong product leadership are 3x more likely to achieve product-market fit and 2x more likely to succeed in fundraising. This drives sustained demand for <strong>fractional CPO jobs</strong> across the UK.",
+        "Whether you're a former CPO seeking portfolio work, a VP Product ready for broader challenges, or a product leader looking to mentor multiple teams, the UK market for <strong>fractional CPO jobs</strong> offers compelling opportunities across B2B SaaS, fintech, marketplaces, and consumer tech.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CPO Day Rates by Company Stage",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary by company stage and product complexity (Source: Mind the Product, Lenny's Newsletter):",
       rates: [
@@ -101,7 +101,7 @@ export const cpoJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CPO Sectors and Product Hubs",
+      title: "Key Product Sectors and Hubs",
       areas: [
         {
           name: "B2B SaaS",
@@ -131,7 +131,7 @@ export const cpoJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CPO Roles",
+      title: "Specialist Product Leadership Roles",
       roles: [
         {
           title: "0-1 Product Lead",
@@ -161,9 +161,9 @@ export const cpoJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CPO Work",
+      title: "The Future of Fractional Product Leadership",
       paragraphs: [
-        "Mind the Product forecasts product leadership demand will outpace supply through 2028, with particular shortages in AI product, growth, and platform specialisations. This creates sustained demand for fractional CPOs who can guide multiple companies.",
+        "Mind the Product forecasts product leadership demand will outpace supply through 2028, with particular shortages in AI product, growth, and platform specialisations. This creates sustained demand for <strong>fractional CPO</strong> professionals who can guide multiple companies.",
         "Key trends shaping the fractional CPO market include: the rise of AI-first products requiring new product paradigms, growing importance of product-led growth strategies, and increasing expectation that CPOs understand both product and commercial metrics.",
       ],
     },

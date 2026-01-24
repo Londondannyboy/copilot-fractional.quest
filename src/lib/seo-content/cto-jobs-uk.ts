@@ -79,16 +79,16 @@ export const ctoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Fractional CTO Jobs UK: Tech Leadership on Demand",
+      title: "Tech Leadership on Demand: The UK Market",
       paragraphs: [
-        "Fractional CTO jobs UK have surged 320% since 2019 as startups and scale-ups seek experienced technology leadership without full-time overhead. According to Tech Nation, the UK has over 150,000 tech companies needing technical guidance.",
+        "<strong>Fractional CTO jobs</strong> in the UK have surged 320% since 2019 as startups and scale-ups seek experienced technology leadership without full-time overhead. According to Tech Nation, the UK has over 150,000 tech companies needing technical guidance.",
         "When searching for fractional CTO jobs UK offers unmatched variety—fintech, healthtech, SaaS, and AI/ML companies all actively hiring. BCS research shows companies with fractional CTOs ship products 45% faster while maintaining 60% better code quality.",
-        "For tech leaders seeking fractional CTO jobs UK provides exceptional earning potential (£900-£1,400/day) with portfolio variety. Whether you're a former CTO, VP Engineering, or technical founder, the market offers compelling opportunities.",
+        "For tech leaders seeking <strong>fractional CTO jobs</strong>, the UK provides exceptional earning potential (£900-£1,400/day) with portfolio variety. Whether you're a former CTO, VP Engineering, or technical founder, the market offers compelling opportunities.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CTO Day Rates by Company Stage",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary by company stage and technical complexity (Source: Stack Overflow, Tech Nation):",
       rates: [
@@ -101,7 +101,7 @@ export const ctoJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CTO Sectors and Tech Hubs",
+      title: "Key Technology Sectors and Hubs",
       areas: [
         {
           name: "Fintech & Financial Services",
@@ -131,7 +131,7 @@ export const ctoJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CTO Roles",
+      title: "Specialist Technology Leadership Roles",
       roles: [
         {
           title: "Platform CTO",
@@ -161,9 +161,9 @@ export const ctoJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CTO Work",
+      title: "The Future of Fractional Tech Leadership",
       paragraphs: [
-        "Tech Nation projects the UK tech sector will add 678,000 jobs by 2030, with persistent skills shortages at the leadership level. This creates sustained structural demand for fractional CTOs who can guide multiple companies simultaneously.",
+        "Tech Nation projects the UK tech sector will add 678,000 jobs by 2030, with persistent skills shortages at the leadership level. This creates sustained structural demand for <strong>fractional CTO</strong> roles who can guide multiple companies simultaneously.",
         "Key trends shaping the fractional CTO market include: the rise of AI requiring specialist technical leadership, increasing cloud complexity demanding architecture expertise, and the ongoing normalisation of portfolio careers among senior technologists.",
       ],
     },

@@ -79,16 +79,16 @@ export const cisoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional CISO Demand is Surging",
+      title: "Security Leadership on Demand: The UK Market",
       paragraphs: [
-        "With cyber threats increasing and regulatory requirements tightening, every company needs security leadership. The NCSC reports 2.7 million cyber attacks on UK businesses annually, yet only 14% of businesses have a dedicated security lead. The fractional CISO model delivers experienced cybersecurity expertise without the £200k+ full-time cost.",
-        "The UK Cyber Security Council estimates a gap of 50,000 unfilled security roles, with senior leadership positions being the hardest to fill. (ISC)² research shows that companies with fractional CISOs achieve 40% faster compliance and 60% better incident response compared to those without dedicated security leadership.",
-        "Whether you're a former CISO seeking portfolio work, a Security Director ready for C-suite challenges, or a consultant looking for ongoing engagements, the UK fractional CISO market offers exceptional opportunities across all sectors handling sensitive data.",
+        "With cyber threats increasing and regulatory requirements tightening, every company needs security leadership. The NCSC reports 2.7 million cyber attacks on UK businesses annually, yet only 14% of businesses have a dedicated security lead. <strong>Fractional CISO jobs</strong> deliver experienced cybersecurity expertise without the £200k+ full-time cost.",
+        "The UK Cyber Security Council estimates a gap of 50,000 unfilled security roles, with senior leadership positions being the hardest to fill. (ISC)² research shows that companies with <strong>fractional CISO jobs</strong> achieve 40% faster compliance and 60% better incident response compared to those without dedicated security leadership.",
+        "Whether you're a former CISO seeking portfolio work, a Security Director ready for C-suite challenges, or a consultant looking for ongoing engagements, the UK <strong>fractional CISO jobs</strong> market offers exceptional opportunities across all sectors handling sensitive data.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CISO Day Rates by Sector",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary by regulatory requirements and security complexity (Source: (ISC)², ISACA UK):",
       rates: [
@@ -101,7 +101,7 @@ export const cisoJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CISO Sectors and Security Hubs",
+      title: "Key Security Sectors and Hubs",
       areas: [
         {
           name: "Financial Services",
@@ -131,7 +131,7 @@ export const cisoJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CISO Roles",
+      title: "Specialist Security Leadership Roles",
       roles: [
         {
           title: "Virtual CISO (vCISO)",
@@ -161,10 +161,10 @@ export const cisoJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CISO Work",
+      title: "The Future of Fractional Security Leadership",
       paragraphs: [
         "The UK Cyber Security Council projects demand for security leaders will grow 25% annually through 2028, outpacing supply. Regulatory pressure from DORA, NIS2, and evolving GDPR requirements ensures sustained demand for experienced CISOs.",
-        "Key trends shaping the fractional CISO market include: the rise of AI-powered attacks requiring sophisticated defences, increasing board-level accountability for cyber risk, and the ongoing shortage of qualified security professionals creating premium rates for experienced leaders.",
+        "Key trends shaping the <strong>fractional CISO</strong> market include: the rise of AI-powered attacks requiring sophisticated defences, increasing board-level accountability for cyber risk, and the ongoing shortage of qualified security professionals creating premium rates for experienced leaders.",
       ],
     },
   },

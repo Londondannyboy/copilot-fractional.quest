@@ -81,18 +81,18 @@ export const cioJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Fractional CIO Jobs UK: IT Leadership on Demand",
+      title: "IT Leadership on Demand: The UK Market",
       paragraphs: [
-        "Fractional CIO jobs UK have surged 290% since 2020 as digital transformation accelerates across all sectors. According to Gartner, 74% of UK enterprises are accelerating their digital agendas, creating unprecedented demand for experienced IT leaders who can drive change without the overhead of a permanent C-suite hire.",
-        "The BCS reports that the UK faces a shortage of 50,000+ technology professionals, with senior IT leadership being the hardest to fill. Fractional CIOs provide mid-market and growing companies access to enterprise-grade IT strategy expertise that would otherwise be unaffordable. Companies with fractional CIOs report 40% faster technology adoption.",
-        "For IT leaders seeking fractional CIO jobs UK provides exceptional opportunities across digital transformation, cloud migration, legacy modernisation, and IT strategy development. Whether you're a former CIO, IT Director, or technology transformation leader, the market offers compelling portfolio career opportunities.",
+        "<strong>Fractional CIO jobs</strong> in the UK have surged 290% since 2020 as digital transformation accelerates across all sectors. According to Gartner, 74% of UK enterprises are accelerating their digital agendas, creating unprecedented demand for experienced IT leaders who can drive change without the overhead of a permanent C-suite hire.",
+        "The BCS reports that the UK faces a shortage of 50,000+ technology professionals, with senior IT leadership being the hardest to fill. <strong>Fractional CIOs</strong> provide mid-market and growing companies access to enterprise-grade IT strategy expertise that would otherwise be unaffordable. Companies with fractional technology leaders report 40% faster technology adoption.",
+        "For IT leaders seeking <strong>fractional CIO jobs</strong>, the UK provides exceptional opportunities across digital transformation, cloud migration, legacy modernisation, and IT strategy development. Whether you're a former Chief Information Officer, IT Director, or technology transformation leader, the market offers compelling portfolio career opportunities.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CIO Day Rates by Sector",
+      title: "Day Rates by Sector",
       description:
-        "Day rates vary by sector complexity and transformation scope (Source: Gartner, BCS, Glassdoor UK):",
+        "Fractional CIO day rates vary by sector complexity and transformation scope (Source: Gartner, BCS, Glassdoor UK):",
       rates: [
         { role: "Financial Services", range: "£1,200 - £1,800/day", typical: "£1,400", annual: "£240-360k" },
         { role: "Digital Transformation", range: "£1,100 - £1,600/day", typical: "£1,300", annual: "£220-320k" },
@@ -103,7 +103,7 @@ export const cioJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CIO Sectors and IT Hubs",
+      title: "Key Sectors and IT Hubs",
       areas: [
         {
           name: "Digital Transformation",
@@ -133,7 +133,7 @@ export const cioJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CIO Roles",
+      title: "Specialist IT Leadership Roles",
       roles: [
         {
           title: "Transformation CIO",
@@ -163,10 +163,10 @@ export const cioJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CIO Work",
+      title: "The Future of Fractional IT Leadership",
       paragraphs: [
-        "Gartner predicts continued strong demand for fractional CIOs through 2028, driven by accelerating AI adoption, increasing cyber threats requiring senior leadership, and the ongoing shortage of experienced IT leaders. The role is evolving from pure technology management to business transformation leadership.",
-        "Key trends shaping the fractional CIO market include: growing demand for AI strategy expertise, increasing importance of operational resilience and disaster recovery, and the rise of CIOs who combine technology leadership with commercial acumen and change management skills.",
+        "Gartner predicts continued strong demand for <strong>fractional CIO</strong> roles through 2028, driven by accelerating AI adoption, increasing cyber threats requiring senior leadership, and the ongoing shortage of experienced IT leaders. The role is evolving from pure technology management to business transformation leadership.",
+        "Key trends shaping the <strong>fractional CIO jobs</strong> market include: growing demand for AI strategy expertise, increasing importance of operational resilience and disaster recovery, and the rise of technology leaders who combine IT strategy with commercial acumen and change management skills.",
       ],
     },
   },

@@ -79,16 +79,16 @@ export const cfoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Fractional CFO Jobs UK: Finance Leadership on Demand",
+      title: "Finance Leadership on Demand: The UK Market",
       paragraphs: [
-        "Fractional CFO jobs UK have grown 250% since 2020 as PE-backed companies, high-growth startups, and SMEs prefer flexible finance leadership. According to ICAEW, 45% of growing UK SMEs now use part-time finance leadership.",
+        "<strong>Fractional CFO jobs</strong> in the UK have grown 250% since 2020 as PE-backed companies, high-growth startups, and SMEs prefer flexible finance leadership. According to ICAEW, 45% of growing UK SMEs now use part-time finance leadership.",
         "When searching for fractional CFO jobs UK offers the most premium rates—£1,000-£1,500/day. The BVCA reports 78% of portfolio companies have engaged fractional CFOs for fundraising, M&A, and financial system implementations.",
-        "For finance leaders seeking fractional CFO jobs UK provides exceptional opportunities across all sectors. Whether you're ACA/ACCA qualified, a former Finance Director, or CFO ready for variety, the market is thriving.",
+        "For finance leaders seeking <strong>fractional CFO jobs</strong>, the UK provides exceptional opportunities across all sectors. Whether you're ACA/ACCA qualified, a former Finance Director, or CFO ready for variety, the market is thriving.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CFO Day Rates by Sector",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary significantly by sector and complexity (Source: Glassdoor UK, ICAEW):",
       rates: [
@@ -101,7 +101,7 @@ export const cfoJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CFO Sectors",
+      title: "Key Finance Sectors and Hubs",
       areas: [
         {
           name: "PE-Backed Companies",
@@ -131,7 +131,7 @@ export const cfoJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CFO Roles",
+      title: "Specialist Finance Leadership Roles",
       roles: [
         {
           title: "M&A CFO",
@@ -161,9 +161,9 @@ export const cfoJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CFO Work",
+      title: "The Future of Fractional Finance Leadership",
       paragraphs: [
-        "ICAEW forecasts continued strong demand for fractional CFOs through 2028, driven by the ongoing skills shortage in senior finance roles, increasing PE activity, and the normalisation of portfolio careers among qualified accountants.",
+        "ICAEW forecasts continued strong demand for <strong>fractional CFO</strong> roles through 2028, driven by the ongoing skills shortage in senior finance roles, increasing PE activity, and the normalisation of portfolio careers among qualified accountants.",
         "Key trends shaping the fractional CFO market include: growing demand for CFOs with AI/automation implementation experience, increasing importance of ESG and sustainability reporting, and the rise of part-time FDs progressing to portfolio CFO roles.",
       ],
     },

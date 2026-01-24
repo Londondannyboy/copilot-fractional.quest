@@ -65,9 +65,7 @@ export function SEOContent({ content }: SEOContentProps) {
         <SectionHeading>{content.whyLocation.title}</SectionHeading>
         <div className="max-w-3xl space-y-5 sm:space-y-6 px-1 sm:px-0">
           {content.whyLocation.paragraphs.map((p, i) => (
-            <p key={i} className="text-gray-600 leading-relaxed text-base sm:text-lg">
-              {p}
-            </p>
+            <p key={i} className="text-gray-600 leading-relaxed text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: p }} />
           ))}
         </div>
       </Section>
@@ -130,7 +128,7 @@ export function SEOContent({ content }: SEOContentProps) {
             <div key={i} className="relative rounded-xl overflow-hidden shadow-md h-56 sm:h-64 group">
               <Image
                 src={SECTOR_IMAGES[i % SECTOR_IMAGES.length]}
-                alt={area.name}
+                alt={`${area.name} - fractional jobs`}
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
@@ -164,7 +162,7 @@ export function SEOContent({ content }: SEOContentProps) {
             <div key={i} className="relative rounded-xl overflow-hidden shadow-md h-52 sm:h-56 group">
               <Image
                 src={ROLE_IMAGES[i % ROLE_IMAGES.length]}
-                alt={role.title}
+                alt={`${role.title} - fractional jobs UK`}
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
@@ -185,6 +183,18 @@ export function SEOContent({ content }: SEOContentProps) {
           ))}
         </div>
       </Section>
+
+      {/* Future Outlook Section */}
+      {content.futureOutlook && (
+        <Section className="py-10 sm:py-16">
+          <SectionHeading>{content.futureOutlook.title}</SectionHeading>
+          <div className="max-w-3xl space-y-5 sm:space-y-6 px-1 sm:px-0">
+            {content.futureOutlook.paragraphs.map((p, i) => (
+              <p key={i} className="text-gray-600 leading-relaxed text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: p }} />
+            ))}
+          </div>
+        </Section>
+      )}
     </>
   );
 }

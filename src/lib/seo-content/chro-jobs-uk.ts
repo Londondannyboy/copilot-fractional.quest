@@ -79,16 +79,16 @@ export const chroJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional CHRO Demand is Growing",
+      title: "HR Leadership on Demand: The UK Market",
       paragraphs: [
-        "As companies navigate hybrid work, talent retention, and culture building, experienced HR leadership has become critical. CIPD research shows that 55% of UK scale-ups now use some form of fractional people leadership - up from just 20% in 2019.",
-        "The fractional CHRO model delivers senior people strategy without full-time overhead. According to People Management, companies with fractional CHROs report 35% better retention rates and 40% faster time-to-hire compared to those without senior HR leadership.",
-        "Whether you're a former CHRO seeking portfolio work, an HR Director ready for C-suite challenges, or a people leader looking to share expertise across multiple organisations, the UK fractional CHRO market offers growing opportunities across tech, professional services, and growing enterprises.",
+        "As companies navigate hybrid work, talent retention, and culture building, experienced HR leadership has become critical. CIPD research shows that 55% of UK scale-ups now use some form of fractional people leadership - up from just 20% in 2019. This has led to a surge in <strong>fractional CHRO jobs</strong> across the country.",
+        "The fractional CHRO model delivers senior people strategy without full-time overhead. According to People Management, companies with <strong>fractional CHRO jobs</strong> report 35% better retention rates and 40% faster time-to-hire compared to those without senior HR leadership.",
+        "Whether you're a former CHRO seeking portfolio work, an HR Director ready for C-suite challenges, or a people leader looking to share expertise across multiple organisations, the UK market for <strong>fractional CHRO jobs</strong> offers growing opportunities across tech, professional services, and growing enterprises.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CHRO Day Rates by Company Stage",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary by company size and HR complexity (Source: CIPD, HR Magazine):",
       rates: [
@@ -101,7 +101,7 @@ export const chroJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CHRO Sectors",
+      title: "Key HR Sectors and Hubs",
       areas: [
         {
           name: "Tech & Scale-ups",
@@ -131,7 +131,7 @@ export const chroJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CHRO Roles",
+      title: "Specialist HR Leadership Roles",
       roles: [
         {
           title: "Culture & Transformation CHRO",
@@ -161,9 +161,9 @@ export const chroJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CHRO Work",
+      title: "The Future of Fractional HR Leadership",
       paragraphs: [
-        "CIPD forecasts continued strong demand for fractional HR leaders through 2028, driven by the ongoing complexity of people management, the importance of culture in hybrid environments, and the increasing acceptance of portfolio careers among senior HR professionals.",
+        "CIPD forecasts continued strong demand for <strong>fractional CHRO</strong> leaders through 2028, driven by the ongoing complexity of people management, the importance of culture in hybrid environments, and the increasing acceptance of portfolio careers among senior HR professionals.",
         "Key trends shaping the fractional CHRO market include: growing demand for CHROs with AI/HR tech implementation experience, increasing importance of DEI leadership, and the rise of employee experience as a strategic priority requiring senior attention.",
       ],
     },

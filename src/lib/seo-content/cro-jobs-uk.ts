@@ -79,16 +79,16 @@ export const croJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Why Fractional CRO Demand is Surging",
+      title: "Revenue Leadership on Demand: The UK Market",
       paragraphs: [
-        "The fractional CRO model has become essential for growth-stage companies in the UK. According to Revenue Collective research, over 80% of Series A-C companies now use some form of fractional revenue leadership. PE-backed companies, SaaS businesses, and scale-ups increasingly prefer flexible revenue leadership to full-time hires during critical growth phases.",
-        "The Scale-Up Institute reports that companies with fractional CROs achieve 40% faster revenue growth than those without dedicated revenue leadership. This creates exceptional opportunities for experienced revenue leaders to build portfolio careers working with multiple high-growth companies.",
-        "Whether you're a former VP Sales or CRO seeking portfolio work, a revenue operations leader exploring flexibility, or a sales leader ready for C-suite challenges, the UK market offers compelling fractional opportunities across SaaS, fintech, and B2B sectors.",
+        "The <strong>fractional CRO jobs</strong> model has become essential for growth-stage companies in the UK. According to Revenue Collective research, over 80% of Series A-C companies now use some form of fractional revenue leadership. PE-backed companies, SaaS businesses, and scale-ups increasingly prefer flexible revenue leadership to full-time hires during critical growth phases.",
+        "The Scale-Up Institute reports that companies with <strong>fractional CRO jobs</strong> achieve 40% faster revenue growth than those without dedicated revenue leadership. This creates exceptional opportunities for experienced revenue leaders to build portfolio careers working with multiple high-growth companies.",
+        "Whether you're a former VP Sales or CRO seeking portfolio work, a revenue operations leader exploring flexibility, or a sales leader ready for C-suite challenges, the UK <strong>fractional CRO jobs</strong> market offers compelling opportunities across SaaS, fintech, and B2B sectors.",
       ],
     },
 
     dayRates: {
-      title: "Fractional CRO Day Rates by Sector",
+      title: "Day Rates by Sector",
       description:
         "Day rates vary significantly by sector and complexity (Source: Revenue Collective, Glassdoor UK):",
       rates: [
@@ -101,7 +101,7 @@ export const croJobsUkSEO = {
     },
 
     locations: {
-      title: "Key CRO Sectors",
+      title: "Key Revenue Sectors and Hubs",
       areas: [
         {
           name: "SaaS & Software",
@@ -131,7 +131,7 @@ export const croJobsUkSEO = {
     },
 
     emergingRoles: {
-      title: "Specialist CRO Roles",
+      title: "Specialist Revenue Leadership Roles",
       roles: [
         {
           title: "PLG CRO",
@@ -161,10 +161,10 @@ export const croJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional CRO Work",
+      title: "The Future of Fractional Revenue Leadership",
       paragraphs: [
         "Revenue Collective forecasts continued strong demand for fractional CROs through 2028, driven by the ongoing shift to subscription revenue models, increasing PE activity in UK tech, and the normalisation of portfolio careers among senior sales leaders.",
-        "Key trends shaping the fractional CRO market include: growing demand for CROs with AI/automation sales experience, increasing importance of revenue operations and analytics, and the rise of fractional Chief Revenue Officers as strategic board advisors.",
+        "Key trends shaping the <strong>fractional CRO</strong> market include: growing demand for CROs with AI/automation sales experience, increasing importance of revenue operations and analytics, and the rise of fractional Chief Revenue Officers as strategic board advisors.",
       ],
     },
   },
