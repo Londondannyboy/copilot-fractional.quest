@@ -4,18 +4,26 @@
 
 export const cfoJobsUkSEO = {
   meta: {
-    title: "Fractional CFO Jobs UK 💰 Finance Leadership",
+    title: "Fractional CFO Jobs UK | Part-Time Finance Director Roles",
     description:
-      "Fractional CFO jobs UK for PE-backed and high-growth companies. Part-time Finance Director roles paying £1,000-£1,500/day.",
+      "Fractional CFO & Finance Director jobs UK. Remote and hybrid part-time FD roles paying £1,000-£1,500/day. Edinburgh, Manchester, London & nationwide.",
     keywords: [
+      "fractional cfo jobs",
       "fractional cfo jobs uk",
-      "fractional cfo",
-      "part time cfo uk",
-      "interim cfo jobs",
-      "fractional finance director",
-      "portfolio cfo",
       "part time finance director",
-      "interim finance director uk",
+      "remote cfo jobs",
+      "fractional fd",
+      "fractional finance director",
+      "part time cfo",
+      "interim cfo jobs",
+      "fractional cfo uk",
+      "fractional cfo edinburgh",
+      "fractional cfo manchester",
+      "fractional cfo london",
+      "part time finance director jobs",
+      "cfo recruitment",
+      "fractional finance roles",
+      "interim finance director",
     ],
   },
 
@@ -26,12 +34,12 @@ export const cfoJobsUkSEO = {
   ],
 
   hero: {
-    headline: "Fractional CFO Jobs UK",
+    headline: "Fractional CFO & Finance Director Jobs UK",
     subtitle:
-      "Part-time Finance Director and CFO roles across the United Kingdom. Day rates £1,000-£1,500.",
+      "Part-time CFO, FD & Finance Director roles — remote, hybrid and on-site across the UK. Day rates £1,000-£1,500.",
     stats: {
       avgDayRate: "£1,000-£1,500",
-      hubStatus: "Premium Roles",
+      hubStatus: "Remote & Hybrid",
       hybridOptions: "70% Hybrid",
     },
   },
@@ -79,11 +87,11 @@ export const cfoJobsUkSEO = {
 
   content: {
     whyLocation: {
-      title: "Finance Leadership on Demand: The UK Market",
+      title: "Fractional CFO & Part-Time Finance Director: The UK Market",
       paragraphs: [
-        "<strong>Fractional CFO jobs</strong> in the UK have grown 250% since 2020 as PE-backed companies, high-growth startups, and SMEs prefer flexible finance leadership. According to ICAEW, 45% of growing UK SMEs now use part-time finance leadership.",
-        "When searching for fractional CFO jobs UK offers the most premium rates—£1,000-£1,500/day. The BVCA reports 78% of portfolio companies have engaged fractional CFOs for fundraising, M&A, and financial system implementations.",
-        "For finance leaders seeking <strong>fractional CFO jobs</strong>, the UK provides exceptional opportunities across all sectors. Whether you're ACA/ACCA qualified, a former Finance Director, or CFO ready for variety, the market is thriving.",
+        "<strong>Fractional CFO jobs</strong> and <strong>part-time Finance Director</strong> roles in the UK have grown 250% since 2020. PE-backed companies, high-growth startups, and SMEs increasingly prefer a <strong>fractional FD</strong> over a full-time hire. According to ICAEW, 45% of growing UK SMEs now use part-time finance leadership.",
+        "Whether you're searching for <strong>remote CFO jobs</strong>, hybrid positions, or on-site roles, the UK market offers premium rates of £1,000-£1,500/day. The BVCA reports 78% of portfolio companies have engaged fractional CFOs for fundraising, M&A, and financial system implementations. Many <strong>fractional finance director</strong> roles now offer fully remote working.",
+        "For finance leaders seeking a <strong>part-time CFO</strong> or <strong>fractional FD</strong> role, the UK provides exceptional opportunities in London, Manchester, Edinburgh, Birmingham, Newcastle, and Leeds. Whether you're ACA/ACCA qualified, a former Finance Director, or a CFO ready for portfolio variety, the market is thriving.",
       ],
     },
 
@@ -101,31 +109,43 @@ export const cfoJobsUkSEO = {
     },
 
     locations: {
-      title: "Key Finance Sectors and Hubs",
+      title: "Fractional CFO Jobs by UK Location",
       areas: [
         {
-          name: "PE-Backed Companies",
+          name: "London",
           description:
-            "High demand for CFOs experienced with investor reporting, bolt-on M&A, and value creation plans. Premium rates, typically 2-3 days/week. FRC governance standards essential.",
-          sectors: ["Private Equity", "Venture Capital", "Portfolio Operations", "M&A"],
+            "The largest market for fractional CFO and part-time Finance Director roles. PE-backed companies, fintech firms, and scale-ups across the City, Canary Wharf, and Tech City. Highest day rates (£1,200-£1,800) with strong demand for FCA-regulated experience. Many remote CFO jobs based here.",
+          sectors: ["Private Equity", "Fintech", "Scale-Ups", "Professional Services"],
         },
         {
-          name: "Fintech & FCA-Regulated",
+          name: "Manchester",
           description:
-            "FCA-regulated companies need CFOs familiar with regulatory capital, CASS rules, compliance reporting, and governance frameworks. Strong demand in London with growing fintech scenes in Manchester and Edinburgh.",
-          sectors: ["Payments", "Banking", "Insurance", "Wealth Management"],
+            "Growing hub for fractional FD and part-time CFO roles. Strong demand across MediaCityUK, the Northern Quarter tech scene, and Manchester's thriving SME sector. Hybrid and remote options widely available.",
+          sectors: ["Tech", "Media", "Manufacturing", "eCommerce"],
         },
         {
-          name: "Scale-Up CFOs",
+          name: "Edinburgh",
           description:
-            "Series A-C companies seeking CFOs for fundraising support, board reporting, and financial infrastructure building. VC investor relations experience highly valued.",
-          sectors: ["SaaS", "Marketplace", "D2C", "HealthTech"],
+            "Scotland's financial capital offers premium fractional CFO opportunities in asset management, fintech, and the energy sector. Edinburgh's fund management industry regularly seeks part-time Finance Directors with regulatory experience.",
+          sectors: ["Asset Management", "Fintech", "Energy", "Life Sciences"],
         },
         {
-          name: "Manufacturing & Trade",
+          name: "Birmingham & Midlands",
           description:
-            "Working capital management, supply chain finance, and international trade expertise. Growing demand for CFOs who understand inventory and trade finance.",
-          sectors: ["Manufacturing", "Distribution", "Import/Export", "Supply Chain"],
+            "Strong demand for fractional FDs in manufacturing, logistics, and the region's growing tech sector. Many companies in the West Midlands seek part-time finance director support for growth and operational improvement.",
+          sectors: ["Manufacturing", "Automotive", "Logistics", "Professional Services"],
+        },
+        {
+          name: "Newcastle & North East",
+          description:
+            "Emerging market for fractional CFO roles with lower overheads but competitive rates. Strong in tech, digital, and the region's reinvigorated industrial sector. Remote CFO jobs increasingly common here.",
+          sectors: ["Tech", "Digital", "Engineering", "Healthcare"],
+        },
+        {
+          name: "Remote & UK-Wide",
+          description:
+            "Around 30% of fractional CFO and part-time FD roles are now fully remote, accessible from anywhere in the UK. Ideal for experienced Finance Directors seeking portfolio careers without geographic constraints.",
+          sectors: ["SaaS", "eCommerce", "Consulting", "Non-Profit"],
         },
       ],
     },
@@ -161,49 +181,61 @@ export const cfoJobsUkSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional Finance Leadership",
+      title: "The Future of Part-Time Finance Director & CFO Roles",
       paragraphs: [
-        "ICAEW forecasts continued strong demand for <strong>fractional CFO</strong> roles through 2028, driven by the ongoing skills shortage in senior finance roles, increasing PE activity, and the normalisation of portfolio careers among qualified accountants.",
-        "Key trends shaping the fractional CFO market include: growing demand for CFOs with AI/automation implementation experience, increasing importance of ESG and sustainability reporting, and the rise of part-time FDs progressing to portfolio CFO roles.",
+        "ICAEW forecasts continued strong demand for <strong>fractional CFO</strong> and <strong>part-time Finance Director</strong> roles through 2028, driven by the ongoing skills shortage in senior finance roles, increasing PE activity, and the normalisation of portfolio careers among qualified accountants. <strong>Remote CFO jobs</strong> are expected to grow as companies accept distributed finance leadership.",
+        "Key trends shaping the fractional FD market include: growing demand for CFOs with AI/automation implementation experience, increasing importance of ESG and sustainability reporting, the rise of part-time FDs progressing to portfolio CFO roles, and expansion of <strong>fractional finance director</strong> opportunities beyond London into Manchester, Edinburgh, Newcastle, and Birmingham.",
       ],
     },
   },
 
   faqs: [
     {
+      question: "What is a fractional CFO (fractional FD)?",
+      answer:
+        "A fractional CFO — also called a fractional FD or fractional Finance Director — is an experienced finance leader who works part-time across multiple companies, typically 1-3 days per week. They provide the same strategic finance leadership as a full-time CFO but at a fraction of the cost, making senior finance expertise accessible to SMEs, startups, and PE-backed companies.",
+    },
+    {
       question: "What qualifications do fractional CFOs need?",
       answer:
-        "Most fractional CFO roles require ACA, ACCA, or CIMA qualification plus 10-15+ years post-qualification experience. Prior CFO, FD, or Finance Director experience is typically essential. Sector-specific credentials (FCA experience for fintech, PE experience for portfolio companies) add significant value.",
+        "Most fractional CFO and part-time Finance Director roles require ACA, ACCA, or CIMA qualification plus 10-15+ years post-qualification experience. Prior CFO, FD, or Finance Director experience is typically essential. Sector-specific credentials (FCA experience for fintech, PE experience for portfolio companies) add significant value.",
     },
     {
-      question: "How much do fractional CFOs earn in the UK?",
+      question: "How much do part-time Finance Directors earn in the UK?",
       answer:
-        "UK fractional CFOs typically earn £1,000-£1,500 per day, with PE-backed and FCA-regulated roles at the premium end (£1,200-£1,800). Working 2-3 days per week across multiple clients, annual earnings of £200,000-£360,000 are achievable while offering greater flexibility than permanent roles.",
+        "UK fractional CFOs and part-time Finance Directors typically earn £1,000-£1,500 per day, with PE-backed and FCA-regulated roles at the premium end (£1,200-£1,800). Working 2-3 days per week across multiple clients, annual earnings of £200,000-£360,000 are achievable while offering greater flexibility than permanent roles.",
     },
     {
-      question: "What's the typical fractional CFO engagement?",
+      question: "Are there remote CFO jobs available in the UK?",
       answer:
-        "Initial engagements typically run 6-12 months with 2-3 days per week commitment. Many evolve into longer relationships as companies value continuity. Some CFOs maintain 2-3 concurrent clients for portfolio diversity, while others prefer deeper engagement with one or two.",
+        "Yes, around 30% of fractional CFO roles are now fully remote, with 70% offering hybrid arrangements. Remote CFO jobs are most common in SaaS, eCommerce, and consulting sectors. Regulated sectors (FCA, fintech) typically require some on-site presence for board meetings and compliance, but many offer 2-3 days remote per week.",
     },
     {
-      question: "Do fractional CFOs work remotely?",
+      question: "What is the difference between a fractional CFO and an interim CFO?",
       answer:
-        "About 70% of fractional CFO roles offer hybrid arrangements. Finance leadership typically requires some on-site presence for board meetings, investor calls, and team management. Fully remote CFO roles exist but are less common, particularly in regulated sectors.",
+        "A fractional CFO works part-time (1-3 days/week) on an ongoing basis, often with multiple clients simultaneously. An interim CFO works full-time for a fixed period (3-12 months), usually covering a vacancy or managing a specific project like M&A or restructuring. Fractional CFOs cost less per year (£50-150k vs £200-400k) but are less available day-to-day.",
+    },
+    {
+      question: "Where are fractional CFO jobs available in the UK?",
+      answer:
+        "Fractional CFO and part-time FD roles are available across all major UK cities. London has the largest market, followed by Manchester, Edinburgh, Birmingham, Leeds, Bristol, and Newcastle. Remote fractional CFO jobs are accessible from anywhere in the UK and represent a growing share of the market.",
     },
     {
       question: "Which sectors pay the highest CFO day rates?",
       answer:
-        "PE-backed companies and FCA-regulated fintech firms pay the highest rates (£1,200-£1,800/day). IPO preparation and M&A-focused roles also command premium rates. SME and non-profit sectors pay lower rates but often offer more flexibility and purpose-driven work.",
+        "PE-backed companies and FCA-regulated fintech firms pay the highest fractional CFO rates (£1,200-£1,800/day). IPO preparation and M&A-focused Finance Director roles also command premium rates. SME and non-profit sectors pay lower rates but often offer more flexibility and purpose-driven work.",
     },
     {
-      question: "How do I find fractional CFO roles?",
+      question: "How do I find fractional CFO or part-time FD roles?",
       answer:
-        "The most effective approaches are: registering with specialist platforms like Fractional Quest, networking through ICAEW/ACCA events and FD networks, building relationships with PE firms who frequently place CFOs in portfolio companies, and developing a LinkedIn presence showcasing finance leadership expertise.",
+        "The most effective approaches are: registering with specialist platforms like Fractional Quest, networking through ICAEW/ACCA events and FD networks, building relationships with PE firms who frequently place CFOs in portfolio companies, and developing a LinkedIn presence showcasing finance leadership expertise. Searching for 'fractional CFO jobs', 'part-time finance director', or 'fractional FD' will surface relevant opportunities.",
     },
   ],
 
   // Internal links for topical authority - comprehensive coverage
   relatedPages: [
+    // Featured Role
+    { name: "Featured: Fractional CFO Role", url: "/fractional-job/fractional-cfo-part-time-finance-director-uk" },
     // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Finance Jobs", url: "/fractional-jobs-london" },

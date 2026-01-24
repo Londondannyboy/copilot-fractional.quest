@@ -355,6 +355,19 @@ export default function FractionalCfoPage() {
             </Link>
           </div>
 
+          {/* Featured Role */}
+          <div className="mb-6">
+            <Link href="/fractional-job/fractional-cfo-part-time-finance-director-uk" className="block p-5 bg-emerald-50 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:shadow-md transition-all group">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">⭐</span>
+                <div>
+                  <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">Featured: Fractional CFO / Part-Time Finance Director Role</h4>
+                  <p className="text-gray-600 text-sm">Remote & hybrid, £1,000-£1,500/day — view full job description and requirements</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* Secondary Links - More internal pages */}
           <div className="grid md:grid-cols-4 gap-4">
             <Link href="/fractional-cfo-services" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-colors group">
