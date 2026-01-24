@@ -213,7 +213,7 @@ export const cioJobsUkSEO = {
     { name: "What is a Fractional CIO?", url: "/fractional-cio" },
     { name: "CIO Salary Guide", url: "/fractional-cio-salary" },
     { name: "Hire a Fractional CIO", url: "/hire-fractional-cio" },
-    { name: "CIO vs CTO Comparison", url: "/cio-vs-cto" },
+    { name: "CIO Costs Guide", url: "/fractional-cio-cost" },
     // Related Tech Roles
     { name: "Fractional CTO Jobs UK", url: "/fractional-cto-jobs-uk" },
     { name: "Fractional CISO Jobs UK", url: "/fractional-ciso-jobs-uk" },

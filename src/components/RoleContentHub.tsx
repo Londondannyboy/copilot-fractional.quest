@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 interface RoleContentHubProps {
-  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'cro' | 'controller' | 'growth' | 'compliance' | 'product' | 'pm';
+  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'cro' | 'cio' | 'cso' | 'controller' | 'growth' | 'compliance' | 'product' | 'pm';
 }
 
 interface RoleLink {
