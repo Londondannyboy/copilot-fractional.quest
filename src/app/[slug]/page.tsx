@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getPageBySlug, getAllPageSlugs, getPageTypeLabel } from '@/lib/pages'
 import { PageWithCopilot } from '@/components/pages/PageWithCopilot'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -79,6 +80,18 @@ function getRelatedLinks(slug: string, pageType: string): { name: string; url: s
     .filter((link, idx, arr) => link.url !== selfUrl && arr.findIndex(l => l.url === link.url) === idx)
     .slice(0, 8)
 }
+
+// Background images for related resource cards
+const RELATED_IMAGES = [
+  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop',
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=200&fit=crop',
+  'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop',
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop',
+  'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=200&fit=crop',
+  'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=200&fit=crop',
+  'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=200&fit=crop',
+  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=200&fit=crop',
+]
 
 // ===========================================
 // Caching Configuration
@@ -174,6 +187,8 @@ const STATIC_ROUTE_SLUGS = [
   'interim-ciso-jobs-uk',
   'interim-cpo-jobs-uk',
   'interim-ceo-jobs-uk',
+  'interim-cio-jobs-uk',
+  'interim-cso-jobs-uk',
   'interim-executive',
   'interim-marketing-director',
   // Part-time job pages
@@ -185,6 +200,8 @@ const STATIC_ROUTE_SLUGS = [
   'part-time-ciso-jobs-uk',
   'part-time-cpo-jobs-uk',
   'part-time-ceo-jobs-uk',
+  'part-time-cio-jobs-uk',
+  'part-time-cso-jobs-uk',
   // Guide pages
   'fractional-recruitment-agency',
   // Procurement pages
@@ -364,17 +381,30 @@ export default async function DynamicPage({ params }: PageProps) {
         const relatedLinks = getRelatedLinks(slug, page.page_type)
         if (relatedLinks.length === 0) return null
         return (
-          <section className="bg-gray-50 border-t border-gray-200 py-10">
+          <section className="bg-gray-50 border-t border-gray-200 py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Related Resources</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              <div className="mb-6">
+                <span className="text-xs font-bold uppercase tracking-widest text-gray-500 block mb-2">Explore More</span>
+                <h2 className="text-2xl font-bold text-gray-900">Related Resources</h2>
+              </div>
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {relatedLinks.map((link, idx) => (
                   <Link
                     key={idx}
                     href={link.url}
-                    className="block px-4 py-3 bg-white border border-gray-200 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:border-blue-300 transition-colors"
+                    className="block relative rounded-xl overflow-hidden group h-36 shadow-sm hover:shadow-lg transition-shadow"
                   >
-                    {link.name}
+                    <Image
+                      src={RELATED_IMAGES[idx % RELATED_IMAGES.length]}
+                      alt={link.name}
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="font-bold text-white text-sm leading-tight">{link.name}</h3>
+                    </div>
                   </Link>
                 ))}
               </div>

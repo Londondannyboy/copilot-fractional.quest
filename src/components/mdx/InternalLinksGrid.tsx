@@ -191,8 +191,8 @@ export default function InternalLinksGrid({
   }
 
   if (variant === 'featured') {
-    const featured = links.slice(0, 3)
-    const rest = links.slice(3)
+    const featured = links.slice(0, 6)
+    const rest = links.slice(6)
 
     return (
       <div className="py-8">
@@ -203,28 +203,28 @@ export default function InternalLinksGrid({
         </div>
 
         {/* Featured cards with background images */}
-        <div className="grid md:grid-cols-3 gap-6 mb-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 mb-6">
           {featured.map((link, idx) => (
             <Link
               key={idx}
               href={link.url}
-              className="block relative rounded-xl overflow-hidden group h-48 shadow-md hover:shadow-xl transition-shadow"
+              className="block relative rounded-xl overflow-hidden group h-44 shadow-md hover:shadow-xl transition-shadow"
             >
               <Image
                 src={getCategoryImage(link.category, idx)}
                 alt={link.name}
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-              <div className="absolute bottom-0 left-0 right-0 p-5">
+              <div className="absolute bottom-0 left-0 right-0 p-4">
                 {link.category && showCategories && (
                   <span className="inline-block px-2 py-0.5 text-xs font-bold uppercase bg-white/20 text-white rounded mb-2 backdrop-blur-sm">
                     {categoryLabels[link.category] || link.category}
                   </span>
                 )}
-                <h4 className="font-bold text-white text-lg leading-tight">{link.name}</h4>
+                <h4 className="font-bold text-white text-base leading-tight">{link.name}</h4>
                 {link.description && <p className="text-sm text-white/80 mt-1 line-clamp-2">{link.description}</p>}
               </div>
             </Link>
