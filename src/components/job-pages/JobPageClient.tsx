@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCoAgent, useCopilotChat, useRenderToolCall, useHumanInTheLoop } from "@copilotkit/react-core";
 import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
@@ -18,9 +18,10 @@ import { Testimonials, TestimonialsSchema } from "@/components/Testimonials";
 import { LazyYouTube } from "@/components/LazyYouTube";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 import { HotJobs } from "@/components/HotJobs";
-import { EmailCapture } from "@/components/EmailCapture";
+// EmailCapture is rendered inside JobsSidebar
 import { AgentMDXRenderer } from "@/components/AgentMDXRenderer";
 import { ProfileCard } from "@/components/ProfileCard";
+import { JobsSidebar } from "@/components/JobsSidebar";
 
 // Dynamic imports for heavy components (lazy loading for LCP optimization)
 import dynamic from "next/dynamic";
@@ -156,7 +157,6 @@ interface JobPageClientProps {
   userDayRate?: number;                  // User's current day rate for comparison
   // Job filtering options
   roleCategory?: string;                 // Filter jobs by category (Finance, Engineering, Marketing, etc.)
-  hideMoreOpportunities?: boolean;       // Hide the "More Opportunities" sidebar section
 }
 
 // Outer component that provides CopilotKit context
@@ -181,7 +181,6 @@ function JobPageClientInner({
   showEmbeddedChat = false,
   userDayRate,
   roleCategory,
-  hideMoreOpportunities = false,
 }: JobPageClientProps) {
   // Auth
   const { data: session } = authClient.useSession();
@@ -730,177 +729,135 @@ ${initialJobs.slice(0, 2).map(j => `- ${j.title} at ${j.company}`).join("\n")}
           </div>
         </section>
 
-        {/* Hot Jobs + Calculator Section - Compact layout */}
+        {/* Main Content + Sidebar Layout */}
         <section className="py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 space-y-6">
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Main Content Column */}
+              <div className="lg:col-span-2 space-y-8">
+                {/* Hot Jobs */}
                 <HotJobs
                   location={location === "london" ? "London" : undefined}
                   department={roleCategory}
                   maxJobs={8}
                   title={`🔥 Hot ${locationDisplay} Jobs`}
                 />
-                {/* Rate Calculator - mobile responsive container */}
+
+                {/* Rate Calculator */}
                 <div className="bg-gray-50 rounded-xl p-4 sm:p-6 border border-gray-200">
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">
                     Calculate Your {locationDisplay} Day Rate
                   </h3>
                   <RoleCalculator role="cfo" />
                 </div>
-              </div>
-              <div className="space-y-6">
-                <EmailCapture
-                  variant="sidebar"
-                  title="Get Job Alerts"
-                  description={`New ${locationDisplay} fractional roles straight to your inbox.`}
+
+                {/* Hey Companies - Employer CTA */}
+                <HeyCompanies location={locationDisplay} />
+
+                {/* AI Insights Panel */}
+                <AIInsightsPanel
+                  location={locationDisplay}
+                  initialPrompts={[
+                    `What's the ${locationDisplay} market like?`,
+                    "Show me salary trends",
+                    "Compare roles by day rate",
+                    "What skills are in demand?",
+                  ]}
                 />
-                {/* More Opportunities - only show if not hidden */}
-                {!hideMoreOpportunities && (
-                  <HotJobs
-                    maxJobs={6}
-                    title="🚀 More Opportunities"
-                    className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-100"
+
+                {/* Quick Links */}
+                <div className="py-6 border-y border-gray-200">
+                  <div className="flex flex-wrap items-center justify-center gap-3">
+                    <span className="text-sm text-gray-500 font-medium">Quick Links:</span>
+                    <a href="/fractional-cfo-jobs-uk" className="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-100 transition-colors">💰 CFO Jobs</a>
+                    <a href="/fractional-cto-jobs-uk" className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors">💻 CTO Jobs</a>
+                    <a href="/fractional-cmo-jobs-uk" className="px-4 py-2 bg-pink-50 text-pink-700 rounded-full text-sm font-medium hover:bg-pink-100 transition-colors">📣 CMO Jobs</a>
+                    <a href="/fractional-coo-jobs-uk" className="px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium hover:bg-amber-100 transition-colors">⚙️ COO Jobs</a>
+                    <a href="/remote-fractional-jobs" className="px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium hover:bg-purple-100 transition-colors">🏠 Remote Jobs</a>
+                  </div>
+                </div>
+
+                {/* Market Statistics */}
+                {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
+                  <MarketStatistics
+                    statistics={seoContent.statistics}
+                    title={`${locationDisplay} Fractional Market in Numbers`}
+                    location={locationDisplay}
                   />
                 )}
-                {/* Quick Stats Card - fills remaining space */}
-                <div className="bg-gray-900 text-white rounded-xl p-5">
-                  <h3 className="font-bold mb-4 flex items-center gap-2">
-                    <span>📈</span>
-                    {locationDisplay} Market Snapshot
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4">
+
+                {/* SEO Content */}
+                <SEOContent content={seoContent.content} />
+
+                {/* Skills Demand Chart */}
+                <SkillsDemandChart location={locationDisplay} />
+
+                {/* Savings Calculator */}
+                <SavingsCalculator location={locationDisplay} />
+
+                {/* YouTube Videos */}
+                <div className="py-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                    Fractional Executive Insights
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <p className="text-2xl font-bold text-emerald-400">£{stats.avgDayRate || 900}</p>
-                      <p className="text-xs text-gray-500">Avg Day Rate</p>
+                      <LazyYouTube videoId="zxMG2m6yLdc" title="Fractional Executive Jobs - Market Overview" />
+                      <p className="text-sm text-gray-600 mt-2">Market Overview for Fractional Executives</p>
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-emerald-400">{stats.total}</p>
-                      <p className="text-xs text-gray-500">Active Jobs</p>
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold text-emerald-400">{stats.topRoles?.[0]?.count || 0}</p>
-                      <p className="text-xs text-gray-500">{stats.topRoles?.[0]?.role || 'Top'} Roles</p>
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold text-emerald-400">78%</p>
-                      <p className="text-xs text-gray-500">Remote Options</p>
+                      <LazyYouTube videoId="m8UOqjRRHHk" title="How to Build a Portfolio Career" />
+                      <p className="text-sm text-gray-600 mt-2">Building a Portfolio Career in {locationDisplay}</p>
                     </div>
                   </div>
                 </div>
-                {/* Book a Call CTA */}
-                <a
-                  href="/book-call"
-                  className="block bg-gradient-to-br from-orange-500 via-rose-500 to-purple-600 rounded-xl p-5 text-white hover:opacity-95 transition-opacity"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-2xl">📞</span>
-                    <div>
-                      <h3 className="font-bold">Talk to an Expert</h3>
-                      <p className="text-white/80 text-sm">Free 15-min consultation</p>
-                    </div>
-                  </div>
-                  <span className="inline-block bg-white/20 px-4 py-2 rounded-lg text-sm font-medium">
-                    Book a Call →
-                  </span>
-                </a>
+
+                {/* Authority Links */}
+                {seoContent.authorityLinks && seoContent.authorityLinks.length > 0 && (
+                  <AuthorityLinks
+                    links={seoContent.authorityLinks}
+                    title="Trusted Industry Resources"
+                    location={locationDisplay}
+                  />
+                )}
+
+                {/* Role Comparison Tool */}
+                <RoleComparisonTool />
+
+                {/* Case Study */}
+                <CaseStudy />
+                <CaseStudySchema />
+
+                {/* Testimonials */}
+                <Testimonials variant="carousel" />
+                <TestimonialsSchema />
+
+                {/* FAQ */}
+                <FAQSection faqs={seoContent.faqs} location={locationDisplay} />
+
+                {/* Expert Profile */}
+                <ExpertProfile />
+                <ExpertProfileSchema />
+              </div>
+
+              {/* Sidebar Column - Hidden on mobile, sticky on desktop */}
+              <div className="hidden lg:block">
+                <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto scrollbar-thin">
+                  <JobsSidebar
+                    location={location}
+                    locationDisplay={locationDisplay}
+                    roleCategory={roleCategory}
+                    showCalendly={true}
+                    authorityLinks={seoContent.authorityLinks}
+                    statistics={seoContent.statistics}
+                    relatedPages={seoContent.relatedPages}
+                    accentColor="emerald"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Hey Companies - Employer CTA */}
-        <HeyCompanies location={locationDisplay} />
-
-        {/* AI Insights Panel - Interactive CopilotKit integration */}
-        <AIInsightsPanel
-          location={locationDisplay}
-          initialPrompts={[
-            `What's the ${locationDisplay} market like?`,
-            "Show me salary trends",
-            "Compare roles by day rate",
-            "What skills are in demand?",
-          ]}
-        />
-
-        {/* Quick Links Bar - Horizontal, no white space */}
-        <section className="py-8 bg-white border-y border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <span className="text-sm text-gray-500 font-medium">Quick Links:</span>
-              <a href="/fractional-cfo-jobs-uk" className="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium hover:bg-emerald-100 transition-colors">💰 CFO Jobs</a>
-              <a href="/fractional-cto-jobs-uk" className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors">💻 CTO Jobs</a>
-              <a href="/fractional-cmo-jobs-uk" className="px-4 py-2 bg-pink-50 text-pink-700 rounded-full text-sm font-medium hover:bg-pink-100 transition-colors">📣 CMO Jobs</a>
-              <a href="/fractional-coo-jobs-uk" className="px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium hover:bg-amber-100 transition-colors">⚙️ COO Jobs</a>
-              <a href="/remote-fractional-jobs" className="px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium hover:bg-purple-100 transition-colors">🏠 Remote Jobs</a>
-            </div>
-          </div>
-        </section>
-
-        {/* Market Statistics */}
-        {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
-          <MarketStatistics
-            statistics={seoContent.statistics}
-            title={`${locationDisplay} Fractional Market in Numbers`}
-            location={locationDisplay}
-          />
-        )}
-
-        {/* SEO Content */}
-        <SEOContent content={seoContent.content} />
-
-        {/* Skills Demand Chart - Visual skills analysis */}
-        <SkillsDemandChart location={locationDisplay} />
-
-
-        {/* Savings Calculator */}
-        <SavingsCalculator location={locationDisplay} />
-
-        {/* YouTube Videos */}
-        <section className="py-12 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-              Fractional Executive Insights
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <LazyYouTube videoId="zxMG2m6yLdc" title="Fractional Executive Jobs - Market Overview" />
-                <p className="text-sm text-gray-600 mt-2">Market Overview for Fractional Executives</p>
-              </div>
-              <div>
-                <LazyYouTube videoId="m8UOqjRRHHk" title="How to Build a Portfolio Career" />
-                <p className="text-sm text-gray-600 mt-2">Building a Portfolio Career in {locationDisplay}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Authority Links */}
-        {seoContent.authorityLinks && seoContent.authorityLinks.length > 0 && (
-          <AuthorityLinks
-            links={seoContent.authorityLinks}
-            title="Trusted Industry Resources"
-            location={locationDisplay}
-          />
-        )}
-
-        {/* Role Comparison Tool - Interactive comparison */}
-        <RoleComparisonTool />
-
-        {/* Case Study */}
-        <CaseStudy />
-        <CaseStudySchema />
-
-        {/* Testimonials - Client Success Stories */}
-        <Testimonials variant="carousel" />
-        <TestimonialsSchema />
-
-        {/* FAQ */}
-        <FAQSection faqs={seoContent.faqs} location={locationDisplay} />
-
-        {/* Expert Profile */}
-        <ExpertProfile />
-        <ExpertProfileSchema />
       </CopilotSidebar>
     </main>
   );
