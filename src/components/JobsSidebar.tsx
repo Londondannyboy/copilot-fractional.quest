@@ -61,14 +61,60 @@ const UK_LOCATIONS = [
   { name: 'Remote UK', href: '/remote-fractional-jobs' },
 ]
 
-// Role images for sidebar job cards
-const ROLE_IMAGES: Record<string, string> = {
-  'Finance': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=80&h=80&fit=crop',
-  'Engineering': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=80&h=80&fit=crop',
-  'Marketing': 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=80&h=80&fit=crop',
-  'Operations': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop',
-  'HR': 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=80&h=80&fit=crop',
-  'default': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=80&h=80&fit=crop',
+// Multiple images per role category for visual variety in sidebar
+const ROLE_THUMB_IMAGES: Record<string, string[]> = {
+  'Finance': [
+    'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=80&h=80&fit=crop',
+  ],
+  'Engineering': [
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=80&h=80&fit=crop',
+  ],
+  'Marketing': [
+    'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1557838923-2985c318be48?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&h=80&fit=crop',
+  ],
+  'Operations': [
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=80&h=80&fit=crop',
+  ],
+  'HR': [
+    'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=80&h=80&fit=crop',
+  ],
+  'default': [
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=80&h=80&fit=crop',
+  ],
+}
+
+// Header images for sidebar hot jobs section
+const SIDEBAR_HEADER_IMAGES: Record<string, string> = {
+  'Finance': 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=120&fit=crop',
+  'Engineering': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=120&fit=crop',
+  'Marketing': 'https://images.unsplash.com/photo-1557838923-2985c318be48?w=400&h=120&fit=crop',
+  'Operations': 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=120&fit=crop',
+  'HR': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=120&fit=crop',
+  'default': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=120&fit=crop',
+}
+
+function getJobThumb(jobId: string, roleCategory?: string): string {
+  const hash = jobId.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0)
+  const images = ROLE_THUMB_IMAGES[roleCategory || ''] || ROLE_THUMB_IMAGES.default
+  return images[Math.abs(hash) % images.length]
 }
 
 export function JobsSidebar({
@@ -123,11 +169,21 @@ export function JobsSidebar({
     <aside className="space-y-6">
       {/* Featured Jobs - Always show jobs! */}
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-3">
-          <p className="font-bold text-white flex items-center gap-2">
-            <span className="animate-pulse">🔥</span>
-            {locationDisplay ? `Hot ${locationDisplay} Jobs` : 'Hot Jobs'}
-          </p>
+        <div className="relative h-14 overflow-hidden">
+          <Image
+            src={SIDEBAR_HEADER_IMAGES[roleCategory || ''] || SIDEBAR_HEADER_IMAGES.default}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="400px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/60" />
+          <div className="absolute inset-0 flex items-center px-5">
+            <p className="font-bold text-white flex items-center gap-2 text-sm">
+              <span>🔥</span>
+              {locationDisplay ? `Hot ${locationDisplay} Jobs` : 'Hot Jobs'}
+            </p>
+          </div>
         </div>
         <div className="divide-y divide-gray-100">
           {loadingJobs ? (
@@ -148,11 +204,11 @@ export function JobsSidebar({
               <Link
                 key={job.id}
                 href={`/fractional-job/${job.slug}`}
-                className="flex gap-3 p-4 hover:bg-amber-50 transition-colors group"
+                className="flex gap-3 p-4 hover:bg-gray-50 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
                   <Image
-                    src={ROLE_IMAGES[roleCategory || ''] || ROLE_IMAGES.default}
+                    src={getJobThumb(job.id, roleCategory)}
                     alt={job.title}
                     width={48}
                     height={48}
@@ -160,7 +216,7 @@ export function JobsSidebar({
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-medium text-gray-900 text-sm truncate group-hover:text-amber-700 transition-colors">
+                  <h4 className="font-medium text-gray-900 text-sm truncate group-hover:text-blue-700 transition-colors">
                     {job.title}
                   </h4>
                   <p className="text-xs text-gray-500 truncate">{job.company_name}</p>
@@ -171,7 +227,7 @@ export function JobsSidebar({
                     )}
                   </div>
                 </div>
-                <svg className="w-4 h-4 text-gray-300 group-hover:text-amber-500 transition-colors flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
@@ -185,7 +241,7 @@ export function JobsSidebar({
         <div className="bg-gray-50 px-5 py-3 border-t border-gray-100">
           <Link
             href={location ? `/fractional-jobs-${location}` : '/fractional-jobs-uk'}
-            className="text-sm font-medium text-amber-700 hover:text-amber-800 flex items-center justify-center gap-1"
+            className="text-sm font-medium text-blue-700 hover:text-blue-800 flex items-center justify-center gap-1"
           >
             View all jobs
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -195,32 +251,39 @@ export function JobsSidebar({
         </div>
       </div>
 
-      {/* Book a Call CTA - Eye-catching with Dan's photo */}
+      {/* Book a Call CTA */}
       {showCalendly && (
-        <div className="bg-gradient-to-br from-orange-500 via-rose-500 to-purple-600 rounded-xl overflow-hidden shadow-lg">
-          {/* Photo + Content */}
-          <div className="p-5 text-white">
+        <div className="relative rounded-xl overflow-hidden shadow-lg">
+          <Image
+            src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="400px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/85 to-gray-900/95" />
+          <div className="relative p-5 text-white">
             <div className="flex items-center gap-4 mb-4">
               <Image
                 src="/dan-keegan.webp"
                 alt="Dan Keegan - Founder of Fractional Quest"
-                width={64}
-                height={64}
+                width={56}
+                height={56}
                 className="rounded-full border-2 border-white/30 shadow-lg object-cover"
               />
               <div>
-                <p className="font-bold text-lg">Talk to Dan</p>
-                <p className="text-white/80 text-sm">Fractional Executive & Founder</p>
+                <p className="font-bold text-base">Talk to Dan</p>
+                <p className="text-white/70 text-sm">Fractional Executive & Founder</p>
               </div>
             </div>
-            <p className="text-white/90 text-sm mb-4">
-              15+ years in executive roles. I&apos;ve been where you are - let me help you navigate your fractional journey.
+            <p className="text-white/80 text-sm mb-4">
+              15+ years in executive roles. Let me help you navigate your fractional journey.
             </p>
             <Link
               href="/book-call"
-              className="block w-full bg-white text-purple-700 text-center font-bold py-3 px-4 rounded-lg hover:bg-purple-50 transition-colors shadow-md"
+              className="block w-full bg-white text-gray-900 text-center font-bold py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors shadow-md text-sm"
             >
-              📅 Book a Free Call
+              Book a Free Call
             </Link>
           </div>
         </div>

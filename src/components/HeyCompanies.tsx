@@ -9,16 +9,17 @@ interface HeyCompaniesProps {
 
 export function HeyCompanies({ location = 'London' }: HeyCompaniesProps) {
   return (
-    <section className="py-16 bg-gradient-to-br from-orange-500 via-orange-600 to-red-600 text-white relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Ccircle cx='5' cy='5' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
-          }}
-        />
-      </div>
+    <section className="py-16 text-white relative overflow-hidden">
+      {/* Background image */}
+      <Image
+        src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80"
+        alt=""
+        fill
+        className="object-cover"
+        sizes="100vw"
+      />
+      {/* Dark overlay with subtle blue tint */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-blue-900/85 to-indigo-900/80" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -64,7 +65,7 @@ export function HeyCompanies({ location = 'London' }: HeyCompaniesProps) {
             {/* CTA Button */}
             <Link
               href="/book-call"
-              className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold px-8 py-4 rounded-xl hover:bg-orange-50 transition-colors shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg hover:shadow-xl"
             >
               <span>Book a Free Discovery Call</span>
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
