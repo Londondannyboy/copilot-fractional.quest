@@ -267,7 +267,12 @@ const DEFAULT_ROLE_DATA: RoleData = {
   ]
 }
 
-function getRoleData(roleCategory: string | null): RoleData {
+function getRoleData(roleCategory: string | null, executiveTitle?: string | null): RoleData {
+  // Check executive_title first (more specific: CFO, CTO, CMO, etc.)
+  if (executiveTitle) {
+    const etKey = executiveTitle.toLowerCase()
+    if (ROLE_DATA[etKey]) return ROLE_DATA[etKey]
+  }
   if (!roleCategory) return DEFAULT_ROLE_DATA
   return ROLE_DATA[roleCategory.toLowerCase()] || DEFAULT_ROLE_DATA
 }
@@ -324,6 +329,47 @@ function FAQSchema({ faqs }: { faqs: Array<{ question: string; answer: string }>
 export const revalidate = 3600
 
 // Parse job description into structured sections
+// Helper: render inline markdown (bold and links) within text
+function renderInlineMarkdown(text: string): React.ReactNode {
+  // Split on markdown patterns: **bold** and [text](url)
+  const parts: React.ReactNode[] = []
+  let remaining = text
+  let partKey = 0
+
+  while (remaining.length > 0) {
+    // Find the next markdown pattern
+    const boldMatch = remaining.match(/\*\*(.+?)\*\*/)
+    const linkMatch = remaining.match(/\[([^\]]+)\]\(([^)]+)\)/)
+
+    const boldIndex = boldMatch ? remaining.indexOf(boldMatch[0]) : Infinity
+    const linkIndex = linkMatch ? remaining.indexOf(linkMatch[0]) : Infinity
+
+    if (boldIndex === Infinity && linkIndex === Infinity) {
+      // No more patterns, push remaining text
+      parts.push(remaining)
+      break
+    }
+
+    if (boldIndex <= linkIndex && boldMatch) {
+      // Bold comes first
+      if (boldIndex > 0) parts.push(remaining.slice(0, boldIndex))
+      parts.push(<strong key={partKey++} className="font-semibold text-gray-900">{boldMatch[1]}</strong>)
+      remaining = remaining.slice(boldIndex + boldMatch[0].length)
+    } else if (linkMatch) {
+      // Link comes first
+      if (linkIndex > 0) parts.push(remaining.slice(0, linkIndex))
+      parts.push(
+        <a key={partKey++} href={linkMatch[2]} target={linkMatch[2].startsWith('http') ? '_blank' : undefined} rel={linkMatch[2].startsWith('http') ? 'noopener noreferrer' : undefined} className="text-emerald-700 hover:text-emerald-900 underline font-medium">
+          {linkMatch[1]}
+        </a>
+      )
+      remaining = remaining.slice(linkIndex + linkMatch[0].length)
+    }
+  }
+
+  return parts.length === 1 && typeof parts[0] === 'string' ? parts[0] : <>{parts}</>
+}
+
 function parseJobDescription(text: string): React.ReactNode[] {
   if (!text) return []
 
@@ -335,9 +381,9 @@ function parseJobDescription(text: string): React.ReactNode[] {
   const flushList = () => {
     if (currentList.length > 0) {
       elements.push(
-        <ul key={key++} className="list-disc list-inside space-y-2 my-4 text-gray-600">
+        <ul key={key++} className="list-disc list-inside space-y-3 my-6 text-gray-600 pl-2">
           {currentList.map((item, i) => (
-            <li key={i} className="leading-relaxed">{item}</li>
+            <li key={i} className="leading-relaxed">{renderInlineMarkdown(item)}</li>
           ))}
         </ul>
       )
@@ -348,6 +394,28 @@ function parseJobDescription(text: string): React.ReactNode[] {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim()
     if (!line) continue
+
+    // Check for markdown headings (## and ###)
+    if (line.startsWith('## ')) {
+      flushList()
+      const headingText = line.slice(3)
+      elements.push(
+        <h2 key={key++} className="text-xl sm:text-2xl font-bold text-gray-900 mt-10 mb-4 first:mt-0">
+          {renderInlineMarkdown(headingText)}
+        </h2>
+      )
+      continue
+    }
+    if (line.startsWith('### ')) {
+      flushList()
+      const headingText = line.slice(4)
+      elements.push(
+        <h3 key={key++} className="text-lg font-semibold text-gray-900 mt-8 mb-3">
+          {renderInlineMarkdown(headingText)}
+        </h3>
+      )
+      continue
+    }
 
     // Check if it's a bullet point (starts with ·, •, -, *)
     if (/^[·•\-\*]\s*/.test(line)) {
@@ -362,16 +430,17 @@ function parseJobDescription(text: string): React.ReactNode[] {
     // Check if it's a section heading (short line, no ending punctuation, followed by content)
     const isHeading = line.length < 60 &&
                       !/[.,:;!?]$/.test(line) &&
+                      !line.includes('[') &&
                       i < lines.length - 1 &&
                       (lines[i + 1]?.trim().length > 0 || /^[·•\-\*]/.test(lines[i + 1]?.trim() || ''))
 
     // Check if it looks like a metadata line (Key: Value format)
     const metaMatch = line.match(/^([A-Za-z\s]+):\s*(.+)$/)
-    if (metaMatch && metaMatch[1].length < 30) {
+    if (metaMatch && metaMatch[1].length < 30 && !line.includes('[') && !line.includes('**')) {
       elements.push(
-        <div key={key++} className="flex flex-wrap gap-2 my-3 py-2 px-3 bg-gray-50 rounded-lg">
+        <div key={key++} className="flex flex-wrap gap-2 my-4 py-2 px-3 bg-gray-50 rounded-lg">
           <span className="font-semibold text-gray-700">{metaMatch[1]}:</span>
-          <span className="text-gray-600">{metaMatch[2]}</span>
+          <span className="text-gray-600">{renderInlineMarkdown(metaMatch[2])}</span>
         </div>
       )
       continue
@@ -380,14 +449,14 @@ function parseJobDescription(text: string): React.ReactNode[] {
     if (isHeading) {
       elements.push(
         <h3 key={key++} className="text-lg font-semibold text-gray-900 mt-8 mb-3 first:mt-0">
-          {line}
+          {renderInlineMarkdown(line)}
         </h3>
       )
     } else {
-      // Regular paragraph
+      // Regular paragraph - with better spacing for mobile
       elements.push(
-        <p key={key++} className="text-gray-600 leading-relaxed my-3">
-          {line}
+        <p key={key++} className="text-gray-600 leading-relaxed my-4 text-base sm:text-lg">
+          {renderInlineMarkdown(line)}
         </p>
       )
     }
@@ -412,8 +481,9 @@ async function fetchJob(slug: string) {
         id, slug, title, company_name, location, workplace_type, is_remote,
         compensation, posted_date, updated_date, description_snippet,
         full_description, requirements, responsibilities, benefits,
-        qualifications, skills_required, role_category, hours_per_week,
-        url, about_company, about_team, appeal_summary, key_deliverables
+        qualifications, skills_required, role_category, executive_title,
+        hours_per_week, url, about_company, about_team, appeal_summary,
+        key_deliverables, city
       FROM jobs
       WHERE slug = ${slug} AND is_active = true
     `
@@ -501,7 +571,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   // Get role data for SEO optimization
-  const roleData = getRoleData(job.role_category)
+  const roleData = getRoleData(job.role_category, job.executive_title)
   const roleKeyword = roleData.displayName
 
   // SEO-optimized title: Put normalized role keyword FIRST for ranking
@@ -569,7 +639,7 @@ export default async function JobDetailPage({ params }: Props) {
   const relatedJobs = await getRelatedJobs(job)
 
   // Get comprehensive role data for SEO
-  const roleData = getRoleData(job.role_category)
+  const roleData = getRoleData(job.role_category, job.executive_title)
   const roleKeyword = roleData.displayName
 
   // Parse compensation for schema, fallback to role estimates
@@ -609,13 +679,17 @@ export default async function JobDetailPage({ params }: Props) {
         datePosted={job.posted_date || new Date().toISOString().split('T')[0]}
         validThrough={calculateValidThrough(job.posted_date, 30)}
         company={{
-          name: job.company_name,
-          logo: undefined,
-          url: undefined,
+          name: job.company_name || 'Fractional Quest',
+          logo: job.company_name === 'Fractional Quest'
+            ? 'https://fractional.quest/logo.png'
+            : undefined,
+          url: job.company_name === 'Fractional Quest'
+            ? 'https://fractional.quest'
+            : undefined,
         }}
         location={{
-          city: job.location?.split(',')[0]?.trim(),
-          region: job.location?.split(',')[1]?.trim(),
+          city: job.city || job.location?.split(',')[0]?.trim(),
+          region: job.location?.split(',')[1]?.trim() || 'England',
           country: 'GB',
         }}
         isRemote={job.is_remote || job.workplace_type === 'Remote'}

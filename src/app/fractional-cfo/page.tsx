@@ -357,7 +357,7 @@ export default function FractionalCfoPage() {
 
           {/* Featured Role */}
           <div className="mb-6">
-            <Link href="/fractional-job/fractional-cfo-part-time-finance-director-uk" className="block p-5 bg-emerald-50 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:shadow-md transition-all group">
+            <Link href="/fractional-job/fractional-cfo-uk" className="block p-5 bg-emerald-50 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:shadow-md transition-all group">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">⭐</span>
                 <div>

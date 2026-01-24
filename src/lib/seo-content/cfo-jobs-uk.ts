@@ -235,7 +235,7 @@ export const cfoJobsUkSEO = {
   // Internal links for topical authority - comprehensive coverage
   relatedPages: [
     // Featured Role
-    { name: "Featured: Fractional CFO Role", url: "/fractional-job/fractional-cfo-part-time-finance-director-uk" },
+    { name: "Featured: Fractional CFO Role", url: "/fractional-job/fractional-cfo-uk" },
     // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Finance Jobs", url: "/fractional-jobs-london" },
