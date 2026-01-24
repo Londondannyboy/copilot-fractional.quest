@@ -10,6 +10,7 @@ import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { JobListingSchema } from '@/components/seo/JobPostingSchema'
 import { WebPageSchema, LastUpdatedBadge } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
@@ -80,6 +81,7 @@ export default async function PartTimeCFOJobsUKPage() {
       <WebPageSchema title="Part-Time CFO Jobs UK | Fractional Finance Director Roles 2026" description="Find part-time CFO and Finance Director jobs across the UK." url="https://fractional.quest/part-time-cfo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={PART_TIME_CFO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/part-time-cfo-jobs-uk" />
+      <BreadcrumbSchema items={breadcrumbs} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <Image src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80" alt="Part-Time CFO Jobs UK" fill priority sizes="100vw" className="object-cover object-center" />

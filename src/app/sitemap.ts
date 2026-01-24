@@ -106,6 +106,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'fractional-ciso-jobs-uk',
     'fractional-cpo-jobs-uk',
     'fractional-ceo-jobs-uk',
+    'fractional-cro-jobs-uk',
+    'fractional-cio-jobs-uk',
+    'fractional-cso-jobs-uk',
+    'fractional-procurement-jobs-uk',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
@@ -195,6 +199,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'interim-ciso-jobs-uk',
     'interim-cpo-jobs-uk',
     'interim-ceo-jobs-uk',
+    'interim-cio-jobs-uk',
+    'interim-cso-jobs-uk',
     'interim-executive',
     'interim-marketing-director',
   ].map(slug => ({
@@ -214,6 +220,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'part-time-ciso-jobs-uk',
     'part-time-cpo-jobs-uk',
     'part-time-ceo-jobs-uk',
+    'part-time-cio-jobs-uk',
+    'part-time-cso-jobs-uk',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),

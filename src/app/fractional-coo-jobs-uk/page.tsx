@@ -63,6 +63,19 @@ export default async function FractionalCOOJobsUKPage() {
     },
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: cooJobsUkSEO.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <>
       {/* Preload hero image for faster LCP - WebP format */}
@@ -89,6 +102,10 @@ export default async function FractionalCOOJobsUKPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Page Content - Using IntelligentDocument pattern for reactive updates */}

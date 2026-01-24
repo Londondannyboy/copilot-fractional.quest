@@ -81,9 +81,9 @@ export const procurementJobsUkSEO = {
     whyLocation: {
       title: "Why Fractional Procurement Demand is Growing",
       paragraphs: [
-        "UK businesses face unprecedented supply chain complexity, from post-Brexit trade arrangements to global sourcing challenges. According to CIPS, 72% of UK organisations report difficulty recruiting experienced procurement leaders, making fractional Procurement Directors an essential solution for strategic sourcing leadership.",
-        "The fractional procurement model delivers senior-level expertise in supplier management, contract negotiation, and cost optimisation without full-time overhead. Procurement Leaders research shows that companies with strong procurement leadership achieve 15-25% cost savings on average, with fractional arrangements enabling access to this expertise from day one.",
-        "Whether you're a CIPS-qualified procurement professional seeking portfolio work, a former CPO looking for flexible arrangements, or a supply chain director ready to work across multiple industries, the UK fractional procurement market offers compelling opportunities across manufacturing, retail, healthcare, and professional services.",
+        "UK businesses face unprecedented supply chain complexity, from post-Brexit trade arrangements to global sourcing challenges. According to CIPS, 72% of UK organisations report difficulty recruiting experienced procurement leaders, making <strong>fractional procurement jobs</strong> an essential solution for strategic sourcing leadership.",
+        "The <strong>fractional procurement</strong> model delivers senior-level expertise in supplier management, contract negotiation, and cost optimisation without full-time overhead. Procurement Leaders research shows that companies with strong procurement leadership achieve 15-25% cost savings on average, with fractional arrangements enabling access to this expertise from day one.",
+        "Whether you're a CIPS-qualified procurement professional seeking portfolio work, a former CPO looking for flexible arrangements, or a supply chain director ready to work across multiple industries, the UK <strong>fractional procurement jobs</strong> market offers compelling opportunities across manufacturing, retail, healthcare, and professional services.",
       ],
     },
 
@@ -163,8 +163,8 @@ export const procurementJobsUkSEO = {
     futureOutlook: {
       title: "The Future of Fractional Procurement",
       paragraphs: [
-        "CIPS forecasts procurement leadership demand will continue to outpace supply through 2027, with particular shortages in sustainable procurement, digital transformation, and supply chain risk management. This creates sustained demand for fractional Procurement Directors who can guide multiple organisations.",
-        "Key trends shaping the fractional procurement market include: the rise of AI-powered sourcing and spend analytics, growing importance of ESG and sustainable procurement, and increasing expectation that CPOs understand both cost reduction and value creation across the supply chain.",
+        "CIPS forecasts procurement leadership demand will continue to outpace supply through 2027, with particular shortages in sustainable procurement, digital transformation, and supply chain risk management. This creates sustained demand for <strong>fractional procurement</strong> directors who can guide multiple organisations.",
+        "Key trends shaping the <strong>fractional procurement jobs</strong> market include: the rise of AI-powered sourcing and spend analytics, growing importance of ESG and sustainable procurement, and increasing expectation that CPOs understand both cost reduction and value creation across the supply chain.",
       ],
     },
   },

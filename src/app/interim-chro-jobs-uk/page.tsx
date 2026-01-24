@@ -10,6 +10,7 @@ import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { JobListingSchema } from '@/components/seo/JobPostingSchema'
 import { WebPageSchema, LastUpdatedBadge } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
@@ -80,6 +81,7 @@ export default async function InterimCHROJobsUKPage() {
       <WebPageSchema title="Interim CHRO Jobs UK | HR Director Roles 2026" description="Find interim CHRO and HR Director jobs across the UK." url="https://fractional.quest/interim-chro-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_CHRO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-chro-jobs-uk" />
+      <BreadcrumbSchema items={breadcrumbs} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <Image src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80" alt="Interim CHRO Jobs UK" fill priority sizes="100vw" className="object-cover object-center" />

@@ -10,6 +10,7 @@ import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { JobListingSchema } from '@/components/seo/JobPostingSchema'
 import { WebPageSchema, LastUpdatedBadge } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
@@ -87,6 +88,7 @@ export default async function InterimCTOJobsUKPage() {
       <WebPageSchema title="Interim CTO Jobs UK | Technology Director Roles 2026" description="Find interim CTO and Technology Director jobs across the UK." url="https://fractional.quest/interim-cto-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_CTO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-cto-jobs-uk" />
+      <BreadcrumbSchema items={breadcrumbs} />
 
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">

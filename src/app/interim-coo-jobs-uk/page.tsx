@@ -10,6 +10,7 @@ import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { JobListingSchema } from '@/components/seo/JobPostingSchema'
 import { WebPageSchema, LastUpdatedBadge } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { HotJobsLines } from '@/components/HotJobsLines'
@@ -80,6 +81,7 @@ export default async function InterimCOOJobsUKPage() {
       <WebPageSchema title="Interim COO Jobs UK | Operations Director Roles 2026" description="Find interim COO and Operations Director jobs across the UK." url="https://fractional.quest/interim-coo-jobs-uk" dateModified={lastUpdatedDate} />
       <FAQPageSchema faqs={INTERIM_COO_FAQS} />
       <JobListingSchema jobs={jobs.slice(0, 10)} pageUrl="https://fractional.quest/interim-coo-jobs-uk" />
+      <BreadcrumbSchema items={breadcrumbs} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <Image src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80" alt="Interim COO Jobs UK" fill priority sizes="100vw" className="object-cover object-center" />

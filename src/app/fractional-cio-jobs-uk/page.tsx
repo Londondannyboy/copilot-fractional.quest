@@ -63,6 +63,19 @@ export default async function FractionalCIOJobsUKPage() {
     },
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: cioJobsUkSEO.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <>
       {/* Preload hero image for faster LCP - use CTO WebP as closest match */}
@@ -89,6 +102,10 @@ export default async function FractionalCIOJobsUKPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Page Content - Using IntelligentDocument pattern for reactive updates */}

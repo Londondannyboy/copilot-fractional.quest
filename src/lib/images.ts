@@ -4,7 +4,7 @@
 // Credit: All images from Unsplash (unsplash.com)
 
 export type ImageCategory =
-  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso' | 'cro'
+  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso' | 'cro' | 'cso'
   | 'london' | 'manchester' | 'birmingham' | 'edinburgh' | 'bristol' | 'uk'
   | 'remote' | 'tech' | 'finance' | 'marketing' | 'operations' | 'hr' | 'sales'
   | 'interim' | 'part-time' | 'services' | 'guide' | 'salary' | 'default'
@@ -166,6 +166,12 @@ const imageMap: Record<ImageCategory, ImageData> = {
     alt: 'Revenue leader in sales strategy meeting',
     credit: 'LinkedIn Sales Solutions',
     creditUrl: 'https://unsplash.com/@linkedinsalesnavigator'
+  },
+  cso: {
+    url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=600&fit=crop&q=80',
+    alt: 'Strategy executive planning corporate direction',
+    credit: 'Scott Graham',
+    creditUrl: 'https://unsplash.com/@homajob'
   },
 
   // Location-specific images

@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui";
 
+// Tiny base64 blur placeholder for smooth image loading (dark to match card overlays)
+const BLUR_PLACEHOLDER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMklEQVQImWNgYPj/n4EBCxg1atR/BgYGBgYmBjIBEwMDAwMjIyMjAwMDA8P///8ZAAAH3wTCMlKvOAAAAABJRU5ErkJggg=='
+
 // Background images for sector/location cards
 const SECTOR_IMAGES = [
   'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop',
@@ -132,6 +135,8 @@ export function SEOContent({ content }: SEOContentProps) {
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL={BLUR_PLACEHOLDER}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
               <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -166,6 +171,8 @@ export function SEOContent({ content }: SEOContentProps) {
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL={BLUR_PLACEHOLDER}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
               <div className="absolute bottom-0 left-0 right-0 p-5">
