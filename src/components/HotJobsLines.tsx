@@ -4,38 +4,81 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-// Generate a unique colored initials thumbnail for each job
-// This ensures no two adjacent jobs ever look the same
-const THUMB_COLORS = [
-  '0ea5e9', '8b5cf6', '06b6d4', 'f59e0b', 'ef4444',
-  '10b981', '6366f1', 'ec4899', '14b8a6', 'f97316',
-  '3b82f6', 'a855f7', '22c55e', 'e11d48', '0891b2',
-  '7c3aed', 'd97706', '059669', 'dc2626', '2563eb',
-]
+// Role-category based Unsplash images for job thumbnails
+const ROLE_THUMB_IMAGES: Record<string, string[]> = {
+  'Finance': [
+    'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=80&h=80&fit=crop',
+  ],
+  'Engineering': [
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=80&h=80&fit=crop',
+  ],
+  'Marketing': [
+    'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1551434678-e076c223a692?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=80&h=80&fit=crop',
+  ],
+  'Operations': [
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=80&h=80&fit=crop',
+  ],
+  'HR': [
+    'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=80&h=80&fit=crop',
+  ],
+  'Product': [
+    'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1558403194-611308249627?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1576153192396-180ecef2a715?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=80&h=80&fit=crop',
+  ],
+  'Sales': [
+    'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1552581234-26160f608093?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1523287562758-66c7fc58967f?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=80&h=80&fit=crop',
+  ],
+  'Security': [
+    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=80&h=80&fit=crop',
+  ],
+  'default': [
+    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=80&h=80&fit=crop',
+    'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=80&h=80&fit=crop',
+  ],
+}
 
-function getJobImage(jobId: string, _roleCategory?: string, title?: string): string {
-  // Use a hash of the job ID + title to pick a unique color
-  const hashSource = `${jobId}-${title || ''}`
-  let hash = 0
-  for (let i = 0; i < hashSource.length; i++) {
-    const char = hashSource.charCodeAt(i)
-    hash = ((hash << 5) - hash) + char
-    hash = hash & hash
-  }
-  const colorIndex = Math.abs(hash) % THUMB_COLORS.length
-  const bgColor = THUMB_COLORS[colorIndex]
-
-  // Extract initials from job title (up to 2 chars)
-  const words = (title || 'Job').split(/[\s\-\/]+/).filter(w => w.length > 0)
-  let initials = ''
-  if (words.length >= 2) {
-    initials = (words[0][0] + words[1][0]).toUpperCase()
-  } else if (words.length === 1) {
-    initials = words[0].substring(0, 2).toUpperCase()
-  }
-
-  // Use ui-avatars.com to generate a unique colored thumbnail with initials
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bgColor}&color=ffffff&size=80&font-size=0.4&bold=true&format=png`
+function getJobImage(jobId: string, roleCategory?: string): string {
+  const hash = jobId.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0)
+  const images = ROLE_THUMB_IMAGES[roleCategory || ''] || ROLE_THUMB_IMAGES.default
+  return images[Math.abs(hash) % images.length]
 }
 
 interface HotJobLine {
@@ -130,7 +173,7 @@ export function HotJobsLines({
             >
               <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                 <Image
-                  src={getJobImage(job.id, job.role_category, job.title)}
+                  src={getJobImage(job.id, job.role_category)}
                   alt={job.title}
                   width={40}
                   height={40}

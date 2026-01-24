@@ -3,25 +3,29 @@
 import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui";
 
-// Color palette for card thumbnails
-const CARD_COLORS = [
-  '0ea5e9', '8b5cf6', '06b6d4', 'f59e0b', 'ef4444',
-  '10b981', '6366f1', 'ec4899', '14b8a6', 'f97316',
-  '3b82f6', 'a855f7', '22c55e', 'e11d48', '0891b2',
+// Background images for sector/location cards
+const SECTOR_IMAGES = [
+  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=250&fit=crop',
 ];
 
-function getCardThumbnail(title: string, index: number): string {
-  const colorIndex = (index * 3 + title.length) % CARD_COLORS.length;
-  const bgColor = CARD_COLORS[colorIndex];
-  const words = title.split(/[\s\-\/]+/).filter(w => w.length > 0);
-  let initials = '';
-  if (words.length >= 2) {
-    initials = (words[0][0] + words[1][0]).toUpperCase();
-  } else if (words.length === 1) {
-    initials = words[0].substring(0, 2).toUpperCase();
-  }
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bgColor}&color=ffffff&size=80&font-size=0.4&bold=true&format=png`;
-}
+// Background images for specialist role cards
+const ROLE_IMAGES = [
+  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=250&fit=crop',
+  'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=400&h=250&fit=crop',
+];
 
 // Flexible content interface that works with both enriched and basic pages
 interface SEOContentData {
@@ -118,69 +122,65 @@ export function SEOContent({ content }: SEOContentProps) {
         </div>
       </Section>
 
-      {/* Location Hubs Section - Better mobile spacing */}
+      {/* Location Hubs Section - Image overlay cards */}
       <Section className="py-10 sm:py-16">
         <SectionHeading>{content.locations.title}</SectionHeading>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {content.locations.areas.map((area, i) => (
-            <div key={i} className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-gray-100">
-              <div className="flex items-start gap-4 mb-3">
-                <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-                  <Image
-                    src={getCardThumbnail(area.name, i)}
-                    alt={area.name}
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="font-bold text-lg text-gray-900 pt-1">
+            <div key={i} className="relative rounded-xl overflow-hidden shadow-md h-56 sm:h-64 group">
+              <Image
+                src={SECTOR_IMAGES[i % SECTOR_IMAGES.length]}
+                alt={area.name}
+                fill
+                className="object-cover transition-transform group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <h3 className="font-bold text-lg text-white mb-2">
                   {area.name}
                 </h3>
+                <p className="text-white/80 text-sm leading-relaxed line-clamp-2">{area.description}</p>
+                {area.sectors && area.sectors.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {area.sectors.slice(0, 4).map((sector, j) => (
+                      <span key={j} className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full backdrop-blur-sm">
+                        {sector}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{area.description}</p>
-              {area.sectors && area.sectors.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {area.sectors.map((sector, j) => (
-                    <span key={j} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                      {sector}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>
       </Section>
 
-      {/* Emerging Roles Section - Better mobile layout */}
+      {/* Emerging Roles Section - Image overlay cards */}
       <Section background="muted" className="py-10 sm:py-16">
         <SectionHeading>{content.emergingRoles.title}</SectionHeading>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
           {content.emergingRoles.roles.map((role, i) => (
-            <div key={i} className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-gray-100">
-              <div className="flex items-start gap-4 mb-3">
-                <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-                  <Image
-                    src={getCardThumbnail(role.title, i + 10)}
-                    alt={role.title}
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-cover"
-                  />
+            <div key={i} className="relative rounded-xl overflow-hidden shadow-md h-52 sm:h-56 group">
+              <Image
+                src={ROLE_IMAGES[i % ROLE_IMAGES.length]}
+                alt={role.title}
+                fill
+                className="object-cover transition-transform group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="font-bold text-white text-lg">{role.title}</h3>
+                  {role.rate && (
+                    <span className="text-xs font-semibold text-white bg-white/20 px-2 py-1 rounded backdrop-blur-sm ml-2 flex-shrink-0">
+                      {role.rate}
+                    </span>
+                  )}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between">
-                    <h3 className="font-bold text-gray-900">{role.title}</h3>
-                    {role.rate && (
-                      <span className="text-xs sm:text-sm font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded ml-2 flex-shrink-0">
-                        {role.rate}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <p className="text-white/80 text-sm leading-relaxed line-clamp-2">{role.description}</p>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">{role.description}</p>
             </div>
           ))}
         </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface InternalLink {
   name: string
@@ -45,6 +46,51 @@ const accentColors = {
   purple: { border: 'border-purple-300', text: 'text-purple-700', bg: 'bg-purple-50', hover: 'hover:border-purple-500' },
   red: { border: 'border-red-300', text: 'text-red-700', bg: 'bg-red-50', hover: 'hover:border-red-500' },
   indigo: { border: 'border-indigo-300', text: 'text-indigo-700', bg: 'bg-indigo-50', hover: 'hover:border-indigo-500' },
+}
+
+// Background images by category for visual cards
+const categoryImages: Record<string, string[]> = {
+  jobs: [
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=400&h=250&fit=crop',
+  ],
+  guide: [
+    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&h=250&fit=crop',
+  ],
+  salary: [
+    'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=400&h=250&fit=crop',
+  ],
+  hire: [
+    'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop',
+  ],
+  services: [
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=250&fit=crop',
+  ],
+  location: [
+    'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=250&fit=crop',
+    'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=400&h=250&fit=crop',
+  ],
+}
+
+function getCategoryImage(category: string | undefined, index: number): string {
+  const images = categoryImages[category || ''] || categoryImages.jobs
+  return images[index % images.length]
 }
 
 /**
@@ -156,24 +202,31 @@ export default function InternalLinksGrid({
           {subtitle && <p className="text-gray-600 mt-2">{subtitle}</p>}
         </div>
 
-        {/* Featured cards */}
+        {/* Featured cards with background images */}
         <div className="grid md:grid-cols-3 gap-6 mb-6">
           {featured.map((link, idx) => (
             <Link
               key={idx}
               href={link.url}
-              className={`block p-6 bg-white border-2 ${colors.border} rounded-xl ${colors.hover} transition-all hover:shadow-lg group`}
+              className="block relative rounded-xl overflow-hidden group h-48 shadow-md hover:shadow-xl transition-shadow"
             >
-              <div className="text-3xl mb-3">
-                {link.icon || (link.category && categoryIcons[link.category]) || '📄'}
+              <Image
+                src={getCategoryImage(link.category, idx)}
+                alt={link.name}
+                fill
+                className="object-cover transition-transform group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                {link.category && showCategories && (
+                  <span className="inline-block px-2 py-0.5 text-xs font-bold uppercase bg-white/20 text-white rounded mb-2 backdrop-blur-sm">
+                    {categoryLabels[link.category] || link.category}
+                  </span>
+                )}
+                <h4 className="font-bold text-white text-lg leading-tight">{link.name}</h4>
+                {link.description && <p className="text-sm text-white/80 mt-1 line-clamp-2">{link.description}</p>}
               </div>
-              {link.category && showCategories && (
-                <span className={`inline-block px-2 py-0.5 text-xs font-bold uppercase ${colors.bg} ${colors.text} rounded mb-2`}>
-                  {categoryLabels[link.category] || link.category}
-                </span>
-              )}
-              <h4 className={`font-bold text-gray-900 group-hover:${colors.text} mb-2`}>{link.name}</h4>
-              {link.description && <p className="text-sm text-gray-600">{link.description}</p>}
             </Link>
           ))}
         </div>
@@ -198,7 +251,7 @@ export default function InternalLinksGrid({
     )
   }
 
-  // Default: cards
+  // Default: cards with image overlays
   return (
     <div className="py-8">
       <div className="mb-6">
@@ -211,25 +264,25 @@ export default function InternalLinksGrid({
           <Link
             key={idx}
             href={link.url}
-            className={`block p-5 bg-white border border-gray-200 rounded-lg ${colors.hover} transition-all hover:shadow-md group`}
+            className="block relative rounded-xl overflow-hidden group h-36 shadow-sm hover:shadow-lg transition-shadow"
           >
-            <div className="flex items-start gap-3">
-              <span className="text-2xl flex-shrink-0">
-                {link.icon || (link.category && categoryIcons[link.category]) || '📄'}
-              </span>
-              <div className="flex-1 min-w-0">
-                {link.category && showCategories && (
-                  <span className="text-xs font-bold uppercase text-gray-400 block mb-1">
-                    {categoryLabels[link.category] || link.category}
-                  </span>
-                )}
-                <h4 className={`font-bold text-gray-900 group-hover:${colors.text} transition-colors`}>
-                  {link.name}
-                </h4>
-                {link.description && (
-                  <p className="text-sm text-gray-600 mt-1 line-clamp-2">{link.description}</p>
-                )}
-              </div>
+            <Image
+              src={getCategoryImage(link.category, idx)}
+              alt={link.name}
+              fill
+              className="object-cover transition-transform group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-4">
+              {link.category && showCategories && (
+                <span className="inline-block px-2 py-0.5 text-[10px] font-bold uppercase bg-white/20 text-white rounded mb-1.5 backdrop-blur-sm">
+                  {categoryLabels[link.category] || link.category}
+                </span>
+              )}
+              <h4 className="font-bold text-white text-sm leading-tight">
+                {link.name}
+              </h4>
             </div>
           </Link>
         ))}
