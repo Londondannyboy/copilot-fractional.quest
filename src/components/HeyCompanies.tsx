@@ -126,10 +126,10 @@ export function HeyCompanies({ location = 'London' }: HeyCompaniesProps) {
           </div>
         </div>
 
-        {/* Client Logos - Trusted By Section */}
+        {/* Client Logos - Dan's Work History */}
         <div className="mt-16 pt-12 border-t border-white/20">
           <p className="text-center text-white/70 text-sm font-medium mb-8 uppercase tracking-wider">
-            Trusted by executives from leading companies
+            Companies Dan has worked with — full-time & fractional
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             {/* Sony */}

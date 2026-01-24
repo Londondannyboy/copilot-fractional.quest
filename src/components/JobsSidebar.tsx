@@ -61,45 +61,29 @@ const UK_LOCATIONS = [
   { name: 'Remote UK', href: '/remote-fractional-jobs' },
 ]
 
-// Multiple images per role category for visual variety in sidebar
-const ROLE_THUMB_IMAGES: Record<string, string[]> = {
-  'Finance': [
-    'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=80&h=80&fit=crop',
-  ],
-  'Engineering': [
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=80&h=80&fit=crop',
-  ],
-  'Marketing': [
-    'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1557838923-2985c318be48?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&h=80&fit=crop',
-  ],
-  'Operations': [
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=80&h=80&fit=crop',
-  ],
-  'HR': [
-    'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=80&h=80&fit=crop',
-  ],
-  'default': [
-    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=80&h=80&fit=crop',
-    'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=80&h=80&fit=crop',
-  ],
-}
+// Large pool of unique thumbnails for sidebar job cards - no duplicates across any 5 consecutive jobs
+const ALL_THUMB_IMAGES = [
+  'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1518770660439-4636190af475?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1552664730-d307ca884978?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1551434678-e076c223a692?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=96&h=96&fit=crop',
+  'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=96&h=96&fit=crop',
+]
 
 // Header images for sidebar hot jobs section
 const SIDEBAR_HEADER_IMAGES: Record<string, string> = {
@@ -111,10 +95,13 @@ const SIDEBAR_HEADER_IMAGES: Record<string, string> = {
   'default': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=120&fit=crop',
 }
 
-function getJobThumb(jobId: string, roleCategory?: string): string {
+// Use index-based assignment to guarantee no duplicates in consecutive jobs
+function getJobThumb(jobId: string, _roleCategory?: string, index?: number): string {
+  if (index !== undefined) {
+    return ALL_THUMB_IMAGES[index % ALL_THUMB_IMAGES.length]
+  }
   const hash = jobId.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0)
-  const images = ROLE_THUMB_IMAGES[roleCategory || ''] || ROLE_THUMB_IMAGES.default
-  return images[Math.abs(hash) % images.length]
+  return ALL_THUMB_IMAGES[Math.abs(hash) % ALL_THUMB_IMAGES.length]
 }
 
 export function JobsSidebar({
@@ -200,7 +187,7 @@ export function JobsSidebar({
               </div>
             ))
           ) : featuredJobs.length > 0 ? (
-            featuredJobs.filter(job => job.slug).map((job) => (
+            featuredJobs.filter(job => job.slug).map((job, idx) => (
               <Link
                 key={job.id}
                 href={`/fractional-job/${job.slug}`}
@@ -208,7 +195,7 @@ export function JobsSidebar({
               >
                 <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
                   <Image
-                    src={getJobThumb(job.id, roleCategory)}
+                    src={getJobThumb(job.id, roleCategory, idx)}
                     alt={job.title}
                     width={48}
                     height={48}
@@ -289,10 +276,10 @@ export function JobsSidebar({
         </div>
       )}
 
-      {/* Trusted By - Client Logos */}
+      {/* Client Logos - Dan's Work History */}
       <div className="bg-white rounded-xl border border-gray-200 p-5">
         <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 text-center">
-          Trusted by executives from
+          Dan has worked with
         </p>
         <div className="grid grid-cols-5 gap-2">
           <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="Sony">
