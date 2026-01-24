@@ -31,12 +31,16 @@ interface EmbeddedJobBoardProps {
 
 const DEPARTMENT_OPTIONS = [
   { value: '', label: 'All Departments' },
+  { value: 'Technology', label: 'Technology' },
   { value: 'Engineering', label: 'Engineering' },
   { value: 'Marketing', label: 'Marketing' },
   { value: 'Finance', label: 'Finance' },
   { value: 'Operations', label: 'Operations' },
   { value: 'Sales', label: 'Sales' },
   { value: 'HR', label: 'HR' },
+  { value: 'Legal', label: 'Legal' },
+  { value: 'Design', label: 'Design' },
+  { value: 'Executive', label: 'Executive' },
   { value: 'Product', label: 'Product' },
 ]
 

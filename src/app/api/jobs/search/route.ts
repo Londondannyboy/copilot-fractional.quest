@@ -48,9 +48,29 @@ export async function GET(request: NextRequest) {
     const isHybridFilter = remoteParam === 'hybrid'
     const isOnsiteFilter = remoteParam === 'onsite'
 
-    // Department/category filter
-    const departments = ['Engineering', 'Marketing', 'Finance', 'Operations', 'Sales', 'HR', 'Product']
-    const isDepartmentFilter = roleType && departments.includes(roleType)
+    // Department/category filter with aliases
+    // Maps MDX defaultDepartment values to actual role_category values in the DB
+    const departmentMap: Record<string, string> = {
+      Technology: 'Engineering',
+      Engineering: 'Engineering',
+      Marketing: 'Marketing',
+      Finance: 'Finance',
+      Operations: 'Operations',
+      Sales: 'Sales',
+      HR: 'HR',
+      Product: 'Product',
+      Legal: 'Legal',
+      Design: 'Design',
+      Data: 'Data',
+      Executive: 'Executive',
+      Compliance: 'Legal',
+      Innovation: 'Engineering',
+      Strategy: 'Executive',
+      Communications: 'Marketing',
+      Sustainability: 'Operations',
+    }
+    const mappedDepartment = roleType ? departmentMap[roleType] || roleType : ''
+    const isDepartmentFilter = !!mappedDepartment
 
     // Fetch all matching jobs (we'll filter for UK in JS for flexibility)
     let allJobs: any[] = []
@@ -60,7 +80,7 @@ export async function GET(request: NextRequest) {
         SELECT id, slug, title, company_name, location, is_remote, workplace_type, compensation, role_category, skills_required, posted_date, hours_per_week
         FROM jobs
         WHERE is_active = true AND is_fractional = true
-          AND role_category = ${roleType}
+          AND role_category = ${mappedDepartment}
           AND LOWER(COALESCE(location, '')) LIKE ${`%${location.toLowerCase()}%`}
         ORDER BY posted_date DESC NULLS LAST
       `
@@ -69,7 +89,7 @@ export async function GET(request: NextRequest) {
         SELECT id, slug, title, company_name, location, is_remote, workplace_type, compensation, role_category, skills_required, posted_date, hours_per_week
         FROM jobs
         WHERE is_active = true AND is_fractional = true
-          AND role_category = ${roleType}
+          AND role_category = ${mappedDepartment}
         ORDER BY posted_date DESC NULLS LAST
       `
     } else if (location && location.toLowerCase() !== 'remote') {
