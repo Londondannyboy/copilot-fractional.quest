@@ -230,6 +230,8 @@ export const cfoJobsUkSEO = {
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
     { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Recruitment
+    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
     // Other Locations
     { name: "Manchester Jobs", url: "/manchester" },
     { name: "Birmingham Jobs", url: "/birmingham" },

@@ -218,6 +218,8 @@ export const londonSEO = {
     { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
     { name: "Fractional CCO Jobs UK", url: "/fractional-cco-jobs-uk" },
+    // Recruitment
+    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
     // Other UK Cities
     { name: "Manchester Jobs", url: "/manchester" },
     { name: "Birmingham Jobs", url: "/birmingham" },

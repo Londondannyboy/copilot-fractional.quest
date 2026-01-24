@@ -228,6 +228,8 @@ export const cpoJobsUkSEO = {
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
     { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Recruitment
+    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
     // Locations
     { name: "Cambridge Jobs", url: "/cambridge" },
     { name: "Manchester Jobs", url: "/manchester" },

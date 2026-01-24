@@ -212,6 +212,8 @@ export const cmoJobsUkSEO = {
     { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CMO Jobs UK", url: "/part-time-cmo-jobs-uk" },
+    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
   ],
 
   schema: {
