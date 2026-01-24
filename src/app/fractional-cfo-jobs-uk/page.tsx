@@ -81,14 +81,14 @@ export default async function FractionalCFOJobsUKPage() {
       {/* Preload hero image for faster LCP - WebP format */}
       <link
         rel="preload"
-        href="/images/hero/cfo-mobile.webp"
+        href="/images/hero/fractional-cfo-jobs-uk-mobile.webp"
         as="image"
         type="image/webp"
         media="(max-width: 768px)"
       />
       <link
         rel="preload"
-        href="/images/hero/cfo-desktop.webp"
+        href="/images/hero/fractional-cfo-jobs-uk-desktop.webp"
         as="image"
         type="image/webp"
         media="(min-width: 769px)"

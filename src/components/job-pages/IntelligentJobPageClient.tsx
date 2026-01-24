@@ -158,6 +158,7 @@ function IntelligentHero({
             <Image
               src={localImage.desktop}
               alt={`${headline} - ${image.alt}`}
+              title={headline}
               fill
               priority
               className="object-cover"
@@ -169,6 +170,7 @@ function IntelligentHero({
           <Image
             src={fallbackUrl}
             alt={`${headline} - ${image.alt}`}
+            title={headline}
             fill
             priority
             className="object-cover"

@@ -9,11 +9,10 @@ import { LazyYouTube } from '@/components/LazyYouTube'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
-import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+import { getOGImageUrl, getImage } from '@/lib/images'
 
 const ogImage = getOGImageUrl('cfo')
 const imageAlt = getImage('cfo').alt
-const heroImage = getHeroImageUrl('cfo', 1920, 800)
 const imageCredit = getImage('cfo')
 
 export const metadata: Metadata = {
@@ -56,8 +55,9 @@ export default function FractionalCfoPage() {
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <Image
-          src={heroImage}
+          src="/images/hero/fractional-cfo-jobs-uk-desktop.webp"
           alt={`What is a Fractional CFO - ${imageAlt}`}
+          title="Fractional CFO - Part-Time Finance Leadership"
           fill
           priority
           sizes="100vw"
@@ -110,7 +110,7 @@ export default function FractionalCfoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
 
-            <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CFO? Understanding the Role</h2>
+            <h2 className="text-3xl font-black text-gray-900 mb-6">Understanding the Fractional CFO Role</h2>
 
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
               The <strong>fractional CFO meaning</strong> centres on flexible, senior-level financial leadership. Unlike traditional full-time CFOs earning £130,000-£220,000 annually, a <strong>fractional Chief Financial Officer</strong> works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.
@@ -130,7 +130,7 @@ export default function FractionalCfoPage() {
               <p className="text-gray-500 text-sm mt-3">Video: Understanding the fractional CFO role and responsibilities</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">What Does a Fractional CFO Do?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities and Deliverables</h2>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -149,7 +149,7 @@ export default function FractionalCfoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CFO vs Full-Time CFO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Part-Time vs Full-Time: How They Compare</h2>
 
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
@@ -185,7 +185,7 @@ export default function FractionalCfoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Do You Need a Fractional CFO?</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Does Your Business Need One?</h2>
 
             <ul className="space-y-3">
               <li><strong>Fundraising:</strong> Preparing for and executing Series A-C rounds</li>
@@ -197,16 +197,16 @@ export default function FractionalCfoPage() {
             </ul>
 
             <div className="bg-emerald-50 p-6 border border-emerald-200 rounded-lg my-8 not-prose">
-              <p className="text-emerald-800 font-medium mb-3">Ready to hire a fractional CFO?</p>
+              <p className="text-emerald-800 font-medium mb-3">Ready to hire a part-time finance leader?</p>
               <Link href="/hire-fractional-cfo" className="inline-flex items-center text-emerald-700 font-bold hover:text-emerald-900">
                 Complete Guide: How to Hire a Fractional CFO →
               </Link>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CFO Cost UK</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Cost and Pricing UK</h2>
 
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Fractional CFO Pricing</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing Breakdown</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £3,000-£5,600/month (£36,000-£67,000/year)</li>
                 <li><strong>2 days/week:</strong> £6,000-£11,200/month (£72,000-£134,000/year)</li>
@@ -215,7 +215,7 @@ export default function FractionalCfoPage() {
               <p className="text-sm text-gray-600 mt-4">Compare to full-time CFO: £160,000-£280,000+ (salary + benefits + equity)</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Types of Fractional CFO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Types of Finance Leadership Engagement</h2>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -235,7 +235,7 @@ export default function FractionalCfoPage() {
             <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Qualifications & Professional Bodies</h2>
 
             <p>
-              Most <strong>fractional CFOs</strong> hold professional accounting qualifications from recognized bodies. Key professional organizations include:
+              Most part-time finance directors hold professional accounting qualifications from recognized bodies. Key professional organizations include:
             </p>
 
             <div className="grid md:grid-cols-2 gap-4 not-prose my-8">
@@ -308,7 +308,7 @@ export default function FractionalCfoPage() {
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
             <h2 className="text-2xl md:text-3xl font-black text-gray-900">
-              Fractional CFO Cost Calculator
+              Day Rate Calculator
             </h2>
           </div>
           <RoleCalculator role="cfo" />
@@ -321,7 +321,7 @@ export default function FractionalCfoPage() {
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
             <h2 className="text-3xl md:text-4xl font-black text-gray-900">
-              Frequently Asked Questions About Fractional CFOs
+              Frequently Asked Questions
             </h2>
           </div>
           <FAQ items={CFO_FAQS} title="" />
@@ -333,7 +333,7 @@ export default function FractionalCfoPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="mb-8">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Related Resources</span>
-            <h2 className="text-2xl font-black text-gray-900">Explore More CFO Resources</h2>
+            <h2 className="text-2xl font-black text-gray-900">Explore More Resources</h2>
           </div>
 
           {/* Primary Links */}
@@ -351,7 +351,7 @@ export default function FractionalCfoPage() {
             <Link href="/fractional-cfo-salary" className="bg-white p-6 rounded-lg border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all group">
               <span className="text-3xl mb-3 block">💰</span>
               <h3 className="font-bold text-gray-900 group-hover:text-emerald-700 mb-2">Fractional CFO Salary Guide</h3>
-              <p className="text-gray-600 text-sm">UK day rates, annual earnings, and IR35 considerations for fractional CFOs</p>
+              <p className="text-gray-600 text-sm">UK day rates, annual earnings, and IR35 considerations for finance leaders</p>
             </Link>
           </div>
 
@@ -403,10 +403,10 @@ export default function FractionalCfoPage() {
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Work with a Fractional CFO?
+            Ready to Get Started?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted fractional CFO candidates or post your requirements.
+            Browse pre-vetted finance leaders or post your requirements.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
@@ -430,8 +430,8 @@ export default function FractionalCfoPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Fractional CFO Jobs UK</h2>
-            <p className="text-xl text-gray-500">Find your next fractional CFO opportunity</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Latest Finance Leadership Jobs</h2>
+            <p className="text-xl text-gray-500">Find your next part-time finance opportunity</p>
           </div>
           <EmbeddedJobBoard
             defaultDepartment="Finance"

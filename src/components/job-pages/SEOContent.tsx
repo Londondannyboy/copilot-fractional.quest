@@ -132,6 +132,7 @@ export function SEOContent({ content }: SEOContentProps) {
               <Image
                 src={SECTOR_IMAGES[i % SECTOR_IMAGES.length]}
                 alt={`${area.name} - fractional jobs`}
+                title={`${area.name} - fractional jobs UK`}
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
@@ -168,6 +169,7 @@ export function SEOContent({ content }: SEOContentProps) {
               <Image
                 src={ROLE_IMAGES[i % ROLE_IMAGES.length]}
                 alt={`${role.title} - fractional jobs UK`}
+                title={`${role.title} - fractional jobs UK`}
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"

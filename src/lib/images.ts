@@ -42,30 +42,30 @@ const localImageMap: Partial<Record<ImageCategory, LocalImageData>> = {
     creditUrl: 'https://unsplash.com/@charlpost'
   },
   cfo: {
-    desktop: '/images/hero/cfo-desktop.webp',
-    mobile: '/images/hero/cfo-mobile.webp',
-    alt: 'Professional finance executive reviewing financial data',
+    desktop: '/images/hero/fractional-cfo-jobs-uk-desktop.webp',
+    mobile: '/images/hero/fractional-cfo-jobs-uk-mobile.webp',
+    alt: 'Fractional CFO jobs UK - finance executive reviewing data',
     credit: 'Austin Distel',
     creditUrl: 'https://unsplash.com/@austindistel'
   },
   cto: {
-    desktop: '/images/hero/cto-desktop.webp',
-    mobile: '/images/hero/cto-mobile.webp',
-    alt: 'Technology team collaborating on software development',
+    desktop: '/images/hero/fractional-cto-jobs-uk-desktop.webp',
+    mobile: '/images/hero/fractional-cto-jobs-uk-mobile.webp',
+    alt: 'Fractional CTO jobs UK - technology team collaborating',
     credit: 'Marvin Meyer',
     creditUrl: 'https://unsplash.com/@marvelous'
   },
   cmo: {
-    desktop: '/images/hero/cmo-desktop.webp',
-    mobile: '/images/hero/cmo-mobile.webp',
-    alt: 'Marketing team in strategy meeting',
+    desktop: '/images/hero/fractional-cmo-jobs-uk-desktop.webp',
+    mobile: '/images/hero/fractional-cmo-jobs-uk-mobile.webp',
+    alt: 'Fractional CMO jobs UK - marketing strategy meeting',
     credit: 'Jason Goodman',
     creditUrl: 'https://unsplash.com/@jasongoodman_youxventures'
   },
   coo: {
-    desktop: '/images/hero/coo-desktop.webp',
-    mobile: '/images/hero/coo-mobile.webp',
-    alt: 'Operations team reviewing business processes',
+    desktop: '/images/hero/fractional-coo-jobs-uk-desktop.webp',
+    mobile: '/images/hero/fractional-coo-jobs-uk-mobile.webp',
+    alt: 'Fractional COO jobs UK - operations team planning',
     credit: 'Austin Distel',
     creditUrl: 'https://unsplash.com/@austindistel'
   },
