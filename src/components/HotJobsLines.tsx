@@ -35,7 +35,7 @@ function getJobImage(jobId: string, _roleCategory?: string, title?: string): str
   }
 
   // Use ui-avatars.com to generate a unique colored thumbnail with initials
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bgColor}&color=ffffff&size=80&font-size=0.4&bold=true&format=svg`
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bgColor}&color=ffffff&size=80&font-size=0.4&bold=true&format=png`
 }
 
 interface HotJobLine {
