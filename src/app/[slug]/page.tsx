@@ -1,9 +1,84 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { getPageBySlug, getAllPageSlugs, getPageTypeLabel } from '@/lib/pages'
 import { PageWithCopilot } from '@/components/pages/PageWithCopilot'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { mdxComponents } from '../../../mdx-components'
+
+// Generate related internal links based on page slug and type
+function getRelatedLinks(slug: string, pageType: string): { name: string; url: string }[] {
+  const links: { name: string; url: string }[] = []
+
+  // Extract the role identifier from the slug (e.g., "cfo" from "fractional-cfo-salary")
+  const rolePatterns = [
+    'cfo', 'cto', 'cmo', 'coo', 'ceo', 'chro', 'ciso', 'cpo', 'cro', 'cio', 'cso',
+    'cko', 'cqo', 'cvo', 'cbdo', 'cino', 'ctso', 'csco', 'cgo', 'cxo',
+    'cbo-chief-business-officer', 'cbo-chief-brand-officer',
+    'cco-chief-commercial-officer', 'cco-chief-compliance-officer', 'cco-chief-customer-officer',
+    'cco-chief-content-officer', 'cco-chief-creative-officer', 'cco-chief-communications-officer',
+    'cdo-chief-digital-officer', 'cdo-chief-data-officer', 'cdo-chief-diversity-officer', 'cdo-chief-design-officer',
+    'cio-chief-information-officer', 'cio-chief-investment-officer',
+    'clo-chief-legal-officer', 'clo-chief-learning-officer',
+    'cao-chief-administrative-officer', 'cao-chief-analytics-officer',
+    'cpo-chief-people-officer', 'cpo-chief-privacy-officer', 'cpo-chief-process-officer',
+    'cro-chief-risk-officer', 'cro-chief-research-officer', 'cro-chief-reputation-officer', 'cro-chief-restructuring-officer',
+    'cso-chief-security-officer', 'cso-chief-sustainability-officer', 'cso-chief-strategy-officer',
+    'cso-chief-scientific-officer', 'cso-chief-services-officer', 'cso-chief-solutions-officer',
+    'head-of-legal',
+  ]
+
+  let matchedRole = ''
+  for (const role of rolePatterns) {
+    if (slug.includes(role)) {
+      matchedRole = role
+      break
+    }
+  }
+
+  // Add hub link
+  links.push({ name: 'UK Fractional Jobs', url: '/fractional-jobs-uk' })
+
+  if (matchedRole) {
+    const roleName = matchedRole.split('-').map(w => w.toUpperCase()).join(' ').replace('CHIEF ', 'C').substring(0, 20)
+
+    // Add sibling page types for this role
+    if (!slug.includes('-salary') && !slug.includes('salary-')) {
+      links.push({ name: `${roleName} Salary Guide`, url: `/fractional-${matchedRole}-salary` })
+    }
+    if (!slug.startsWith('hire-')) {
+      links.push({ name: `Hire ${roleName}`, url: `/hire-fractional-${matchedRole}` })
+    }
+    if (!slug.includes('-services')) {
+      links.push({ name: `${roleName} Services`, url: `/fractional-${matchedRole}-services` })
+    }
+    if (!slug.startsWith('fractional-') || slug.includes('salary') || slug.includes('services') || slug.includes('jobs')) {
+      links.push({ name: `What is a Fractional ${roleName}?`, url: `/fractional-${matchedRole}` })
+    }
+    if (!slug.includes('-jobs-uk')) {
+      links.push({ name: `${roleName} Jobs UK`, url: `/fractional-${matchedRole}-jobs-uk` })
+    }
+  }
+
+  // Add general links based on page type
+  if (pageType === 'comparison') {
+    links.push({ name: 'Fractional vs Consultant', url: '/fractional-vs-consulting' })
+  }
+
+  // Always add a few cross-role links
+  const mainRoles = ['cfo', 'cto', 'cmo', 'coo', 'ceo']
+  for (const role of mainRoles) {
+    if (!slug.includes(role) && links.length < 8) {
+      links.push({ name: `Fractional ${role.toUpperCase()} Jobs UK`, url: `/fractional-${role}-jobs-uk` })
+    }
+  }
+
+  // Deduplicate and remove self-links
+  const selfUrl = `/${slug}`
+  return links
+    .filter((link, idx, arr) => link.url !== selfUrl && arr.findIndex(l => l.url === link.url) === idx)
+    .slice(0, 8)
+}
 
 // ===========================================
 // Caching Configuration
@@ -283,6 +358,30 @@ export default async function DynamicPage({ params }: PageProps) {
       ) : (
         <PageWithCopilot page={page} />
       )}
+
+      {/* Related Pages - Internal linking for all database pages */}
+      {(() => {
+        const relatedLinks = getRelatedLinks(slug, page.page_type)
+        if (relatedLinks.length === 0) return null
+        return (
+          <section className="bg-gray-50 border-t border-gray-200 py-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Related Resources</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {relatedLinks.map((link, idx) => (
+                  <Link
+                    key={idx}
+                    href={link.url}
+                    className="block px-4 py-3 bg-white border border-gray-200 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:border-blue-300 transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )
+      })()}
     </>
   )
 }
