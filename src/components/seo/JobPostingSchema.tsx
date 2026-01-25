@@ -59,32 +59,50 @@ export function JobPostingSchema({
   educationRequirements,
   directApply = true,
 }: JobPostingSchemaProps) {
+  // Ensure datePosted is full ISO format with timezone
+  const formattedDatePosted = datePosted.includes('T')
+    ? datePosted
+    : `${datePosted}T00:00:00+00:00`
+
+  // Ensure validThrough is full ISO format
+  const formattedValidThrough = validThrough
+    ? (validThrough.includes('T') ? validThrough : `${validThrough}T23:59:59+00:00`)
+    : undefined
+
   // Build the structured data object
   const structuredData: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
     title,
     description,
-    datePosted,
+    datePosted: formattedDatePosted,
     hiringOrganization: {
       '@type': 'Organization',
       name: company.name,
       ...(company.logo && { logo: company.logo }),
       ...(company.url && { sameAs: company.url }),
     },
-    employmentType,
+    // employmentType should be an array per Google's examples
+    employmentType: [employmentType],
     directApply,
     url: jobUrl,
+    // Add identifier for unique job tracking
+    identifier: {
+      '@type': 'PropertyValue',
+      name: company.name,
+      value: jobUrl,
+    },
   }
 
   // Add validity period if provided
-  if (validThrough) {
-    structuredData.validThrough = validThrough
+  if (formattedValidThrough) {
+    structuredData.validThrough = formattedValidThrough
   }
 
-  // Add job location
-  if (location && !isRemote) {
-    structuredData.jobLocation = {
+  // Add job location - ALWAYS include if we have location data, even for remote jobs
+  // Remote jobs with a city should have BOTH jobLocation AND jobLocationType
+  if (location && (location.city || location.region)) {
+    structuredData.jobLocation = [{
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
@@ -92,18 +110,19 @@ export function JobPostingSchema({
         ...(location.city && { addressLocality: location.city }),
         ...(location.region && { addressRegion: location.region }),
         ...(location.postalCode && { postalCode: location.postalCode }),
-        addressCountry: location.country || 'GB',
+        addressCountry: location.country || 'United Kingdom',
       },
-    }
+    }]
   }
 
-  // Handle remote work
+  // Handle remote work - add TELECOMMUTE type and applicant requirements
+  // This is IN ADDITION to jobLocation for hybrid roles
   if (isRemote) {
     structuredData.jobLocationType = 'TELECOMMUTE'
-    structuredData.applicantLocationRequirements = {
+    structuredData.applicantLocationRequirements = [{
       '@type': 'Country',
       name: 'United Kingdom',
-    }
+    }]
   }
 
   // Add salary information if provided
