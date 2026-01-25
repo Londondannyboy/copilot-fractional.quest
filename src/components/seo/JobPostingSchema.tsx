@@ -365,6 +365,16 @@ export function JobListingSchema({ jobs, pageUrl }: JobListingSchemaProps) {
       const locationCity = job.city || job.location?.split(',')[0] || undefined
       const countryName = job.country || 'United Kingdom'
 
+      // Build job location object if we have location data
+      const jobLocationObj = locationCity ? [{
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: locationCity,
+          addressCountry: countryName,
+        },
+      }] : undefined
+
       return {
         '@type': 'ListItem',
         position: index + 1,
@@ -379,26 +389,19 @@ export function JobListingSchema({ jobs, pageUrl }: JobListingSchemaProps) {
           },
           datePosted,
           validThrough,
-          employmentType: 'CONTRACTOR',
+          employmentType: ['CONTRACTOR'],
           baseSalary,
           directApply: true,
           url: `https://fractional.quest/fractional-job/${job.slug}`,
-          // Location handling - international aware
-          ...(job.is_remote ? {
+          // Always include location if available
+          ...(jobLocationObj && { jobLocation: jobLocationObj }),
+          // Add remote work flags if remote
+          ...(job.is_remote && {
             jobLocationType: 'TELECOMMUTE',
-            applicantLocationRequirements: {
+            applicantLocationRequirements: [{
               '@type': 'Country',
               name: countryName,
-            },
-          } : {
-            jobLocation: {
-              '@type': 'Place',
-              address: {
-                '@type': 'PostalAddress',
-                ...(locationCity && { addressLocality: locationCity }),
-                addressCountry: countryCode,
-              },
-            },
+            }],
           }),
           // Skills if available
           ...(job.skills_required && job.skills_required.length > 0 && {

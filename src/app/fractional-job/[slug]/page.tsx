@@ -690,7 +690,7 @@ export default async function JobDetailPage({ params }: Props) {
         location={{
           city: job.city || job.location?.split(',')[0]?.trim(),
           region: job.location?.split(',')[1]?.trim() || 'England',
-          country: 'GB',
+          country: 'United Kingdom',
         }}
         isRemote={job.is_remote || job.workplace_type === 'Remote'}
         employmentType="CONTRACTOR"
