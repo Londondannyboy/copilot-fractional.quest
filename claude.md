@@ -1071,6 +1071,160 @@ Agent system prompt injects:
 
 ---
 
+## Google Jobs Poster-Card Template (CRITICAL FOR RANKING)
+
+This template defines how to create SEO-optimized job listings that rank in Google Jobs. Follow this EXACTLY for all poster-card jobs.
+
+### Database Required Fields
+
+```sql
+INSERT INTO jobs (
+  slug,                    -- Short, keyword-rich: 'fractional-cfo-uk' or 'fractional-cto-london'
+  title,                   -- Include role + variant: 'Fractional CTO / Part-Time Technology Director — London'
+  company_name,            -- 'Fractional Quest' for poster cards
+  location,                -- 'London, England' or 'United Kingdom'
+  city,                    -- 'London' - CRITICAL for Google Jobs geolocation
+  country,                 -- 'United Kingdom' (full name, not 'GB')
+  workplace_type,          -- 'Hybrid' or 'Remote'
+  is_remote,               -- true for remote/hybrid roles
+  is_fractional,           -- true
+  compensation,            -- '£1,000-£1,500/day'
+  salary_min,              -- 1000 (numeric, for schema)
+  salary_max,              -- 1500 (numeric, for schema)
+  salary_currency,         -- 'GBP'
+  posted_date,             -- CURRENT_DATE
+  application_deadline,    -- CURRENT_DATE + INTERVAL '90 days'
+  role_category,           -- 'Finance', 'Engineering', 'Marketing', etc.
+  executive_title,         -- 'CFO', 'CTO', 'CMO' - maps to display name
+  description_snippet,     -- Short summary for listings
+  site_tags,               -- ARRAY['featured', 'poster-card', 'evergreen']
+  full_description,        -- Long-form markdown (see below)
+  is_active,               -- true
+  external_id,             -- 'fq-poster-{role}-001'
+  source,                  -- 'fractional-quest'
+  url                      -- Link to cluster page: 'https://fractional.quest/fractional-cfo-jobs-uk'
+) VALUES (...)
+```
+
+### full_description Content Requirements
+
+**Keyword Density (MANDATORY):**
+- Primary keyword (e.g., "Fractional CTO") in ALL 8 headers
+- Mentioned 8+ times in body text (aim for 15+)
+- Bolded **once** in body text (not in header)
+- Bold mention spaced AWAY from headers (mid-paragraph)
+
+**Required 8 Headers (## format):**
+```markdown
+## About This Fractional {ROLE} Opportunity {in LOCATION}
+## What Does a Fractional {ROLE} Do?
+## Fractional {ROLE} Day Rates {in LOCATION}
+## Who Should Apply for This Fractional {ROLE} Role?
+## Fractional {ROLE} Working Arrangements: {Remote & Hybrid / Location}
+## {Location} Sectors Seeking Fractional {ROLE}s
+## The {Location/UK} Fractional {ROLE} Market
+## How to Apply for Fractional {ROLE} Roles {in LOCATION}
+```
+
+**Authority Links (8-10 required):**
+Include links to professional bodies relevant to the role:
+- CFO: ICAEW, ACCA, CIMA, FRC, BVCA, FCA, Glassdoor, British Business Bank
+- CTO: Tech Nation, BCS, IET, GDS, Gartner, FCA, MHRA, ScaleUp Institute
+- CMO: CIM, DMA, Marketing Week, IPA, WARC
+- General: ONS, Charity Commission (if applicable)
+
+**Internal Links (5+ required):**
+At the bottom, link to cluster pages:
+```markdown
+Browse more opportunities: [All Fractional {ROLE} Jobs UK](https://fractional.quest/fractional-{role}-jobs-uk) | [Location Jobs](https://fractional.quest/fractional-jobs-london) | [Remote Fractional Jobs](https://fractional.quest/remote-fractional-jobs) | [{ROLE} Salary Guide](https://fractional.quest/fractional-{role}-salary) | [What is a Fractional {ROLE}?](https://fractional.quest/fractional-{role})
+```
+
+### JobPosting Schema (Auto-generated)
+
+The `JobPostingSchema` component in `/src/components/seo/JobPostingSchema.tsx` automatically generates Google Jobs-compliant structured data:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "Job Title - Fractional CFO",
+  "datePosted": "2026-01-25T00:00:00+00:00",
+  "validThrough": "2026-04-25T23:59:59+00:00",
+  "employmentType": ["CONTRACTOR"],
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "Fractional Quest",
+    "value": "https://fractional.quest/fractional-job/{slug}"
+  },
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Fractional Quest",
+    "logo": "https://fractional.quest/logo.png",
+    "sameAs": "https://fractional.quest"
+  },
+  "jobLocation": [{
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "London",
+      "addressRegion": "England",
+      "addressCountry": "United Kingdom"
+    }
+  }],
+  "jobLocationType": "TELECOMMUTE",
+  "applicantLocationRequirements": [{
+    "@type": "Country",
+    "name": "United Kingdom"
+  }],
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "GBP",
+    "value": {
+      "@type": "QuantitativeValue",
+      "minValue": 1000,
+      "maxValue": 1500,
+      "unitText": "DAY"
+    }
+  },
+  "directApply": true,
+  "url": "https://fractional.quest/fractional-job/{slug}"
+}
+```
+
+**Key Schema Rules:**
+- `datePosted` and `validThrough`: Full ISO 8601 with timezone (T00:00:00+00:00)
+- `employmentType`: MUST be an array `["CONTRACTOR"]`
+- `jobLocation`: MUST be an array, even for single location
+- `applicantLocationRequirements`: MUST be an array
+- `addressCountry`: Use "United Kingdom" not "GB"
+- For remote/hybrid jobs: Include BOTH `jobLocation` AND `jobLocationType: "TELECOMMUTE"`
+- `identifier`: Include PropertyValue with company name and job URL
+- `logo`: Use `https://fractional.quest/logo.png`
+
+### Existing Poster-Card Jobs
+
+| Role | Slug | URL |
+|------|------|-----|
+| CFO | `fractional-cfo-uk` | `/fractional-job/fractional-cfo-uk` |
+| CTO | `fractional-cto-london` | `/fractional-job/fractional-cto-london` |
+
+### After Creating a Poster-Card Job
+
+1. **Submit to Search Console**: Request indexing for the new URL
+2. **Add internal link**: Link from the role's service page (e.g., `/fractional-cfo` → new job)
+3. **Add to SEO content**: Add to `relatedPages` in the role's SEO content file
+4. **Verify schema**: Test with Google's Rich Results Test
+
+### Competitor Analysis (Jan 2026)
+
+Analyzed ranking competitors (Reed.co.uk, StudySmarter, Women for Hire):
+- NO special "job board" schema - just standard JobPosting
+- Our schema is MORE complete (we have salary, logo, identifier - they often don't)
+- Google Jobs treats all sites with valid JobPosting schema equally
+- Key ranking factors: valid schema + location accuracy + crawl time
+
+---
+
 ## Build Fixes (Evening Session)
 
 ### 1. TypeScript setState Error
