@@ -229,6 +229,8 @@ export const ctoJobsUkSEO = {
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
     { name: "Executive Finder", url: "/fractional-executive-finder" },
+    // Featured Role
+    { name: "Featured: Fractional CTO Role", url: "/fractional-job/fractional-cto-london" },
     // Recruitment
     { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
     // Tech Locations

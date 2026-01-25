@@ -375,6 +375,19 @@ export default function FractionalCtoPage() {
             </Link>
           </div>
 
+          {/* Featured Role */}
+          <div className="mb-6">
+            <Link href="/fractional-job/fractional-cto-london" className="block p-5 bg-cyan-50 border-2 border-cyan-300 rounded-lg hover:border-cyan-500 hover:shadow-md transition-all group">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">⭐</span>
+                <div>
+                  <h4 className="font-bold text-gray-900 group-hover:text-cyan-700">Featured: Fractional CTO / Part-Time Technology Director — London</h4>
+                  <p className="text-gray-600 text-sm">Remote & hybrid, £1,000-£1,600/day — view full job description and requirements</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* Secondary Links */}
           <div className="grid md:grid-cols-4 gap-4">
             <Link href="/fractional-cto-services" className="p-4 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-colors group">
