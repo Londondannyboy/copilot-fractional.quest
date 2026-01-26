@@ -96,7 +96,7 @@ export default function CaseStudiesPage() {
           <div className="text-center">
             <Link
               href="/case-studies/oneup-productions"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-700 text-white font-bold rounded-xl hover:bg-emerald-800 transition-colors"
             >
               Read Full Case Study
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

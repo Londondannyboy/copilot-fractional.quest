@@ -13,7 +13,7 @@ export function HeyCompanies({ location = 'London' }: HeyCompaniesProps) {
       {/* Background image */}
       <Image
         src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80"
-        alt=""
+        alt="Modern office environment for hiring fractional executives"
         fill
         className="object-cover"
         sizes="100vw"

@@ -173,7 +173,7 @@ export function CaseStudy({ variant = 'full', caseStudyId = 'oneup', className =
             <div className="mt-6 text-center">
               <a
                 href={study.link}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors font-medium"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-700 text-white rounded-xl hover:bg-emerald-800 transition-colors font-medium"
               >
                 Read Full Case Study
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

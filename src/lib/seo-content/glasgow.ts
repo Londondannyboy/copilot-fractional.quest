@@ -2,7 +2,7 @@
 
 export const glasgowSEO = {
   meta: {
-    title: "Fractional Jobs Glasgow 🏴󠁧󠁢󠁳󠁣󠁴 Scotland's Largest City",
+    title: "Fractional Jobs Glasgow | Scotland Hub",
     description:
       "Fractional jobs Glasgow, Scotland's largest business city. CFO, CTO, CMO roles with day rates £650-£1,100.",
     keywords: [

@@ -397,7 +397,7 @@ export function LiveJobGrid({ role, location, limit = 6 }: LiveJobGridProps) {
                     </span>
                   )}
                   {job.is_remote && (
-                    <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    <span className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                       Remote
                     </span>
                   )}

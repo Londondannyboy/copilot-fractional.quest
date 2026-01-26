@@ -122,7 +122,7 @@ function InsightCard({ title, children, icon }: { title: string; children: React
     <div className="bg-white border-l-4 border-emerald-500 rounded-r-xl p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-2">
         {icon && <span className="text-xl">{icon}</span>}
-        <h4 className="font-bold text-gray-900">{title}</h4>
+        <p className="font-bold text-gray-900">{title}</p>
       </div>
       <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
     </div>
@@ -257,7 +257,7 @@ export function SEOContent({ content }: SEOContentProps) {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={content.dayRates.rates.map(rate => ({
-                  role: rate.role,
+                  name: rate.role,
                   min: parseInt(rate.range.match(/£([\d,]+)/)?.[1]?.replace(',', '') || '0'),
                   typical: parseInt(rate.typical.replace(/[£,]/g, '')),
                   max: parseInt(rate.range.match(/£[\d,]+ - £([\d,]+)/)?.[1]?.replace(',', '') || '0'),
@@ -267,7 +267,7 @@ export function SEOContent({ content }: SEOContentProps) {
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis type="number" tick={{ fontSize: 12 }} tickFormatter={(v) => `£${v}`} domain={[0, 'dataMax + 200']} />
-                <YAxis dataKey="role" type="category" tick={{ fontSize: 12, fontWeight: 500 }} width={70} />
+                <YAxis dataKey="name" type="category" tick={{ fontSize: 12, fontWeight: 500 }} width={70} />
                 <Tooltip
                   formatter={(value) => value !== undefined ? [`£${Number(value).toLocaleString()}/day`, ''] : ['', '']}
                   contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }}

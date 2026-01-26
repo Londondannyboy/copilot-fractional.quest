@@ -2,7 +2,7 @@
 
 export const edinburghSEO = {
   meta: {
-    title: "Fractional Jobs Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴 Scotland's Capital",
+    title: "Fractional Jobs Edinburgh | Scotland's Capital",
     description:
       "Fractional jobs Edinburgh, Scotland's financial capital. CFO, CTO, CMO roles with day rates £700-£1,200.",
     keywords: [

@@ -61,7 +61,7 @@ export default function PersonalizedHero({
       <div className="absolute inset-0 z-0">
         <Image
           src={backgroundImage}
-          alt=""
+          alt="Fractional executive jobs background"
           fill
           className="object-cover"
           priority

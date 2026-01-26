@@ -159,7 +159,7 @@ export function JobsSidebar({
         <div className="relative h-14 overflow-hidden">
           <Image
             src={SIDEBAR_HEADER_IMAGES[roleCategory || ''] || SIDEBAR_HEADER_IMAGES.default}
-            alt=""
+            alt="Featured fractional executive opportunities"
             fill
             className="object-cover"
             sizes="400px"
@@ -243,7 +243,7 @@ export function JobsSidebar({
         <div className="relative rounded-xl overflow-hidden shadow-lg">
           <Image
             src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop"
-            alt=""
+            alt="Book a consultation call with Fractional Quest"
             fill
             className="object-cover"
             sizes="400px"
