@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { unstable_cache } from 'next/cache'
-import { createDbQuery } from '@/lib/db'
+import { createDbQuery, withRetry } from '@/lib/db'
 import { BreadcrumbsLight } from '@/components/Breadcrumbs'
 import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { JobPostingSchema, parseCompensation } from '@/components/seo/JobPostingSchema'
@@ -533,21 +533,23 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
-// Internal function to fetch job from database
+// Internal function to fetch job from database with retry for cold starts
 async function fetchJob(slug: string) {
   try {
     const sql = createDbQuery()
-    const jobs = await sql`
-      SELECT
-        id, slug, title, company_name, location, workplace_type, is_remote,
-        compensation, posted_date, updated_date, description_snippet,
-        full_description, requirements, responsibilities, benefits,
-        qualifications, skills_required, role_category, executive_title,
-        hours_per_week, url, about_company, about_team, appeal_summary,
-        key_deliverables, city
-      FROM jobs
-      WHERE slug = ${slug} AND is_active = true
-    `
+    const jobs = await withRetry(async () => {
+      return await sql`
+        SELECT
+          id, slug, title, company_name, location, workplace_type, is_remote,
+          compensation, posted_date, updated_date, description_snippet,
+          full_description, requirements, responsibilities, benefits,
+          qualifications, skills_required, role_category, executive_title,
+          hours_per_week, url, about_company, about_team, appeal_summary,
+          key_deliverables, city
+        FROM jobs
+        WHERE slug = ${slug} AND is_active = true
+      `
+    })
     return jobs[0] as any || null
   } catch {
     return null
@@ -567,25 +569,27 @@ async function fetchRelatedJobs(jobId: number, roleCategory: string | null, comp
     const sql = createDbQuery()
     // First try to find jobs with the same role category (most relevant)
     // If no role category, fall back to same company
-    const jobs = roleCategory
-      ? await sql`
-          SELECT id, slug, title, company_name, location, compensation, role_category
-          FROM jobs
-          WHERE is_active = true
-            AND id != ${jobId}
-            AND role_category = ${roleCategory}
-          ORDER BY posted_date DESC NULLS LAST
-          LIMIT 6
-        `
-      : await sql`
-          SELECT id, slug, title, company_name, location, compensation, role_category
-          FROM jobs
-          WHERE is_active = true
-            AND id != ${jobId}
-            AND company_name = ${companyName}
-          ORDER BY posted_date DESC NULLS LAST
-          LIMIT 6
-        `
+    const jobs = await withRetry(async () => {
+      return roleCategory
+        ? await sql`
+            SELECT id, slug, title, company_name, location, compensation, role_category
+            FROM jobs
+            WHERE is_active = true
+              AND id != ${jobId}
+              AND role_category = ${roleCategory}
+            ORDER BY posted_date DESC NULLS LAST
+            LIMIT 6
+          `
+        : await sql`
+            SELECT id, slug, title, company_name, location, compensation, role_category
+            FROM jobs
+            WHERE is_active = true
+              AND id != ${jobId}
+              AND company_name = ${companyName}
+            ORDER BY posted_date DESC NULLS LAST
+            LIMIT 6
+          `
+    })
     return jobs as any[]
   } catch {
     return []
