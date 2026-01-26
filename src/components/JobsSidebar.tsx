@@ -303,7 +303,7 @@ export function JobsSidebar({
             </div>
           </div>
           <div className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-50 transition-colors" title="CK Delta">
-            <div className="w-8 h-8 bg-emerald-700 rounded flex items-center justify-center">
+            <div className="w-8 h-8 bg-emerald-600 rounded flex items-center justify-center">
               <span className="text-white font-bold text-[10px]">CKD</span>
             </div>
           </div>

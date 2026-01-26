@@ -124,7 +124,6 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-cro-jobs-uk',
   'fractional-cio-jobs-uk',
   'fractional-cso-jobs-uk',
-  'fractional-cdo-jobs-uk',
   // Role hub pages (global)
   'fractional-jobs-cfo',
   'fractional-jobs-cto',
@@ -191,7 +190,6 @@ const STATIC_ROUTE_SLUGS = [
   'interim-ceo-jobs-uk',
   'interim-cio-jobs-uk',
   'interim-cso-jobs-uk',
-  'interim-cdo-jobs-uk',
   'interim-executive',
   'interim-marketing-director',
   // Part-time job pages
@@ -205,7 +203,6 @@ const STATIC_ROUTE_SLUGS = [
   'part-time-ceo-jobs-uk',
   'part-time-cio-jobs-uk',
   'part-time-cso-jobs-uk',
-  'part-time-cdo-jobs-uk',
   // Guide pages
   'fractional-recruitment-agency',
   // Procurement pages
