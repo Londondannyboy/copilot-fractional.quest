@@ -145,6 +145,22 @@ export const CFO_FAQS: FAQItem[] = [
     question: 'What do Fractional CFOs do?',
     answer: 'Fractional CFOs handle strategic financial planning, fundraising and investor relations, financial reporting and compliance, cash flow management, building finance teams, M&A support, and board reporting. They act as a strategic partner to the CEO and leadership team.',
   },
+  {
+    question: 'How quickly can I hire a Fractional CFO?',
+    answer: 'Fractional CFOs can typically start within 1-2 weeks of engagement. Unlike full-time CFO recruitment which takes 3-6 months, fractional CFOs are experienced professionals ready to hit the ground running. Most begin with a financial health check and 90-day improvement plan.',
+  },
+  {
+    question: 'What is the difference between a Fractional CFO and an Interim CFO?',
+    answer: 'A Fractional CFO works part-time (1-3 days/week) on an ongoing basis, often with multiple clients simultaneously. An Interim CFO works full-time but temporarily, usually to cover a gap or lead a specific project. Fractional CFOs are ideal for companies that need senior finance leadership but not full-time capacity.',
+  },
+  {
+    question: 'How do Fractional CFO engagements typically work?',
+    answer: 'Most Fractional CFO engagements start with a discovery phase to assess financial health and priorities. Typical arrangements include 1-3 fixed days per week, monthly retainer models, or project-based work. The CFO attends leadership meetings, produces board packs, manages investor relations, and drives financial strategy alongside your team.',
+  },
+  {
+    question: 'When should my company hire a Fractional CFO instead of a full-time CFO?',
+    answer: 'Hire a Fractional CFO when you need senior finance leadership but: your company is pre-Series B and cannot justify full-time CFO cost (£150k-£250k+ package), you need specific expertise for a defined period (fundraising, exit), or your finance function is not yet complex enough for 5 days/week of CFO attention. Full-time CFOs suit Series C+ companies with complex multi-entity structures.',
+  },
 ]
 
 export const CTO_FAQS: FAQItem[] = [

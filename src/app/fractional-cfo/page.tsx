@@ -15,6 +15,39 @@ const ogImage = getOGImageUrl('cfo')
 const imageAlt = getImage('cfo').alt
 const imageCredit = getImage('cfo')
 
+// Author schema for E-E-A-T signals
+const authorSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fractional Quest Editorial Team",
+  "jobTitle": "Finance Leadership Experts",
+  "url": "https://fractional.quest/about",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Fractional Quest",
+    "url": "https://fractional.quest"
+  }
+}
+
+// Organization schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Fractional Quest",
+  "url": "https://fractional.quest",
+  "logo": "https://fractional.quest/logo.png",
+  "description": "UK platform connecting companies with fractional executives - CFOs, CTOs, CMOs and more.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "London",
+    "addressCountry": "United Kingdom"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/fractional-quest"
+  ]
+}
+
+
 export const metadata: Metadata = {
   title: 'What is a Fractional CFO? | Guide',
   description: 'What is a fractional CFO? A part-time finance leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
@@ -48,9 +81,19 @@ export default function FractionalCfoPage() {
         title="What is a Fractional CFO? | Part-Time Chief Financial Officer Guide"
         description="Complete guide to fractional CFO meaning, responsibilities, costs, and when to hire one. Learn what a part-time Chief Financial Officer does."
         url="https://fractional.quest/fractional-cfo"
-        dateModified={new Date('2026-01-07')}
+        dateModified={new Date('2026-01-26')}
       />
       <FAQPageSchema faqs={CFO_FAQS} />
+
+      {/* Author and Organization Schema for E-E-A-T */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(authorSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
@@ -277,6 +320,99 @@ export default function FractionalCfoPage() {
               </a>
             </div>
 
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">The UK Fractional CFO Market</h2>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              The UK <strong>fractional CFO</strong> market has grown significantly since 2020, driven by the rise of remote work and the expansion of the venture capital ecosystem. London remains the largest hub, accounting for approximately 60% of fractional CFO engagements, followed by Manchester, Birmingham, and Edinburgh.
+            </p>
+
+            <p>
+              Key sectors driving demand for fractional CFOs in the UK include:
+            </p>
+
+            <ul className="space-y-2 mb-8">
+              <li><strong>VC-backed technology companies</strong> - Seed to Series B startups needing investor-ready financials</li>
+              <li><strong>Private equity portfolio companies</strong> - Businesses requiring value creation and exit preparation</li>
+              <li><strong>Professional services firms</strong> - Law firms, consultancies scaling beyond partner-managed finances</li>
+              <li><strong>E-commerce and D2C brands</strong> - Fast-growth companies needing cash flow expertise</li>
+              <li><strong>Healthcare and life sciences</strong> - Regulated sectors requiring compliance expertise</li>
+            </ul>
+
+            <p>
+              According to the <a href="https://www.british-business-bank.co.uk" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">British Business Bank</a>, UK SMEs increasingly recognise that access to strategic finance leadership - not just accounting - is critical for scaling. The fractional model addresses this by providing CFO expertise at a fraction of the full-time cost.
+            </p>
+
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">How to Hire a Fractional CFO</h2>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Finding the right <strong>fractional CFO</strong> requires understanding your specific needs and matching them to a finance leader with relevant experience. The hiring process typically takes 2-4 weeks, significantly faster than recruiting a full-time CFO.
+            </p>
+
+            <div className="bg-gray-50 p-6 rounded-xl my-8 not-prose">
+              <h3 className="font-bold text-gray-900 mb-4">5-Step Hiring Process</h3>
+              <ol className="space-y-4">
+                <li className="flex gap-4">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center">1</span>
+                  <div>
+                    <strong className="text-gray-900">Define Your Requirements</strong>
+                    <p className="text-gray-600 text-sm">What finance challenges need solving? Fundraising? Reporting? Systems?</p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center">2</span>
+                  <div>
+                    <strong className="text-gray-900">Determine Time Commitment</strong>
+                    <p className="text-gray-600 text-sm">Most engagements are 1-3 days per week. Consider your finance complexity.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center">3</span>
+                  <div>
+                    <strong className="text-gray-900">Shortlist Candidates</strong>
+                    <p className="text-gray-600 text-sm">Look for sector experience, relevant qualifications (ACA/ACCA), and cultural fit.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center">4</span>
+                  <div>
+                    <strong className="text-gray-900">Conduct Discovery Sessions</strong>
+                    <p className="text-gray-600 text-sm">Meet candidates to assess chemistry and approach. Ask for case studies.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center">5</span>
+                  <div>
+                    <strong className="text-gray-900">Agree Terms and Onboard</strong>
+                    <p className="text-gray-600 text-sm">Typical arrangements: monthly retainer or fixed day rate. Start with 90-day goals.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div className="bg-emerald-50 p-6 border border-emerald-200 rounded-lg my-8 not-prose">
+              <p className="text-emerald-800 font-medium mb-3">Need help finding a fractional CFO?</p>
+              <Link href="/fractional-cfo-jobs-uk" className="inline-flex items-center text-emerald-700 font-bold hover:text-emerald-900">
+                Browse Fractional CFO Jobs UK →
+              </Link>
+            </div>
+
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">IR35 and Tax Considerations</h2>
+
+            <p>
+              Fractional CFO arrangements in the UK typically fall outside <a href="https://www.gov.uk/guidance/understanding-off-payroll-working-ir35" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">IR35</a> regulations because:
+            </p>
+
+            <ul className="space-y-2 mb-8">
+              <li>The CFO works with multiple clients simultaneously</li>
+              <li>They control how, when, and where they deliver the work</li>
+              <li>There is no mutuality of obligation (neither party must offer/accept future work)</li>
+              <li>The CFO provides their own equipment and bears financial risk</li>
+            </ul>
+
+            <p>
+              However, each engagement should be assessed individually. Many fractional CFOs operate through their own limited companies or as LLP members. It is advisable to seek guidance from <a href="https://www.gov.uk/government/organisations/hm-revenue-customs" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">HMRC</a> or a qualified tax advisor.
+            </p>
+
             <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">External Resources</h2>
 
             <div className="grid md:grid-cols-4 gap-4 not-prose my-8">
@@ -295,6 +431,22 @@ export default function FractionalCfoPage() {
               <a href="https://www.bvca.co.uk" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
                 <span className="text-xl">💼</span>
                 <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">BVCA</p>
+              </a>
+              <a href="https://www.british-business-bank.co.uk" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">🏦</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">British Business Bank</p>
+              </a>
+              <a href="https://www.scaleupinstitute.org.uk" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">📈</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">ScaleUp Institute</p>
+              </a>
+              <a href="https://www.fca.org.uk" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">⚖️</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">FCA</p>
+              </a>
+              <a href="https://www.ons.gov.uk" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">📊</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">ONS</p>
               </a>
             </div>
 
