@@ -265,6 +265,30 @@ export function PublicLanding() {
         </div>
       </section>
 
+      {/* Related Executive Services */}
+      <section className="py-12 bg-gray-800/20 border-t border-gray-700">
+        <div className="max-w-6xl mx-auto px-4">
+          <h3 className="text-xl font-semibold text-white text-center mb-6">Related Executive Services</h3>
+          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto text-sm">
+            Looking for different types of executive support? Our partner sites specialise in complementary areas.
+          </p>
+          <div className="grid md:grid-cols-3 gap-4">
+            <a href="https://interim.quest" target="_blank" rel="noopener noreferrer" className="bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-xl p-4 text-center transition-colors">
+              <p className="text-emerald-400 font-semibold">Interim Executives</p>
+              <p className="text-gray-400 text-sm mt-1">Full-time temporary C-suite for 3-12 month assignments</p>
+            </a>
+            <a href="https://chiefofstaff.quest" target="_blank" rel="noopener noreferrer" className="bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-xl p-4 text-center transition-colors">
+              <p className="text-indigo-400 font-semibold">Chief of Staff</p>
+              <p className="text-gray-400 text-sm mt-1">Specialist recruitment for strategic operations roles</p>
+            </a>
+            <a href="https://gtm.quest" target="_blank" rel="noopener noreferrer" className="bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-xl p-4 text-center transition-colors">
+              <p className="text-amber-400 font-semibold">GTM Strategy</p>
+              <p className="text-gray-400 text-sm mt-1">Go-to-market strategy and execution for B2B growth</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-gray-800 py-12">
         <div className="max-w-6xl mx-auto px-4">
