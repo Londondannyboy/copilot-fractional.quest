@@ -428,8 +428,8 @@ export function JobListingSchema({ jobs, pageUrl }: JobListingSchemaProps) {
 export function parseCompensation(compensation: string | undefined): JobPostingSchemaProps['salary'] | undefined {
   if (!compensation) return undefined
 
-  // Try to extract day rate (e.g., "£800-£1,200/day", "£1000 per day")
-  const dayRateMatch = compensation.match(/£([\d,]+)(?:\s*-\s*£([\d,]+))?(?:\s*\/?\s*(?:day|per day|pd))/i)
+  // Try to extract day rate (e.g., "£800-£1,200/day", "£800-1,200/day", "£1000 per day")
+  const dayRateMatch = compensation.match(/£([\d,]+)(?:\s*-\s*£?([\d,]+))?(?:\s*\/?\s*(?:day|per day|pd))/i)
   if (dayRateMatch) {
     const minValue = parseInt(dayRateMatch[1].replace(/,/g, ''))
     const maxValue = dayRateMatch[2] ? parseInt(dayRateMatch[2].replace(/,/g, '')) : undefined
