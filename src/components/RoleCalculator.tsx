@@ -84,6 +84,15 @@ const ROLE_DEFAULTS: Record<string, {
     color: 'indigo',
     colorDark: 'indigo-600',
   },
+  cco: {
+    label: 'CCO',
+    avgDayRate: 1000,
+    avgSalary: 140000,
+    minDayRate: 800,
+    maxDayRate: 1200,
+    color: 'orange',
+    colorDark: 'orange-600',
+  },
 }
 
 interface RoleCalculatorProps {

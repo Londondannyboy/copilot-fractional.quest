@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 interface RoleContentHubProps {
-  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'cro' | 'cio' | 'cso' | 'controller' | 'growth' | 'compliance' | 'product' | 'pm';
+  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'cro' | 'cio' | 'cso' | 'cco' | 'controller' | 'growth' | 'compliance' | 'product' | 'pm';
 }
 
 interface RoleLink {
@@ -22,6 +22,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cpo', path: '/fractional-cpo-jobs-uk', label: 'CPO Jobs' },
     { role: 'cro', path: '/fractional-cro-jobs-uk', label: 'CRO Jobs' },
     { role: 'cio', path: '/fractional-cio-jobs-uk', label: 'CIO Jobs' },
+    { role: 'cco', path: '/fractional-cco-jobs-uk', label: 'CCO Jobs' },
   ];
 
   // TODO: Create pages for leadership roles
