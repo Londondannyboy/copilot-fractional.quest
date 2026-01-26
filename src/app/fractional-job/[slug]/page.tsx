@@ -277,6 +277,67 @@ function getRoleData(roleCategory: string | null, executiveTitle?: string | null
   return ROLE_DATA[roleCategory.toLowerCase()] || DEFAULT_ROLE_DATA
 }
 
+// External authority links for E-E-A-T signals (displayed in visible section)
+const ROLE_AUTHORITY_LINKS: Record<string, Array<{name: string, url: string, context: string}>> = {
+  cto: [
+    { name: 'BCS', url: 'https://www.bcs.org', context: 'UK chartered institute for IT' },
+    { name: 'IET', url: 'https://www.theiet.org', context: 'Institution of Engineering and Technology' },
+    { name: 'Tech Nation', url: 'https://technation.io', context: 'UK tech sector insights' },
+    { name: 'GDS', url: 'https://www.gov.uk/government/organisations/government-digital-service', context: 'Government Digital Service standards' },
+  ],
+  cfo: [
+    { name: 'ICAEW', url: 'https://www.icaew.com', context: 'Institute of Chartered Accountants' },
+    { name: 'ACCA', url: 'https://www.accaglobal.com', context: 'Association of Chartered Certified Accountants' },
+    { name: 'CIMA', url: 'https://www.cimaglobal.com', context: 'Chartered Institute of Management Accountants' },
+    { name: 'FRC', url: 'https://www.frc.org.uk', context: 'Financial Reporting Council' },
+  ],
+  cmo: [
+    { name: 'CIM', url: 'https://www.cim.co.uk', context: 'Chartered Institute of Marketing' },
+    { name: 'DMA', url: 'https://dma.org.uk', context: 'Data & Marketing Association' },
+    { name: 'Marketing Week', url: 'https://www.marketingweek.com', context: 'Industry insights' },
+    { name: 'IPA', url: 'https://ipa.co.uk', context: 'Institute of Practitioners in Advertising' },
+  ],
+  coo: [
+    { name: 'CMI', url: 'https://www.managers.org.uk', context: 'Chartered Management Institute' },
+    { name: 'IOD', url: 'https://www.iod.com', context: 'Institute of Directors' },
+    { name: 'CIPS', url: 'https://www.cips.org', context: 'Chartered Institute of Procurement & Supply' },
+    { name: 'APM', url: 'https://www.apm.org.uk', context: 'Association for Project Management' },
+  ],
+  chro: [
+    { name: 'CIPD', url: 'https://www.cipd.org', context: 'Chartered Institute of Personnel and Development' },
+    { name: 'SHRM', url: 'https://www.shrm.org', context: 'Society for Human Resource Management' },
+    { name: 'IOD', url: 'https://www.iod.com', context: 'Institute of Directors' },
+    { name: 'ACAS', url: 'https://www.acas.org.uk', context: 'Advisory, Conciliation and Arbitration Service' },
+  ],
+  ciso: [
+    { name: 'NCSC', url: 'https://www.ncsc.gov.uk', context: 'National Cyber Security Centre' },
+    { name: 'ISC2', url: 'https://www.isc2.org', context: 'International Information System Security Certification' },
+    { name: 'ISACA', url: 'https://www.isaca.org', context: 'Information Systems Audit and Control Association' },
+    { name: 'CREST', url: 'https://www.crest-approved.org', context: 'Cyber security certification body' },
+  ],
+  cpo: [
+    { name: 'Product School', url: 'https://productschool.com', context: 'Product management education' },
+    { name: 'Mind the Product', url: 'https://www.mindtheproduct.com', context: 'Product community' },
+    { name: 'SVPG', url: 'https://www.svpg.com', context: 'Silicon Valley Product Group' },
+    { name: 'ProductPlan', url: 'https://www.productplan.com', context: 'Product roadmap platform' },
+  ],
+  ceo: [
+    { name: 'IOD', url: 'https://www.iod.com', context: 'Institute of Directors' },
+    { name: 'EY CEO Imperative', url: 'https://www.ey.com/en_gl/ceo', context: 'CEO insights and research' },
+    { name: 'ScaleUp Institute', url: 'https://www.scaleupinstitute.org.uk', context: 'UK scale-up research' },
+    { name: 'British Business Bank', url: 'https://www.british-business-bank.co.uk', context: 'Business finance support' },
+  ],
+}
+
+function getAuthorityLinks(roleCategory: string | null, executiveTitle?: string | null): Array<{name: string, url: string, context: string}> {
+  if (executiveTitle) {
+    const etKey = executiveTitle.toLowerCase()
+    if (ROLE_AUTHORITY_LINKS[etKey]) return ROLE_AUTHORITY_LINKS[etKey]
+  }
+  if (!roleCategory) return []
+  return ROLE_AUTHORITY_LINKS[roleCategory.toLowerCase()] || []
+}
+
 // Calculate validThrough date (30 days from posted date)
 function calculateValidThrough(datePosted: string | null, days: number = 30): string {
   const base = datePosted ? new Date(datePosted) : new Date()
@@ -641,6 +702,7 @@ export default async function JobDetailPage({ params }: Props) {
   // Get comprehensive role data for SEO
   const roleData = getRoleData(job.role_category, job.executive_title)
   const roleKeyword = roleData.displayName
+  const authorityLinks = getAuthorityLinks(job.role_category, job.executive_title)
 
   // Parse compensation for schema, fallback to role estimates
   const parsedSalary = parseCompensation(job.compensation) || {
@@ -710,6 +772,7 @@ export default async function JobDetailPage({ params }: Props) {
           <Image
             src={getHeroImageUrl(getRoleImageCategory(job.role_category || 'default'), 1600, 600)}
             alt={`${roleKeyword} job opportunity - ${job.title} at ${job.company_name}`}
+            title={`${roleKeyword} opportunity in ${job.location || 'UK'}`}
             fill
             className="object-cover"
             priority
@@ -879,7 +942,7 @@ export default async function JobDetailPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-              What is a {roleKeyword}?
+              About This Role
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
               {roleData.fullDescription}
@@ -888,7 +951,7 @@ export default async function JobDetailPage({ params }: Props) {
             {/* Salary Benchmarks */}
             <div className="bg-emerald-50 rounded-xl p-6 mb-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                {roleKeyword} Day Rates (UK Market)
+                Day Rates (UK Market)
               </h3>
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
@@ -911,7 +974,7 @@ export default async function JobDetailPage({ params }: Props) {
 
             {/* Internal Links for Topical Authority */}
             <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              Learn More About {roleKeyword} Roles
+              Related Resources
             </h3>
             <div className="grid sm:grid-cols-3 gap-4">
               <Link
@@ -936,6 +999,27 @@ export default async function JobDetailPage({ params }: Props) {
                 <div className="text-sm text-gray-500">Guide for businesses</div>
               </Link>
             </div>
+
+            {/* External Authority Links for E-E-A-T signals */}
+            {authorityLinks.length > 0 && (
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <h3 className="text-sm font-medium text-gray-500 mb-3">Professional Resources</h3>
+                <div className="flex flex-wrap gap-3">
+                  {authorityLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                      title={link.context}
+                    >
+                      {link.name} ↗
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -945,7 +1029,7 @@ export default async function JobDetailPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-              Frequently Asked Questions About {roleKeyword} Roles
+              Frequently Asked Questions
             </h2>
             <div className="space-y-4">
               {roleData.faqs.map((faq, index) => (
@@ -967,7 +1051,7 @@ export default async function JobDetailPage({ params }: Props) {
         <section className="py-8 sm:py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">
-              More {roleKeyword} Opportunities
+              Similar Opportunities
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {relatedJobs.map((relatedJob: any) => (
