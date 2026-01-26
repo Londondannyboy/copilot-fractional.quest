@@ -1,152 +1,121 @@
 # Content Creation Restart Prompt
 
-Use this prompt to continue creating job pages and content for Fractional Quest.
+Use this prompt when starting a new session for content/job creation tasks.
 
 ---
 
 ## Context
 
-I'm working on Fractional Quest at `/Users/dankeegan/fractional.quest`. We're creating comprehensive job pages for all C-suite roles across all engagement types.
+I'm working on Fractional Quest at `/Users/dankeegan/fractional.quest`. The site is a UK executive job marketplace covering fractional, interim, part-time, and advisory C-suite roles.
 
-## Database Status: COMPLETE
+## Database
 
-The Neon database (`sweet-hat-02969611` / `deep-fractional`) has **44 jobs** covering:
+- **Project**: `plain-glade-34229418`
+- **Table**: `public.jobs`
 
-**11 Roles:** CCO, CEO, CFO, CHRO, CIO, CISO, CMO, COO, CPO, CRO, CTO
+## Reference Files (Read These First)
 
-**4 Engagement Types per role:** Fractional, Interim, Part-Time, Advisory
+Before creating jobs or content, read:
+1. `.claude/reference/job-schema.md` - Database schema, required fields
+2. `.claude/reference/seo-templates.md` - Description templates, authority links
+3. `.claude/reference/role-data.md` - Day rates, role categories
 
-## Page Coverage Status: ALL COMPLETE ✅
+## Current Job Coverage
 
-### Completed Pages (2026-01-26)
+**11 Roles**: CCO, CEO, CFO, CHRO, CIO, CISO, CMO, COO, CPO, CRO, CTO
 
-| Type | Roles Covered | Status |
-|------|---------------|--------|
-| **Fractional Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CSO (11) | ✅ Complete |
-| **Interim Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CSO, CRO, CCO (12) | ✅ Complete |
-| **Part-Time Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CSO, CRO, CCO (12) | ✅ Complete |
-| **Advisory Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO (11) | ✅ Complete |
-| **Fractional Services** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CRO, CCO, Procurement (11) | ✅ Complete |
-| **Hire Pages** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CRO, CISO, CCO, Procurement (11) | ✅ Complete |
-| **Role Definitions** | CFO, CTO, CMO, COO, CEO, CHRO, CIO, CISO, CPO, CRO, CSO, CCO (12) | ✅ Complete |
+**4 Engagement Types per role**: Fractional, Interim, Part-Time, Advisory
 
-### Pages Created This Session (16 total)
+**Total**: 44 job entries in database
 
-**Services Pages (2):**
-- `src/app/fractional-cro-services/page.tsx` ✅
-- `src/app/fractional-cco-services/page.tsx` ✅
+## Page Coverage (Static Files)
 
-**Hire Pages (1):**
-- `src/app/hire-fractional-cco/page.tsx` + `HireFractionalCCOClient.tsx` ✅
-
-**Role Definition Pages (2):**
-- `src/app/fractional-cso/page.tsx` ✅
-- `src/app/fractional-cco/page.tsx` ✅
-
-**Advisory Job Pages (11):**
-- `src/app/advisory-cfo-jobs-uk/page.tsx` ✅
-- `src/app/advisory-cto-jobs-uk/page.tsx` ✅
-- `src/app/advisory-cmo-jobs-uk/page.tsx` ✅
-- `src/app/advisory-coo-jobs-uk/page.tsx` ✅
-- `src/app/advisory-ceo-jobs-uk/page.tsx` ✅
-- `src/app/advisory-chro-jobs-uk/page.tsx` ✅
-- `src/app/advisory-cpo-jobs-uk/page.tsx` ✅
-- `src/app/advisory-ciso-jobs-uk/page.tsx` ✅
-- `src/app/advisory-cio-jobs-uk/page.tsx` ✅
-- `src/app/advisory-cro-jobs-uk/page.tsx` ✅
-- `src/app/advisory-cco-jobs-uk/page.tsx` ✅
-
----
-
-## IMPORTANT: Future Page Architecture
-
-**Current pages were created as static files** following the high-quality interim/part-time template pattern. These include:
-- Full SEO metadata
-- 10 role-specific FAQs
-- External authority links (ICAEW, ACCA, CIPD, BCS, etc.)
-- Internal linking sections
-- Database queries for job stats
-- All key components (RoleCalculator, IR35Calculator, etc.)
-
-**For future pages: Use Neon Database + PageRenderer approach** for easier content updates and MDX support. This allows:
-- Content changes without code deploys
-- MDX components within content
-- Easier A/B testing
-- CMS-like experience
-
-To migrate existing pages to Neon in future:
-1. Convert page content to JSONB sections format
-2. INSERT into `pages` table
-3. Add slug to `STATIC_ROUTE_SLUGS` exclusion list
-4. Delete static file after verification
-
----
-
-## Template Files Reference
-
-| Page Type | Template Location |
-|-----------|-------------------|
-| Advisory Jobs | `src/app/advisory-cfo-jobs-uk/page.tsx` |
-| Interim Jobs | `src/app/interim-cto-jobs-uk/page.tsx` |
-| Part-Time Jobs | `src/app/part-time-cto-jobs-uk/page.tsx` |
-| Services | `src/app/fractional-cto-services/page.tsx` |
-| Hire | `src/app/hire-fractional-cto/page.tsx` |
-| Role Definition | `src/app/fractional-cto/page.tsx` |
-| Fractional Jobs UK | `src/app/fractional-cto-jobs-uk/page.tsx` |
-
-## Key Components Used
-
-- `RoleCalculator` - Day rate calculator (role prop: cfo, cto, cmo, coo, ceo, chro, ciso, cpo, cro, cio, cso, cco)
-- `RoleContentHub` - Internal linking component
-- `ServerJobGrid` - Job listings display
-- `HotJobsLines` - Hot jobs carousel
-- `IR35Calculator` - IR35 tax calculator
-- `ExpertProfile` - Expert profile section
-- `CaseStudy` - Case study section
-- `FAQ` - FAQ accordion with schema
-- `EmbeddedJobBoard` - Interactive job board with filters (for hire/role pages)
-
-## SEO Content Files
-
-Location: `src/lib/seo-content/`
-
-Existing files: birmingham, bristol, ceo-jobs-uk, cfo-jobs-uk, chro-jobs-uk, cio-jobs-uk, ciso-jobs-uk, cmo-jobs-uk, coo-jobs-uk, cpo-jobs-uk, cro-jobs-uk, cso-jobs-uk, cto-jobs-uk, edinburgh, fd-jobs-uk, glasgow, leeds, london, manchester, procurement-jobs-uk, remote, uk
-
-## Day Rate Ranges by Role
-
-| Role | Fractional | Interim | Part-Time | Advisory |
-|------|------------|---------|-----------|----------|
-| CCO | £800-1,200 | £850-1,300 | £800-1,200 | £600-900 |
-| CEO | £1,000-1,500 | £1,200-1,800 | £1,000-1,600 | £800-1,200 |
-| CFO | £800-1,200 | £900-1,500 | £800-1,200 | £700-1,000 |
-| CHRO | £750-1,100 | £800-1,200 | £750-1,100 | £600-900 |
-| CIO | £850-1,250 | £900-1,400 | £850-1,300 | £650-950 |
-| CISO | £900-1,350 | £1,000-1,500 | £900-1,400 | £700-1,000 |
-| CMO | £800-1,200 | £900-1,350 | £850-1,300 | £600-900 |
-| COO | £850-1,200 | £900-1,350 | £850-1,300 | £650-950 |
-| CPO | £850-1,300 | £900-1,400 | £850-1,300 | £650-950 |
-| CRO | £850-1,250 | £900-1,400 | £850-1,300 | £650-950 |
-| CTO | £900-1,400 | £1,100-1,400 | £900-1,400 | £700-1,000 |
+| Page Type | Roles | Status |
+|-----------|-------|--------|
+| Fractional Jobs UK | All 11 | Complete |
+| Interim Jobs UK | All 11 | Complete |
+| Part-Time Jobs UK | All 11 | Complete |
+| Advisory Jobs UK | All 11 | Complete |
+| Role Definitions | All 11 | Complete |
+| Salary Guides | All 11 | Complete |
+| Hire Pages | All 11 | Complete |
 
 ## Commands
 
 ```bash
-npm run build    # Build (check for errors)
-npm run dev      # Development server
+npm run dev      # Start dev server
+npm run build    # Check for errors
 git add -A && git commit -m "message" && git push  # Deploy
 ```
 
-## Potential Future Work
+## Creating New Job Entries
 
-1. **CDO Pages** (if needed):
-   - CDO role exists in database but no pages created yet
-   - Would need: jobs-uk, interim, part-time, advisory, services, hire, definition
+### Quick SQL Template
 
-2. **Migrate pages to Neon** for MDX support (when needed)
+```sql
+INSERT INTO jobs (
+  slug, external_id, company_name, title, url,
+  location, country, workplace_type, is_remote,
+  employment_type, compensation, salary_min, salary_max, salary_currency,
+  posted_date, application_deadline,
+  is_active, is_fractional, is_interim,
+  role_category, executive_title, site_tags, source,
+  description_snippet
+) VALUES (
+  '{engagement}-{role}-uk',
+  'fq-{engagement}-{role}-uk',
+  'Fractional Quest',
+  '{Title} / {Alternative} — UK',
+  'https://fractional.quest/{engagement}-{role}-jobs-uk',
+  'United Kingdom', 'United Kingdom', 'Hybrid', true,
+  'Contract', '£{min}-{max}/day', {min}, {max}, 'GBP',
+  CURRENT_DATE, CURRENT_DATE + INTERVAL '90 days',
+  true, {is_fractional}, {is_interim},
+  '{category}', '{ROLE}',
+  ARRAY['{engagement}', 'poster-card', 'uk'],
+  'fractional-quest',
+  '{Engagement} {Role} opportunities across the UK. £{min}-{max}/day. Remote & hybrid options.'
+);
+```
 
-3. **Add CIO pages** - Some page types may be missing for CIO role
+### Engagement Type Settings
+
+| Type | is_fractional | is_interim | employment_type |
+|------|---------------|------------|-----------------|
+| Fractional | true | false | Contract |
+| Interim | false | true | Contract |
+| Part-Time | true | false | Part-Time |
+| Advisory | true | false | Contract |
+
+## Creating New Pages
+
+1. Copy existing template from `src/app/fractional-cfo-jobs-uk/`
+2. Create SEO content file in `src/lib/seo-content/`
+3. Add slug to `STATIC_ROUTE_SLUGS` in `src/app/[slug]/page.tsx`
+4. Build and verify
+
+## Key Components
+
+- `JobPageClient` - Full job page with CopilotKit sidebar
+- `EmbeddedJobBoard` - Filterable job grid
+- `RoleCalculator` - Day rate calculator
+- `ServerJobGrid` - Server-rendered jobs
+- `HotJobsLines` - Featured carousel
+
+## Authority Links Quick Reference
+
+| Role | Key Links |
+|------|-----------|
+| CFO | ICAEW, ACCA, CIMA, FRC, British Business Bank |
+| CTO | BCS, Tech Nation, IET, GDS |
+| CMO | CIM, DMA, Marketing Week, IPA |
+| COO | CMI, IOD, CIPS |
+| CHRO | CIPD, ACAS |
+| CISO | NCSC, ISC2, ISACA, ICO |
+| CPO | Product School, Mind the Product, SVPG |
+| CRO | ISM |
+| CCO | IOD, CBI |
 
 ---
 
-**Last Updated:** 2026-01-26
-**Commit:** 33beafd - Add services, hire, role definition and advisory job pages
+**Last Updated**: 2026-01-26
