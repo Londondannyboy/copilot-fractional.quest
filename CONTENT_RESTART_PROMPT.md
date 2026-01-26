@@ -16,53 +16,77 @@ The Neon database (`sweet-hat-02969611` / `deep-fractional`) has **44 jobs** cov
 
 **4 Engagement Types per role:** Fractional, Interim, Part-Time, Advisory
 
-## Page Coverage Status
+## Page Coverage Status: ALL COMPLETE ✅
 
-### Completed Pages
+### Completed Pages (2026-01-26)
 
-| Type | Roles Covered |
-|------|---------------|
-| **Fractional Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CSO (11) |
-| **Interim Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CSO, CRO, CCO (12) |
-| **Part-Time Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CSO, CRO, CCO (12) |
-| **Fractional Services** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, Procurement (9) |
-| **Hire Pages** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CRO, CISO, Procurement (10) |
-| **Role Definitions** | CFO, CTO, CMO, COO, CEO, CHRO, CIO, CISO, CPO, CRO (10) |
+| Type | Roles Covered | Status |
+|------|---------------|--------|
+| **Fractional Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CSO (11) | ✅ Complete |
+| **Interim Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CSO, CRO, CCO (12) | ✅ Complete |
+| **Part-Time Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CSO, CRO, CCO (12) | ✅ Complete |
+| **Advisory Jobs UK** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO (11) | ✅ Complete |
+| **Fractional Services** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CRO, CCO, Procurement (11) | ✅ Complete |
+| **Hire Pages** | CFO, CTO, CMO, COO, CEO, CHRO, CPO, CRO, CISO, CCO, Procurement (11) | ✅ Complete |
+| **Role Definitions** | CFO, CTO, CMO, COO, CEO, CHRO, CIO, CISO, CPO, CRO, CSO, CCO (12) | ✅ Complete |
 
-### Pages Still Needed
+### Pages Created This Session (16 total)
 
-1. **Services Pages (2):**
-   - `fractional-cro-services`
-   - `fractional-cco-services`
+**Services Pages (2):**
+- `src/app/fractional-cro-services/page.tsx` ✅
+- `src/app/fractional-cco-services/page.tsx` ✅
 
-2. **Hire Pages (1):**
-   - `hire-fractional-cco`
+**Hire Pages (1):**
+- `src/app/hire-fractional-cco/page.tsx` + `HireFractionalCCOClient.tsx` ✅
 
-3. **Role Definition Pages (2):**
-   - `fractional-cso`
-   - `fractional-cco`
+**Role Definition Pages (2):**
+- `src/app/fractional-cso/page.tsx` ✅
+- `src/app/fractional-cco/page.tsx` ✅
 
-4. **Advisory Job Pages (11 - NEW category):**
-   - `advisory-cfo-jobs-uk`
-   - `advisory-cto-jobs-uk`
-   - `advisory-cmo-jobs-uk`
-   - `advisory-coo-jobs-uk`
-   - `advisory-ceo-jobs-uk`
-   - `advisory-chro-jobs-uk`
-   - `advisory-cpo-jobs-uk`
-   - `advisory-ciso-jobs-uk`
-   - `advisory-cio-jobs-uk`
-   - `advisory-cro-jobs-uk`
-   - `advisory-cco-jobs-uk`
+**Advisory Job Pages (11):**
+- `src/app/advisory-cfo-jobs-uk/page.tsx` ✅
+- `src/app/advisory-cto-jobs-uk/page.tsx` ✅
+- `src/app/advisory-cmo-jobs-uk/page.tsx` ✅
+- `src/app/advisory-coo-jobs-uk/page.tsx` ✅
+- `src/app/advisory-ceo-jobs-uk/page.tsx` ✅
+- `src/app/advisory-chro-jobs-uk/page.tsx` ✅
+- `src/app/advisory-cpo-jobs-uk/page.tsx` ✅
+- `src/app/advisory-ciso-jobs-uk/page.tsx` ✅
+- `src/app/advisory-cio-jobs-uk/page.tsx` ✅
+- `src/app/advisory-cro-jobs-uk/page.tsx` ✅
+- `src/app/advisory-cco-jobs-uk/page.tsx` ✅
 
-5. **CDO Pages (if needed):**
-   - CDO role exists in database but no pages created yet
-   - Would need: jobs-uk, interim, part-time, advisory, services, hire, definition
+---
 
-## Template Files to Copy From
+## IMPORTANT: Future Page Architecture
+
+**Current pages were created as static files** following the high-quality interim/part-time template pattern. These include:
+- Full SEO metadata
+- 10 role-specific FAQs
+- External authority links (ICAEW, ACCA, CIPD, BCS, etc.)
+- Internal linking sections
+- Database queries for job stats
+- All key components (RoleCalculator, IR35Calculator, etc.)
+
+**For future pages: Use Neon Database + PageRenderer approach** for easier content updates and MDX support. This allows:
+- Content changes without code deploys
+- MDX components within content
+- Easier A/B testing
+- CMS-like experience
+
+To migrate existing pages to Neon in future:
+1. Convert page content to JSONB sections format
+2. INSERT into `pages` table
+3. Add slug to `STATIC_ROUTE_SLUGS` exclusion list
+4. Delete static file after verification
+
+---
+
+## Template Files Reference
 
 | Page Type | Template Location |
 |-----------|-------------------|
+| Advisory Jobs | `src/app/advisory-cfo-jobs-uk/page.tsx` |
 | Interim Jobs | `src/app/interim-cto-jobs-uk/page.tsx` |
 | Part-Time Jobs | `src/app/part-time-cto-jobs-uk/page.tsx` |
 | Services | `src/app/fractional-cto-services/page.tsx` |
@@ -80,6 +104,7 @@ The Neon database (`sweet-hat-02969611` / `deep-fractional`) has **44 jobs** cov
 - `ExpertProfile` - Expert profile section
 - `CaseStudy` - Case study section
 - `FAQ` - FAQ accordion with schema
+- `EmbeddedJobBoard` - Interactive job board with filters (for hire/role pages)
 
 ## SEO Content Files
 
@@ -111,25 +136,17 @@ npm run dev      # Development server
 git add -A && git commit -m "message" && git push  # Deploy
 ```
 
-## Next Steps
+## Potential Future Work
 
-1. Create the 2 missing services pages (CRO, CCO)
-2. Create the 1 missing hire page (CCO)
-3. Create the 2 missing role definition pages (CSO, CCO)
-4. Create all 11 advisory job pages
-5. Consider CDO pages if needed
+1. **CDO Pages** (if needed):
+   - CDO role exists in database but no pages created yet
+   - Would need: jobs-uk, interim, part-time, advisory, services, hire, definition
 
-When creating pages:
-- Copy from the appropriate template file
-- Update metadata (title, description, keywords, canonical URL)
-- Update FAQs for the specific role
-- Update day rates for the role
-- Update database queries for the role
-- Update color theme/Unsplash image appropriately
-- Update breadcrumbs
-- Update internal links
+2. **Migrate pages to Neon** for MDX support (when needed)
+
+3. **Add CIO pages** - Some page types may be missing for CIO role
 
 ---
 
 **Last Updated:** 2026-01-26
-**Commit:** 431c463 - Add interim and part-time job pages for CRO and CCO roles
+**Commit:** 33beafd - Add services, hire, role definition and advisory job pages
