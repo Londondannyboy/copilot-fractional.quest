@@ -80,6 +80,26 @@ For new role/engagement pages:
 | Part-Time | Fixed days per week | true | false |
 | Advisory | Board/strategic advisor | true | false |
 
+## Job Posts (Google Jobs)
+
+Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs` table.
+
+**URL Pattern**: `https://fractional.quest/fractional-job/{slug}`
+
+**Coverage (49 poster-card jobs)**:
+| Engagement Type | Count | Example URL |
+|-----------------|-------|-------------|
+| Fractional | 14 | /fractional-job/fractional-cfo-uk |
+| Interim | 12 | /fractional-job/interim-cfo-uk |
+| Part-Time | 12 | /fractional-job/part-time-cfo-uk |
+| Advisory | 11 | /fractional-job/advisory-cfo-uk |
+
+**Roles**: CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO, CDO
+
+**Features**: JobPosting schema, hero images, day rates, FAQs, authority links
+
+**Key File**: `src/app/fractional-job/[slug]/page.tsx`
+
 ## Current Coverage (Jan 2026)
 
 **Jobs UK Pages**: All 11 roles x 4 engagement types = 44 jobs in DB

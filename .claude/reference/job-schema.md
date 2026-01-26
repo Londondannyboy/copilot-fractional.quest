@@ -102,7 +102,19 @@ INSERT INTO jobs (
 );
 ```
 
-## URL Patterns by Engagement Type
+## URL Types
+
+There are TWO URL types for jobs:
+
+| Type | Pattern | Purpose |
+|------|---------|---------|
+| **Collection Page** | `/interim-cfo-jobs-uk` | Lists jobs, SEO landing page |
+| **Job Post** | `/fractional-job/interim-cfo-uk` | Individual job, Google Jobs indexed |
+
+The `url` field in job entries points to the **collection page**.
+The **job post** URL is derived from slug: `https://fractional.quest/fractional-job/{slug}`
+
+## Collection Page URL Patterns
 
 | Type | URL Pattern |
 |------|-------------|
@@ -110,3 +122,11 @@ INSERT INTO jobs (
 | Interim | `/interim-{role}-jobs-uk` |
 | Part-Time | `/part-time-{role}-jobs-uk` |
 | Advisory | `/advisory-{role}-jobs-uk` |
+
+## Job Post URL Pattern
+
+All individual job posts use: `/fractional-job/{slug}`
+
+Example: Job with slug `interim-cfo-uk` has:
+- Collection page URL (in `url` field): `https://fractional.quest/interim-cfo-jobs-uk`
+- Job post URL: `https://fractional.quest/fractional-job/interim-cfo-uk`

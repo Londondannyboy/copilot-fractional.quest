@@ -29,6 +29,7 @@ Build the UK's premier platform for fractional executive job seekers and hirers,
 - **Total Pages**: 374 (243 database + 131 static)
 - **Database Pages**: 243 in Neon PostgreSQL
 - **Static Pages**: 131 with JobPageClient components
+- **Job Posts**: 49 (Google Jobs optimized, at `/fractional-job/{slug}`)
 - **Top Traffic**: /fractional-jobs-london (115 clicks), /london (40), /fractional-jobs-uk (23)
 
 ### Working Features
@@ -278,6 +279,10 @@ user_profile_items (
 
 ### Page Types
 - `jobs_uk` - Role-specific UK job listings (42 pages)
+- `job_post` - Individual job listings for Google Jobs (49 pages)
+  - Dynamic route: `/fractional-job/[slug]`
+  - Engagement types: Fractional, Interim, Part-Time, Advisory
+  - All 11 C-suite roles + CDO covered
 - `specialist` - Niche expertise pages (35 pages)
 - `guide` - How-to and educational content (26 pages)
 - `industry` - Sector-specific pages (19 pages)
