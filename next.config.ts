@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   // Enable MDX pages
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   serverExternalPackages: ["@copilotkit/runtime"],
+  // Experimental optimizations for better performance
+  experimental: {
+    // Optimize package imports for tree-shaking
+    optimizePackageImports: ['recharts', 'lucide-react', '@copilotkit/react-ui'],
+  },
   images: {
     remotePatterns: [
       {

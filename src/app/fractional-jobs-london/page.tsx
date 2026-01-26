@@ -65,11 +65,8 @@ export default async function FractionalJobsLondonPage() {
 
   return (
     <>
-      {/* Preconnect to external image origins for faster loading */}
-      <link rel="preconnect" href="https://images.unsplash.com" />
-      <link rel="dns-prefetch" href="https://images.unsplash.com" />
-
       {/* Preload hero image for faster LCP - WebP format */}
+      {/* Note: Unsplash preconnect is now in layout.tsx for all pages */}
       <link
         rel="preload"
         href="/images/hero/london-mobile.webp"
