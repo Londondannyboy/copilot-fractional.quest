@@ -46,14 +46,14 @@ export const cfoJobsUkSEO = {
 
   // External authority links - critical for E-E-A-T
   authorityLinks: [
+    { name: "BBC: UK Job Market 2026", url: "https://www.bbc.co.uk/news/articles/c5yv6n536vno", context: "UK employment trends driving fractional adoption" },
+    { name: "BBC: Rise of Fractional Work", url: "https://www.bbc.co.uk/news/articles/c0r4zd29n5no", context: "Fractional executive market growth" },
+    { name: "Wikipedia: Fractional Work", url: "https://en.wikipedia.org/wiki/Fractional_work", context: "Definition and background" },
     { name: "ICAEW", url: "https://www.icaew.com", context: "Institute of Chartered Accountants" },
     { name: "ACCA", url: "https://www.accaglobal.com", context: "Global accountancy body" },
     { name: "CIMA", url: "https://www.cimaglobal.com", context: "Management accountants" },
-    { name: "FRC", url: "https://www.frc.org.uk", context: "Financial Reporting Council" },
     { name: "BVCA", url: "https://www.bvca.co.uk", context: "Private equity authority" },
     { name: "FCA", url: "https://www.fca.org.uk", context: "Financial Conduct Authority" },
-    { name: "Glassdoor UK Finance", url: "https://www.glassdoor.co.uk", context: "Salary benchmarking" },
-    { name: "Finance Director Magazine", url: "https://www.financedirector.co.uk", context: "Industry insights" },
   ],
 
   // Market statistics with citations

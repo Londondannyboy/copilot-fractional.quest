@@ -9,7 +9,25 @@ import { LazyYouTube } from '@/components/LazyYouTube'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 import { getOGImageUrl, getImage } from '@/lib/images'
+
+// Table of Contents items with section IDs
+const tocItems = [
+  { id: 'understanding', title: 'Understanding the Role' },
+  { id: 'responsibilities', title: 'Key Responsibilities' },
+  { id: 'comparison', title: 'Part-Time vs Full-Time' },
+  { id: 'when-needed', title: 'When You Need One' },
+  { id: 'cost-pricing', title: 'Cost & Pricing UK' },
+  { id: 'types', title: 'Types of Engagement' },
+  { id: 'qualifications', title: 'Qualifications & Bodies' },
+  { id: 'uk-market', title: 'UK Market Overview' },
+  { id: 'how-to-hire', title: 'How to Hire' },
+  { id: 'ir35', title: 'IR35 & Tax' },
+  { id: 'resources', title: 'External Resources' },
+  { id: 'calculator', title: 'Day Rate Calculator' },
+  { id: 'faq', title: 'FAQ' },
+]
 
 // Unsplash images for section backgrounds
 const sectionImages = {
@@ -161,6 +179,11 @@ export default function FractionalCfoPage() {
         </div>
       </section>
 
+      {/* Mobile Table of Contents */}
+      <div className="lg:hidden max-w-4xl mx-auto px-6 py-8">
+        <TableOfContentsMobile items={tocItems} />
+      </div>
+
       {/* Main Content with Sidebar */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -169,7 +192,7 @@ export default function FractionalCfoPage() {
             <article className="prose prose-lg prose-gray max-w-none">
 
               {/* Section: Understanding */}
-              <div className="relative -mx-6 px-6 py-12 mb-12 rounded-2xl overflow-hidden">
+              <div id="understanding" className="relative -mx-6 px-6 py-12 mb-12 rounded-2xl overflow-hidden scroll-mt-24">
                 <Image
                   src={sectionImages.understanding}
                   alt="Financial analysis and strategy"
@@ -183,8 +206,15 @@ export default function FractionalCfoPage() {
                     The <strong>fractional CFO meaning</strong> centres on flexible, senior-level financial leadership. Unlike traditional full-time CFOs earning £130,000-£220,000 annually, a <strong>fractional Chief Financial Officer</strong> works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.
                   </p>
 
+                  {/* Authority context box */}
+                  <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-6 not-prose">
+                    <p className="text-sm text-gray-700">
+                      <strong>UK Market Context:</strong> As the <a href="https://www.bbc.co.uk/news/articles/c5yv6n536vno" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline font-medium">BBC reports on the evolving UK job market (Jan 2026)</a>, companies are increasingly embracing flexible executive arrangements. Fractional CFOs represent a key part of this shift - offering businesses access to senior finance leadership without traditional full-time commitments.
+                    </p>
+                  </div>
+
                   <p>
-                    This model emerged from the startup and scale-up ecosystem where companies need CFO-level expertise for fundraising, financial planning, and investor relations but cannot justify the cost of a full-time finance executive.
+                    This model emerged from the startup and scale-up ecosystem where companies need CFO-level expertise for fundraising, financial planning, and investor relations but cannot justify the cost of a full-time finance executive. The concept is part of the broader <a href="https://en.wikipedia.org/wiki/Fractional_work" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">fractional work</a> trend transforming executive recruitment globally.
                   </p>
                 </div>
               </div>
@@ -200,7 +230,7 @@ export default function FractionalCfoPage() {
               </div>
 
               {/* Section: Responsibilities */}
-              <div className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50">
+              <div id="responsibilities" className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 scroll-mt-24">
                 <Image
                   src={sectionImages.responsibilities}
                   alt="Business dashboard and KPIs"
@@ -230,7 +260,7 @@ export default function FractionalCfoPage() {
               </div>
 
               {/* Section: Comparison */}
-              <div className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden">
+              <div id="comparison" className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden scroll-mt-24">
                 <Image
                   src={sectionImages.comparison}
                   alt="Business analytics comparison"
@@ -287,7 +317,7 @@ export default function FractionalCfoPage() {
               </div>
 
               {/* Section: When Needed */}
-              <div className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50">
+              <div id="when-needed" className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 scroll-mt-24">
                 <Image
                   src={sectionImages.whenNeeded}
                   alt="Team strategy meeting"
@@ -316,7 +346,7 @@ export default function FractionalCfoPage() {
               </div>
 
               {/* Section: Cost */}
-              <div className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden">
+              <div id="cost-pricing" className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden scroll-mt-24">
                 <Image
                   src={sectionImages.cost}
                   alt="Financial planning and budgeting"
@@ -339,7 +369,7 @@ export default function FractionalCfoPage() {
               </div>
 
               {/* Section: Types */}
-              <div className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
+              <div id="types" className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 scroll-mt-24">
                 <Image
                   src={sectionImages.types}
                   alt="Business professionals"
@@ -366,7 +396,7 @@ export default function FractionalCfoPage() {
                 </div>
               </div>
 
-              <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Qualifications & Professional Bodies</h2>
+              <h2 id="qualifications" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Qualifications & Professional Bodies</h2>
 
             <p>
               Most part-time finance directors hold professional accounting qualifications from recognized bodies. Key professional organizations include:
@@ -411,10 +441,10 @@ export default function FractionalCfoPage() {
               </a>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">The UK Fractional CFO Market</h2>
+            <h2 id="uk-market" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">The UK Fractional CFO Market</h2>
 
             <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              The UK <strong>fractional CFO</strong> market has grown significantly since 2020, driven by the rise of remote work and the expansion of the venture capital ecosystem. London remains the largest hub, accounting for approximately 60% of fractional CFO engagements, followed by Manchester, Birmingham, and Edinburgh.
+              The UK <strong>fractional CFO</strong> market has grown significantly since 2020, driven by the rise of remote work and the expansion of the venture capital ecosystem. London remains the largest hub, accounting for approximately 60% of fractional CFO engagements, followed by Manchester, Birmingham, and Edinburgh. As <a href="https://www.bbc.co.uk/news/articles/c0r4zd29n5no" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">recent BBC coverage</a> highlights, fractional work is reshaping executive employment patterns across the UK and US.
             </p>
 
             <p>
@@ -433,7 +463,7 @@ export default function FractionalCfoPage() {
               According to the <a href="https://www.british-business-bank.co.uk" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">British Business Bank</a>, UK SMEs increasingly recognise that access to strategic finance leadership - not just accounting - is critical for scaling. The fractional model addresses this by providing CFO expertise at a fraction of the full-time cost.
             </p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">How to Hire a Fractional CFO</h2>
+            <h2 id="how-to-hire" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">How to Hire a Fractional CFO</h2>
 
             <p className="text-lg text-gray-600 leading-relaxed mb-6">
               Finding the right <strong>fractional CFO</strong> requires understanding your specific needs and matching them to a finance leader with relevant experience. The hiring process typically takes 2-4 weeks, significantly faster than recruiting a full-time CFO.
@@ -487,7 +517,7 @@ export default function FractionalCfoPage() {
               </Link>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">IR35 and Tax Considerations</h2>
+            <h2 id="ir35" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">IR35 and Tax Considerations</h2>
 
             <p>
               Fractional CFO arrangements in the UK typically fall outside <a href="https://www.gov.uk/guidance/understanding-off-payroll-working-ir35" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">IR35</a> regulations because:
@@ -504,9 +534,17 @@ export default function FractionalCfoPage() {
               However, each engagement should be assessed individually. Many fractional CFOs operate through their own limited companies or as LLP members. It is advisable to seek guidance from <a href="https://www.gov.uk/government/organisations/hm-revenue-customs" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">HMRC</a> or a qualified tax advisor.
             </p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">External Resources</h2>
+            <h2 id="resources" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">External Resources</h2>
 
             <div className="grid md:grid-cols-4 gap-4 not-prose my-8">
+              <a href="https://en.wikipedia.org/wiki/Fractional_work" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">📚</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">Wikipedia: Fractional Work</p>
+              </a>
+              <a href="https://www.bbc.co.uk/news/articles/c0r4zd29n5no" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
+                <span className="text-xl">📰</span>
+                <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">BBC: Fractional Jobs</p>
+              </a>
               <a href="https://www.gov.uk/government/organisations/companies-house" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-emerald-300 transition-all group text-center">
                 <span className="text-xl">🏢</span>
                 <p className="text-xs font-medium text-gray-900 mt-1 group-hover:text-emerald-700">Companies House</p>
@@ -579,6 +617,9 @@ export default function FractionalCfoPage() {
                   </Link>
                 </div>
 
+                {/* Table of Contents */}
+                <TableOfContents items={tocItems} />
+
                 {/* Quick Links */}
                 <div className="bg-white p-6 rounded-xl border border-gray-200">
                   <h3 className="font-bold text-gray-900 mb-4">Related Guides</h3>
@@ -623,7 +664,7 @@ export default function FractionalCfoPage() {
       </section>
 
       {/* Calculator Section */}
-      <section className="py-16 bg-gray-50">
+      <section id="calculator" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
@@ -636,7 +677,7 @@ export default function FractionalCfoPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section id="faq" className="py-20 bg-white scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>

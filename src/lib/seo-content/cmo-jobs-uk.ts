@@ -38,14 +38,14 @@ export const cmoJobsUkSEO = {
 
   // External authority links - critical for E-E-A-T
   authorityLinks: [
+    { name: "BBC: UK Job Market 2026", url: "https://www.bbc.co.uk/news/articles/c5yv6n536vno", context: "UK employment trends driving fractional adoption" },
+    { name: "BBC: Rise of Fractional Work", url: "https://www.bbc.co.uk/news/articles/c0r4zd29n5no", context: "Fractional executive market growth" },
+    { name: "Wikipedia: Fractional Work", url: "https://en.wikipedia.org/wiki/Fractional_work", context: "Definition and background" },
     { name: "Chartered Institute of Marketing", url: "https://www.cim.co.uk", context: "Professional marketing body" },
     { name: "Data & Marketing Association", url: "https://dma.org.uk", context: "Data-driven marketing authority" },
     { name: "Marketing Week", url: "https://www.marketingweek.com", context: "Industry insights and trends" },
     { name: "IPA (Institute of Practitioners in Advertising)", url: "https://www.ipa.co.uk", context: "Advertising effectiveness authority" },
     { name: "WARC", url: "https://www.warc.com", context: "Marketing evidence and effectiveness" },
-    { name: "The Drum", url: "https://www.thedrum.com", context: "Creative marketing insights" },
-    { name: "HubSpot Marketing", url: "https://www.hubspot.com/marketing-statistics", context: "Marketing statistics" },
-    { name: "eMarketer", url: "https://www.emarketer.com", context: "Digital marketing data" },
   ],
 
   // Market statistics with citations

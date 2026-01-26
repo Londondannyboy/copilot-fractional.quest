@@ -38,14 +38,14 @@ export const ctoJobsUkSEO = {
 
   // External authority links - critical for E-E-A-T
   authorityLinks: [
+    { name: "BBC: UK Job Market 2026", url: "https://www.bbc.co.uk/news/articles/c5yv6n536vno", context: "UK employment trends driving fractional adoption" },
+    { name: "BBC: Rise of Fractional Work", url: "https://www.bbc.co.uk/news/articles/c0r4zd29n5no", context: "Fractional executive market growth" },
+    { name: "Wikipedia: Fractional Work", url: "https://en.wikipedia.org/wiki/Fractional_work", context: "Definition and background" },
     { name: "BCS (British Computer Society)", url: "https://www.bcs.org", context: "Chartered IT professional body" },
     { name: "Tech Nation", url: "https://technation.io", context: "UK tech ecosystem data and insights" },
     { name: "IET (Institution of Engineering and Technology)", url: "https://www.theiet.org", context: "Engineering and technology authority" },
     { name: "UK Government Digital Service", url: "https://www.gov.uk/government/organisations/government-digital-service", context: "Digital transformation standards" },
     { name: "Gartner", url: "https://www.gartner.com", context: "Technology research and advisory" },
-    { name: "Stack Overflow Developer Survey", url: "https://survey.stackoverflow.co", context: "Developer trends and salaries" },
-    { name: "AWS UK", url: "https://aws.amazon.com/uk", context: "Cloud infrastructure trends" },
-    { name: "GitHub State of the Octoverse", url: "https://octoverse.github.com", context: "Developer ecosystem insights" },
   ],
 
   // Market statistics with citations

@@ -205,9 +205,22 @@ export function PublicLanding() {
           <h3 className="text-2xl font-bold text-white text-center mb-4">
             Executive Roles We Cover
           </h3>
-          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto">
             From finance to technology, marketing to operations. Find or hire fractional leadership across all business functions.
           </p>
+
+          {/* Featured: Fractional CFO Guide */}
+          <div className="mb-8">
+            <Link
+              href="/fractional-cfo"
+              className="block max-w-2xl mx-auto bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-6 text-center hover:border-emerald-400/50 transition-all group"
+            >
+              <span className="text-emerald-400 text-sm font-semibold uppercase tracking-wider">Featured Guide</span>
+              <h4 className="text-xl font-bold text-white mt-2 group-hover:text-emerald-300 transition-colors">What is a Fractional CFO?</h4>
+              <p className="text-gray-400 text-sm mt-2">Complete guide to fractional CFO meaning, responsibilities, costs and how to hire one</p>
+            </Link>
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { role: 'CFO', label: 'Chief Financial Officer', href: '/fractional-cfo-jobs-uk', color: 'emerald' },
@@ -312,8 +325,9 @@ export function PublicLanding() {
             <div>
               <h4 className="text-white font-semibold mb-4">Resources</h4>
               <ul className="space-y-2">
+                <li><Link href="/fractional-cfo" className="text-gray-400 hover:text-white text-sm">What is a Fractional CFO?</Link></li>
                 <li><Link href="/fractional-executive-meaning" className="text-gray-400 hover:text-white text-sm">What is Fractional?</Link></li>
-                <li><Link href="/fractional-cfo-salary" className="text-gray-400 hover:text-white text-sm">Salary Guide</Link></li>
+                <li><Link href="/fractional-cfo-salary" className="text-gray-400 hover:text-white text-sm">CFO Salary Guide</Link></li>
                 <li><Link href="/news" className="text-gray-400 hover:text-white text-sm">Latest News</Link></li>
               </ul>
             </div>
