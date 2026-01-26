@@ -104,7 +104,7 @@ export default function FractionalCFOServicesPage() {
               <div key={model.name} className="bg-white p-8 rounded-xl border hover:border-emerald-400 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{model.name}</h3>
                 <div className="text-3xl font-black text-emerald-700 mb-1">{model.days}</div>
-                <div className="text-emerald-600 font-semibold mb-4">{model.price}</div>
+                <div className="text-emerald-700 font-semibold mb-4">{model.price}</div>
                 <p className="text-gray-600 mb-4">{model.description}</p>
                 <div className="pt-4 border-t">
                   <span className="text-xs font-bold uppercase text-gray-500">Best for:</span>

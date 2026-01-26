@@ -198,10 +198,10 @@ export function RecruitmentAgencyClient() {
       <section className="bg-gray-50 border-b">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-12">
           <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div><div className="text-4xl font-black text-emerald-600 mb-2">£5k-30k</div><div className="text-gray-600 text-sm">Typical Fractional Recruitment Agency Fees</div></div>
-            <div><div className="text-4xl font-black text-emerald-600 mb-2">3-6 Months</div><div className="text-gray-600 text-sm">Guarantee Period</div></div>
-            <div><div className="text-4xl font-black text-emerald-600 mb-2">5-10</div><div className="text-gray-600 text-sm">Candidates Presented</div></div>
-            <div><div className="text-4xl font-black text-emerald-600 mb-2">85%+</div><div className="text-gray-600 text-sm">Placement Success</div></div>
+            <div><div className="text-4xl font-black text-emerald-700 mb-2">£5k-30k</div><div className="text-gray-600 text-sm">Typical Fractional Recruitment Agency Fees</div></div>
+            <div><div className="text-4xl font-black text-emerald-700 mb-2">3-6 Months</div><div className="text-gray-600 text-sm">Guarantee Period</div></div>
+            <div><div className="text-4xl font-black text-emerald-700 mb-2">5-10</div><div className="text-gray-600 text-sm">Candidates Presented</div></div>
+            <div><div className="text-4xl font-black text-emerald-700 mb-2">85%+</div><div className="text-gray-600 text-sm">Placement Success</div></div>
           </div>
         </div>
       </section>

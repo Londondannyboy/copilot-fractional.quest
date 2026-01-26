@@ -271,7 +271,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ slug
                   </p>
                   <Link
                     href={`/fractional-${job.role_category.toLowerCase()}-jobs-uk`}
-                    className="text-emerald-600 hover:text-emerald-700 font-medium text-sm"
+                    className="text-emerald-700 hover:text-emerald-700 font-medium text-sm"
                   >
                     View {job.role_category} Jobs →
                   </Link>

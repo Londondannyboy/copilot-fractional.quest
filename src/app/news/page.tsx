@@ -124,7 +124,7 @@ export default async function NewsPage() {
 
                     {/* Content */}
                     <div className="px-6 pb-6 flex-grow flex flex-col">
-                      <h2 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-emerald-600 transition-colors">
+                      <h2 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-emerald-700 transition-colors">
                         <a
                           href={article.url}
                           target="_blank"

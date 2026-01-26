@@ -142,7 +142,7 @@ export const mdxComponents = {
     <ol className="list-decimal list-inside space-y-2 mb-4 text-gray-600" {...props} />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a className="text-emerald-600 hover:text-emerald-700 underline" {...props} />
+    <a className="text-emerald-700 hover:text-emerald-700 underline" {...props} />
   ),
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote className="border-l-4 border-emerald-500 pl-4 italic text-gray-600 my-4" {...props} />

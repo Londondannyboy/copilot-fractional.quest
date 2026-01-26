@@ -55,9 +55,9 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
         {/* Footer */}
         <p className="text-center text-sm text-gray-500 mt-6">
           By continuing, you agree to our{' '}
-          <Link href="/terms" className="text-emerald-600 hover:text-emerald-700">Terms</Link>
+          <Link href="/terms" className="text-emerald-700 hover:text-emerald-700">Terms</Link>
           {' '}and{' '}
-          <Link href="/privacy" className="text-emerald-600 hover:text-emerald-700">Privacy Policy</Link>
+          <Link href="/privacy" className="text-emerald-700 hover:text-emerald-700">Privacy Policy</Link>
         </p>
       </div>
     </main>

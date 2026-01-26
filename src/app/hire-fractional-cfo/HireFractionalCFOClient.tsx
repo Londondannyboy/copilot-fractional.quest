@@ -90,7 +90,7 @@ function HireFractionalCFOClientInner() {
             <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-24">
               <Link href="/fractional-cfo" className="text-emerald-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional CFO Guide</Link>
               <div className="max-w-4xl">
-                <span className="inline-block bg-white text-emerald-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Hiring Guide</span>
+                <span className="inline-block bg-white text-emerald-700 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Hiring Guide</span>
                 <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">Hire a<br /><span className="text-emerald-200">Fractional CFO</span></h1>
                 <p className="text-2xl md:text-3xl text-emerald-50 leading-relaxed font-light mb-10">Complete guide to finding, vetting, and hiring the perfect fractional Chief Financial Officer for your business.</p>
                 <div className="flex flex-wrap gap-10 mb-12">
@@ -100,8 +100,8 @@ function HireFractionalCFOClientInner() {
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
                   <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'hiring_guide', roleType: 'CFO', pageH1: 'Hire a Fractional CFO', pageUrl: '/hire-fractional-cfo', pageDescription: 'Complete guide to hiring a fractional CFO' }} />
-                  <Link href="/fractional-cfo-jobs-uk" className="px-8 py-4 bg-white text-emerald-600 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors">Browse CFO Candidates</Link>
-                  <Link href="#process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-emerald-600 transition-colors">See Hiring Process</Link>
+                  <Link href="/fractional-cfo-jobs-uk" className="px-8 py-4 bg-white text-emerald-700 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors">Browse CFO Candidates</Link>
+                  <Link href="#process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-emerald-700 transition-colors">See Hiring Process</Link>
                 </div>
               </div>
             </div>
@@ -113,10 +113,10 @@ function HireFractionalCFOClientInner() {
           <section className="bg-gray-50 border-b">
             <div className="max-w-6xl mx-auto px-6 lg:px-8 py-12">
               <div className="grid md:grid-cols-4 gap-8 text-center">
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">5-10</div><div className="text-gray-600 text-sm">Candidates to Interview</div></div>
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">3-6 Months</div><div className="text-gray-600 text-sm">Minimum Engagement</div></div>
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">£800-1.5k</div><div className="text-gray-600 text-sm">Day Rate Range</div></div>
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">30 Days</div><div className="text-gray-600 text-sm">Standard Notice</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">5-10</div><div className="text-gray-600 text-sm">Candidates to Interview</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">3-6 Months</div><div className="text-gray-600 text-sm">Minimum Engagement</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">£800-1.5k</div><div className="text-gray-600 text-sm">Day Rate Range</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">30 Days</div><div className="text-gray-600 text-sm">Standard Notice</div></div>
               </div>
             </div>
           </section>
@@ -135,7 +135,7 @@ function HireFractionalCFOClientInner() {
                     <h3 className="text-xl font-bold text-gray-900 mb-3">{source.channel}</h3>
                     <p className="text-gray-600 text-sm mb-4 leading-relaxed">{source.description}</p>
                     <div className="mb-3"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Pros:</div><div className="text-sm text-gray-700">{source.pros}</div></div>
-                    <div><div className="text-xs font-bold text-gray-500 uppercase mb-1">Best For:</div><div className="text-sm text-emerald-600">{source.bestFor}</div></div>
+                    <div><div className="text-xs font-bold text-gray-500 uppercase mb-1">Best For:</div><div className="text-sm text-emerald-700">{source.bestFor}</div></div>
                   </div>
                 ))}
               </div>
@@ -275,8 +275,8 @@ function HireFractionalCFOClientInner() {
               <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to Hire?</h2>
               <p className="text-xl text-emerald-100 mb-10 max-w-2xl mx-auto">Browse 100+ pre-vetted fractional CFO candidates. Post your role and start interviews this week.</p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link href="/fractional-cfo-jobs-uk" className="px-10 py-5 bg-white text-emerald-600 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors">Browse CFO Candidates</Link>
-                <Link href="/contact" className="px-10 py-5 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-emerald-600 transition-colors">Post Your Role</Link>
+                <Link href="/fractional-cfo-jobs-uk" className="px-10 py-5 bg-white text-emerald-700 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors">Browse CFO Candidates</Link>
+                <Link href="/contact" className="px-10 py-5 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-emerald-700 transition-colors">Post Your Role</Link>
               </div>
             </div>
           </section>
@@ -286,10 +286,10 @@ function HireFractionalCFOClientInner() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <span className="text-sm font-bold uppercase tracking-wider text-gray-400">Related Resources</span>
                 <div className="flex flex-wrap gap-4">
-                  <Link href="/fractional-cfo" className="text-gray-600 hover:text-emerald-600 font-medium transition-colors">Fractional CFO Guide</Link>
-                  <Link href="/fractional-cfo-cost" className="text-gray-600 hover:text-emerald-600 font-medium transition-colors">CFO Cost Guide</Link>
-                  <Link href="/fractional-cfo-services" className="text-gray-600 hover:text-emerald-600 font-medium transition-colors">CFO Services</Link>
-                  <Link href="/fractional-cfo-salary" className="text-gray-600 hover:text-emerald-600 font-medium transition-colors">CFO Salary Data</Link>
+                  <Link href="/fractional-cfo" className="text-gray-600 hover:text-emerald-700 font-medium transition-colors">Fractional CFO Guide</Link>
+                  <Link href="/fractional-cfo-cost" className="text-gray-600 hover:text-emerald-700 font-medium transition-colors">CFO Cost Guide</Link>
+                  <Link href="/fractional-cfo-services" className="text-gray-600 hover:text-emerald-700 font-medium transition-colors">CFO Services</Link>
+                  <Link href="/fractional-cfo-salary" className="text-gray-600 hover:text-emerald-700 font-medium transition-colors">CFO Salary Data</Link>
                 </div>
               </div>
             </div>

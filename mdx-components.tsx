@@ -56,7 +56,7 @@ export const mdxComponents: MDXComponents = {
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a
-      className="text-emerald-600 hover:text-emerald-700 underline"
+      className="text-emerald-700 hover:text-emerald-700 underline"
       {...props}
     />
   ),

@@ -893,7 +893,7 @@ export default async function JobDetailPage({ params }: Props) {
                   {job.compensation && (
                     <div>
                       <dt className="text-sm text-gray-500">Compensation</dt>
-                      <dd className="font-medium text-emerald-600">{job.compensation}</dd>
+                      <dd className="font-medium text-emerald-700">{job.compensation}</dd>
                     </div>
                   )}
                   {job.hours_per_week && (
@@ -955,15 +955,15 @@ export default async function JobDetailPage({ params }: Props) {
               </h3>
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-emerald-600">£{roleData.typicalDayRate.min}</div>
+                  <div className="text-2xl font-bold text-emerald-700">£{roleData.typicalDayRate.min}</div>
                   <div className="text-sm text-gray-500">Minimum</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-emerald-600">£{roleData.typicalDayRate.typical}</div>
+                  <div className="text-2xl font-bold text-emerald-700">£{roleData.typicalDayRate.typical}</div>
                   <div className="text-sm text-gray-500">Typical</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-emerald-600">£{roleData.typicalDayRate.max}</div>
+                  <div className="text-2xl font-bold text-emerald-700">£{roleData.typicalDayRate.max}</div>
                   <div className="text-sm text-gray-500">Maximum</div>
                 </div>
               </div>
@@ -1036,7 +1036,7 @@ export default async function JobDetailPage({ params }: Props) {
                 <details key={index} className="bg-white rounded-lg p-4 border border-gray-200 group">
                   <summary className="font-medium text-gray-900 cursor-pointer list-none flex justify-between items-center">
                     {faq.question}
-                    <span className="text-emerald-600 group-open:rotate-180 transition-transform">▼</span>
+                    <span className="text-emerald-700 group-open:rotate-180 transition-transform">▼</span>
                   </summary>
                   <p className="mt-3 text-gray-600 leading-relaxed">{faq.answer}</p>
                 </details>
@@ -1070,7 +1070,7 @@ export default async function JobDetailPage({ params }: Props) {
                   <div className="flex items-center justify-between text-sm gap-2">
                     <span className="text-gray-500 truncate">{relatedJob.location}</span>
                     {relatedJob.compensation && (
-                      <span className="text-emerald-600 font-medium whitespace-nowrap">{relatedJob.compensation}</span>
+                      <span className="text-emerald-700 font-medium whitespace-nowrap">{relatedJob.compensation}</span>
                     )}
                   </div>
                 </Link>

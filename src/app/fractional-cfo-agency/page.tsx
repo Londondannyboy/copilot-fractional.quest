@@ -114,7 +114,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
             <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
               <Link href="/fractional-jobs-uk" className="text-emerald-100 hover:text-white mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Fractional Jobs UK</Link>
               <div className="max-w-4xl">
-                <span className="inline-block bg-white text-emerald-600 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Guide</span>
+                <span className="inline-block bg-white text-emerald-700 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6">Guide</span>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">Fractional<br /><span className="text-emerald-200">CFO Agency</span></h1>
                 <p className="text-2xl md:text-3xl text-emerald-50 leading-relaxed font-light mb-10">Find the best agencies for hiring <strong>fractional CFO</strong> talent. Compare specialists in finance leadership placements across the UK.</p>
                 <div className="flex flex-wrap gap-10 mb-12">
@@ -127,7 +127,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                     href={CALENDLY_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-8 py-4 bg-white text-emerald-600 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors inline-flex items-center gap-2"
+                    className="px-8 py-4 bg-white text-emerald-700 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors inline-flex items-center gap-2"
                   >
                     <span>📅</span> Book a Free Call
                   </a>
@@ -159,7 +159,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                     href={CALENDLY_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-white text-emerald-600 text-lg font-bold py-4 px-8 hover:bg-emerald-50 transition-all shadow-lg hover:shadow-xl"
+                    className="inline-flex items-center gap-3 bg-white text-emerald-700 text-lg font-bold py-4 px-8 hover:bg-emerald-50 transition-all shadow-lg hover:shadow-xl"
                   >
                     <span className="text-2xl">📅</span>
                     <span>Book Your Free Call</span>
@@ -197,10 +197,10 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
           <section className="bg-gray-50 border-b">
             <div className="max-w-6xl mx-auto px-6 lg:px-8 py-12">
               <div className="grid md:grid-cols-4 gap-8 text-center">
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">£5k-30k</div><div className="text-gray-600 text-sm">Typical Agency Fees</div></div>
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">3-6 Months</div><div className="text-gray-600 text-sm">Guarantee Period</div></div>
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">5-10</div><div className="text-gray-600 text-sm">Candidates Presented</div></div>
-                <div><div className="text-4xl font-black text-emerald-600 mb-2">85%+</div><div className="text-gray-600 text-sm">Placement Success</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">£5k-30k</div><div className="text-gray-600 text-sm">Typical Agency Fees</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">3-6 Months</div><div className="text-gray-600 text-sm">Guarantee Period</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">5-10</div><div className="text-gray-600 text-sm">Candidates Presented</div></div>
+                <div><div className="text-4xl font-black text-emerald-700 mb-2">85%+</div><div className="text-gray-600 text-sm">Placement Success</div></div>
               </div>
             </div>
           </section>
@@ -299,7 +299,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                     <h3 className="text-xl font-bold text-gray-900 mb-3">{agency.name}</h3>
                     <p className="text-gray-600 text-sm mb-4">{agency.description}</p>
                     <div className="mb-3"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Speciality:</div><div className="text-sm text-gray-700">{agency.speciality}</div></div>
-                    <div><div className="text-xs font-bold text-gray-500 uppercase mb-1">Model:</div><div className="text-sm text-emerald-600">{agency.model}</div></div>
+                    <div><div className="text-xs font-bold text-gray-500 uppercase mb-1">Model:</div><div className="text-sm text-emerald-700">{agency.model}</div></div>
                   </div>
                 ))}
               </div>
@@ -386,7 +386,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <Link href="/fractional-cfo-jobs-uk" className="bg-gray-50 p-8 border-l-4 border-emerald-500 hover:shadow-md transition-shadow group">
                   <div className="text-3xl mb-4">💰</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600">Fractional CFO Jobs</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-700">Fractional CFO Jobs</h3>
                   <p className="text-gray-600 text-sm">Browse CFO, FD, and finance leadership roles.</p>
                 </Link>
                 <Link href="/fractional-cfo-services" className="bg-gray-50 p-8 border-l-4 border-teal-500 hover:shadow-md transition-shadow group">
@@ -413,9 +413,9 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <h3 className="text-lg font-bold text-gray-900 mb-6">External Resources</h3>
               <div className="grid md:grid-cols-3 gap-6 text-sm">
-                <a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-600">ICAEW - Institute of Chartered Accountants →</a>
-                <a href="https://www.accaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-600">ACCA - Chartered Certified Accountants →</a>
-                <a href="https://www.gov.uk/guidance/ir35-find-out-if-it-applies" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-600">HMRC - IR35 Guidance →</a>
+                <a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700">ICAEW - Institute of Chartered Accountants →</a>
+                <a href="https://www.accaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700">ACCA - Chartered Certified Accountants →</a>
+                <a href="https://www.gov.uk/guidance/ir35-find-out-if-it-applies" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700">HMRC - IR35 Guidance →</a>
               </div>
             </div>
           </section>
@@ -441,7 +441,7 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-600 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-700 font-bold uppercase tracking-wider hover:bg-emerald-50 transition-colors"
                 >
                   <span>📅</span> Book Your Free Call
                 </a>

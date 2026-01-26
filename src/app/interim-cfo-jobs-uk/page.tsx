@@ -290,18 +290,18 @@ export default async function InterimCFOJobsUKPage() {
             <h2 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">On This Page</h2>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div className="space-y-2">
-                <a href="#market" className="block text-emerald-600 hover:text-emerald-800 hover:underline">UK Interim CFO Market</a>
-                <a href="#when-needed" className="block text-emerald-600 hover:text-emerald-800 hover:underline">When Companies Need Interim CFOs</a>
-                <a href="#qualifications" className="block text-emerald-600 hover:text-emerald-800 hover:underline">Qualifications & Experience</a>
+                <a href="#market" className="block text-emerald-700 hover:text-emerald-800 hover:underline">UK Interim CFO Market</a>
+                <a href="#when-needed" className="block text-emerald-700 hover:text-emerald-800 hover:underline">When Companies Need Interim CFOs</a>
+                <a href="#qualifications" className="block text-emerald-700 hover:text-emerald-800 hover:underline">Qualifications & Experience</a>
               </div>
               <div className="space-y-2">
-                <a href="#sectors" className="block text-emerald-600 hover:text-emerald-800 hover:underline">Top Hiring Sectors</a>
-                <a href="#rates" className="block text-emerald-600 hover:text-emerald-800 hover:underline">Day Rates & IR35</a>
-                <a href="#career" className="block text-emerald-600 hover:text-emerald-800 hover:underline">Career Path & Transition</a>
+                <a href="#sectors" className="block text-emerald-700 hover:text-emerald-800 hover:underline">Top Hiring Sectors</a>
+                <a href="#rates" className="block text-emerald-700 hover:text-emerald-800 hover:underline">Day Rates & IR35</a>
+                <a href="#career" className="block text-emerald-700 hover:text-emerald-800 hover:underline">Career Path & Transition</a>
               </div>
               <div className="space-y-2">
-                <a href="#resources" className="block text-emerald-600 hover:text-emerald-800 hover:underline">Related Resources</a>
-                <a href="#faq" className="block text-emerald-600 hover:text-emerald-800 hover:underline">Common Questions</a>
+                <a href="#resources" className="block text-emerald-700 hover:text-emerald-800 hover:underline">Related Resources</a>
+                <a href="#faq" className="block text-emerald-700 hover:text-emerald-800 hover:underline">Common Questions</a>
               </div>
             </div>
           </nav>
@@ -314,10 +314,10 @@ export default async function InterimCFOJobsUKPage() {
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 id="market" className="text-3xl font-black text-gray-900 mb-6">The UK Interim CFO Market in 2026</h2>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              The <strong>interim CFO</strong> market in the UK has grown significantly as companies recognise the value of experienced finance leadership during periods of change. According to the <a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Institute of Chartered Accountants in England and Wales (ICAEW)</a>, demand for interim finance executives increased by 20% in 2025, driven by M&A activity, PE investment, and finance transformation programmes.
+              The <strong>interim CFO</strong> market in the UK has grown significantly as companies recognise the value of experienced finance leadership during periods of change. According to the <a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">Institute of Chartered Accountants in England and Wales (ICAEW)</a>, demand for interim finance executives increased by 20% in 2025, driven by M&A activity, PE investment, and finance transformation programmes.
             </p>
             <p>
-              Unlike <Link href="/fractional-cfo-jobs-uk" className="text-emerald-600 hover:underline">fractional CFO roles</Link> which involve ongoing part-time engagement, interim CFO positions are typically full-time assignments lasting 6-12 months. The <a href="https://www.accaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Association of Chartered Certified Accountants (ACCA)</a> notes that interim finance leadership has become essential for businesses navigating regulatory changes and digital transformation.
+              Unlike <Link href="/fractional-cfo-jobs-uk" className="text-emerald-700 hover:underline">fractional CFO roles</Link> which involve ongoing part-time engagement, interim CFO positions are typically full-time assignments lasting 6-12 months. The <a href="https://www.accaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">Association of Chartered Certified Accountants (ACCA)</a> notes that interim finance leadership has become essential for businesses navigating regulatory changes and digital transformation.
             </p>
 
             <h3 id="when-needed" className="text-2xl font-bold text-gray-900 mt-12 mb-4">When Companies Need Interim CFOs</h3>
@@ -325,14 +325,14 @@ export default async function InterimCFOJobsUKPage() {
             <ul className="space-y-3 text-gray-600">
               <li><strong>Leadership gaps</strong> — Covering departures while recruiting permanent replacements. CFO searches typically take 6-9 months; interim cover maintains business continuity and stakeholder confidence.</li>
               <li><strong>Finance transformations</strong> — ERP implementations, finance system upgrades, process automation. Interim CFOs bring implementation experience without long-term commitment.</li>
-              <li><strong>M&A activity</strong> — Pre-deal financial due diligence, post-merger integration, carve-outs. According to <a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">BVCA</a>, PE-backed M&A remains strong, driving interim demand.</li>
+              <li><strong>M&A activity</strong> — Pre-deal financial due diligence, post-merger integration, carve-outs. According to <a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">BVCA</a>, PE-backed M&A remains strong, driving interim demand.</li>
               <li><strong>PE portfolio management</strong> — Value creation initiatives, financial controls improvement, exit preparation. Portfolio companies frequently need senior finance leadership during transitions.</li>
               <li><strong>Crisis management</strong> — Cash flow management, restructuring, stakeholder communication. Interim CFOs provide objectivity and specialist turnaround expertise.</li>
               <li><strong>IPO preparation</strong> — Getting finance function ready for public markets, implementing audit-ready processes, investor relations capability.</li>
             </ul>
 
             <h3 id="qualifications" className="text-2xl font-bold text-gray-900 mt-12 mb-4">Qualifications & Experience for Interim CFOs</h3>
-            <p className="text-gray-600 mb-4">Successful interim CFOs combine professional qualifications with extensive commercial experience. The <a href="https://www.cimaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Chartered Institute of Management Accountants (CIMA)</a> identifies these key requirements:</p>
+            <p className="text-gray-600 mb-4">Successful interim CFOs combine professional qualifications with extensive commercial experience. The <a href="https://www.cimaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">Chartered Institute of Management Accountants (CIMA)</a> identifies these key requirements:</p>
             <div className="grid md:grid-cols-2 gap-6 not-prose mt-6">
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h4 className="font-bold text-gray-900 mb-3">Professional Qualifications</h4>
@@ -357,7 +357,7 @@ export default async function InterimCFOJobsUKPage() {
             </div>
 
             <h3 id="sectors" className="text-2xl font-bold text-gray-900 mt-12 mb-4">Top UK Sectors Hiring Interim CFOs</h3>
-            <p className="text-gray-600 mb-4">Demand for interim CFOs varies by sector. Based on market analysis and data from the <a href="https://www.frc.org.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Financial Reporting Council</a>:</p>
+            <p className="text-gray-600 mb-4">Demand for interim CFOs varies by sector. Based on market analysis and data from the <a href="https://www.frc.org.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">Financial Reporting Council</a>:</p>
             <div className="overflow-x-auto mt-6">
               <table className="min-w-full text-sm">
                 <thead><tr className="border-b border-gray-200"><th className="text-left py-3 px-4 font-bold text-gray-900">Sector</th><th className="text-left py-3 px-4 font-bold text-gray-900">Typical Day Rate</th><th className="text-left py-3 px-4 font-bold text-gray-900">Key Drivers</th></tr></thead>
@@ -372,21 +372,21 @@ export default async function InterimCFOJobsUKPage() {
             </div>
 
             <h3 id="rates" className="text-2xl font-bold text-gray-900 mt-12 mb-4">Day Rates & IR35 Considerations</h3>
-            <p className="text-gray-600 mb-4">Interim CFO compensation in the UK is primarily day-rate based. According to guidance from <a href="https://www.gov.uk/guidance/ir35-find-out-if-it-applies" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">HMRC on IR35</a>:</p>
+            <p className="text-gray-600 mb-4">Interim CFO compensation in the UK is primarily day-rate based. According to guidance from <a href="https://www.gov.uk/guidance/ir35-find-out-if-it-applies" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">HMRC on IR35</a>:</p>
             <ul className="space-y-2 text-gray-600">
               <li><strong>Day rate range:</strong> £900-£1,500 standard, up to £2,000 for financial services/PE</li>
               <li><strong>Location premium:</strong> London roles typically pay 10-20% more than regional positions</li>
               <li><strong>IR35 status:</strong> Many interim CFO roles fall inside IR35. Budget for the tax implications accordingly.</li>
               <li><strong>Notice periods:</strong> Typically 30 days, sometimes 2 weeks for shorter assignments</li>
             </ul>
-            <p className="text-gray-600 mt-4">For detailed IR35 guidance, consult <a href="https://www.ipse.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">IPSE</a> or seek specialist tax advice from firms like <a href="https://www.kpmg.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">KPMG</a> or <a href="https://www.deloitte.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Deloitte</a>.</p>
+            <p className="text-gray-600 mt-4">For detailed IR35 guidance, consult <a href="https://www.ipse.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">IPSE</a> or seek specialist tax advice from firms like <a href="https://www.kpmg.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">KPMG</a> or <a href="https://www.deloitte.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">Deloitte</a>.</p>
 
             <h3 id="career" className="text-2xl font-bold text-gray-900 mt-12 mb-4">Career Path: Transitioning to Interim CFO Work</h3>
             <p className="text-gray-600 mb-4">Many interim CFOs transition from permanent roles after 15-20 years of experience. The path typically involves:</p>
             <ol className="list-decimal list-inside space-y-2 text-gray-600 mb-6">
               <li>Building a track record of financial leadership (CFO/FD roles in multiple organisations)</li>
               <li>Developing M&A and transformation experience (integration, carve-outs, system implementations)</li>
-              <li>Building a network through industry events, <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">LinkedIn</a>, and professional bodies</li>
+              <li>Building a network through industry events, <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">LinkedIn</a>, and professional bodies</li>
               <li>Registering with specialist interim management firms and executive search consultancies</li>
               <li>Creating a compelling CV focused on measurable financial outcomes and specific transaction experience</li>
             </ol>
@@ -404,12 +404,12 @@ export default async function InterimCFOJobsUKPage() {
             <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Authority Resources</h3>
             <p className="text-gray-600 mb-4">Further reading from professional bodies and regulatory sources:</p>
             <ul className="space-y-2 text-gray-600">
-              <li><a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">ICAEW</a> — Institute of Chartered Accountants in England and Wales</li>
-              <li><a href="https://www.accaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">ACCA</a> — Association of Chartered Certified Accountants</li>
-              <li><a href="https://www.cimaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">CIMA</a> — Chartered Institute of Management Accountants</li>
-              <li><a href="https://www.frc.org.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">FRC</a> — Financial Reporting Council</li>
-              <li><a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">BVCA</a> — British Private Equity & Venture Capital Association</li>
-              <li><a href="https://www.gov.uk/guidance/ir35-find-out-if-it-applies" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">HMRC IR35 Guidance</a> — Off-payroll working rules</li>
+              <li><a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">ICAEW</a> — Institute of Chartered Accountants in England and Wales</li>
+              <li><a href="https://www.accaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">ACCA</a> — Association of Chartered Certified Accountants</li>
+              <li><a href="https://www.cimaglobal.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">CIMA</a> — Chartered Institute of Management Accountants</li>
+              <li><a href="https://www.frc.org.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">FRC</a> — Financial Reporting Council</li>
+              <li><a href="https://www.bvca.co.uk/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">BVCA</a> — British Private Equity & Venture Capital Association</li>
+              <li><a href="https://www.gov.uk/guidance/ir35-find-out-if-it-applies" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">HMRC IR35 Guidance</a> — Off-payroll working rules</li>
             </ul>
           </article>
         </div>

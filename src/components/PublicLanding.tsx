@@ -65,13 +65,13 @@ export function PublicLanding() {
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
                   href="/auth/sign-in"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+                  className="bg-gray-900 hover:bg-black text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
                 >
                   Start Your Search
                 </Link>
                 <Link
                   href="/fractional-jobs-uk"
-                  className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+                  className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
                 >
                   Browse Jobs
                 </Link>
@@ -91,13 +91,13 @@ export function PublicLanding() {
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
                   href="/book-call"
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+                  className="bg-gray-900 hover:bg-black text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
                 >
                   Book a Call
                 </Link>
                 <Link
                   href="/hire-fractional-cfo"
-                  className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+                  className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
                 >
                   Learn More
                 </Link>

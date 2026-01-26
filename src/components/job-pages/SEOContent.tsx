@@ -2,16 +2,7 @@
 
 import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-} from 'recharts';
+import { LazyDayRateChart } from "./LazyChart";
 
 // Authority source URLs for citations
 const AUTHORITY_SOURCES = {
@@ -209,7 +200,7 @@ export function SEOContent({ content }: SEOContentProps) {
             </InsightCard>
             <InsightCard title="Flexible Working" icon="🏠">
               <p>65% of London fractional roles offer hybrid arrangements, per{' '}
-                <a href={AUTHORITY_SOURCES.cipd.url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">
+                <a href={AUTHORITY_SOURCES.cipd.url} target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">
                   CIPD research
                 </a>.
               </p>
@@ -233,7 +224,7 @@ export function SEOContent({ content }: SEOContentProps) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
           >
-            <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
             <span className="font-medium text-gray-700">Glassdoor UK</span>
@@ -244,41 +235,17 @@ export function SEOContent({ content }: SEOContentProps) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
           >
-            <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
             <span className="font-medium text-gray-700">CIPD Pay Report</span>
           </a>
         </div>
 
-        {/* Interactive Bar Chart */}
+        {/* Interactive Bar Chart - Lazy Loaded */}
         <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-6">
           <div className="h-72 sm:h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={content.dayRates.rates.map(rate => ({
-                  name: rate.role,
-                  min: parseInt(rate.range.match(/£([\d,]+)/)?.[1]?.replace(',', '') || '0'),
-                  typical: parseInt(rate.typical.replace(/[£,]/g, '')),
-                  max: parseInt(rate.range.match(/£[\d,]+ - £([\d,]+)/)?.[1]?.replace(',', '') || '0'),
-                }))}
-                layout="vertical"
-                margin={{ top: 5, right: 30, left: 60, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis type="number" tick={{ fontSize: 12 }} tickFormatter={(v) => `£${v}`} domain={[0, 'dataMax + 200']} />
-                <YAxis dataKey="name" type="category" tick={{ fontSize: 12, fontWeight: 500 }} width={70} />
-                <Tooltip
-                  formatter={(value) => value !== undefined ? [`£${Number(value).toLocaleString()}/day`, ''] : ['', '']}
-                  contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }}
-                />
-                <Bar dataKey="typical" fill="#059669" radius={[0, 4, 4, 0]} name="Typical Rate">
-                  {content.dayRates.rates.map((_, index) => (
-                    <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#059669' : '#10b981'} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            <LazyDayRateChart rates={content.dayRates.rates} />
           </div>
           <p className="text-xs text-gray-500 text-center mt-4">
             Typical daily rates for fractional executives. Hover over bars for details.

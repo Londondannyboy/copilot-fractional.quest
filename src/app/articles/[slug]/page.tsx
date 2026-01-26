@@ -228,7 +228,7 @@ export default async function ArticlePage({ params }: Props) {
       <section className="py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <article
-            className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-emerald-600 prose-a:underline"
+            className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-emerald-700 prose-a:underline"
             dangerouslySetInnerHTML={{ __html: article.content || '' }}
           />
         </div>
@@ -252,7 +252,7 @@ export default async function ArticlePage({ params }: Props) {
                   <p className="text-sm text-gray-600 mb-2">{job.company_name}</p>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-500">{job.location}</span>
-                    <span className="text-emerald-600 font-medium">{job.compensation}</span>
+                    <span className="text-emerald-700 font-medium">{job.compensation}</span>
                   </div>
                 </Link>
               ))}

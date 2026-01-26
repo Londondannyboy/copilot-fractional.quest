@@ -32,7 +32,7 @@ export function RelatedPages({ pages, title = "Related Pages", currentPath }: Re
             className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors group"
           >
             <svg
-              className="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition-colors flex-shrink-0"
+              className="w-4 h-4 text-gray-400 group-hover:text-emerald-700 transition-colors flex-shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

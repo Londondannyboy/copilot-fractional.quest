@@ -384,16 +384,16 @@ export function JobsSidebar({
         <p className="text-gray-600 text-sm mb-4">
           Ready to start your fractional career?
         </p>
-        <div className="space-y-2">
+        <div className="space-y-3">
           <Link
             href="/auth/sign-up"
-            className="block w-full bg-indigo-600 text-white text-center font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors text-sm"
+            className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-4 rounded-lg hover:bg-black transition-colors shadow-md"
           >
             Create Profile
           </Link>
           <Link
             href="/fractional-jobs-uk"
-            className="block w-full bg-white text-indigo-600 text-center font-semibold py-2 px-4 rounded-lg border border-indigo-200 hover:bg-indigo-50 transition-colors text-sm"
+            className="block w-full bg-white text-gray-900 text-center font-bold py-3 px-4 rounded-lg border-2 border-gray-900 hover:bg-gray-50 transition-colors"
           >
             Browse All Jobs
           </Link>

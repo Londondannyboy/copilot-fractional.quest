@@ -155,7 +155,7 @@ ${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
               <DocumentSection id="salary" title="Market Rates">
                 <p className="text-gray-600 mb-6">
                   Current day rates for fractional finance executives in the UK market.
-                  Say <span className="font-medium text-emerald-600">"focus on salary"</span> to highlight this section.
+                  Say <span className="font-medium text-emerald-700">"focus on salary"</span> to highlight this section.
                 </p>
                 <LiveMarketChart type="bar" />
               </DocumentSection>
@@ -164,8 +164,8 @@ ${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
               <DocumentSection id="jobs" title="Available Opportunities">
                 <p className="text-gray-600 mb-6">
                   Live job listings from our database. Try saying{' '}
-                  <span className="font-medium text-emerald-600">"show me remote jobs"</span> or{' '}
-                  <span className="font-medium text-emerald-600">"filter to Manchester"</span>.
+                  <span className="font-medium text-emerald-700">"show me remote jobs"</span> or{' '}
+                  <span className="font-medium text-emerald-700">"filter to Manchester"</span>.
                 </p>
                 <LiveJobGrid limit={6} />
               </DocumentSection>
@@ -202,7 +202,7 @@ ${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
                       <div>
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-gray-600">Remote Work</span>
-                          <span className="font-medium text-emerald-600">78%</span>
+                          <span className="font-medium text-emerald-700">78%</span>
                         </div>
                         <div className="h-2 bg-gray-100 rounded-full">
                           <div className="h-2 bg-emerald-500 rounded-full" style={{ width: '78%' }} />
@@ -211,7 +211,7 @@ ${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
                       <div>
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-gray-600">AI/Automation Skills</span>
-                          <span className="font-medium text-emerald-600">65%</span>
+                          <span className="font-medium text-emerald-700">65%</span>
                         </div>
                         <div className="h-2 bg-gray-100 rounded-full">
                           <div className="h-2 bg-emerald-500 rounded-full" style={{ width: '65%' }} />
@@ -220,7 +220,7 @@ ${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
                       <div>
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-gray-600">ESG Reporting</span>
-                          <span className="font-medium text-emerald-600">52%</span>
+                          <span className="font-medium text-emerald-700">52%</span>
                         </div>
                         <div className="h-2 bg-gray-100 rounded-full">
                           <div className="h-2 bg-emerald-500 rounded-full" style={{ width: '52%' }} />

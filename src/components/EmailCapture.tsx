@@ -84,11 +84,11 @@ export function EmailCapture({
 
   if (variant === 'banner') {
     return (
-      <div className={`bg-indigo-600 py-4 px-6 ${className}`}>
+      <div className={`bg-gray-900 py-5 px-6 ${className}`}>
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-white text-center md:text-left">
-            <span className="font-semibold">{title}</span>
-            <span className="hidden md:inline text-indigo-200 ml-2">{description}</span>
+            <span className="font-bold text-lg">{title}</span>
+            <span className="hidden md:inline text-gray-300 ml-2">{description}</span>
           </div>
 
           {status === 'success' ? (
@@ -109,7 +109,7 @@ export function EmailCapture({
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="bg-white text-indigo-700 font-semibold px-6 py-2 rounded-lg hover:bg-indigo-50 transition-colors disabled:opacity-50 whitespace-nowrap"
+                className="bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-50 whitespace-nowrap shadow-md text-lg"
               >
                 {status === 'loading' ? '...' : buttonText}
               </button>
@@ -149,7 +149,7 @@ export function EmailCapture({
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors disabled:opacity-50"
+            className="bg-gray-900 hover:bg-black text-white font-bold px-8 py-3 rounded-lg transition-colors disabled:opacity-50 shadow-md text-lg"
           >
             {status === 'loading' ? '...' : buttonText}
           </button>

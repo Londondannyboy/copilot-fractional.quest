@@ -155,7 +155,7 @@ export default function CaseStudiesPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/fractional-jobs-uk"
-              className="px-8 py-4 bg-white text-emerald-600 font-bold rounded-xl hover:bg-emerald-50 transition-colors"
+              className="px-8 py-4 bg-white text-emerald-700 font-bold rounded-xl hover:bg-emerald-50 transition-colors"
             >
               Browse Fractional Roles
             </Link>

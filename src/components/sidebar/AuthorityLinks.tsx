@@ -29,7 +29,7 @@ export function AuthorityLinks({ links, title = "Trusted Sources" }: AuthorityLi
           >
             <div className="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-emerald-50 transition-colors">
               <svg
-                className="w-4 h-4 text-gray-500 group-hover:text-emerald-600 transition-colors"
+                className="w-4 h-4 text-gray-500 group-hover:text-emerald-700 transition-colors"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

@@ -252,7 +252,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-emerald-600 hover:text-emerald-700 font-medium text-sm break-all"
+                    className="block text-emerald-700 hover:text-emerald-700 font-medium text-sm break-all"
                   >
                     Read on {article.source_name} →
                   </a>
@@ -277,7 +277,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
                   <h3 className="font-semibold text-gray-900 mb-2">More News</h3>
                   <Link
                     href="/news"
-                    className="text-emerald-600 hover:text-emerald-700 font-medium text-sm"
+                    className="text-emerald-700 hover:text-emerald-700 font-medium text-sm"
                   >
                     View all articles →
                   </Link>
