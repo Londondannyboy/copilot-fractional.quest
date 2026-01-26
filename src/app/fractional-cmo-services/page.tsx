@@ -144,6 +144,7 @@ export default function FractionalCMOServicesPage() {
               <li><strong>Agency dependency</strong> - When you need someone to direct agency work strategically</li>
               <li><strong>Brand evolution</strong> - Repositioning, rebrand, or entering new markets</li>
               <li><strong>Demand generation</strong> - Building pipeline and marketing-sourced revenue</li>
+              <li><strong>Membership growth</strong> - For membership-based organisations, work alongside a <a href="https://membership.quest" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">membership marketing specialists</a> to drive acquisition and retention</li>
               <li><strong>Pre-fundraise</strong> - Professionalising marketing before Series A/B</li>
               <li><strong>Marketing leadership gap</strong> - Covering departure while hiring permanent CMO</li>
             </ul>

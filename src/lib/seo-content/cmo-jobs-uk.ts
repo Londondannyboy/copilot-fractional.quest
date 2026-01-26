@@ -118,7 +118,7 @@ export const cmoJobsUkSEO = {
         {
           name: "Professional Services",
           description:
-            "Thought leadership, content marketing, and business development support. Often combined with BD responsibilities. Strong demand from law firms, consultancies, and financial services in London and Edinburgh.",
+            "Thought leadership, content marketing, and business development support. Often combined with BD responsibilities. Strong demand from law firms, consultancies, and financial services in London and Edinburgh. Professional associations and membership bodies increasingly partner with a <a href=\"https://membership.quest\" target=\"_blank\" rel=\"noopener noreferrer\">membership marketing agency</a> for specialist acquisition and retention strategies.",
           sectors: ["Thought Leadership", "Content Marketing", "BD Integration", "Employer Branding"],
         },
         {

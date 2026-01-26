@@ -76,9 +76,9 @@ const sourcingChannels = [
   },
   {
     channel: 'Marketing Communities',
-    description: 'Slack groups (Marketing Ops, GTM), Pavilion, or industry-specific communities.',
+    description: 'Slack groups (Marketing Ops, GTM), Pavilion, or industry-specific communities. For membership-focused businesses, a <a href="https://membership.quest" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">marketing membership agency</a> can connect you with specialists in subscription and recurring revenue models.',
     pros: 'Active practitioners, can observe expertise publicly',
-    bestFor: 'Finding niche specialists (PLG, B2B SaaS, etc.)',
+    bestFor: 'Finding niche specialists (PLG, B2B SaaS, membership models, etc.)',
     icon: '👥',
   },
   {
