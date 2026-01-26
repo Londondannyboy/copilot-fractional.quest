@@ -4,7 +4,7 @@
 // Credit: All images from Unsplash (unsplash.com)
 
 export type ImageCategory =
-  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso' | 'cro' | 'cso' | 'cio'
+  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso' | 'cro' | 'cso' | 'cio' | 'cdo'
   | 'london' | 'manchester' | 'birmingham' | 'edinburgh' | 'bristol' | 'uk'
   | 'remote' | 'tech' | 'finance' | 'marketing' | 'operations' | 'hr' | 'sales'
   | 'interim' | 'part-time' | 'services' | 'guide' | 'salary' | 'default'
@@ -179,6 +179,12 @@ const imageMap: Record<ImageCategory, ImageData> = {
     credit: 'Luke Chesser',
     creditUrl: 'https://unsplash.com/@lukechesser'
   },
+  cdo: {
+    url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop&q=80',
+    alt: 'Chief Data Officer analysing data insights and strategy',
+    credit: 'Luke Chesser',
+    creditUrl: 'https://unsplash.com/@lukechesser'
+  },
 
   // Location-specific images
   london: {
@@ -338,6 +344,7 @@ export function getRoleImageCategory(role: string): ImageCategory {
     'cpo': 'cpo',
     'ciso': 'ciso',
     'cro': 'cro',
+    'cdo': 'cdo',
     'finance': 'finance',
     'technology': 'tech',
     'marketing': 'marketing',

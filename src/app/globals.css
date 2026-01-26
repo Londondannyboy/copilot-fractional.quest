@@ -880,11 +880,18 @@ h3, h4, h5, h6 {
   color: #ffffff !important; /* White text for contrast */
 }
 
-/* Ensure "Powered by" text has good contrast if visible */
+/* Hide "Powered by CopilotKit" completely - override inline styles */
 .poweredBy,
+p.poweredBy,
+[class="poweredBy"],
 [class*="poweredBy"] {
-  color: #9ca3af !important; /* gray-400 - meets AA on dark background */
-  background: transparent !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  pointer-events: none !important;
 }
 
 /* ==========================================
