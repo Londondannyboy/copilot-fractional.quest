@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 interface RoleContentHubProps {
-  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'cro' | 'cio' | 'cso' | 'controller' | 'growth' | 'compliance' | 'product' | 'pm';
+  currentRole: 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'ciso' | 'cpo' | 'cro' | 'cio' | 'cso' | 'cdo' | 'controller' | 'growth' | 'compliance' | 'product' | 'pm';
 }
 
 interface RoleLink {
@@ -22,6 +22,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cpo', path: '/fractional-cpo-jobs-uk', label: 'CPO Jobs' },
     { role: 'cro', path: '/fractional-cro-jobs-uk', label: 'CRO Jobs' },
     { role: 'cio', path: '/fractional-cio-jobs-uk', label: 'CIO Jobs' },
+    { role: 'cdo', path: '/fractional-cdo-jobs-uk', label: 'CDO Jobs' },
   ];
 
   // TODO: Create pages for leadership roles
@@ -58,6 +59,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cpo', path: '/fractional-cpo', label: 'What is a Fractional CPO' },
     { role: 'cro', path: '/fractional-cro', label: 'What is a Fractional CRO' },
     { role: 'cio', path: '/fractional-cio', label: 'What is a Fractional CIO' },
+    { role: 'cdo', path: '/fractional-cdo', label: 'What is a Fractional CDO' },
     { role: 'controller', path: '/fractional-controller', label: 'What is a Fractional Controller' },
     { role: 'growth', path: '/fractional-growth', label: 'What is a Fractional Growth Lead' },
   ];
@@ -72,6 +74,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cpo', path: '/fractional-cpo-salary', label: 'CPO Salary' },
     { role: 'ceo', path: '/fractional-ceo-salary', label: 'CEO Salary' },
     { role: 'cio', path: '/fractional-cio-salary', label: 'CIO Salary' },
+    { role: 'cdo', path: '/fractional-cdo-salary', label: 'CDO Salary' },
   ];
 
   const costGuides: RoleLink[] = [
@@ -106,6 +109,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'cpo', path: '/hire-fractional-cpo', label: 'Hire a CPO' },
     { role: 'ceo', path: '/hire-fractional-ceo', label: 'Hire a CEO' },
     { role: 'cro', path: '/hire-fractional-cro', label: 'Hire a CRO' },
+    { role: 'cdo', path: '/hire-fractional-cdo', label: 'Hire a CDO' },
   ];
 
   // Industry Verticals
