@@ -1,7 +1,10 @@
 import { neon } from '@neondatabase/serverless'
 import { unstable_cache } from 'next/cache'
+import { withRetry } from './db'
 
-// Create SQL client
+// Create SQL client with caching
+let sqlClient: ReturnType<typeof neon> | null = null
+
 function createSql(): ReturnType<typeof neon> {
   if (!process.env.DATABASE_URL) {
     const placeholder = (() => {
@@ -9,7 +12,11 @@ function createSql(): ReturnType<typeof neon> {
     }) as unknown as ReturnType<typeof neon>
     return placeholder
   }
-  return neon(process.env.DATABASE_URL)
+  // Cache the client instance
+  if (!sqlClient) {
+    sqlClient = neon(process.env.DATABASE_URL)
+  }
+  return sqlClient
 }
 
 export const sql = createSql()
@@ -100,15 +107,17 @@ export interface FAQ {
 // Query Functions
 // ===========================================
 
-// Internal function for actual database query
+// Internal function for actual database query with retry for cold starts
 async function fetchPageBySlug(slug: string): Promise<PageData | null> {
   try {
-    const pages = await sql`
-      SELECT *
-      FROM pages
-      WHERE slug = ${slug} AND is_published = true
-      LIMIT 1
-    ` as PageData[]
+    const pages = await withRetry(async () => {
+      return await sql`
+        SELECT *
+        FROM pages
+        WHERE slug = ${slug} AND is_published = true
+        LIMIT 1
+      ` as PageData[]
+    })
 
     return pages[0] || null
   } catch (error) {
