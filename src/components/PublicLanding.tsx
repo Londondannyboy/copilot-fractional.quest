@@ -311,6 +311,50 @@ export function PublicLanding() {
         </div>
       </section>
 
+      {/* Interim Executive Jobs */}
+      <section className="py-12 bg-gray-800/30 border-t border-gray-700">
+        <div className="max-w-6xl mx-auto px-4">
+          <h3 className="text-xl font-semibold text-white text-center mb-4">Interim Executive Jobs UK</h3>
+          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto text-sm">
+            Looking for full-time interim assignments? Browse UK interim executive roles with day rates £900-£1,800.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Link
+              href="/interim-cto-jobs-uk"
+              className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-400/50 transition-all group"
+            >
+              <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-cyan-300 transition-colors">CTO Jobs</h4>
+              <p className="text-gray-400 text-xs mt-1">£900-£1,400/day</p>
+            </Link>
+            <Link
+              href="/interim-cfo-jobs-uk"
+              className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-4 text-center hover:border-emerald-400/50 transition-all group"
+            >
+              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-emerald-300 transition-colors">CFO Jobs</h4>
+              <p className="text-gray-400 text-xs mt-1">£900-£1,500/day</p>
+            </Link>
+            <Link
+              href="/interim-cmo-jobs-uk"
+              className="bg-gradient-to-r from-amber-900/50 to-orange-900/50 border border-amber-500/30 rounded-xl p-4 text-center hover:border-amber-400/50 transition-all group"
+            >
+              <span className="text-amber-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-amber-300 transition-colors">CMO Jobs</h4>
+              <p className="text-gray-400 text-xs mt-1">£850-£1,300/day</p>
+            </Link>
+            <Link
+              href="/interim-coo-jobs-uk"
+              className="bg-gradient-to-r from-purple-900/50 to-violet-900/50 border border-purple-500/30 rounded-xl p-4 text-center hover:border-purple-400/50 transition-all group"
+            >
+              <span className="text-purple-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-purple-300 transition-colors">COO Jobs</h4>
+              <p className="text-gray-400 text-xs mt-1">£950-£1,600/day</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Related Executive Services */}
       <section className="py-12 bg-gray-800/20 border-t border-gray-700">
         <div className="max-w-6xl mx-auto px-4">
@@ -343,8 +387,9 @@ export function PublicLanding() {
               <h4 className="text-white font-semibold mb-4">For Candidates</h4>
               <ul className="space-y-2">
                 <li><Link href="/fractional-jobs-uk" className="text-gray-400 hover:text-white text-sm">Browse Jobs</Link></li>
+                <li><Link href="/interim-cto-jobs-uk" className="text-gray-400 hover:text-white text-sm">Interim CTO Jobs</Link></li>
+                <li><Link href="/interim-cfo-jobs-uk" className="text-gray-400 hover:text-white text-sm">Interim CFO Jobs</Link></li>
                 <li><Link href="/auth/sign-in" className="text-gray-400 hover:text-white text-sm">Create Profile</Link></li>
-                <li><Link href="/news" className="text-gray-400 hover:text-white text-sm">Industry News</Link></li>
               </ul>
             </div>
             <div>
