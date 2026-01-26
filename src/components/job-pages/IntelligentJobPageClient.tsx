@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
@@ -28,12 +28,13 @@ import { ImageCategory, getImage, getHeroImageUrl, getLocalImage, hasLocalImage 
 // LAZY LOADED COMPONENTS - These load AFTER initial paint for better LCP
 // ============================================================================
 
-// Lazy load CopilotKit - it's the main culprit for slow LCP
-const CopilotKitWrapper = dynamic(
-  () => import("./CopilotKitWrapper"),
+// Lazy load AI Chat - only loads when user clicks "Chat with AI" button
+// This saves ~687KB of JS from initial page load
+const LazyAIChat = dynamic(
+  () => import("./LazyAIChat"),
   {
     ssr: false,
-    loading: () => null // Don't show loading - content already visible
+    loading: () => null
   }
 );
 
@@ -280,8 +281,6 @@ export function IntelligentJobPageClient({
   roleFilter,
   accentColor = 'emerald',
 }: IntelligentJobPageClientProps) {
-  const [aiLoaded, setAiLoaded] = useState(false);
-
   // Get accent color value
   const accentColorValue = accentColor === 'emerald' ? "#059669" :
     accentColor === 'blue' ? "#2563eb" :
@@ -328,15 +327,13 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
         breadcrumb={seoContent.breadcrumb}
       />
 
-      {/* Everything below loads lazily with CopilotKit */}
+      {/* Everything below loads lazily - AI chat only loads on user click */}
       <Suspense fallback={<ContentSkeleton />}>
-        <CopilotKitWrapper
+        <LazyAIChat
           instructions={agentInstructions}
           title="Fractional AI"
           initialMessage={`Hi! I can help you explore ${locationDisplay} fractional jobs. Try asking me to filter by role, show salary data, or find remote opportunities.`}
           accentColor={accentColorValue}
-          initialJobs={initialJobs}
-          onLoad={() => setAiLoaded(true)}
         >
           <IntelligentDocument
             pageContext={pageContext}
@@ -356,9 +353,9 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
               </div>
             </section>
 
-            {/* Statistics Banner */}
+            {/* Statistics Banner - Fixed height to prevent CLS */}
             {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
-              <section className="py-8 bg-gray-50 border-y border-gray-200">
+              <section className="py-8 bg-gray-50 border-y border-gray-200 min-h-[180px]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <StatisticsPanel
                     title={`${locationDisplay} Market Statistics`}
@@ -511,7 +508,7 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
               </div>
             </section>
           </IntelligentDocument>
-        </CopilotKitWrapper>
+        </LazyAIChat>
       </Suspense>
     </main>
   );
