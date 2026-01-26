@@ -39,15 +39,18 @@ export function HeroSection({
 
   return (
     <section className="relative text-white py-12 sm:py-16 px-4 sm:px-6 min-h-[400px] sm:min-h-[500px] flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image - Optimized for LCP */}
       <div className="absolute inset-0">
         <Image
           src={imageUrl}
           alt={`${headline} - ${image.alt}`}
           fill
           priority
+          fetchPriority="high"
+          loading="eager"
           className="object-cover"
           sizes="100vw"
+          quality={60}
         />
         {/* Gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/70 to-gray-900/50" />

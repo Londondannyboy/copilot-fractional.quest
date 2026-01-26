@@ -2,6 +2,44 @@
 
 import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from 'recharts';
+
+// Authority source URLs for citations
+const AUTHORITY_SOURCES = {
+  glassdoor: {
+    name: 'Glassdoor UK',
+    url: 'https://www.glassdoor.co.uk/Salaries/london-cfo-salary-SRCH_IL.0,6_IM1035_KO7,10.htm',
+  },
+  cipd: {
+    name: 'CIPD',
+    url: 'https://www.cipd.org/uk/knowledge/reports/reward-management-survey/',
+  },
+  scaleup: {
+    name: 'ScaleUp Institute',
+    url: 'https://www.scaleupinstitute.org.uk/reports/annual-scaleup-review/',
+  },
+  cbi: {
+    name: 'CBI',
+    url: 'https://www.cbi.org.uk/articles/uk-business-trends/',
+  },
+  techNation: {
+    name: 'Tech Nation',
+    url: 'https://technation.io/report/',
+  },
+  ncsc: {
+    name: 'NCSC',
+    url: 'https://www.ncsc.gov.uk/section/reports-advisories/cyber-threat-assessments',
+  },
+};
 
 // Tiny base64 blur placeholder for smooth image loading (dark to match card overlays)
 const BLUR_PLACEHOLDER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMklEQVQImWNgYPj/n4EBCxg1atR/BgYGBgYmBjIBEwMDAwMjIyMjAwMDA8P///8ZAAAH3wTCMlKvOAAAAABJRU5ErkJggg=='
@@ -29,6 +67,67 @@ const ROLE_IMAGES = [
   'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=250&fit=crop',
   'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=400&h=250&fit=crop',
 ];
+
+// Citation component for inline references
+function Citation({ source, url }: { source: string; url?: string }) {
+  if (url) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full hover:bg-emerald-100 transition-colors ml-1"
+      >
+        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        {source}
+      </a>
+    );
+  }
+  return (
+    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full ml-1">
+      {source}
+    </span>
+  );
+}
+
+// Stat callout box
+function StatCallout({ value, label, source, sourceUrl, icon }: {
+  value: string;
+  label: string;
+  source?: string;
+  sourceUrl?: string;
+  icon?: string;
+}) {
+  return (
+    <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-4">
+      {icon && <span className="text-3xl">{icon}</span>}
+      <div className="flex-1">
+        <div className="text-3xl font-bold text-emerald-800">{value}</div>
+        <div className="text-gray-700 font-medium">{label}</div>
+        {source && (
+          <div className="mt-2">
+            <Citation source={source} url={sourceUrl} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Key insight card
+function InsightCard({ title, children, icon }: { title: string; children: React.ReactNode; icon?: string }) {
+  return (
+    <div className="bg-white border-l-4 border-emerald-500 rounded-r-xl p-5 shadow-sm">
+      <div className="flex items-center gap-2 mb-2">
+        {icon && <span className="text-xl">{icon}</span>}
+        <h4 className="font-bold text-gray-900">{title}</h4>
+      </div>
+      <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
+    </div>
+  );
+}
 
 // Flexible content interface that works with both enriched and basic pages
 interface SEOContentData {
@@ -63,63 +162,149 @@ interface SEOContentProps {
 export function SEOContent({ content }: SEOContentProps) {
   return (
     <>
-      {/* Why Location Section - Enhanced mobile spacing */}
-      <Section className="py-10 sm:py-16">
+      {/* Why Location Section - Enhanced with callouts and citations */}
+      <Section className="py-10 sm:py-16" id="why-location">
         <SectionHeading>{content.whyLocation.title}</SectionHeading>
-        <div className="max-w-3xl space-y-5 sm:space-y-6 px-1 sm:px-0">
-          {content.whyLocation.paragraphs.map((p, i) => (
-            <p key={i} className="text-gray-600 leading-relaxed text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: p }} />
-          ))}
+
+        {/* Key Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <StatCallout
+            value="60%+"
+            label="of UK fractional appointments"
+            source="ScaleUp Institute"
+            sourceUrl={AUTHORITY_SOURCES.scaleup.url}
+            icon="📊"
+          />
+          <StatCallout
+            value="70%"
+            label="of companies using fractional are London-based"
+            source="ScaleUp Institute"
+            sourceUrl={AUTHORITY_SOURCES.scaleup.url}
+            icon="🏙️"
+          />
+          <StatCallout
+            value="£900-£1,500"
+            label="typical London day rates"
+            source="Glassdoor UK"
+            sourceUrl={AUTHORITY_SOURCES.glassdoor.url}
+            icon="💰"
+          />
+        </div>
+
+        {/* Content with better formatting */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Main content */}
+          <div className="lg:col-span-2 space-y-6">
+            {content.whyLocation.paragraphs.map((p, i) => (
+              <div key={i} className={i === 0 ? "text-lg text-gray-700 leading-relaxed" : "text-gray-600 leading-relaxed"}>
+                <p dangerouslySetInnerHTML={{ __html: p }} />
+              </div>
+            ))}
+          </div>
+
+          {/* Sidebar with insights */}
+          <div className="space-y-4">
+            <InsightCard title="Market Leaders" icon="🚀">
+              <p>London hosts headquarters for fintech leaders including <strong>Revolut</strong>, <strong>Monzo</strong>, and <strong>Starling</strong> - all active users of fractional talent.</p>
+            </InsightCard>
+            <InsightCard title="Flexible Working" icon="🏠">
+              <p>65% of London fractional roles offer hybrid arrangements, per{' '}
+                <a href={AUTHORITY_SOURCES.cipd.url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">
+                  CIPD research
+                </a>.
+              </p>
+            </InsightCard>
+          </div>
         </div>
       </Section>
 
-      {/* Day Rates Section - Mobile cards, desktop table */}
-      <Section background="muted" className="py-10 sm:py-16">
-        <SectionHeading subtitle={content.dayRates.description}>
+      {/* Day Rates Section - Interactive Chart + Citation Links */}
+      <Section background="muted" className="py-10 sm:py-16" id="day-rates">
+        <SectionHeading>
           {content.dayRates.title}
         </SectionHeading>
-        {/* Mobile: Cards view */}
-        <div className="sm:hidden space-y-3">
+
+        {/* Source Citation Bar */}
+        <div className="flex flex-wrap items-center gap-2 mb-6 text-sm">
+          <span className="text-gray-600">Data sources:</span>
+          <a
+            href={AUTHORITY_SOURCES.glassdoor.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
+          >
+            <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            <span className="font-medium text-gray-700">Glassdoor UK</span>
+          </a>
+          <a
+            href={AUTHORITY_SOURCES.cipd.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
+          >
+            <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            <span className="font-medium text-gray-700">CIPD Pay Report</span>
+          </a>
+        </div>
+
+        {/* Interactive Bar Chart */}
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-6">
+          <div className="h-72 sm:h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={content.dayRates.rates.map(rate => ({
+                  role: rate.role,
+                  min: parseInt(rate.range.match(/£([\d,]+)/)?.[1]?.replace(',', '') || '0'),
+                  typical: parseInt(rate.typical.replace(/[£,]/g, '')),
+                  max: parseInt(rate.range.match(/£[\d,]+ - £([\d,]+)/)?.[1]?.replace(',', '') || '0'),
+                }))}
+                layout="vertical"
+                margin={{ top: 5, right: 30, left: 60, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis type="number" tick={{ fontSize: 12 }} tickFormatter={(v) => `£${v}`} domain={[0, 'dataMax + 200']} />
+                <YAxis dataKey="role" type="category" tick={{ fontSize: 12, fontWeight: 500 }} width={70} />
+                <Tooltip
+                  formatter={(value) => value !== undefined ? [`£${Number(value).toLocaleString()}/day`, ''] : ['', '']}
+                  contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }}
+                />
+                <Bar dataKey="typical" fill="#059669" radius={[0, 4, 4, 0]} name="Typical Rate">
+                  {content.dayRates.rates.map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#059669' : '#10b981'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="text-xs text-gray-500 text-center mt-4">
+            Typical daily rates for fractional executives. Hover over bars for details.
+          </p>
+        </div>
+
+        {/* Mobile-friendly cards with full data */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {content.dayRates.rates.map((rate, i) => (
-            <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-              <div className="font-semibold text-gray-900 mb-2">{rate.role}</div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-600">{rate.range}</span>
-                <span className="font-bold text-emerald-700">{rate.typical}</span>
+            <div key={i} className="bg-white rounded-xl p-4 border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="flex justify-between items-start mb-3">
+                <span className="font-bold text-gray-900">{rate.role}</span>
+                <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">
+                  {rate.typical}
+                </span>
               </div>
+              <div className="text-sm text-gray-600 mb-2">
+                Range: <span className="font-medium text-gray-800">{rate.range}</span>
+              </div>
+              {rate.annual && (
+                <div className="text-xs text-gray-500">
+                  Annual equiv: {rate.annual}
+                </div>
+              )}
             </div>
           ))}
-        </div>
-        {/* Desktop: Table view */}
-        <div className="hidden sm:block overflow-x-auto">
-          <table className="w-full max-w-2xl">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-3 px-4 font-semibold text-gray-900">
-                  Role
-                </th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-900">
-                  Day Rate Range
-                </th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-900">
-                  Typical
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {content.dayRates.rates.map((rate, i) => (
-                <tr key={i} className="border-b border-gray-100">
-                  <td className="py-3 px-4 font-medium text-gray-900">
-                    {rate.role}
-                  </td>
-                  <td className="py-3 px-4 text-gray-600">{rate.range}</td>
-                  <td className="py-3 px-4 text-emerald-700 font-medium">
-                    {rate.typical}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </Section>
 

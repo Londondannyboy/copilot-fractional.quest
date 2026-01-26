@@ -136,7 +136,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
           className={`flex-1 px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-bold uppercase tracking-wider transition-colors ${
             mode === 'candidate'
               ? 'bg-amber-500 text-black'
-              : 'bg-gray-900 text-gray-400 hover:text-white'
+              : 'bg-gray-900 text-white/80 hover:text-white'
           }`}
         >
           I&apos;m a {roleData.label} - Earnings
@@ -146,7 +146,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
           className={`flex-1 px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-bold uppercase tracking-wider transition-colors ${
             mode === 'employer'
               ? 'bg-amber-500 text-black'
-              : 'bg-gray-900 text-gray-400 hover:text-white'
+              : 'bg-gray-900 text-white/80 hover:text-white'
           }`}
         >
           I&apos;m Hiring - Savings
@@ -157,13 +157,13 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
         {mode === 'candidate' ? (
           <div>
             <div className="mb-8">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">Fractional {roleData.label} Earnings</span>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Fractional {roleData.label} Earnings</span>
               <h3 className="text-2xl font-black mt-1">Calculate Your Potential Income</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
               <div>
-                <label htmlFor="calc-day-rate" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Your Day Rate</label>
+                <label htmlFor="calc-day-rate" className="block text-xs sm:text-sm font-medium text-white/80 mb-2">Your Day Rate</label>
                 <div className="text-2xl sm:text-3xl font-black text-amber-400 mb-3 truncate">{formatCurrency(dayRate)}</div>
                 <input
                   id="calc-day-rate"
@@ -176,7 +176,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                   className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   aria-label="Day rate slider"
                 />
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                <div className="flex justify-between text-xs text-white/70 mt-1">
                   <span>£{roleData.minDayRate}</span>
                   <span className="text-amber-500">Avg: £{roleData.avgDayRate}</span>
                   <span>£{roleData.maxDayRate}</span>
@@ -184,7 +184,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
               </div>
 
               <div>
-                <label htmlFor="calc-days-week" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Days Per Client/Week</label>
+                <label htmlFor="calc-days-week" className="block text-xs sm:text-sm font-medium text-white/80 mb-2">Days Per Client/Week</label>
                 <div className="text-2xl sm:text-3xl font-black text-white mb-3">{daysPerWeek} days</div>
                 <input
                   id="calc-days-week"
@@ -197,14 +197,14 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                   className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   aria-label="Days per week slider"
                 />
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                <div className="flex justify-between text-xs text-white/70 mt-1">
                   <span>1 day</span>
                   <span>5 days</span>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="calc-clients" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Number of Clients</label>
+                <label htmlFor="calc-clients" className="block text-xs sm:text-sm font-medium text-white/80 mb-2">Number of Clients</label>
                 <div className="text-2xl sm:text-3xl font-black text-white mb-3">{clients} {clients === 1 ? 'client' : 'clients'}</div>
                 <input
                   id="calc-clients"
@@ -217,7 +217,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                   className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   aria-label="Number of clients slider"
                 />
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                <div className="flex justify-between text-xs text-white/70 mt-1">
                   <span>1</span>
                   <span>4</span>
                 </div>
@@ -226,34 +226,34 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 sm:p-6 bg-gray-900 border border-gray-800">
               <div className="text-center py-2 sm:py-0">
-                <div className="text-xs sm:text-sm text-gray-500 mb-1 uppercase tracking-wider">Weekly</div>
+                <div className="text-xs sm:text-sm text-white/70 mb-1 uppercase tracking-wider">Weekly</div>
                 <div className="text-xl sm:text-2xl font-bold text-white truncate">{formatCurrency(weeklyEarnings)}</div>
               </div>
               <div className="text-center py-2 sm:py-0 border-y sm:border-y-0 sm:border-x border-gray-800">
-                <div className="text-xs sm:text-sm text-gray-500 mb-1 uppercase tracking-wider">Monthly</div>
+                <div className="text-xs sm:text-sm text-white/70 mb-1 uppercase tracking-wider">Monthly</div>
                 <div className="text-xl sm:text-2xl font-bold text-white truncate">{formatCurrency(monthlyEarnings)}</div>
               </div>
               <div className="text-center py-2 sm:py-0">
-                <div className="text-xs sm:text-sm text-gray-500 mb-1 uppercase tracking-wider">Annual</div>
+                <div className="text-xs sm:text-sm text-white/70 mb-1 uppercase tracking-wider">Annual</div>
                 <div className="text-2xl sm:text-3xl font-black text-amber-400 truncate">{formatCurrency(annualEarnings)}</div>
               </div>
             </div>
 
-            <p className="text-xs text-gray-600 mt-4">
+            <p className="text-xs text-white/80 mt-4">
               Based on {daysPerWeek} days/week x {clients} clients x 48 working weeks. {roleData.label} UK average day rate: £{roleData.avgDayRate}.
             </p>
           </div>
         ) : (
           <div>
             <div className="mb-8">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">Fractional {roleData.label} vs Full-Time</span>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Fractional {roleData.label} vs Full-Time</span>
               <h3 className="text-2xl font-black mt-1">Calculate Your Savings</h3>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
               <div className="space-y-6">
                 <div>
-                  <label htmlFor="calc-ft-salary" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Full-Time {roleData.label} Salary (Base)</label>
+                  <label htmlFor="calc-ft-salary" className="block text-xs sm:text-sm font-medium text-white/80 mb-2">Full-Time {roleData.label} Salary (Base)</label>
                   <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-3 truncate">{formatCurrency(fullTimeSalary)}</div>
                   <input
                     id="calc-ft-salary"
@@ -266,7 +266,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                     className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
                     aria-label="Full-time salary slider"
                   />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <div className="flex justify-between text-xs text-white/70 mt-1">
                     <span>£50k</span>
                     <span className="text-amber-500">Avg: £{(roleData.avgSalary / 1000).toFixed(0)}k</span>
                     <span>£250k</span>
@@ -274,9 +274,9 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                 </div>
 
                 <div>
-                  <label htmlFor="calc-hours-needed" className="block text-xs sm:text-sm font-medium text-gray-400 mb-2">Hours Per Week You Actually Need</label>
+                  <label htmlFor="calc-hours-needed" className="block text-xs sm:text-sm font-medium text-white/80 mb-2">Hours Per Week You Actually Need</label>
                   <div className="text-2xl sm:text-3xl font-black text-white mb-3">
-                    {hoursNeeded} hrs <span className="text-sm sm:text-lg font-normal text-gray-500">({daysPerWeekNeeded.toFixed(1)} days)</span>
+                    {hoursNeeded} hrs <span className="text-sm sm:text-lg font-normal text-white/70">({daysPerWeekNeeded.toFixed(1)} days)</span>
                   </div>
                   <input
                     id="calc-hours-needed"
@@ -289,7 +289,7 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                     className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
                     aria-label="Hours needed per week slider"
                   />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <div className="flex justify-between text-xs text-white/70 mt-1">
                     <span>4 hrs (0.5 days)</span>
                     <span>40 hrs (5 days)</span>
                   </div>
@@ -297,13 +297,13 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
               </div>
 
               <div className="bg-gray-900 border border-gray-800 p-6 space-y-4">
-                <h4 className="text-lg font-bold text-center mb-4 text-gray-400 uppercase tracking-wider">Annual Cost Comparison</h4>
+                <h4 className="text-lg font-bold text-center mb-4 text-white/80 uppercase tracking-wider">Annual Cost Comparison</h4>
 
                 <div className="bg-red-900/30 border border-red-900/50 p-3 sm:p-4">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                     <div>
-                      <div className="text-xs sm:text-sm text-gray-400">Full-Time {roleData.label}</div>
-                      <div className="text-[10px] sm:text-xs text-gray-500">(Salary + NI + Benefits)</div>
+                      <div className="text-xs sm:text-sm text-white/80">Full-Time {roleData.label}</div>
+                      <div className="text-[10px] sm:text-xs text-white/70">(Salary + NI + Benefits)</div>
                     </div>
                     <div className="text-xl sm:text-2xl font-bold text-red-400 truncate">{formatCurrency(fullTimeTotalCost)}</div>
                   </div>
@@ -312,8 +312,8 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
                 <div className="bg-blue-900/30 border border-blue-900/50 p-3 sm:p-4">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                     <div>
-                      <div className="text-xs sm:text-sm text-gray-400">Fractional {roleData.label}</div>
-                      <div className="text-[10px] sm:text-xs text-gray-500">({daysPerWeekNeeded.toFixed(1)} days/week x 48 weeks)</div>
+                      <div className="text-xs sm:text-sm text-white/80">Fractional {roleData.label}</div>
+                      <div className="text-[10px] sm:text-xs text-white/70">({daysPerWeekNeeded.toFixed(1)} days/week x 48 weeks)</div>
                     </div>
                     <div className="text-xl sm:text-2xl font-bold text-blue-400 truncate">{formatCurrency(fractionalAnnualCost)}</div>
                   </div>
@@ -327,14 +327,14 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
               </div>
             </div>
 
-            <p className="text-xs text-gray-600 mt-4">
+            <p className="text-xs text-white/80 mt-4">
               Based on £{roleData.avgDayRate}/day average {roleData.label} rate. Full-time includes 35% for employer NI, pension, benefits and overhead.
             </p>
           </div>
         )}
 
         <div className="mt-6 p-4 bg-gray-900 border border-gray-800 rounded">
-          <p className="text-xs text-gray-500 text-center">
+          <p className="text-xs text-white/70 text-center">
             <span className="inline-block bg-amber-500 text-black px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider mr-2">Beta</span>
             This calculator provides rough estimates for illustration only. Actual rates and salaries vary based on location, experience, industry, and market conditions.
           </p>

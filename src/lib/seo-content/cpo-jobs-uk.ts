@@ -4,7 +4,7 @@
 
 export const cpoJobsUkSEO = {
   meta: {
-    title: "Fractional CPO Jobs UK 🎯 Product Leadership",
+    title: "Fractional CPO Jobs UK  Product Leadership",
     description:
       "Fractional CPO jobs UK for tech startups and scale-ups. Part-time Product Director roles paying £900-£1,300/day.",
     keywords: [

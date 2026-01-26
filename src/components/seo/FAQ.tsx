@@ -253,6 +253,29 @@ export const CISO_FAQS: FAQItem[] = [
   },
 ]
 
+export const CIO_FAQS: FAQItem[] = [
+  {
+    question: 'What is a Fractional CIO?',
+    answer: 'A Fractional CIO (Chief Information Officer) is an experienced IT executive who works with companies on a part-time basis, typically 1-3 days per week. They provide strategic IT leadership, oversee digital transformation, manage technology infrastructure, and align IT strategy with business goals without the cost of a full-time CIO.',
+  },
+  {
+    question: 'How much do Fractional CIO jobs pay in the UK?',
+    answer: 'Fractional CIO day rates in the UK typically range from £900 to £1,400 per day. Rates are higher for those with experience in digital transformation, cloud migration, or ERP implementations. Annual earnings for experienced fractional CIOs with multiple clients can range from £180,000 to £280,000.',
+  },
+  {
+    question: 'What is the difference between a CIO and a CTO?',
+    answer: 'A CIO focuses on internal IT operations, infrastructure, and business systems (ERP, CRM, internal tools), while a CTO focuses on product technology, engineering teams, and external-facing technology. CIOs optimise business operations through technology; CTOs build technology products. Some organisations combine these roles.',
+  },
+  {
+    question: 'What qualifications do I need for Fractional CIO jobs?',
+    answer: 'Fractional CIOs typically need 10-15+ years of IT leadership experience with prior CIO, IT Director, or VP IT background. Certifications like CGEIT, CISM, or ITIL are valued. Experience with ERP systems, cloud platforms, and digital transformation initiatives is essential.',
+  },
+  {
+    question: 'When should a company hire a Fractional CIO?',
+    answer: 'Companies hire Fractional CIOs when undergoing digital transformation, implementing new business systems (ERP, CRM), optimising IT costs, improving cybersecurity posture, preparing for scale, or when they need senior IT leadership but cannot justify a full-time hire.',
+  },
+]
+
 export const CRO_FAQS: FAQItem[] = [
   {
     question: 'What is a Fractional CRO?',

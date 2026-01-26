@@ -10,6 +10,23 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { getOGImageUrl, getImage } from '@/lib/images'
+import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+
+// Table of Contents items
+const tocItems = [
+  { id: 'understanding', title: 'Understanding the Role' },
+  { id: 'responsibilities', title: 'Key Responsibilities' },
+  { id: 'comparison', title: 'Part-Time vs Full-Time' },
+  { id: 'when-needed', title: 'When You Need One' },
+  { id: 'cost-pricing', title: 'Cost & Pricing UK' },
+  { id: 'qualifications', title: 'Qualifications' },
+  { id: 'uk-market', title: 'UK Market Overview' },
+  { id: 'how-to-hire', title: 'How to Hire' },
+  { id: 'resources', title: 'External Resources' },
+  { id: 'calculator', title: 'Day Rate Calculator' },
+  { id: 'jobs', title: 'CTO Jobs' },
+  { id: 'faq', title: 'FAQ' },
+]
 
 const ogImage = getOGImageUrl('cto')
 const imageAlt = getImage('cto').alt
@@ -100,16 +117,30 @@ export default function FractionalCtoPage() {
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <article className="prose prose-lg prose-gray max-w-none">
+      {/* Mobile Table of Contents */}
+      <div className="lg:hidden max-w-4xl mx-auto px-6 py-8">
+        <TableOfContentsMobile items={tocItems} />
+      </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CTO? Understanding the Role</h2>
+      {/* Main Content with Sidebar */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1fr_300px] gap-12">
+            {/* Main Column */}
+            <article className="prose prose-lg prose-gray max-w-none">
+
+            <h2 id="understanding" className="text-3xl font-black text-gray-900 mb-6 scroll-mt-24">What is a Fractional CTO? Understanding the Role</h2>
 
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
               The <strong>fractional CTO meaning</strong> centres on flexible, senior-level technology leadership. Unlike traditional full-time CTOs earning £150,000-£250,000 annually, a <strong>fractional Chief Technology Officer</strong> works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.
             </p>
+
+            {/* Authority context box */}
+            <div className="bg-cyan-50 border-l-4 border-cyan-500 p-4 my-6 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>UK Market Context:</strong> As the <a href="https://www.bbc.co.uk/news/articles/c5yv6n536vno" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:underline font-medium">BBC reports on the evolving UK job market (Jan 2026)</a>, companies are increasingly embracing flexible executive arrangements. Fractional CTOs represent a key part of this shift, part of the broader <a href="https://en.wikipedia.org/wiki/Fractional_work" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:underline">fractional work</a> trend transforming executive recruitment.
+              </p>
+            </div>
 
             <p>
               This model emerged from the startup ecosystem where companies need CTO-level expertise but cannot justify or afford a full-time executive. The <strong>fractional CTO</strong> brings the same strategic thinking, technical leadership, and engineering expertise as a full-time CTO, but on a fractional basis.
@@ -125,7 +156,7 @@ export default function FractionalCtoPage() {
               <p className="text-gray-500 text-sm mt-3">Video: Understanding the fractional CTO role and responsibilities</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities and Deliverables</h2>
+            <h2 id="responsibilities" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Key Responsibilities and Deliverables</h2>
 
             <p>
               A <strong>fractional CTO</strong> performs the same functions as a full-time Chief Technology Officer, but on a part-time basis. Their responsibilities typically include:
@@ -148,7 +179,7 @@ export default function FractionalCtoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Part-Time vs Full-Time: How They Compare</h2>
+            <h2 id="comparison" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Part-Time vs Full-Time: How They Compare</h2>
 
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
@@ -194,7 +225,7 @@ export default function FractionalCtoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Does Your Business Need One?</h2>
+            <h2 id="when-needed" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">When Does Your Business Need One?</h2>
 
             <ul className="space-y-3">
               <li><strong>Building MVP:</strong> Need technical leadership to build your first product</li>
@@ -212,7 +243,7 @@ export default function FractionalCtoPage() {
               </Link>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Cost and Pricing UK</h2>
+            <h2 id="cost-pricing" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Cost and Pricing UK</h2>
 
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
               <h4 className="font-bold text-gray-900 mb-4">Typical Pricing Breakdown</h4>
@@ -224,7 +255,7 @@ export default function FractionalCtoPage() {
               <p className="text-sm text-gray-600 mt-4">Compare to full-time CTO total cost: £200,000-£400,000+ (salary + benefits + equity)</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Types of Technology Leadership Engagement</h2>
+            <h2 id="uk-market" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Types of Technology Leadership Engagement</h2>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
               {[
@@ -241,7 +272,7 @@ export default function FractionalCtoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Benefits of a Fractional CTO</h2>
+            <h2 id="how-to-hire" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Benefits of a Fractional CTO</h2>
 
             <ul className="space-y-3">
               <li><strong>Cost-effective:</strong> Access CTO expertise at 30-50% of full-time cost</li>
@@ -252,7 +283,7 @@ export default function FractionalCtoPage() {
               <li><strong>Flexibility:</strong> Scale engagement as product evolves</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Professional Bodies & Certifications</h2>
+            <h2 id="qualifications" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Professional Bodies & Certifications</h2>
 
             <p>
               Many <strong>part-time technology directors</strong> hold certifications from recognized technology and engineering bodies. Key organizations include:
@@ -297,7 +328,7 @@ export default function FractionalCtoPage() {
               </a>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">External Resources</h2>
+            <h2 id="resources" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">External Resources</h2>
 
             <div className="grid md:grid-cols-4 gap-4 not-prose my-8">
               <a href="https://www.gartner.com/en/information-technology" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-cyan-300 transition-all group text-center">
@@ -319,11 +350,44 @@ export default function FractionalCtoPage() {
             </div>
 
           </article>
+
+          {/* Sidebar */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <TableOfContents items={tocItems} />
+
+              {/* Quick Links */}
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <h3 className="font-bold text-gray-900 mb-4">Related Guides</h3>
+                <div className="space-y-3">
+                  <Link href="/hire-fractional-cto" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
+                    <span>📋</span> How to Hire a CTO
+                  </Link>
+                  <Link href="/fractional-cto-salary" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
+                    <span>💰</span> Salary & Day Rates
+                  </Link>
+                  <Link href="/fractional-cto-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
+                    <span>💼</span> CTO Jobs UK
+                  </Link>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="bg-cyan-50 p-6 rounded-xl border border-cyan-200">
+                <p className="font-bold text-gray-900 mb-2">Looking for a CTO?</p>
+                <p className="text-sm text-gray-600 mb-4">Browse pre-vetted tech leaders</p>
+                <Link href="/fractional-cto-jobs-uk" className="block text-center bg-cyan-500 text-black font-bold py-2 px-4 rounded-lg hover:bg-cyan-400 transition-colors text-sm">
+                  View CTO Jobs
+                </Link>
+              </div>
+            </div>
+          </aside>
+          </div>
         </div>
       </section>
 
       {/* Calculator Section */}
-      <section className="py-16 bg-gray-50">
+      <section id="calculator" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
@@ -336,7 +400,7 @@ export default function FractionalCtoPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section id="faq" className="py-20 bg-white scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
@@ -459,7 +523,7 @@ export default function FractionalCtoPage() {
       </section>
 
       {/* Job Board Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="jobs" className="py-20 bg-gray-50 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>

@@ -209,15 +209,47 @@ export function PublicLanding() {
             From finance to technology, marketing to operations. Find or hire fractional leadership across all business functions.
           </p>
 
-          {/* Featured: Fractional CFO Guide */}
-          <div className="mb-8">
+          {/* Featured Role Guides */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             <Link
               href="/fractional-cfo"
-              className="block max-w-2xl mx-auto bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-6 text-center hover:border-emerald-400/50 transition-all group"
+              className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-4 text-center hover:border-emerald-400/50 transition-all group"
             >
-              <span className="text-emerald-400 text-sm font-semibold uppercase tracking-wider">Featured Guide</span>
-              <h4 className="text-xl font-bold text-white mt-2 group-hover:text-emerald-300 transition-colors">What is a Fractional CFO?</h4>
-              <p className="text-gray-400 text-sm mt-2">Complete guide to fractional CFO meaning, responsibilities, costs and how to hire one</p>
+              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-emerald-300 transition-colors">Fractional CFO</h4>
+              <p className="text-gray-400 text-xs mt-1">Finance leadership</p>
+            </Link>
+            <Link
+              href="/fractional-cto"
+              className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-400/50 transition-all group"
+            >
+              <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-cyan-300 transition-colors">Fractional CTO</h4>
+              <p className="text-gray-400 text-xs mt-1">Tech leadership</p>
+            </Link>
+            <Link
+              href="/fractional-cmo"
+              className="bg-gradient-to-r from-amber-900/50 to-orange-900/50 border border-amber-500/30 rounded-xl p-4 text-center hover:border-amber-400/50 transition-all group"
+            >
+              <span className="text-amber-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-amber-300 transition-colors">Fractional CMO</h4>
+              <p className="text-gray-400 text-xs mt-1">Marketing leadership</p>
+            </Link>
+            <Link
+              href="/fractional-ciso"
+              className="bg-gradient-to-r from-red-900/50 to-rose-900/50 border border-red-500/30 rounded-xl p-4 text-center hover:border-red-400/50 transition-all group"
+            >
+              <span className="text-red-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-red-300 transition-colors">Fractional CISO</h4>
+              <p className="text-gray-400 text-xs mt-1">Security leadership</p>
+            </Link>
+            <Link
+              href="/fractional-cio"
+              className="bg-gradient-to-r from-purple-900/50 to-violet-900/50 border border-purple-500/30 rounded-xl p-4 text-center hover:border-purple-400/50 transition-all group"
+            >
+              <span className="text-purple-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-purple-300 transition-colors">Fractional CIO</h4>
+              <p className="text-gray-400 text-xs mt-1">IT leadership</p>
             </Link>
           </div>
 
@@ -231,6 +263,7 @@ export function PublicLanding() {
               { role: 'CEO', label: 'Chief Executive Officer', href: '/fractional-ceo-jobs-uk', color: 'yellow' },
               { role: 'CPO', label: 'Chief Product Officer', href: '/fractional-cpo-jobs-uk', color: 'indigo' },
               { role: 'CISO', label: 'Security Officer', href: '/fractional-ciso-jobs-uk', color: 'red' },
+              { role: 'CIO', label: 'Chief Information Officer', href: '/fractional-cio-jobs-uk', color: 'violet' },
             ].map((item) => (
               <Link
                 key={item.role}

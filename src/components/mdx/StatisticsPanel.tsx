@@ -65,7 +65,7 @@ export default function StatisticsPanel({
   if (variant === 'horizontal') {
     return (
       <div className={`${colors.bg} border ${colors.border} rounded-lg p-6 my-8`}>
-        <h3 className="text-lg font-bold text-gray-900 mb-4">{title}</h3>
+        <h2 className="text-lg font-bold text-gray-900 mb-4">{title}</h2>
         <div className={`grid grid-cols-2 md:grid-cols-${Math.min(statsArray.length, 4)} gap-6`}>
           {statsArray.slice(0, 4).map((stat, idx) => (
             <div key={idx} className="text-center">
@@ -89,7 +89,7 @@ export default function StatisticsPanel({
     return (
       <div className="my-8">
         <span className="text-xs font-bold uppercase tracking-widest text-gray-500 block mb-2">Key Statistics</span>
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">{title}</h3>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">{title}</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           {/* Featured stat */}

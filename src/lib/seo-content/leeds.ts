@@ -2,7 +2,7 @@
 
 export const leedsSEO = {
   meta: {
-    title: "Fractional Jobs Leeds 🏙️ Yorkshire's Hub",
+    title: "Fractional Jobs Leeds  ️ Yorkshire's Hub",
     description:
       "Fractional jobs Leeds, Yorkshire's leading business hub. CFO, CTO, CMO roles with day rates £650-£1,100.",
     keywords: [

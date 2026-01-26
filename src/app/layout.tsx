@@ -29,8 +29,8 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Fractional Jobs | Fractional Jobs Quest",
-    template: "%s | Fractional Jobs Quest"
+    default: "Fractional Jobs UK | Executive Roles £900-£1,500/day",
+    template: "%s | Fractional Quest"
   },
   description: "AI-powered fractional job search platform. Find executive roles paying £1,200-£2,500/day.",
   metadataBase: new URL("https://fractional.quest"),
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    siteName: "Fractional Jobs Quest",
+    siteName: "Fractional Quest",
     type: "website",
     locale: "en_GB",
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   appleWebApp: {
-    title: "Fractional Jobs Quest",
+    title: "Fractional Quest",
     capable: true,
     statusBarStyle: "default",
   },
@@ -68,7 +68,7 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-title" content="Fractional Jobs Quest" />
+        <meta name="apple-mobile-web-app-title" content="Fractional Quest" />
         <link rel="manifest" href="/site.webmanifest" />
         {/* WebSite Schema for Google site name */}
         <script
@@ -78,14 +78,14 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "@id": "https://fractional.quest/#website",
-              "name": "Fractional Jobs Quest",
+              "name": "Fractional Quest",
               "alternateName": ["Fractional Quest", "FJQ"],
               "url": "https://fractional.quest",
               "description": "AI-powered fractional job search platform. Find executive roles paying £1,200-£2,500/day.",
               "publisher": {
                 "@type": "Organization",
                 "@id": "https://fractional.quest/#organization",
-                "name": "Fractional Jobs Quest",
+                "name": "Fractional Quest",
                 "url": "https://fractional.quest"
               },
               "potentialAction": {

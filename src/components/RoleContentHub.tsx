@@ -21,6 +21,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'ciso', path: '/fractional-ciso-jobs-uk', label: 'CISO Jobs' },
     { role: 'cpo', path: '/fractional-cpo-jobs-uk', label: 'CPO Jobs' },
     { role: 'cro', path: '/fractional-cro-jobs-uk', label: 'CRO Jobs' },
+    { role: 'cio', path: '/fractional-cio-jobs-uk', label: 'CIO Jobs' },
   ];
 
   // TODO: Create pages for leadership roles
@@ -56,6 +57,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'ciso', path: '/fractional-ciso', label: 'What is a Fractional CISO' },
     { role: 'cpo', path: '/fractional-cpo', label: 'What is a Fractional CPO' },
     { role: 'cro', path: '/fractional-cro', label: 'What is a Fractional CRO' },
+    { role: 'cio', path: '/fractional-cio', label: 'What is a Fractional CIO' },
     { role: 'controller', path: '/fractional-controller', label: 'What is a Fractional Controller' },
     { role: 'growth', path: '/fractional-growth', label: 'What is a Fractional Growth Lead' },
   ];
@@ -69,6 +71,7 @@ export function RoleContentHub({ currentRole }: RoleContentHubProps) {
     { role: 'ciso', path: '/fractional-ciso-salary', label: 'CISO Salary' },
     { role: 'cpo', path: '/fractional-cpo-salary', label: 'CPO Salary' },
     { role: 'ceo', path: '/fractional-ceo-salary', label: 'CEO Salary' },
+    { role: 'cio', path: '/fractional-cio-salary', label: 'CIO Salary' },
   ];
 
   const costGuides: RoleLink[] = [

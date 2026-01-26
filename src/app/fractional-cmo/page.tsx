@@ -10,6 +10,23 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { getOGImageUrl, getImage } from '@/lib/images'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+
+// Table of Contents items
+const tocItems = [
+  { id: 'understanding', title: 'Understanding the Role' },
+  { id: 'responsibilities', title: 'Key Responsibilities' },
+  { id: 'comparison', title: 'Part-Time vs Full-Time' },
+  { id: 'when-needed', title: 'When You Need One' },
+  { id: 'cost-pricing', title: 'Cost & Pricing UK' },
+  { id: 'qualifications', title: 'Qualifications' },
+  { id: 'uk-market', title: 'UK Market Overview' },
+  { id: 'how-to-hire', title: 'How to Hire' },
+  { id: 'resources', title: 'External Resources' },
+  { id: 'calculator', title: 'Day Rate Calculator' },
+  { id: 'jobs', title: 'CMO Jobs' },
+  { id: 'faq', title: 'FAQ' },
+]
 
 const ogImage = getOGImageUrl('cmo')
 const imageAlt = getImage('cmo').alt
@@ -100,17 +117,31 @@ export default function FractionalCmoPage() {
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* Mobile Table of Contents */}
+      <div className="lg:hidden max-w-4xl mx-auto px-6 py-8">
+        <TableOfContentsMobile items={tocItems} />
+      </div>
+
+      {/* Main Content with Sidebar */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <article className="prose prose-lg prose-gray max-w-none">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1fr_300px] gap-12">
+            {/* Main Column */}
+            <article className="prose prose-lg prose-gray max-w-none">
 
             {/* What is a Fractional CMO */}
-            <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CMO? Understanding the Role</h2>
+            <h2 id="understanding" className="text-3xl font-black text-gray-900 mb-6 scroll-mt-24">What is a Fractional CMO? Understanding the Role</h2>
 
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
               The <strong>fractional CMO meaning</strong> centres on flexible, senior-level marketing leadership. Unlike traditional full-time CMOs earning £150,000-£250,000 annually, a <strong>fractional Chief Marketing Officer</strong> works with multiple companies simultaneously, dedicating typically 1-3 days per week to each client.
             </p>
+
+            {/* Authority context box */}
+            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 my-6 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>UK Market Context:</strong> As the <a href="https://www.bbc.co.uk/news/articles/c5yv6n536vno" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline font-medium">BBC reports on the evolving UK job market (Jan 2026)</a>, companies are increasingly embracing flexible executive arrangements. Fractional CMOs represent a key part of this shift, part of the broader <a href="https://en.wikipedia.org/wiki/Fractional_work" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">fractional work</a> trend transforming executive recruitment.
+              </p>
+            </div>
 
             <p>
               This model emerged from the startup and scale-up ecosystem where companies need CMO-level expertise but cannot justify or afford a full-time executive. The <strong>fractional CMO</strong> brings the same strategic thinking, leadership skills, and marketing expertise as a full-time CMO, but on a fractional basis.
@@ -126,7 +157,7 @@ export default function FractionalCmoPage() {
               <p className="text-gray-500 text-sm mt-3">Video: Understanding the fractional CMO role and responsibilities</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities and Deliverables</h2>
+            <h2 id="responsibilities" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Key Responsibilities and Deliverables</h2>
 
             <p>
               A <strong>fractional CMO</strong> performs the same functions as a full-time Chief Marketing Officer, but on a part-time basis. Their responsibilities typically include:
@@ -149,7 +180,7 @@ export default function FractionalCmoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Part-Time vs Full-Time: How They Compare</h2>
+            <h2 id="comparison" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Part-Time vs Full-Time: How They Compare</h2>
 
             <p>
               Understanding the difference between a <strong>fractional CMO</strong> and full-time CMO helps companies make the right hiring decision:
@@ -199,7 +230,7 @@ export default function FractionalCmoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When Does Your Business Need One?</h2>
+            <h2 id="when-needed" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">When Does Your Business Need One?</h2>
 
             <p>
               Companies typically hire a <strong>fractional CMO</strong> in these situations:
@@ -221,7 +252,7 @@ export default function FractionalCmoPage() {
               </Link>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Cost and Pricing UK</h2>
+            <h2 id="cost-pricing" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Cost and Pricing UK</h2>
 
             <p>
               <strong>Fractional CMO</strong> costs in the UK typically range from £700-£1,400 per day, depending on experience and specialisation. Most engagements are structured as:
@@ -237,7 +268,7 @@ export default function FractionalCmoPage() {
               <p className="text-sm text-gray-600 mt-4">Compare to full-time CMO total cost: £180,000-£300,000+ (salary + benefits + equity)</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">How to Find a Fractional CMO</h2>
+            <h2 id="how-to-hire" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">How to Find a Fractional CMO</h2>
 
             <p>
               Finding the right <strong>fractional CMO</strong> requires knowing where to look:
@@ -251,7 +282,7 @@ export default function FractionalCmoPage() {
               <li><strong>Communities:</strong> Marketing Slack groups, Pavilion, and industry associations</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Fractional CMO vs Marketing Consultant</h2>
+            <h2 id="uk-market" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Fractional CMO vs Marketing Consultant</h2>
 
             <p>
               While sometimes confused, there are key differences between a <strong>fractional CMO</strong> and a marketing consultant:
@@ -290,7 +321,7 @@ export default function FractionalCmoPage() {
               <p className="text-gray-500 text-sm mt-3">Video: Understanding the differences between fractional CMO and consultant roles</p>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Benefits of Hiring a Fractional CMO</h2>
+            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Benefits of Hiring a Fractional CMO</h2>
 
             <ul className="space-y-3">
               <li><strong>Cost-effective:</strong> Access CMO expertise at 30-50% of full-time cost</li>
@@ -302,7 +333,7 @@ export default function FractionalCmoPage() {
               <li><strong>Mentorship:</strong> Develop your internal team under senior leadership</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Professional Bodies & Industry Associations</h2>
+            <h2 id="qualifications" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Professional Bodies & Industry Associations</h2>
 
             <p>
               Many <strong>part-time marketing leaders</strong> are members of recognized marketing and advertising bodies. Key organizations include:
@@ -347,7 +378,7 @@ export default function FractionalCmoPage() {
               </a>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">External Resources</h2>
+            <h2 id="resources" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">External Resources</h2>
 
             <div className="grid md:grid-cols-4 gap-4 not-prose my-8">
               <a href="https://www.warc.com" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white border border-gray-200 rounded-lg hover:border-amber-300 transition-all group text-center">
@@ -369,11 +400,44 @@ export default function FractionalCmoPage() {
             </div>
 
           </article>
+
+          {/* Sidebar */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <TableOfContents items={tocItems} />
+
+              {/* Quick Links */}
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <h3 className="font-bold text-gray-900 mb-4">Related Guides</h3>
+                <div className="space-y-3">
+                  <Link href="/hire-fractional-cmo" className="flex items-center gap-2 text-sm text-gray-600 hover:text-amber-700 transition-colors">
+                    <span>📋</span> How to Hire a CMO
+                  </Link>
+                  <Link href="/fractional-cmo-salary" className="flex items-center gap-2 text-sm text-gray-600 hover:text-amber-700 transition-colors">
+                    <span>💰</span> Salary & Day Rates
+                  </Link>
+                  <Link href="/fractional-cmo-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-amber-700 transition-colors">
+                    <span>💼</span> CMO Jobs UK
+                  </Link>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="bg-amber-50 p-6 rounded-xl border border-amber-200">
+                <p className="font-bold text-gray-900 mb-2">Looking for a CMO?</p>
+                <p className="text-sm text-gray-600 mb-4">Browse pre-vetted marketing leaders</p>
+                <Link href="/fractional-cmo-jobs-uk" className="block text-center bg-amber-500 text-black font-bold py-2 px-4 rounded-lg hover:bg-amber-400 transition-colors text-sm">
+                  View CMO Jobs
+                </Link>
+              </div>
+            </div>
+          </aside>
+          </div>
         </div>
       </section>
 
       {/* Calculator Section */}
-      <section className="py-16 bg-gray-50">
+      <section id="calculator" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
@@ -386,7 +450,7 @@ export default function FractionalCmoPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section id="faq" className="py-20 bg-white scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
@@ -484,7 +548,7 @@ export default function FractionalCmoPage() {
       </section>
 
       {/* Job Board Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="jobs" className="py-20 bg-gray-50 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>

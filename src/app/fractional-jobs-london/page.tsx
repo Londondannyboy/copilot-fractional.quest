@@ -65,6 +65,10 @@ export default async function FractionalJobsLondonPage() {
 
   return (
     <>
+      {/* Preconnect to external image origins for faster loading */}
+      <link rel="preconnect" href="https://images.unsplash.com" />
+      <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
       {/* Preload hero image for faster LCP - WebP format */}
       <link
         rel="preload"
@@ -72,6 +76,7 @@ export default async function FractionalJobsLondonPage() {
         as="image"
         type="image/webp"
         media="(max-width: 768px)"
+        fetchPriority="high"
       />
       <link
         rel="preload"
@@ -79,6 +84,7 @@ export default async function FractionalJobsLondonPage() {
         as="image"
         type="image/webp"
         media="(min-width: 769px)"
+        fetchPriority="high"
       />
 
       {/* Schema Markup */}

@@ -4,7 +4,7 @@
 // Credit: All images from Unsplash (unsplash.com)
 
 export type ImageCategory =
-  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso' | 'cro' | 'cso'
+  | 'cfo' | 'cto' | 'cmo' | 'coo' | 'ceo' | 'chro' | 'cpo' | 'ciso' | 'cro' | 'cso' | 'cio'
   | 'london' | 'manchester' | 'birmingham' | 'edinburgh' | 'bristol' | 'uk'
   | 'remote' | 'tech' | 'finance' | 'marketing' | 'operations' | 'hr' | 'sales'
   | 'interim' | 'part-time' | 'services' | 'guide' | 'salary' | 'default'
@@ -172,6 +172,12 @@ const imageMap: Record<ImageCategory, ImageData> = {
     alt: 'Strategy executive planning corporate direction',
     credit: 'Scott Graham',
     creditUrl: 'https://unsplash.com/@homajob'
+  },
+  cio: {
+    url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop&q=80',
+    alt: 'IT executive overseeing digital transformation',
+    credit: 'Luke Chesser',
+    creditUrl: 'https://unsplash.com/@lukechesser'
   },
 
   // Location-specific images

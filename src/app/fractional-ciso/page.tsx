@@ -10,6 +10,7 @@ import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 
 const ogImage = getOGImageUrl('ciso')
 const imageAlt = getImage('ciso').alt
@@ -38,6 +39,17 @@ export const metadata: Metadata = {
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'What is a Fractional CISO', href: '/fractional-ciso' },
+]
+
+const tocItems = [
+  { id: 'understanding', title: 'Understanding the Role' },
+  { id: 'responsibilities', title: 'Key Responsibilities' },
+  { id: 'comparison', title: 'Fractional vs Consultant' },
+  { id: 'when-needed', title: 'When to Hire' },
+  { id: 'cost-pricing', title: 'UK Cost Guide' },
+  { id: 'resources', title: 'Related Resources' },
+  { id: 'calculator', title: 'Cost Calculator' },
+  { id: 'faq', title: 'FAQ' },
 ]
 
 export default function FractionalCisoPage() {
@@ -84,15 +96,29 @@ export default function FractionalCisoPage() {
         </div>
       </section>
 
+      {/* Mobile Table of Contents */}
+      <div className="lg:hidden max-w-4xl mx-auto px-6 py-8">
+        <TableOfContentsMobile items={tocItems} />
+      </div>
+
       {/* Main Content */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <article className="prose prose-lg prose-gray max-w-none">
-            <h2 className="text-3xl font-black text-gray-900 mb-6">What is a Fractional CISO? Understanding the Role</h2>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+            {/* Main Article Column */}
+            <article className="lg:col-span-8 prose prose-lg prose-gray max-w-none">
+            <h2 id="understanding" className="text-3xl font-black text-gray-900 mb-6 scroll-mt-24">What is a Fractional CISO? Understanding the Role</h2>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>fractional CISO meaning</strong> centres on flexible, senior-level cybersecurity leadership. Unlike traditional full-time CISOs earning £150,000-£250,000 annually, a <strong>part-time security executive</strong> works with multiple companies simultaneously, bringing diverse security experience across industries and compliance frameworks.</p>
+
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 my-6 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>UK Market Context:</strong> As the <a href="https://www.bbc.co.uk/news/articles/c5yv6n536vno" target="_blank" rel="noopener noreferrer" className="text-red-700 hover:underline font-medium">BBC reports on the evolving UK job market (Jan 2026)</a>, companies are increasingly embracing flexible executive arrangements. Fractional CISOs represent a key part of this shift, part of the broader <a href="https://en.wikipedia.org/wiki/Fractional_work" target="_blank" rel="noopener noreferrer" className="text-red-700 hover:underline">fractional work</a> trend transforming cybersecurity leadership.
+              </p>
+            </div>
+
             <p>With increasing cyber threats, regulatory requirements (GDPR, SOC 2, ISO 27001), and customer security questionnaires, companies need senior security leadership but often cannot justify or afford a full-time CISO. The fractional model provides enterprise-grade security expertise at a fraction of the cost.</p>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Key Responsibilities</h2>
+            <h2 id="responsibilities" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Key Responsibilities</h2>
             <p>A <strong>fractional CISO</strong> performs the same functions as a full-time Chief Information Security Officer, but on a part-time basis:</p>
 
             <div className="grid md:grid-cols-2 gap-6 not-prose my-8">
@@ -112,7 +138,7 @@ export default function FractionalCisoPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">Comparison: Fractional vs Consultant</h2>
+            <h2 id="comparison" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Comparison: Fractional vs Consultant</h2>
             <div className="overflow-x-auto my-8 not-prose">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-50">
@@ -132,7 +158,7 @@ export default function FractionalCisoPage() {
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">When to Hire</h2>
+            <h2 id="when-needed" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">When to Hire</h2>
             <ul className="space-y-3">
               <li><strong>SOC 2 certification:</strong> When pursuing SOC 2 Type I or Type II compliance</li>
               <li><strong>Enterprise sales:</strong> When large customers require security questionnaires and audits</li>
@@ -142,7 +168,7 @@ export default function FractionalCisoPage() {
               <li><strong>Incident preparation:</strong> Building incident response capabilities before a breach occurs</li>
             </ul>
 
-            <h2 className="text-3xl font-black text-gray-900 mt-16 mb-6">UK Cost Guide</h2>
+            <h2 id="cost-pricing" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">UK Cost Guide</h2>
             <p><strong>Fractional CISO</strong> costs in the UK typically range from £900-£1,500 per day:</p>
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
               <h4 className="font-bold text-gray-900 mb-4">Typical Pricing</h4>
@@ -159,11 +185,19 @@ export default function FractionalCisoPage() {
               <p className="text-red-700 text-sm">The average cost of a data breach in the UK is over £3.4 million. A fractional CISO helps prevent breaches and ensures compliance at a fraction of the cost of both a full-time hire and a potential incident.</p>
             </div>
           </article>
+
+            {/* Sidebar with Table of Contents */}
+            <aside className="hidden lg:block lg:col-span-4">
+              <div className="sticky top-24">
+                <TableOfContents items={tocItems} />
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
 
       {/* Calculator Section */}
-      <section className="py-16 bg-gray-50">
+      <section id="calculator" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
@@ -174,7 +208,7 @@ export default function FractionalCisoPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section id="faq" className="py-20 bg-white scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
@@ -185,7 +219,7 @@ export default function FractionalCisoPage() {
       </section>
 
       {/* Related Links */}
-      <section className="py-16 bg-gray-50">
+      <section id="resources" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 block mb-2">Explore More</span>
           <h2 className="text-2xl font-black text-gray-900 mb-8">Related Resources</h2>
