@@ -203,6 +203,8 @@ const STATIC_ROUTE_SLUGS = [
   'part-time-ceo-jobs-uk',
   'part-time-cio-jobs-uk',
   'part-time-cso-jobs-uk',
+  // Part-time guide pages
+  'part-time-cfo',
   // Guide pages
   'fractional-recruitment-agency',
   // Procurement pages

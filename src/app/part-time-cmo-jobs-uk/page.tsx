@@ -19,14 +19,15 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CMO Jobs UK',
-  description: 'Part-time CMO jobs UK for marketing leaders. Find Chief Marketing Officer and Marketing Director roles. 1-3 days/week, £850-£1,300/day.',
-  keywords: 'part time cmo jobs uk, part time cmo, part time marketing director jobs, fractional cmo jobs, part time chief marketing officer',
+  title: 'Part-Time CMO Jobs UK | Chief Marketing Officer Roles 2026',
+  description: 'Part-time CMO jobs UK for marketing leaders. Find part-time Chief Marketing Officer and Marketing Director roles. 45+ live positions, £850-£1,300/day, remote & hybrid.',
+  keywords: 'part time cmo, part-time cmo, part time cmo jobs uk, part time chief marketing officer, part time marketing director jobs, fractional cmo jobs, cmo part time, part-time cmo services, portfolio cmo',
   alternates: { canonical: 'https://fractional.quest/part-time-cmo-jobs-uk' },
   openGraph: {
-    title: 'Part-Time CMO Jobs UK | Fractional Marketing Director Roles',
-    description: 'Find part-time CMO and Marketing Director jobs across the UK. 1-3 days per week.',
+    title: 'Part-Time CMO Jobs UK | Chief Marketing Officer Roles 2026',
+    description: 'Find part-time CMO and part-time Chief Marketing Officer jobs across the UK. 45+ live roles, £850-£1,300/day.',
     url: 'https://fractional.quest/part-time-cmo-jobs-uk',
+    images: [{ url: 'https://fractional.quest/api/og?title=Part-Time%20CMO%20Jobs%20UK', width: 1200, height: 630, alt: 'Part-Time CMO Jobs UK' }],
   },
 }
 
@@ -112,7 +113,115 @@ export default async function PartTimeCMOJobsUKPage() {
 
       {companies.length > 0 && (<section className="py-16 bg-gray-50"><div className="max-w-6xl mx-auto px-6 lg:px-8"><div className="text-center mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Who&apos;s Hiring</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">UK Companies Hiring Part-Time CMOs</h2></div><div className="flex flex-wrap justify-center gap-x-12 gap-y-6">{companies.map((company: string, index: number) => (<span key={index} className="text-xl md:text-2xl font-light text-gray-400 hover:text-amber-500 transition-colors cursor-default">{company}</span>))}</div></div></section>)}
 
-      <section className="py-20 bg-white"><div className="max-w-4xl mx-auto px-6 lg:px-8"><article className="prose prose-lg prose-gray max-w-none"><h2 className="text-3xl font-black text-gray-900 mb-6">The UK Part-Time CMO Market</h2><p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>part-time CMO</strong> model (also known as fractional CMO) has become increasingly popular as companies recognise they can access senior marketing leadership without the full-time cost. This creates opportunities for experienced marketing professionals to build portfolio careers.</p><p>Unlike <Link href="/interim-cmo-jobs-uk" className="text-amber-600 hover:underline">interim CMO roles</Link> which are full-time for a fixed period, part-time CMO positions offer ongoing engagement typically 1-3 days per week. Many <Link href="/fractional-cmo-jobs-uk" className="text-amber-600 hover:underline">fractional CMOs</Link> work with multiple clients simultaneously.</p><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Who Hires Part-Time CMOs?</h3><ul className="space-y-2 text-gray-600"><li><strong>SMEs</strong> - Companies needing strategic marketing leadership</li><li><strong>Startups</strong> - Companies building brand and go-to-market</li><li><strong>Scale-ups</strong> - Fast-growing companies scaling marketing</li><li><strong>PE portfolio companies</strong> - Businesses needing marketing transformation</li><li><strong>Family businesses</strong> - Professionalising marketing operations</li></ul><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Resources</h3><div className="grid md:grid-cols-2 gap-4 not-prose"><Link href="/fractional-cmo-jobs-uk" className="p-4 border rounded-lg hover:border-amber-300 transition-colors"><h4 className="font-bold text-gray-900">Fractional CMO Jobs</h4><p className="text-sm text-gray-600">All fractional marketing roles</p></Link><Link href="/interim-cmo-jobs-uk" className="p-4 border rounded-lg hover:border-amber-300 transition-colors"><h4 className="font-bold text-gray-900">Interim CMO Jobs</h4><p className="text-sm text-gray-600">Full-time temporary roles</p></Link><Link href="/fractional-cmo-salary" className="p-4 border rounded-lg hover:border-amber-300 transition-colors"><h4 className="font-bold text-gray-900">CMO Salary Guide</h4><p className="text-sm text-gray-600">Day rates and benchmarks</p></Link><Link href="/hire-fractional-cmo" className="p-4 border rounded-lg hover:border-amber-300 transition-colors"><h4 className="font-bold text-gray-900">Hire a CMO</h4><p className="text-sm text-gray-600">Hiring guide</p></Link></div></article></div></section>
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <article className="prose prose-lg prose-gray max-w-none">
+            <h2 className="text-3xl font-black text-gray-900 mb-6">The UK Part-Time CMO Market</h2>
+
+            <p className="text-xl text-gray-600 leading-relaxed mb-6">
+              The <strong>part-time CMO</strong> model (also known as fractional CMO or <strong>part-time Chief Marketing Officer</strong>) has grown significantly as companies recognise they can access senior marketing leadership without the full-time cost.
+            </p>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              This creates opportunities for experienced marketing professionals to build portfolio careers as a <strong>part-time CMO</strong>.
+            </p>
+
+            {/* Authority context box */}
+            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 my-8 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>UK Market Context:</strong> According to the <a href="https://www.cim.co.uk" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline font-medium">Chartered Institute of Marketing (CIM)</a>, demand for senior marketing talent has grown 180% since 2020. As <a href="https://www.marketingweek.com" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline font-medium">Marketing Week</a> reports, the <strong>part-time CMO</strong> model is now mainstream.
+              </p>
+            </div>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Unlike <Link href="/interim-cmo-jobs-uk" className="text-amber-600 hover:underline">interim CMO roles</Link> which are full-time for a fixed period, <strong>part-time CMO</strong> positions offer ongoing engagement typically 1-3 days per week.
+            </p>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Many <Link href="/fractional-cmo-jobs-uk" className="text-amber-600 hover:underline">fractional CMOs</Link> work with multiple clients simultaneously, building a portfolio of <strong>part-time Chief Marketing Officer</strong> engagements.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Part-Time CMO Skills & Expertise</h3>
+
+            <div className="grid md:grid-cols-2 gap-4 not-prose my-8">
+              <div className="bg-amber-50 p-4 rounded-lg">
+                <h4 className="font-bold text-gray-900 mb-2">Strategic Marketing</h4>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>&#10003; Brand strategy & positioning</li>
+                  <li>&#10003; Go-to-market planning</li>
+                  <li>&#10003; Marketing team leadership</li>
+                </ul>
+              </div>
+              <div className="bg-amber-50 p-4 rounded-lg">
+                <h4 className="font-bold text-gray-900 mb-2">Digital & Growth</h4>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>&#10003; Performance marketing</li>
+                  <li>&#10003; Marketing automation</li>
+                  <li>&#10003; Analytics & attribution</li>
+                </ul>
+              </div>
+              <div className="bg-amber-50 p-4 rounded-lg">
+                <h4 className="font-bold text-gray-900 mb-2">Content & Brand</h4>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>&#10003; Content strategy</li>
+                  <li>&#10003; PR & communications</li>
+                  <li>&#10003; Creative direction</li>
+                </ul>
+              </div>
+              <div className="bg-amber-50 p-4 rounded-lg">
+                <h4 className="font-bold text-gray-900 mb-2">Commercial</h4>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>&#10003; Marketing ROI</li>
+                  <li>&#10003; Budget management</li>
+                  <li>&#10003; Agency relationships</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Who Hires Part-Time CMOs?</h3>
+
+            <ul className="space-y-3 text-gray-600">
+              <li><strong>SMEs (£2-20m revenue)</strong> - Companies needing strategic <strong>part-time CMO</strong> leadership without full-time cost</li>
+              <li><strong>Startups</strong> - Seed to Series B companies building brand and go-to-market strategy</li>
+              <li><strong>Scale-ups</strong> - Fast-growing companies scaling marketing operations</li>
+              <li><strong>PE portfolio companies</strong> - Businesses needing marketing transformation and value creation</li>
+              <li><strong>Family businesses</strong> - Professionalising marketing operations with experienced leadership</li>
+            </ul>
+
+            {/* Authority links section */}
+            <div className="bg-gray-50 p-6 rounded-lg my-8 not-prose">
+              <h4 className="font-bold text-gray-900 mb-4">Marketing Authority Resources</h4>
+              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                <a href="https://www.cim.co.uk" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">&#8594; CIM - Chartered Institute of Marketing</a>
+                <a href="https://www.marketingweek.com" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">&#8594; Marketing Week</a>
+                <a href="https://www.warc.com" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">&#8594; WARC - Marketing Intelligence</a>
+                <a href="https://dma.org.uk" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">&#8594; DMA - Data & Marketing Association</a>
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Resources</h3>
+
+            <div className="grid md:grid-cols-2 gap-4 not-prose">
+              <Link href="/fractional-cmo-jobs-uk" className="p-4 border rounded-lg hover:border-amber-300 transition-colors">
+                <h4 className="font-bold text-gray-900">Fractional CMO Jobs</h4>
+                <p className="text-sm text-gray-600">All fractional marketing roles</p>
+              </Link>
+              <Link href="/interim-cmo-jobs-uk" className="p-4 border rounded-lg hover:border-amber-300 transition-colors">
+                <h4 className="font-bold text-gray-900">Interim CMO Jobs</h4>
+                <p className="text-sm text-gray-600">Full-time temporary roles</p>
+              </Link>
+              <Link href="/fractional-cmo-salary" className="p-4 border rounded-lg hover:border-amber-300 transition-colors">
+                <h4 className="font-bold text-gray-900">CMO Salary Guide</h4>
+                <p className="text-sm text-gray-600">Day rates and benchmarks</p>
+              </Link>
+              <Link href="/hire-fractional-cmo" className="p-4 border rounded-lg hover:border-amber-300 transition-colors">
+                <h4 className="font-bold text-gray-900">Hire a Part-Time CMO</h4>
+                <p className="text-sm text-gray-600">Complete hiring guide</p>
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
 
       <section className="py-16 bg-gray-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-8 text-center"><h2 className="text-2xl md:text-3xl font-black text-gray-900">IR35 Calculator for Part-Time CMOs</h2></div><IR35Calculator defaultDayRate={1000} /></div></section>
 

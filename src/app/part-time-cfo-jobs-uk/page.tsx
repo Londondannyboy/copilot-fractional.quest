@@ -19,14 +19,15 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Part-Time CFO Jobs UK',
-  description: 'Part-time CFO jobs UK for finance leaders. Find Chief Financial Officer and Finance Director roles. 1-3 days/week, £900-£1,500/day.',
-  keywords: 'part time cfo jobs uk, part time cfo, part time finance director jobs, part time fd jobs, fractional cfo jobs, part time chief financial officer',
+  title: 'Part-Time CFO Jobs UK | Finance Director Roles 2026',
+  description: 'Part-time CFO jobs UK for finance leaders. 50+ live part-time Chief Financial Officer and part-time Finance Director roles. £900-£1,500/day, remote & hybrid available.',
+  keywords: 'part time cfo, part-time cfo, part time cfo jobs, part time cfo jobs uk, cfo part time, part time finance director, part time fd jobs, fractional cfo jobs, part time chief financial officer, portfolio cfo',
   alternates: { canonical: 'https://fractional.quest/part-time-cfo-jobs-uk' },
   openGraph: {
-    title: 'Part-Time CFO Jobs UK | Fractional Finance Director Roles',
-    description: 'Find part-time CFO and Finance Director jobs across the UK. 1-3 days per week.',
+    title: 'Part-Time CFO Jobs UK | Finance Director Roles 2026',
+    description: 'Find part-time CFO and part-time Finance Director jobs across the UK. 50+ live roles, £900-£1,500/day.',
     url: 'https://fractional.quest/part-time-cfo-jobs-uk',
+    images: [{ url: 'https://fractional.quest/api/og?title=Part-Time%20CFO%20Jobs%20UK', width: 1200, height: 630, alt: 'Part-Time CFO Jobs UK' }],
   },
 }
 
@@ -112,7 +113,127 @@ export default async function PartTimeCFOJobsUKPage() {
 
       {companies.length > 0 && (<section className="py-16 bg-gray-50"><div className="max-w-6xl mx-auto px-6 lg:px-8"><div className="text-center mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Who&apos;s Hiring</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">UK Companies Hiring Part-Time CFOs</h2></div><div className="flex flex-wrap justify-center gap-x-12 gap-y-6">{companies.map((company: string, index: number) => (<span key={index} className="text-xl md:text-2xl font-light text-gray-400 hover:text-emerald-500 transition-colors cursor-default">{company}</span>))}</div></div></section>)}
 
-      <section className="py-20 bg-white"><div className="max-w-4xl mx-auto px-6 lg:px-8"><article className="prose prose-lg prose-gray max-w-none"><h2 className="text-3xl font-black text-gray-900 mb-6">The UK Part-Time CFO Market</h2><p className="text-xl text-gray-600 leading-relaxed mb-8">The <strong>part-time CFO</strong> model (also known as fractional CFO) has become increasingly popular as companies recognise they can access senior finance leadership without the full-time cost. This creates opportunities for experienced finance professionals to build portfolio careers.</p><p>Unlike <Link href="/interim-cfo-jobs-uk" className="text-emerald-700 hover:underline">interim CFO roles</Link> which are full-time for a fixed period, part-time CFO positions offer ongoing engagement typically 1-3 days per week. Many <Link href="/fractional-cfo-jobs-uk" className="text-emerald-700 hover:underline">fractional CFOs</Link> work with multiple clients simultaneously.</p><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Who Hires Part-Time CFOs?</h3><ul className="space-y-2 text-gray-600"><li><strong>SMEs</strong> - Companies with £2-20m revenue needing finance leadership</li><li><strong>Startups</strong> - Series A/B companies preparing for growth</li><li><strong>Scale-ups</strong> - Fast-growing companies building finance function</li><li><strong>PE portfolio companies</strong> - Investor-backed businesses needing financial rigour</li><li><strong>Family businesses</strong> - Professionalising finance operations</li></ul><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Resources</h3><div className="grid md:grid-cols-2 gap-4 not-prose"><Link href="/fractional-cfo-jobs-uk" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">Fractional CFO Jobs</h4><p className="text-sm text-gray-600">All fractional finance roles</p></Link><Link href="/interim-cfo-jobs-uk" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">Interim CFO Jobs</h4><p className="text-sm text-gray-600">Full-time temporary roles</p></Link><Link href="/fractional-cfo-salary" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">CFO Salary Guide</h4><p className="text-sm text-gray-600">Day rates and benchmarks</p></Link><Link href="/hire-fractional-cfo" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors"><h4 className="font-bold text-gray-900">Hire a CFO</h4><p className="text-sm text-gray-600">Hiring guide</p></Link></div></article></div></section>
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <article className="prose prose-lg prose-gray max-w-none">
+            <h2 className="text-3xl font-black text-gray-900 mb-6">The UK Part-Time CFO Market</h2>
+
+            <p className="text-xl text-gray-600 leading-relaxed mb-6">
+              The <strong>part-time CFO</strong> model (also known as fractional CFO or <strong>part-time finance director</strong>) has grown 250% since 2020 as companies recognise they can access senior finance leadership without the full-time cost.
+            </p>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              This creates opportunities for experienced finance professionals to build portfolio careers as a <strong>part-time CFO</strong>.
+            </p>
+
+            {/* Authority context box */}
+            <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-8 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>UK Market Context:</strong> According to <a href="https://www.icaew.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline font-medium">ICAEW</a>, 45% of growing UK SMEs now use part-time finance leadership. The <a href="https://www.bvca.co.uk" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline font-medium">BVCA</a> reports 78% of PE-backed companies have engaged <strong>part-time CFOs</strong>.
+              </p>
+            </div>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Unlike <Link href="/interim-cfo-jobs-uk" className="text-emerald-700 hover:underline">interim CFO roles</Link> which are full-time for a fixed period, <strong>part-time CFO</strong> positions offer ongoing engagement typically 1-3 days per week.
+            </p>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Many <Link href="/fractional-cfo-jobs-uk" className="text-emerald-700 hover:underline">fractional CFOs</Link> work with multiple clients simultaneously, combining <strong>part-time CFO</strong> engagements into a portfolio career.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Part-Time CFO Day Rates by Sector</h3>
+
+            <div className="overflow-x-auto my-6 not-prose">
+              <table className="min-w-full bg-white border border-gray-200 rounded-lg text-sm">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-bold text-gray-900">Sector</th>
+                    <th className="px-4 py-3 text-left font-bold text-gray-900">Day Rate</th>
+                    <th className="px-4 py-3 text-left font-bold text-gray-900">Typical Annual</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  <tr>
+                    <td className="px-4 py-3 text-gray-900 font-medium">PE-Backed</td>
+                    <td className="px-4 py-3 text-emerald-700 font-bold">£1,200-£1,800</td>
+                    <td className="px-4 py-3 text-gray-600">£120-180k (2 days/wk)</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-4 py-3 text-gray-900 font-medium">Fintech / FCA</td>
+                    <td className="px-4 py-3 text-emerald-700 font-bold">£1,100-£1,600</td>
+                    <td className="px-4 py-3 text-gray-600">£110-160k (2 days/wk)</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 text-gray-900 font-medium">Scale-ups</td>
+                    <td className="px-4 py-3 text-emerald-700 font-bold">£1,000-£1,400</td>
+                    <td className="px-4 py-3 text-gray-600">£100-140k (2 days/wk)</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-4 py-3 text-gray-900 font-medium">SME / Family</td>
+                    <td className="px-4 py-3 text-emerald-700 font-bold">£800-£1,200</td>
+                    <td className="px-4 py-3 text-gray-600">£80-120k (2 days/wk)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Who Hires Part-Time CFOs?</h3>
+
+            <ul className="space-y-3 text-gray-600">
+              <li><strong>SMEs (£2-20m revenue)</strong> - Companies needing strategic <strong>part-time CFO</strong> leadership without full-time cost</li>
+              <li><strong>Startups (Series A/B)</strong> - Companies preparing for growth and investor reporting</li>
+              <li><strong>Scale-ups</strong> - Fast-growing companies building finance function with <strong>part-time finance director</strong> support</li>
+              <li><strong>PE portfolio companies</strong> - Investor-backed businesses needing financial rigour and value creation tracking</li>
+              <li><strong>Family businesses</strong> - Professionalising finance operations with experienced <strong>part-time CFO</strong> expertise</li>
+            </ul>
+
+            {/* Authority links section */}
+            <div className="bg-gray-50 p-6 rounded-lg my-8 not-prose">
+              <h4 className="font-bold text-gray-900 mb-4">Finance Authority Resources</h4>
+              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                <a href="https://www.icaew.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">&#8594; ICAEW - Chartered Accountants</a>
+                <a href="https://www.accaglobal.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">&#8594; ACCA - Global Accountancy</a>
+                <a href="https://www.bvca.co.uk" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">&#8594; BVCA - Private Equity</a>
+                <a href="https://www.fca.org.uk" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">&#8594; FCA - Financial Conduct Authority</a>
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Part-Time CFO Qualifications</h3>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-4">
+              Most <strong>part-time CFO</strong> roles require:
+            </p>
+
+            <ul className="space-y-2 text-gray-600 mb-8">
+              <li>&#10003; ACA, ACCA, or CIMA qualification</li>
+              <li>&#10003; 10-15+ years post-qualification experience</li>
+              <li>&#10003; Prior CFO, FD, or Finance Director experience</li>
+              <li>&#10003; Sector expertise (PE, FCA, SaaS) commands premium rates</li>
+            </ul>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Resources</h3>
+
+            <div className="grid md:grid-cols-2 gap-4 not-prose">
+              <Link href="/part-time-cfo" className="p-4 border-2 border-emerald-200 rounded-lg hover:border-emerald-400 transition-colors bg-emerald-50">
+                <h4 className="font-bold text-gray-900">Part-Time CFO Guide</h4>
+                <p className="text-sm text-gray-600">Complete guide to part-time CFO roles</p>
+              </Link>
+              <Link href="/fractional-cfo-jobs-uk" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors">
+                <h4 className="font-bold text-gray-900">Fractional CFO Jobs</h4>
+                <p className="text-sm text-gray-600">All fractional finance roles</p>
+              </Link>
+              <Link href="/fractional-cfo-salary" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors">
+                <h4 className="font-bold text-gray-900">CFO Salary Guide</h4>
+                <p className="text-sm text-gray-600">Day rates and benchmarks</p>
+              </Link>
+              <Link href="/hire-fractional-cfo" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors">
+                <h4 className="font-bold text-gray-900">Hire a Part-Time CFO</h4>
+                <p className="text-sm text-gray-600">Complete hiring guide</p>
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
 
       <section className="py-16 bg-gray-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-8 text-center"><h2 className="text-2xl md:text-3xl font-black text-gray-900">IR35 Calculator for Part-Time CFOs</h2></div><IR35Calculator defaultDayRate={1200} /></div></section>
 
