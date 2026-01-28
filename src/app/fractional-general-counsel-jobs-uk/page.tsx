@@ -58,7 +58,7 @@ export default async function FractionalGCJobsUKPage() {
         seoContent={gcJobsUkSEO}
         imageCategory="default"
         roleFilter="Legal"
-        accentColor="slate"
+        accentColor="indigo"
       />
     </>
   );
