@@ -79,6 +79,8 @@ For new role/engagement pages:
 | Interim | Full-time 3-12 months | false | true |
 | Part-Time | Fixed days per week | true | false |
 | Advisory | Board/strategic advisor | true | false |
+| Contract | Fixed-term 3-12 months (Neon pages) | false | true |
+| Founding | Startup equity + cash (Neon pages) | true | false |
 
 ## Job Posts (Google Jobs)
 
@@ -94,7 +96,7 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 | Part-Time | 12 | /fractional-job/part-time-cfo-uk |
 | Advisory | 11 | /fractional-job/advisory-cfo-uk |
 
-**Roles**: CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO, CDO
+**Roles**: CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO, CDO, CAIO, FD, GC, MD
 
 **Features**: JobPosting schema, hero images, day rates, FAQs, authority links
 
@@ -102,7 +104,7 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 
 ## Current Coverage (Jan 2026)
 
-**Jobs UK Pages**: All 11 roles x 4 engagement types = 44 jobs in DB
+**Jobs UK Pages**: All 11 core roles x 4 engagement types = 44 jobs in DB
 
 **Static Pages**: CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO for:
 - Fractional Jobs UK
@@ -112,6 +114,16 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 - Role definitions
 - Salary guides
 - Hire pages
+
+**New Static Pages (Jan 2026)**:
+- CAIO (Chief AI Officer) - `/fractional-chief-ai-officer-jobs-uk`
+- FD (Finance Director) - `/fractional-finance-director-jobs-uk`
+- GC (General Counsel) - `/fractional-general-counsel-jobs-uk`
+- MD (Managing Director) - `/fractional-managing-director-jobs-uk`
+
+**Neon Database Pages**:
+- Contract jobs UK: 11 roles (contract-cfo-jobs-uk, etc.)
+- Founding jobs UK: 6 roles (founding-cto-jobs-uk, etc.)
 
 ## Restart Prompt
 
