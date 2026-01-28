@@ -110,6 +110,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'fractional-cio-jobs-uk',
     'fractional-cso-jobs-uk',
     'fractional-procurement-jobs-uk',
+    // GTM, SDR, Growth, General Counsel
+    'fractional-gtm-jobs-uk',
+    'fractional-sdr-jobs-uk',
+    'fractional-general-counsel-jobs-uk',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
@@ -140,6 +144,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'fractional-ciso',
     'fractional-cpo',
     'fractional-ceo',
+    // GTM, SDR, Growth, General Counsel
+    'fractional-gtm',
+    'fractional-sdr',
+    'fractional-growth',
+    'fractional-general-counsel',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
@@ -203,6 +212,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'interim-cso-jobs-uk',
     'interim-executive',
     'interim-marketing-director',
+    // GTM, SDR, Growth, General Counsel
+    'interim-gtm-jobs-uk',
+    'interim-growth-jobs-uk',
+    'interim-general-counsel-jobs-uk',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
