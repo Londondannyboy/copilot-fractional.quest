@@ -109,11 +109,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'fractional-cro-jobs-uk',
     'fractional-cio-jobs-uk',
     'fractional-cso-jobs-uk',
+    'fractional-cco-jobs-uk',
     'fractional-procurement-jobs-uk',
-    // GTM, SDR, Growth, General Counsel
+    // New roles (Jan 2026)
+    'fractional-chief-ai-officer-jobs-uk',
+    'fractional-finance-director-jobs-uk',
+    'fractional-general-counsel-jobs-uk',
+    'fractional-managing-director-jobs-uk',
+    // GTM, SDR, Growth
     'fractional-gtm-jobs-uk',
     'fractional-sdr-jobs-uk',
-    'fractional-general-counsel-jobs-uk',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
@@ -242,6 +247,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }))
 
+  // Advisory job pages
+  const advisoryPages: MetadataRoute.Sitemap = [
+    'advisory-cfo-jobs-uk',
+    'advisory-cto-jobs-uk',
+    'advisory-cmo-jobs-uk',
+    'advisory-coo-jobs-uk',
+    'advisory-chro-jobs-uk',
+    'advisory-ciso-jobs-uk',
+    'advisory-cpo-jobs-uk',
+    'advisory-ceo-jobs-uk',
+    'advisory-cio-jobs-uk',
+    'advisory-cso-jobs-uk',
+    'advisory-cco-jobs-uk',
+    'advisory-cro-jobs-uk',
+  ].map(slug => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }))
+
   // Case studies
   const caseStudyPages: MetadataRoute.Sitemap = [
     'case-studies',
@@ -292,6 +318,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...hirePages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...interimPages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...partTimePages.map(p => p.url.replace(`${baseUrl}/`, '')),
+    ...advisoryPages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...caseStudyPages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...toolPages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...guidePages.map(p => p.url.replace(`${baseUrl}/`, '')),
@@ -431,6 +458,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...hirePages,
     ...interimPages,
     ...partTimePages,
+    ...advisoryPages,
     ...caseStudyPages,
     ...toolPages,
     ...guidePages,
