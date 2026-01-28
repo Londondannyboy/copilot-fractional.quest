@@ -58,7 +58,7 @@ export default async function FractionalMDJobsUKPage() {
         seoContent={mdJobsUkSEO}
         imageCategory="default"
         roleFilter="Managing Director"
-        accentColor="gray"
+        accentColor="purple"
       />
     </>
   );
