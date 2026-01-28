@@ -126,6 +126,9 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-cso-jobs-uk',
   'fractional-cco-jobs-uk',
   'fractional-chief-ai-officer-jobs-uk',
+  'fractional-finance-director-jobs-uk',
+  'fractional-general-counsel-jobs-uk',
+  'fractional-managing-director-jobs-uk',
   // Role hub pages (global)
   'fractional-jobs-cfo',
   'fractional-jobs-cto',
