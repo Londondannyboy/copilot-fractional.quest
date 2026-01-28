@@ -41,6 +41,24 @@ export const gcJobsUkSEO = {
         { role: "Tech/SaaS", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
       ],
     },
+    locations: {
+      title: "Key Sectors for General Counsel",
+      areas: [
+        { name: "Financial Services", description: "Banks, insurers, and asset managers needing regulatory expertise.", sectors: ["Banking", "Insurance", "Asset Management"] },
+        { name: "Technology", description: "Tech companies needing IP, data privacy, and commercial contracts.", sectors: ["SaaS", "FinTech", "E-commerce"] },
+        { name: "PE-Backed", description: "Portfolio companies needing M&A and commercial support.", sectors: ["Private Equity", "Growth Equity", "VC"] },
+        { name: "Life Sciences", description: "Pharma and biotech needing regulatory and IP expertise.", sectors: ["Pharma", "BioTech", "MedTech"] },
+      ],
+    },
+    emergingRoles: {
+      title: "Specialist Legal Roles",
+      roles: [
+        { title: "Commercial GC", description: "Contracts, partnerships, and commercial negotiations.", rate: "£1,000-£1,400/day" },
+        { title: "Regulatory GC", description: "FCA, compliance, and regulatory matters.", rate: "£1,100-£1,500/day" },
+        { title: "M&A GC", description: "Deal execution, due diligence, and integration.", rate: "£1,200-£1,600/day" },
+        { title: "Data & Privacy GC", description: "GDPR, data protection, and privacy.", rate: "£1,000-£1,400/day" },
+      ],
+    },
   },
   faqs: [
     { question: "What qualifications do fractional GCs need?", answer: "Most require qualification as a solicitor or barrister with 10-15+ years PQE. In-house experience is highly valued, particularly in commercial contracts, M&A, and regulatory matters." },

@@ -41,6 +41,24 @@ export const mdJobsUkSEO = {
         { role: "Growth/Scale", range: "£950 - £1,400/day", typical: "£1,175", annual: "£190-280k" },
       ],
     },
+    locations: {
+      title: "Key Sectors for Managing Directors",
+      areas: [
+        { name: "PE Portfolio", description: "Private equity portfolio companies needing operational leadership.", sectors: ["Private Equity", "Growth Equity", "Buyout"] },
+        { name: "Family Business", description: "Family-owned businesses needing professional management.", sectors: ["Manufacturing", "Distribution", "Services"] },
+        { name: "Scale-Up", description: "Fast-growing companies needing experienced leadership.", sectors: ["Tech", "E-commerce", "Services"] },
+        { name: "Turnaround", description: "Distressed businesses needing restructuring.", sectors: ["Manufacturing", "Retail", "Hospitality"] },
+      ],
+    },
+    emergingRoles: {
+      title: "Specialist MD Roles",
+      roles: [
+        { title: "Turnaround MD", description: "Restructuring, cost reduction, and performance improvement.", rate: "£1,100-£1,500/day" },
+        { title: "Integration MD", description: "Post-acquisition integration and change management.", rate: "£1,200-£1,600/day" },
+        { title: "Growth MD", description: "Scaling operations and building teams.", rate: "£1,000-£1,400/day" },
+        { title: "Interim MD", description: "Bridge leadership during recruitment or transition.", rate: "£1,100-£1,700/day" },
+      ],
+    },
   },
   faqs: [
     { question: "What's the difference between an MD and CEO?", answer: "In UK usage, a Managing Director typically has hands-on operational responsibility for running a business, while a CEO may have a more strategic, investor-facing role. In many SMEs, these titles are used interchangeably." },

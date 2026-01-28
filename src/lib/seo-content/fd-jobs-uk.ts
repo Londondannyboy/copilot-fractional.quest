@@ -58,6 +58,24 @@ export const fdJobsUkSEO = {
         { role: "SME", range: "£700 - £1,000/day", typical: "£850", annual: "£140-200k" },
       ],
     },
+    locations: {
+      title: "Key Sectors for Finance Directors",
+      areas: [
+        { name: "Professional Services", description: "Law firms, accountancy practices needing financial management.", sectors: ["Legal", "Accounting", "Consulting"] },
+        { name: "E-commerce & Retail", description: "Online retailers requiring cash flow and inventory finance.", sectors: ["E-commerce", "D2C", "Retail"] },
+        { name: "Manufacturing", description: "Manufacturers needing working capital management.", sectors: ["Manufacturing", "Distribution", "Engineering"] },
+        { name: "Technology", description: "Tech companies needing SaaS metrics and investor reporting.", sectors: ["SaaS", "Software", "Tech Services"] },
+      ],
+    },
+    emergingRoles: {
+      title: "Specialist Finance Director Roles",
+      roles: [
+        { title: "Group FD", description: "Managing finances across multiple entities.", rate: "£900-£1,200/day" },
+        { title: "Turnaround FD", description: "Restructuring and cash crisis management.", rate: "£850-£1,100/day" },
+        { title: "M&A FD", description: "Due diligence and post-acquisition integration.", rate: "£950-£1,300/day" },
+        { title: "Systems FD", description: "ERP implementation and finance transformation.", rate: "£800-£1,100/day" },
+      ],
+    },
   },
 
   faqs: [
