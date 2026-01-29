@@ -1,0 +1,54 @@
+{
+  "common": {
+    "viewAllJobs": "View All US Jobs",
+    "dayRate": "Day Rate",
+    "perDay": "/day",
+    "apply": "Apply Now",
+    "saveJob": "Save Job",
+    "viewDetails": "View Details",
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "onSite": "On-site",
+    "postedOn": "Posted",
+    "location": "Location",
+    "salary": "Salary",
+    "jobType": "Job Type"
+  },
+  "jobs": {
+    "allLocations": "All US Locations",
+    "searchPlaceholder": "Search fractional jobs...",
+    "noJobsFound": "No jobs found matching your criteria",
+    "filterByDepartment": "Department",
+    "filterByLocation": "Location",
+    "filterByWorkType": "Work Type",
+    "showingJobs": "Showing {count} jobs"
+  },
+  "calculator": {
+    "w2vs1099Title": "W-2 vs 1099 Calculator",
+    "taxStatusEmployee": "W-2 Employee",
+    "taxStatusContractor": "1099 Contractor",
+    "dayRateLabel": "Day Rate",
+    "daysPerWeekLabel": "Days per Week",
+    "annualEarnings": "Annual Earnings",
+    "takeHomePay": "Take-Home Pay",
+    "taxPaid": "Taxes Paid",
+    "selfEmploymentTax": "Self-Employment Tax"
+  },
+  "meta": {
+    "siteName": "Fractional Quest",
+    "defaultTitle": "Fractional Jobs USA | Executive Roles $1,200-$2,000/day",
+    "defaultDescription": "Find fractional executive jobs in the US. CFO, CTO, CMO, COO roles paying $1,200-$2,000 per day."
+  },
+  "navigation": {
+    "jobs": "Jobs",
+    "calculators": "Calculators",
+    "about": "About",
+    "contact": "Contact",
+    "selectCountry": "Select Country"
+  },
+  "footer": {
+    "copyright": "© {year} Fractional Quest. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

@@ -134,6 +134,7 @@ interface IntelligentJobPageClientProps {
   imageCategory?: ImageCategory;
   roleFilter?: string;
   accentColor?: 'emerald' | 'blue' | 'amber' | 'purple' | 'red' | 'indigo';
+  locale?: 'uk' | 'us' | 'au' | 'nz';
 }
 
 // ============================================================================
@@ -279,6 +280,7 @@ export function IntelligentJobPageClient({
   imageCategory = 'finance',
   roleFilter,
   accentColor = 'emerald',
+  locale = 'uk',
 }: IntelligentJobPageClientProps) {
   const [aiLoaded, setAiLoaded] = useState(false);
 

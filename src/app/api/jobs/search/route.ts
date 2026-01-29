@@ -1,29 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { neon } from '@neondatabase/serverless'
 
-// UK location check function
-function isUKLocation(location: string | null): boolean {
+// Country-specific location keywords for filtering
+const COUNTRY_LOCATIONS: Record<string, string[]> = {
+  uk: [
+    'united kingdom', 'england', 'scotland', 'wales', 'northern ireland',
+    'london', 'manchester', 'birmingham', 'edinburgh', 'glasgow',
+    'bristol', 'leeds', 'liverpool', 'cambridge', 'oxford', 'uk'
+  ],
+  us: [
+    'united states', 'usa', 'america',
+    'new york', 'san francisco', 'los angeles', 'chicago', 'boston',
+    'austin', 'seattle', 'denver', 'miami', 'atlanta', 'dallas'
+  ],
+  au: [
+    'australia',
+    'sydney', 'melbourne', 'brisbane', 'perth', 'adelaide',
+    'canberra', 'hobart', 'darwin', 'gold coast'
+  ],
+  nz: [
+    'new zealand', 'nz',
+    'auckland', 'wellington', 'christchurch', 'hamilton', 'tauranga', 'dunedin'
+  ]
+}
+
+// Check if location matches a specific country
+function isLocationInCountry(location: string | null, country: string): boolean {
   if (!location) return false
+  // Remote jobs are available for all countries
+  if (location.toLowerCase() === 'remote') return true
+
   const loc = location.toLowerCase()
-  return (
-    loc.includes('united kingdom') ||
-    loc.includes('england') ||
-    loc.includes('scotland') ||
-    loc.includes('wales') ||
-    loc.includes('northern ireland') ||
-    loc.includes('london') ||
-    loc.includes('manchester') ||
-    loc.includes('birmingham') ||
-    loc.includes('edinburgh') ||
-    loc.includes('glasgow') ||
-    loc.includes('bristol') ||
-    loc.includes('leeds') ||
-    loc.includes('liverpool') ||
-    loc.includes('cambridge') ||
-    loc.includes('oxford') ||
-    loc === 'remote' ||
-    loc === 'uk'
-  )
+  const countryKeywords = COUNTRY_LOCATIONS[country] || COUNTRY_LOCATIONS.uk
+  return countryKeywords.some(keyword => loc.includes(keyword))
+}
+
+// Legacy UK-only check for backwards compatibility
+function isUKLocation(location: string | null): boolean {
+  return isLocationInCountry(location, 'uk')
 }
 
 // GET /api/jobs/search - Search jobs with filters (UK-only by default)
@@ -33,6 +47,7 @@ export async function GET(request: NextRequest) {
   const roleType = params.get('role') || ''
   const location = params.get('location') || ''
   const remoteParam = params.get('remote') || ''
+  const country = params.get('country') || 'uk' // Default to UK for backwards compatibility
   const includeInternational = params.get('international') === 'true'
 
   // Pagination
@@ -110,10 +125,10 @@ export async function GET(request: NextRequest) {
       `
     }
 
-    // Apply UK filter (unless international=true)
+    // Apply country filter (unless international=true)
     let filteredJobs = includeInternational
       ? allJobs
-      : allJobs.filter((job: any) => isUKLocation(job.location))
+      : allJobs.filter((job: any) => isLocationInCountry(job.location, country))
 
     // Apply remote/hybrid/onsite filter
     if (isRemoteFilter) {

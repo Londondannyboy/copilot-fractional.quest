@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 
 // Pages that should have transparent header over hero
 const TRANSPARENT_HEADER_PAGES = [
@@ -340,6 +341,9 @@ export function Header() {
             >
               Browse Jobs
             </Link>
+
+            {/* Locale Switcher */}
+            <LocaleSwitcher />
 
             {/* Mobile menu button - 48x48px touch target */}
             <button

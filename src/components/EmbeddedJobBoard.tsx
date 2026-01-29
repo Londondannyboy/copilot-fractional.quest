@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { locationOptionsByLocale, type Locale } from '@/i18n/config'
 
 interface Job {
   id: string
@@ -27,6 +28,7 @@ interface EmbeddedJobBoardProps {
   showFilters?: boolean
   title?: string
   accentColor?: string // 'emerald' | 'blue' | 'amber' | 'purple' | 'red' | 'indigo'
+  locale?: Locale
 }
 
 const DEPARTMENT_OPTIONS = [
@@ -44,15 +46,8 @@ const DEPARTMENT_OPTIONS = [
   { value: 'Product', label: 'Product' },
 ]
 
-const LOCATION_OPTIONS = [
-  { value: '', label: 'All UK Locations' },
-  { value: 'London', label: 'London' },
-  { value: 'Manchester', label: 'Manchester' },
-  { value: 'Birmingham', label: 'Birmingham' },
-  { value: 'Bristol', label: 'Bristol' },
-  { value: 'Edinburgh', label: 'Edinburgh' },
-  { value: 'Remote', label: 'Remote' },
-]
+// Location options are now loaded from i18n config based on locale
+// See locationOptionsByLocale in @/i18n/config
 
 const WORK_TYPE_OPTIONS = [
   { value: '', label: 'All Work Types' },
@@ -173,7 +168,10 @@ export function EmbeddedJobBoard({
   showFilters = true,
   title = 'Latest Jobs',
   accentColor = 'emerald',
+  locale = 'uk',
 }: EmbeddedJobBoardProps) {
+  // Get locale-specific location options
+  const LOCATION_OPTIONS = locationOptionsByLocale[locale]
   const [jobs, setJobs] = useState<Job[]>([])
   const [totalJobs, setTotalJobs] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -200,6 +198,8 @@ export function EmbeddedJobBoard({
       if (department) params.set('role', department)
       if (location) params.set('location', location)
       if (workType) params.set('remote', workType)
+      // Add country filter based on locale
+      params.set('country', locale)
       params.set('page', page.toString())
       params.set('limit', jobsPerPage.toString())
 
@@ -220,7 +220,7 @@ export function EmbeddedJobBoard({
     } finally {
       setLoading(false)
     }
-  }, [department, location, workType, page, jobsPerPage])
+  }, [department, location, workType, page, jobsPerPage, locale])
 
   useEffect(() => {
     fetchJobs()

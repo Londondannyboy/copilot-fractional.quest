@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 import { Providers } from "@/components/providers";
 import { Header, Footer } from "@/components/navigation";
+import { localeConfig, type Locale } from "@/i18n/config";
 import "./globals.css";
 import "@copilotkit/react-ui/styles.css";
 
@@ -52,13 +55,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Get locale from middleware (defaults to 'uk')
+  const locale = await getLocale() as Locale;
+  const messages = await getMessages();
+  const config = localeConfig[locale];
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={config.language} suppressHydrationWarning>
       <head>
         {/* Preconnect to Google Fonts for faster font loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -109,13 +117,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-white text-gray-900`}
       >
-        <Providers>
-          <Header />
-          <main className="pt-16 lg:pt-20">
-            {children}
-          </main>
-          <Footer />
-        </Providers>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <Providers>
+            <Header />
+            <main className="pt-16 lg:pt-20">
+              {children}
+            </main>
+            <Footer />
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,0 +1,54 @@
+{
+  "common": {
+    "viewAllJobs": "View All Australian Jobs",
+    "dayRate": "Day Rate",
+    "perDay": "/day",
+    "apply": "Apply Now",
+    "saveJob": "Save Job",
+    "viewDetails": "View Details",
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "onSite": "On-site",
+    "postedOn": "Posted",
+    "location": "Location",
+    "salary": "Salary",
+    "jobType": "Job Type"
+  },
+  "jobs": {
+    "allLocations": "All Australian Locations",
+    "searchPlaceholder": "Search fractional jobs...",
+    "noJobsFound": "No jobs found matching your criteria",
+    "filterByDepartment": "Department",
+    "filterByLocation": "Location",
+    "filterByWorkType": "Work Type",
+    "showingJobs": "Showing {count} jobs"
+  },
+  "calculator": {
+    "contractorTitle": "Contractor vs Employee Calculator",
+    "taxStatusEmployee": "PAYG Employee",
+    "taxStatusContractor": "Contractor (ABN)",
+    "dayRateLabel": "Day Rate",
+    "daysPerWeekLabel": "Days per Week",
+    "annualEarnings": "Annual Earnings",
+    "takeHomePay": "Take-Home Pay",
+    "taxPaid": "Tax Paid",
+    "superannuation": "Superannuation"
+  },
+  "meta": {
+    "siteName": "Fractional Quest",
+    "defaultTitle": "Fractional Jobs Australia | Executive Roles A$1,600-A$2,600/day",
+    "defaultDescription": "Find fractional executive jobs in Australia. CFO, CTO, CMO, COO roles paying A$1,600-A$2,600 per day."
+  },
+  "navigation": {
+    "jobs": "Jobs",
+    "calculators": "Calculators",
+    "about": "About",
+    "contact": "Contact",
+    "selectCountry": "Select Country"
+  },
+  "footer": {
+    "copyright": "© {year} Fractional Quest. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

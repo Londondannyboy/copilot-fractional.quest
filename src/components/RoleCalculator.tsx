@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { roleDefaultsByLocale } from '@/i18n/currency'
+import { localeConfig, type Locale } from '@/i18n/config'
 
-// Role-specific defaults based on UK market data
+// Role-specific defaults based on UK market data (used as fallback)
 const ROLE_DEFAULTS: Record<string, {
   label: string
   avgDayRate: number
@@ -98,12 +100,19 @@ const ROLE_DEFAULTS: Record<string, {
 interface RoleCalculatorProps {
   role: keyof typeof ROLE_DEFAULTS
   className?: string
+  locale?: Locale
 }
 
 type ViewMode = 'candidate' | 'employer'
 
-export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
-  const roleData = ROLE_DEFAULTS[role] || ROLE_DEFAULTS.cmo
+export function RoleCalculator({ role, className = '', locale = 'uk' }: RoleCalculatorProps) {
+  // Get role data from locale-specific defaults, fallback to UK/default
+  const localeRoleData = roleDefaultsByLocale[locale]?.[role]
+  const roleData = localeRoleData
+    ? { ...ROLE_DEFAULTS[role], ...localeRoleData }
+    : ROLE_DEFAULTS[role] || ROLE_DEFAULTS.cmo
+
+  const config = localeConfig[locale]
   const [mode, setMode] = useState<ViewMode>('candidate')
 
   // Candidate calculator state
@@ -128,10 +137,11 @@ export function RoleCalculator({ role, className = '' }: RoleCalculatorProps) {
   const savings = fullTimeTotalCost - fractionalAnnualCost
   const savingsPercent = Math.round((savings / fullTimeTotalCost) * 100)
 
+  // Locale-aware currency formatting
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-GB', {
+    return new Intl.NumberFormat(config.language, {
       style: 'currency',
-      currency: 'GBP',
+      currency: config.currency,
       maximumFractionDigits: 0
     }).format(amount)
   }

@@ -1,0 +1,54 @@
+{
+  "common": {
+    "viewAllJobs": "View All NZ Jobs",
+    "dayRate": "Day Rate",
+    "perDay": "/day",
+    "apply": "Apply Now",
+    "saveJob": "Save Job",
+    "viewDetails": "View Details",
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "onSite": "On-site",
+    "postedOn": "Posted",
+    "location": "Location",
+    "salary": "Salary",
+    "jobType": "Job Type"
+  },
+  "jobs": {
+    "allLocations": "All NZ Locations",
+    "searchPlaceholder": "Search fractional jobs...",
+    "noJobsFound": "No jobs found matching your criteria",
+    "filterByDepartment": "Department",
+    "filterByLocation": "Location",
+    "filterByWorkType": "Work Type",
+    "showingJobs": "Showing {count} jobs"
+  },
+  "calculator": {
+    "contractorTitle": "Contractor vs Employee Calculator",
+    "taxStatusEmployee": "PAYE Employee",
+    "taxStatusContractor": "Contractor (IRD)",
+    "dayRateLabel": "Day Rate",
+    "daysPerWeekLabel": "Days per Week",
+    "annualEarnings": "Annual Earnings",
+    "takeHomePay": "Take-Home Pay",
+    "taxPaid": "Tax Paid",
+    "kiwiSaver": "KiwiSaver"
+  },
+  "meta": {
+    "siteName": "Fractional Quest",
+    "defaultTitle": "Fractional Jobs New Zealand | Executive Roles NZ$1,500-NZ$2,400/day",
+    "defaultDescription": "Find fractional executive jobs in New Zealand. CFO, CTO, CMO, COO roles paying NZ$1,500-NZ$2,400 per day."
+  },
+  "navigation": {
+    "jobs": "Jobs",
+    "calculators": "Calculators",
+    "about": "About",
+    "contact": "Contact",
+    "selectCountry": "Select Country"
+  },
+  "footer": {
+    "copyright": "© {year} Fractional Quest. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

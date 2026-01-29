@@ -125,6 +125,31 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 - Contract jobs UK: 11 roles (contract-cfo-jobs-uk, etc.)
 - Founding jobs UK: 6 roles (founding-cto-jobs-uk, etc.)
 
+## Internationalization (i18n)
+
+**Supported Markets**: UK (default), US, AU, NZ
+
+**URL Structure**:
+- UK: `/fractional-cfo-jobs-uk` (root, no prefix)
+- US: `/us/fractional-cfo-jobs`
+- AU: `/au/fractional-cfo-jobs`
+- NZ: `/nz/fractional-cfo-jobs`
+
+**For detailed i18n implementation**: See `.claude/reference/i18n-guide.md`
+
+**Key Files**:
+| File | Purpose |
+|------|---------|
+| `src/i18n/config.ts` | Locale definitions, location options |
+| `src/i18n/currency.ts` | Exchange rates, market-specific day rates |
+| `src/middleware.ts` | Auto-redirect based on browser locale |
+| `src/components/LocaleSwitcher.tsx` | Header country selector |
+
+**Adding International Pages**:
+1. Create SEO content: `src/lib/seo-content/{role}-jobs-{locale}.ts`
+2. Create page: `src/app/[locale]/fractional-{role}-jobs/page.tsx`
+3. Pages automatically get hreflang, currency formatting, locale job filtering
+
 ## Restart Prompt
 
 See `CONTENT_RESTART_PROMPT.md` for context when starting new sessions.

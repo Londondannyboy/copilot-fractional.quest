@@ -1,0 +1,112 @@
+// Middleware for locale detection and routing
+// UK stays at root, other locales use prefix (/us/, /au/, /nz/)
+// Auto-redirects based on browser Accept-Language header
+
+import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from 'next/server';
+import { routing } from './i18n/routing';
+
+// Map browser language codes to our locales
+const LANGUAGE_TO_LOCALE: Record<string, string> = {
+  'en-US': 'us',
+  'en-AU': 'au',
+  'en-NZ': 'nz',
+  'en-GB': 'uk',
+  'en': 'uk', // Default English to UK
+};
+
+// Cookie name for locale preference
+const LOCALE_COOKIE = 'NEXT_LOCALE';
+
+// Create the base next-intl middleware
+const intlMiddleware = createMiddleware(routing);
+
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Skip locale detection for:
+  // - Already has locale prefix
+  // - Has locale cookie set (user chose manually)
+  // - Is an API route or static file
+  const hasLocalePrefix = /^\/(us|au|nz)(\/|$)/.test(pathname);
+  const hasLocaleCookie = request.cookies.has(LOCALE_COOKIE);
+
+  if (hasLocalePrefix || hasLocaleCookie) {
+    return intlMiddleware(request);
+  }
+
+  // Detect locale from Accept-Language header
+  const acceptLanguage = request.headers.get('Accept-Language') || '';
+  const detectedLocale = detectLocaleFromHeader(acceptLanguage);
+
+  // If detected locale is not UK and user is visiting a UK page, redirect
+  if (detectedLocale && detectedLocale !== 'uk' && !hasLocalePrefix) {
+    // Build the redirect URL
+    const url = request.nextUrl.clone();
+
+    // Convert UK-style path to international path
+    // e.g., /fractional-cfo-jobs-uk -> /us/fractional-cfo-jobs
+    let newPath = pathname;
+    if (pathname.endsWith('-uk')) {
+      newPath = pathname.replace(/-uk$/, '');
+    }
+
+    url.pathname = `/${detectedLocale}${newPath}`;
+
+    // Set locale cookie so we don't redirect again
+    const response = NextResponse.redirect(url);
+    response.cookies.set(LOCALE_COOKIE, detectedLocale, {
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+      path: '/',
+    });
+
+    return response;
+  }
+
+  return intlMiddleware(request);
+}
+
+// Parse Accept-Language header and return matching locale
+function detectLocaleFromHeader(acceptLanguage: string): string | null {
+  // Parse Accept-Language: en-US,en;q=0.9,es;q=0.8
+  const languages = acceptLanguage
+    .split(',')
+    .map((lang) => {
+      const [code, qValue] = lang.trim().split(';q=');
+      return {
+        code: code.trim(),
+        q: qValue ? parseFloat(qValue) : 1,
+      };
+    })
+    .sort((a, b) => b.q - a.q);
+
+  // Find first matching locale
+  for (const { code } of languages) {
+    // Try exact match first (e.g., en-US)
+    if (LANGUAGE_TO_LOCALE[code]) {
+      return LANGUAGE_TO_LOCALE[code];
+    }
+    // Try language without region (e.g., en)
+    const baseCode = code.split('-')[0];
+    if (LANGUAGE_TO_LOCALE[baseCode]) {
+      return LANGUAGE_TO_LOCALE[baseCode];
+    }
+  }
+
+  return null;
+}
+
+export const config = {
+  // Match all paths except:
+  // - API routes (/api/...)
+  // - Static files (_next, images, etc.)
+  // - Files with extensions (.ico, .svg, etc.)
+  matcher: [
+    // Match root
+    '/',
+    // Match locale prefixes
+    '/(us|au|nz)/:path*',
+    // Match all other paths except excluded ones
+    '/((?!api|_next|_vercel|.*\\..*).*)',
+  ],
+};

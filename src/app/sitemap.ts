@@ -22,8 +22,7 @@ const REDIRECT_SOURCE_SLUGS = [
   'interim-coo',
   'fractional-jobs',
   'guide',
-  'fractional-jobs-au',
-  'fractional-jobs-us',
+  // fractional-jobs-au and fractional-jobs-us now redirect to real international pages
   'fractional-hr-salary',
   'fractional-hr-roles',
   'fractional-hr-director',
@@ -94,6 +93,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
     priority: 0.95,
+  }))
+
+  // International pages (US, AU, NZ)
+  const internationalLocales = ['us', 'au', 'nz']
+  const internationalRoles = ['cfo', 'cto', 'cmo', 'coo', 'ceo', 'chro', 'cpo', 'ciso']
+
+  const internationalJobPages: MetadataRoute.Sitemap = internationalLocales.flatMap(locale =>
+    internationalRoles.map(role => ({
+      url: `${baseUrl}/${locale}/fractional-${role}-jobs`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.85,
+    }))
+  )
+
+  // International main job pages
+  const internationalMainPages: MetadataRoute.Sitemap = internationalLocales.map(locale => ({
+    url: `${baseUrl}/${locale}/fractional-jobs`,
+    lastModified: new Date(),
+    changeFrequency: 'daily' as const,
+    priority: 0.9,
   }))
 
   // Role-specific job pages (high priority)
@@ -451,6 +471,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...homepage,
     ...jobListingPages,
+    ...internationalMainPages,
+    ...internationalJobPages,
     ...roleJobPages,
     ...locationPages,
     ...roleDefinitionPages,

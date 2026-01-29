@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   // Enable MDX pages
@@ -211,15 +212,15 @@ const nextConfig: NextConfig = {
         destination: '/fractional-jobs-uk',
         permanent: false,
       },
-      // Location redirects
+      // Location redirects - now point to proper locale pages
       {
         source: '/fractional-jobs-au',
-        destination: '/fractional-jobs-uk',
+        destination: '/au/fractional-jobs',
         permanent: false,
       },
       {
         source: '/fractional-jobs-us',
-        destination: '/fractional-jobs-uk',
+        destination: '/us/fractional-jobs',
         permanent: false,
       },
       // HR → CHRO redirects
@@ -571,5 +572,8 @@ const withMDX = createMDX({
   },
 });
 
-// Export with MDX support
-export default withMDX(nextConfig);
+// Wrap config with next-intl support
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
+// Export with MDX and next-intl support
+export default withNextIntl(withMDX(nextConfig));

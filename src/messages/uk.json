@@ -1,0 +1,54 @@
+{
+  "common": {
+    "viewAllJobs": "View All UK Jobs",
+    "dayRate": "Day Rate",
+    "perDay": "/day",
+    "apply": "Apply Now",
+    "saveJob": "Save Job",
+    "viewDetails": "View Details",
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "onSite": "On-site",
+    "postedOn": "Posted",
+    "location": "Location",
+    "salary": "Salary",
+    "jobType": "Job Type"
+  },
+  "jobs": {
+    "allLocations": "All UK Locations",
+    "searchPlaceholder": "Search fractional jobs...",
+    "noJobsFound": "No jobs found matching your criteria",
+    "filterByDepartment": "Department",
+    "filterByLocation": "Location",
+    "filterByWorkType": "Work Type",
+    "showingJobs": "Showing {count} jobs"
+  },
+  "calculator": {
+    "ir35Title": "IR35 Take-Home Pay Calculator",
+    "taxStatusInside": "Inside IR35",
+    "taxStatusOutside": "Outside IR35",
+    "dayRateLabel": "Day Rate",
+    "daysPerWeekLabel": "Days per Week",
+    "annualEarnings": "Annual Earnings",
+    "takeHomePay": "Take-Home Pay",
+    "taxPaid": "Tax Paid",
+    "niContributions": "NI Contributions"
+  },
+  "meta": {
+    "siteName": "Fractional Quest",
+    "defaultTitle": "Fractional Jobs UK | Executive Roles £900-£1,500/day",
+    "defaultDescription": "Find fractional executive jobs in the UK. CFO, CTO, CMO, COO roles paying £900-£1,500 per day."
+  },
+  "navigation": {
+    "jobs": "Jobs",
+    "calculators": "Calculators",
+    "about": "About",
+    "contact": "Contact",
+    "selectCountry": "Select Country"
+  },
+  "footer": {
+    "copyright": "© {year} Fractional Quest. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
