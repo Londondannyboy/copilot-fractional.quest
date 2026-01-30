@@ -239,6 +239,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'interim-gtm-jobs-uk',
     'interim-growth-jobs-uk',
     'interim-general-counsel-jobs-uk',
+    // Director guides (Jan 2026)
+    'interim-hr-director',
+    'interim-marketing-director-guide',
+    'interim-sales-director',
+    'interim-operations-director',
+    'interim-manager',
+    // Manager-level roles
+    'interim-finance-manager',
+    'interim-operations-manager',
+    'interim-hr-manager',
+    'interim-product-manager',
+    // Support roles
+    'fractional-executive-assistant',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
@@ -325,13 +338,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const recruitmentAgencyPages: MetadataRoute.Sitemap = [
     'finance-recruitment-agency',
     'cfo-recruitment-agency',
+    'cfo-recruitment',
     'cto-recruitment-agency',
+    'cmo-recruitment-agency',
     'marketing-recruitment-agency',
     'digital-marketing-recruitment-agency',
     'technology-recruitment-agency',
     'fintech-recruitment-agency',
     'cybersecurity-recruitment-agency',
     'ciso-recruitment-agency',
+    'hr-director-recruitment',
+    'operations-director-recruitment',
+    'sales-director-recruitment',
+    // Industry verticals
+    'pharmaceutical-recruitment-agency',
+    'life-sciences-recruitment-agency',
+    'data-science-recruitment-agency',
+    'healthcare-recruitment-agency',
+    'product-management-recruitment',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
