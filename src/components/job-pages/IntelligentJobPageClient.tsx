@@ -247,27 +247,6 @@ function IntelligentHero({
 }
 
 // ============================================================================
-// LOADING SKELETON for lazy content
-// ============================================================================
-
-function ContentSkeleton() {
-  return (
-    <div className="animate-pulse space-y-8 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-4">
-            <div className="h-64 bg-gray-200 rounded-xl"></div>
-            <div className="h-64 bg-gray-200 rounded-xl"></div>
-          </div>
-          <div className="h-96 bg-gray-200 rounded-xl"></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ============================================================================
 // MAIN COMPONENT
 // ============================================================================
 
@@ -280,9 +259,9 @@ export function IntelligentJobPageClient({
   imageCategory = 'finance',
   roleFilter,
   accentColor = 'emerald',
-  locale = 'uk',
+  locale: _locale = 'uk',
 }: IntelligentJobPageClientProps) {
-  const [aiLoaded, setAiLoaded] = useState(false);
+  const [, setAiLoaded] = useState(false);
 
   // Get accent color value
   const accentColorValue = accentColor === 'emerald' ? "#059669" :
@@ -330,14 +309,9 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
         breadcrumb={seoContent.breadcrumb}
       />
 
-      {/* ============================================================== */}
-      {/* SEO CONTENT SECTION - Renders Server-Side for Search Engines   */}
-      {/* This section is OUTSIDE CopilotKitWrapper so it's SSR-safe     */}
-      {/* ============================================================== */}
-
-      {/* Statistics Banner - SSR */}
+      {/* Statistics Banner - Full width, SSR */}
       {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
-        <section className="py-8 bg-gray-50 border-y border-gray-200">
+        <section className="py-6 bg-gray-50 border-y border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <StatisticsPanel
               title={`${locationDisplay} Market Statistics`}
@@ -349,13 +323,94 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
         </section>
       )}
 
-      {/* Main SEO Content Section - SSR */}
-      <section className="py-12 bg-white">
+      {/* ============================================================== */}
+      {/* MAIN CONTENT SECTION - Unified 2-column layout with sidebar    */}
+      {/* Jobs at TOP, SEO content below, sidebar extends full height    */}
+      {/* ============================================================== */}
+      <section className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content Column */}
-            <div className="lg:col-span-2 space-y-10">
-              {/* SEO Content - Primary text content for search engines */}
+            <div className="lg:col-span-2 space-y-8">
+
+              {/* ====== JOB BOARDS - TOP OF PAGE ====== */}
+
+              {/* Hot Jobs - SSR, renders immediately */}
+              <HotJobs
+                location={location === "london" ? "London" : undefined}
+                maxJobs={8}
+                title={`Hot ${locationDisplay} Jobs`}
+              />
+
+              {/* Interactive Job Grid - Lazy loaded with CopilotKit */}
+              <Suspense fallback={
+                <div className="animate-pulse space-y-4">
+                  <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[...Array(6)].map((_, i) => (
+                      <div key={i} className="h-48 bg-gray-200 rounded-xl"></div>
+                    ))}
+                  </div>
+                </div>
+              }>
+                <CopilotKitWrapper
+                  instructions={agentInstructions}
+                  title="Fractional AI"
+                  initialMessage={`Hi! I can help you explore ${locationDisplay} fractional jobs. Try asking me to filter by role, show salary data, or find remote opportunities.`}
+                  accentColor={accentColorValue}
+                  initialJobs={initialJobs}
+                  onLoad={() => setAiLoaded(true)}
+                >
+                  <IntelligentDocument
+                    pageContext={pageContext}
+                    initialFilters={{
+                      location: location === 'london' ? 'London' : '',
+                      role: roleFilter || '',
+                    }}
+                  >
+                    {/* AI Greeting & Filters */}
+                    <div className="mb-6">
+                      <PersonalizedGreeting
+                        userRole={roleFilter}
+                        userLocation={locationDisplay}
+                      />
+                      <ActiveFilters />
+                    </div>
+
+                    {/* Live Job Grid */}
+                    <DocumentSection id="jobs" title={`${locationDisplay} Fractional Jobs`}>
+                      <LiveJobGrid
+                        location={location === 'london' ? 'London' : ''}
+                        role={roleFilter}
+                        limit={9}
+                      />
+                    </DocumentSection>
+
+                    {/* Live Market Chart */}
+                    <div className="mt-8">
+                      <DocumentSection id="salary" title={`${locationDisplay} Day Rates`}>
+                        <LiveMarketChart
+                          location={locationDisplay}
+                          role={roleFilter}
+                          type="bar"
+                        />
+                      </DocumentSection>
+                    </div>
+
+                    {/* Rate Calculator */}
+                    <div className="mt-8 bg-gray-50 rounded-xl p-6 border border-gray-200">
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                        {locationDisplay} Fractional Rate Calculator
+                      </h2>
+                      <RoleCalculator role="cfo" />
+                    </div>
+                  </IntelligentDocument>
+                </CopilotKitWrapper>
+              </Suspense>
+
+              {/* ====== SEO CONTENT - Renders Server-Side ====== */}
+
+              {/* Primary text content for search engines */}
               <div id="market">
                 <SEOContent content={seoContent.content} />
               </div>
@@ -398,26 +453,50 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
                 />
               )}
 
-              {/* Trust Signals - SSR for credibility */}
+              {/* ====== SOCIAL PROOF & MEDIA ====== */}
+
+              {/* Trust Signals */}
               <TrustSignals variant="compact" className="py-6" />
 
-              {/* Case Study - SSR for social proof */}
+              {/* Case Study */}
               <CaseStudy variant="grid" />
               <CaseStudySchema />
 
-              {/* Testimonials - SSR for social proof */}
+              {/* Testimonials */}
               <Testimonials variant="carousel" />
               <TestimonialsSchema />
 
-              {/* Expert Profile - SSR for E-E-A-T */}
+              {/* Video Section */}
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                  Fractional Executive Insights
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <LazyYouTube videoId="zxMG2m6yLdc" title="Fractional Executive Jobs - Market Overview" />
+                    <p className="text-sm text-gray-600 mt-2">Market Overview for Fractional Executives</p>
+                  </div>
+                  <div>
+                    <LazyYouTube videoId="m8UOqjRRHHk" title="How to Build a Portfolio Career" />
+                    <p className="text-sm text-gray-600 mt-2">Building a Portfolio Career in {locationDisplay}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ====== EMPLOYER CTA & EXPERT PROFILE - Bottom ====== */}
+
+              {/* Hey Companies - Employer CTA */}
+              <HeyCompanies location={locationDisplay} />
+
+              {/* Expert Profile - E-E-A-T */}
               <ExpertProfile />
               <ExpertProfileSchema />
               <TrustSignalsSchema />
             </div>
 
-            {/* Sidebar Column - SSR */}
+            {/* Sidebar Column - Sticky, extends full height */}
             <div className="hidden lg:block">
-              <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto scrollbar-thin">
+              <div className="sticky top-20">
                 <JobsSidebar
                   location={location}
                   locationDisplay={locationDisplay}
@@ -434,105 +513,6 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
           </div>
         </div>
       </section>
-
-      {/* ============================================================== */}
-      {/* INTERACTIVE SECTION - Lazy loaded with CopilotKit              */}
-      {/* This section loads after initial paint for better performance  */}
-      {/* ============================================================== */}
-      <Suspense fallback={<ContentSkeleton />}>
-        <CopilotKitWrapper
-          instructions={agentInstructions}
-          title="Fractional AI"
-          initialMessage={`Hi! I can help you explore ${locationDisplay} fractional jobs. Try asking me to filter by role, show salary data, or find remote opportunities.`}
-          accentColor={accentColorValue}
-          initialJobs={initialJobs}
-          onLoad={() => setAiLoaded(true)}
-        >
-          <IntelligentDocument
-            pageContext={pageContext}
-            initialFilters={{
-              location: location === 'london' ? 'London' : '',
-              role: roleFilter || '',
-            }}
-          >
-            {/* Personalized Greeting */}
-            <section className="py-6 bg-gray-50 border-t border-gray-200">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  Interactive Job Explorer
-                </h2>
-                <PersonalizedGreeting
-                  userRole={roleFilter}
-                  userLocation={locationDisplay}
-                />
-                <ActiveFilters />
-              </div>
-            </section>
-
-            {/* Live Market Chart */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <DocumentSection id="salary" title={`${locationDisplay} Day Rates`}>
-                <LiveMarketChart
-                  location={locationDisplay}
-                  role={roleFilter}
-                  type="bar"
-                />
-              </DocumentSection>
-            </div>
-
-            {/* Live Jobs Section */}
-            <section className="py-8 bg-white">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="space-y-8">
-                  {/* Live Job Grid */}
-                  <DocumentSection id="jobs" title={`${locationDisplay} Fractional Jobs`}>
-                    <LiveJobGrid
-                      location={location === 'london' ? 'London' : ''}
-                      role={roleFilter}
-                      limit={9}
-                    />
-                  </DocumentSection>
-
-                  {/* Hot Jobs */}
-                  <HotJobs
-                    location={location === "london" ? "London" : undefined}
-                    maxJobs={8}
-                    title={`Hot ${locationDisplay} Jobs`}
-                  />
-
-                  {/* Hey Companies - Employer CTA */}
-                  <HeyCompanies location={locationDisplay} />
-
-                  {/* Rate Calculator */}
-                  <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                      {locationDisplay} Fractional Rate Calculator
-                    </h2>
-                    <RoleCalculator role="cfo" />
-                  </div>
-
-                  {/* Video Section */}
-                  <div className="py-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                      Fractional Executive Insights
-                    </h2>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <LazyYouTube videoId="zxMG2m6yLdc" title="Fractional Executive Jobs - Market Overview" />
-                        <p className="text-sm text-gray-600 mt-2">Market Overview for Fractional Executives</p>
-                      </div>
-                      <div>
-                        <LazyYouTube videoId="m8UOqjRRHHk" title="How to Build a Portfolio Career" />
-                        <p className="text-sm text-gray-600 mt-2">Building a Portfolio Career in {locationDisplay}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </IntelligentDocument>
-        </CopilotKitWrapper>
-      </Suspense>
     </main>
   );
 }
