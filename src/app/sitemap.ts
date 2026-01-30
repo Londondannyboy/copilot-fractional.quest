@@ -321,6 +321,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
+  // Recruitment agency pages
+  const recruitmentAgencyPages: MetadataRoute.Sitemap = [
+    'finance-recruitment-agency',
+    'cfo-recruitment-agency',
+    'cto-recruitment-agency',
+    'marketing-recruitment-agency',
+    'digital-marketing-recruitment-agency',
+    'technology-recruitment-agency',
+    'fintech-recruitment-agency',
+    'cybersecurity-recruitment-agency',
+    'ciso-recruitment-agency',
+  ].map(slug => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }))
+
+  // Executive search pages
+  const executiveSearchPages: MetadataRoute.Sitemap = [
+    'executive-search-firms',
+    'fractional-executive-search',
+    'interim-executive-search',
+    'ciso-executive-search',
+  ].map(slug => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }))
+
   // ============================================
   // DYNAMIC PAGES - From database
   // ============================================
@@ -340,6 +371,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...caseStudyPages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...toolPages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...guidePages.map(p => p.url.replace(`${baseUrl}/`, '')),
+    ...recruitmentAgencyPages.map(p => p.url.replace(`${baseUrl}/`, '')),
+    ...executiveSearchPages.map(p => p.url.replace(`${baseUrl}/`, '')),
   ])
 
   // Dynamic pages from database (excluding redirects, noindex, and already-listed static pages)
@@ -482,6 +515,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...caseStudyPages,
     ...toolPages,
     ...guidePages,
+    ...recruitmentAgencyPages,
+    ...executiveSearchPages,
     ...dynamicPages,
     ...newsIndexPage,
     ...jobDetailPages,
