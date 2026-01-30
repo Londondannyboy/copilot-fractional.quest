@@ -7,18 +7,42 @@ import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { TableOfContents } from '@/components/TableOfContents'
 
 export const metadata: Metadata = {
-  title: 'Fractional COO Services UK',
-  description: 'Fractional COO services for UK businesses. Operations leadership 1-3 days/week. Process optimisation, scale-up support from £900/day.',
-  keywords: 'fractional coo services, fractional coo uk, part time coo, fractional operations director, outsourced coo services',
+  title: 'Fractional COO Services UK | Virtual COO & Part-Time Operations Leadership',
+  description: 'Fractional COO & Virtual COO services for UK businesses. Operations leadership 1-3 days/week. Process optimisation, scale-up support from £900/day. London, Manchester, Birmingham.',
+  keywords: 'fractional coo services, virtual coo, virtual coo services, fractional coo uk, part time coo, fractional operations director, outsourced coo services, coo as a service, operations leadership, operational transformation',
   alternates: { canonical: 'https://fractional.quest/fractional-coo-services' },
   openGraph: {
-    title: 'Fractional COO Services UK | Part-Time Operations Leadership',
+    title: 'Fractional COO Services UK | Virtual COO & Part-Time Operations Leadership',
     description: 'Get experienced COO leadership without full-time commitment. Operational transformation, process optimisation, scale-up support.',
     url: 'https://fractional.quest/fractional-coo-services',
   },
 }
+
+// Table of Contents items
+const tocItems = [
+  { id: 'service-areas', title: 'Service Areas' },
+  { id: 'engagement-models', title: 'Engagement Models & Pricing' },
+  { id: 'current-jobs', title: 'Current COO Jobs' },
+  { id: 'when-to-use', title: 'When to Use COO Services' },
+  { id: 'success-stories', title: 'Success Stories' },
+  { id: 'uk-locations', title: 'UK Locations' },
+  { id: 'resources', title: 'Professional Resources' },
+  { id: 'faq', title: 'FAQ' },
+]
+
+// Authority links for E-E-A-T
+const authorityLinks = [
+  { name: 'CMI', url: 'https://www.managers.org.uk', description: 'Chartered Management Institute', icon: '📋' },
+  { name: 'IoD', url: 'https://www.iod.com', description: 'Institute of Directors', icon: '🏛️' },
+  { name: 'CIPS', url: 'https://www.cips.org', description: 'Chartered Institute of Procurement & Supply', icon: '📦' },
+  { name: 'CIPD', url: 'https://www.cipd.org', description: 'Chartered Institute of Personnel and Development', icon: '👥' },
+  { name: 'APM', url: 'https://www.apm.org.uk', description: 'Association for Project Management', icon: '📊' },
+  { name: 'Lean Enterprise Academy', url: 'https://www.leanuk.org', description: 'Lean and operational excellence', icon: '⚙️' },
+]
 
 const SERVICE_FAQS = [
   { question: "What's included in fractional COO services?", answer: "Fractional COO services typically include: operational strategy development, process design and optimisation, team structure and hiring, KPI frameworks and reporting, vendor and supplier management, operational due diligence, and hands-on execution support. Scope is tailored to your specific needs." },
@@ -26,6 +50,11 @@ const SERVICE_FAQS = [
   { question: "What's the difference between fractional COO and consulting?", answer: "Consultants advise and produce reports. Fractional COOs are hands-on operators who become part of your leadership team. They attend board meetings, manage teams, make decisions, and are accountable for operational outcomes - not just recommendations." },
   { question: "How much do fractional COO services cost?", answer: "Fractional COO day rates in the UK range from £900-£1,300. A typical 2-day per week engagement costs £7,200-£10,400 per month (£86,000-£125,000 annually). This is 40-60% less than a full-time COO with benefits and equity." },
   { question: "When should a company use fractional COO services?", answer: "Ideal situations: scaling operations beyond founder capacity, preparing for fundraising or exit, post-merger integration, operational turnaround, implementing new systems or processes, or building operational foundations before hiring full-time." },
+  { question: "Where are your fractional COOs based?", answer: "Our fractional COOs are based across the UK, with strong presence in London (our largest market), Manchester, Birmingham, Leeds, Bristol, and Edinburgh. Most work hybrid arrangements combining remote work with on-site client days for hands-on operational work." },
+  { question: "What background do fractional COOs typically have?", answer: "Most have 15-25 years experience in operations, supply chain, or general management. Common backgrounds include: operations directors from scale-ups, consultants (McKinsey, Bain, etc.) who moved into line roles, ex-military logistics officers, and industry specialists (retail ops, manufacturing, service delivery). Look for proven transformation experience." },
+  { question: "Can a fractional COO help with M&A integration?", answer: "Absolutely - post-merger integration is a core fractional COO service. They lead the integration of operations, systems, teams, and processes. Many fractional COOs have led 5-10+ integrations and bring playbooks for common challenges like system consolidation, team restructuring, and culture alignment." },
+  { question: "How does a fractional COO work with the CEO?", answer: "The fractional COO becomes the CEO's operational partner. They take ownership of internal operations so the CEO can focus on strategy, customers, and growth. They attend leadership meetings, provide operational updates, flag risks, and execute on the CEO's vision. Clear scope and decision rights are agreed upfront." },
+  { question: "How quickly can a fractional COO make an impact?", answer: "Quick wins in 30 days (operational audit, low-hanging fruit improvements, KPI dashboard). Meaningful impact by 90 days (processes redesigned, team structure clarified, systems improvements underway). Significant ROI by 6 months (operational costs reduced, delivery quality improved, scalable foundations built)." },
 ]
 
 const SERVICES = [
@@ -41,6 +70,31 @@ const ENGAGEMENT_MODELS = [
   { name: 'Light Touch', days: '1 day/week', price: '£3,600-£5,200/month', description: 'Strategic oversight, monthly board participation, quarterly planning', best: 'Early-stage, founder-led operations' },
   { name: 'Standard', days: '2 days/week', price: '£7,200-£10,400/month', description: 'Active leadership, team management, process implementation', best: 'Scale-ups, operational transformation' },
   { name: 'Intensive', days: '3 days/week', price: '£10,800-£15,600/month', description: 'Deep involvement, hands-on execution, complex transformations', best: 'Turnarounds, M&A integration' },
+]
+
+// Success stories / case study placeholders
+const SUCCESS_STORIES = [
+  {
+    company: 'PE-Backed Services Business',
+    challenge: 'Rapid acquisition spree left 5 companies operating as silos with no unified operations',
+    solution: 'Fractional COO 3 days/week for 18 months',
+    results: ['Integrated 5 acquisitions', 'Unified operations platform', 'Reduced overhead by 25%', 'Achieved £4M EBITDA uplift'],
+    industry: 'Professional Services',
+  },
+  {
+    company: 'Scale-up Logistics Company',
+    challenge: 'Growing from 20 to 100 employees with founder still managing all operations',
+    solution: 'Fractional COO 2 days/week for 12 months',
+    results: ['Built operations team of 8', 'Implemented WMS system', 'Reduced delivery errors by 60%', 'Freed CEO for growth focus'],
+    industry: 'Logistics',
+  },
+  {
+    company: 'SaaS Customer Success',
+    challenge: 'Churn at 8% monthly, no defined processes, support tickets spiralling',
+    solution: 'Fractional COO 2 days/week for 9 months',
+    results: ['Churn reduced to 2%', 'NPS improved by 40 points', 'Support ticket backlog cleared', 'Playbooks for scale documented'],
+    industry: 'Technology',
+  },
 ]
 
 const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/fractional-jobs-uk' }, { label: 'Fractional COO Services', href: '/fractional-coo-services' }]
@@ -72,7 +126,30 @@ export default function FractionalCOOServicesPage() {
 
       <section className="bg-slate-900 py-6"><div className="max-w-6xl mx-auto px-6 lg:px-8"><div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"><div><div className="text-3xl font-black text-slate-300">£900-£1,300</div><div className="text-gray-400 text-sm">Day Rate Range</div></div><div><div className="text-3xl font-black text-slate-300">1-3 days</div><div className="text-gray-400 text-sm">Per Week</div></div><div><div className="text-3xl font-black text-slate-300">40-60%</div><div className="text-gray-400 text-sm">Cost Savings vs FT</div></div><div><div className="text-3xl font-black text-slate-300">3 months</div><div className="text-gray-400 text-sm">Typical Trial Period</div></div></div></div></section>
 
-      <section className="py-16 bg-white">
+      {/* Table of Contents */}
+      <section className="py-8 bg-white border-b">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <TableOfContents items={tocItems} title="On This Page" accentColor="slate" />
+            </div>
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+              <ul className="space-y-3">
+                {authorityLinks.slice(0, 4).map((link, idx) => (
+                  <li key={idx}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-slate-700 hover:text-slate-900 flex items-center gap-2">
+                      <span className="text-slate-500">→</span> {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="service-areas" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">What We Deliver</span>
@@ -90,7 +167,7 @@ export default function FractionalCOOServicesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-slate-50">
+      <section id="engagement-models" className="py-16 bg-slate-50">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Pricing</span>
@@ -114,11 +191,169 @@ export default function FractionalCOOServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white"><div className="max-w-4xl mx-auto px-6 lg:px-8"><article className="prose prose-lg prose-gray max-w-none"><h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional COO Services</h2><p className="text-xl text-gray-600 leading-relaxed mb-8">A <strong>fractional COO</strong> provides senior operations leadership without the cost and commitment of a full-time hire. This model works exceptionally well for growing companies that need operational expertise but aren't ready for a full-time C-suite operations leader.</p><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Ideal Situations for Fractional COO Services</h3><ul className="space-y-2 text-gray-600"><li><strong>Founder bandwidth</strong> - When founders are stretched thin managing operations</li><li><strong>Pre-fundraise</strong> - Building operational maturity before Series A/B</li><li><strong>Rapid growth</strong> - Scaling operations from 20 to 100+ employees</li><li><strong>Process chaos</strong> - Bringing structure to ad-hoc operations</li><li><strong>Post-acquisition</strong> - Integrating operations after M&A</li><li><strong>Turnaround</strong> - Fixing operational issues affecting performance</li></ul><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Fractional COO vs Full-Time vs Consulting</h3><div className="not-prose overflow-x-auto"><table className="min-w-full text-sm"><thead><tr className="border-b"><th className="text-left py-3 px-4">Aspect</th><th className="text-left py-3 px-4">Fractional COO</th><th className="text-left py-3 px-4">Full-Time COO</th><th className="text-left py-3 px-4">Consultant</th></tr></thead><tbody><tr className="border-b"><td className="py-3 px-4 font-semibold">Cost</td><td className="py-3 px-4">£85-125k/year</td><td className="py-3 px-4">£150-250k/year</td><td className="py-3 px-4">£100-200k/project</td></tr><tr className="border-b"><td className="py-3 px-4 font-semibold">Commitment</td><td className="py-3 px-4">1-3 days/week</td><td className="py-3 px-4">Full-time</td><td className="py-3 px-4">Project-based</td></tr><tr className="border-b"><td className="py-3 px-4 font-semibold">Accountability</td><td className="py-3 px-4">High - owns outcomes</td><td className="py-3 px-4">Highest</td><td className="py-3 px-4">Low - advises only</td></tr><tr><td className="py-3 px-4 font-semibold">Flexibility</td><td className="py-3 px-4">High - scale up/down</td><td className="py-3 px-4">Low</td><td className="py-3 px-4">Medium</td></tr></tbody></table></div><h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Services</h3><div className="grid md:grid-cols-2 gap-4 not-prose"><Link href="/fractional-coo-jobs-uk" className="p-4 border rounded-lg hover:border-slate-300 transition-colors"><h4 className="font-bold text-gray-900">Find Fractional COOs</h4><p className="text-sm text-gray-600">Browse available fractional COOs</p></Link><Link href="/hire-fractional-coo" className="p-4 border rounded-lg hover:border-slate-300 transition-colors"><h4 className="font-bold text-gray-900">How to Hire</h4><p className="text-sm text-gray-600">Guide to hiring a fractional COO</p></Link><Link href="/fractional-coo-salary" className="p-4 border rounded-lg hover:border-slate-300 transition-colors"><h4 className="font-bold text-gray-900">COO Salary Guide</h4><p className="text-sm text-gray-600">Day rates and benchmarks</p></Link><Link href="/fractional-coo" className="p-4 border rounded-lg hover:border-slate-300 transition-colors"><h4 className="font-bold text-gray-900">What is a Fractional COO?</h4><p className="text-sm text-gray-600">Understanding the role</p></Link></div></article></div></section>
+      {/* Job Board Section */}
+      <section id="current-jobs" className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="mb-8 text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Opportunities</span>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900">Current Fractional COO Jobs</h2>
+          </div>
+          <EmbeddedJobBoard defaultDepartment="Operations" title="" accentColor="slate" jobsPerPage={6} />
+        </div>
+      </section>
 
-      <section className="py-20 bg-slate-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional COO Services</h2></div><FAQ items={SERVICE_FAQS} title="" /></div></section>
+      <section id="when-to-use" className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <article className="prose prose-lg prose-gray max-w-none">
+            <h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional COO Services</h2>
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">A <strong>fractional COO</strong> provides senior operations leadership without the cost and commitment of a full-time hire. This model works exceptionally well for growing companies that need operational expertise but aren&apos;t ready for a full-time C-suite operations leader.</p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Virtual COO vs Fractional COO - What&apos;s the Difference?</h3>
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              <strong>Virtual COO</strong> and <strong>fractional COO</strong> are essentially the same thing - both refer to a part-time Chief Operating Officer who provides operational leadership on a retained basis. The &quot;virtual&quot; term gained popularity with remote work, highlighting that operations leaders can drive results without being on-site every day. Whether you search for virtual COO services or fractional COO services, you&apos;re looking for the same solution: experienced operations leadership without full-time cost.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Ideal Situations for Fractional COO Services</h3>
+            <ul className="space-y-2 text-gray-600">
+              <li><strong>Founder bandwidth</strong> - When founders are stretched thin managing operations</li>
+              <li><strong>Pre-fundraise</strong> - Building operational maturity before Series A/B</li>
+              <li><strong>Rapid growth</strong> - Scaling operations from 20 to 100+ employees</li>
+              <li><strong>Process chaos</strong> - Bringing structure to ad-hoc operations</li>
+              <li><strong>Post-acquisition</strong> - Integrating operations after M&A</li>
+              <li><strong>Turnaround</strong> - Fixing operational issues affecting performance</li>
+            </ul>
+
+            <h3 id="uk-locations" className="text-2xl font-bold text-gray-900 mt-12 mb-4">UK Locations We Serve</h3>
+            <p>Our fractional COOs operate across the UK, with particular strength in:</p>
+            <div className="grid md:grid-cols-3 gap-4 not-prose my-6">
+              <Link href="/fractional-jobs-london" className="p-4 border rounded-lg hover:border-slate-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">London</h4>
+                <p className="text-sm text-gray-600">Our largest market - scale-ups, PE portfolio</p>
+              </Link>
+              <Link href="/manchester" className="p-4 border rounded-lg hover:border-slate-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">Manchester</h4>
+                <p className="text-sm text-gray-600">Growing tech and services hub</p>
+              </Link>
+              <Link href="/birmingham" className="p-4 border rounded-lg hover:border-slate-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">Birmingham</h4>
+                <p className="text-sm text-gray-600">Manufacturing, logistics, services</p>
+              </Link>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Fractional COO vs Full-Time vs Consulting</h3>
+            <div className="not-prose overflow-x-auto">
+              <table className="min-w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-3 px-4">Aspect</th>
+                    <th className="text-left py-3 px-4">Fractional COO</th>
+                    <th className="text-left py-3 px-4">Full-Time COO</th>
+                    <th className="text-left py-3 px-4">Consultant</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b"><td className="py-3 px-4 font-semibold">Cost</td><td className="py-3 px-4">£85-125k/year</td><td className="py-3 px-4">£150-250k/year</td><td className="py-3 px-4">£100-200k/project</td></tr>
+                  <tr className="border-b"><td className="py-3 px-4 font-semibold">Commitment</td><td className="py-3 px-4">1-3 days/week</td><td className="py-3 px-4">Full-time</td><td className="py-3 px-4">Project-based</td></tr>
+                  <tr className="border-b"><td className="py-3 px-4 font-semibold">Accountability</td><td className="py-3 px-4">High - owns outcomes</td><td className="py-3 px-4">Highest</td><td className="py-3 px-4">Low - advises only</td></tr>
+                  <tr><td className="py-3 px-4 font-semibold">Flexibility</td><td className="py-3 px-4">High - scale up/down</td><td className="py-3 px-4">Low</td><td className="py-3 px-4">Medium</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Related Services</h3>
+            <div className="grid md:grid-cols-2 gap-4 not-prose">
+              <Link href="/fractional-coo-jobs-uk" className="p-4 border rounded-lg hover:border-slate-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">Find Fractional COOs</h4>
+                <p className="text-sm text-gray-600">Browse available fractional COOs</p>
+              </Link>
+              <Link href="/hire-fractional-coo" className="p-4 border rounded-lg hover:border-slate-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">How to Hire</h4>
+                <p className="text-sm text-gray-600">Guide to hiring a fractional COO</p>
+              </Link>
+              <Link href="/fractional-coo-salary" className="p-4 border rounded-lg hover:border-slate-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">COO Salary Guide</h4>
+                <p className="text-sm text-gray-600">Day rates and benchmarks</p>
+              </Link>
+              <Link href="/fractional-coo" className="p-4 border rounded-lg hover:border-slate-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">What is a Fractional COO?</h4>
+                <p className="text-sm text-gray-600">Understanding the role</p>
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* Success Stories Section */}
+      <section id="success-stories" className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Results</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Success Stories</h2>
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">Real examples of how fractional COO services have transformed businesses</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {SUCCESS_STORIES.map((story, index) => (
+              <div key={index} className="bg-slate-50 border border-slate-200 rounded-xl p-8">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">{story.industry}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{story.company}</h3>
+                <div className="mb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-1">Challenge:</div>
+                  <p className="text-sm text-gray-600">{story.challenge}</p>
+                </div>
+                <div className="mb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-1">Solution:</div>
+                  <p className="text-sm text-gray-600">{story.solution}</p>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-gray-700 mb-2">Results:</div>
+                  <ul className="space-y-1">
+                    {story.results.map((result, idx) => (
+                      <li key={idx} className="text-sm text-slate-800 flex items-start gap-2">
+                        <span className="text-slate-600 mt-0.5">✓</span>
+                        {result}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* External Authority Links */}
+      <section id="resources" className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <h2 className="text-2xl font-black text-gray-900 mb-8">Professional Resources</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {authorityLinks.map((link, idx) => (
+              <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-slate-300 transition-colors group">
+                <span className="text-lg">{link.icon}</span>
+                <div>
+                  <h4 className="font-semibold text-gray-900 group-hover:text-slate-700 text-sm">{link.name}</h4>
+                  <p className="text-gray-500 text-xs">{link.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="py-20 bg-slate-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional COO Services</h2></div><FAQ items={SERVICE_FAQS} title="" /></div></section>
 
       <ExpertProfile /><ExpertProfileSchema /><CaseStudy /><CaseStudySchema />
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gray-900 text-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to Get Started with Fractional COO Services?</h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Connect with experienced fractional COOs who can transform your operations. London, Manchester, Birmingham and across the UK.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link href="/fractional-coo-jobs-uk" className="px-8 py-4 bg-slate-500 text-white font-bold rounded-lg hover:bg-slate-400 transition-colors">Find Fractional COOs</Link>
+            <Link href="/fractional-jobs-london" className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors">London COO Jobs</Link>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

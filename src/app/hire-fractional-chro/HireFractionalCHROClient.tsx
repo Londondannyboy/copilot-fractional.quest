@@ -13,6 +13,30 @@ import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
 import Image from "next/image";
 import { getHeroImageUrl, getImage } from '@/lib/images';
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { TableOfContents } from '@/components/TableOfContents'
+
+// Table of Contents items for SEO
+const tocItems = [
+  { id: 'where-to-find', title: 'Where to Find Fractional CHROs' },
+  { id: 'what-to-look-for', title: 'What to Look For' },
+  { id: 'interview-questions', title: 'Interview Questions' },
+  { id: 'hiring-process', title: 'Hiring Process' },
+  { id: 'contract-terms', title: 'Contract Terms' },
+  { id: 'cost-comparison', title: 'Cost Comparison' },
+  { id: 'browse-candidates', title: 'Browse Candidates' },
+  { id: 'faq', title: 'FAQ' },
+]
+
+// External authority links for E-E-A-T (CHRO-specific)
+const authorityLinks = [
+  { name: 'CIPD', url: 'https://www.cipd.org', description: 'Chartered Institute of Personnel & Development' },
+  { name: 'ACAS', url: 'https://www.acas.org.uk', description: 'Advisory, Conciliation and Arbitration Service' },
+  { name: 'GOV.UK Employment', url: 'https://www.gov.uk/browse/employing-people', description: 'UK employment law guidance' },
+  { name: 'HR Magazine', url: 'https://www.hrmagazine.co.uk', description: 'UK HR industry publication' },
+  { name: 'People Management', url: 'https://www.peoplemanagement.co.uk', description: 'CIPD publication' },
+  { name: 'SHRM', url: 'https://www.shrm.org', description: 'Society for Human Resource Management' },
+]
 
 const faqItems: FAQItem[] = [
   { question: 'How long does it take to hire a fractional CHRO?', answer: 'Typically 2-4 weeks from first conversations to start date. This includes defining requirements (1-3 days), sourcing candidates (3-7 days), interviews (1-2 weeks), and onboarding (1 week). Much faster than hiring a full-time CHRO.' },
@@ -133,12 +157,36 @@ Key facts: Day rates £600-£1,100 | 2-4 weeks to hire | 3-month trial standard`
             </div>
           </section>
 
+          {/* Table of Contents */}
+          <section className="py-8 bg-white border-b">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="grid lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2">
+                  <TableOfContents items={tocItems} title="In This Guide" accentColor="purple" />
+                </div>
+                <div className="bg-purple-50 border border-purple-200 rounded-xl p-6">
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+                  <ul className="space-y-3">
+                    {authorityLinks.slice(0, 4).map((link, idx) => (
+                      <li key={idx}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-purple-600 hover:text-purple-800 flex items-center gap-2">
+                          <span className="text-purple-400">→</span> {link.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Where to Find */}
-          <section className="py-24 bg-white">
+          <section id="where-to-find" className="py-24 bg-white">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <div className="mb-16 text-center max-w-3xl mx-auto">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Sourcing</span>
                 <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Where to Find Fractional CHROs</h2>
+                <p className="text-xl text-gray-600">Six proven channels for finding pre-vetted, experienced fractional HR leaders.</p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {sourcingChannels.map((source, index) => (
@@ -155,11 +203,12 @@ Key facts: Day rates £600-£1,100 | 2-4 weeks to hire | 3-month trial standard`
           </section>
 
           {/* Evaluation Criteria */}
-          <section className="py-24 bg-gray-50">
+          <section id="what-to-look-for" className="py-24 bg-gray-50">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-16">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Evaluation</span>
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">What to Look For</h2>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Evaluation Criteria</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">What to Look For in a Fractional CHRO</h2>
+                <p className="text-xl text-gray-600 max-w-3xl">Not all experienced HR leaders make good fractional CHROs. Here's what separates the best from the rest.</p>
               </div>
               <div className="space-y-8">
                 {evaluationCriteria.map((item, index) => (
@@ -176,18 +225,183 @@ Key facts: Day rates £600-£1,100 | 2-4 weeks to hire | 3-month trial standard`
             </div>
           </section>
 
-          {/* Process */}
-          <section id="process" className="py-24 bg-white">
+          {/* Interview Questions */}
+          <section id="interview-questions" className="py-24 bg-white">
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+              <div className="mb-16">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Interview Guide</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Interview Questions to Ask</h2>
+                <p className="text-xl text-gray-600 max-w-3xl">These questions separate strategic HR leaders from administrators. Use them to assess expertise, results, and fit.</p>
+              </div>
+              <div className="space-y-8">
+                <div className="bg-purple-50 border-2 border-purple-200 p-10 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">👥 People & Culture Questions</h3>
+                  <ul className="space-y-4">
+                    <li className="text-gray-700"><strong className="text-gray-900">"Walk me through how you've built culture at a scaling company. What worked and what didn't?"</strong><br/><span className="text-sm text-gray-600">Listen for: Specific initiatives, measurable engagement results, lessons learned</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you approach employee retention during rapid growth?"</strong><br/><span className="text-sm text-gray-600">Listen for: Data-driven approach, proactive vs reactive, career development focus</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"Tell me about a difficult employee relations situation you handled."</strong><br/><span className="text-sm text-gray-600">Listen for: Employment law knowledge, fairness, clear process, outcome</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you balance business needs with employee advocacy?"</strong><br/><span className="text-sm text-gray-600">Listen for: Understanding of both perspectives, examples of navigating tension</span></li>
+                  </ul>
+                </div>
+                <div className="bg-purple-50 border-2 border-purple-200 p-10 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">📋 HR Operations Questions</h3>
+                  <ul className="space-y-4">
+                    <li className="text-gray-700"><strong className="text-gray-900">"What HR systems and processes would you prioritize for a company at our stage?"</strong><br/><span className="text-sm text-gray-600">Listen for: Stage-appropriate thinking, not over-engineering, pragmatic priorities</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you approach performance management? Walk me through a system you've built."</strong><br/><span className="text-sm text-gray-600">Listen for: Modern approaches, clear frameworks, continuous vs annual review</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"Tell me about your experience with compensation and benefits strategy."</strong><br/><span className="text-sm text-gray-600">Listen for: Benchmarking methodology, equity vs cash trade-offs, market awareness</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you ensure HR compliance without slowing down the business?"</strong><br/><span className="text-sm text-gray-600">Listen for: Balance of risk vs speed, practical compliance, prioritization</span></li>
+                  </ul>
+                </div>
+                <div className="bg-purple-50 border-2 border-purple-200 p-10 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">🚀 Talent & Growth Questions</h3>
+                  <ul className="space-y-4">
+                    <li className="text-gray-700"><strong className="text-gray-900">"How would you structure our talent acquisition function?"</strong><br/><span className="text-sm text-gray-600">Listen for: In-house vs agency, employer branding, process design</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"Tell me about a time you had to rapidly scale a team. What was your approach?"</strong><br/><span className="text-sm text-gray-600">Listen for: Hiring process, quality vs speed balance, onboarding</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you approach leadership development and succession planning?"</strong><br/><span className="text-sm text-gray-600">Listen for: Long-term thinking, practical programs, manager training</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you stay effective working 2 days/week vs embedded full-time?"</strong><br/><span className="text-sm text-gray-600">Listen for: Async communication, clear frameworks, delegation</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Hiring Process */}
+          <section id="hiring-process" className="py-24 bg-gray-50">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-12 text-center">
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">The Hiring Process</h2>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Process</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">The Fractional CHRO Hiring Process</h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">From first conversation to start date in 2-4 weeks.</p>
               </div>
               <HireProcessStepper accentColor="purple" />
+              <div className="mt-16 bg-purple-50 border-2 border-purple-200 p-10 rounded-lg">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Timeline Breakdown</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div><h4 className="font-bold text-gray-900 mb-2">Week 1: Define & Source</h4><ul className="text-sm text-gray-700 space-y-1"><li>• Define HR requirements (Day 1-2)</li><li>• Post on job boards, ask for referrals (Day 2-3)</li><li>• Review candidates, shortlist 5-10 (Day 4-7)</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Week 2-3: Interview & Select</h4><ul className="text-sm text-gray-700 space-y-1"><li>• First-round interviews (45-min calls)</li><li>• Second round: case study or scenario</li><li>• Reference checks (2-3 calls)</li><li>• Make offer and negotiate terms</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Week 4: Onboard & Start</h4><ul className="text-sm text-gray-700 space-y-1"><li>• Contract signing and admin setup</li><li>• Share HR systems access and docs</li><li>• First week: stakeholder interviews</li><li>• Begin HR audit and strategy work</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">First 90 Days: Deliver</h4><ul className="text-sm text-gray-700 space-y-1"><li>• Month 1: HR audit, quick wins</li><li>• Month 2: Process improvements, systems</li><li>• Month 3: Scale, hire, measure results</li><li>• Decide to extend or part ways</li></ul></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Contract Terms */}
+          <section id="contract-terms" className="py-24 bg-white">
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+              <div className="mb-16">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Contracts</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Contract Terms & Structure</h2>
+                <p className="text-xl text-gray-600 max-w-3xl">Standard terms for fractional CHRO engagements.</p>
+              </div>
+              <div className="bg-gray-50 border-2 border-gray-200 p-10 rounded-lg">
+                <h3 className="text-2xl font-bold text-gray-900 mt-0 mb-6">Standard Contract Template</h3>
+                <div className="space-y-6">
+                  <div><h4 className="font-bold text-gray-900 mb-2">Engagement Model</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Day rate:</strong> £600-£1,100 per day (based on experience)</li><li><strong>Commitment:</strong> 1-3 days per week (specify exact days)</li><li><strong>Monthly retainer option:</strong> £2,400-£4,400 for predictable billing</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Term & Notice</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Initial term:</strong> 3-month trial period</li><li><strong>Renewal:</strong> Auto-renew to 12-month rolling contract after trial</li><li><strong>Notice period:</strong> 30 days either side (standard)</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Scope of Work</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Responsibilities:</strong> HR strategy, people operations, culture development, employment law compliance</li><li><strong>Deliverables:</strong> HR audit, people strategy, process documentation, team development</li><li><strong>Exclusions:</strong> Day-to-day HR admin (unless scoped), individual contributor work</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">IP & Confidentiality</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>IP ownership:</strong> Company owns all HR documentation and systems</li><li><strong>Confidentiality:</strong> Standard NDA terms, survives termination (employee data critical)</li><li><strong>Non-compete:</strong> Usually not applicable (fractional works with multiple companies)</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Optional: Equity</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Advisory shares:</strong> 0.1-0.25% for long-term engagements (12+ months)</li><li><strong>Vesting:</strong> Quarterly or annual vesting</li><li><strong>Cash reduction:</strong> If equity included, day rate may reduce 10-15%</li></ul></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Cost Comparison */}
+          <section id="cost-comparison" className="py-24 bg-gray-50">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="mb-16 text-center">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Investment</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Cost Comparison: Fractional vs Full-Time vs HR Consultancy</h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">Understand the total cost of each CHRO hiring option for your business.</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse bg-white rounded-xl shadow-sm overflow-hidden">
+                  <thead>
+                    <tr className="bg-purple-600 text-white">
+                      <th className="px-6 py-4 text-left font-bold">Cost Factor</th>
+                      <th className="px-6 py-4 text-center font-bold">Fractional CHRO</th>
+                      <th className="px-6 py-4 text-center font-bold">Full-Time CHRO</th>
+                      <th className="px-6 py-4 text-center font-bold">HR Consultancy</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Annual Cost</td>
+                      <td className="px-6 py-4 text-center text-purple-700 font-bold">£50k - £100k</td>
+                      <td className="px-6 py-4 text-center text-gray-600">£120k - £200k</td>
+                      <td className="px-6 py-4 text-center text-gray-600">£80k - £250k</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Days per Week</td>
+                      <td className="px-6 py-4 text-center text-purple-700">1-3 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">5 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Project-based</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Notice Period</td>
+                      <td className="px-6 py-4 text-center text-purple-700">30 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">3-6 months</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Contract end</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Employer NI/Benefits</td>
+                      <td className="px-6 py-4 text-center text-green-600">None</td>
+                      <td className="px-6 py-4 text-center text-red-600">£25k - £40k</td>
+                      <td className="px-6 py-4 text-center text-green-600">None</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Equity Required</td>
+                      <td className="px-6 py-4 text-center text-green-600">Optional (0.1-0.25%)</td>
+                      <td className="px-6 py-4 text-center text-red-600">0.3-1%</td>
+                      <td className="px-6 py-4 text-center text-green-600">None</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Time to Hire</td>
+                      <td className="px-6 py-4 text-center text-purple-700">2-4 weeks</td>
+                      <td className="px-6 py-4 text-center text-gray-600">3-6 months</td>
+                      <td className="px-6 py-4 text-center text-gray-600">2-4 weeks</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Cross-Industry Experience</td>
+                      <td className="px-6 py-4 text-center text-green-600">High (multiple clients)</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Limited</td>
+                      <td className="px-6 py-4 text-center text-green-600">High</td>
+                    </tr>
+                    <tr className="bg-purple-100">
+                      <td className="px-6 py-4 font-bold text-gray-900">Best For</td>
+                      <td className="px-6 py-4 text-center text-purple-700 font-medium">Scale-ups needing strategic HR leadership</td>
+                      <td className="px-6 py-4 text-center text-gray-600 font-medium">Large orgs with 200+ employees</td>
+                      <td className="px-6 py-4 text-center text-gray-600 font-medium">One-off HR projects</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-8 text-center">
+                <p className="text-gray-600">Sources: <a href="https://www.glassdoor.co.uk" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:text-purple-800 underline">Glassdoor UK</a>, <a href="https://www.cipd.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:text-purple-800 underline">CIPD Salary Survey</a>, Market research</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Browse CHRO Candidates */}
+          <section id="browse-candidates" className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Find Talent</span>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Browse CHRO Candidates</h2>
+                <p className="text-xl text-gray-500">Connect with experienced fractional CHROs seeking new opportunities</p>
+              </div>
+              <EmbeddedJobBoard
+                defaultDepartment="HR"
+                title="Available CHRO Talent"
+                accentColor="purple"
+                jobsPerPage={6}
+              />
             </div>
           </section>
 
           {/* FAQ */}
-          <section className="py-20 bg-gray-50">
+          <section id="faq" className="py-20 bg-gray-50">
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
               <h2 className="text-3xl font-black text-gray-900 mb-8">Frequently Asked Questions</h2>
               <FAQ items={faqItems} title="" skipSchema={true} />
@@ -198,8 +412,58 @@ Key facts: Day rates £600-£1,100 | 2-4 weeks to hire | 3-month trial standard`
           <section className="py-20 bg-purple-600 text-white">
             <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
               <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to Hire?</h2>
-              <p className="text-xl text-purple-100 mb-10">Browse pre-vetted fractional CHRO candidates on Fractional.Quest.</p>
-              <Link href="/fractional-chro-jobs-uk" className="px-10 py-5 bg-white text-purple-600 font-bold uppercase tracking-wider hover:bg-purple-50 transition-colors inline-block">Browse CHRO Candidates</Link>
+              <p className="text-xl text-purple-100 mb-10 max-w-2xl mx-auto">Browse pre-vetted fractional CHRO candidates on Fractional.Quest. Post your role and start interviews this week.</p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Link href="/fractional-chro-jobs-uk" className="px-10 py-5 bg-white text-purple-600 font-bold uppercase tracking-wider hover:bg-purple-50 transition-colors">Browse CHRO Candidates</Link>
+                <Link href="/contact" className="px-10 py-5 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-purple-600 transition-colors">Post Your Role</Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Related Links */}
+          <section className="py-16 bg-white border-t border-gray-200">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="mb-8">
+                <h2 className="text-2xl font-black text-gray-900 mb-2">Related Resources</h2>
+                <p className="text-gray-600">Explore more fractional executive hiring guides and resources</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* CHRO Resources */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">CHRO Resources</h3>
+                  <ul className="space-y-2">
+                    <li><Link href="/fractional-chro" className="text-gray-600 hover:text-purple-600 transition-colors">What is a Fractional CHRO?</Link></li>
+                    <li><Link href="/fractional-chro-salary" className="text-gray-600 hover:text-purple-600 transition-colors">CHRO Salary & Day Rates</Link></li>
+                    <li><Link href="/fractional-chro-services" className="text-gray-600 hover:text-purple-600 transition-colors">CHRO Services</Link></li>
+                    <li><Link href="/fractional-chro-jobs-uk" className="text-gray-600 hover:text-purple-600 transition-colors">CHRO Jobs UK</Link></li>
+                    <li><Link href="/interim-chro-jobs-uk" className="text-gray-600 hover:text-purple-600 transition-colors">Interim CHRO Jobs</Link></li>
+                  </ul>
+                </div>
+                {/* Other C-Suite Hiring */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Hire Other C-Suite</h3>
+                  <ul className="space-y-2">
+                    <li><Link href="/hire-fractional-cfo" className="text-gray-600 hover:text-purple-600 transition-colors">Hire a Fractional CFO</Link></li>
+                    <li><Link href="/hire-fractional-cto" className="text-gray-600 hover:text-purple-600 transition-colors">Hire a Fractional CTO</Link></li>
+                    <li><Link href="/hire-fractional-cmo" className="text-gray-600 hover:text-purple-600 transition-colors">Hire a Fractional CMO</Link></li>
+                    <li><Link href="/hire-fractional-coo" className="text-gray-600 hover:text-purple-600 transition-colors">Hire a Fractional COO</Link></li>
+                    <li><Link href="/hire-fractional-ceo" className="text-gray-600 hover:text-purple-600 transition-colors">Hire a Fractional CEO</Link></li>
+                  </ul>
+                </div>
+                {/* External Resources */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+                  <ul className="space-y-2">
+                    {authorityLinks.map((link, idx) => (
+                      <li key={idx}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-purple-600 transition-colors flex items-center gap-1">
+                          {link.name} <span className="text-gray-400 text-xs">↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </section>
         </div>

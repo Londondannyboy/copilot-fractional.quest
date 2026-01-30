@@ -14,6 +14,29 @@ import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { HireProcessStepper } from "@/components/HireProcessStepper";
 import { getHeroImageUrl, getImage } from '@/lib/images';
+import { TableOfContents } from '@/components/TableOfContents'
+
+// Table of Contents items for SEO
+const tocItems = [
+  { id: 'where-to-find', title: 'Where to Find Fractional CTOs' },
+  { id: 'what-to-look-for', title: 'What to Look For' },
+  { id: 'interview-questions', title: 'Interview Questions' },
+  { id: 'hiring-process', title: 'Hiring Process' },
+  { id: 'contract-terms', title: 'Contract Terms' },
+  { id: 'cost-comparison', title: 'Cost Comparison' },
+  { id: 'browse-candidates', title: 'Browse Candidates' },
+  { id: 'faq', title: 'FAQ' },
+]
+
+// External authority links for E-E-A-T (CTO-specific)
+const authorityLinks = [
+  { name: 'BCS (British Computer Society)', url: 'https://www.bcs.org', description: 'Chartered Institute for IT' },
+  { name: 'IET (Institution of Engineering)', url: 'https://www.theiet.org', description: 'Engineering and technology body' },
+  { name: 'Tech Nation', url: 'https://technation.io', description: 'UK tech ecosystem data' },
+  { name: 'CTO Craft', url: 'https://ctocraft.com', description: 'CTO community and resources' },
+  { name: 'InfoQ', url: 'https://www.infoq.com', description: 'Software development news' },
+  { name: 'ThoughtWorks Technology Radar', url: 'https://www.thoughtworks.com/radar', description: 'Technology trends' },
+]
 
 const faqItems: FAQItem[] = [
   { question: 'How long does it take to hire a fractional CTO?', answer: 'Typically 2-4 weeks from first conversations to start date. This includes: defining requirements (1-3 days), sourcing candidates (3-7 days), interviews (1-2 weeks), and onboarding (1 week). Much faster than the 3-6 months required for full-time CTO recruitment.' },
@@ -124,7 +147,7 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
                 <div className="flex flex-wrap items-center gap-4">
                   <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'hiring_guide', roleType: 'CTO', pageH1: 'Hire a Fractional CTO', pageUrl: '/hire-fractional-cto', pageDescription: 'Complete guide to hiring a fractional CTO' }} />
                   <Link href="/fractional-cto-jobs-uk" className="px-8 py-4 bg-white text-cyan-600 font-bold uppercase tracking-wider hover:bg-cyan-50 transition-colors">Browse CTO Candidates</Link>
-                  <Link href="#process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-cyan-600 transition-colors">See Hiring Process</Link>
+                  <Link href="#hiring-process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-cyan-600 transition-colors">See Hiring Process</Link>
                 </div>
               </div>
 
@@ -148,8 +171,31 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
             </div>
           </section>
 
+          {/* Table of Contents */}
+          <section className="py-8 bg-white border-b">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="grid lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2">
+                  <TableOfContents items={tocItems} title="In This Guide" accentColor="cyan" />
+                </div>
+                <div className="bg-cyan-50 border border-cyan-200 rounded-xl p-6">
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+                  <ul className="space-y-3">
+                    {authorityLinks.slice(0, 4).map((link, idx) => (
+                      <li key={idx}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-cyan-600 hover:text-cyan-800 flex items-center gap-2">
+                          <span className="text-cyan-400">-&gt;</span> {link.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Where to Find */}
-          <section className="py-24 bg-white">
+          <section id="where-to-find" className="py-24 bg-white">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <div className="mb-16 text-center max-w-3xl mx-auto">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Sourcing</span>
@@ -174,7 +220,7 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
           </section>
 
           {/* What to Look For */}
-          <section className="py-24 bg-gray-50">
+          <section id="what-to-look-for" className="py-24 bg-gray-50">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-16">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Evaluation Criteria</span>
@@ -196,20 +242,166 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
             </div>
           </section>
 
+          {/* Interview Questions */}
+          <section id="interview-questions" className="py-24 bg-white">
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+              <div className="mb-16">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Interview Guide</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Interview Questions to Ask</h2>
+                <p className="text-xl text-gray-600 max-w-3xl">These questions separate strategic CTOs from individual contributors.</p>
+              </div>
+              <div className="space-y-8">
+                <div className="bg-cyan-50 border-2 border-cyan-200 p-10 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Architecture & Technical Questions</h3>
+                  <ul className="space-y-4">
+                    <li className="text-gray-700"><strong className="text-gray-900">"Walk me through how you architected [System X]. What trade-offs did you make and why?"</strong><br/><span className="text-sm text-gray-600">Listen for: Clear reasoning, pragmatic trade-offs, understanding of constraints</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you decide between build vs buy for a key system component?"</strong><br/><span className="text-sm text-gray-600">Listen for: ROI thinking, time-to-market considerations, maintenance cost awareness</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"Tell me about a time you had to deal with significant technical debt. How did you prioritize?"</strong><br/><span className="text-sm text-gray-600">Listen for: Business alignment, pragmatic approach, incremental improvement</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you approach security and compliance in system design?"</strong><br/><span className="text-sm text-gray-600">Listen for: Security-first mindset, understanding of regulatory requirements</span></li>
+                  </ul>
+                </div>
+                <div className="bg-cyan-50 border-2 border-cyan-200 p-10 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Scaling & Growth Questions</h3>
+                  <ul className="space-y-4">
+                    <li className="text-gray-700"><strong className="text-gray-900">"What technical systems need to be in place for a company at our stage?"</strong><br/><span className="text-sm text-gray-600">Listen for: Stage-appropriate thinking, not over-engineering, pragmatic priorities</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you structure an engineering team for a company with [X] engineers?"</strong><br/><span className="text-sm text-gray-600">Listen for: Understanding of team dynamics, scaling patterns, reporting structures</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"Tell me about a time you scaled a system from handling X to 10X or 100X load."</strong><br/><span className="text-sm text-gray-600">Listen for: Specific technical solutions, monitoring approach, incremental scaling</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you balance feature development with platform/infrastructure work?"</strong><br/><span className="text-sm text-gray-600">Listen for: Business alignment, stakeholder communication, prioritization frameworks</span></li>
+                  </ul>
+                </div>
+                <div className="bg-purple-50 border-2 border-purple-200 p-10 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Leadership & Team Questions</h3>
+                  <ul className="space-y-4">
+                    <li className="text-gray-700"><strong className="text-gray-900">"How would you structure hiring for our engineering team over the next 12 months?"</strong><br/><span className="text-sm text-gray-600">Listen for: Stage-appropriate team structure, clear hiring priorities</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you evaluate engineers and set up performance management?"</strong><br/><span className="text-sm text-gray-600">Listen for: Clear frameworks, growth mindset, feedback culture</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"Tell me about translating business requirements to engineering priorities with non-technical stakeholders."</strong><br/><span className="text-sm text-gray-600">Listen for: Communication skills, business understanding, stakeholder management</span></li>
+                    <li className="text-gray-700"><strong className="text-gray-900">"How do you stay effective working 2 days/week vs embedded full-time?"</strong><br/><span className="text-sm text-gray-600">Listen for: Async communication, clear frameworks, delegation</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Hiring Process */}
-          <section id="process" className="py-24 bg-white">
+          <section id="hiring-process" className="py-24 bg-gray-50">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-12 text-center">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Process</span>
                 <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">The Fractional CTO Hiring Process</h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">From first conversation to start date in 2-4 weeks.</p>
               </div>
-              <HireProcessStepper accentColor="blue" />
+              <HireProcessStepper accentColor="cyan" />
+              <div className="mt-16 bg-cyan-50 border-2 border-cyan-200 p-10 rounded-lg">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Timeline Breakdown</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div><h4 className="font-bold text-gray-900 mb-2">Week 1: Define & Source</h4><ul className="text-sm text-gray-700 space-y-1"><li>Define technical requirements (Day 1-2)</li><li>Post on job boards, ask for referrals (Day 2-3)</li><li>Review candidates, shortlist 5-10 (Day 4-7)</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Week 2-3: Interview & Select</h4><ul className="text-sm text-gray-700 space-y-1"><li>First-round interviews (45-min calls)</li><li>Second round: technical deep-dive or architecture review</li><li>Reference checks (2-3 calls)</li><li>Make offer and negotiate terms</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Week 4: Onboard & Start</h4><ul className="text-sm text-gray-700 space-y-1"><li>Contract signing and admin setup</li><li>Share codebase access, architecture docs</li><li>First week: technical audit and team intros</li><li>Begin roadmap and priority alignment</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">First 90 Days: Deliver</h4><ul className="text-sm text-gray-700 space-y-1"><li>Month 1: Technical audit, quick wins</li><li>Month 2: Architecture improvements, team structure</li><li>Month 3: Scale, hire, measure results</li><li>Decide to extend or part ways</li></ul></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Contract Terms */}
+          <section id="contract-terms" className="py-24 bg-white">
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+              <div className="mb-16">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Contracts</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Contract Terms & Structure</h2>
+                <p className="text-xl text-gray-600 max-w-3xl">Standard terms for fractional CTO engagements.</p>
+              </div>
+              <div className="bg-gray-50 border-2 border-gray-200 p-10 rounded-lg">
+                <h3 className="text-2xl font-bold text-gray-900 mt-0 mb-6">Standard Contract Template</h3>
+                <div className="space-y-6">
+                  <div><h4 className="font-bold text-gray-900 mb-2">Engagement Model</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Day rate:</strong> £900-£1,600 per day (based on experience)</li><li><strong>Commitment:</strong> 1-3 days per week (specify exact days)</li><li><strong>Monthly retainer option:</strong> £4,000-£6,500 for predictable billing</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Term & Notice</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Initial term:</strong> 3-month trial period</li><li><strong>Renewal:</strong> Auto-renew to 12-month rolling contract after trial</li><li><strong>Notice period:</strong> 30 days either side (standard)</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Scope of Work</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Responsibilities:</strong> Technology strategy, architecture, team leadership, technical roadmap</li><li><strong>Deliverables:</strong> Architecture documentation, tech roadmap, hiring plan, code standards</li><li><strong>Exclusions:</strong> Day-to-day coding (unless scoped), on-call support (unless agreed)</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">IP & Confidentiality</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>IP ownership:</strong> Company owns all code, architecture, and documentation</li><li><strong>Confidentiality:</strong> Standard NDA terms, survives termination</li><li><strong>Non-compete:</strong> Usually not applicable (fractional works with multiple companies)</li></ul></div>
+                  <div><h4 className="font-bold text-gray-900 mb-2">Optional: Equity</h4><ul className="text-gray-700 space-y-1 text-base"><li><strong>Advisory shares:</strong> 0.2-0.5% for long-term engagements (12+ months)</li><li><strong>Vesting:</strong> Quarterly or annual vesting</li><li><strong>Cash reduction:</strong> If equity included, day rate may reduce 10-15%</li></ul></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Cost Comparison */}
+          <section id="cost-comparison" className="py-24 bg-gray-50">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="mb-16 text-center">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Investment</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Cost Comparison: Fractional vs Full-Time vs Agency</h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">Understand the total cost of each CTO hiring option for your business.</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse bg-white rounded-xl shadow-sm overflow-hidden">
+                  <thead>
+                    <tr className="bg-cyan-600 text-white">
+                      <th className="px-6 py-4 text-left font-bold">Cost Factor</th>
+                      <th className="px-6 py-4 text-center font-bold">Fractional CTO</th>
+                      <th className="px-6 py-4 text-center font-bold">Full-Time CTO</th>
+                      <th className="px-6 py-4 text-center font-bold">Dev Agency</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Annual Cost</td>
+                      <td className="px-6 py-4 text-center text-cyan-700 font-bold">£90k - £160k</td>
+                      <td className="px-6 py-4 text-center text-gray-600">£180k - £300k</td>
+                      <td className="px-6 py-4 text-center text-gray-600">£200k - £500k</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Days per Week</td>
+                      <td className="px-6 py-4 text-center text-cyan-700">2-3 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">5 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Project-based</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Notice Period</td>
+                      <td className="px-6 py-4 text-center text-cyan-700">30 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">3-6 months</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Contract end</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Employer NI/Benefits</td>
+                      <td className="px-6 py-4 text-center text-green-600">None</td>
+                      <td className="px-6 py-4 text-center text-red-600">£35k - £60k</td>
+                      <td className="px-6 py-4 text-center text-green-600">None</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Equity Required</td>
+                      <td className="px-6 py-4 text-center text-green-600">Optional (0.2-0.5%)</td>
+                      <td className="px-6 py-4 text-center text-red-600">1-3%</td>
+                      <td className="px-6 py-4 text-center text-green-600">None</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Time to Hire</td>
+                      <td className="px-6 py-4 text-center text-cyan-700">2-4 weeks</td>
+                      <td className="px-6 py-4 text-center text-gray-600">3-6 months</td>
+                      <td className="px-6 py-4 text-center text-gray-600">2-4 weeks</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Cross-Industry Experience</td>
+                      <td className="px-6 py-4 text-center text-green-600">High (multiple clients)</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Limited</td>
+                      <td className="px-6 py-4 text-center text-green-600">High</td>
+                    </tr>
+                    <tr className="bg-cyan-50">
+                      <td className="px-6 py-4 font-bold text-gray-900">Best For</td>
+                      <td className="px-6 py-4 text-center text-cyan-700 font-medium">Startups needing strategic tech leadership</td>
+                      <td className="px-6 py-4 text-center text-gray-600 font-medium">Large orgs with complex tech</td>
+                      <td className="px-6 py-4 text-center text-gray-600 font-medium">One-off development projects</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-8 text-center">
+                <p className="text-gray-600">Sources: <a href="https://www.glassdoor.co.uk" target="_blank" rel="noopener noreferrer" className="text-cyan-600 hover:text-cyan-800 underline">Glassdoor UK</a>, <a href="https://technation.io" target="_blank" rel="noopener noreferrer" className="text-cyan-600 hover:text-cyan-800 underline">Tech Nation</a>, Market research</p>
+              </div>
             </div>
           </section>
 
           {/* Browse CTO Candidates */}
-          <section className="py-20 bg-gray-50">
+          <section id="browse-candidates" className="py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <div className="text-center mb-12">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Find Talent</span>
@@ -221,7 +413,7 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
           </section>
 
           {/* FAQ */}
-          <section className="py-20 bg-white">
+          <section id="faq" className="py-20 bg-gray-50">
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
               <h2 className="text-3xl font-black text-gray-900 mb-8">Frequently Asked Questions</h2>
               <FAQ items={faqItems} title="" skipSchema={true} />
@@ -241,15 +433,47 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
           </section>
 
           {/* Related Links */}
-          <section className="py-12 bg-white border-t border-gray-200">
+          <section className="py-16 bg-white border-t border-gray-200">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <span className="text-sm font-bold uppercase tracking-wider text-gray-400">Related Resources</span>
-                <div className="flex flex-wrap gap-4">
-                  <Link href="/fractional-cto" className="text-gray-600 hover:text-cyan-600 font-medium transition-colors">Fractional CTO Guide</Link>
-                  <Link href="/fractional-cto-cost" className="text-gray-600 hover:text-cyan-600 font-medium transition-colors">CTO Cost Guide</Link>
-                  <Link href="/fractional-cto-services" className="text-gray-600 hover:text-cyan-600 font-medium transition-colors">CTO Services</Link>
-                  <Link href="/fractional-cto-salary" className="text-gray-600 hover:text-cyan-600 font-medium transition-colors">CTO Salary Data</Link>
+              <div className="mb-8">
+                <h2 className="text-2xl font-black text-gray-900 mb-2">Related Resources</h2>
+                <p className="text-gray-600">Explore more fractional executive hiring guides and resources</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* CTO Resources */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">CTO Resources</h3>
+                  <ul className="space-y-2">
+                    <li><Link href="/fractional-cto" className="text-gray-600 hover:text-cyan-600 transition-colors">What is a Fractional CTO?</Link></li>
+                    <li><Link href="/fractional-cto-salary" className="text-gray-600 hover:text-cyan-600 transition-colors">CTO Salary & Day Rates</Link></li>
+                    <li><Link href="/fractional-cto-services" className="text-gray-600 hover:text-cyan-600 transition-colors">CTO Services</Link></li>
+                    <li><Link href="/fractional-cto-jobs-uk" className="text-gray-600 hover:text-cyan-600 transition-colors">CTO Jobs UK</Link></li>
+                    <li><Link href="/interim-cto-jobs-uk" className="text-gray-600 hover:text-cyan-600 transition-colors">Interim CTO Jobs</Link></li>
+                  </ul>
+                </div>
+                {/* Other C-Suite Hiring */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Hire Other C-Suite</h3>
+                  <ul className="space-y-2">
+                    <li><Link href="/hire-fractional-cfo" className="text-gray-600 hover:text-cyan-600 transition-colors">Hire a Fractional CFO</Link></li>
+                    <li><Link href="/hire-fractional-coo" className="text-gray-600 hover:text-cyan-600 transition-colors">Hire a Fractional COO</Link></li>
+                    <li><Link href="/hire-fractional-cmo" className="text-gray-600 hover:text-cyan-600 transition-colors">Hire a Fractional CMO</Link></li>
+                    <li><Link href="/hire-fractional-ceo" className="text-gray-600 hover:text-cyan-600 transition-colors">Hire a Fractional CEO</Link></li>
+                    <li><Link href="/hire-fractional-chro" className="text-gray-600 hover:text-cyan-600 transition-colors">Hire a Fractional CHRO</Link></li>
+                  </ul>
+                </div>
+                {/* External Resources */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+                  <ul className="space-y-2">
+                    {authorityLinks.map((link, idx) => (
+                      <li key={idx}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-cyan-600 transition-colors flex items-center gap-1">
+                          {link.name} <span className="text-gray-400 text-xs">↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>

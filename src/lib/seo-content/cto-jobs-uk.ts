@@ -225,6 +225,7 @@ export const ctoJobsUkSEO = {
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CTO Jobs UK", url: "/part-time-cto-jobs-uk" },
     { name: "Interim CTO Jobs UK", url: "/interim-cto-jobs-uk" },
+    { name: "Interim CTO Guide", url: "/interim-cto" },
     // Tools & Guides
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },

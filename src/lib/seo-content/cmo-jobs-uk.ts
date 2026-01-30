@@ -204,16 +204,25 @@ export const cmoJobsUkSEO = {
 
   // Internal links for topical authority
   relatedPages: [
+    // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Marketing Jobs", url: "/fractional-jobs-london" },
+    // CMO Resources
     { name: "What is a Fractional CMO?", url: "/fractional-cmo" },
     { name: "CMO Salary Guide", url: "/fractional-cmo-salary" },
     { name: "Hire a Fractional CMO", url: "/hire-fractional-cmo" },
-    { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
-    { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    { name: "Fractional CMO UK", url: "/fractional-cmo-uk" },
+    // Work Types
     { name: "Part-Time CMO Jobs UK", url: "/part-time-cmo-jobs-uk" },
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Part-Time CMO Guide", url: "/part-time-cmo" },
+    { name: "Interim CMO Guide", url: "/interim-cmo" },
+    { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    // Related C-Suite Roles
+    { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
+    { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
+    // Recruitment
+    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
   ],
 
   schema: {

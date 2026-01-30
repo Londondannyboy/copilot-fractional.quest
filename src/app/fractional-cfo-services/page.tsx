@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { TableOfContents } from '@/components/TableOfContents'
 
 export const metadata: Metadata = {
   title: 'Fractional CFO Services UK | Virtual CFO & Part-Time Finance Leadership',
@@ -21,6 +22,28 @@ export const metadata: Metadata = {
   },
 }
 
+// Table of Contents items
+const tocItems = [
+  { id: 'service-areas', title: 'Service Areas' },
+  { id: 'engagement-models', title: 'Engagement Models & Pricing' },
+  { id: 'current-jobs', title: 'Current CFO Jobs' },
+  { id: 'when-to-use', title: 'When to Use CFO Services' },
+  { id: 'success-stories', title: 'Success Stories' },
+  { id: 'uk-locations', title: 'UK Locations' },
+  { id: 'resources', title: 'Professional Resources' },
+  { id: 'faq', title: 'FAQ' },
+]
+
+// Authority links for E-E-A-T
+const authorityLinks = [
+  { name: 'ICAEW', url: 'https://www.icaew.com', description: 'Institute of Chartered Accountants in England & Wales', icon: '📚' },
+  { name: 'ACCA', url: 'https://www.accaglobal.com', description: 'Association of Chartered Certified Accountants', icon: '🎓' },
+  { name: 'CIMA', url: 'https://www.cimaglobal.com', description: 'Chartered Institute of Management Accountants', icon: '📊' },
+  { name: 'FRC', url: 'https://www.frc.org.uk', description: 'Financial Reporting Council', icon: '⚖️' },
+  { name: 'British Business Bank', url: 'https://www.british-business-bank.co.uk', description: 'SME finance and growth support', icon: '🏦' },
+  { name: 'BVCA', url: 'https://www.bvca.co.uk', description: 'British Private Equity & Venture Capital Association', icon: '💼' },
+]
+
 const SERVICE_FAQS = [
   { question: "What's included in fractional CFO services?", answer: "Fractional CFO services typically include: financial strategy and planning, management reporting and dashboards, cash flow management, fundraising support (models, decks, investor relations), board reporting, compliance and audit preparation, team leadership, and financial systems implementation." },
   { question: "How do fractional CFO engagements work?", answer: "Most engagements are 1-3 days per week on a retained basis. Your fractional CFO attends leadership meetings, manages the finance function, produces board packs, and drives financial strategy. Engagements typically start with a financial health check and 90-day improvement plan." },
@@ -28,6 +51,10 @@ const SERVICE_FAQS = [
   { question: "How much do fractional CFO services cost?", answer: "Fractional CFO day rates in the UK range from £850-£1,200. A typical 2-day per week engagement costs £6,800-£9,600 per month (£81,600-£115,200 annually). This is 40-60% less than a full-time CFO with benefits, bonus, and equity." },
   { question: "When should a company use fractional CFO services?", answer: "Ideal situations: preparing for fundraising (Series A onwards), post-investment reporting requirements, scaling beyond founder-managed finances, M&A preparation, implementing financial systems, or professionalising the finance function pre-exit." },
   { question: "Where are your fractional CFOs based?", answer: "Our fractional CFOs are based across the UK, with strong presence in London (our largest market), Manchester, Birmingham, Edinburgh, Bristol, and Leeds. Most work hybrid arrangements combining remote work with on-site client days." },
+  { question: "What qualifications do fractional CFOs typically have?", answer: "Most fractional CFOs are ACA (ICAEW) or ACCA qualified with 15-25 years experience. Many have Big 4 backgrounds plus commercial experience in finance director or CFO roles. Look for those with sector-specific experience and ideally previous fractional engagements with strong references." },
+  { question: "Can a fractional CFO help with fundraising?", answer: "Absolutely - fundraising support is a core fractional CFO service. They build financial models, prepare data rooms, create investor decks, coordinate due diligence, negotiate term sheets, and manage investor relations. Many fractional CFOs have helped raise £10M-£100M+ across multiple companies." },
+  { question: "How does a fractional CFO work with my existing accountant?", answer: "Your accountant handles compliance (statutory accounts, tax returns, Companies House filings). Your fractional CFO focuses on strategic finance - they'll work alongside your accountant, using their numbers to build management reporting, forecasts, and strategic insights. Many fractional CFOs help upgrade accounting partners if needed." },
+  { question: "How quickly can a fractional CFO make an impact?", answer: "Quick wins in 30 days (financial health check, cash flow analysis, KPI dashboard). Meaningful impact by 90 days (management reporting live, budget/forecast built, board packs running). Significant ROI by 6 months (fundraise ready, systems implemented, team structure defined)." },
 ]
 
 const SERVICES = [
@@ -43,6 +70,31 @@ const ENGAGEMENT_MODELS = [
   { name: 'Oversight', days: '1 day/week', price: '£3,400-£4,800/month', description: 'Board reporting, strategic oversight, investor liaison', best: 'Post-seed with FD/controller' },
   { name: 'Part-Time CFO', days: '2 days/week', price: '£6,800-£9,600/month', description: 'Active leadership, fundraising, systems implementation', best: 'Series A/B, scaling finance' },
   { name: 'Full Engagement', days: '3 days/week', price: '£10,200-£14,400/month', description: 'Deep involvement, M&A, complex transactions', best: 'Fundraising, exit preparation' },
+]
+
+// Success stories / case study placeholders
+const SUCCESS_STORIES = [
+  {
+    company: 'Series A SaaS Company',
+    challenge: 'Needed to raise Series A but had no financial model, messy books, and no investor-grade reporting',
+    solution: 'Fractional CFO 3 days/week for 6 months',
+    results: ['Built 3-year financial model', 'Closed £8M Series A', 'Implemented Xero + reporting stack', 'Reduced cash burn by 25%'],
+    industry: 'Technology',
+  },
+  {
+    company: 'Private Equity Portfolio Company',
+    challenge: 'PE acquisition with no finance function beyond bookkeeper, needed rapid professionalisation',
+    solution: 'Fractional CFO 2 days/week for 18 months',
+    results: ['Built finance team of 3', 'Implemented ERP system', 'Monthly board packs in 5 days', 'Prepared for bolt-on acquisitions'],
+    industry: 'Manufacturing',
+  },
+  {
+    company: 'High-Growth E-commerce',
+    challenge: 'Cash flow crisis despite £15M revenue, no visibility on working capital or profitability',
+    solution: 'Fractional CFO 2 days/week for 12 months',
+    results: ['Unlocked £2M working capital', '13-week cash flow forecast', 'Negotiated better supplier terms', 'Profitable within 9 months'],
+    industry: 'E-commerce',
+  },
 ]
 
 const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/fractional-jobs-uk' }, { label: 'Fractional CFO Services', href: '/fractional-cfo-services' }]
@@ -74,7 +126,30 @@ export default function FractionalCFOServicesPage() {
 
       <section className="bg-emerald-900 py-6"><div className="max-w-6xl mx-auto px-6 lg:px-8"><div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"><div><div className="text-3xl font-black text-emerald-200">£850-£1,200</div><div className="text-emerald-300/70 text-sm">Day Rate Range</div></div><div><div className="text-3xl font-black text-emerald-200">1-3 days</div><div className="text-emerald-300/70 text-sm">Per Week</div></div><div><div className="text-3xl font-black text-emerald-200">40-60%</div><div className="text-emerald-300/70 text-sm">Cost Savings vs FT</div></div><div><div className="text-3xl font-black text-emerald-200">ACA/ACCA</div><div className="text-emerald-300/70 text-sm">Typically Qualified</div></div></div></div></section>
 
-      <section className="py-16 bg-white">
+      {/* Table of Contents */}
+      <section className="py-8 bg-white border-b">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <TableOfContents items={tocItems} title="On This Page" accentColor="emerald" />
+            </div>
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+              <ul className="space-y-3">
+                {authorityLinks.slice(0, 4).map((link, idx) => (
+                  <li key={idx}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-emerald-700 hover:text-emerald-900 flex items-center gap-2">
+                      <span className="text-emerald-500">→</span> {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="service-areas" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">What We Deliver</span>
@@ -92,7 +167,7 @@ export default function FractionalCFOServicesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-emerald-50">
+      <section id="engagement-models" className="py-16 bg-emerald-50">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Pricing</span>
@@ -117,7 +192,7 @@ export default function FractionalCFOServicesPage() {
       </section>
 
       {/* Job Board Section */}
-      <section className="py-16 bg-white">
+      <section id="current-jobs" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Opportunities</span>
@@ -127,7 +202,7 @@ export default function FractionalCFOServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section id="when-to-use" className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional CFO Services</h2>
@@ -148,7 +223,7 @@ export default function FractionalCFOServicesPage() {
               <li><strong>Interim cover</strong> - Bridging gap while recruiting permanent CFO</li>
             </ul>
 
-            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">UK Locations We Serve</h3>
+            <h3 id="uk-locations" className="text-2xl font-bold text-gray-900 mt-12 mb-4">UK Locations We Serve</h3>
             <p>Our fractional CFOs operate across the UK, with particular strength in:</p>
             <div className="grid md:grid-cols-3 gap-4 not-prose my-6">
               <Link href="/fractional-jobs-london" className="p-4 border rounded-lg hover:border-emerald-300 transition-colors bg-white">
@@ -206,8 +281,46 @@ export default function FractionalCFOServicesPage() {
         </div>
       </section>
 
+      {/* Success Stories Section */}
+      <section id="success-stories" className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Results</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Success Stories</h2>
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">Real examples of how fractional CFO services have transformed businesses</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {SUCCESS_STORIES.map((story, index) => (
+              <div key={index} className="bg-emerald-50 border border-emerald-200 rounded-xl p-8">
+                <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">{story.industry}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{story.company}</h3>
+                <div className="mb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-1">Challenge:</div>
+                  <p className="text-sm text-gray-600">{story.challenge}</p>
+                </div>
+                <div className="mb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-1">Solution:</div>
+                  <p className="text-sm text-gray-600">{story.solution}</p>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-gray-700 mb-2">Results:</div>
+                  <ul className="space-y-1">
+                    {story.results.map((result, idx) => (
+                      <li key={idx} className="text-sm text-emerald-800 flex items-start gap-2">
+                        <span className="text-emerald-600 mt-0.5">✓</span>
+                        {result}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* External Authority Links */}
-      <section className="py-16 bg-white">
+      <section id="resources" className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-black text-gray-900 mb-8">Professional Resources</h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -257,7 +370,7 @@ export default function FractionalCFOServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-emerald-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional CFO Services</h2></div><FAQ items={SERVICE_FAQS} title="" /></div></section>
+      <section id="faq" className="py-20 bg-emerald-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional CFO Services</h2></div><FAQ items={SERVICE_FAQS} title="" /></div></section>
 
       <ExpertProfile /><ExpertProfileSchema /><CaseStudy /><CaseStudySchema />
 

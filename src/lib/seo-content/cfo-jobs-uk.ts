@@ -248,6 +248,7 @@ export const cfoJobsUkSEO = {
     { name: "Interim CFO vs Fractional CFO", url: "/interim-cfo-vs-fractional-cfo" },
     // Related Finance Roles
     { name: "Financial Controller Jobs", url: "/fractional-financial-controller-jobs-uk" },
+    { name: "Fractional FD Guide", url: "/fractional-fd" },
     { name: "Fractional COO Jobs UK", url: "/fractional-coo-jobs-uk" },
     { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
     // Related C-Suite Roles

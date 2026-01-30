@@ -13,8 +13,29 @@ interface TableOfContentsProps {
   title?: string
 }
 
-export function TableOfContents({ items, title = 'On This Page' }: TableOfContentsProps) {
+// Color configurations for different roles
+const colorConfig = {
+  emerald: { active: 'border-emerald-500 text-emerald-700', hover: 'hover:text-emerald-700 hover:border-emerald-300' },
+  blue: { active: 'border-blue-500 text-blue-700', hover: 'hover:text-blue-700 hover:border-blue-300' },
+  amber: { active: 'border-amber-500 text-amber-700', hover: 'hover:text-amber-700 hover:border-amber-300' },
+  cyan: { active: 'border-cyan-500 text-cyan-700', hover: 'hover:text-cyan-700 hover:border-cyan-300' },
+  purple: { active: 'border-purple-500 text-purple-700', hover: 'hover:text-purple-700 hover:border-purple-300' },
+  red: { active: 'border-red-500 text-red-700', hover: 'hover:text-red-700 hover:border-red-300' },
+  indigo: { active: 'border-indigo-500 text-indigo-700', hover: 'hover:text-indigo-700 hover:border-indigo-300' },
+  yellow: { active: 'border-yellow-500 text-yellow-700', hover: 'hover:text-yellow-700 hover:border-yellow-300' },
+  slate: { active: 'border-slate-500 text-slate-700', hover: 'hover:text-slate-700 hover:border-slate-300' },
+  gray: { active: 'border-gray-500 text-gray-700', hover: 'hover:text-gray-700 hover:border-gray-300' },
+}
+
+type AccentColor = keyof typeof colorConfig
+
+interface TableOfContentsExtendedProps extends TableOfContentsProps {
+  accentColor?: AccentColor
+}
+
+export function TableOfContents({ items, title = 'On This Page', accentColor = 'emerald' }: TableOfContentsExtendedProps) {
   const [activeId, setActiveId] = useState<string>('')
+  const colors = colorConfig[accentColor] || colorConfig.emerald
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,8 +86,8 @@ export function TableOfContents({ items, title = 'On This Page' }: TableOfConten
                 item.level === 3 ? 'ml-3' : ''
               } ${
                 activeId === item.id
-                  ? 'border-emerald-500 text-emerald-700 font-medium'
-                  : 'border-transparent text-gray-600 hover:text-emerald-700 hover:border-emerald-300'
+                  ? `${colors.active} font-medium`
+                  : `border-transparent text-gray-600 ${colors.hover}`
               }`}
             >
               {item.title}

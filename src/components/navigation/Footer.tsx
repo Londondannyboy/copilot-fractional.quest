@@ -48,6 +48,11 @@ const footerLinks = {
       { name: 'CTO Salary Guide', href: '/fractional-cto-salary' },
       { name: 'Portfolio Career Guide', href: '/fractional-executive-portfolio' },
       { name: 'Rate Calculator', href: '/rate-calculator' },
+      { name: 'Interim CMO Guide', href: '/interim-cmo' },
+      { name: 'Interim CTO Guide', href: '/interim-cto' },
+      { name: 'Interim CEO Guide', href: '/interim-ceo' },
+      { name: 'Interim CHRO Guide', href: '/interim-chro' },
+      { name: 'Virtual CFO Services', href: '/virtual-cfo-services' },
     ],
   },
   forEmployers: {
@@ -64,6 +69,10 @@ const footerLinks = {
       { name: 'CMO Agency', href: '/fractional-cmo-agency' },
       { name: 'Recruitment Agency Guide', href: '/fractional-recruitment-agency' },
       { name: 'Book a Call', href: '/book-call' },
+      { name: 'Fractional FD', href: '/fractional-fd' },
+      { name: 'Fractional Ops Manager', href: '/fractional-operations-manager' },
+      { name: 'Fractional CMO UK', href: '/fractional-cmo-uk' },
+      { name: 'B2B CMO', href: '/fractional-cmo-b2b' },
     ],
   },
   jobTypes: {
@@ -79,6 +88,9 @@ const footerLinks = {
       { name: 'Part-time CMO Jobs', href: '/part-time-cmo-jobs-uk' },
       { name: 'Founding GTM', href: '/founding-gtm' },
       { name: 'Founding SDR', href: '/founding-sdr' },
+      { name: 'Part-time COO Jobs', href: '/part-time-coo-jobs-uk' },
+      { name: 'Advisory CFO Jobs', href: '/advisory-cfo-jobs-uk' },
+      { name: 'Advisory CTO Jobs', href: '/advisory-cto-jobs-uk' },
     ],
   },
   industries: {
@@ -110,6 +122,17 @@ const footerLinks = {
       { name: 'Sales', href: '/fractional-sales' },
     ],
   },
+  costGuides: {
+    title: 'Cost & Pricing',
+    links: [
+      { name: 'CFO Cost Guide', href: '/fractional-cfo-cost' },
+      { name: 'CMO Cost Guide', href: '/fractional-cmo-cost' },
+      { name: 'COO Cost Guide', href: '/fractional-coo-cost' },
+      { name: 'CTO Cost Guide', href: '/fractional-cto-cost' },
+      { name: 'CMO Salary Guide', href: '/fractional-cmo-salary' },
+      { name: 'COO Salary Guide', href: '/fractional-coo-salary' },
+    ],
+  },
 }
 
 const socialLinks = [
@@ -124,7 +147,7 @@ export function Footer() {
     <footer className="bg-gray-900 text-gray-300">
       {/* Main footer content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-8">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -237,6 +260,19 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">{footerLinks.specialistRoles.title}</h3>
             <ul className="space-y-2">
               {footerLinks.specialistRoles.links.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">{footerLinks.costGuides.title}</h3>
+            <ul className="space-y-2">
+              {footerLinks.costGuides.links.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm hover:text-white transition-colors">
                     {link.name}

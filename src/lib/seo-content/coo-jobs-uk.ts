@@ -207,16 +207,24 @@ export const cooJobsUkSEO = {
 
   // Internal links for topical authority
   relatedPages: [
+    // Main Hubs
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
     { name: "London Operations Jobs", url: "/fractional-jobs-london" },
+    // COO Resources
     { name: "What is a Fractional COO?", url: "/fractional-coo" },
     { name: "COO Salary Guide", url: "/fractional-coo-salary" },
     { name: "Hire a Fractional COO", url: "/hire-fractional-coo" },
-    { name: "Fractional CFO Jobs UK", url: "/fractional-cfo-jobs-uk" },
-    { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    // Work Types
     { name: "Part-Time COO Jobs UK", url: "/part-time-coo-jobs-uk" },
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Part-Time COO Guide", url: "/part-time-coo" },
+    { name: "Fractional Operations Manager", url: "/fractional-operations-manager" },
+    { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    // Related C-Suite Roles
+    { name: "Fractional CFO Jobs UK", url: "/fractional-cfo-jobs-uk" },
+    { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
+    // Recruitment
+    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
   ],
 
   schema: {

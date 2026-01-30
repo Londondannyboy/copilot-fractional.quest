@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { TableOfContents } from '@/components/TableOfContents'
 
 export const metadata: Metadata = {
   title: 'Fractional CMO Services UK | Virtual CMO & Part-Time Marketing Leadership',
@@ -21,6 +22,28 @@ export const metadata: Metadata = {
   },
 }
 
+// Table of Contents items
+const tocItems = [
+  { id: 'service-areas', title: 'Service Areas' },
+  { id: 'engagement-models', title: 'Engagement Models & Pricing' },
+  { id: 'current-jobs', title: 'Current CMO Jobs' },
+  { id: 'when-to-use', title: 'When to Use CMO Services' },
+  { id: 'success-stories', title: 'Success Stories' },
+  { id: 'uk-locations', title: 'UK Locations' },
+  { id: 'resources', title: 'Professional Resources' },
+  { id: 'faq', title: 'FAQ' },
+]
+
+// Authority links for E-E-A-T
+const authorityLinks = [
+  { name: 'Chartered Institute of Marketing (CIM)', url: 'https://www.cim.co.uk', description: 'UK\'s leading professional body for marketing', icon: '📚' },
+  { name: 'Data & Marketing Association (DMA)', url: 'https://dma.org.uk', description: 'UK direct and data-driven marketing body', icon: '📊' },
+  { name: 'Marketing Week', url: 'https://www.marketingweek.com', description: 'Leading UK marketing publication', icon: '📰' },
+  { name: 'IPA (Institute of Practitioners in Advertising)', url: 'https://ipa.co.uk', description: 'UK advertising industry body', icon: '🏆' },
+  { name: 'WARC', url: 'https://www.warc.com', description: 'Marketing effectiveness research', icon: '📈' },
+  { name: 'B2B Marketing', url: 'https://b2bmarketing.net', description: 'B2B marketing community and awards', icon: '🎯' },
+]
+
 const SERVICE_FAQS = [
   { question: "What's included in fractional CMO services?", answer: "Fractional CMO services typically include: marketing strategy development, brand positioning and messaging, demand generation and pipeline growth, marketing team leadership, agency and vendor management, marketing technology stack optimisation, and board-level marketing reporting." },
   { question: "How do fractional CMO engagements work?", answer: "Most engagements are 1-3 days per week on a retained basis. Your fractional CMO joins leadership meetings, directs marketing strategy, manages teams and agencies, and drives measurable marketing outcomes. Engagements typically start with a strategic assessment and 90-day plan." },
@@ -28,6 +51,10 @@ const SERVICE_FAQS = [
   { question: "How much do fractional CMO services cost?", answer: "Fractional CMO day rates in the UK range from £850-£1,300. A typical 2-day per week engagement costs £6,800-£10,400 per month (£81,600-£124,800 annually). This is 40-60% less than a full-time CMO with benefits and equity." },
   { question: "When should a company use fractional CMO services?", answer: "Ideal situations: scaling marketing beyond founder-led efforts, repositioning brand for growth, building demand generation engine, preparing for fundraising, professionalising marketing operations, or bridging gap while hiring full-time CMO." },
   { question: "Where are your fractional CMOs based?", answer: "Our fractional CMOs are based across the UK, with strong presence in London (our largest market), Manchester, Birmingham, Edinburgh, Bristol, and Leeds. Most work hybrid arrangements combining remote work with on-site client days." },
+  { question: "How long do fractional CMO engagements typically last?", answer: "Most engagements start with a 3-month trial period, then extend to 6-18 month retained relationships. Some companies work with fractional CMOs for 2-3 years as they scale, eventually converting to full-time when the role justifies it. The flexibility to scale up or down is a key advantage." },
+  { question: "Can a fractional CMO help with hiring my marketing team?", answer: "Absolutely. One of the most valuable fractional CMO services is building your marketing function. They define roles, write job specs, source candidates, conduct interviews, and onboard new hires. Many fractional CMOs have built teams of 5-20+ marketers across multiple companies." },
+  { question: "What qualifications should a fractional CMO have?", answer: "Look for: 10-15+ years marketing experience including leadership roles, track record of measurable results (revenue, pipeline, brand metrics), experience at similar stage companies, relevant industry knowledge, and ideally CIM or equivalent professional qualifications. References from previous fractional engagements are valuable." },
+  { question: "How quickly can a fractional CMO make an impact?", answer: "Expect quick wins in 30-60 days (audit findings, low-hanging fruit optimisations), meaningful impact in 90 days (strategy deployed, campaigns running), and significant ROI by 6 months (team built, systems optimised, measurable pipeline growth)." },
 ]
 
 const SERVICES = [
@@ -43,6 +70,31 @@ const ENGAGEMENT_MODELS = [
   { name: 'Strategic Advisor', days: '1 day/week', price: '£3,400-£5,200/month', description: 'Strategy oversight, monthly planning, agency direction', best: 'Early-stage, strong marketing team' },
   { name: 'Part-Time CMO', days: '2 days/week', price: '£6,800-£10,400/month', description: 'Active leadership, team management, campaign oversight', best: 'Scale-ups, demand gen focus' },
   { name: 'Intensive CMO', days: '3 days/week', price: '£10,200-£15,600/month', description: 'Deep involvement, rebrand, major launches', best: 'Transformations, rapid growth' },
+]
+
+// Success stories / case study placeholders
+const SUCCESS_STORIES = [
+  {
+    company: 'B2B SaaS Scale-up',
+    challenge: 'Founder-led marketing hitting ceiling at £2M ARR, no marketing leadership or team',
+    solution: 'Fractional CMO 2 days/week for 12 months',
+    results: ['Built 4-person marketing team', 'Reduced CAC by 35%', 'Grew pipeline by 180%', 'Reached £5M ARR'],
+    industry: 'Software',
+  },
+  {
+    company: 'Professional Services Firm',
+    challenge: 'Strong referral business but needed to build brand and digital presence',
+    solution: 'Fractional CMO 1 day/week for 18 months',
+    results: ['Complete rebrand and positioning', 'Launched thought leadership programme', '40% increase in inbound leads', 'Won 3 industry awards'],
+    industry: 'Professional Services',
+  },
+  {
+    company: 'D2C E-commerce Brand',
+    challenge: 'Reliant on paid media with declining ROAS, needed diversification',
+    solution: 'Fractional CMO 2 days/week for 9 months',
+    results: ['Built organic acquisition channel', 'Improved email revenue by 120%', 'Reduced paid media dependency by 40%', 'Launched successful loyalty programme'],
+    industry: 'E-commerce',
+  },
 ]
 
 const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/fractional-jobs-uk' }, { label: 'Fractional CMO Services', href: '/fractional-cmo-services' }]
@@ -74,7 +126,30 @@ export default function FractionalCMOServicesPage() {
 
       <section className="bg-amber-900 py-6"><div className="max-w-6xl mx-auto px-6 lg:px-8"><div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"><div><div className="text-3xl font-black text-amber-200">£850-£1,300</div><div className="text-amber-300/70 text-sm">Day Rate Range</div></div><div><div className="text-3xl font-black text-amber-200">1-3 days</div><div className="text-amber-300/70 text-sm">Per Week</div></div><div><div className="text-3xl font-black text-amber-200">40-60%</div><div className="text-amber-300/70 text-sm">Cost Savings vs FT</div></div><div><div className="text-3xl font-black text-amber-200">90 days</div><div className="text-amber-300/70 text-sm">Typical First Review</div></div></div></div></section>
 
-      <section className="py-16 bg-white">
+      {/* Table of Contents */}
+      <section className="py-8 bg-white border-b">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <TableOfContents items={tocItems} title="On This Page" accentColor="amber" />
+            </div>
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+              <ul className="space-y-3">
+                {authorityLinks.slice(0, 4).map((link, idx) => (
+                  <li key={idx}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-amber-700 hover:text-amber-900 flex items-center gap-2">
+                      <span className="text-amber-500">→</span> {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="service-areas" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">What We Deliver</span>
@@ -92,7 +167,7 @@ export default function FractionalCMOServicesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-amber-50">
+      <section id="engagement-models" className="py-16 bg-amber-50">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Pricing</span>
@@ -117,7 +192,7 @@ export default function FractionalCMOServicesPage() {
       </section>
 
       {/* Job Board Section */}
-      <section className="py-16 bg-white">
+      <section id="current-jobs" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Opportunities</span>
@@ -127,7 +202,7 @@ export default function FractionalCMOServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section id="when-to-use" className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <article className="prose prose-lg prose-gray max-w-none">
             <h2 className="text-3xl font-black text-gray-900 mb-6">When to Use Fractional CMO Services</h2>
@@ -149,7 +224,7 @@ export default function FractionalCMOServicesPage() {
               <li><strong>Marketing leadership gap</strong> - Covering departure while hiring permanent CMO</li>
             </ul>
 
-            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">UK Locations We Serve</h3>
+            <h3 id="uk-locations" className="text-2xl font-bold text-gray-900 mt-12 mb-4">UK Locations We Serve</h3>
             <p>Our fractional CMOs operate across the UK, with particular strength in:</p>
             <div className="grid md:grid-cols-3 gap-4 not-prose my-6">
               <Link href="/fractional-jobs-london" className="p-4 border rounded-lg hover:border-amber-300 transition-colors bg-white">
@@ -207,8 +282,46 @@ export default function FractionalCMOServicesPage() {
         </div>
       </section>
 
+      {/* Success Stories Section */}
+      <section id="success-stories" className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block">Results</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Success Stories</h2>
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">Real examples of how fractional CMO services have transformed businesses</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {SUCCESS_STORIES.map((story, index) => (
+              <div key={index} className="bg-amber-50 border border-amber-200 rounded-xl p-8">
+                <div className="text-xs font-bold uppercase tracking-wider text-amber-700 mb-2">{story.industry}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{story.company}</h3>
+                <div className="mb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-1">Challenge:</div>
+                  <p className="text-sm text-gray-600">{story.challenge}</p>
+                </div>
+                <div className="mb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-1">Solution:</div>
+                  <p className="text-sm text-gray-600">{story.solution}</p>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-gray-700 mb-2">Results:</div>
+                  <ul className="space-y-1">
+                    {story.results.map((result, idx) => (
+                      <li key={idx} className="text-sm text-amber-800 flex items-start gap-2">
+                        <span className="text-amber-600 mt-0.5">✓</span>
+                        {result}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* External Authority Links */}
-      <section className="py-16 bg-white">
+      <section id="resources" className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-black text-gray-900 mb-8">Professional Resources</h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -258,7 +371,7 @@ export default function FractionalCMOServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-amber-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional CMO Services</h2></div><FAQ items={SERVICE_FAQS} title="" /></div></section>
+      <section id="faq" className="py-20 bg-amber-50"><div className="max-w-4xl mx-auto px-6 lg:px-8"><div className="mb-12"><span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span><h2 className="text-3xl md:text-4xl font-black text-gray-900">Common Questions About Fractional CMO Services</h2></div><FAQ items={SERVICE_FAQS} title="" /></div></section>
 
       <ExpertProfile /><ExpertProfileSchema /><CaseStudy /><CaseStudySchema />
 

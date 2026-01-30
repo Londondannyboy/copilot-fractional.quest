@@ -89,12 +89,56 @@ export async function InternationalPageContent({ locale, slug }: InternationalPa
           pageContext={`${page.title} - ${config.name}`}
           initialContent={page.mdx_content}
         >
-          <article className="prose prose-lg max-w-none">
-            <MDXRemote
-              source={page.mdx_content}
-              components={mdxComponents}
-            />
-          </article>
+          {/* Hero Section */}
+          <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center">
+                {page.hero_badge && (
+                  <span className="inline-block px-4 py-1.5 bg-emerald-500/20 text-emerald-400 text-sm font-medium rounded-full mb-6">
+                    {page.hero_badge}
+                  </span>
+                )}
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+                  {page.hero_title || page.title}
+                </h1>
+                {page.hero_subtitle && (
+                  <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    {page.hero_subtitle}
+                  </p>
+                )}
+              </div>
+            </div>
+          </section>
+
+          {/* Main Content */}
+          <main className="bg-white">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+              <article className="prose prose-lg prose-gray max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-table:border prose-th:bg-gray-50 prose-th:p-3 prose-td:p-3 prose-td:border">
+                <MDXRemote
+                  source={page.mdx_content}
+                  components={mdxComponents}
+                />
+              </article>
+            </div>
+          </main>
+
+          {/* CTA Section */}
+          <section className="bg-gray-50 py-16">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Ready to Find Your Next Role?
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Browse the latest fractional and interim executive opportunities in {config.name}.
+              </p>
+              <a
+                href={`/${locale}/fractional-jobs`}
+                className="inline-flex items-center px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition-colors"
+              >
+                View All Jobs
+              </a>
+            </div>
+          </section>
         </PageWithCopilot>
       </>
     )

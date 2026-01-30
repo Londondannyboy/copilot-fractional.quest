@@ -15,6 +15,29 @@ import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
 import { getHeroImageUrl, getImage } from '@/lib/images';
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { TableOfContents } from '@/components/TableOfContents'
+
+// Table of Contents items for SEO
+const tocItems = [
+  { id: 'where-to-find', title: 'Where to Find Fractional CMOs' },
+  { id: 'what-to-look-for', title: 'What to Look For' },
+  { id: 'interview-questions', title: 'Interview Questions' },
+  { id: 'hiring-process', title: 'Hiring Process' },
+  { id: 'contract-terms', title: 'Contract Terms' },
+  { id: 'cost-comparison', title: 'Cost Comparison' },
+  { id: 'browse-candidates', title: 'Browse Candidates' },
+  { id: 'faq', title: 'FAQ' },
+]
+
+// External authority links for E-E-A-T
+const authorityLinks = [
+  { name: 'Chartered Institute of Marketing (CIM)', url: 'https://www.cim.co.uk', description: 'UK\'s leading marketing professional body' },
+  { name: 'Data & Marketing Association (DMA)', url: 'https://dma.org.uk', description: 'UK direct and digital marketing body' },
+  { name: 'Marketing Week', url: 'https://www.marketingweek.com', description: 'Leading UK marketing publication' },
+  { name: 'IPA (Institute of Practitioners in Advertising)', url: 'https://www.ipa.co.uk', description: 'UK advertising industry body' },
+  { name: 'Campaign', url: 'https://www.campaignlive.co.uk', description: 'Advertising and marketing news' },
+  { name: 'The Drum', url: 'https://www.thedrum.com', description: 'Global marketing media platform' },
+]
 
 // FAQ items for the page
 const faqItems: FAQItem[] = [
@@ -334,7 +357,7 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
                   <Link href="/fractional-cmo-jobs-uk" className="px-8 py-4 bg-white text-blue-600 font-bold uppercase tracking-wider hover:bg-blue-50 transition-colors">
                     Browse CMO Candidates
                   </Link>
-                  <Link href="#process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-blue-600 transition-colors">
+                  <Link href="#hiring-process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-blue-600 transition-colors">
                     See Hiring Process
                   </Link>
                 </div>
@@ -380,8 +403,31 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
             </div>
           </section>
 
+          {/* Table of Contents */}
+          <section className="py-8 bg-white border-b">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="grid lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2">
+                  <TableOfContents items={tocItems} title="In This Guide" accentColor="blue" />
+                </div>
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+                  <ul className="space-y-3">
+                    {authorityLinks.slice(0, 4).map((link, idx) => (
+                      <li key={idx}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-2">
+                          <span className="text-blue-400">→</span> {link.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Where to Find Fractional CMOs */}
-          <section className="py-24 bg-white">
+          <section id="where-to-find" className="py-24 bg-white">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <div className="mb-16 text-center max-w-3xl mx-auto">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Sourcing</span>
@@ -420,7 +466,7 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
           </section>
 
           {/* What to Look For */}
-          <section className="py-24 bg-gray-50">
+          <section id="what-to-look-for" className="py-24 bg-gray-50">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-16">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Evaluation Criteria</span>
@@ -456,7 +502,7 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
           </section>
 
           {/* Interview Questions */}
-          <section className="py-24 bg-white">
+          <section id="interview-questions" className="py-24 bg-white">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-16">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Interview Guide</span>
@@ -559,7 +605,7 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
           </section>
 
           {/* Hiring Process */}
-          <section id="process" className="py-24 bg-gray-50">
+          <section id="hiring-process" className="py-24 bg-gray-50">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-12 text-center">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Process</span>
@@ -615,7 +661,7 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
           </section>
 
           {/* Contract Terms */}
-          <section className="py-24 bg-white">
+          <section id="contract-terms" className="py-24 bg-white">
             <div className="max-w-5xl mx-auto px-6 lg:px-8">
               <div className="mb-16">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Contracts</span>
@@ -687,8 +733,84 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
             </div>
           </section>
 
+          {/* Cost Comparison */}
+          <section id="cost-comparison" className="py-24 bg-gray-50">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="mb-16 text-center">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Investment</span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Cost Comparison: Fractional vs Full-Time vs Agency</h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">Understand the total cost of each CMO hiring option for your business.</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse bg-white rounded-xl shadow-sm overflow-hidden">
+                  <thead>
+                    <tr className="bg-blue-600 text-white">
+                      <th className="px-6 py-4 text-left font-bold">Cost Factor</th>
+                      <th className="px-6 py-4 text-center font-bold">Fractional CMO</th>
+                      <th className="px-6 py-4 text-center font-bold">Full-Time CMO</th>
+                      <th className="px-6 py-4 text-center font-bold">Marketing Agency</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Annual Cost</td>
+                      <td className="px-6 py-4 text-center text-blue-700 font-bold">£70k - £140k</td>
+                      <td className="px-6 py-4 text-center text-gray-600">£150k - £280k</td>
+                      <td className="px-6 py-4 text-center text-gray-600">£120k - £500k</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Days per Week</td>
+                      <td className="px-6 py-4 text-center text-blue-700">1-3 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">5 days</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Varies</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Strategic Ownership</td>
+                      <td className="px-6 py-4 text-center text-green-600">Full ownership</td>
+                      <td className="px-6 py-4 text-center text-green-600">Full ownership</td>
+                      <td className="px-6 py-4 text-center text-red-600">Limited</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Team Leadership</td>
+                      <td className="px-6 py-4 text-center text-green-600">Yes</td>
+                      <td className="px-6 py-4 text-center text-green-600">Yes</td>
+                      <td className="px-6 py-4 text-center text-red-600">No</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Equity Required</td>
+                      <td className="px-6 py-4 text-center text-green-600">Optional (0.1-0.25%)</td>
+                      <td className="px-6 py-4 text-center text-red-600">0.5-1.5%</td>
+                      <td className="px-6 py-4 text-center text-green-600">None</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900">Time to Hire</td>
+                      <td className="px-6 py-4 text-center text-blue-700">2-4 weeks</td>
+                      <td className="px-6 py-4 text-center text-gray-600">3-6 months</td>
+                      <td className="px-6 py-4 text-center text-gray-600">2-4 weeks</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-medium text-gray-900">Cross-Industry Experience</td>
+                      <td className="px-6 py-4 text-center text-green-600">High (multiple clients)</td>
+                      <td className="px-6 py-4 text-center text-gray-600">Limited</td>
+                      <td className="px-6 py-4 text-center text-green-600">High</td>
+                    </tr>
+                    <tr className="bg-blue-100">
+                      <td className="px-6 py-4 font-bold text-gray-900">Best For</td>
+                      <td className="px-6 py-4 text-center text-blue-700 font-medium">Scale-ups needing strategy + leadership</td>
+                      <td className="px-6 py-4 text-center text-gray-600 font-medium">Large orgs with big teams</td>
+                      <td className="px-6 py-4 text-center text-gray-600 font-medium">Execution-only projects</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-8 text-center">
+                <p className="text-gray-600">Sources: <a href="https://www.glassdoor.co.uk" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">Glassdoor UK</a>, <a href="https://www.cim.co.uk" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">CIM Salary Survey</a>, Market research</p>
+              </div>
+            </div>
+          </section>
+
           {/* Browse CMO Candidates */}
-          <section className="py-20 bg-white">
+          <section id="browse-candidates" className="py-20 bg-white">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <div className="text-center mb-12">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Find Talent</span>
@@ -705,7 +827,7 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
           </section>
 
           {/* FAQ */}
-          <section className="py-20 bg-gray-50">
+          <section id="faq" className="py-20 bg-gray-50">
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
               <h2 className="text-3xl font-black text-gray-900 mb-8">Frequently Asked Questions</h2>
               <FAQ items={faqItems} title="" skipSchema={true} />
@@ -733,23 +855,47 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
           </section>
 
           {/* Related Links */}
-          <section className="py-12 bg-white border-t border-gray-200">
+          <section className="py-16 bg-white border-t border-gray-200">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <span className="text-sm font-bold uppercase tracking-wider text-gray-400">Related Resources</span>
-                <div className="flex flex-wrap gap-4">
-                  <Link href="/fractional-cmo" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
-                    Fractional CMO Guide
-                  </Link>
-                  <Link href="/fractional-cmo-cost" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
-                    CMO Cost Guide
-                  </Link>
-                  <Link href="/fractional-cmo-services" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
-                    CMO Services
-                  </Link>
-                  <Link href="/fractional-cmo-salary" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
-                    CMO Salary Data
-                  </Link>
+              <div className="mb-8">
+                <h2 className="text-2xl font-black text-gray-900 mb-2">Related Resources</h2>
+                <p className="text-gray-600">Explore more fractional executive hiring guides and resources</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* CMO Resources */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">CMO Resources</h3>
+                  <ul className="space-y-2">
+                    <li><Link href="/fractional-cmo" className="text-gray-600 hover:text-blue-600 transition-colors">What is a Fractional CMO?</Link></li>
+                    <li><Link href="/fractional-cmo-salary" className="text-gray-600 hover:text-blue-600 transition-colors">CMO Salary & Day Rates</Link></li>
+                    <li><Link href="/fractional-cmo-services" className="text-gray-600 hover:text-blue-600 transition-colors">CMO Services</Link></li>
+                    <li><Link href="/fractional-cmo-jobs-uk" className="text-gray-600 hover:text-blue-600 transition-colors">CMO Jobs UK</Link></li>
+                    <li><Link href="/interim-cmo-jobs-uk" className="text-gray-600 hover:text-blue-600 transition-colors">Interim CMO Jobs</Link></li>
+                  </ul>
+                </div>
+                {/* Other C-Suite Hiring */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Hire Other C-Suite</h3>
+                  <ul className="space-y-2">
+                    <li><Link href="/hire-fractional-cfo" className="text-gray-600 hover:text-blue-600 transition-colors">Hire a Fractional CFO</Link></li>
+                    <li><Link href="/hire-fractional-cto" className="text-gray-600 hover:text-blue-600 transition-colors">Hire a Fractional CTO</Link></li>
+                    <li><Link href="/hire-fractional-coo" className="text-gray-600 hover:text-blue-600 transition-colors">Hire a Fractional COO</Link></li>
+                    <li><Link href="/hire-fractional-ceo" className="text-gray-600 hover:text-blue-600 transition-colors">Hire a Fractional CEO</Link></li>
+                    <li><Link href="/hire-fractional-chro" className="text-gray-600 hover:text-blue-600 transition-colors">Hire a Fractional CHRO</Link></li>
+                  </ul>
+                </div>
+                {/* External Resources */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+                  <ul className="space-y-2">
+                    {authorityLinks.map((link, idx) => (
+                      <li key={idx}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1">
+                          {link.name} <span className="text-gray-400 text-xs">↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>

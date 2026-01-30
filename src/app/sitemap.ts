@@ -12,13 +12,11 @@ const REDIRECT_SOURCE_SLUGS = [
   'fractional-jobs-edinburgh',
   'fractional-jobs-bristol',
   // Short URLs that redirect (note: part-time-cfo, interim-cfo, cfo, cmo, cto, coo now have dedicated pages)
-  'part-time-cmo',
+  // Removed: 'part-time-cmo', 'interim-cmo', 'interim-cto' - now have real content pages
   'fractional-ciso-jobs',
   'fractional-hr',
   'fractional-cfo-meaning',
   'fractional-ciso-meaning',
-  'interim-cmo',
-  'interim-cto',
   'interim-coo',
   'fractional-jobs',
   'guide',

@@ -85,6 +85,24 @@ const navigation = {
       { name: 'CTO Services', href: '/fractional-cto-services' },
       { name: 'CMO Services', href: '/fractional-cmo-services' },
     ]
+  },
+  engagementTypes: {
+    label: 'Work Types',
+    description: 'Browse by engagement type',
+    items: [
+      { name: 'Interim CFO', href: '/interim-cfo', description: 'Full-time temporary' },
+      { name: 'Interim CTO', href: '/interim-cto', description: 'Full-time temporary' },
+      { name: 'Interim CMO', href: '/interim-cmo', description: 'Full-time temporary' },
+      { name: 'Interim CEO', href: '/interim-ceo', description: 'Full-time temporary' },
+      { name: 'Interim CHRO', href: '/interim-chro', description: 'Full-time temporary' },
+      { name: 'Part-Time CMO', href: '/part-time-cmo', description: 'Fixed days per week' },
+      { name: 'Part-Time COO', href: '/part-time-coo', description: 'Fixed days per week' },
+    ],
+    featured: [
+      { name: 'All Interim Jobs', href: '/interim-jobs-uk', tag: 'Full-time temp' },
+      { name: 'All Part-Time Jobs', href: '/part-time-jobs-uk', tag: 'Flexible' },
+      { name: 'Advisory Roles', href: '/advisory-jobs-uk', tag: 'Strategic' },
+    ]
   }
 }
 
@@ -325,6 +343,64 @@ export function Header() {
                 </div>
               )}
             </div>
+
+            {/* Work Types Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => !isTouchDevice && setActiveDropdown('engagementTypes')}
+              onMouseLeave={() => !isTouchDevice && setActiveDropdown(null)}
+            >
+              <button
+                className={`px-4 py-2 font-medium flex items-center gap-1 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}
+                onClick={() => isTouchDevice && setActiveDropdown(activeDropdown === 'engagementTypes' ? null : 'engagementTypes')}
+              >
+                {navigation.engagementTypes.label}
+                <ChevronDownIcon className={`w-4 h-4 transition-transform ${activeDropdown === 'engagementTypes' ? 'rotate-180' : ''}`} />
+              </button>
+
+              {activeDropdown === 'engagementTypes' && (
+                <div className="absolute top-full right-0 w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">By Type</p>
+                    <div className="space-y-1">
+                      {navigation.engagementTypes.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                          <span className="font-medium text-gray-900">{item.name}</span>
+                          <span className="text-sm text-gray-500 block">{item.description}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Featured</p>
+                    <div className="space-y-2">
+                      {navigation.engagementTypes.featured.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="flex items-center justify-between px-3 py-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                        >
+                          <span className="font-medium text-gray-900">{item.name}</span>
+                          <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">{item.tag}</span>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                      <Link
+                        href="/interim-jobs-uk"
+                        className="text-emerald-700 hover:text-emerald-800 font-medium text-sm flex items-center gap-1"
+                      >
+                        View all work types <ArrowRightIcon className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Right side - CTA */}
@@ -466,6 +542,41 @@ export function Header() {
                         {item.name}
                       </Link>
                     ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Work Types */}
+              <div>
+                <button
+                  className="w-full flex items-center justify-between px-4 py-3 min-h-[48px] font-medium text-gray-900 hover:bg-gray-50 transition-colors"
+                  onClick={() => setActiveDropdown(activeDropdown === 'mobile-engagementTypes' ? null : 'mobile-engagementTypes')}
+                >
+                  Work Types
+                  <ChevronDownIcon className={`w-5 h-5 transition-transform ${activeDropdown === 'mobile-engagementTypes' ? 'rotate-180' : ''}`} />
+                </button>
+                {activeDropdown === 'mobile-engagementTypes' && (
+                  <div className="bg-gray-50 py-2">
+                    {navigation.engagementTypes.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                    <div className="border-t border-gray-200 mt-2 pt-2">
+                      {navigation.engagementTypes.featured.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
