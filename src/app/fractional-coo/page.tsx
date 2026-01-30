@@ -394,6 +394,8 @@ export default function FractionalCooPage() {
               <span className="text-gray-300">•</span>
               <Link href="/fractional-chro" className="text-sm text-gray-600 hover:text-slate-700">Fractional CHRO</Link>
               <span className="text-gray-300">•</span>
+              <Link href="/fractional-recruitment-agency" className="text-sm text-slate-700 hover:text-slate-900 font-medium">Recruitment Agency</Link>
+              <span className="text-gray-300">•</span>
               <Link href="/fractional-ciso" className="text-sm text-gray-600 hover:text-slate-700">Fractional CISO</Link>
             </div>
           </div>

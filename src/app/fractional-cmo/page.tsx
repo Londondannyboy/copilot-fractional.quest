@@ -419,6 +419,9 @@ export default function FractionalCmoPage() {
                   <Link href="/fractional-cmo-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-amber-700 transition-colors">
                     <span>💼</span> CMO Jobs UK
                   </Link>
+                  <Link href="/fractional-recruitment-agency" className="flex items-center gap-2 text-sm text-gray-600 hover:text-amber-700 transition-colors">
+                    <span>🎯</span> Fractional Recruitment Agency
+                  </Link>
                 </div>
               </div>
 

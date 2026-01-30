@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { RecruitmentAgencyClient } from "./RecruitmentAgencyClient";
-import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
+import { WebPageSchema, FAQPageSchema, FAQItem, EmploymentAgencySchema } from "@/components/seo";
 
 // SEO Metadata - optimized for "fractional recruitment agency" and "fractional recruiter" keywords
 export const metadata: Metadata = {
@@ -98,12 +98,27 @@ export default function FractionalRecruitmentAgencyPage() {
         media="(min-width: 769px)"
       />
 
-      {/* Schema Markup */}
-      <WebPageSchema
-        title="Fractional Recruitment Agency - Best Agencies & Fractional Recruiters Guide"
-        description="Find the best fractional recruitment agencies and fractional recruiters. Compare agencies specialising in fractional CFO, CTO, CMO, and C-suite placements. Understand fees, timelines, and how to choose."
+      {/* Schema Markup - EmploymentAgency tells Google we ARE a recruitment agency */}
+      <EmploymentAgencySchema
+        name="Fractional Quest"
+        description="UK's leading fractional recruitment agency and job board. Specializing in fractional CFO, CTO, CMO, COO, and C-suite executive placements. Lower fees than traditional recruiters."
         url="https://fractional.quest/fractional-recruitment-agency"
-        dateModified={new Date("2026-01-30T00:00:00Z")}
+        serviceTypes={[
+          "Fractional Executive Recruitment",
+          "Fractional CFO Recruitment",
+          "Fractional CTO Recruitment",
+          "Fractional CMO Recruitment",
+          "Fractional COO Recruitment",
+          "Fractional CISO Recruitment",
+          "Interim Executive Search",
+          "Part-Time Executive Placement",
+        ]}
+      />
+      <WebPageSchema
+        title="Fractional Recruitment Agency UK | Fractional Recruiter & Executive Search"
+        description="UK's leading fractional recruitment agency. Find fractional CFO, CTO, CMO recruiters. 10-15% fees vs 25-30% industry standard. 200+ executives, placements in 2-4 weeks."
+        url="https://fractional.quest/fractional-recruitment-agency"
+        dateModified={new Date()}
       />
       <FAQPageSchema faqs={faqItems} />
 

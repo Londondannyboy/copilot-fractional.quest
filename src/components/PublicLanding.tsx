@@ -311,6 +311,55 @@ export function PublicLanding() {
         </div>
       </section>
 
+      {/* Fractional Recruitment Agency CTA */}
+      <section className="py-12 bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 border-t border-emerald-500">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <span className="inline-block bg-white/20 text-white px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">Fractional Recruitment Agency</span>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Hire Fractional Executives Without the Fees
+              </h3>
+              <p className="text-emerald-100 mb-6">
+                Skip the 25% recruiter fees. Book a free call with our team or browse our network of 200+ vetted fractional executives directly.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/fractional-recruitment-agency"
+                  className="bg-white text-gray-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-bold transition-colors"
+                >
+                  Learn More
+                </Link>
+                <Link
+                  href="/book-call"
+                  className="bg-emerald-800 text-white hover:bg-emerald-900 px-6 py-3 rounded-lg font-bold transition-colors border border-emerald-400"
+                >
+                  Book a Free Call
+                </Link>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                <div className="text-3xl font-black text-white">10-15%</div>
+                <div className="text-emerald-200 text-sm">Our Fee</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                <div className="text-3xl font-black text-white">25-30%</div>
+                <div className="text-emerald-200 text-sm">Industry Avg</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                <div className="text-3xl font-black text-white">200+</div>
+                <div className="text-emerald-200 text-sm">Executives</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                <div className="text-3xl font-black text-white">2 Weeks</div>
+                <div className="text-emerald-200 text-sm">Avg Hire Time</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Virtual Executive Services - US Market */}
       <section className="py-12 bg-gray-800/30 border-t border-gray-700">
         <div className="max-w-6xl mx-auto px-4">

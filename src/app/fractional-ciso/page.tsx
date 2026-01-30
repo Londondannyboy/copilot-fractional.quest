@@ -307,6 +307,8 @@ export default function FractionalCisoPage() {
               <span className="text-gray-300">•</span>
               <Link href="/fractional-coo" className="text-sm text-gray-600 hover:text-red-700">Fractional COO</Link>
               <span className="text-gray-300">•</span>
+              <Link href="/fractional-recruitment-agency" className="text-sm text-red-700 hover:text-red-900 font-medium">Recruitment Agency</Link>
+              <span className="text-gray-300">•</span>
               <Link href="/fractional-chro" className="text-sm text-gray-600 hover:text-red-700">Fractional CHRO</Link>
             </div>
           </div>

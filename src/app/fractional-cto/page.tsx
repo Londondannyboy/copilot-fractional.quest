@@ -375,6 +375,9 @@ export default function FractionalCtoPage() {
                   <Link href="/fractional-ciso" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
                     <span>🔒</span> Fractional CISO Guide
                   </Link>
+                  <Link href="/fractional-recruitment-agency" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
+                    <span>🎯</span> Fractional Recruitment Agency
+                  </Link>
                 </div>
               </div>
 

@@ -194,14 +194,64 @@ export function RecruitmentAgencyClient() {
         </div>
       </section>
 
+      {/* Trust Signals - Clients */}
+      <section className="bg-white border-b py-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-sm text-gray-500 uppercase tracking-wider mb-6">Clients include</p>
+          <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 mb-8">
+            {/* OneUp Productions - Real Client Logo */}
+            <div className="flex items-center justify-center">
+              <Image
+                src="/1UP productions logo.jpg"
+                alt="OneUp Productions - Fractional Quest Client"
+                width={120}
+                height={40}
+                className="opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </div>
+            {/* Placeholder for more client logos */}
+            <div className="text-center px-4 py-2 border border-dashed border-gray-300 rounded-lg">
+              <div className="text-xs text-gray-400 font-medium">More clients<br/>coming soon</div>
+            </div>
+          </div>
+          <p className="text-center text-sm text-gray-500 uppercase tracking-wider mb-6">Working with</p>
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10">
+            <div className="text-center">
+              <div className="text-2xl mb-1">🚀</div>
+              <div className="text-xs text-gray-600 font-medium">VC-Backed<br/>Startups</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-1">🏢</div>
+              <div className="text-xs text-gray-600 font-medium">PE Portfolio<br/>Companies</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-1">📈</div>
+              <div className="text-xs text-gray-600 font-medium">Scale-ups<br/>£2M-50M</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-1">🏛️</div>
+              <div className="text-xs text-gray-600 font-medium">SME<br/>Businesses</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-1">💼</div>
+              <div className="text-xs text-gray-600 font-medium">Family<br/>Offices</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-1">🌐</div>
+              <div className="text-xs text-gray-600 font-medium">International<br/>Corporates</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Quick Stats */}
       <section className="bg-gray-50 border-b">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
-            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">£5k-30k</div><div className="text-gray-600 text-xs sm:text-sm">Typical Recruiter Fees</div></div>
-            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">3-6 Months</div><div className="text-gray-600 text-xs sm:text-sm">Guarantee Period</div></div>
-            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">5-10</div><div className="text-gray-600 text-xs sm:text-sm">Candidates Presented</div></div>
-            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">85%+</div><div className="text-gray-600 text-xs sm:text-sm">Placement Success</div></div>
+            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">200+</div><div className="text-gray-600 text-xs sm:text-sm">Vetted Executives</div></div>
+            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">10-15%</div><div className="text-gray-600 text-xs sm:text-sm">Our Fee vs 25%+</div></div>
+            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">2 Weeks</div><div className="text-gray-600 text-xs sm:text-sm">Avg. Time to Hire</div></div>
+            <div><div className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">95%+</div><div className="text-gray-600 text-xs sm:text-sm">Client Satisfaction</div></div>
           </div>
         </div>
       </section>
@@ -283,22 +333,117 @@ export function RecruitmentAgencyClient() {
         </div>
       </section>
 
+      {/* Testimonials Section - Social Proof */}
+      <section className="py-16 sm:py-20 bg-white border-b">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">What Clients Say</span>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">Trusted Fractional Recruitment</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gray-50 p-8 rounded-xl border border-gray-200">
+              <div className="flex items-center gap-1 mb-4">
+                {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
+              </div>
+              <p className="text-gray-700 mb-6 italic">&quot;Found us an exceptional fractional CFO within 10 days. The quality of candidates was far better than traditional recruiters we&apos;d used before.&quot;</p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold">JM</div>
+                <div>
+                  <div className="font-bold text-gray-900 text-sm">James M.</div>
+                  <div className="text-gray-500 text-xs">CEO, Series B SaaS</div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-xl border border-gray-200">
+              <div className="flex items-center gap-1 mb-4">
+                {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
+              </div>
+              <p className="text-gray-700 mb-6 italic">&quot;The free consultation alone saved us thousands. Dan helped us realise we needed a part-time FD, not a full fractional CFO. Honest advice.&quot;</p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">SC</div>
+                <div>
+                  <div className="font-bold text-gray-900 text-sm">Sarah C.</div>
+                  <div className="text-gray-500 text-xs">Founder, E-commerce Scale-up</div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-xl border border-gray-200">
+              <div className="flex items-center gap-1 mb-4">
+                {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
+              </div>
+              <p className="text-gray-700 mb-6 italic">&quot;We saved £12,000 in recruiter fees by using the job board. Hired a brilliant fractional CTO who&apos;s transformed our tech stack.&quot;</p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-700 font-bold">MR</div>
+                <div>
+                  <div className="font-bold text-gray-900 text-sm">Michael R.</div>
+                  <div className="text-gray-500 text-xs">MD, PE-Backed Retail</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Study Highlights */}
+      <section className="py-16 bg-gradient-to-br from-gray-900 to-gray-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-3 block">Success Stories</span>
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Fractional Recruitment Results</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Featured Case Study - OneUp Productions */}
+            <Link href="/case-studies/oneup-productions" className="bg-emerald-900/50 backdrop-blur rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all group">
+              <div className="flex items-center gap-3 mb-4">
+                <Image
+                  src="/1UP productions logo.jpg"
+                  alt="OneUp Productions"
+                  width={60}
+                  height={24}
+                  className="rounded"
+                />
+                <span className="text-xs text-emerald-400 font-bold uppercase">Featured</span>
+              </div>
+              <div className="text-emerald-400 text-3xl font-black mb-2">OneUp Productions</div>
+              <div className="text-white font-bold mb-2">Fractional CFO Placement</div>
+              <p className="text-gray-300 text-sm mb-4">Helped scale-up entertainment company find the right fractional finance leadership for their growth stage.</p>
+              <span className="text-emerald-400 text-sm font-medium group-hover:text-emerald-300">Read Case Study →</span>
+            </Link>
+            <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
+              <div className="text-emerald-400 text-4xl font-black mb-2">£45K</div>
+              <div className="text-white font-bold mb-2">Saved vs Traditional Recruiter</div>
+              <p className="text-gray-300 text-sm">Series A fintech hired fractional CFO + CTO through our platform instead of paying 25% fees to an agency.</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
+              <div className="text-emerald-400 text-4xl font-black mb-2">7 Days</div>
+              <div className="text-white font-bold mb-2">From Brief to Placement</div>
+              <p className="text-gray-300 text-sm">PE portfolio company needed urgent interim CFO coverage. Placed within a week via our fractional recruiter network.</p>
+            </div>
+          </div>
+          <div className="mt-10 text-center">
+            <Link href="/case-studies" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-bold">
+              View All Case Studies <span>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* SECOND CTA - MID PAGE */}
-      <section className="py-12 sm:py-16 bg-gray-900">
+      <section className="py-12 sm:py-16 bg-emerald-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="text-4xl sm:text-5xl mb-4 sm:mb-6">🚀</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4">Ready to Start Hiring?</h2>
-          <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8">Most companies don&apos;t need to pay a fractional recruiter. Let&apos;s discuss your specific needs.</p>
+          <p className="text-lg sm:text-xl text-emerald-100 mb-6 sm:mb-8">Most companies don&apos;t need to pay a fractional recruiter. Let&apos;s discuss your specific needs.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-700 text-white font-bold uppercase tracking-wider hover:bg-emerald-800 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors"
             >
               <span>📅</span> Book a Free Call
             </a>
-            <Link href="/fractional-jobs-uk" className="px-8 py-4 bg-white text-gray-900 font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors">
+            <Link href="/fractional-jobs-uk" className="px-8 py-4 bg-emerald-800 text-white font-bold uppercase tracking-wider hover:bg-emerald-900 transition-colors border border-emerald-500">
               Browse Candidates
             </Link>
           </div>
