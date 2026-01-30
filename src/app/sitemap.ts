@@ -356,6 +356,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'data-science-recruitment-agency',
     'healthcare-recruitment-agency',
     'product-management-recruitment',
+    // Priority 1 - High value (Jan 2026)
+    'c-suite-recruitment',
+    'cfo-headhunter',
+    'biotech-executive-recruitment',
+    'outsourced-cfo',
+    'accounting-recruitment-agency',
+    // Priority 2 - Growth sectors
+    'biotech-recruitment-agency',
+    'private-equity-recruitment-agency',
+    'ai-recruitment-agency',
+    'financial-services-headhunter',
+    'pharmaceutical-headhunter',
+    // Priority 3 - Executive niches
+    'executive-marketing-recruitment',
+    'executive-sales-recruitment',
+    'oil-gas-executive-recruitment',
+    'supply-chain-recruitment-agency',
+    'technology-executive-recruitment',
   ].map(slug => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
