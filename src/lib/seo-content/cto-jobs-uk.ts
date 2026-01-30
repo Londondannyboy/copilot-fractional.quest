@@ -234,6 +234,10 @@ export const ctoJobsUkSEO = {
     { name: "Featured: Fractional CTO Role", url: "/fractional-job/fractional-cto-london" },
     // Recruitment
     { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Technology Recruitment", url: "/technology-executive-recruitment" },
+    { name: "AI Recruitment Agency", url: "/ai-recruitment-agency" },
+    { name: "Data Science Recruitment", url: "/data-science-recruitment-agency" },
+    { name: "CTO Recruitment Agency", url: "/cto-recruitment-agency" },
     // Tech Locations
     { name: "Cambridge Jobs", url: "/cambridge" },
     { name: "Manchester Jobs", url: "/manchester" },

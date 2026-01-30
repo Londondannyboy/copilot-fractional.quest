@@ -265,6 +265,12 @@ export const cfoJobsUkSEO = {
     { name: "Executive Finder", url: "/fractional-executive-finder" },
     // Recruitment
     { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "CFO Headhunter", url: "/cfo-headhunter" },
+    { name: "Outsourced CFO", url: "/outsourced-cfo" },
+    { name: "CFO Recruitment", url: "/cfo-recruitment" },
+    { name: "Accounting Recruitment", url: "/accounting-recruitment-agency" },
+    { name: "Finance Recruitment", url: "/finance-recruitment-agency" },
+    { name: "Private Equity Recruitment", url: "/private-equity-recruitment-agency" },
     // Other Locations
     { name: "Manchester Jobs", url: "/manchester" },
     { name: "Birmingham Jobs", url: "/birmingham" },

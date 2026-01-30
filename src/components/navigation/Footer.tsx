@@ -129,6 +129,21 @@ const footerLinks = {
       { name: 'COO Salary Guide', href: '/fractional-coo-salary' },
     ],
   },
+  recruitment: {
+    title: 'Recruitment',
+    links: [
+      { name: 'C-Suite Recruitment', href: '/c-suite-recruitment' },
+      { name: 'CFO Headhunter', href: '/cfo-headhunter' },
+      { name: 'CMO Recruitment', href: '/cmo-recruitment-agency' },
+      { name: 'CTO Recruitment', href: '/cto-recruitment-agency' },
+      { name: 'Executive Search', href: '/executive-search-firms' },
+      { name: 'Interim Executive Search', href: '/interim-executive-search' },
+      { name: 'Private Equity Recruitment', href: '/private-equity-recruitment-agency' },
+      { name: 'FinTech Recruitment', href: '/fintech-recruitment-agency' },
+      { name: 'AI Recruitment', href: '/ai-recruitment-agency' },
+      { name: 'Accounting Recruitment', href: '/accounting-recruitment-agency' },
+    ],
+  },
 }
 
 const socialLinks = [
@@ -143,7 +158,7 @@ export function Footer() {
     <footer className="bg-gray-900 text-gray-300">
       {/* Main footer content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-10 gap-8">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -269,6 +284,19 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">{footerLinks.costGuides.title}</h3>
             <ul className="space-y-2">
               {footerLinks.costGuides.links.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">{footerLinks.recruitment.title}</h3>
+            <ul className="space-y-2">
+              {footerLinks.recruitment.links.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm hover:text-white transition-colors">
                     {link.name}

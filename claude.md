@@ -140,6 +140,20 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 - Specialist pages: `fractional-cmo-uk`, `fractional-fd`, `fractional-cfo-agency`
 - Services: `virtual-cfo-services`, `fractional-operations-manager`, `fractional-cmo-b2b`
 
+**Recruitment Pages (Jan 2026)** - 35+ pages with fractional/interim angle:
+- C-Suite: `c-suite-recruitment`, `cfo-headhunter`, `cfo-recruitment`
+- Executive Search: `executive-search-firms`, `interim-executive-search`
+- Industry: `biotech-recruitment-agency`, `pharmaceutical-headhunter`, `fintech-recruitment-agency`
+- Sector: `private-equity-recruitment-agency`, `ai-recruitment-agency`, `accounting-recruitment-agency`
+- Function: `executive-marketing-recruitment`, `executive-sales-recruitment`, `technology-executive-recruitment`
+- Manager-level: `interim-hr-director`, `interim-sales-director`, `interim-manager`, `interim-operations-manager`
+
+**Internal Linking Structure**:
+- Pillar pages (CFO/CMO/CTO/COO jobs) link to relevant recruitment pages via `relatedPages`
+- Footer has dedicated "Recruitment" section with 10 key pages
+- Header has "Work Types" dropdown for interim/part-time/advisory
+- All recruitment pages link back to job pages
+
 ## Internationalization (i18n)
 
 **Supported Markets**: UK (default), US, AU, NZ
