@@ -4,8 +4,8 @@
 
 export const londonSEO = {
   meta: {
-    // Title: 54 chars (within 50-60 target) - matches competitor patterns
-    title: "Fractional Jobs London | 100+ Roles, £900-£1,500/day",
+    // Title: 48 chars - optimized for SERPs with site name
+    title: "Fractional Jobs London | 100+ Roles £1K+/day",
     // Description: 156 chars (within 140-160 target) - answers "what is a fractional job" + value prop
     description:
       "Browse 100+ fractional jobs in London. Part-time CFO, CTO, CMO executive roles paying £900-£1,500/day. The UK's specialist job board for fractional work.",
@@ -83,7 +83,7 @@ export const londonSEO = {
 
   content: {
     whyLocation: {
-      title: "Fractional Jobs London: Why the Capital Leads",
+      title: "Fractional Jobs in London: Why the Capital Leads",
       paragraphs: [
         "Fractional jobs London dominate the UK market, with the capital accounting for over 60% of all UK fractional executive appointments. London's unique concentration of high-growth startups, scale-ups, PE-backed companies, and established enterprises creates unparalleled demand for flexible C-suite expertise.",
         "According to the ScaleUp Institute, 70% of UK companies using fractional leadership are London-based. When searching for fractional jobs London offers the most diverse business ecosystem—spanning fintech (Revolut, Monzo), healthtech, proptech, and traditional sectors. The CBI reports that London businesses are leading the shift toward flexible executive models.",
@@ -92,7 +92,7 @@ export const londonSEO = {
     },
 
     dayRates: {
-      title: "London Fractional Day Rates by Role",
+      title: "Fractional Jobs Day Rates in London",
       description:
         "Typical day rates for fractional executives in London, based on experience and sector (Source: Glassdoor UK, CIPD Pay Benchmarking):",
       rates: [
@@ -105,7 +105,7 @@ export const londonSEO = {
     },
 
     locations: {
-      title: "Key London Business Hubs",
+      title: "Where to Find Fractional Jobs in London",
       areas: [
         {
           name: "Square Mile & City of London",
@@ -135,7 +135,7 @@ export const londonSEO = {
     },
 
     emergingRoles: {
-      title: "Emerging Fractional Roles in London",
+      title: "New Fractional Jobs Categories in London",
       roles: [
         {
           title: "Fractional CISO",
@@ -165,7 +165,7 @@ export const londonSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional Work in London",
+      title: "The Future of Fractional Jobs in London",
       paragraphs: [
         "The global fractional executive market is projected to exceed $5.7 billion by 2026, with London positioned as a leading hub. Tech Nation reports that London's tech sector alone employs over 600,000 people, creating sustained demand for flexible executive leadership.",
         "Key trends shaping London's fractional market include: increased acceptance of portfolio careers among senior executives, the rise of AI requiring specialist leadership, and growing PE/VC preference for operational expertise without permanent overhead.",

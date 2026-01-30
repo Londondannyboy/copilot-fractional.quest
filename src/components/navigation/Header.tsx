@@ -84,6 +84,8 @@ const navigation = {
       { name: 'CFO Services', href: '/fractional-cfo-services' },
       { name: 'CTO Services', href: '/fractional-cto-services' },
       { name: 'CMO Services', href: '/fractional-cmo-services' },
+      { name: 'Executive Search', href: '/executive-search-firms' },
+      { name: 'Recruitment Agencies', href: '/fractional-recruitment-agency' },
     ]
   },
   engagementTypes: {

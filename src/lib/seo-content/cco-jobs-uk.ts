@@ -215,6 +215,7 @@ export const ccoJobsUkSEO = {
     { name: "Fractional CRO Jobs UK", url: "/fractional-cro-jobs-uk" },
     { name: "Fractional CMO Jobs UK", url: "/fractional-cmo-jobs-uk" },
     { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
+    { name: "Fractional CSO Jobs UK", url: "/fractional-cso-jobs-uk" },
     // Related Operations Roles
     { name: "Fractional COO Jobs UK", url: "/fractional-coo-jobs-uk" },
     { name: "Fractional CFO Jobs UK", url: "/fractional-cfo-jobs-uk" },
@@ -223,10 +224,13 @@ export const ccoJobsUkSEO = {
     { name: "Part-Time CCO Jobs UK", url: "/part-time-cco-jobs-uk" },
     { name: "Advisory CCO Jobs UK", url: "/advisory-cco-jobs-uk" },
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
+    // Recruitment & Executive Search
+    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Executive Search", url: "/fractional-executive-search" },
+    { name: "Marketing Recruitment Agency", url: "/marketing-recruitment-agency" },
     // Tools & Guides
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
-    { name: "Executive Finder", url: "/fractional-executive-finder" },
     // Locations
     { name: "Manchester Jobs", url: "/manchester" },
     { name: "Edinburgh Jobs", url: "/edinburgh" },
