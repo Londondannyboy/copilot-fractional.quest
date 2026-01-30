@@ -325,9 +325,19 @@ export function RecruitmentAgencyClient() {
         </div>
       </section>
 
-      {/* Benefits of Using an Agency */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Benefits of Using an Agency - with background image */}
+      <section className="relative py-16 sm:py-24 overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
+            alt="Professional recruitment"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50/95 via-gray-50/90 to-emerald-50/95" />
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 sm:mb-16 text-center max-w-3xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Benefits</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-6">Why Use a Fractional Recruiter?</h2>
@@ -335,7 +345,7 @@ export function RecruitmentAgencyClient() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
-              <div key={index} className="bg-white p-8 border-l-4 border-emerald-500 hover:shadow-md transition-shadow">
+              <div key={index} className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border-l-4 border-emerald-500 hover:shadow-lg transition-all hover:bg-white">
                 <div className="text-4xl mb-4">{benefit.icon}</div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
                 <p className="text-gray-600 text-sm">{benefit.description}</p>
@@ -345,97 +355,48 @@ export function RecruitmentAgencyClient() {
         </div>
       </section>
 
-      {/* Testimonials Section - Social Proof */}
-      <section className="py-16 sm:py-20 bg-white border-b">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">What Clients Say</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">Trusted Fractional Recruitment</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-8 rounded-xl border border-gray-200">
-              <div className="flex items-center gap-1 mb-4">
-                {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
-              </div>
-              <p className="text-gray-700 mb-6 italic">&quot;Found us an exceptional fractional CFO within 10 days. The quality of candidates was far better than traditional recruiters we&apos;d used before.&quot;</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold">JM</div>
-                <div>
-                  <div className="font-bold text-gray-900 text-sm">James M.</div>
-                  <div className="text-gray-500 text-xs">CEO, Series B SaaS</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-gray-50 p-8 rounded-xl border border-gray-200">
-              <div className="flex items-center gap-1 mb-4">
-                {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
-              </div>
-              <p className="text-gray-700 mb-6 italic">&quot;The free consultation alone saved us thousands. Dan helped us realise we needed a part-time FD, not a full fractional CFO. Honest advice.&quot;</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">SC</div>
-                <div>
-                  <div className="font-bold text-gray-900 text-sm">Sarah C.</div>
-                  <div className="text-gray-500 text-xs">Founder, E-commerce Scale-up</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-gray-50 p-8 rounded-xl border border-gray-200">
-              <div className="flex items-center gap-1 mb-4">
-                {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
-              </div>
-              <p className="text-gray-700 mb-6 italic">&quot;We saved £12,000 in recruiter fees by using the job board. Hired a brilliant fractional CTO who&apos;s transformed our tech stack.&quot;</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-700 font-bold">MR</div>
-                <div>
-                  <div className="font-bold text-gray-900 text-sm">Michael R.</div>
-                  <div className="text-gray-500 text-xs">MD, PE-Backed Retail</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* Case Study - OneUp Productions (Real Client) */}
+      <section className="relative py-16 overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=1920&q=80"
+            alt="Business success"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-emerald-900/95" />
         </div>
-      </section>
-
-      {/* Case Study Highlights */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 to-gray-800">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-3 block">Success Stories</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Fractional Recruitment Results</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-3 block">Case Study</span>
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Client Success Story</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="max-w-3xl mx-auto">
             {/* Featured Case Study - OneUp Productions */}
-            <Link href="/case-studies/oneup-productions" className="bg-emerald-900/50 backdrop-blur rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all group">
-              <div className="flex items-center gap-3 mb-4">
+            <Link href="/case-studies/oneup-productions" className="block bg-white/10 backdrop-blur rounded-2xl p-8 sm:p-10 border border-emerald-500/30 hover:border-emerald-400/50 transition-all group">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-6">
                 <Image
                   src="/1UP productions logo.jpg"
                   alt="OneUp Productions"
-                  width={60}
-                  height={24}
-                  className="rounded"
+                  width={120}
+                  height={48}
+                  className="rounded-lg"
                 />
-                <span className="text-xs text-emerald-400 font-bold uppercase">Featured</span>
+                <div>
+                  <div className="text-emerald-400 text-2xl sm:text-3xl font-black mb-1">OneUp Productions</div>
+                  <div className="text-white/80">Entertainment & Media Scale-up</div>
+                </div>
               </div>
-              <div className="text-emerald-400 text-3xl font-black mb-2">OneUp Productions</div>
-              <div className="text-white font-bold mb-2">Fractional CFO Placement</div>
-              <p className="text-gray-300 text-sm mb-4">Helped scale-up entertainment company find the right fractional finance leadership for their growth stage.</p>
-              <span className="text-emerald-400 text-sm font-medium group-hover:text-emerald-300">Read Case Study →</span>
+              <div className="text-white font-bold text-xl mb-4">Fractional CFO Placement</div>
+              <p className="text-gray-300 text-lg mb-6 leading-relaxed">Helped this scale-up entertainment company find the right fractional finance leadership for their growth stage. The placement enabled them to professionalise their finance function ahead of their next funding round.</p>
+              <span className="inline-flex items-center gap-2 text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors">
+                Read Full Case Study <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </span>
             </Link>
-            <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
-              <div className="text-emerald-400 text-4xl font-black mb-2">£45K</div>
-              <div className="text-white font-bold mb-2">Saved vs Traditional Recruiter</div>
-              <p className="text-gray-300 text-sm">Series A fintech hired fractional CFO + CTO through our platform instead of paying 25% fees to an agency.</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
-              <div className="text-emerald-400 text-4xl font-black mb-2">7 Days</div>
-              <div className="text-white font-bold mb-2">From Brief to Placement</div>
-              <p className="text-gray-300 text-sm">PE portfolio company needed urgent interim CFO coverage. Placed within a week via our fractional recruiter network.</p>
-            </div>
           </div>
           <div className="mt-10 text-center">
-            <Link href="/case-studies" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-bold">
-              View All Case Studies <span>→</span>
-            </Link>
+            <p className="text-gray-400 text-sm">More case studies coming soon as we grow our client base</p>
           </div>
         </div>
       </section>
