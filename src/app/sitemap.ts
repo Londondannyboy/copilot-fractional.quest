@@ -394,6 +394,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }))
 
+  // Virtual executive pages (US-focused)
+  const virtualPages: MetadataRoute.Sitemap = [
+    'virtual-cfo',
+    'virtual-cto',
+    'virtual-coo',
+    'virtual-ciso',
+  ].map(slug => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
   // ============================================
   // DYNAMIC PAGES - From database
   // ============================================
@@ -415,6 +428,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...guidePages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...recruitmentAgencyPages.map(p => p.url.replace(`${baseUrl}/`, '')),
     ...executiveSearchPages.map(p => p.url.replace(`${baseUrl}/`, '')),
+    ...virtualPages.map(p => p.url.replace(`${baseUrl}/`, '')),
   ])
 
   // Dynamic pages from database (excluding redirects, noindex, and already-listed static pages)
@@ -559,6 +573,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...guidePages,
     ...recruitmentAgencyPages,
     ...executiveSearchPages,
+    ...virtualPages,
     ...dynamicPages,
     ...newsIndexPage,
     ...jobDetailPages,

@@ -369,6 +369,12 @@ export default function FractionalCtoPage() {
                   <Link href="/fractional-cto-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
                     <span>💼</span> CTO Jobs UK
                   </Link>
+                  <Link href="/virtual-cto" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
+                    <span>🌐</span> Virtual CTO Services
+                  </Link>
+                  <Link href="/fractional-ciso" className="flex items-center gap-2 text-sm text-gray-600 hover:text-cyan-700 transition-colors">
+                    <span>🔒</span> Fractional CISO Guide
+                  </Link>
                 </div>
               </div>
 

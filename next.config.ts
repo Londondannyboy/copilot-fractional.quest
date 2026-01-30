@@ -29,25 +29,31 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Virtual CFO/CMO redirects - same as fractional
-      {
-        source: '/virtual-cfo',
-        destination: '/fractional-cfo-services',
-        permanent: true,
-      },
+      // Note: /virtual-cfo, /virtual-cto, /virtual-coo, /virtual-ciso now have dedicated pages
+      // Keeping virtual-cfo-services and virtual-cmo-services as redirects for now
       {
         source: '/virtual-cfo-services',
-        destination: '/fractional-cfo-services',
-        permanent: true,
-      },
-      {
-        source: '/virtual-cmo',
-        destination: '/fractional-cmo-services',
+        destination: '/virtual-cfo',
         permanent: true,
       },
       {
         source: '/virtual-cmo-services',
         destination: '/fractional-cmo-services',
+        permanent: true,
+      },
+      {
+        source: '/virtual-cto-services',
+        destination: '/virtual-cto',
+        permanent: true,
+      },
+      {
+        source: '/virtual-coo-services',
+        destination: '/virtual-coo',
+        permanent: true,
+      },
+      {
+        source: '/virtual-ciso-services',
+        destination: '/virtual-ciso',
         permanent: true,
       },
       // 404 fixes - redirect to closest relevant pages

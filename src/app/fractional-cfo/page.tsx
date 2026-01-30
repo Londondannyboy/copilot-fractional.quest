@@ -633,6 +633,12 @@ export default function FractionalCfoPage() {
                     <Link href="/fractional-cfo-services" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
                       <span>⚙️</span> CFO Services
                     </Link>
+                    <Link href="/virtual-cfo" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                      <span>🌐</span> Virtual CFO Services
+                    </Link>
+                    <Link href="/fractional-cto" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                      <span>💻</span> Fractional CTO Guide
+                    </Link>
                     <Link href="/part-time-cfo-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
                       <span>🕐</span> Part-Time CFO Jobs
                     </Link>

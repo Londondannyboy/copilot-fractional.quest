@@ -363,8 +363,11 @@ export default function FractionalCooPage() {
             </Link>
           </div>
 
-          {/* Secondary Resources - 4 compact links */}
+          {/* Secondary Resources - 5 compact links */}
           <div className="flex flex-wrap gap-3 pb-6 border-b border-gray-200">
+            <Link href="/virtual-coo" className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-300 rounded-full text-sm text-slate-700 hover:border-slate-500 transition-colors font-medium">
+              🌐 Virtual COO Services
+            </Link>
             <Link href="/fractional-coo-services" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-slate-700 hover:border-slate-400 transition-colors">
               ⚙️ COO Services
             </Link>

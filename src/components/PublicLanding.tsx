@@ -311,8 +311,52 @@ export function PublicLanding() {
         </div>
       </section>
 
-      {/* Interim Executive Jobs */}
+      {/* Virtual Executive Services - US Market */}
       <section className="py-12 bg-gray-800/30 border-t border-gray-700">
+        <div className="max-w-6xl mx-auto px-4">
+          <h3 className="text-xl font-semibold text-white text-center mb-4">Virtual Executive Services</h3>
+          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto text-sm">
+            Remote C-suite leadership for US businesses. Get experienced executive guidance without full-time commitment.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Link
+              href="/virtual-cfo"
+              className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-4 text-center hover:border-emerald-400/50 transition-all group"
+            >
+              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-emerald-300 transition-colors">CFO Services</h4>
+              <p className="text-gray-400 text-xs mt-1">$1,200-$2,500/day</p>
+            </Link>
+            <Link
+              href="/virtual-cto"
+              className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-400/50 transition-all group"
+            >
+              <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-cyan-300 transition-colors">CTO Services</h4>
+              <p className="text-gray-400 text-xs mt-1">$1,500-$3,000/day</p>
+            </Link>
+            <Link
+              href="/virtual-coo"
+              className="bg-gradient-to-r from-slate-800/50 to-gray-900/50 border border-slate-500/30 rounded-xl p-4 text-center hover:border-slate-400/50 transition-all group"
+            >
+              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-slate-300 transition-colors">COO Services</h4>
+              <p className="text-gray-400 text-xs mt-1">$1,200-$2,500/day</p>
+            </Link>
+            <Link
+              href="/virtual-ciso"
+              className="bg-gradient-to-r from-red-900/50 to-rose-900/50 border border-red-500/30 rounded-xl p-4 text-center hover:border-red-400/50 transition-all group"
+            >
+              <span className="text-red-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
+              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-red-300 transition-colors">CISO Services</h4>
+              <p className="text-gray-400 text-xs mt-1">$1,500-$3,000/day</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Interim Executive Jobs */}
+      <section className="py-12 bg-gray-800/20 border-t border-gray-700">
         <div className="max-w-6xl mx-auto px-4">
           <h3 className="text-xl font-semibold text-white text-center mb-4">Interim Executive Jobs UK</h3>
           <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto text-sm">

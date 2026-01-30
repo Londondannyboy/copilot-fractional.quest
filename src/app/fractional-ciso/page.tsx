@@ -243,8 +243,11 @@ export default function FractionalCisoPage() {
             </Link>
           </div>
 
-          {/* Secondary Resources - 4 compact links */}
+          {/* Secondary Resources - 5 compact links */}
           <div className="flex flex-wrap gap-3 pb-6 border-b border-gray-200">
+            <Link href="/virtual-ciso" className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-200 rounded-full text-sm text-red-700 hover:border-red-400 transition-colors font-medium">
+              🌐 Virtual CISO (vCISO)
+            </Link>
             <Link href="/fractional-ciso-services" className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-red-700 hover:border-red-300 transition-colors">
               ⚙️ CISO Services
             </Link>
