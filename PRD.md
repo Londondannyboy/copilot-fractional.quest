@@ -26,11 +26,18 @@ Build the UK's premier platform for fractional executive job seekers and hirers,
 ## Current State (Jan 2026)
 
 ### Metrics
-- **Total Pages**: 374 (243 database + 131 static)
-- **Database Pages**: 243 in Neon PostgreSQL
+- **Total Pages**: 390+ (260+ database + 131 static)
+- **Database Pages**: 260+ in Neon PostgreSQL (including 17 new SEO pages)
 - **Static Pages**: 131 with JobPageClient components
 - **Job Posts**: 49 (Google Jobs optimized, at `/fractional-job/{slug}`)
-- **Top Traffic**: /fractional-jobs-london (115 clicks), /london (40), /fractional-jobs-uk (23)
+- **Hub Pages**: 3 (interim-jobs-uk, part-time-jobs-uk, advisory-jobs-uk)
+- **Top Traffic**: /fractional-jobs-london, /fractional-cto-jobs-uk, /fractional-cfo-jobs-uk
+
+### SEO Improvements (Jan 30, 2026)
+- **Enriched Pages**: 17 pages with TOC, authority links, FAQs, comparison tables
+- **New Neon Pages**: interim-cmo, interim-cto, interim-ceo, interim-chro, part-time-cmo, part-time-coo, fractional-fd, fractional-cfo-agency, virtual-cfo-services, fractional-operations-manager
+- **Navigation**: Header "Work Types" dropdown, Footer expanded to 9 columns
+- **Discoverability**: Hub pages for topic clustering, sitemap fixed
 
 ### Working Features
 - CopilotKit sidebar on all pages

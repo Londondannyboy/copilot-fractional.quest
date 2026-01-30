@@ -70,6 +70,9 @@ For new role/engagement pages:
 | `RoleCalculator` | Day rate calculator |
 | `ServerJobGrid` | Server-rendered job grid |
 | `HotJobsLines` | Featured jobs carousel |
+| `TableOfContents` | Sticky TOC with accentColor prop |
+| `Header` | Navigation with Work Types dropdown |
+| `Footer` | Comprehensive footer with 8 link sections |
 
 ## Engagement Types
 
@@ -124,6 +127,18 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 **Neon Database Pages**:
 - Contract jobs UK: 11 roles (contract-cfo-jobs-uk, etc.)
 - Founding jobs UK: 6 roles (founding-cto-jobs-uk, etc.)
+
+**Hub Pages (Neon)** - Topic clustering for discoverability:
+- `/interim-jobs-uk` - Hub linking to all interim role pages
+- `/part-time-jobs-uk` - Hub linking to all part-time role pages
+- `/advisory-jobs-uk` - Hub linking to all advisory role pages
+
+**SEO-Enriched Pages (Jan 2026)**:
+- Cost guides: `fractional-cfo-cost`, `fractional-cmo-cost`, `fractional-coo-cost`
+- Role guides: `interim-cmo`, `interim-cto`, `interim-ceo`, `interim-chro`
+- Part-time guides: `part-time-cmo`, `part-time-coo`
+- Specialist pages: `fractional-cmo-uk`, `fractional-fd`, `fractional-cfo-agency`
+- Services: `virtual-cfo-services`, `fractional-operations-manager`, `fractional-cmo-b2b`
 
 ## Internationalization (i18n)
 
