@@ -639,8 +639,8 @@ export default function FractionalCfoPage() {
                     <Link href="/fractional-cto" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
                       <span>💻</span> Fractional CTO Guide
                     </Link>
-                    <Link href="/fractional-recruitment-agency" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
-                      <span>🎯</span> Fractional Recruitment Agency
+                    <Link href="/fractional-recruitment-agency" className="flex items-center gap-2 text-sm text-emerald-700 hover:text-emerald-900 font-medium transition-colors">
+                      <span>🎯</span> Fractional Recruitment Agency UK
                     </Link>
                     <Link href="/part-time-cfo-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
                       <span>🕐</span> Part-Time CFO Jobs

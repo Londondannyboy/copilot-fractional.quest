@@ -231,7 +231,7 @@ export const cisoJobsUkSEO = {
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
     { name: "Executive Finder", url: "/fractional-executive-finder" },
     // Recruitment
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment", url: "/fractional-recruitment-agency" },
     // Locations
     { name: "Edinburgh Jobs", url: "/edinburgh" },
     { name: "Manchester Jobs", url: "/manchester" },

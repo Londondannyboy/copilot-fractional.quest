@@ -7,6 +7,7 @@ import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
 import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
+import { LazyYouTube } from "@/components/LazyYouTube";
 
 // Lazy-load below-fold components to reduce initial JS execution
 const EmbeddedJobBoard = dynamic(
@@ -295,6 +296,17 @@ export function RecruitmentAgencyClient() {
               The <strong>fractional recruitment agency</strong> market has grown significantly since 2020, with more agencies and independent fractional recruiters now offering specialist services alongside traditional interim and permanent search.
             </p>
           </div>
+
+          {/* Video: What is Fractional Recruitment */}
+          <div className="mt-12 not-prose">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">What is Fractional Recruitment?</h3>
+            <LazyYouTube
+              videoId="V-x6RAOEftk"
+              title="What is Fractional Recruitment? Understanding the Fractional Recruiter Model"
+            />
+            <p className="text-gray-500 text-sm mt-3">Video: Understanding how <strong>fractional recruitment agencies</strong> and <strong>fractional recruiters</strong> work</p>
+          </div>
+
           {/* INLINE CTA */}
           <div className="mt-12 bg-emerald-50 border border-emerald-200 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>

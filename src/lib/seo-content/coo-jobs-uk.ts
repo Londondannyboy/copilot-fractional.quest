@@ -224,7 +224,7 @@ export const cooJobsUkSEO = {
     { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
     // Recruitment
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruiters UK", url: "/fractional-recruitment-agency" },
     { name: "Operations Recruitment", url: "/operations-director-recruitment" },
     { name: "Supply Chain Recruitment", url: "/supply-chain-recruitment-agency" },
     { name: "Executive Sales Recruitment", url: "/executive-sales-recruitment" },

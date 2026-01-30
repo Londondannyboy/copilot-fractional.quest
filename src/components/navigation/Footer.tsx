@@ -67,7 +67,7 @@ const footerLinks = {
       { name: 'CEO Services', href: '/fractional-ceo-services' },
       { name: 'CFO Agency', href: '/fractional-cfo-agency' },
       { name: 'CMO Agency', href: '/fractional-cmo-agency' },
-      { name: 'Recruitment Agency Guide', href: '/fractional-recruitment-agency' },
+      { name: 'Fractional Recruitment Agency', href: '/fractional-recruitment-agency' },
       { name: 'Executive Search Firms', href: '/executive-search-firms' },
       { name: 'Fractional Executive Search', href: '/fractional-executive-search' },
       { name: 'Book a Call', href: '/book-call' },
