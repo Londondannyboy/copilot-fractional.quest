@@ -162,7 +162,7 @@ export function DigitalMarketingRecruitmentAgencyClient() {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">FAQ</span>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-6">Digital Marketing Recruitment Questions</h2>
           </div>
-          <FAQ items={faqItems} />
+          <FAQ skipSchema items={faqItems} />
         </div>
       </section>
 
