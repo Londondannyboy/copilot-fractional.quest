@@ -185,6 +185,51 @@ h3, h4, h5, h6 {
   }
 }
 
+/* Responsive section padding - mobile-first */
+.section-responsive {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-responsive {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-responsive {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Hero minimum height - responsive */
+.hero-min-h {
+  min-height: 300px;
+}
+
+@media (min-width: 640px) {
+  .hero-min-h {
+    min-height: 350px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-min-h {
+    min-height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-min-h {
+    min-height: 500px;
+  }
+}
+
 /* ==========================================
    CARD COMPONENTS
    ========================================== */

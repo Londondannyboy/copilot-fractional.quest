@@ -172,7 +172,7 @@ export function Header() {
               </button>
 
               {activeDropdown === 'roles' && (
-                <div className="absolute top-full left-0 w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
+                <div className="absolute top-full left-0 w-[90vw] max-w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">By Role</p>
                     <div className="space-y-1">
@@ -230,7 +230,7 @@ export function Header() {
               </button>
 
               {activeDropdown === 'locations' && (
-                <div className="absolute top-full left-0 w-[320px] bg-white rounded-xl shadow-xl border border-gray-100 p-4">
+                <div className="absolute top-full left-0 w-[90vw] max-w-[320px] bg-white rounded-xl shadow-xl border border-gray-100 p-4">
                   <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">UK Locations</p>
                   <div className="space-y-1">
                     {navigation.locations.items.map((item) => (
@@ -263,7 +263,7 @@ export function Header() {
               </button>
 
               {activeDropdown === 'resources' && (
-                <div className="absolute top-full left-0 w-[500px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
+                <div className="absolute top-full left-0 w-[90vw] max-w-[500px] bg-white rounded-xl shadow-xl border border-gray-100 p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Role Guides</p>
                     <div className="space-y-1">
@@ -311,7 +311,7 @@ export function Header() {
               </button>
 
               {activeDropdown === 'employers' && (
-                <div className="absolute top-full right-0 w-[400px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
+                <div className="absolute top-full right-0 w-[90vw] max-w-[400px] bg-white rounded-xl shadow-xl border border-gray-100 p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Hire Talent</p>
                     <div className="space-y-1">
@@ -359,7 +359,7 @@ export function Header() {
               </button>
 
               {activeDropdown === 'engagementTypes' && (
-                <div className="absolute top-full right-0 w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-6 grid grid-cols-2 gap-6">
+                <div className="absolute top-full right-0 w-[90vw] max-w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">By Type</p>
                     <div className="space-y-1">

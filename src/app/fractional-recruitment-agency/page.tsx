@@ -2,14 +2,15 @@ import { Metadata } from "next";
 import { RecruitmentAgencyClient } from "./RecruitmentAgencyClient";
 import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
-// SEO Metadata - optimized for "fractional recruitment agency" keyword
+// SEO Metadata - optimized for "fractional recruitment agency" and "fractional recruiter" keywords
 export const metadata: Metadata = {
-  title: "Fractional Recruitment Agency UK 🎯 Best Agencies 2026",
+  title: "Fractional Recruitment Agency 🎯 Fractional Recruiter",
   description:
-    "Find the best fractional recruitment agencies in the UK. Compare specialist agencies for fractional CFO, CTO, CMO, and C-suite placements. Understand agency fees (15-25%), timelines (2-4 weeks), and how to choose the right fractional recruitment agency.",
+    "Find the best fractional recruitment agencies and fractional recruiters. Compare specialist agencies for fractional CFO, CTO, CMO, and C-suite placements. Agency fees 15-25%, placements in 2-4 weeks.",
   keywords: [
     "fractional recruitment agency",
-    "fractional recruitment agencies uk",
+    "fractional recruiter",
+    "fractional recruitment agencies",
     "fractional executive recruitment",
     "fractional cfo recruitment",
     "fractional cto recruitment",
@@ -17,11 +18,12 @@ export const metadata: Metadata = {
     "interim executive recruitment",
     "part time executive recruitment",
     "fractional c-suite recruitment",
+    "executive recruiter",
   ],
   openGraph: {
-    title: "Fractional Recruitment Agency UK 🎯 Best Agencies 2026",
+    title: "Fractional Recruitment Agency 🎯 Fractional Recruiter",
     description:
-      "Find the best fractional recruitment agencies in the UK. Compare specialists in CFO, CTO, CMO placements. Fees 15-25%, placements in 2-4 weeks.",
+      "Find the best fractional recruitment agencies and fractional recruiters. Compare specialists in CFO, CTO, CMO placements. Fees 15-25%, placements in 2-4 weeks.",
     type: "website",
     url: "https://fractional.quest/fractional-recruitment-agency",
     images: [
@@ -29,15 +31,15 @@ export const metadata: Metadata = {
         url: "https://fractional.quest/og-recruitment-agency.png",
         width: 1200,
         height: 630,
-        alt: "Fractional Recruitment Agency UK - Best Agencies Guide",
+        alt: "Fractional Recruitment Agency - Best Agencies & Recruiters Guide",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fractional Recruitment Agency UK 🎯 Best Agencies 2026",
+    title: "Fractional Recruitment Agency 🎯 Fractional Recruiter",
     description:
-      "Find the best fractional recruitment agencies in the UK. Compare specialists in CFO, CTO, CMO placements.",
+      "Find the best fractional recruitment agencies and fractional recruiters. Compare specialists in CFO, CTO, CMO placements.",
   },
   alternates: {
     canonical: "https://fractional.quest/fractional-recruitment-agency",
@@ -98,10 +100,10 @@ export default function FractionalRecruitmentAgencyPage() {
 
       {/* Schema Markup */}
       <WebPageSchema
-        title="Fractional Recruitment Agency UK - Best Agencies for Fractional Executives 2026"
-        description="Find the best fractional recruitment agencies in the UK. Compare agencies specialising in fractional CFO, CTO, CMO, and C-suite placements. Understand fees, timelines, and how to choose."
+        title="Fractional Recruitment Agency - Best Agencies & Fractional Recruiters Guide"
+        description="Find the best fractional recruitment agencies and fractional recruiters. Compare agencies specialising in fractional CFO, CTO, CMO, and C-suite placements. Understand fees, timelines, and how to choose."
         url="https://fractional.quest/fractional-recruitment-agency"
-        dateModified={new Date("2026-01-22T00:00:00Z")}
+        dateModified={new Date("2026-01-30T00:00:00Z")}
       />
       <FAQPageSchema faqs={faqItems} />
 

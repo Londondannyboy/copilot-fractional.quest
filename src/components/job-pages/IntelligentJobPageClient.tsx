@@ -160,7 +160,7 @@ function IntelligentHero({
   const fallbackUrl = getHeroImageUrl(imageCategory, 1920, 800);
 
   return (
-    <section className="relative text-white py-16 px-6 min-h-[400px] flex items-center overflow-hidden">
+    <section className="relative text-white py-12 sm:py-16 px-4 sm:px-6 min-h-[300px] sm:min-h-[350px] md:min-h-[400px] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         {hasLocal && localImage ? (
           <picture>
@@ -208,26 +208,26 @@ function IntelligentHero({
         )}
 
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance font-playfair text-white">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance font-playfair text-white">
             {headline}
           </h1>
-          <p className="text-xl md:text-2xl opacity-90 mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl opacity-90 mb-6 sm:mb-8">
             {subtitle}
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-6 mt-8">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4">
-            <div className="text-2xl font-bold">{stats.avgDayRate}</div>
-            <div className="text-sm opacity-80">Avg Day Rate</div>
+        <div className="flex flex-wrap gap-3 sm:gap-6 mt-6 sm:mt-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 sm:px-6 py-3 sm:py-4">
+            <div className="text-xl sm:text-2xl font-bold">{stats.avgDayRate}</div>
+            <div className="text-xs sm:text-sm opacity-80">Avg Day Rate</div>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4">
-            <div className="text-2xl font-bold">{stats.hubStatus}</div>
-            <div className="text-sm opacity-80">Hub Status</div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 sm:px-6 py-3 sm:py-4">
+            <div className="text-xl sm:text-2xl font-bold">{stats.hubStatus}</div>
+            <div className="text-xs sm:text-sm opacity-80">Hub Status</div>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4">
-            <div className="text-2xl font-bold">{stats.hybridOptions}</div>
-            <div className="text-sm opacity-80">Hybrid Options</div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 sm:px-6 py-3 sm:py-4">
+            <div className="text-xl sm:text-2xl font-bold">{stats.hybridOptions}</div>
+            <div className="text-xs sm:text-sm opacity-80">Hybrid Options</div>
           </div>
         </div>
       </div>
