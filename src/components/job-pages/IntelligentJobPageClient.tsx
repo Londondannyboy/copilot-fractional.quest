@@ -330,7 +330,115 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
         breadcrumb={seoContent.breadcrumb}
       />
 
-      {/* Everything below loads lazily with CopilotKit */}
+      {/* ============================================================== */}
+      {/* SEO CONTENT SECTION - Renders Server-Side for Search Engines   */}
+      {/* This section is OUTSIDE CopilotKitWrapper so it's SSR-safe     */}
+      {/* ============================================================== */}
+
+      {/* Statistics Banner - SSR */}
+      {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
+        <section className="py-8 bg-gray-50 border-y border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <StatisticsPanel
+              title={`${locationDisplay} Market Statistics`}
+              statistics={seoContent.statistics}
+              variant="horizontal"
+              accentColor={accentColor}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Main SEO Content Section - SSR */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Content Column */}
+            <div className="lg:col-span-2 space-y-10">
+              {/* SEO Content - Primary text content for search engines */}
+              <div id="market">
+                <SEOContent content={seoContent.content} />
+              </div>
+
+              {/* Authority Links - External links for E-E-A-T */}
+              {seoContent.authorityLinks && seoContent.authorityLinks.length > 0 && (
+                <AuthorityLinksPanel
+                  title="Industry Resources & Professional Bodies"
+                  links={seoContent.authorityLinks.map(link => ({
+                    ...link,
+                    type: link.url.includes('gov.uk') ? 'government' as const :
+                          link.url.includes('icaew') || link.url.includes('acca') || link.url.includes('cima') ? 'professional_body' as const :
+                          link.url.includes('glassdoor') || link.url.includes('linkedin') ? 'research' as const :
+                          'industry' as const
+                  }))}
+                  variant="grid"
+                  accentColor={accentColor}
+                />
+              )}
+
+              {/* FAQ Section - Important for featured snippets */}
+              <FAQSection faqs={seoContent.faqs} location={locationDisplay} />
+
+              {/* Internal Links - For crawlability and topic authority */}
+              {seoContent.relatedPages && seoContent.relatedPages.length > 0 && (
+                <InternalLinksGrid
+                  title={`Explore More ${roleFilter || 'Fractional'} Resources`}
+                  subtitle="Discover related guides, job boards, and resources"
+                  links={seoContent.relatedPages.map(page => ({
+                    name: page.name,
+                    url: page.url,
+                    category: page.url.includes('jobs') ? 'jobs' as const :
+                              page.url.includes('salary') ? 'salary' as const :
+                              page.url.includes('hire') ? 'hire' as const :
+                              'guide' as const
+                  }))}
+                  variant="featured"
+                  columns={2}
+                  accentColor={accentColor}
+                />
+              )}
+
+              {/* Trust Signals - SSR for credibility */}
+              <TrustSignals variant="compact" className="py-6" />
+
+              {/* Case Study - SSR for social proof */}
+              <CaseStudy variant="grid" />
+              <CaseStudySchema />
+
+              {/* Testimonials - SSR for social proof */}
+              <Testimonials variant="carousel" />
+              <TestimonialsSchema />
+
+              {/* Expert Profile - SSR for E-E-A-T */}
+              <ExpertProfile />
+              <ExpertProfileSchema />
+              <TrustSignalsSchema />
+            </div>
+
+            {/* Sidebar Column - SSR */}
+            <div className="hidden lg:block">
+              <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto scrollbar-thin">
+                <JobsSidebar
+                  location={location}
+                  locationDisplay={locationDisplay}
+                  roleCategory={roleFilter}
+                  showCalendly={true}
+                  authorityLinks={seoContent.authorityLinks}
+                  statistics={seoContent.statistics}
+                  relatedPages={seoContent.relatedPages}
+                  accentColor={accentColor}
+                  currentPath={`/fractional-jobs-${location}`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================== */}
+      {/* INTERACTIVE SECTION - Lazy loaded with CopilotKit              */}
+      {/* This section loads after initial paint for better performance  */}
+      {/* ============================================================== */}
       <Suspense fallback={<ContentSkeleton />}>
         <CopilotKitWrapper
           instructions={agentInstructions}
@@ -348,8 +456,11 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
             }}
           >
             {/* Personalized Greeting */}
-            <section className="py-6 bg-white">
+            <section className="py-6 bg-gray-50 border-t border-gray-200">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                  Interactive Job Explorer
+                </h2>
                 <PersonalizedGreeting
                   userRole={roleFilter}
                   userLocation={locationDisplay}
@@ -358,22 +469,8 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
               </div>
             </section>
 
-            {/* Statistics Banner */}
-            {seoContent.statistics && Object.keys(seoContent.statistics).length > 0 && (
-              <section className="py-8 bg-gray-50 border-y border-gray-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <StatisticsPanel
-                    title={`${locationDisplay} Market Statistics`}
-                    statistics={seoContent.statistics}
-                    variant="horizontal"
-                    accentColor={accentColor}
-                  />
-                </div>
-              </section>
-            )}
-
             {/* Live Market Chart */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <DocumentSection id="salary" title={`${locationDisplay} Day Rates`}>
                 <LiveMarketChart
                   location={locationDisplay}
@@ -383,130 +480,51 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
               </DocumentSection>
             </div>
 
-            {/* Main Content + Sidebar Layout */}
+            {/* Live Jobs Section */}
             <section className="py-8 bg-white">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-3 gap-8">
-                  {/* Main Content Column */}
-                  <div className="lg:col-span-2 space-y-8">
-                    {/* Live Job Grid */}
-                    <DocumentSection id="jobs" title={`${locationDisplay} Fractional Jobs`}>
-                      <LiveJobGrid
-                        location={location === 'london' ? 'London' : ''}
-                        role={roleFilter}
-                        limit={9}
-                      />
-                    </DocumentSection>
-
-                    {/* Hot Jobs */}
-                    <HotJobs
-                      location={location === "london" ? "London" : undefined}
-                      maxJobs={8}
-                      title={`Hot ${locationDisplay} Jobs`}
+                <div className="space-y-8">
+                  {/* Live Job Grid */}
+                  <DocumentSection id="jobs" title={`${locationDisplay} Fractional Jobs`}>
+                    <LiveJobGrid
+                      location={location === 'london' ? 'London' : ''}
+                      role={roleFilter}
+                      limit={9}
                     />
+                  </DocumentSection>
 
-                    {/* Hey Companies - Employer CTA */}
-                    <HeyCompanies location={locationDisplay} />
+                  {/* Hot Jobs */}
+                  <HotJobs
+                    location={location === "london" ? "London" : undefined}
+                    maxJobs={8}
+                    title={`Hot ${locationDisplay} Jobs`}
+                  />
 
-                    {/* Trust Signals */}
-                    <TrustSignals variant="compact" className="py-6" />
+                  {/* Hey Companies - Employer CTA */}
+                  <HeyCompanies location={locationDisplay} />
 
-                    {/* SEO Content */}
-                    <DocumentSection id="market" title="">
-                      <SEOContent content={seoContent.content} />
-                    </DocumentSection>
-
-                    {/* Authority Links */}
-                    {seoContent.authorityLinks && seoContent.authorityLinks.length > 0 && (
-                      <AuthorityLinksPanel
-                        title="Industry Resources & Professional Bodies"
-                        links={seoContent.authorityLinks.map(link => ({
-                          ...link,
-                          type: link.url.includes('gov.uk') ? 'government' as const :
-                                link.url.includes('icaew') || link.url.includes('acca') || link.url.includes('cima') ? 'professional_body' as const :
-                                link.url.includes('glassdoor') || link.url.includes('linkedin') ? 'research' as const :
-                                'industry' as const
-                        }))}
-                        variant="grid"
-                        accentColor={accentColor}
-                      />
-                    )}
-
-                    {/* Internal Links */}
-                    {seoContent.relatedPages && seoContent.relatedPages.length > 0 && (
-                      <InternalLinksGrid
-                        title={`Explore More ${roleFilter || 'Fractional'} Resources`}
-                        subtitle="Discover related guides, job boards, and resources"
-                        links={seoContent.relatedPages.map(page => ({
-                          name: page.name,
-                          url: page.url,
-                          category: page.url.includes('jobs') ? 'jobs' as const :
-                                    page.url.includes('salary') ? 'salary' as const :
-                                    page.url.includes('hire') ? 'hire' as const :
-                                    'guide' as const
-                        }))}
-                        variant="featured"
-                        columns={2}
-                        accentColor={accentColor}
-                      />
-                    )}
-
-                    {/* Rate Calculator */}
-                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                        {locationDisplay} Fractional Rate Calculator
-                      </h2>
-                      <RoleCalculator role="cfo" />
-                    </div>
-
-                    {/* Video Section */}
-                    <div className="py-8">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                        Fractional Executive Insights
-                      </h2>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <LazyYouTube videoId="zxMG2m6yLdc" title="Fractional Executive Jobs - Market Overview" />
-                          <p className="text-sm text-gray-600 mt-2">Market Overview for Fractional Executives</p>
-                        </div>
-                        <div>
-                          <LazyYouTube videoId="m8UOqjRRHHk" title="How to Build a Portfolio Career" />
-                          <p className="text-sm text-gray-600 mt-2">Building a Portfolio Career in {locationDisplay}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Case Study */}
-                    <CaseStudy variant="grid" />
-                    <CaseStudySchema />
-
-                    {/* Testimonials */}
-                    <Testimonials variant="carousel" />
-                    <TestimonialsSchema />
-
-                    {/* FAQ */}
-                    <FAQSection faqs={seoContent.faqs} location={locationDisplay} />
-
-                    {/* Expert Profile */}
-                    <ExpertProfile />
-                    <ExpertProfileSchema />
-                    <TrustSignalsSchema />
+                  {/* Rate Calculator */}
+                  <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                      {locationDisplay} Fractional Rate Calculator
+                    </h2>
+                    <RoleCalculator role="cfo" />
                   </div>
 
-                  {/* Sidebar Column */}
-                  <div className="hidden lg:block">
-                    <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto scrollbar-thin">
-                      <JobsSidebar
-                        location={location}
-                        locationDisplay={locationDisplay}
-                        roleCategory={roleFilter}
-                        showCalendly={true}
-                        authorityLinks={seoContent.authorityLinks}
-                        statistics={seoContent.statistics}
-                        relatedPages={seoContent.relatedPages}
-                        accentColor={accentColor}
-                        currentPath={`/fractional-jobs-${location}`}
-                      />
+                  {/* Video Section */}
+                  <div className="py-8">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                      Fractional Executive Insights
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <LazyYouTube videoId="zxMG2m6yLdc" title="Fractional Executive Jobs - Market Overview" />
+                        <p className="text-sm text-gray-600 mt-2">Market Overview for Fractional Executives</p>
+                      </div>
+                      <div>
+                        <LazyYouTube videoId="m8UOqjRRHHk" title="How to Build a Portfolio Career" />
+                        <p className="text-sm text-gray-600 mt-2">Building a Portfolio Career in {locationDisplay}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
