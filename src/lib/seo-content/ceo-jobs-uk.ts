@@ -39,7 +39,7 @@ export const ceoJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional CEO Jobs UK",
-    definition: "Fractional CEO jobs are part-time Chief Executive Officer roles where experienced business leaders work 1-3 days per week for UK companies. Day rates range from £900-£1,800 depending on company size and complexity. Fractional CEOs provide strategic leadership, board-level guidance, and transformation support without the £200,000-£400,000+ cost of a full-time hire.",
+    definition: "Fractional CEO jobs are part-time Chief Executive Officer roles where experienced business leaders provide strategic leadership 1-3 days per week. UK day rates range £750-£2,000 with monthly retainers from £3,500. A fractional CEO provides executive direction, board-level guidance, and transformation support without the £200,000-£400,000+ cost of a full-time hire (Source: Tavily Market Analysis Jan 2026).",
   },
 
   // External authority links - critical for E-E-A-T

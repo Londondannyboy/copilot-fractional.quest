@@ -39,7 +39,7 @@ export const ccoJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional CCO Jobs UK",
-    definition: "Fractional CCO jobs are part-time Chief Commercial Officer roles where experienced commercial leaders work 1-3 days per week for UK companies. Day rates range from £700-£1,300 depending on sector and deal complexity. Fractional CCOs provide commercial strategy, partnership development, and revenue growth without the £140,000-£220,000+ cost of a full-time hire.",
+    definition: "Fractional CCO jobs are part-time Chief Commercial Officer roles where experienced commercial leaders work 1-3 days per week. UK day rates range £700-£1,400 with monthly retainers £3,000-£6,000. A fractional CCO provides commercial strategy, partnership development, and revenue growth without the £130,000-£200,000+ cost of a full-time hire (Source: Tavily Market Analysis Jan 2026).",
   },
 
   // External authority links - critical for E-E-A-T
