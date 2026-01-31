@@ -99,7 +99,7 @@ export const cooJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary by company size and operational complexity (Source: CMI, IoD):",
+        "Fractional COO rates average £950/day in the UK. Rates vary by company size and operational complexity. (Source: CMI, IoD, ScaleUpExec, Like Sunday Jan 2026):",
       rates: [
         { role: "PE-Backed", range: "£1,100 - £1,500/day", typical: "£1,300", annual: "£220-300k" },
         { role: "Scale-up (50-200)", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
@@ -107,6 +107,16 @@ export const cooJobsUkSEO = {
         { role: "SME", range: "£750 - £1,100/day", typical: "£900", annual: "£150-220k" },
         { role: "Non-Profit", range: "£600 - £950/day", typical: "£800", annual: "£120-190k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Retainer Packages",
+        description: "Alternative to day rates for ongoing operational leadership (Source: Like Sunday, ScaleUpExec):",
+        rates: [
+          { commitment: "1 day/week", range: "£3,000 - £5,000/month" },
+          { commitment: "2 days/week", range: "£5,000 - £8,000/month" },
+          { commitment: "3+ days/week", range: "£8,000 - £12,000/month" },
+        ],
+      },
+      savingsNote: "Full-time COO salary: £130,000-£230,000+ (Source: Tavily Jan 2026). A fractional COO at £6,000/month saves £80,000-£160,000 annually (50-65%).",
     },
 
     locations: {

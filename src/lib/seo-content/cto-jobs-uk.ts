@@ -96,7 +96,7 @@ export const ctoJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary by company stage and technical complexity (Source: Stack Overflow, Tech Nation):",
+        "Day rates vary by company stage and technical complexity. Senior fractional CTOs (8-15 years experience) command £150-£250/hour or equivalent day rates. (Source: Full Stack Consulting, CodPal, Tech Nation Jan 2026):",
       rates: [
         { role: "Series B+", range: "£1,100 - £1,600/day", typical: "£1,300", annual: "£220-320k" },
         { role: "Series A", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
@@ -104,6 +104,16 @@ export const ctoJobsUkSEO = {
         { role: "Enterprise", range: "£1,000 - £1,400/day", typical: "£1,200", annual: "£200-280k" },
         { role: "Agency/Consultancy", range: "£700 - £1,100/day", typical: "£900", annual: "£140-220k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Retainer Packages",
+        description: "Alternative to day rates for ongoing technical leadership (Source: Full Stack Consulting, fractionalctoexperts.com):",
+        rates: [
+          { commitment: "Startup (20 hrs/mo)", range: "£2,400 - £4,000/month" },
+          { commitment: "Growth (40 hrs/mo)", range: "£4,800 - £6,500/month" },
+          { commitment: "Scale-Up (60+ hrs/mo)", range: "£7,000 - £10,000/month" },
+        ],
+      },
+      savingsNote: "A fractional CTO at £5,000/month costs £60,000 annually vs £180,000+ for a full-time CTO (salary + benefits + equity). Savings: £120,000+ (67%).",
     },
 
     locations: {

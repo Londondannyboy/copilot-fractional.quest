@@ -96,7 +96,7 @@ export const chroJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary by company size and HR complexity (Source: CIPD, HR Magazine):",
+        "UK fractional CHROs charge £800-£1,200/day. CPOs (Chief People Officers) command £800-£1,400/day for more strategic roles. Rates vary by company size and HR complexity. (Source: CIPD, HR Magazine, Find HR Jan 2026):",
       rates: [
         { role: "PE-Backed", range: "£1,000 - £1,400/day", typical: "£1,150", annual: "£200-280k" },
         { role: "Scale-up (100+)", range: "£850 - £1,200/day", typical: "£1,000", annual: "£170-240k" },
@@ -104,6 +104,16 @@ export const chroJobsUkSEO = {
         { role: "SME", range: "£650 - £950/day", typical: "£800", annual: "£130-190k" },
         { role: "Non-Profit", range: "£550 - £850/day", typical: "£700", annual: "£110-170k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Retainer Packages",
+        description: "Alternative to day rates for ongoing HR leadership (Source: CIPD, Find HR):",
+        rates: [
+          { commitment: "1 day/week", range: "£2,500 - £4,000/month" },
+          { commitment: "2 days/week", range: "£4,500 - £6,500/month" },
+          { commitment: "3 days/week", range: "£6,500 - £8,500/month" },
+        ],
+      },
+      savingsNote: "Full-time CHRO salary: £120,000-£180,000+ (Source: CIPD). A fractional CHRO at £4,000/month costs £48,000 annually - savings of £72,000-£132,000 (60-73%).",
     },
 
     locations: {
