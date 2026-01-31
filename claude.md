@@ -179,6 +179,57 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 2. Create page: `src/app/[locale]/fractional-{role}-jobs/page.tsx`
 3. Pages automatically get hreflang, currency formatting, locale job filtering
 
+## Research & Content Intelligence
+
+### Tavily API Access
+**API Key**: `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`
+
+Use Tavily for:
+- Keyword research and competitive analysis
+- AI Overview responses (what Google shows)
+- People Also Ask patterns
+- Competitor content analysis
+- Pricing/market data validation
+
+**Usage via curl**:
+```bash
+curl -s -X POST "https://api.tavily.com/search" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "api_key": "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",
+    "query": "fractional CMO UK cost",
+    "search_depth": "advanced",
+    "include_answer": true,
+    "max_results": 5
+  }'
+```
+
+**Key fields in response**:
+- `answer`: AI-generated summary (like Google AI Overview)
+- `results[].content`: Page content snippets
+- `results[].url`: Competitor URLs
+- `results[].score`: Relevance score
+
+### GSC Data Location
+- Queries: `/Users/dankeegan/Desktop/Queries.csv`
+- Pages: `/Users/dankeegan/Desktop/Pages.csv`
+
+### Content Research Workflow
+1. Read GSC data to identify high-impression, low-click keywords
+2. Use Tavily to research competitor content and AI responses
+3. Identify content gaps and FAQ opportunities
+4. Enrich pages with competitive intelligence
+
+## Content Creation Phase (Planned)
+
+See `.claude/reference/content-plan.md` for the full content creation roadmap.
+
+**Priority Areas**:
+- Comparison content (Fractional vs Interim vs Full-Time)
+- FAQ enrichment with PAA-style questions
+- Definition boxes for AI Overview optimization
+- Pricing tables with competitive data
+
 ## Restart Prompt
 
 See `CONTENT_RESTART_PROMPT.md` for context when starting new sessions.
