@@ -96,7 +96,7 @@ export const croJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary significantly by sector and complexity (Source: Revenue Collective, Glassdoor UK):",
+        "Fractional CRO monthly retainers typically £7,000-£11,000 ($9,000-$14,000). Day rates vary by sector and revenue complexity. (Source: Revenue Collective, Ready For The Next Level, Glassdoor UK Jan 2026):",
       rates: [
         { role: "PE-Backed", range: "£1,200 - £1,800/day", typical: "£1,400", annual: "£240-360k" },
         { role: "SaaS Series B+", range: "£1,100 - £1,600/day", typical: "£1,300", annual: "£220-320k" },
@@ -104,6 +104,16 @@ export const croJobsUkSEO = {
         { role: "Scale-Up", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
         { role: "SME B2B", range: "£800 - £1,200/day", typical: "£1,000", annual: "£160-240k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Revenue Leadership Packages",
+        description: "Alternative to day rates for ongoing revenue strategy (Source: Ready For The Next Level):",
+        rates: [
+          { commitment: "Strategic (1 day/week)", range: "£4,000 - £6,000/month" },
+          { commitment: "Growth (2 days/week)", range: "£7,000 - £10,000/month" },
+          { commitment: "Scale (3+ days/week)", range: "£10,000 - £14,000/month" },
+        ],
+      },
+      savingsNote: "Full-time CRO salary: £150,000-£250,000+ plus commission (Source: Revenue Collective). Fractional CRO at £8,000/month = £96,000 annually, 50-60% savings.",
     },
 
     locations: {

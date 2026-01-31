@@ -98,7 +98,7 @@ export const cioJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Fractional CIO day rates vary by sector complexity and transformation scope (Source: Gartner, BCS, Glassdoor UK):",
+        "UK fractional CIO day rates range £1,000-£1,600, with senior transformation roles up to £2,500/day. Hourly rates £150-£350. (Source: Gartner, BCS, Assurepath, The Small Business Cyber Security Guy Jan 2026):",
       rates: [
         { role: "Financial Services", range: "£1,200 - £1,800/day", typical: "£1,400", annual: "£240-360k" },
         { role: "Digital Transformation", range: "£1,100 - £1,600/day", typical: "£1,300", annual: "£220-320k" },
@@ -106,6 +106,16 @@ export const cioJobsUkSEO = {
         { role: "Manufacturing/Retail", range: "£900 - £1,400/day", typical: "£1,100", annual: "£180-280k" },
         { role: "SME", range: "£800 - £1,200/day", typical: "£1,000", annual: "£160-240k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly IT Leadership Packages",
+        description: "Alternative to day rates for ongoing IT strategy (Source: Assurepath, BCS):",
+        rates: [
+          { commitment: "1 day/week", range: "£3,500 - £5,500/month" },
+          { commitment: "2 days/week", range: "£6,000 - £9,000/month" },
+          { commitment: "3+ days/week", range: "£9,000 - £14,000/month" },
+        ],
+      },
+      savingsNote: "Full-time CIO salary: £120,000-£180,000+ (Source: Tavily Jan 2026). A fractional CIO at £25,000/year vs £180,000 full-time = 86% savings for SMEs.",
     },
 
     locations: {

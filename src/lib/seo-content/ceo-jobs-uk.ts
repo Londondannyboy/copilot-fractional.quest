@@ -96,7 +96,7 @@ export const ceoJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary by company situation and complexity (Source: IoD, BVCA):",
+        "UK fractional CEO day rates range £800-£2,500. Monthly retainers £3,000-£10,000. Rates vary by company situation and complexity. (Source: IoD, BVCA, Tavily Jan 2026):",
       rates: [
         { role: "PE Portfolio", range: "£1,500 - £2,500/day", typical: "£2,000", annual: "£300-500k" },
         { role: "Turnaround", range: "£1,400 - £2,200/day", typical: "£1,800", annual: "£280-440k" },
@@ -104,6 +104,16 @@ export const ceoJobsUkSEO = {
         { role: "Founder Support", range: "£1,000 - £1,600/day", typical: "£1,300", annual: "£200-320k" },
         { role: "Non-Profit", range: "£800 - £1,400/day", typical: "£1,100", annual: "£160-280k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Executive Leadership Packages",
+        description: "Alternative to day rates for ongoing CEO support (Source: IoD, BVCA):",
+        rates: [
+          { commitment: "Strategic (1 day/week)", range: "£4,000 - £7,000/month" },
+          { commitment: "Active (2-3 days/week)", range: "£8,000 - £14,000/month" },
+          { commitment: "Intensive (3+ days/week)", range: "£14,000 - £20,000/month" },
+        ],
+      },
+      savingsNote: "Full-time CEO salary: £180,000-£350,000+ (Source: IoD, BVCA). Fractional CEO at £10,000/month = £120,000 annually, 50-65% savings plus flexibility.",
     },
 
     locations: {

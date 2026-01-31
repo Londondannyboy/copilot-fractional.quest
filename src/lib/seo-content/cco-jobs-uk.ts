@@ -96,7 +96,7 @@ export const ccoJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary significantly by sector and complexity (Source: Institute of Directors, Glassdoor UK):",
+        "UK fractional CCO day rates range £800-£2,500. £1,250/day is realistic for 2-day weekly commitment. Rates vary by sector and commercial complexity. (Source: Institute of Directors, Glassdoor UK, Tavily Jan 2026):",
       rates: [
         { role: "PE-Backed", range: "£1,000 - £1,400/day", typical: "£1,200", annual: "£200-280k" },
         { role: "SaaS/Tech", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
@@ -104,6 +104,16 @@ export const ccoJobsUkSEO = {
         { role: "Scale-Up", range: "£800 - £1,100/day", typical: "£950", annual: "£160-220k" },
         { role: "SME", range: "£700 - £1,000/day", typical: "£850", annual: "£140-200k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Commercial Leadership Packages",
+        description: "Alternative to day rates for ongoing commercial strategy (Source: IoD):",
+        rates: [
+          { commitment: "1 day/week", range: "£3,000 - £5,000/month" },
+          { commitment: "2 days/week", range: "£5,000 - £8,000/month" },
+          { commitment: "3 days/week", range: "£8,000 - £11,000/month" },
+        ],
+      },
+      savingsNote: "Full-time CCO salary: £130,000-£200,000+ (Source: IoD). Fractional CCO at £6,000/month = £72,000 annually, 50-65% savings vs full-time.",
     },
 
     locations: {
