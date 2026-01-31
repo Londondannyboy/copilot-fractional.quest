@@ -176,6 +176,11 @@ const STATIC_ROUTE_SLUGS = [
   'fractional-ceo-services',
   'fractional-cro-services',
   'fractional-cco-services',
+  // Cost pages
+  'fractional-cfo-cost',
+  'fractional-cto-cost',
+  'fractional-cmo-cost',
+  'fractional-coo-cost',
   // Hire pages
   'hire-fractional-cfo',
   'hire-fractional-cto',
