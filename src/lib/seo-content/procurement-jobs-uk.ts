@@ -28,12 +28,18 @@ export const procurementJobsUkSEO = {
   hero: {
     headline: "Fractional Procurement Jobs UK",
     subtitle:
-      "Part-time Procurement Director and strategic sourcing leadership roles across the United Kingdom. Day rates £800-£1,200.",
+      "Part-time Procurement Director and strategic sourcing leadership roles across the United Kingdom. Day rates £700-£1,300.",
     stats: {
-      avgDayRate: "£800-£1,200",
+      avgDayRate: "£700-£1,300",
       hubStatus: "Procurement Leadership",
       hybridOptions: "75% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional Procurement Jobs UK",
+    definition: "Fractional Procurement Director jobs are part-time CPO roles where experienced procurement leaders work 1-3 days per week for UK companies. Day rates range from £700-£1,300 depending on spend complexity. Fractional Procurement Directors provide strategic sourcing, vendor management, and cost reduction without the £120,000-£180,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const procurementJobsUkSEO = {
       source: "CIPS Career Survey 2024",
     },
     averageDayRate: {
-      value: "£1,000",
-      description: "Average day rate for fractional Procurement Directors in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£950",
+      description: "Average day rate for fractional Procurement Directors in the UK (range: £700-£1,300)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const procurementJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional Procurement Director cost in the UK?",
+      answer:
+        "A fractional Procurement Director in the UK typically costs £2,800-£5,200 per month or £700-£1,300 per day, depending on spend complexity. SME fractional Procurement Directors charge £700-£900/day, mid-market fractional CPOs charge £900-£1,100/day, and enterprise/manufacturing fractional CPOs charge £1,100-£1,300/day. This represents 45-60% savings compared to a full-time CPO hire (£120,000-£180,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional Procurement Directors need?",
       answer:
         "Most fractional procurement roles require MCIPS (Member of Chartered Institute of Procurement & Supply) or equivalent qualification, plus 10-15+ years procurement experience with prior CPO, Head of Procurement, or Procurement Director experience. Track record of delivering measurable savings and supplier performance improvements is essential. Industry-specific experience often required.",
@@ -178,7 +189,7 @@ export const procurementJobsUkSEO = {
     {
       question: "How much do fractional Procurement Directors earn in the UK?",
       answer:
-        "UK fractional Procurement Directors typically earn £800-£1,200 per day, with manufacturing and complex supply chain roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £160,000-£280,000 are achievable while gaining diverse procurement experience.",
+        "UK fractional Procurement Directors typically earn £700-£1,300 per day, with manufacturing and complex supply chain roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £140,000-£280,000 are achievable while gaining diverse procurement experience.",
     },
     {
       question: "What's the typical fractional procurement engagement?",

@@ -13,8 +13,14 @@ export const gcJobsUkSEO = {
   ],
   hero: {
     headline: "Fractional General Counsel Jobs UK",
-    subtitle: "Part-time General Counsel and Chief Legal Officer roles. Day rates £900-£1,400.",
-    stats: { avgDayRate: "£900-£1,400", hubStatus: "Growing Demand", hybridOptions: "60% Hybrid" },
+    subtitle: "Part-time General Counsel and Chief Legal Officer roles. Day rates £900-£1,600.",
+    stats: { avgDayRate: "£900-£1,600", hubStatus: "Growing Demand", hybridOptions: "60% Hybrid" },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional General Counsel Jobs UK",
+    definition: "Fractional General Counsel jobs are part-time GC roles where qualified solicitors or barristers work 1-3 days per week for UK companies. Day rates range from £900-£1,600 depending on sector and complexity. Fractional GCs provide legal strategy, contract management, and compliance oversight without the £150,000-£280,000+ cost of a full-time hire.",
   },
   authorityLinks: [
     { name: "The Law Society", url: "https://www.lawsociety.org.uk", context: "Solicitors regulatory body" },
@@ -61,8 +67,9 @@ export const gcJobsUkSEO = {
     },
   },
   faqs: [
+    { question: "How much does a fractional General Counsel cost in the UK?", answer: "A fractional General Counsel in the UK typically costs £3,600-£6,400 per month or £900-£1,600 per day, depending on sector and complexity. Tech/SaaS fractional GCs charge £900-£1,200/day, PE-backed fractional GCs charge £1,100-£1,400/day, and financial services fractional GCs charge £1,300-£1,600/day. This represents 45-60% savings compared to a full-time GC hire (£150,000-£280,000+ annually)." },
     { question: "What qualifications do fractional GCs need?", answer: "Most require qualification as a solicitor or barrister with 10-15+ years PQE. In-house experience is highly valued, particularly in commercial contracts, M&A, and regulatory matters." },
-    { question: "How much do fractional General Counsels earn?", answer: "UK fractional GCs typically earn £900-£1,400 per day, with financial services and PE-backed roles at the premium end." },
+    { question: "How much do fractional General Counsels earn?", answer: "UK fractional GCs typically earn £900-£1,600 per day, with financial services and PE-backed roles at the premium end (£1,200-£1,600)." },
   ],
   relatedPages: [
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },

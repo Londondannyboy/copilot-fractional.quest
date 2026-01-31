@@ -28,12 +28,18 @@ export const ccoJobsUkSEO = {
   hero: {
     headline: "Fractional CCO Jobs UK",
     subtitle:
-      "Part-time Chief Commercial Officer and Commercial Director roles across the United Kingdom. Day rates £800-£1,200.",
+      "Part-time Chief Commercial Officer and Commercial Director roles across the United Kingdom. Day rates £700-£1,300.",
     stats: {
-      avgDayRate: "£800-£1,200",
+      avgDayRate: "£700-£1,300",
       hubStatus: "Growing Demand",
       hybridOptions: "60% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CCO Jobs UK",
+    definition: "Fractional CCO jobs are part-time Chief Commercial Officer roles where experienced commercial leaders work 1-3 days per week for UK companies. Day rates range from £700-£1,300 depending on sector and deal complexity. Fractional CCOs provide commercial strategy, partnership development, and revenue growth without the £140,000-£220,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const ccoJobsUkSEO = {
       source: "Institute of Directors Survey 2024",
     },
     averageDayRate: {
-      value: "£1,000",
-      description: "Average day rate for fractional CCOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£900",
+      description: "Average day rate for fractional CCOs in the UK (range: £700-£1,300)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const ccoJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CCO cost in the UK?",
+      answer:
+        "A fractional CCO in the UK typically costs £2,800-£5,200 per month or £700-£1,300 per day, depending on sector and commercial complexity. SME fractional CCOs charge £700-£900/day, scale-up fractional CCOs charge £900-£1,100/day, and PE-backed/enterprise fractional CCOs charge £1,100-£1,300/day. This represents 50-65% savings compared to a full-time CCO hire (£140,000-£220,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CCOs need?",
       answer:
         "Most fractional CCO roles require 10-15+ years of commercial leadership experience with proven track record of driving revenue growth. Prior Commercial Director, CCO, or VP Commercial experience is typically essential. Sector-specific expertise (B2B sales for tech, regulatory knowledge for professional services) adds significant value. Commercial operations and CRM proficiency expected.",
@@ -178,7 +189,7 @@ export const ccoJobsUkSEO = {
     {
       question: "How much do fractional CCOs earn in the UK?",
       answer:
-        "UK fractional CCOs typically earn £800-£1,200 per day, with PE-backed and SaaS roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £160,000-£280,000 are achievable while offering greater flexibility than permanent roles.",
+        "UK fractional CCOs typically earn £700-£1,300 per day, with PE-backed and SaaS roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £140,000-£280,000 are achievable while offering greater flexibility than permanent roles.",
     },
     {
       question: "What's the typical fractional CCO engagement?",

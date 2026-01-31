@@ -22,12 +22,18 @@ export const fdJobsUkSEO = {
 
   hero: {
     headline: "Fractional Finance Director Jobs UK",
-    subtitle: "Part-time Finance Director roles across the UK. Day rates £700-£1,100.",
+    subtitle: "Part-time Finance Director roles across the UK. Day rates £500-£1,200.",
     stats: {
-      avgDayRate: "£700-£1,100",
+      avgDayRate: "£500-£1,200",
       hubStatus: "High Demand",
       hybridOptions: "55% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional Finance Director Jobs UK",
+    definition: "Fractional Finance Director jobs are part-time FD roles where experienced finance professionals work 1-3 days per week for UK companies. Day rates range from £500-£1,200 depending on company size. Fractional FDs provide financial management, reporting, and controls without the £85,000-£140,000+ cost of a full-time hire.",
   },
 
   authorityLinks: [
@@ -80,12 +86,16 @@ export const fdJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional Finance Director cost in the UK?",
+      answer: "A fractional Finance Director in the UK typically costs £2,000-£4,800 per month or £500-£1,200 per day, depending on company size and complexity. SME fractional FDs charge £500-£800/day, scale-up fractional FDs charge £800-£1,000/day, and PE-backed fractional FDs charge £1,000-£1,200/day. This represents 40-60% savings compared to a full-time FD hire (£85,000-£140,000+ annually).",
+    },
+    {
       question: "What's the difference between a Finance Director and CFO?",
       answer: "A Finance Director (FD) typically focuses on operational finance: management accounts, financial controls, compliance. A CFO has a more strategic focus: fundraising, investor relations, M&A. In the UK, FD is more common for SMEs.",
     },
     {
       question: "How much do fractional Finance Directors earn?",
-      answer: "UK fractional FDs typically earn £700-£1,100 per day. Working 2-3 days per week, annual earnings of £140,000-£220,000 are achievable.",
+      answer: "UK fractional FDs typically earn £500-£1,200 per day, with PE-backed roles at the premium end. Working 2-3 days per week, annual earnings of £100,000-£240,000 are achievable.",
     },
   ],
 

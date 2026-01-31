@@ -30,12 +30,18 @@ export const csoJobsUkSEO = {
   hero: {
     headline: "Fractional CSO Jobs UK",
     subtitle:
-      "Part-time Chief Strategy Officer and Strategy Leadership roles across the United Kingdom. Day rates £1,000-£1,500.",
+      "Part-time Chief Strategy Officer and Strategy Leadership roles across the United Kingdom. Day rates £900-£1,500.",
     stats: {
-      avgDayRate: "£1,000-£1,500",
+      avgDayRate: "£900-£1,500",
       hubStatus: "Growing Demand",
       hybridOptions: "70% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CSO Jobs UK",
+    definition: "Fractional CSO jobs are part-time Chief Strategy Officer roles where experienced strategy leaders work 1-3 days per week for UK companies. Day rates range from £900-£1,500 depending on strategic complexity. Fractional CSOs provide strategic planning, M&A strategy, and transformation leadership without the £160,000-£280,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -73,9 +79,9 @@ export const csoJobsUkSEO = {
       source: "Institute of Directors Survey 2024",
     },
     averageDayRate: {
-      value: "£1,200",
-      description: "Average day rate for fractional CSOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£1,100",
+      description: "Average day rate for fractional CSOs in the UK (range: £900-£1,500)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -173,6 +179,11 @@ export const csoJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CSO cost in the UK?",
+      answer:
+        "A fractional CSO in the UK typically costs £3,600-£6,000 per month or £900-£1,500 per day, depending on strategic complexity. Growth/transformation fractional CSOs charge £900-£1,100/day, M&A fractional CSOs charge £1,100-£1,300/day, and PE-backed/enterprise fractional CSOs charge £1,300-£1,500/day. This represents 50-65% savings compared to a full-time CSO hire (£160,000-£280,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CSOs need?",
       answer:
         "Most fractional CSO roles require 15+ years of strategy experience including prior CSO, Strategy Director, or senior consulting experience at firms like McKinsey, BCG, or Bain. MBA from a top business school (LBS, INSEAD, Harvard) is common but not essential. Sector expertise and track record of successful strategy execution matter more than credentials.",
@@ -180,7 +191,7 @@ export const csoJobsUkSEO = {
     {
       question: "How much do fractional CSOs earn in the UK?",
       answer:
-        "UK fractional CSOs typically earn £1,000-£1,500 per day, with PE-backed and M&A-focused roles at the premium end (£1,200-£1,800). Working 2-3 days per week across multiple clients, annual earnings of £200,000-£360,000 are achievable while maintaining the strategic variety that many CSOs seek.",
+        "UK fractional CSOs typically earn £900-£1,500 per day, with PE-backed and M&A-focused roles at the premium end (£1,200-£1,600). Working 2-3 days per week across multiple clients, annual earnings of £180,000-£320,000 are achievable while maintaining the strategic variety that many CSOs seek.",
     },
     {
       question: "What's the typical fractional CSO engagement?",

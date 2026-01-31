@@ -28,12 +28,18 @@ export const croJobsUkSEO = {
   hero: {
     headline: "Fractional CRO Jobs UK",
     subtitle:
-      "Part-time Chief Revenue Officer and Revenue Leadership roles across the United Kingdom. Day rates £1,000-£1,500.",
+      "Part-time Chief Revenue Officer and Revenue Leadership roles across the United Kingdom. Day rates £900-£1,500.",
     stats: {
-      avgDayRate: "£1,000-£1,500",
+      avgDayRate: "£900-£1,500",
       hubStatus: "High Demand",
       hybridOptions: "65% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CRO Jobs UK",
+    definition: "Fractional CRO jobs are part-time Chief Revenue Officer roles where experienced revenue leaders work 1-3 days per week for UK companies. Day rates range from £900-£1,500 depending on company stage and revenue complexity. Fractional CROs provide sales strategy, revenue operations, and go-to-market leadership without the £160,000-£280,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const croJobsUkSEO = {
       source: "Revenue Collective Survey 2024",
     },
     averageDayRate: {
-      value: "£1,250",
-      description: "Average day rate for fractional CROs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£1,100",
+      description: "Average day rate for fractional CROs in the UK (range: £900-£1,500)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const croJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CRO cost in the UK?",
+      answer:
+        "A fractional CRO in the UK typically costs £3,600-£6,000 per month or £900-£1,500 per day, depending on revenue complexity and company stage. Scale-up fractional CROs charge £900-£1,100/day, Series B+ fractional CROs charge £1,100-£1,300/day, and PE-backed/enterprise fractional CROs charge £1,300-£1,500/day. This represents 55-70% savings compared to a full-time CRO hire (£160,000-£280,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CROs need?",
       answer:
         "Most fractional CRO roles require 10-15+ years of sales leadership experience with proven track record of scaling revenue. Prior VP Sales, CRO, or CCO experience is typically essential. Sector-specific expertise (SaaS metrics for tech, regulatory knowledge for fintech) adds significant value. Revenue operations and Salesforce/HubSpot proficiency expected.",
@@ -178,7 +189,7 @@ export const croJobsUkSEO = {
     {
       question: "How much do fractional CROs earn in the UK?",
       answer:
-        "UK fractional CROs typically earn £1,000-£1,500 per day, with PE-backed and high-growth SaaS roles at the premium end (£1,200-£1,800). Working 2-3 days per week across multiple clients, annual earnings of £200,000-£360,000 are achievable while offering greater flexibility than permanent roles.",
+        "UK fractional CROs typically earn £900-£1,500 per day, with PE-backed and high-growth SaaS roles at the premium end (£1,200-£1,600). Working 2-3 days per week across multiple clients, annual earnings of £180,000-£320,000 are achievable while offering greater flexibility than permanent roles.",
     },
     {
       question: "What's the typical fractional CRO engagement?",

@@ -13,8 +13,14 @@ export const mdJobsUkSEO = {
   ],
   hero: {
     headline: "Fractional Managing Director Jobs UK",
-    subtitle: "Part-time Managing Director roles across the UK. Day rates £950-£1,400.",
-    stats: { avgDayRate: "£950-£1,400", hubStatus: "Strong Demand", hybridOptions: "50% Hybrid" },
+    subtitle: "Part-time Managing Director roles across the UK. Day rates £900-£1,700.",
+    stats: { avgDayRate: "£900-£1,700", hubStatus: "Strong Demand", hybridOptions: "50% Hybrid" },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional Managing Director Jobs UK",
+    definition: "Fractional Managing Director jobs are part-time MD roles where experienced business leaders work 2-4 days per week for UK companies. Day rates range from £900-£1,700 depending on company situation. Fractional MDs provide operational leadership, team management, and business turnaround without the £150,000-£250,000+ cost of a full-time hire.",
   },
   authorityLinks: [
     { name: "Institute of Directors", url: "https://www.iod.com", context: "Director standards" },
@@ -61,8 +67,9 @@ export const mdJobsUkSEO = {
     },
   },
   faqs: [
+    { question: "How much does a fractional Managing Director cost in the UK?", answer: "A fractional Managing Director in the UK typically costs £4,500-£8,500 per month or £900-£1,700 per day, depending on company situation and complexity. Growth/scale-up fractional MDs charge £900-£1,200/day, turnaround fractional MDs charge £1,100-£1,500/day, and PE portfolio fractional MDs charge £1,300-£1,700/day. This represents 40-55% savings compared to a full-time MD hire (£150,000-£250,000+ annually)." },
     { question: "What's the difference between an MD and CEO?", answer: "In UK usage, a Managing Director typically has hands-on operational responsibility for running a business, while a CEO may have a more strategic, investor-facing role. In many SMEs, these titles are used interchangeably." },
-    { question: "How much do fractional Managing Directors earn?", answer: "UK fractional MDs typically earn £950-£1,400 per day, with PE-backed and turnaround roles at the premium end." },
+    { question: "How much do fractional Managing Directors earn?", answer: "UK fractional MDs typically earn £900-£1,700 per day, with PE-backed and turnaround roles at the premium end (£1,300-£1,700)." },
   ],
   relatedPages: [
     { name: "UK Fractional Jobs", url: "/fractional-jobs-uk" },
