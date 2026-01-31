@@ -94,8 +94,9 @@ export default function FractionalCooPage() {
           <div className="bg-slate-500/10 border border-slate-500/30 rounded-lg p-8">
             <h2 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Fractional COO Definition</h2>
             <p className="text-2xl font-light leading-relaxed">
-              A <strong className="font-semibold">Fractional COO</strong> (Fractional Chief Operating Officer) is an experienced operations executive who works with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic operational leadership without the cost of a full-time hire.
+              A <strong className="font-semibold">Fractional COO</strong> (Fractional Chief Operating Officer) is an experienced operations executive who works with companies on a part-time basis, typically 2-3 days per week. Day rates range from £600-£1,500 depending on sector and complexity. Monthly retainers typically range from £3,000-£10,000. Fractional COOs provide operational strategy, process optimization, and scaling support without the £130,000-£230,000 cost of a full-time hire.
             </p>
+            <p className="text-sm text-slate-400 mt-4">Source: ScaleUpExec, Like Sunday, CMI Jan 2026</p>
           </div>
         </div>
       </section>

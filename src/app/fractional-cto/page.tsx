@@ -111,8 +111,9 @@ export default function FractionalCtoPage() {
           <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-8">
             <h2 className="text-sm font-bold uppercase tracking-widest text-cyan-400 mb-4">Fractional CTO Definition</h2>
             <p className="text-2xl font-light leading-relaxed">
-              A <strong className="font-semibold">Fractional CTO</strong> (Fractional Chief Technology Officer) is an experienced technology executive who works with companies on a part-time or contract basis, typically 1-3 days per week, providing strategic technology leadership without the cost of a full-time hire.
+              A <strong className="font-semibold">Fractional CTO</strong> (Fractional Chief Technology Officer) is an experienced technology executive who works with companies on a part-time or contract basis, typically 1-3 days per week. Day rates range from £800-£1,250 depending on experience and sector. Monthly retainers typically range from £2,400-£8,000. Fractional CTOs provide strategic technology leadership without the £155,000-£250,000 cost of a full-time hire.
             </p>
+            <p className="text-sm text-cyan-300 mt-4">Source: CodPal, Fractional CTO Experts Jan 2026</p>
           </div>
         </div>
       </section>

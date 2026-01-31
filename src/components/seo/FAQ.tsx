@@ -166,30 +166,70 @@ export const CFO_FAQS: FAQItem[] = [
 export const CTO_FAQS: FAQItem[] = [
   {
     question: 'What is a Fractional CTO?',
-    answer: 'A Fractional CTO (Chief Technology Officer) is an experienced technology leader who works with companies on a part-time basis. They provide technical strategy, architecture guidance, and engineering leadership without the commitment of a full-time CTO hire.',
+    answer: 'A Fractional CTO (Chief Technology Officer) is an experienced technology executive who works with companies on a part-time basis, typically 1-3 days per week. They provide strategic technology leadership, architecture decisions, and engineering team oversight without the commitment of a full-time CTO hire. Day rates range from £800-£1,250 in the UK. (Source: CodPal, Fractional CTO Experts Jan 2026)',
   },
   {
-    question: 'How much do Fractional CTO jobs pay in the UK?',
-    answer: 'Fractional CTO day rates in the UK typically range from £800 to £1,600 per day, with highly specialized roles (AI, security) commanding premium rates. London-based and FinTech roles often pay at the higher end of this range.',
+    question: 'How much does a Fractional CTO cost in the UK?',
+    answer: 'Fractional CTO costs in the UK range from £800-£1,600 per day or £2,400-£8,000 per month depending on experience and sector. Entry-level fractional CTOs charge £800-£1,000/day, senior CTOs charge £1,000-£1,250/day, and AI/ML specialists command £1,200-£1,600/day. Monthly retainers are common for ongoing engagements. This represents 40-60% savings compared to a full-time CTO at £155,000-£250,000 annually.',
   },
   {
     question: 'When should a company hire a Fractional CTO?',
-    answer: 'Companies typically hire Fractional CTOs when they need technical leadership but cannot justify or afford a full-time CTO. Common scenarios include early-stage startups building their first product, companies needing technical due diligence for fundraising, or businesses undergoing digital transformation.',
+    answer: 'Hire a Fractional CTO when you: (1) Are building an MVP and need technical architecture decisions, (2) Have non-technical founders needing tech strategy, (3) Are preparing for fundraising requiring due diligence, (4) Need to scale your engineering team from 3-20 people, (5) Have technical debt requiring modernisation strategy, (6) Need technology credibility for investors or the board.',
+  },
+  {
+    question: 'What does a Fractional CTO do?',
+    answer: 'Fractional CTOs provide: technology strategy and 12-24 month roadmaps, system architecture and tech stack decisions, engineering team leadership and mentoring, code quality standards and best practices, security and compliance frameworks, DevOps and infrastructure strategy, and board-level technology reporting. They work 10-20 hours per week per client.',
+  },
+  {
+    question: 'What is the difference between a Fractional CTO and Interim CTO?',
+    answer: 'A Fractional CTO works part-time (1-3 days/week) with multiple clients simultaneously on an ongoing basis. An Interim CTO works full-time (5 days/week) for a single company for a fixed period (3-9 months), typically filling a gap or leading a specific project. Fractional CTOs cost £2,400-£8,000/month while Interim CTOs cost £8,000-£12,000/week.',
+  },
+  {
+    question: 'What qualifications should a Fractional CTO have?',
+    answer: 'Look for: 10-15+ years technology experience with prior CTO, VP Engineering, or Tech Lead experience. Key qualifications include hands-on coding background, experience scaling engineering teams from 3-20+ people, fundraising or due diligence experience for VC-backed roles, relevant sector expertise (SaaS, FinTech, HealthTech), and modern tech stack knowledge (cloud, DevOps, AI/ML).',
+  },
+  {
+    question: 'How many hours per week does a Fractional CTO work?',
+    answer: 'Fractional CTOs typically work 10-20 hours per week per client (1-3 days). Most engage with 2-4 clients simultaneously. Common structures include: 1 day/week for strategy and oversight, 2 days/week for active technical leadership, 3 days/week for hands-on architecture and team building. Engagements usually run 6-12 months minimum.',
+  },
+  {
+    question: 'Do Fractional CTOs get equity compensation?',
+    answer: 'Some Fractional CTOs receive equity (typically 0.1-0.5%) alongside reduced day rates, especially for longer startup engagements. This is less than full-time CTOs (0.5-2% equity) but can be valuable for early-stage companies. Most fractional engagements are fee-based only, with equity reserved for strategic advisory relationships.',
   },
 ]
 
 export const COO_FAQS: FAQItem[] = [
   {
     question: 'What is a Fractional COO?',
-    answer: 'A Fractional COO (Chief Operating Officer) is an experienced operations executive who works with companies on a part-time basis. They focus on operational efficiency, process optimization, scaling operations, and implementing systems to support growth.',
+    answer: 'A Fractional COO (Chief Operating Officer) is an experienced operations executive who works with companies on a part-time basis, typically 1-3 days per week. They optimise operations, build scalable processes, and translate vision into execution. Day rates range from £600-£1,500 in the UK. (Source: ScaleUpExec, Like Sunday Jan 2026)',
   },
   {
-    question: 'How much do Fractional COO jobs pay in the UK?',
-    answer: 'Fractional COO day rates in the UK typically range from £700 to £1,300 per day. Rates vary based on industry, company stage, and specific operational challenges being addressed.',
+    question: 'How much does a Fractional COO cost in the UK?',
+    answer: 'Fractional COO costs in the UK range from £600-£1,500 per day or £3,000-£10,000 per month depending on experience and sector. SME COOs charge £700-£1,000/day, scale-up COOs charge £950-£1,300/day, and PE-backed/turnaround specialists command £1,200-£1,500/day. This represents 49-71% savings compared to a full-time COO at £130,000-£230,000 annually.',
   },
   {
     question: 'What does a Fractional COO do?',
-    answer: 'Fractional COOs focus on operational strategy, process improvement, team structure optimization, implementing operational systems, managing key initiatives, and ensuring the business can scale efficiently. They often work closely with the CEO to execute on strategic priorities.',
+    answer: 'Fractional COOs focus on: operational strategy development, process optimisation and efficiency improvements, team structure and scaling (20 to 100+ employees), vendor management and contract negotiation, KPI development and performance dashboards, change management and transformation, and implementing operational systems like EOS.',
+  },
+  {
+    question: 'When should a company hire a Fractional COO?',
+    answer: 'Hire a Fractional COO when: (1) Operations cannot keep up with rapid growth, (2) The CEO/founder needs to delegate operational leadership, (3) Processes are ad-hoc and inefficient, (4) Scaling from 20 to 100+ employees, (5) Expanding to new markets or products, (6) Post-acquisition integration is needed, (7) Preparing for exit or fundraising.',
+  },
+  {
+    question: 'What is the difference between a Fractional COO and Interim COO?',
+    answer: 'A Fractional COO works part-time (2-3 days/week) with multiple clients on an ongoing basis (6+ months). An Interim COO works full-time (4-5 days/week) for a single company for a fixed period (3-9 months), typically during transitions or turnarounds. Fractional COOs cost £3,000-£10,000/month while Interim COOs cost £8,000-£15,000/week.',
+  },
+  {
+    question: 'What qualifications should a Fractional COO have?',
+    answer: 'Look for: 15+ years business operations experience with prior COO, Operations Director, or GM experience. Key qualifications include CMI or IoD membership, experience scaling businesses through growth phases, EOS or similar operating system implementation, sector expertise, and track record of operational transformation and efficiency gains.',
+  },
+  {
+    question: 'How is a Fractional COO different from a Fractional CFO?',
+    answer: 'A Fractional CFO focuses on financial strategy, reporting, fundraising, and investor relations. A Fractional COO focuses on operational execution, process efficiency, team scaling, and day-to-day business operations. Many companies hire both: the CFO for financial oversight and the COO for operational delivery. Some overlap exists in areas like budgeting and resource planning.',
+  },
+  {
+    question: 'What types of Fractional COO roles exist?',
+    answer: 'Common Fractional COO specialisations include: Scale-up COO (rapid growth and team building), E-commerce COO (supply chain and fulfilment), Process COO (lean operations and efficiency), Integration COO (M&A and company integration), EOS Integrator (Entrepreneurial Operating System implementation), and Turnaround COO (restructuring and crisis management).',
   },
 ]
 
