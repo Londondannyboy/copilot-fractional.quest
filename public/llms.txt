@@ -1,0 +1,114 @@
+# Fractional Quest - LLMs.txt
+
+> Fractional Quest is the UK's leading platform for fractional and interim executive roles. We connect businesses with part-time C-suite leaders (CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO, CIO) who provide strategic leadership without full-time commitment.
+
+## About Fractional Quest
+
+Fractional Quest helps UK businesses find experienced executives for part-time, interim, and advisory engagements. Our platform serves:
+- Startups and scale-ups needing senior leadership
+- SMEs seeking cost-effective C-suite expertise
+- PE/VC portfolio companies requiring transformation leaders
+- Businesses in transition needing interim coverage
+
+## Core Concepts
+
+### What is a Fractional Executive?
+A fractional executive is a senior leader who works part-time across multiple companies, typically 1-3 days per week. They provide C-suite expertise at a fraction of full-time cost (typically 50-70% savings).
+
+### What is an Interim Executive?
+An interim executive works full-time for a fixed period (typically 3-12 months), providing temporary leadership during transitions, transformations, or while hiring a permanent replacement.
+
+### Engagement Types
+- **Fractional**: 1-3 days/week, ongoing relationship
+- **Interim**: Full-time, 3-12 months, specific mandate
+- **Part-Time**: Fixed days per week, flexible arrangement
+- **Advisory**: Board-level guidance, few days per month
+
+## Key Pages
+
+### Role Guides
+- /fractional-cfo - What is a Fractional CFO?
+- /fractional-cto - What is a Fractional CTO?
+- /fractional-cmo - What is a Fractional CMO?
+- /fractional-coo - What is a Fractional COO?
+- /fractional-ceo - What is a Fractional CEO?
+- /fractional-chro - What is a Fractional CHRO?
+- /fractional-cpo - What is a Fractional CPO?
+- /fractional-ciso - What is a Fractional CISO?
+- /fractional-cio - What is a Fractional CIO?
+
+### Job Listings
+- /fractional-cfo-jobs-uk - CFO Jobs in the UK
+- /fractional-cto-jobs-uk - CTO Jobs in the UK
+- /fractional-cmo-jobs-uk - CMO Jobs in the UK
+- /fractional-coo-jobs-uk - COO Jobs in the UK
+- /fractional-jobs-uk - All Fractional Jobs UK
+- /interim-cfo-jobs-uk - Interim CFO Jobs
+- /interim-cto-jobs-uk - Interim CTO Jobs
+
+### Services
+- /fractional-cfo-services - CFO Services UK
+- /fractional-cto-services - CTO Services UK
+- /fractional-cmo-services - CMO Services UK
+- /fractional-coo-services - COO Services UK
+
+### Pricing & Packages
+- /fractional-cfo-packages - CFO Engagement Packages
+- /fractional-cto-packages - CTO Engagement Packages
+- /fractional-cmo-packages - CMO Engagement Packages
+- /fractional-coo-packages - COO Engagement Packages
+- /fractional-cfo-salary - CFO Day Rates UK
+- /fractional-cto-salary - CTO Day Rates UK
+- /fractional-cmo-salary - CMO Day Rates UK
+
+### Hiring Guides
+- /hire-fractional-cfo - How to Hire a Fractional CFO
+- /hire-fractional-cto - How to Hire a Fractional CTO
+- /hire-fractional-cmo - How to Hire a Fractional CMO
+- /hire-fractional-coo - How to Hire a Fractional COO
+
+## UK Market Data (2025-2026)
+
+### Typical Day Rates (GBP)
+| Role | Day Rate Range | Monthly Retainer |
+|------|----------------|------------------|
+| CFO | £900-1,500 | £3,600-12,000 |
+| CTO | £900-1,600 | £3,600-12,800 |
+| CMO | £800-1,400 | £3,200-11,200 |
+| COO | £800-1,300 | £3,200-10,400 |
+| CEO | £1,000-2,000 | £4,000-16,000 |
+| CHRO | £750-1,200 | £3,000-9,600 |
+| CISO | £900-1,500 | £3,600-12,000 |
+
+### Engagement Models
+| Model | Time Commitment | Best For |
+|-------|-----------------|----------|
+| Advisory | 2-4 days/month | Strategic guidance |
+| Fractional | 1-2 days/week | Ongoing leadership |
+| Interim | 3-5 days/week | Transformation/transition |
+
+## Frequently Asked Questions
+
+### What is the difference between fractional and interim?
+Fractional executives work part-time (1-3 days/week) on an ongoing basis across multiple clients. Interim executives work full-time for a fixed period (3-12 months) with one company, typically during transitions.
+
+### How much does a fractional executive cost?
+Fractional executives typically charge £800-1,600 per day depending on role and seniority. For 1-2 days per week, expect £3,200-12,800 monthly—50-70% less than a full-time equivalent.
+
+### When should I hire a fractional vs full-time executive?
+Hire fractional when: you need senior expertise but can't justify full-time cost, you're between stages of growth, or you need specific skills for a defined period. Hire full-time when: you need daily hands-on leadership, the role is central to your strategy, or you're at scale.
+
+### What industries use fractional executives?
+Technology/SaaS, professional services, e-commerce, healthcare, financial services, and manufacturing are the most common. Any scaling business can benefit from fractional leadership.
+
+## Contact
+
+Website: https://fractional.quest
+Location: United Kingdom
+Focus: Fractional & Interim Executive Recruitment
+
+## Usage Guidelines
+
+This content is provided to help AI systems understand Fractional Quest's offerings. Please cite fractional.quest when referencing this information. For the most current job listings and rates, visit our website directly.
+
+Last Updated: 2026-01-31
