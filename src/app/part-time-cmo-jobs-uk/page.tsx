@@ -20,20 +20,21 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Part-Time CMO Jobs UK | Chief Marketing Officer Roles 2026',
-  description: 'Part-time CMO jobs UK for marketing leaders. Find part-time Chief Marketing Officer and Marketing Director roles. 45+ live positions, £850-£1,300/day, remote & hybrid.',
+  description: 'Part-time CMO jobs UK for marketing leaders. Find part-time Chief Marketing Officer and Marketing Director roles. 45+ live positions, £600-£1,400/day, remote & hybrid.',
   keywords: 'part time cmo, part-time cmo, part time cmo jobs uk, part time chief marketing officer, part time marketing director jobs, fractional cmo jobs, cmo part time, part-time cmo services, portfolio cmo',
   alternates: { canonical: 'https://fractional.quest/part-time-cmo-jobs-uk' },
   openGraph: {
     title: 'Part-Time CMO Jobs UK | Chief Marketing Officer Roles 2026',
-    description: 'Find part-time CMO and part-time Chief Marketing Officer jobs across the UK. 45+ live roles, £850-£1,300/day.',
+    description: 'Find part-time CMO and part-time Chief Marketing Officer jobs across the UK. 45+ live roles, £600-£1,400/day.',
     url: 'https://fractional.quest/part-time-cmo-jobs-uk',
     images: [{ url: 'https://fractional.quest/api/og?title=Part-Time%20CMO%20Jobs%20UK', width: 1200, height: 630, alt: 'Part-Time CMO Jobs UK' }],
   },
 }
 
 const PART_TIME_CMO_FAQS = [
+  { question: "How much does a part-time CMO cost in the UK?", answer: "A part-time CMO in the UK typically costs £3,000-£6,000 per month or £600-£1,400 per day, depending on experience level and sector. Entry-level part-time CMOs charge £600-£900/day, senior part-time CMOs charge £900-£1,200/day, and premium B2B SaaS/VC-backed part-time CMOs charge £1,200-£1,400/day. This represents 45-65% savings compared to a full-time CMO hire (£150,000-£250,000+ annually)." },
   { question: "What is a part-time CMO?", answer: "A part-time CMO (also called fractional CMO) is a Chief Marketing Officer who works with companies 1-3 days per week on an ongoing basis. This model provides senior marketing leadership without the full-time commitment or cost." },
-  { question: "What are typical part-time CMO day rates in the UK?", answer: "Part-time CMO day rates in the UK typically range from £850-£1,300 per day. For a 2-day per week engagement, annual costs are £85,000-£130,000 - significantly less than a full-time CMO package." },
+  { question: "What are typical part-time CMO day rates in the UK?", answer: "Part-time CMO day rates in the UK typically range from £600-£1,400 per day. Entry-level roles start at £600-£900/day, senior roles command £900-£1,200/day. For a 2-day per week engagement, annual costs are £60,000-£145,000 - significantly less than a full-time CMO package." },
   { question: "How many days per week do part-time CMOs work?", answer: "Most part-time CMO roles involve 1-3 days per week, with 2 days being most common. Many CMOs work with multiple clients to build a portfolio career." },
   { question: "What's the difference between part-time and fractional CMO?", answer: "The terms are often used interchangeably. 'Part-time CMO' emphasizes the reduced hours, while 'fractional CMO' emphasizes the shared/portfolio nature. Both refer to senior marketing leaders working less than full-time." },
   { question: "Who hires part-time CMOs?", answer: "SMEs, startups, scale-ups, and PE portfolio companies commonly hire part-time CMOs. They get experienced marketing leadership at a fraction of full-time cost - ideal for companies needing strategic marketing guidance." },
@@ -93,7 +94,7 @@ export default async function PartTimeCMOJobsUKPage() {
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Part-Time Marketing Leadership</span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">Part-Time CMO Jobs UK</h1>
-              <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Find <strong>part-time CMO</strong> and <strong>fractional Marketing Director</strong> roles across the UK. Portfolio marketing leadership positions, 1-3 days per week, day rates from £850-£1,300.</p>
+              <p className="text-xl text-white/90 leading-relaxed max-w-2xl">Find <strong>part-time CMO</strong> and <strong>fractional Marketing Director</strong> roles across the UK. Portfolio marketing leadership positions, 1-3 days per week, day rates from £600-£1,400.</p>
               <div className="flex flex-wrap gap-4 mt-8">
                 <a href="#jobs" className="px-6 py-3 bg-white text-amber-900 font-bold rounded-lg hover:bg-amber-50 transition-colors">Browse Part-Time CMO Jobs</a>
                 <Link href="/interim-cmo-jobs-uk" className="px-6 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">Interim CMO Jobs</Link>

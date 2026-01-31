@@ -28,12 +28,18 @@ export const cpoJobsUkSEO = {
   hero: {
     headline: "Fractional CPO Jobs UK",
     subtitle:
-      "Part-time Product Leadership and CPO roles across the United Kingdom. Day rates £900-£1,300.",
+      "Part-time Product Leadership and CPO roles across the United Kingdom. Day rates £800-£1,400.",
     stats: {
-      avgDayRate: "£900-£1,300",
+      avgDayRate: "£800-£1,400",
       hubStatus: "Product Leadership",
       hybridOptions: "80% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CPO Jobs UK",
+    definition: "Fractional CPO jobs are part-time Chief Product Officer roles where experienced product leaders work 1-3 days per week for UK companies. Day rates range from £800-£1,400 depending on experience and company stage. Fractional CPOs provide product strategy, roadmap leadership, and team mentoring without the £145,000-£220,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const cpoJobsUkSEO = {
       source: "Mind the Product Career Survey 2024",
     },
     averageDayRate: {
-      value: "£1,100",
-      description: "Average day rate for fractional CPOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£950",
+      description: "Average day rate for fractional CPOs in the UK (range: £800-£1,400)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const cpoJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CPO cost in the UK?",
+      answer:
+        "A fractional CPO in the UK typically costs £3,200-£5,600 per month or £800-£1,400 per day, depending on experience level and company stage. Seed-stage fractional CPOs charge £800-£1,000/day, Series A fractional CPOs charge £950-£1,200/day, and premium Series B+ fractional CPOs charge £1,200-£1,400/day. This represents 45-65% savings compared to a full-time CPO hire (£145,000-£220,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CPOs need?",
       answer:
         "Most fractional CPO roles require 10-15+ years product experience with prior CPO, VP Product, or Head of Product experience. Certifications from Product School, Pragmatic Institute, or Reforge add value. Track record of shipping successful products and building product teams is essential. Domain expertise (B2B, fintech, marketplace) often required.",
@@ -178,7 +189,7 @@ export const cpoJobsUkSEO = {
     {
       question: "How much do fractional CPOs earn in the UK?",
       answer:
-        "UK fractional CPOs typically earn £900-£1,300 per day, with Series B+ and fintech roles at the premium end (£1,100-£1,500). Working 2-3 days per week across multiple clients, annual earnings of £180,000-£300,000 are achievable while gaining diverse product experience.",
+        "UK fractional CPOs typically earn £800-£1,400 per day, with Series B+ and fintech roles at the premium end (£1,100-£1,500). Working 2-3 days per week across multiple clients, annual earnings of £160,000-£300,000 are achievable while gaining diverse product experience.",
     },
     {
       question: "What's the typical fractional CPO engagement?",
