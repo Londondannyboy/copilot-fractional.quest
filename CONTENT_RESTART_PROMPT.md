@@ -35,27 +35,84 @@ Created `content_enrichment` table in Neon to track all page enrichments:
 SELECT page_slug, enrichment_type, enriched_at::date FROM content_enrichment;
 ```
 
+### ✅ All 17 Role Jobs UK Pages Enriched
+Each page now has:
+- Definition box (60-80 words for AI Overview optimization)
+- "How much does a fractional X cost UK?" FAQ with tiered pricing
+- Authority links to professional bodies (CIPS, IOD, ICAEW, etc.)
+- Statistics with Jan 2026 citations
+- Updated day rate ranges (Entry/Senior/Premium tiers)
+
+**Pages Updated:**
+- CFO, CMO, CTO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO
+- FD, MD, GC, CAIO, CSO, Procurement
+
+**25 enrichments tracked in `content_enrichment` table**
+
 ### Remaining Work
 - [ ] Add 3-way comparison tables to COO, CISO, CHRO pages
-- [ ] Add PAA-style FAQs to high-traffic pages
 - [ ] Create /part-time-cmo and /interim-finance-director pages
+- [ ] Run Tavily Extract on competitor pages for deeper content
+
+---
+
+## Tavily API Workflow (Updated 31 Jan 2026)
+
+### Quick Commands
+
+**Search API** - Find competitor pages and get AI answer:
+```bash
+cat > /tmp/tav.json << 'EOF'
+{"api_key":"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","query":"fractional CFO cost UK 2025","search_depth":"advanced","include_answer":true,"max_results":5}
+EOF
+curl -s -X POST "https://api.tavily.com/search" -H "Content-Type: application/json" -d @/tmp/tav.json | jq '{answer, sources: [.results[] | {title, url}]}'
+```
+
+**Extract API** - Get full content from competitor URLs:
+```bash
+cat > /tmp/tav_extract.json << 'EOF'
+{"api_key":"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","urls":["https://competitor.com/page"],"extract_depth":"advanced"}
+EOF
+curl -s -X POST "https://api.tavily.com/extract" -H "Content-Type: application/json" -d @/tmp/tav_extract.json | jq '.results[] | {url, content: .raw_content[:2000]}'
+```
+
+### What Tavily Enables
+
+**For Accuracy:**
+- Validate pricing data against competitors
+- Confirm statistics are current
+- Ensure day rates match market reality
+
+**For Content Creation:**
+- Discover content gaps (what competitors cover that we don't)
+- Find new FAQ questions from competitor pages
+- Identify new sections to add
+- Source authority links to cite
+- Get market intelligence for longer-form content
+
+### Workflow: Search → Extract → Enrich
+
+1. **Search** for a keyword to get competitor URLs and AI summary
+2. **Extract** full content from top 3-5 competitor pages
+3. **Analyze** what sections/topics they cover that we don't
+4. **Enrich** our pages with better, more comprehensive content
+5. **Track** enrichment in `content_enrichment` table
+
+### Key Competitor URLs (from Tavily)
+
+**CFO:**
+- cfoiquk.com - UK pricing breakdown
+- fdcapital.co.uk - London-specific
+- hirecfo.com - UK pricing guide
+- csuiterecruit.co.uk - Comprehensive guide
+
+**CMO:**
+- communications-edge.co.uk - UK specific
+- vcmo.co.uk - Investment calculator
 
 ---
 
 ## Research Completed (Jan 2026)
-
-### Tavily API Access
-```bash
-curl -s -X POST "https://api.tavily.com/search" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "api_key": "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",
-    "query": "YOUR_KEYWORD_HERE",
-    "search_depth": "advanced",
-    "include_answer": true,
-    "max_results": 5
-  }'
-```
 
 ### Key Findings: Pricing Reality Check
 

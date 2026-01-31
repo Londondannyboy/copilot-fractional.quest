@@ -96,7 +96,7 @@ export const cmoJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary by sector and marketing complexity (Source: Marketing Week, CIM):",
+        "UK market rates vary by sector and marketing complexity. London and specialist agencies command premium rates. (Source: Marketing Week, CIM, Porter Wills, VCMO Jan 2026):",
       rates: [
         { role: "VC-Backed", range: "£1,000 - £1,400/day", typical: "£1,200", annual: "£200-280k" },
         { role: "B2B SaaS", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
@@ -104,6 +104,16 @@ export const cmoJobsUkSEO = {
         { role: "Professional Services", range: "£800 - £1,100/day", typical: "£950", annual: "£160-220k" },
         { role: "Non-Profit", range: "£600 - £900/day", typical: "£750", annual: "£120-180k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Retainer Pricing",
+        description: "Alternative to day rates for ongoing strategic leadership (Source: Porter Wills, VCMO):",
+        rates: [
+          { commitment: "1 day/week", range: "£3,000 - £4,500/month" },
+          { commitment: "1.5-2 days/week", range: "£4,500 - £6,500/month" },
+          { commitment: "2-3 days/week", range: "£6,500 - £10,000/month" },
+        ],
+      },
+      savingsNote: "A fractional CMO at £5,000/month (1.5 days/week) costs £60,000 annually vs £208,000+ for a full-time CMO (salary + NI + pension + benefits + recruitment). Savings: £148,000+ (71%).",
     },
 
     locations: {

@@ -104,7 +104,7 @@ export const cfoJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary significantly by sector and complexity (Source: Glassdoor UK, ICAEW):",
+        "Day rates vary significantly by sector and complexity. London rates are typically 20-30% higher than regional rates. (Source: Glassdoor UK, ICAEW, HireCFO, EmergeOne Jan 2026):",
       rates: [
         { role: "PE-Backed", range: "£1,200 - £1,800/day", typical: "£1,400", annual: "£240-360k" },
         { role: "Fintech/FCA", range: "£1,100 - £1,600/day", typical: "£1,300", annual: "£220-320k" },
@@ -112,6 +112,16 @@ export const cfoJobsUkSEO = {
         { role: "SME/Family", range: "£800 - £1,200/day", typical: "£1,000", annual: "£160-240k" },
         { role: "Non-Profit", range: "£700 - £1,000/day", typical: "£850", annual: "£140-200k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Retainer Pricing",
+        description: "Alternative to day rates for ongoing engagements (Source: HireCFO, EmergeOne):",
+        rates: [
+          { commitment: "1 day/week", range: "£2,000 - £4,000/month" },
+          { commitment: "2 days/week", range: "£4,000 - £6,500/month" },
+          { commitment: "3 days/week", range: "£6,500 - £8,000/month" },
+        ],
+      },
+      londonPremium: "Note: London-based fractional CFO rates are typically 20-30% higher than regional rates due to cost of living and higher concentration of PE/fintech clients.",
     },
 
     locations: {
