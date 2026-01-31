@@ -28,9 +28,9 @@ export const ctoJobsUkSEO = {
   hero: {
     headline: "Fractional CTO Jobs UK",
     subtitle:
-      "Part-time Technology Leadership and CTO roles across the United Kingdom. Day rates £850-£1,600.",
+      "Part-time Technology Leadership and CTO roles across the United Kingdom. Day rates £800-£1,250 (AI/ML specialists to £1,500).",
     stats: {
-      avgDayRate: "£850-£1,600",
+      avgDayRate: "£800-£1,250",
       hubStatus: "Tech Leadership",
       hybridOptions: "75% Hybrid",
     },
@@ -39,7 +39,7 @@ export const ctoJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional CTO Jobs UK",
-    definition: "Fractional CTO jobs are part-time Chief Technology Officer roles where experienced tech leaders work 1-3 days per week for UK companies. Day rates range from £850-£1,600 depending on experience and sector, with fintech and AI commanding premium rates. Fractional CTOs provide technical strategy, architecture, and team leadership without the £155,000-£300,000+ cost of a full-time hire.",
+    definition: "Fractional CTO jobs are part-time Chief Technology Officer roles where experienced tech leaders work 1-3 days per week for UK companies. Day rates range from £800-£1,250 depending on experience and sector, with fintech and AI specialists commanding premium rates up to £1,500/day. Monthly retainers typically range from £2,400-£8,000. Fractional CTOs provide technical strategy, architecture, and team leadership without the £155,000-£250,000+ cost of a full-time hire. (Source: CodPal, Fractional CTO Experts Jan 2026)",
   },
 
   // External authority links - critical for E-E-A-T
@@ -77,9 +77,19 @@ export const ctoJobsUkSEO = {
       source: "Stack Overflow Developer Survey UK 2024",
     },
     averageDayRate: {
-      value: "£1,050",
-      description: "Average day rate for fractional CTOs in the UK (range: £850-£1,600)",
-      source: "Fractional Quest Market Analysis Jan 2026",
+      value: "£1,000",
+      description: "Average day rate for fractional CTOs in the UK (range: £800-£1,250)",
+      source: "CodPal UK Market Data Jan 2026",
+    },
+    monthlyRetainer: {
+      value: "£2,400-£8,000",
+      description: "Monthly retainer packages for fractional CTO services",
+      source: "Fractional CTO Experts Jan 2026",
+    },
+    hourlyRate: {
+      value: "£150-£350",
+      description: "Hourly rates for fractional CTO consulting (senior to executive level)",
+      source: "CodPal, Fractional CTO Experts Jan 2026",
     },
   },
 
@@ -96,24 +106,25 @@ export const ctoJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary by company stage and technical complexity. Senior fractional CTOs (8-15 years experience) command £150-£250/hour or equivalent day rates. (Source: Full Stack Consulting, CodPal, Tech Nation Jan 2026):",
+        "Day rates vary by company stage and technical complexity. Senior fractional CTOs (8-15 years experience) command £150-£250/hour, while executive-level CTOs with 15+ years charge £200-£350/hour. (Source: CodPal, Fractional CTO Experts Jan 2026):",
       rates: [
-        { role: "Series B+", range: "£1,100 - £1,600/day", typical: "£1,300", annual: "£220-320k" },
-        { role: "Series A", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
-        { role: "Seed Stage", range: "£800 - £1,200/day", typical: "£950", annual: "£160-240k" },
-        { role: "Enterprise", range: "£1,000 - £1,400/day", typical: "£1,200", annual: "£200-280k" },
-        { role: "Agency/Consultancy", range: "£700 - £1,100/day", typical: "£900", annual: "£140-220k" },
+        { role: "Series B+ / Scale-up", range: "£1,000 - £1,250/day", typical: "£1,125", annual: "£200-250k" },
+        { role: "Series A", range: "£900 - £1,150/day", typical: "£1,000", annual: "£180-230k" },
+        { role: "Seed Stage", range: "£800 - £1,000/day", typical: "£875", annual: "£160-200k" },
+        { role: "Enterprise / Transformation", range: "£950 - £1,250/day", typical: "£1,100", annual: "£190-250k" },
+        { role: "AI/ML Specialist", range: "£1,000 - £1,500/day", typical: "£1,200", annual: "£200-300k" },
+        { role: "Agency/Consultancy", range: "£700 - £950/day", typical: "£825", annual: "£140-190k" },
       ],
       monthlyRetainers: {
         title: "Monthly Retainer Packages",
-        description: "Alternative to day rates for ongoing technical leadership (Source: Full Stack Consulting, fractionalctoexperts.com):",
+        description: "Alternative to day rates for ongoing technical leadership. Most UK providers offer tiered packages based on hours and scope. (Source: CodPal £1,500-£5,000+, Fractional CTO Experts £2,400-£8,000):",
         rates: [
-          { commitment: "Startup (20 hrs/mo)", range: "£2,400 - £4,000/month" },
-          { commitment: "Growth (40 hrs/mo)", range: "£4,800 - £6,500/month" },
-          { commitment: "Scale-Up (60+ hrs/mo)", range: "£7,000 - £10,000/month" },
+          { commitment: "Startup (20 hrs/mo)", range: "£2,400 - £3,500/month" },
+          { commitment: "Growth (40 hrs/mo)", range: "£4,000 - £5,500/month" },
+          { commitment: "Scale-Up (60+ hrs/mo)", range: "£6,000 - £8,000/month" },
         ],
       },
-      savingsNote: "A fractional CTO at £5,000/month costs £60,000 annually vs £180,000+ for a full-time CTO (salary + benefits + equity). Savings: £120,000+ (67%).",
+      savingsNote: "A fractional CTO at £4,500/month costs £54,000 annually vs £155,000-£250,000 for a full-time CTO (salary + benefits + equity). Savings: £100,000-£196,000 (65-78%). Source: CodPal UK Market Analysis 2026.",
     },
 
     locations: {
@@ -189,7 +200,7 @@ export const ctoJobsUkSEO = {
     {
       question: "How much does a fractional CTO cost in the UK?",
       answer:
-        "A fractional CTO in the UK typically costs £3,400-£6,400 per month or £850-£1,600 per day, depending on experience level and sector. Entry-level fractional CTOs charge £850-£1,000/day, senior fractional CTOs charge £1,000-£1,300/day, and premium fintech/AI fractional CTOs charge £1,300-£1,600/day. This represents 50-70% savings compared to a full-time CTO hire (£155,000-£300,000+ annually).",
+        "A fractional CTO in the UK typically costs £2,400-£8,000 per month or £800-£1,250 per day, depending on experience level and sector. According to CodPal and Fractional CTO Experts (Jan 2026): Seed-stage CTOs charge £800-£1,000/day, Series A/B CTOs charge £900-£1,250/day, and specialist AI/ML CTOs command £1,000-£1,500/day. Hourly rates range from £150-£350 depending on seniority. This represents 65-78% savings compared to a full-time CTO hire (£155,000-£250,000 annually including benefits and equity).",
     },
     {
       question: "What qualifications do fractional CTOs need?",

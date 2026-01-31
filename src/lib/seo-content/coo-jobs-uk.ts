@@ -31,9 +31,9 @@ export const cooJobsUkSEO = {
   hero: {
     headline: "Fractional COO Jobs UK",
     subtitle:
-      "Part-time Operations Leadership and COO roles across the United Kingdom. Day rates £750-£1,400.",
+      "Part-time Operations Leadership and COO roles across the United Kingdom. Day rates £600-£1,500 (PE-backed/turnaround to £1,500).",
     stats: {
-      avgDayRate: "£750-£1,400",
+      avgDayRate: "£600-£1,500",
       hubStatus: "Operations Roles",
       hybridOptions: "65% Hybrid",
     },
@@ -42,7 +42,7 @@ export const cooJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional COO Jobs UK",
-    definition: "Fractional COO jobs are part-time Chief Operating Officer roles where experienced operations leaders work 1-3 days per week for UK companies. Day rates range from £750-£1,400 depending on experience and sector. Fractional COOs provide operational strategy, process optimization, and scaling support without the £140,000-£220,000+ cost of a full-time hire.",
+    definition: "Fractional COO jobs are part-time Chief Operating Officer roles where experienced operations leaders work 1-3 days per week for UK companies. Day rates range from £600-£1,500 depending on experience and sector, with PE-backed and turnaround specialists commanding premium rates. Monthly retainers typically range from £3,000-£10,000. Fractional COOs provide operational strategy, process optimization, and scaling support without the £130,000-£230,000 cost of a full-time hire. (Source: ScaleUpExec, Like Sunday Jan 2026)",
   },
 
   // External authority links - critical for E-E-A-T
@@ -80,9 +80,14 @@ export const cooJobsUkSEO = {
       source: "CMI Flexible Leadership Report 2024",
     },
     averageDayRate: {
-      value: "£1,100",
-      description: "Average day rate for fractional COOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£1,000",
+      description: "Average day rate for fractional COOs in the UK (range: £600-£1,500)",
+      source: "ScaleUpExec, Like Sunday Jan 2026",
+    },
+    monthlyRetainer: {
+      value: "£3,000-£10,000",
+      description: "Monthly retainer packages for fractional COO services",
+      source: "ScaleUpExec Jan 2026",
     },
   },
 
@@ -99,24 +104,25 @@ export const cooJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Fractional COO rates average £950/day in the UK. Rates vary by company size and operational complexity. (Source: CMI, IoD, ScaleUpExec, Like Sunday Jan 2026):",
+        "Fractional COO rates average £1,000/day in the UK. Rates vary by company size and operational complexity. (Source: ScaleUpExec, Like Sunday Jan 2026):",
       rates: [
-        { role: "PE-Backed", range: "£1,100 - £1,500/day", typical: "£1,300", annual: "£220-300k" },
-        { role: "Scale-up (50-200)", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
-        { role: "Growth (20-50)", range: "£850 - £1,200/day", typical: "£1,000", annual: "£170-240k" },
-        { role: "SME", range: "£750 - £1,100/day", typical: "£900", annual: "£150-220k" },
-        { role: "Non-Profit", range: "£600 - £950/day", typical: "£800", annual: "£120-190k" },
+        { role: "PE-Backed / Turnaround", range: "£1,200 - £1,500/day", typical: "£1,350", annual: "£240-300k" },
+        { role: "Scale-up (50-200)", range: "£950 - £1,300/day", typical: "£1,100", annual: "£190-260k" },
+        { role: "Growth (20-50)", range: "£850 - £1,150/day", typical: "£1,000", annual: "£170-230k" },
+        { role: "SME / Mid-Market", range: "£700 - £1,000/day", typical: "£850", annual: "£140-200k" },
+        { role: "EOS Integrator", range: "£900 - £1,200/day", typical: "£1,050", annual: "£180-240k" },
+        { role: "Non-Profit / Social Enterprise", range: "£600 - £900/day", typical: "£750", annual: "£120-180k" },
       ],
       monthlyRetainers: {
         title: "Monthly Retainer Packages",
-        description: "Alternative to day rates for ongoing operational leadership (Source: Like Sunday, ScaleUpExec):",
+        description: "Alternative to day rates for ongoing operational leadership. Most providers offer tiered packages based on commitment level. (Source: ScaleUpExec, Like Sunday Jan 2026):",
         rates: [
-          { commitment: "1 day/week", range: "£3,000 - £5,000/month" },
-          { commitment: "2 days/week", range: "£5,000 - £8,000/month" },
-          { commitment: "3+ days/week", range: "£8,000 - £12,000/month" },
+          { commitment: "Advisory (1 day/week)", range: "£3,000 - £4,500/month" },
+          { commitment: "Hands-on (2 days/week)", range: "£5,000 - £7,000/month" },
+          { commitment: "Embedded (3+ days/week)", range: "£7,500 - £10,000/month" },
         ],
       },
-      savingsNote: "Full-time COO salary: £130,000-£230,000+ (Source: Tavily Jan 2026). A fractional COO at £6,000/month saves £80,000-£160,000 annually (50-65%).",
+      savingsNote: "Full-time COO salary: £130,000-£230,000 including benefits and bonus. A fractional COO at £5,500/month costs £66,000 annually. Savings: £64,000-£164,000 (49-71%). Source: ScaleUpExec UK Market Analysis 2026.",
     },
 
     locations: {
@@ -192,7 +198,7 @@ export const cooJobsUkSEO = {
     {
       question: "How much does a fractional COO cost in the UK?",
       answer:
-        "A fractional COO in the UK typically costs £3,000-£6,000 per month or £750-£1,400 per day, depending on experience level and sector. Entry-level fractional COOs charge £750-£1,000/day, senior fractional COOs charge £1,000-£1,200/day, and premium PE-backed/scale-up fractional COOs charge £1,200-£1,400/day. This represents 45-60% savings compared to a full-time COO hire (£140,000-£220,000+ annually).",
+        "A fractional COO in the UK typically costs £3,000-£10,000 per month or £600-£1,500 per day, depending on experience level and sector. According to ScaleUpExec and Like Sunday (Jan 2026): SME/mid-market COOs charge £700-£1,000/day, scale-up COOs charge £950-£1,300/day, and PE-backed/turnaround specialists command £1,200-£1,500/day. EOS Integrators typically charge £900-£1,200/day. This represents 49-71% savings compared to a full-time COO hire (£130,000-£230,000 annually including benefits).",
     },
     {
       question: "What qualifications do fractional COOs need?",

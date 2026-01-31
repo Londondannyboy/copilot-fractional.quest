@@ -28,9 +28,9 @@ export const cisoJobsUkSEO = {
   hero: {
     headline: "Fractional CISO Jobs UK",
     subtitle:
-      "Part-time Cybersecurity Leadership and CISO roles across the United Kingdom. Day rates £1,000-£2,000.",
+      "Part-time Cybersecurity Leadership and CISO roles across the United Kingdom. Day rates £1,000-£1,500 (financial services to £1,800).",
     stats: {
-      avgDayRate: "£1,000-£2,000",
+      avgDayRate: "£1,000-£1,500",
       hubStatus: "Security Leadership",
       hybridOptions: "75% Hybrid",
     },
@@ -39,7 +39,7 @@ export const cisoJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional CISO Jobs UK",
-    definition: "Fractional CISO jobs are part-time Chief Information Security Officer roles where experienced security leaders work 1-3 days per week for UK companies. Day rates range from £1,000-£2,000 depending on sector and regulatory requirements, with financial services commanding premium rates. Fractional CISOs provide cybersecurity strategy, compliance, and incident response without the £180,000-£300,000+ cost of a full-time hire.",
+    definition: "Fractional CISO jobs are part-time Chief Information Security Officer roles where experienced security leaders work 1-3 days per week for UK companies. Day rates range from £1,000-£1,500 depending on sector and regulatory requirements, with financial services commanding premium rates up to £1,800/day. Monthly retainers typically range from £3,000-£10,000 for vCISO services. Fractional CISOs provide cybersecurity strategy, compliance, and incident response without the £180,000-£280,000 cost of a full-time hire. (Source: CyPro, The Small Business Cyber Security Guy Jan 2026)",
   },
 
   // External authority links - critical for E-E-A-T
@@ -77,9 +77,14 @@ export const cisoJobsUkSEO = {
       source: "UK Cyber Security Council 2024",
     },
     averageDayRate: {
-      value: "£1,350",
-      description: "Average day rate for fractional CISOs in the UK (range: £1,000-£2,000)",
-      source: "Fractional Quest Market Analysis Jan 2026",
+      value: "£1,250",
+      description: "Average day rate for fractional CISOs in the UK (range: £1,000-£1,500)",
+      source: "CyPro, (ISC)² UK Market Data Jan 2026",
+    },
+    monthlyRetainer: {
+      value: "£3,000-£10,000",
+      description: "vCISO monthly retainer packages for ongoing security leadership",
+      source: "CyPro, The Small Business Cyber Security Guy Jan 2026",
     },
   },
 
@@ -96,24 +101,25 @@ export const cisoJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "UK fractional CISOs charge £1,000-£1,500/day. Virtual CISO (vCISO) services range £2,500-£5,000/month for smaller engagements. Rates vary by regulatory requirements and security complexity. (Source: (ISC)², ISACA UK, CyPro Jan 2026):",
+        "UK fractional CISOs charge £1,000-£1,500/day. Virtual CISO (vCISO) services range £3,000-£10,000/month based on hours and scope. Rates vary by regulatory requirements and security complexity. (Source: CyPro, The Small Business Cyber Security Guy Jan 2026):",
       rates: [
-        { role: "Financial Services", range: "£1,200 - £1,800/day", typical: "£1,500", annual: "£240-360k" },
+        { role: "Financial Services (FCA)", range: "£1,300 - £1,800/day", typical: "£1,500", annual: "£260-360k" },
         { role: "Healthcare/NHS", range: "£1,100 - £1,500/day", typical: "£1,300", annual: "£220-300k" },
-        { role: "Tech/SaaS", range: "£1,000 - £1,400/day", typical: "£1,200", annual: "£200-280k" },
-        { role: "Retail/eCommerce", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
-        { role: "SME/Startup", range: "£800 - £1,200/day", typical: "£1,000", annual: "£160-240k" },
+        { role: "Tech/SaaS (SOC 2)", range: "£1,000 - £1,400/day", typical: "£1,200", annual: "£200-280k" },
+        { role: "Critical Infrastructure", range: "£1,200 - £1,600/day", typical: "£1,400", annual: "£240-320k" },
+        { role: "Retail/eCommerce (PCI)", range: "£1,000 - £1,350/day", typical: "£1,175", annual: "£200-270k" },
+        { role: "SME/Startup", range: "£900 - £1,200/day", typical: "£1,050", annual: "£180-240k" },
       ],
       monthlyRetainers: {
         title: "vCISO Monthly Packages",
-        description: "Virtual CISO services for ongoing security leadership (Source: CyPro, The Small Business Cyber Security Guy):",
+        description: "Virtual CISO services for ongoing security leadership. Most providers offer tiered packages based on hours and scope. (Source: CyPro, The Small Business Cyber Security Guy Jan 2026):",
         rates: [
-          { commitment: "vCISO Basic (8-12 hrs/mo)", range: "£2,500 - £4,000/month" },
-          { commitment: "vCISO Standard (16-24 hrs/mo)", range: "£4,000 - £7,000/month" },
-          { commitment: "vCISO Premium (32+ hrs/mo)", range: "£7,000 - £10,000/month" },
+          { commitment: "vCISO Basic (8-12 hrs/mo)", range: "£3,000 - £4,500/month" },
+          { commitment: "vCISO Standard (16-24 hrs/mo)", range: "£5,000 - £7,000/month" },
+          { commitment: "vCISO Premium (32+ hrs/mo)", range: "£7,500 - £10,000/month" },
         ],
       },
-      savingsNote: "Full-time CISO salary: £180,000-£255,000+ (Source: Tavily Jan 2026). A fractional CISO at £5,000/month costs £60,000 annually - savings of £120,000-£195,000 (67-76%).",
+      savingsNote: "Full-time CISO salary: £180,000-£280,000 including benefits. A vCISO at £5,500/month costs £66,000 annually. Savings: £114,000-£214,000 (63-76%). Source: CyPro, The Small Business Cyber Security Guy 2026.",
     },
 
     locations: {
@@ -189,7 +195,7 @@ export const cisoJobsUkSEO = {
     {
       question: "How much does a fractional CISO cost in the UK?",
       answer:
-        "A fractional CISO in the UK typically costs £4,000-£8,000 per month or £1,000-£2,000 per day, depending on sector and regulatory requirements. SME/startup fractional CISOs charge £1,000-£1,400/day, tech/SaaS fractional CISOs charge £1,200-£1,600/day, and premium financial services/healthcare fractional CISOs charge £1,500-£2,000/day. This represents 60-75% savings compared to a full-time CISO hire (£180,000-£300,000+ annually).",
+        "A fractional CISO or vCISO in the UK typically costs £3,000-£10,000 per month or £1,000-£1,500 per day, depending on sector and regulatory requirements. According to CyPro and The Small Business Cyber Security Guy (Jan 2026): SME/startup CISOs charge £900-£1,200/day, tech/SaaS (SOC 2) CISOs charge £1,000-£1,400/day, and premium financial services (FCA-regulated) CISOs command £1,300-£1,800/day. Annual vCISO contracts range from £50,000-£150,000. This represents 63-76% savings compared to a full-time CISO hire (£180,000-£280,000 annually including benefits).",
     },
     {
       question: "What qualifications do fractional CISOs need?",

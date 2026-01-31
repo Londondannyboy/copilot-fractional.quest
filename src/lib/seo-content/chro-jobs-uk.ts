@@ -28,9 +28,9 @@ export const chroJobsUkSEO = {
   hero: {
     headline: "Fractional CHRO Jobs UK",
     subtitle:
-      "Part-time HR Leadership and Chief People Officer roles across the United Kingdom. Day rates £650-£1,400.",
+      "Part-time HR Leadership and Chief People Officer roles across the United Kingdom. Day rates £800-£1,300 (PE-backed to £1,400).",
     stats: {
-      avgDayRate: "£650-£1,400",
+      avgDayRate: "£800-£1,300",
       hubStatus: "People Leadership",
       hybridOptions: "70% Hybrid",
     },
@@ -39,7 +39,7 @@ export const chroJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional CHRO Jobs UK",
-    definition: "Fractional CHRO jobs are part-time Chief Human Resources Officer roles where experienced HR leaders work 1-3 days per week for UK companies. Day rates range from £650-£1,400 depending on company size and complexity. Fractional CHROs provide people strategy, talent management, and HR transformation without the £130,000-£200,000+ cost of a full-time hire.",
+    definition: "Fractional CHRO jobs are part-time Chief Human Resources Officer or Chief People Officer roles where experienced HR leaders work 1-3 days per week for UK companies. Day rates range from £800-£1,300 depending on company size and complexity, with PE-backed and transformation specialists commanding premium rates up to £1,400/day. Monthly retainers typically range from £2,500-£8,500. Fractional CHROs provide people strategy, talent management, and HR transformation without the £120,000-£180,000 cost of a full-time hire. (Source: sobo.ai, Pioneer HR Jan 2026)",
   },
 
   // External authority links - critical for E-E-A-T
@@ -77,9 +77,14 @@ export const chroJobsUkSEO = {
       source: "People Management Survey 2024",
     },
     averageDayRate: {
-      value: "£900",
-      description: "Average day rate for fractional CHROs in the UK (range: £650-£1,400)",
-      source: "Fractional Quest Market Analysis Jan 2026",
+      value: "£1,000",
+      description: "Average day rate for fractional CHROs in the UK (range: £800-£1,300)",
+      source: "sobo.ai, Pioneer HR Jan 2026",
+    },
+    monthlyRetainer: {
+      value: "£2,500-£8,500",
+      description: "Monthly retainer packages for fractional CHRO/CPO services",
+      source: "sobo.ai Jan 2026",
     },
   },
 
@@ -96,24 +101,25 @@ export const chroJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "UK fractional CHROs charge £800-£1,200/day. CPOs (Chief People Officers) command £800-£1,400/day for more strategic roles. Rates vary by company size and HR complexity. (Source: CIPD, HR Magazine, Find HR Jan 2026):",
+        "UK fractional CHROs charge £800-£1,300/day. CPOs (Chief People Officers) command £950-£1,400/day for more strategic roles. Rates vary by company size and HR complexity. (Source: sobo.ai, Pioneer HR, CIPD Jan 2026):",
       rates: [
-        { role: "PE-Backed", range: "£1,000 - £1,400/day", typical: "£1,150", annual: "£200-280k" },
-        { role: "Scale-up (100+)", range: "£850 - £1,200/day", typical: "£1,000", annual: "£170-240k" },
-        { role: "Growth (50-100)", range: "£750 - £1,100/day", typical: "£900", annual: "£150-220k" },
-        { role: "SME", range: "£650 - £950/day", typical: "£800", annual: "£130-190k" },
-        { role: "Non-Profit", range: "£550 - £850/day", typical: "£700", annual: "£110-170k" },
+        { role: "PE-Backed / M&A", range: "£1,100 - £1,400/day", typical: "£1,250", annual: "£220-280k" },
+        { role: "Scale-up (100+)", range: "£950 - £1,200/day", typical: "£1,075", annual: "£190-240k" },
+        { role: "Growth (50-100)", range: "£850 - £1,100/day", typical: "£975", annual: "£170-220k" },
+        { role: "Culture & Transformation", range: "£900 - £1,200/day", typical: "£1,050", annual: "£180-240k" },
+        { role: "SME / Mid-Market", range: "£800 - £1,000/day", typical: "£900", annual: "£160-200k" },
+        { role: "Non-Profit / Charity", range: "£650 - £900/day", typical: "£775", annual: "£130-180k" },
       ],
       monthlyRetainers: {
         title: "Monthly Retainer Packages",
-        description: "Alternative to day rates for ongoing HR leadership (Source: CIPD, Find HR):",
+        description: "Alternative to day rates for ongoing HR leadership. Most providers offer tiered packages based on days and scope. (Source: sobo.ai, Pioneer HR Jan 2026):",
         rates: [
-          { commitment: "1 day/week", range: "£2,500 - £4,000/month" },
-          { commitment: "2 days/week", range: "£4,500 - £6,500/month" },
-          { commitment: "3 days/week", range: "£6,500 - £8,500/month" },
+          { commitment: "Advisory (1 day/week)", range: "£2,500 - £4,000/month" },
+          { commitment: "Hands-on (2 days/week)", range: "£4,500 - £6,500/month" },
+          { commitment: "Embedded (3 days/week)", range: "£6,500 - £8,500/month" },
         ],
       },
-      savingsNote: "Full-time CHRO salary: £120,000-£180,000+ (Source: CIPD). A fractional CHRO at £4,000/month costs £48,000 annually - savings of £72,000-£132,000 (60-73%).",
+      savingsNote: "Full-time CHRO salary: £120,000-£180,000 including benefits. A fractional CHRO at £4,500/month costs £54,000 annually. Savings: £66,000-£126,000 (55-70%). Source: sobo.ai, CIPD 2026.",
     },
 
     locations: {
@@ -189,7 +195,7 @@ export const chroJobsUkSEO = {
     {
       question: "How much does a fractional CHRO cost in the UK?",
       answer:
-        "A fractional CHRO in the UK typically costs £2,600-£5,600 per month or £650-£1,400 per day, depending on company size and complexity. SME fractional CHROs charge £650-£900/day, scale-up fractional CHROs charge £900-£1,200/day, and premium PE-backed fractional CHROs charge £1,200-£1,400/day. This represents 40-55% savings compared to a full-time CHRO hire (£130,000-£200,000+ annually).",
+        "A fractional CHRO or CPO in the UK typically costs £2,500-£8,500 per month or £800-£1,300 per day, depending on company size and complexity. According to sobo.ai and Pioneer HR (Jan 2026): SME/mid-market CHROs charge £800-£1,000/day, scale-up CHROs (100+ employees) charge £950-£1,200/day, and PE-backed/M&A specialists command £1,100-£1,400/day. Culture & Transformation specialists typically charge £900-£1,200/day. This represents 55-70% savings compared to a full-time CHRO hire (£120,000-£180,000 annually including benefits).",
     },
     {
       question: "What qualifications do fractional CHROs need?",
