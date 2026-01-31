@@ -41,7 +41,7 @@ export const cioJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional CIO Jobs UK",
-    definition: "Fractional CIO jobs are part-time Chief Information Officer roles where experienced IT leaders work 1-3 days per week for UK companies. Day rates range from £900-£1,600 depending on digital transformation complexity. Fractional CIOs provide IT strategy, vendor management, and technology leadership without the £150,000-£250,000+ cost of a full-time hire.",
+    definition: "Fractional CIO jobs are part-time Chief Information Officer roles where experienced IT leaders work 1-3 days per week for UK companies. Day rates range from £1,000-£1,600 with monthly retainers from £3,000. A fractional CIO at £25,000-£36,000/year delivers 86% savings versus a full-time CIO costing £180,000+ (Source: Assurepath, The Small Business Cyber Security Guy Jan 2026).",
   },
 
   // External authority links - critical for E-E-A-T
@@ -69,19 +69,24 @@ export const cioJobsUkSEO = {
       source: "Gartner UK IT Spending Survey 2024",
     },
     costSavings: {
-      value: "55-70%",
-      description: "Typical savings vs full-time CIO hire",
-      source: "Forrester / BCS Research",
+      value: "86%",
+      description: "Savings: £25k fractional vs £180k+ full-time CIO",
+      source: "The Small Business Cyber Security Guy Jan 2026",
     },
-    hybridArrangements: {
-      value: "65%",
-      description: "Of UK fractional CIO roles offer hybrid working",
-      source: "CIO UK Survey 2024",
+    monthlyFromRate: {
+      value: "From £3,000",
+      description: "Monthly retainer for fractional CIO services (1 day/week)",
+      source: "Assurepath UK Jan 2026",
     },
     averageDayRate: {
       value: "£1,100",
-      description: "Average day rate for fractional CIOs in the UK (range: £900-£1,600)",
-      source: "Fractional Quest Market Analysis Jan 2026",
+      description: "Average day rate for fractional CIOs in the UK (range: £1,000-£1,600)",
+      source: "Fractional Quest / Tavily Market Analysis Jan 2026",
+    },
+    fullTimeSalary: {
+      value: "£120,000-£180,000",
+      description: "Full-time CIO salary range (excluding benefits)",
+      source: "Assurepath UK Jan 2026",
     },
   },
 
@@ -191,7 +196,7 @@ export const cioJobsUkSEO = {
     {
       question: "How much does a fractional CIO cost in the UK?",
       answer:
-        "A fractional CIO in the UK typically costs £3,600-£6,400 per month or £900-£1,600 per day, depending on digital transformation scope. SME fractional CIOs charge £900-£1,100/day, mid-market fractional CIOs charge £1,100-£1,400/day, and enterprise/financial services fractional CIOs charge £1,400-£1,600/day. This represents 55-70% savings compared to a full-time CIO hire (£150,000-£250,000+ annually).",
+        "A fractional CIO in the UK typically costs from £3,000/month for 1 day/week (Source: Assurepath UK) or £1,000-£1,600 per day depending on digital transformation scope. At £25,000-£36,000/year, a fractional CIO delivers 86% savings versus a full-time CIO costing £180,000+ including benefits (Source: The Small Business Cyber Security Guy). Enterprise/financial services fractional CIOs command £1,400-£1,800/day for complex transformation programmes.",
     },
     {
       question: "What qualifications do fractional CIOs need?",

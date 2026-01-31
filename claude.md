@@ -181,54 +181,152 @@ Individual job posts at `/fractional-job/{slug}` - dynamic route querying `jobs`
 
 ## Research & Content Intelligence
 
-### Tavily API Access
+### Tavily API Suite
 **API Key**: `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`
 
-Use Tavily for:
-- Keyword research and competitive analysis
-- AI Overview responses (what Google shows)
-- People Also Ask patterns
-- Competitor content analysis
-- Pricing/market data validation
+**Available APIs** (use all for comprehensive enrichment):
 
-**Usage via curl**:
+| API | Purpose | When to Use |
+|-----|---------|-------------|
+| **Search** | Find competitors, get AI answer | Initial research, quick pricing validation |
+| **Extract** | Pull full content from URLs | Deep competitor analysis, FAQ sourcing |
+| **Research** | Comprehensive market analysis | Long-form content generation |
+| **Crawl** | Map entire competitor sites | Site structure analysis |
+| **Map** | Get site structure | Competitor navigation patterns |
+
+**Check Usage**:
 ```bash
-curl -s -X POST "https://api.tavily.com/search" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "api_key": "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",
-    "query": "fractional CMO UK cost",
-    "search_depth": "advanced",
-    "include_answer": true,
-    "max_results": 5
-  }'
+curl -s -H "Authorization: Bearer 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" https://api.tavily.com/usage
 ```
 
-**Key fields in response**:
-- `answer`: AI-generated summary (like Google AI Overview)
-- `results[].content`: Page content snippets
-- `results[].url`: Competitor URLs
-- `results[].score`: Relevance score
+### Tavily API Commands
+
+**Search API** (find competitors + AI answer):
+```bash
+cat > /tmp/tav.json << 'EOF'
+{"api_key":"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","query":"fractional CFO cost UK 2025","search_depth":"advanced","include_answer":true,"max_results":8}
+EOF
+curl -s -X POST "https://api.tavily.com/search" -H "Content-Type: application/json" -d @/tmp/tav.json | jq '{answer, results: [.results[] | {title, url}]}'
+```
+
+**Extract API** (full competitor content):
+```bash
+cat > /tmp/tav_extract.json << 'EOF'
+{"api_key":"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","urls":["https://competitor.com/page"],"extract_depth":"advanced"}
+EOF
+curl -s -X POST "https://api.tavily.com/extract" -H "Content-Type: application/json" -d @/tmp/tav_extract.json | jq '.results[] | {url, content: .raw_content[:3000]}'
+```
+
+**Research API** (comprehensive analysis):
+```bash
+cat > /tmp/tav_research.json << 'EOF'
+{"api_key":"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","query":"What are fractional CFO costs in the UK? Include day rates, monthly retainers, and factors affecting pricing.","max_results":10,"include_answer":true}
+EOF
+curl -s -X POST "https://api.tavily.com/search" -H "Content-Type: application/json" -d @/tmp/tav_research.json
+```
+
+### Content Enrichment Tracking (Neon)
+
+Track all enrichments in `content_enrichment` table:
+
+```sql
+-- Check enrichment status
+SELECT page_slug, enrichment_depth, tavily_apis_used,
+       quality_score_before, quality_score_after,
+       needs_revisit, revisit_priority, enriched_at
+FROM content_enrichment
+WHERE enrichment_type = 'tavily_competitive'
+ORDER BY needs_revisit DESC, revisit_priority;
+
+-- Find pages needing work
+SELECT page_slug FROM content_enrichment
+WHERE needs_revisit = true
+ORDER BY revisit_priority DESC;
+```
+
+**Enrichment Depth Levels**:
+| Level | APIs Used | Quality Target | Time |
+|-------|-----------|----------------|------|
+| **Basic** | Search only | 6→7 | Quick |
+| **Moderate** | Search + Extract | 6→7.5 | Medium |
+| **Comprehensive** | Search + Extract + Research | 6→8.5 | Full |
+
+**Quality Scoring (1-10)**:
+- 5-6: Original content, no external validation
+- 7: Validated pricing, competitor citations
+- 8: Monthly retainers, savings comparisons, authority links
+- 9: Primary sources, long-form content, comprehensive FAQs
+- 10: Best-in-class, multiple primary sources, case studies
+
+### Authoritative Sources (Primary)
+
+Always cite primary sources where possible:
+
+| Domain | Primary Sources |
+|--------|-----------------|
+| **Finance** | ICAEW, ACCA, CIMA, FCA, BVCA |
+| **Marketing** | CIM, Marketing Week, IPA |
+| **Technology** | BCS, Tech Nation, Gartner UK |
+| **HR** | CIPD, SHRM, HR Magazine |
+| **Operations** | CMI, IoD, APM |
+| **Security** | (ISC)², ISACA, NCSC |
+| **Legal** | Law Society, SRA, CILEX |
+
+**Citation Format**:
+```
+"Source: ICAEW Practice Insights 2024" (primary)
+"Source: HireCFO, EmergeOne Jan 2026" (competitor validation)
+```
+
+### Content Research Workflow
+
+**Comprehensive Enrichment Process**:
+1. **Search**: Find top 5-8 competitors for keyword
+2. **Extract**: Pull full content from top 3 competitor URLs
+3. **Analyze**: Identify pricing, FAQs, sections we're missing
+4. **Research**: Generate comprehensive market summary if needed
+5. **Enrich**: Add monthly retainers, savings %, authority links
+6. **Cite**: Add primary sources AND competitor validation
+7. **Track**: Log in `content_enrichment` with depth level and quality scores
+
+**After Each Enrichment**:
+```sql
+INSERT INTO content_enrichment (
+  page_slug, enrichment_type, tavily_apis_used, enrichment_depth,
+  quality_score_before, quality_score_after, needs_revisit,
+  revisit_priority, changes_made, notes
+) VALUES (
+  'page-slug', 'tavily_competitive',
+  ARRAY['search', 'extract', 'research'], 'comprehensive',
+  6, 8, false, NULL,
+  'Added: monthly retainers, savings comparison, 3 authority links',
+  'Primary sources: ICAEW, CIPD. Competitors: HireCFO, Porter Wills'
+);
+```
 
 ### GSC Data Location
 - Queries: `/Users/dankeegan/Desktop/Queries.csv`
 - Pages: `/Users/dankeegan/Desktop/Pages.csv`
 
-### Content Research Workflow
-1. Read GSC data to identify high-impression, low-click keywords
-2. Use Tavily to research competitor content and AI responses
-3. Identify content gaps and FAQ opportunities
-4. Enrich pages with competitive intelligence
+## Content Quality Standards
 
-## Content Creation Phase (Planned)
+### Required Elements for 8+ Score:
+- [ ] Definition box (60-80 words for AI Overview)
+- [ ] Day rate table with sector breakdown
+- [ ] Monthly retainer pricing section
+- [ ] Savings vs full-time comparison (with %)
+- [ ] At least 2 primary source citations
+- [ ] At least 2 competitor-validated data points
+- [ ] 5+ FAQs including cost question
+- [ ] Authority links section (professional bodies)
 
-See `.claude/reference/content-plan.md` for the full content creation roadmap.
-
-**Priority Areas**:
-- Comparison content (Fractional vs Interim vs Full-Time)
-- FAQ enrichment with PAA-style questions
-- Definition boxes for AI Overview optimization
-- Pricing tables with competitive data
+### Required Elements for 9+ Score:
+- All of above, plus:
+- [ ] Long-form content (2000+ words)
+- [ ] 3-way comparison table (Fractional vs Interim vs Full-Time)
+- [ ] Case study or data point reference
+- [ ] PAA-style questions from Tavily research
+- [ ] Internal links to related pages
 
 ## Restart Prompt
 

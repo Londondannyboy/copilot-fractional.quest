@@ -39,7 +39,7 @@ export const croJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional CRO Jobs UK",
-    definition: "Fractional CRO jobs are part-time Chief Revenue Officer roles where experienced revenue leaders work 1-3 days per week for UK companies. Day rates range from £900-£1,500 depending on company stage and revenue complexity. Fractional CROs provide sales strategy, revenue operations, and go-to-market leadership without the £160,000-£280,000+ cost of a full-time hire.",
+    definition: "Fractional CRO jobs are part-time Chief Revenue Officer roles combining sales and marketing leadership. UK monthly retainers range £7,000-£12,000 ($9,000-$14,000), replacing both VP Sales and CMO roles at a fraction of the cost. A fractional CRO provides go-to-market strategy, revenue operations, and sales leadership without £250,000-£400,000+ for two full-time executives (Source: Ready For The Next Level Jan 2026).",
   },
 
   // External authority links - critical for E-E-A-T
@@ -66,20 +66,20 @@ export const croJobsUkSEO = {
       description: "Of Series A-C SaaS companies using fractional revenue leadership",
       source: "Scale-Up Institute Report 2024",
     },
-    costSavings: {
-      value: "55-70%",
-      description: "Typical savings vs full-time CRO hire",
-      source: "BVCA Portfolio Survey",
+    monthlyRetainer: {
+      value: "£7,000-£12,000",
+      description: "Sweet spot monthly retainer for SaaS fractional CROs ($9k-$14k)",
+      source: "Ready For The Next Level / Tavily Jan 2026",
     },
-    hybridArrangements: {
-      value: "65%",
-      description: "Of UK fractional CRO roles offer hybrid working",
-      source: "Revenue Collective Survey 2024",
+    replacementValue: {
+      value: "2-for-1",
+      description: "A fractional CRO replaces both VP Sales and CMO at combined savings",
+      source: "Ready For The Next Level Jan 2026",
     },
     averageDayRate: {
       value: "£1,100",
-      description: "Average day rate for fractional CROs in the UK (range: £900-£1,500)",
-      source: "Fractional Quest Market Analysis Jan 2026",
+      description: "Average day rate for fractional CROs in the UK (range: £600-£1,500)",
+      source: "Fractional Quest / Tavily Market Analysis Jan 2026",
     },
   },
 
