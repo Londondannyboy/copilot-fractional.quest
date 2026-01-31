@@ -2,7 +2,40 @@
 
 ## Overview
 
-This document defines the systematic process for enriching SEO content pages using Tavily's API suite. The goal is to transform baseline content (Quality 5-6) into competitor-validated, authoritative content (Quality 8+) through structured research and citation.
+This document defines the systematic process for enriching SEO content pages using Tavily's API suite. The goal is to transform baseline content (Quality 5-6) into competitor-validated, authoritative content (Quality 9+) through structured research, competitor analysis, and citation.
+
+**Philosophy:** Don't just validate data - study how competitors structure their content, what sections they include, and what narrative arc they follow. Then match or exceed their depth while adding unique value.
+
+---
+
+## Quick Start Checklist
+
+For each page enrichment:
+
+- [ ] **Research Phase** (Day 1 if needed)
+  - [ ] Tavily Search: Find top 5-8 competitors
+  - [ ] Tavily Extract: Pull full content from top 3
+  - [ ] Analyze competitor narrative arc and sections
+  - [ ] Identify gaps in our content vs competitors
+  - [ ] Note all pricing data with sources
+
+- [ ] **Content Creation Phase**
+  - [ ] Add/update definition box with £ ranges + source
+  - [ ] Add 3-way comparison table (Fractional vs Interim vs Full-Time)
+  - [ ] Add hourly rates table
+  - [ ] Add monthly retainer pricing cards (3 tiers)
+  - [ ] Add authority context box with primary source
+  - [ ] Add professional bodies section with clickable cards
+  - [ ] Add EmbeddedJobBoard section
+  - [ ] Ensure 8+ FAQs
+  - [ ] Ensure 2000+ words for Q9
+
+- [ ] **Technical Implementation**
+  - [ ] Add Mobile TOC (TableOfContentsMobile)
+  - [ ] Restructure with sidebar layout
+  - [ ] Update dateModified
+  - [ ] Build and verify
+  - [ ] Track in database
 
 ---
 
@@ -100,6 +133,118 @@ All of Score 9, plus:
 - [ ] Expert quotes with attribution
 - [ ] Comprehensive FAQ (8+ questions)
 - [ ] Video/infographic references
+
+---
+
+## Competitor Analysis Framework
+
+### What to Extract from Competitors
+
+When analyzing competitor pages, document:
+
+#### 1. Content Structure (Narrative Arc)
+```
+Competitor: [URL]
+Word Count: ~[X]
+
+Section Order:
+1. Hero + breadcrumbs
+2. Definition box (with/without pricing)
+3. Key stats bar
+4. Main content with TOC
+5. [List all H2 sections in order]
+...
+
+Observations:
+- Leads with: [definition/stat/question]
+- Pricing placement: [early/middle/late]
+- CTA frequency: [X CTAs total]
+```
+
+#### 2. Pricing Data
+```
+Day Rates:
+- Junior/Entry: £X-£Y
+- Mid-level: £X-£Y
+- Senior: £X-£Y
+- Specialist: £X-£Y
+
+Monthly Retainers:
+- Tier 1 (X days/week): £X-£Y
+- Tier 2 (X days/week): £X-£Y
+- Tier 3 (X days/week): £X-£Y
+
+Hourly Rates:
+- Standard: £X-£Y
+- Premium: £X-£Y
+
+Sources cited: [list]
+```
+
+#### 3. Sections We're Missing
+```
+Sections competitors have that we don't:
+- [ ] Section name
+- [ ] Section name
+- [ ] Section name
+```
+
+#### 4. Authority & Trust Signals
+```
+Professional bodies mentioned:
+- [Body 1] - linked: yes/no
+- [Body 2] - linked: yes/no
+
+Data sources cited:
+- [Source 1]
+- [Source 2]
+
+Case studies/testimonials: yes/no
+```
+
+#### 5. FAQ Patterns
+```
+Questions competitors answer:
+1. [Question]
+2. [Question]
+3. [Question]
+...
+
+Questions we should add:
+1. [Question]
+2. [Question]
+```
+
+### Competitive Gap Analysis Template
+
+After extracting from 3 competitors, summarize:
+
+```markdown
+## Gap Analysis: [Page Slug]
+
+### We Have (Keep):
+- [Element we already do well]
+- [Element we already do well]
+
+### They Have, We Don't (Add):
+- [ ] [Missing element] - Priority: High/Medium/Low
+- [ ] [Missing element] - Priority: High/Medium/Low
+
+### We Have Better (Differentiate):
+- [Our unique advantage]
+- [Our unique advantage]
+
+### Content Depth Comparison:
+| Element | Us | Competitor 1 | Competitor 2 | Competitor 3 |
+|---------|-----|--------------|--------------|--------------|
+| Word count | X | X | X | X |
+| Day rate tiers | X | X | X | X |
+| Monthly retainers | ✓/✗ | ✓/✗ | ✓/✗ | ✓/✗ |
+| Hourly rates | ✓/✗ | ✓/✗ | ✓/✗ | ✓/✗ |
+| 3-way comparison | ✓/✗ | ✓/✗ | ✓/✗ | ✓/✗ |
+| FAQ count | X | X | X | X |
+| Authority links | X | X | X | X |
+```
 
 ---
 
@@ -225,6 +370,379 @@ Update these sections in the content file:
 4. `dayRates.monthlyRetainers` - Add 3 tiers with sources
 5. `dayRates.savingsNote` - Add % and source
 6. `faqs[0].answer` - Cost FAQ with competitor citations
+
+---
+
+## Q9 Template Pattern (Full Code Examples)
+
+### Required Imports
+
+```tsx
+import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
+import { FAQ } from '@/components/seo/FAQ'
+import { RoleCalculator } from '@/components/RoleCalculator'
+import { RoleContentHub } from '@/components/RoleContentHub'
+```
+
+### TOC Items Structure
+
+```tsx
+const tocItems = [
+  { id: 'overview', title: 'Overview' },
+  { id: 'responsibilities', title: 'Key Responsibilities' },
+  { id: 'comparison', title: 'Fractional vs Interim vs Full-Time' },
+  { id: 'cost-pricing', title: 'UK Cost Guide' },
+  { id: 'hourly-rates', title: 'Hourly Rates' },
+  { id: 'monthly-retainers', title: 'Monthly Retainers' },
+  { id: 'qualifications', title: 'Qualifications' },
+  { id: 'calculator', title: 'Calculator' },
+  { id: 'jobs', title: 'Jobs' },
+  { id: 'faq', title: 'FAQ' },
+]
+```
+
+### Mobile TOC (After Hero/Stats)
+
+```tsx
+{/* Mobile Table of Contents */}
+<div className="lg:hidden max-w-4xl mx-auto px-6 py-8">
+  <TableOfContentsMobile items={tocItems} />
+</div>
+```
+
+### Sidebar Layout Structure
+
+```tsx
+{/* Main Content with Sidebar */}
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="grid lg:grid-cols-[1fr_300px] gap-12">
+      {/* Main Column */}
+      <article className="prose prose-lg prose-gray max-w-none">
+
+        <h2 id="overview" className="scroll-mt-24">...</h2>
+        {/* Content sections with scroll-mt-24 on each h2 */}
+
+      </article>
+
+      {/* Sidebar */}
+      <aside className="hidden lg:block">
+        <div className="sticky top-24 space-y-6">
+          <TableOfContents items={tocItems} />
+
+          {/* Quick Links */}
+          <div className="bg-white p-6 rounded-xl border border-gray-200">
+            <h3 className="font-bold text-gray-900 mb-4">Related Guides</h3>
+            <div className="space-y-3">
+              <Link href="/related-page" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                <span>📋</span> Related Page Title
+              </Link>
+              {/* More links */}
+            </div>
+          </div>
+
+          {/* Authority Links */}
+          <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-200">
+            <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+            <ul className="space-y-3">
+              {authorityLinks.map((link, idx) => (
+                <li key={idx}>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer"
+                     className="text-sm text-emerald-600 hover:text-emerald-800 flex items-center gap-2">
+                    <span className="text-emerald-400">→</span> {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* CTA */}
+          <div className="bg-gray-900 p-6 rounded-xl text-white">
+            <p className="font-bold mb-2">Looking for a [Role]?</p>
+            <p className="text-sm text-gray-300 mb-4">Browse pre-vetted leaders</p>
+            <Link href="/jobs-page" className="block text-center bg-emerald-500 text-black font-bold py-2 px-4 rounded-lg hover:bg-emerald-400 transition-colors text-sm">
+              View Jobs
+            </Link>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+```
+
+### Authority Context Box
+
+```tsx
+{/* Authority context box - place after intro paragraph */}
+<div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-6 not-prose">
+  <p className="text-sm text-gray-700">
+    <strong>UK Market Context:</strong> According to{' '}
+    <a href="https://primary-source.org" target="_blank" rel="noopener noreferrer"
+       className="text-emerald-700 hover:underline font-medium">Primary Source</a>{' '}
+    and market research from{' '}
+    <a href="https://competitor.com/page" target="_blank" rel="noopener noreferrer"
+       className="text-emerald-700 hover:underline">Competitor Name</a>,
+    fractional [Role] costs range from £X-£Y per month depending on engagement level.
+  </p>
+</div>
+```
+
+### 3-Way Comparison Table
+
+```tsx
+{/* 3-Way Comparison Table */}
+<section id="comparison" className="py-20 bg-gray-50 scroll-mt-24">
+  <div className="max-w-4xl mx-auto px-6 lg:px-8">
+    <div className="mb-12">
+      <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Comparison</span>
+      <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional vs Interim vs Full-Time [Role]</h2>
+      <p className="text-xl text-gray-600">Understanding the differences.</p>
+    </div>
+
+    <div className="overflow-x-auto my-8">
+      <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-4 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
+            <th className="px-4 py-4 text-left text-sm font-bold text-emerald-700">Fractional</th>
+            <th className="px-4 py-4 text-left text-sm font-bold text-blue-700">Interim</th>
+            <th className="px-4 py-4 text-left text-sm font-bold text-gray-700">Full-Time</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-200">
+          <tr>
+            <td className="px-4 py-4 text-sm font-medium text-gray-900">Commitment</td>
+            <td className="px-4 py-4 text-sm text-gray-600">1-3 days/week</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Full-time (temp)</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Full-time (perm)</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-4 py-4 text-sm font-medium text-gray-900">Duration</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Ongoing (6+ months)</td>
+            <td className="px-4 py-4 text-sm text-gray-600">3-9 months typical</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Permanent</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-4 text-sm font-medium text-gray-900">Monthly Cost</td>
+            <td className="px-4 py-4 text-sm text-emerald-700 font-semibold">£X-£Y</td>
+            <td className="px-4 py-4 text-sm text-gray-600">£X-£Y</td>
+            <td className="px-4 py-4 text-sm text-gray-600">£X-£Y+</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-4 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
+            <td className="px-4 py-4 text-sm text-emerald-700 font-semibold">£X-£Y</td>
+            <td className="px-4 py-4 text-sm text-gray-600">£X-£Y (3-6mo)</td>
+            <td className="px-4 py-4 text-sm text-gray-600">£X-£Y+</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-4 text-sm font-medium text-gray-900">Primary Focus</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Strategy, growth</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Gap cover, turnaround</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Full ownership</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-4 py-4 text-sm font-medium text-gray-900">Flexibility</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Scale up/down easily</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Fixed contract term</td>
+            <td className="px-4 py-4 text-sm text-gray-600">Limited flexibility</td>
+          </tr>
+          <tr className="bg-emerald-50">
+            <td className="px-4 py-4 text-sm font-medium text-gray-900">Best For</td>
+            <td className="px-4 py-4 text-sm text-emerald-800 font-medium">SMEs, startups</td>
+            <td className="px-4 py-4 text-sm text-blue-800 font-medium">Vacancy, crisis, M&A</td>
+            <td className="px-4 py-4 text-sm text-gray-700 font-medium">Large enterprises</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {/* Cost comparison callout */}
+    <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-6">
+      <p className="text-sm text-gray-700">
+        <strong>Savings Summary:</strong> A fractional [Role] at 2 days/week costs £X-£Y/year vs £X-£Y+ for a full-time hire (including salary, NI, pension, benefits, equity, and recruitment fees). That's <strong>50-70% savings</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+```
+
+### Hourly Rates Table
+
+```tsx
+{/* Hourly Rates */}
+<section id="hourly-rates" className="py-20 bg-white scroll-mt-24">
+  <div className="max-w-4xl mx-auto px-6 lg:px-8">
+    <div className="mb-12">
+      <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Hourly</span>
+      <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional [Role] Hourly Rates UK</h2>
+      <p className="text-xl text-gray-600">For ad-hoc consultations and project-based work.</p>
+    </div>
+
+    <div className="overflow-x-auto my-8">
+      <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+        <thead className="bg-emerald-700 text-white">
+          <tr>
+            <th className="px-6 py-4 text-left text-sm font-bold">Level / Specialisation</th>
+            <th className="px-6 py-4 text-left text-sm font-bold">Hourly Rate</th>
+            <th className="px-6 py-4 text-left text-sm font-bold">Best For</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-200">
+          <tr>
+            <td className="px-6 py-4 text-sm font-medium text-gray-900">Standard</td>
+            <td className="px-6 py-4 text-sm text-gray-600">£100-£150/hour</td>
+            <td className="px-6 py-4 text-sm text-gray-600">Reviews, ad-hoc advice</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-6 py-4 text-sm font-medium text-gray-900">Senior (15+ years)</td>
+            <td className="px-6 py-4 text-sm text-gray-600">£150-£200/hour</td>
+            <td className="px-6 py-4 text-sm text-gray-600">Strategic planning</td>
+          </tr>
+          <tr>
+            <td className="px-6 py-4 text-sm font-medium text-gray-900">Specialist</td>
+            <td className="px-6 py-4 text-sm text-emerald-700 font-semibold">£175-£250/hour</td>
+            <td className="px-6 py-4 text-sm text-gray-600">Domain expertise</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-6 py-4 text-sm font-medium text-gray-900">Premium Expert</td>
+            <td className="px-6 py-4 text-sm text-emerald-700 font-semibold">£200-£300/hour</td>
+            <td className="px-6 py-4 text-sm text-gray-600">M&A, exit prep</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+```
+
+### Monthly Retainer Pricing Cards
+
+```tsx
+{/* Monthly Retainers */}
+<section id="monthly-retainers" className="py-20 bg-gray-50 scroll-mt-24">
+  <div className="max-w-4xl mx-auto px-6 lg:px-8">
+    <div className="mb-12">
+      <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Retainers</span>
+      <h2 className="text-3xl font-black text-gray-900 mb-4">Monthly Retainer Pricing</h2>
+      <p className="text-xl text-gray-600">Ongoing leadership on a predictable budget.</p>
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-6 my-8">
+      {/* Starter Tier */}
+      <div className="bg-white p-6 border border-gray-200 rounded-lg">
+        <div className="text-emerald-600 font-bold text-sm mb-2">STARTER</div>
+        <div className="text-3xl font-black text-gray-900 mb-1">£2,500-£4,000</div>
+        <div className="text-gray-500 text-sm mb-4">per month</div>
+        <ul className="space-y-2 text-sm text-gray-600">
+          <li>• 1 day per week (4 days/month)</li>
+          <li>• Monthly reporting</li>
+          <li>• Strategic advice</li>
+        </ul>
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <span className="text-xs text-gray-500">Best for: Seed/Series A</span>
+        </div>
+      </div>
+
+      {/* Growth Tier - Popular */}
+      <div className="bg-white p-6 border-2 border-emerald-500 rounded-lg relative">
+        <div className="absolute -top-3 right-4 bg-emerald-500 text-white text-xs font-bold px-2 py-1 rounded">POPULAR</div>
+        <div className="text-emerald-600 font-bold text-sm mb-2">GROWTH</div>
+        <div className="text-3xl font-black text-gray-900 mb-1">£5,000-£8,000</div>
+        <div className="text-gray-500 text-sm mb-4">per month</div>
+        <ul className="space-y-2 text-sm text-gray-600">
+          <li>• 2 days per week (8 days/month)</li>
+          <li>• Full strategic support</li>
+          <li>• Team/agency management</li>
+          <li>• Board-level input</li>
+        </ul>
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <span className="text-xs text-gray-500">Best for: Series A-B scale-ups</span>
+        </div>
+      </div>
+
+      {/* Enterprise Tier */}
+      <div className="bg-white p-6 border border-gray-200 rounded-lg">
+        <div className="text-emerald-600 font-bold text-sm mb-2">ENTERPRISE</div>
+        <div className="text-3xl font-black text-gray-900 mb-1">£10,000-£15,000</div>
+        <div className="text-gray-500 text-sm mb-4">per month</div>
+        <ul className="space-y-2 text-sm text-gray-600">
+          <li>• 3+ days per week</li>
+          <li>• Full [Role] responsibilities</li>
+          <li>• M&A / exit preparation</li>
+          <li>• Team leadership</li>
+        </ul>
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <span className="text-xs text-gray-500">Best for: PE-backed, pre-IPO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+### Professional Bodies Section
+
+```tsx
+{/* Qualifications Section */}
+<section id="qualifications" className="py-20 bg-white scroll-mt-24">
+  <div className="max-w-4xl mx-auto px-6 lg:px-8">
+    <div className="mb-12">
+      <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Qualifications</span>
+      <h2 className="text-3xl font-black text-gray-900 mb-4">Professional Bodies & Certifications</h2>
+      <p className="text-xl text-gray-600">Key qualifications that impact earning potential.</p>
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-4 my-8">
+      <a href="https://professional-body.org" target="_blank" rel="noopener noreferrer"
+         className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">🏛️</span>
+          <div>
+            <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">Body Name (Acronym)</h4>
+            <p className="text-sm text-gray-600">Full description</p>
+            <p className="text-xs text-emerald-600 mt-1">+10-15% rate premium</p>
+          </div>
+        </div>
+      </a>
+      {/* Repeat for each professional body */}
+    </div>
+  </div>
+</section>
+```
+
+### Job Board Section
+
+```tsx
+{/* Job Board Section */}
+<section id="jobs" className="py-20 bg-white scroll-mt-24">
+  <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <div className="text-center mb-12">
+      <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
+      <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Latest [Role] Jobs</h2>
+      <p className="text-xl text-gray-500">Find your next opportunity</p>
+    </div>
+    <EmbeddedJobBoard
+      defaultDepartment="[Department]"
+      title="Latest [Role] Jobs"
+      accentColor="green"  {/* green, red, amber, blue */}
+      jobsPerPage={6}
+    />
+  </div>
+</section>
+```
+
+### Color Schemes by Role
+
+| Role | Primary Color | Tailwind Classes |
+|------|---------------|------------------|
+| CFO/Finance | Emerald | `emerald-500`, `emerald-700`, `bg-emerald-50` |
+| CMO/Marketing | Amber | `amber-500`, `amber-700`, `bg-amber-50` |
+| CTO/Tech | Blue | `blue-500`, `blue-700`, `bg-blue-50` |
+| COO/Ops | Indigo | `indigo-500`, `indigo-700`, `bg-indigo-50` |
+| CISO/Security | Red | `red-500`, `red-700`, `bg-red-50` |
+| CHRO/HR | Purple | `purple-500`, `purple-700`, `bg-purple-50` |
 
 ### Step 5: Track in Database
 
@@ -471,4 +989,9 @@ After each enrichment session, report:
 ---
 
 *Last Updated: 31 January 2026*
-*Version: 1.1* - Added Serper API for Google UK ranking checks
+*Version: 2.0* - Complete rewrite with:
+- Full competitor analysis framework
+- Q9 template pattern with code examples
+- All component patterns (sidebar, 3-way table, hourly rates, retainers, professional bodies)
+- Color schemes by role
+- Quick start checklist
