@@ -28,12 +28,18 @@ export const cmoJobsUkSEO = {
   hero: {
     headline: "Fractional CMO Jobs UK",
     subtitle:
-      "Part-time Marketing Leadership and CMO roles across the United Kingdom. Day rates £850-£1,300.",
+      "Part-time Marketing Leadership and CMO roles across the United Kingdom. Day rates £600-£1,400.",
     stats: {
-      avgDayRate: "£850-£1,300",
+      avgDayRate: "£600-£1,400",
       hubStatus: "Growth Roles",
       hybridOptions: "80% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CMO Jobs UK",
+    definition: "Fractional CMO jobs are part-time Chief Marketing Officer roles where experienced marketing leaders work 1-3 days per week for UK companies. Day rates range from £600-£1,400 depending on experience and sector. Fractional CMOs lead marketing strategy, brand building, and growth initiatives without the £150,000-£250,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const cmoJobsUkSEO = {
       source: "Marketing Week Salary Survey 2024",
     },
     averageDayRate: {
-      value: "£1,050",
-      description: "Average day rate for fractional CMOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£900",
+      description: "Average day rate for fractional CMOs in the UK (range: £600-£1,400)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const cmoJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CMO cost in the UK?",
+      answer:
+        "A fractional CMO in the UK typically costs £3,000-£6,000 per month or £600-£1,400 per day, depending on experience level and sector. Entry-level fractional CMOs charge £600-£900/day, senior fractional CMOs charge £900-£1,200/day, and premium VC-backed/London-based fractional CMOs charge £1,200-£1,400/day. This represents 45-65% savings compared to a full-time CMO hire (£150,000-£250,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CMOs need?",
       answer:
         "Most fractional CMO roles require 10-15+ years of marketing experience with prior CMO, VP Marketing, or Marketing Director experience. CIM Chartered Marketer status, DMA membership, and demonstrable track record of driving growth are valued. Sector-specific experience (B2B SaaS, D2C, etc.) is often required for specialist roles.",
@@ -178,7 +189,7 @@ export const cmoJobsUkSEO = {
     {
       question: "How much do fractional CMOs earn in the UK?",
       answer:
-        "UK fractional CMOs typically earn £850-£1,300 per day, with VC-backed and B2B SaaS roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £180,000-£280,000 are achievable while maintaining work-life balance.",
+        "UK fractional CMOs typically earn £600-£1,400 per day, with VC-backed and B2B SaaS roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £150,000-£280,000 are achievable while maintaining work-life balance.",
     },
     {
       question: "What's the typical fractional CMO engagement?",

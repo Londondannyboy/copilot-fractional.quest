@@ -36,12 +36,18 @@ export const cfoJobsUkSEO = {
   hero: {
     headline: "Fractional CFO & Finance Director Jobs UK",
     subtitle:
-      "Part-time CFO, FD & Finance Director roles — remote, hybrid and on-site across the UK. Day rates £1,000-£1,500.",
+      "Part-time CFO, FD & Finance Director roles — remote, hybrid and on-site across the UK. Day rates £750-£1,500.",
     stats: {
-      avgDayRate: "£1,000-£1,500",
+      avgDayRate: "£750-£1,500",
       hubStatus: "Remote & Hybrid",
       hybridOptions: "70% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CFO Jobs UK",
+    definition: "Fractional CFO jobs are part-time Chief Financial Officer roles where experienced finance leaders work 1-3 days per week for UK companies. Day rates range from £750-£1,500 depending on experience. Fractional CFOs provide strategic finance leadership, fundraising support, and financial planning without the £150,000-£250,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -79,9 +85,9 @@ export const cfoJobsUkSEO = {
       source: "Finance Director Survey 2024",
     },
     averageDayRate: {
-      value: "£1,200",
-      description: "Average day rate for fractional CFOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£1,000",
+      description: "Average day rate for fractional CFOs in the UK (range: £750-£1,500)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -194,6 +200,11 @@ export const cfoJobsUkSEO = {
       question: "What is a fractional CFO (fractional FD)?",
       answer:
         "A fractional CFO — also called a fractional FD or fractional Finance Director — is an experienced finance leader who works part-time across multiple companies, typically 1-3 days per week. They provide the same strategic finance leadership as a full-time CFO but at a fraction of the cost, making senior finance expertise accessible to SMEs, startups, and PE-backed companies.",
+    },
+    {
+      question: "How much does a fractional CFO cost in the UK?",
+      answer:
+        "A fractional CFO in the UK typically costs £2,500-£6,000 per month or £750-£1,500 per day, depending on experience level and sector. Entry-level fractional CFOs charge £750-£1,000/day, senior fractional CFOs charge £1,000-£1,200/day, and premium PE/London-based fractional CFOs charge £1,200-£1,500/day. This represents 50-70% savings compared to a full-time CFO hire (£150,000-£250,000+ annually).",
     },
     {
       question: "What qualifications do fractional CFOs need?",

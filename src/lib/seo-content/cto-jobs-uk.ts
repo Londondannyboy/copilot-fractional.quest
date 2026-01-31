@@ -28,12 +28,18 @@ export const ctoJobsUkSEO = {
   hero: {
     headline: "Fractional CTO Jobs UK",
     subtitle:
-      "Part-time Technology Leadership and CTO roles across the United Kingdom. Day rates £900-£1,400.",
+      "Part-time Technology Leadership and CTO roles across the United Kingdom. Day rates £850-£1,600.",
     stats: {
-      avgDayRate: "£900-£1,400",
+      avgDayRate: "£850-£1,600",
       hubStatus: "Tech Leadership",
       hybridOptions: "75% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CTO Jobs UK",
+    definition: "Fractional CTO jobs are part-time Chief Technology Officer roles where experienced tech leaders work 1-3 days per week for UK companies. Day rates range from £850-£1,600 depending on experience and sector, with fintech and AI commanding premium rates. Fractional CTOs provide technical strategy, architecture, and team leadership without the £155,000-£300,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const ctoJobsUkSEO = {
       source: "Stack Overflow Developer Survey UK 2024",
     },
     averageDayRate: {
-      value: "£1,150",
-      description: "Average day rate for fractional CTOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£1,050",
+      description: "Average day rate for fractional CTOs in the UK (range: £850-£1,600)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const ctoJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CTO cost in the UK?",
+      answer:
+        "A fractional CTO in the UK typically costs £3,400-£6,400 per month or £850-£1,600 per day, depending on experience level and sector. Entry-level fractional CTOs charge £850-£1,000/day, senior fractional CTOs charge £1,000-£1,300/day, and premium fintech/AI fractional CTOs charge £1,300-£1,600/day. This represents 50-70% savings compared to a full-time CTO hire (£155,000-£300,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CTOs need?",
       answer:
         "Most fractional CTO roles require 10-15+ years of engineering experience with prior CTO, VP Engineering, or Technical Director experience. BCS Chartered IT Professional status, AWS/Azure/GCP certifications, and specific tech stack expertise (languages, frameworks) vary by role. Track record of building and scaling engineering teams is essential.",
@@ -178,7 +189,7 @@ export const ctoJobsUkSEO = {
     {
       question: "How much do fractional CTOs earn in the UK?",
       answer:
-        "UK fractional CTOs typically earn £900-£1,400 per day, with fintech, AI/ML, and Series B+ roles at the premium end (£1,200-£1,600). Working 2-3 days per week across multiple clients, annual earnings of £200,000-£320,000 are achievable while maintaining technical currency through diverse projects.",
+        "UK fractional CTOs typically earn £850-£1,600 per day, with fintech, AI/ML, and Series B+ roles at the premium end (£1,200-£1,600). Working 2-3 days per week across multiple clients, annual earnings of £180,000-£320,000 are achievable while maintaining technical currency through diverse projects.",
     },
     {
       question: "What's the typical fractional CTO engagement?",

@@ -31,12 +31,18 @@ export const cooJobsUkSEO = {
   hero: {
     headline: "Fractional COO Jobs UK",
     subtitle:
-      "Part-time Operations Leadership and COO roles across the United Kingdom. Day rates £900-£1,300.",
+      "Part-time Operations Leadership and COO roles across the United Kingdom. Day rates £750-£1,400.",
     stats: {
-      avgDayRate: "£900-£1,300",
+      avgDayRate: "£750-£1,400",
       hubStatus: "Operations Roles",
       hybridOptions: "65% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional COO Jobs UK",
+    definition: "Fractional COO jobs are part-time Chief Operating Officer roles where experienced operations leaders work 1-3 days per week for UK companies. Day rates range from £750-£1,400 depending on experience and sector. Fractional COOs provide operational strategy, process optimization, and scaling support without the £140,000-£220,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -174,6 +180,11 @@ export const cooJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional COO cost in the UK?",
+      answer:
+        "A fractional COO in the UK typically costs £3,000-£6,000 per month or £750-£1,400 per day, depending on experience level and sector. Entry-level fractional COOs charge £750-£1,000/day, senior fractional COOs charge £1,000-£1,200/day, and premium PE-backed/scale-up fractional COOs charge £1,200-£1,400/day. This represents 45-60% savings compared to a full-time COO hire (£140,000-£220,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional COOs need?",
       answer:
         "Most fractional COO roles require 10-15+ years of operations experience with prior COO, VP Operations, or Operations Director experience. CMI Chartered Manager status, Lean Six Sigma certification, and EOS/Integrator training add value. Proven track record of scaling operations, building teams, and implementing systems is essential.",
@@ -181,7 +192,7 @@ export const cooJobsUkSEO = {
     {
       question: "How much do fractional COOs earn in the UK?",
       answer:
-        "UK fractional COOs typically earn £900-£1,300 per day, with PE-backed and scale-up roles at the premium end (£1,100-£1,500). Working 2-3 days per week across multiple clients, annual earnings of £180,000-£300,000 are achievable while offering greater variety than permanent roles.",
+        "UK fractional COOs typically earn £750-£1,400 per day, with PE-backed and scale-up roles at the premium end (£1,100-£1,500). Working 2-3 days per week across multiple clients, annual earnings of £150,000-£300,000 are achievable while offering greater variety than permanent roles.",
     },
     {
       question: "What's the typical fractional COO engagement?",
