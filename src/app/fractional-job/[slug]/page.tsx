@@ -545,7 +545,8 @@ async function fetchJob(slug: string) {
           full_description, requirements, responsibilities, benefits,
           qualifications, skills_required, role_category, executive_title,
           hours_per_week, url, about_company, about_team, appeal_summary,
-          key_deliverables, city
+          key_deliverables, city, job_posting_logo_url, employment_type,
+          salary_min, salary_max
         FROM jobs
         WHERE slug = ${slug} AND is_active = true
       `
@@ -746,9 +747,8 @@ export default async function JobDetailPage({ params }: Props) {
         validThrough={calculateValidThrough(job.posted_date, 30)}
         company={{
           name: job.company_name || 'Fractional Quest',
-          logo: job.company_name === 'Fractional Quest'
-            ? 'https://fractional.quest/logo.png'
-            : undefined,
+          logo: job.job_posting_logo_url
+            || (job.company_name === 'Fractional Quest' ? 'https://fractional.quest/logo.png' : undefined),
           url: job.company_name === 'Fractional Quest'
             ? 'https://fractional.quest'
             : undefined,
@@ -759,7 +759,7 @@ export default async function JobDetailPage({ params }: Props) {
           country: 'United Kingdom',
         }}
         isRemote={job.is_remote || job.workplace_type === 'Remote'}
-        employmentType="CONTRACTOR"
+        employmentType={job.employment_type || 'CONTRACTOR'}
         salary={parsedSalary}
         jobUrl={`https://fractional.quest/fractional-job/${slug}`}
         skills={job.skills_required ? (Array.isArray(job.skills_required) ? job.skills_required : job.skills_required.split(',').map((s: string) => s.trim())) : undefined}
