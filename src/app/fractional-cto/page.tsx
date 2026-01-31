@@ -179,50 +179,79 @@ export default function FractionalCtoPage() {
               ))}
             </div>
 
-            <h2 id="comparison" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Part-Time vs Full-Time: How They Compare</h2>
+            <h2 id="comparison" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Fractional vs Interim vs Full-Time CTO: How They Compare</h2>
+
+            <p>
+              Understanding the difference between a <strong>fractional CTO</strong>, <strong>interim CTO</strong>, and <strong>full-time CTO</strong> helps companies choose the right technology leadership model:
+            </p>
 
             <div className="overflow-x-auto my-8 not-prose">
-              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+              <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Fractional CTO</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Full-Time CTO</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-cyan-700">Fractional CTO</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-blue-700">Interim CTO</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-gray-700">Full-Time CTO</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">£50,000-£120,000</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">£150,000-£300,000+</td>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Commitment</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">1-3 days/week</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Full-time (temp)</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Full-time (perm)</td>
                   </tr>
                   <tr className="bg-gray-50">
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Time Commitment</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">1-3 days/week</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">5 days/week</td>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Duration</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Ongoing (6+ months)</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">3-9 months typical</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Permanent</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Tech Breadth</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Multiple stacks, diverse experience</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Deep single-stack focus</td>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Monthly Cost</td>
+                    <td className="px-4 py-4 text-sm text-cyan-700 font-semibold">£3,400-£6,400</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£8,000-£12,000/week</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£12,000-£22,000+</td>
                   </tr>
                   <tr className="bg-gray-50">
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Flexibility</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Scale up/down easily</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Fixed commitment</td>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
+                    <td className="px-4 py-4 text-sm text-cyan-700 font-semibold">£41,000-£77,000</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£96,000-£144,000 (3mo)</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£150,000-£300,000+</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Hiring Speed</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">2-4 weeks</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">3-6 months</td>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Primary Focus</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Strategy, architecture, team building</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">CTO gap, platform migration, rescue</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Full tech ownership</td>
                   </tr>
                   <tr className="bg-gray-50">
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Best For</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Startups, MVPs, scaling phase</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Large enterprises, complex systems</td>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Tech Breadth</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Multiple stacks, diverse experience</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Deep hands-on focus</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Your stack only</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Flexibility</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Scale up/down easily</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Fixed contract term</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Limited flexibility</td>
+                  </tr>
+                  <tr className="bg-cyan-50">
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Best For</td>
+                    <td className="px-4 py-4 text-sm text-cyan-800 font-medium">Startups, scale-ups £1-20M revenue</td>
+                    <td className="px-4 py-4 text-sm text-blue-800 font-medium">CTO vacancy, crisis, migration</td>
+                    <td className="px-4 py-4 text-sm text-gray-700 font-medium">Large enterprises, complex systems</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div className="bg-cyan-50 border-l-4 border-cyan-500 p-4 my-6 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>UK Market Insight:</strong> Fractional Quest ranks #1-2 for &quot;fractional CTO jobs&quot; in the UK. Day rates typically range from £850-£1,300 depending on experience, with tech-heavy sectors like fintech and AI commanding premium rates of £1,300-£1,600/day.
+              </p>
             </div>
 
             <h2 id="when-needed" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">When Does Your Business Need One?</h2>

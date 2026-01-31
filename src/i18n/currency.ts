@@ -80,6 +80,7 @@ export function formatSalary(
 
 // Role-specific day rates by locale (actual market rates, not just converted)
 // These are researched rates for each market, not simple currency conversions
+// Updated January 2026 based on Tavily competitive research
 export const roleDefaultsByLocale: Record<Locale, Record<string, {
   label: string;
   avgDayRate: number;
@@ -88,15 +89,16 @@ export const roleDefaultsByLocale: Record<Locale, Record<string, {
   maxDayRate: number;
 }>> = {
   uk: {
-    cmo: { label: 'CMO', avgDayRate: 950, avgSalary: 130000, minDayRate: 700, maxDayRate: 1400 },
-    cfo: { label: 'CFO', avgDayRate: 1050, avgSalary: 145000, minDayRate: 800, maxDayRate: 1500 },
-    cto: { label: 'CTO', avgDayRate: 1100, avgSalary: 155000, minDayRate: 850, maxDayRate: 1600 },
+    // UK rates updated Jan 2026 - aligned with realistic market: Entry £600-900, Senior £900-1,200, Premium £1,200+
+    cmo: { label: 'CMO', avgDayRate: 900, avgSalary: 130000, minDayRate: 600, maxDayRate: 1500 },
+    cfo: { label: 'CFO', avgDayRate: 1000, avgSalary: 145000, minDayRate: 750, maxDayRate: 1500 },
+    cto: { label: 'CTO', avgDayRate: 1050, avgSalary: 155000, minDayRate: 850, maxDayRate: 1600 },
     coo: { label: 'COO', avgDayRate: 950, avgSalary: 140000, minDayRate: 750, maxDayRate: 1400 },
-    ciso: { label: 'CISO', avgDayRate: 1150, avgSalary: 150000, minDayRate: 900, maxDayRate: 1600 },
-    chro: { label: 'CHRO', avgDayRate: 850, avgSalary: 125000, minDayRate: 650, maxDayRate: 1200 },
-    cpo: { label: 'CPO', avgDayRate: 1000, avgSalary: 145000, minDayRate: 800, maxDayRate: 1400 },
+    ciso: { label: 'CISO', avgDayRate: 1350, avgSalary: 165000, minDayRate: 1000, maxDayRate: 2000 },
+    chro: { label: 'CHRO', avgDayRate: 900, avgSalary: 130000, minDayRate: 650, maxDayRate: 1400 },
+    cpo: { label: 'CPO', avgDayRate: 950, avgSalary: 145000, minDayRate: 800, maxDayRate: 1400 },
     ceo: { label: 'CEO', avgDayRate: 1200, avgSalary: 180000, minDayRate: 900, maxDayRate: 1800 },
-    cco: { label: 'CCO', avgDayRate: 1000, avgSalary: 140000, minDayRate: 800, maxDayRate: 1200 },
+    cco: { label: 'CCO', avgDayRate: 900, avgSalary: 140000, minDayRate: 700, maxDayRate: 1300 },
   },
   us: {
     // US rates (USD) - typically higher than UK due to market differences

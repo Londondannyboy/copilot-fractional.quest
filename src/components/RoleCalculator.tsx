@@ -5,6 +5,8 @@ import { roleDefaultsByLocale } from '@/i18n/currency'
 import { localeConfig, type Locale } from '@/i18n/config'
 
 // Role-specific defaults based on UK market data (used as fallback)
+// Updated January 2026 based on Tavily competitive research
+// Pricing aligned with realistic UK market: Entry £600-900, Senior £900-1,200, Premium £1,200+
 const ROLE_DEFAULTS: Record<string, {
   label: string
   avgDayRate: number
@@ -16,82 +18,82 @@ const ROLE_DEFAULTS: Record<string, {
 }> = {
   cmo: {
     label: 'CMO',
-    avgDayRate: 950,
+    avgDayRate: 900,    // Senior mid-point (£900-1,200 range)
     avgSalary: 130000,
-    minDayRate: 700,
-    maxDayRate: 1400,
+    minDayRate: 600,    // Entry level
+    maxDayRate: 1500,   // Premium/PE
     color: 'amber',
     colorDark: 'amber-600',
   },
   cfo: {
     label: 'CFO',
-    avgDayRate: 1050,
+    avgDayRate: 1000,   // Senior mid-point (£1,000-1,200)
     avgSalary: 145000,
-    minDayRate: 800,
-    maxDayRate: 1500,
+    minDayRate: 750,    // Entry level
+    maxDayRate: 1500,   // Premium/PE
     color: 'blue',
     colorDark: 'blue-600',
   },
   cto: {
     label: 'CTO',
-    avgDayRate: 1100,
+    avgDayRate: 1050,   // Senior mid-point (£1,000-1,300)
     avgSalary: 155000,
-    minDayRate: 850,
-    maxDayRate: 1600,
+    minDayRate: 850,    // Entry level
+    maxDayRate: 1600,   // Premium/PE
     color: 'blue',
     colorDark: 'blue-600',
   },
   coo: {
     label: 'COO',
-    avgDayRate: 950,
+    avgDayRate: 950,    // Senior mid-point (£1,000-1,200)
     avgSalary: 140000,
-    minDayRate: 750,
-    maxDayRate: 1400,
+    minDayRate: 750,    // Entry level
+    maxDayRate: 1400,   // Premium/PE
     color: 'orange',
     colorDark: 'orange-600',
   },
   ciso: {
     label: 'CISO',
-    avgDayRate: 1150,
-    avgSalary: 150000,
-    minDayRate: 900,
-    maxDayRate: 1600,
+    avgDayRate: 1350,   // Security premium (£1,200-2,000 range)
+    avgSalary: 165000,
+    minDayRate: 1000,   // Entry level (higher floor)
+    maxDayRate: 2000,   // Premium/regulated
     color: 'red',
     colorDark: 'red-600',
   },
   chro: {
     label: 'CHRO',
-    avgDayRate: 850,
-    avgSalary: 125000,
-    minDayRate: 650,
-    maxDayRate: 1200,
+    avgDayRate: 900,    // Senior mid-point (£800-1,200)
+    avgSalary: 130000,
+    minDayRate: 650,    // Entry level
+    maxDayRate: 1400,   // Premium/PE
     color: 'pink',
     colorDark: 'pink-600',
   },
   cpo: {
     label: 'CPO',
-    avgDayRate: 1000,
+    avgDayRate: 950,    // Senior mid-point (£900-1,200)
     avgSalary: 145000,
-    minDayRate: 800,
-    maxDayRate: 1400,
+    minDayRate: 800,    // Entry level
+    maxDayRate: 1400,   // Premium/PE
     color: 'purple',
     colorDark: 'purple-600',
   },
   ceo: {
     label: 'CEO',
-    avgDayRate: 1200,
+    avgDayRate: 1200,   // Premium role
     avgSalary: 180000,
-    minDayRate: 900,
-    maxDayRate: 1800,
+    minDayRate: 900,    // Senior level floor
+    maxDayRate: 1800,   // Premium/PE
     color: 'indigo',
     colorDark: 'indigo-600',
   },
   cco: {
     label: 'CCO',
-    avgDayRate: 1000,
+    avgDayRate: 900,    // Senior mid-point
     avgSalary: 140000,
-    minDayRate: 800,
-    maxDayRate: 1200,
+    minDayRate: 700,    // Entry level
+    maxDayRate: 1300,   // Premium
     color: 'orange',
     colorDark: 'orange-600',
   },

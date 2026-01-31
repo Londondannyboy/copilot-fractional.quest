@@ -9,6 +9,36 @@ You are continuing work on Fractional Quest, a UK-based platform for fractional 
 1. Read `CLAUDE.md` for project overview and Tavily API access
 2. Read `.claude/reference/content-plan.md` for the content creation roadmap
 3. Access GSC data at `/Users/dankeegan/Desktop/Queries.csv` and `Pages.csv`
+4. Check `content_enrichment` table in Neon for pages already enhanced
+
+---
+
+## Enrichments Completed (31 Jan 2026)
+
+### ✅ Calculator Pricing Update
+Updated `RoleCalculator.tsx` and `src/i18n/currency.ts` with realistic UK market pricing:
+- CMO: £900 avg (was £950), range £600-£1,500
+- CFO: £1,000 avg (was £1,050), range £750-£1,500
+- CTO: £1,050 avg (was £1,100), range £850-£1,600
+- CISO: £1,350 avg (was £1,150), range £1,000-£2,000 (premium for security)
+- CHRO: £900 avg (was £850), range £650-£1,400
+
+### ✅ 3-Way Comparison Tables
+Enhanced pillar pages with Fractional vs Interim vs Full-Time comparison tables:
+- `/fractional-cfo` - 8-row comparison with UK market insight callout
+- `/fractional-cmo` - 8-row comparison with amber brand colors
+- `/fractional-cto` - 8-row comparison highlighting #1 ranking for CTO jobs
+
+### ✅ Enrichment Tracking Database
+Created `content_enrichment` table in Neon to track all page enrichments:
+```sql
+SELECT page_slug, enrichment_type, enriched_at::date FROM content_enrichment;
+```
+
+### Remaining Work
+- [ ] Add 3-way comparison tables to COO, CISO, CHRO pages
+- [ ] Add PAA-style FAQs to high-traffic pages
+- [ ] Create /part-time-cmo and /interim-finance-director pages
 
 ---
 

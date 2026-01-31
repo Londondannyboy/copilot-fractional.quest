@@ -259,7 +259,7 @@ export default function FractionalCfoPage() {
                 </div>
               </div>
 
-              {/* Section: Comparison */}
+              {/* Section: Comparison - 3-way Fractional vs Interim vs Full-Time */}
               <div id="comparison" className="relative -mx-6 px-6 py-12 my-12 rounded-2xl overflow-hidden scroll-mt-24">
                 <Image
                   src={sectionImages.comparison}
@@ -268,40 +268,79 @@ export default function FractionalCfoPage() {
                   className="object-cover opacity-10"
                 />
                 <div className="relative z-10">
-                  <h2 className="text-3xl font-black text-gray-900 mb-6">Part-Time vs Full-Time: How They Compare</h2>
+                  <h2 className="text-3xl font-black text-gray-900 mb-6">Fractional vs Interim vs Full-Time CFO: How They Compare</h2>
+
+                  <p className="text-lg text-gray-600 mb-6">
+                    Understanding the difference between <strong>fractional CFO</strong>, <strong>interim CFO</strong>, and <strong>full-time CFO</strong> helps you choose the right model for your business needs and budget.
+                  </p>
 
                   <div className="overflow-x-auto my-8 not-prose">
                     <table className="min-w-full bg-white/90 backdrop-blur border border-gray-200 rounded-lg shadow-sm">
                       <thead className="bg-gray-50">
                         <tr>
-                          <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
-                          <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Fractional CFO</th>
-                          <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Full-Time CFO</th>
+                          <th className="px-4 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
+                          <th className="px-4 py-4 text-left text-sm font-bold text-emerald-700">Fractional CFO</th>
+                          <th className="px-4 py-4 text-left text-sm font-bold text-blue-700">Interim CFO</th>
+                          <th className="px-4 py-4 text-left text-sm font-bold text-gray-700">Full-Time CFO</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
                         <tr>
-                          <td className="px-6 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">£40,000-£100,000</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">£130,000-£250,000+</td>
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Commitment</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">1-3 days/week</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Full-time (temp)</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Full-time (perm)</td>
                         </tr>
                         <tr className="bg-gray-50">
-                          <td className="px-6 py-4 text-sm font-medium text-gray-900">Time Commitment</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">1-3 days/week</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">5 days/week</td>
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Duration</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Ongoing (6+ months)</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">3-9 months typical</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Permanent</td>
                         </tr>
                         <tr>
-                          <td className="px-6 py-4 text-sm font-medium text-gray-900">Fundraising Experience</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">Multiple rounds across companies</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">Single company focus</td>
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Monthly Cost</td>
+                          <td className="px-4 py-4 text-sm text-emerald-700 font-semibold">£3,000-£6,000</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">£8,000-£12,000/week</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">£12,000-£20,000+</td>
                         </tr>
                         <tr className="bg-gray-50">
-                          <td className="px-6 py-4 text-sm font-medium text-gray-900">Best For</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">Pre-Series B, specific projects</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">Series C+, complex financials</td>
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
+                          <td className="px-4 py-4 text-sm text-emerald-700 font-semibold">£36,000-£72,000</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">£96,000-£144,000 (3mo)</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">£150,000-£250,000+</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Primary Focus</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Strategic + operational</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Gap-fill, transformation</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">All responsibilities</td>
+                        </tr>
+                        <tr className="bg-gray-50">
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Flexibility</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Scale up/down easily</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Fixed contract term</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Limited flexibility</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Experience</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Multiple companies</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Deep single focus</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">Your company only</td>
+                        </tr>
+                        <tr className="bg-emerald-50">
+                          <td className="px-4 py-4 text-sm font-medium text-gray-900">Best For</td>
+                          <td className="px-4 py-4 text-sm text-emerald-800 font-medium">Growing SMEs, startups £1-15M revenue</td>
+                          <td className="px-4 py-4 text-sm text-blue-800 font-medium">CFO vacancy, M&A, restructuring</td>
+                          <td className="px-4 py-4 text-sm text-gray-700 font-medium">Large orgs, complex financials</td>
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+
+                  <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-6 not-prose">
+                    <p className="text-sm text-gray-700">
+                      <strong>UK Market Insight:</strong> According to our research, 78% of PE-backed companies now use fractional CFOs for portfolio companies, while interim CFOs are typically engaged for M&A integration or CFO succession gaps. The fractional model offers 50-70% cost savings compared to full-time hires.
+                    </p>
                   </div>
                 </div>
               </div>
