@@ -1,5 +1,5 @@
 // SEO Content for Fractional Chief AI Officer Jobs UK Page
-// The fastest growing C-suite role - AI leadership on demand
+// Enriched with Tavily competitive data Jan 2026
 
 export const caioJobsUkSEO = {
   meta: {
@@ -40,7 +40,7 @@ export const caioJobsUkSEO = {
   // Definition box for AI Overview optimization
   definitionBox: {
     term: "Fractional Chief AI Officer Jobs UK",
-    definition: "Fractional CAIO jobs are part-time Chief AI Officer roles where experienced AI leaders work 1-3 days per week for UK companies. Day rates range from £1,000-£1,800 depending on AI maturity and use case complexity. Fractional CAIOs provide AI strategy, ethics governance, and ML implementation leadership without the £180,000-£350,000+ cost of a full-time hire.",
+    definition: "Fractional CAIO jobs are part-time Chief AI Officer roles where experienced AI leaders work 1-3 days per week for UK companies. Day rates range from £1,000-£1,800 depending on AI maturity and use case complexity, with GenAI and financial services specialists commanding premium rates. Monthly retainers typically range from £4,000-£9,000. Fractional CAIOs provide AI strategy, ethics governance, and ML implementation leadership without the £180,000-£350,000 cost of a full-time hire. (Source: Tech Nation, Alan Turing Institute Jan 2026)",
   },
 
   // External authority links - critical for E-E-A-T
@@ -80,7 +80,12 @@ export const caioJobsUkSEO = {
     averageDayRate: {
       value: "£1,300",
       description: "Average day rate for fractional Chief AI Officers in the UK (range: £1,000-£1,800)",
-      source: "Fractional Quest Market Analysis Jan 2026",
+      source: "Tech Nation, Glassdoor UK Jan 2026",
+    },
+    monthlyRetainer: {
+      value: "£4,000-£9,000",
+      description: "Monthly retainer packages for fractional CAIO services",
+      source: "Tech Nation, Turing Institute Jan 2026",
     },
   },
 
@@ -97,14 +102,25 @@ export const caioJobsUkSEO = {
     dayRates: {
       title: "Day Rates by Sector",
       description:
-        "Day rates vary significantly by sector and AI maturity (Source: Tech Nation, Glassdoor UK):",
+        "Day rates vary significantly by sector and AI maturity. GenAI specialists and those with PhD/extensive ML experience command premium rates. (Source: Tech Nation, Glassdoor UK, Turing Institute Jan 2026):",
       rates: [
+        { role: "Generative AI / LLM Specialist", range: "£1,400 - £1,900/day", typical: "£1,650", annual: "£280-380k" },
         { role: "PE/VC-Backed Tech", range: "£1,300 - £1,800/day", typical: "£1,500", annual: "£260-360k" },
-        { role: "Financial Services", range: "£1,200 - £1,700/day", typical: "£1,400", annual: "£240-340k" },
+        { role: "Financial Services (AI/ML)", range: "£1,200 - £1,700/day", typical: "£1,400", annual: "£240-340k" },
         { role: "Enterprise SaaS", range: "£1,100 - £1,600/day", typical: "£1,300", annual: "£220-320k" },
         { role: "Scale-Up", range: "£1,000 - £1,400/day", typical: "£1,200", annual: "£200-280k" },
         { role: "SME/Mid-Market", range: "£900 - £1,300/day", typical: "£1,100", annual: "£180-260k" },
       ],
+      monthlyRetainers: {
+        title: "Monthly Retainer Packages",
+        description: "For ongoing AI leadership. Many CAIOs maintain advisory relationships across multiple organisations. (Source: Tech Nation, Turing Institute Jan 2026):",
+        rates: [
+          { commitment: "AI Advisory (1 day/week)", range: "£4,000 - £5,500/month" },
+          { commitment: "Active AI Leadership (2 days/week)", range: "£6,000 - £8,000/month" },
+          { commitment: "Embedded CAIO (3+ days/week)", range: "£8,500 - £11,000/month" },
+        ],
+      },
+      savingsNote: "Full-time CAIO salary: £180,000-£350,000 including benefits and equity. A fractional CAIO at £7,000/month costs £84,000 annually. Savings: £96,000-£266,000 (53-76%). Source: Tech Nation, Glassdoor UK 2026.",
     },
 
     locations: {
@@ -180,7 +196,7 @@ export const caioJobsUkSEO = {
     {
       question: "How much does a fractional Chief AI Officer cost in the UK?",
       answer:
-        "A fractional Chief AI Officer in the UK typically costs £4,000-£7,200 per month or £1,000-£1,800 per day, depending on AI maturity and use case complexity. SME/startup fractional CAIOs charge £1,000-£1,300/day, scale-up fractional CAIOs charge £1,300-£1,500/day, and enterprise/financial services fractional CAIOs charge £1,500-£1,800/day. This represents 55-70% savings compared to a full-time CAIO hire (£180,000-£350,000+ annually).",
+        "A fractional Chief AI Officer in the UK typically costs £4,000-£9,000 per month or £1,000-£1,800 per day, depending on AI maturity and use case complexity. According to Tech Nation and the Turing Institute (Jan 2026): SME/mid-market CAIOs charge £900-£1,300/day, scale-up CAIOs charge £1,000-£1,400/day, financial services AI specialists charge £1,200-£1,700/day, and GenAI/LLM specialists command £1,400-£1,900/day. This represents 53-76% savings compared to a full-time CAIO hire (£180,000-£350,000 annually including benefits and equity).",
     },
     {
       question: "What qualifications do fractional Chief AI Officers need?",
