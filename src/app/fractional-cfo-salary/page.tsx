@@ -6,7 +6,8 @@ import { WebPageSchema, FAQPageSchema, FAQ, FAQItem } from '@/components/seo'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { IR35Calculator } from '@/components/IR35Calculator'
 import { RoleContentHub } from '@/components/RoleContentHub'
-import { TableOfContents } from '@/components/TableOfContents'
+import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
 
 const ogImage = getOGImageUrl('salary')
@@ -45,12 +46,16 @@ const breadcrumbs = [
 const tocItems = [
   { id: 'overview', title: 'Salary Overview' },
   { id: 'experience-level', title: 'Salary by Experience Level' },
+  { id: 'hourly-rates', title: 'Hourly Rates' },
+  { id: 'monthly-retainers', title: 'Monthly Retainers' },
   { id: 'location', title: 'Salary by Location' },
   { id: 'specialisation', title: 'Salary by Specialisation' },
   { id: 'factors', title: 'Factors Affecting Salary' },
-  { id: 'vs-fulltime', title: 'Fractional vs Full-Time' },
+  { id: 'comparison', title: 'Fractional vs Interim vs Full-Time' },
+  { id: 'qualifications', title: 'Qualifications' },
   { id: 'calculator', title: 'Salary Calculator' },
   { id: 'ir35', title: 'IR35 Impact' },
+  { id: 'jobs', title: 'CFO Jobs' },
   { id: 'faq', title: 'FAQ' },
 ]
 
@@ -82,7 +87,7 @@ export default function FractionalCfoSalaryPage() {
         title="Fractional CFO Salary UK 2026 | Day Rates & Compensation Guide"
         description="Complete guide to fractional CFO salary UK. Day rates, annual equivalents, and factors affecting compensation."
         url="https://fractional.quest/fractional-cfo-salary"
-        dateModified={new Date('2026-01-30')}
+        dateModified={new Date('2026-01-31')}
       />
       <FAQPageSchema faqs={faqItems} />
 
@@ -150,45 +155,89 @@ export default function FractionalCfoSalaryPage() {
         </div>
       </section>
 
-      {/* Table of Contents & Authority Links */}
-      <section className="py-8 bg-white border-b">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <TableOfContents items={tocItems} title="In This Guide" accentColor="emerald" />
-            </div>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
-              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
-              <ul className="space-y-3">
-                {authorityLinks.slice(0, 4).map((link, idx) => (
-                  <li key={idx}>
-                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-emerald-600 hover:text-emerald-800 flex items-center gap-2">
-                      <span className="text-emerald-400">→</span> {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* Mobile Table of Contents */}
+      <div className="lg:hidden max-w-4xl mx-auto px-6 py-8">
+        <TableOfContentsMobile items={tocItems} />
+      </div>
+
+      {/* Main Content with Sidebar */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1fr_300px] gap-12">
+            {/* Main Column */}
+            <article className="prose prose-lg prose-gray max-w-none">
+
+              <h2 id="overview" className="text-3xl font-black text-gray-900 mb-6 scroll-mt-24">Fractional CFO Salary UK Overview</h2>
+
+              <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                <strong>Fractional CFO salary</strong> in the UK typically ranges from £700-£1,400 per day, with the average around £1,050/day. CFOs with fundraising experience and PE/VC backgrounds command premium rates. ACA and ACCA qualified candidates typically earn at the higher end.
+              </p>
+
+              {/* Authority context box */}
+              <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-6 not-prose">
+                <p className="text-sm text-gray-700">
+                  <strong>UK Market Context:</strong> According to <a href="https://www.icaew.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline font-medium">ICAEW</a> and market research from <a href="https://www.csuiterecruit.co.uk/how-much-is-a-uk-fractional-cfo-a-comprehensive-pricing-guide/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">C-Suite Recruit</a>, fractional CFO costs range from £1,000-£15,000 per month depending on engagement level. This compares to £200,000-£350,000+ total cost for a full-time CFO hire.
+                </p>
+              </div>
+
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                Working 2-3 days per week across multiple clients, fractional CFOs can achieve annual earnings of £109,000-£218,000. The most successful fractional CFOs specialise in specific industries like SaaS, FinTech, or healthcare, commanding day rates of £1,200-£1,600.
+              </p>
+
+            </article>
+
+            {/* Sidebar */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24 space-y-6">
+                <TableOfContents items={tocItems} />
+
+                {/* Quick Links */}
+                <div className="bg-white p-6 rounded-xl border border-gray-200">
+                  <h3 className="font-bold text-gray-900 mb-4">Related Guides</h3>
+                  <div className="space-y-3">
+                    <Link href="/fractional-cfo" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                      <span>📋</span> What is a Fractional CFO?
+                    </Link>
+                    <Link href="/hire-fractional-cfo" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                      <span>🎯</span> How to Hire a CFO
+                    </Link>
+                    <Link href="/fractional-cfo-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                      <span>💼</span> CFO Jobs UK
+                    </Link>
+                    <Link href="/fractional-cfo-services" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                      <span>⚙️</span> CFO Services
+                    </Link>
+                    <Link href="/fractional-cfo-cost" className="flex items-center gap-2 text-sm text-gray-600 hover:text-emerald-700 transition-colors">
+                      <span>💰</span> CFO Cost Guide
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Authority Links */}
+                <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-200">
+                  <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Industry Resources</h3>
+                  <ul className="space-y-3">
+                    {authorityLinks.slice(0, 4).map((link, idx) => (
+                      <li key={idx}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-emerald-600 hover:text-emerald-800 flex items-center gap-2">
+                          <span className="text-emerald-400">→</span> {link.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* CTA */}
+                <div className="bg-gray-900 p-6 rounded-xl text-white">
+                  <p className="font-bold mb-2">Looking for a CFO?</p>
+                  <p className="text-sm text-gray-300 mb-4">Browse pre-vetted finance leaders</p>
+                  <Link href="/fractional-cfo-jobs-uk" className="block text-center bg-emerald-500 text-black font-bold py-2 px-4 rounded-lg hover:bg-emerald-400 transition-colors text-sm">
+                    View CFO Jobs
+                  </Link>
+                </div>
+              </div>
+            </aside>
           </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section id="overview" className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <article className="prose prose-lg prose-gray max-w-none">
-
-            <h2 className="text-3xl font-black text-gray-900 mb-6">Fractional CFO Salary UK Overview</h2>
-
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              <strong>Fractional CFO salary</strong> in the UK typically ranges from £700-£1,400 per day, with the average around £1,050/day. CFOs with fundraising experience and PE/VC backgrounds command premium rates. ACA and ACCA qualified candidates typically earn at the higher end.
-            </p>
-
-            <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Working 2-3 days per week across multiple clients, fractional CFOs can achieve annual earnings of £109,000-£218,000. The most successful fractional CFOs specialise in specific industries like SaaS, FinTech, or healthcare, commanding day rates of £1,200-£1,600.
-            </p>
-
-          </article>
         </div>
       </section>
 
@@ -243,6 +292,121 @@ export default function FractionalCfoSalaryPage() {
           <div className="bg-emerald-50 border-2 border-emerald-200 p-6 rounded-lg mt-8">
             <h4 className="font-bold text-gray-900 mb-2">Qualification Premium</h4>
             <p className="text-gray-700">ACA, ACCA, or CIMA qualified fractional CFOs typically command 10-15% higher day rates. Big 4 experience (Deloitte, PwC, EY, KPMG) adds a similar premium, with the combination of both commanding rates at the top of each band.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Hourly Rates */}
+      <section id="hourly-rates" className="py-20 bg-white scroll-mt-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Hourly</span>
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional CFO Hourly Rates UK</h2>
+            <p className="text-xl text-gray-600">For ad-hoc consultations and project-based work.</p>
+          </div>
+
+          <div className="overflow-x-auto my-8">
+            <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+              <thead className="bg-emerald-700 text-white">
+                <tr>
+                  <th className="px-6 py-4 text-left text-sm font-bold">Level / Specialisation</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">Hourly Rate</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">Best For</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">Standard Fractional CFO</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">£100-£150/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Financial reviews, board prep, ad-hoc advice</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">Senior CFO (15+ years)</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">£150-£200/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Strategic planning, investor relations</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">PE/VC Specialist</td>
+                  <td className="px-6 py-4 text-sm text-emerald-700 font-semibold">£175-£250/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Due diligence, fundraising support</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">M&A / IPO Expert</td>
+                  <td className="px-6 py-4 text-sm text-emerald-700 font-semibold">£200-£300/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Exit preparation, transaction support</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 p-6 rounded-lg">
+            <h4 className="font-bold text-gray-900 mb-2">When to Use Hourly Rates</h4>
+            <p className="text-gray-600 text-sm">Hourly billing suits short-term projects, specific deliverables, or when you need occasional senior finance input. For ongoing strategic support, monthly retainers typically offer better value.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Monthly Retainers */}
+      <section id="monthly-retainers" className="py-20 bg-gray-50 scroll-mt-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Retainers</span>
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional CFO Monthly Retainer Pricing</h2>
+            <p className="text-xl text-gray-600">Ongoing strategic finance leadership on a predictable budget.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 my-8">
+            <div className="bg-white p-6 border border-gray-200 rounded-lg">
+              <div className="text-emerald-600 font-bold text-sm mb-2">STARTER</div>
+              <div className="text-3xl font-black text-gray-900 mb-1">£2,500-£4,000</div>
+              <div className="text-gray-500 text-sm mb-4">per month</div>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>• 1 day per week (4 days/month)</li>
+                <li>• Monthly reporting & analysis</li>
+                <li>• Board pack preparation</li>
+                <li>• Strategic finance advice</li>
+              </ul>
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <span className="text-xs text-gray-500">Best for: Seed/Series A startups</span>
+              </div>
+            </div>
+            <div className="bg-white p-6 border-2 border-emerald-500 rounded-lg relative">
+              <div className="absolute -top-3 right-4 bg-emerald-500 text-white text-xs font-bold px-2 py-1 rounded">POPULAR</div>
+              <div className="text-emerald-600 font-bold text-sm mb-2">GROWTH</div>
+              <div className="text-3xl font-black text-gray-900 mb-1">£5,000-£8,000</div>
+              <div className="text-gray-500 text-sm mb-4">per month</div>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>• 2 days per week (8 days/month)</li>
+                <li>• Fundraising support</li>
+                <li>• Investor relations</li>
+                <li>• Financial modelling</li>
+                <li>• Cash flow management</li>
+              </ul>
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <span className="text-xs text-gray-500">Best for: Series A-B scale-ups</span>
+              </div>
+            </div>
+            <div className="bg-white p-6 border border-gray-200 rounded-lg">
+              <div className="text-emerald-600 font-bold text-sm mb-2">ENTERPRISE</div>
+              <div className="text-3xl font-black text-gray-900 mb-1">£10,000-£15,000</div>
+              <div className="text-gray-500 text-sm mb-4">per month</div>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>• 3+ days per week</li>
+                <li>• Full CFO responsibilities</li>
+                <li>• M&A / exit preparation</li>
+                <li>• Team management</li>
+                <li>• Board-level engagement</li>
+              </ul>
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <span className="text-xs text-gray-500">Best for: PE-backed, pre-IPO</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-6">
+            <p className="text-sm text-gray-700">
+              <strong>Cost Comparison:</strong> A fractional CFO at £6,000/month (£72,000/year) provides senior finance leadership at <strong>60-70% less</strong> than a full-time CFO total cost of £200,000-£350,000 (salary + benefits + equity + recruitment).
+            </p>
           </div>
         </div>
       </section>
@@ -385,50 +549,147 @@ export default function FractionalCfoSalaryPage() {
         </div>
       </section>
 
-      {/* Fractional vs Full-Time Comparison */}
-      <section id="vs-fulltime" className="py-20 bg-gray-50">
+      {/* 3-Way Comparison Table */}
+      <section id="comparison" className="py-20 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Comparison</span>
-            <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional CFO vs Full-Time CFO Salary</h2>
-            <p className="text-xl text-gray-600">Understanding the total compensation comparison.</p>
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional vs Interim vs Full-Time CFO</h2>
+            <p className="text-xl text-gray-600">Understanding the salary and engagement differences.</p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg border border-gray-200">
-            <h4 className="font-bold text-gray-900 mb-6 text-lg">Total Cost Comparison (Employer Perspective)</h4>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-                <span className="text-gray-700">Full-time CFO base salary</span>
-                <span className="font-semibold">£120,000-£200,000</span>
+          <div className="overflow-x-auto my-8">
+            <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-emerald-700">Fractional CFO</th>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-blue-700">Interim CFO</th>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-gray-700">Full-Time CFO</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr>
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Day Rate</td>
+                  <td className="px-4 py-4 text-sm text-emerald-700 font-semibold">£700-£1,400</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£1,000-£1,500</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">N/A (salaried)</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Monthly Cost</td>
+                  <td className="px-4 py-4 text-sm text-emerald-700 font-semibold">£2,500-£15,000</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£18,000-£30,000</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£12,000-£22,000+</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
+                  <td className="px-4 py-4 text-sm text-emerald-700 font-semibold">£30,000-£180,000</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£70,000-£120,000 (3-6mo)</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£200,000-£350,000+</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Commitment</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">1-3 days/week</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Full-time (temp)</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Full-time (perm)</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Duration</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Ongoing (6+ months)</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">3-9 months typical</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Permanent</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Primary Focus</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Strategy, growth, fundraising</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Gap cover, turnaround, M&A</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Full finance ownership</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Flexibility</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Scale up/down easily</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Fixed contract term</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Limited flexibility</td>
+                </tr>
+                <tr className="bg-emerald-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Best For</td>
+                  <td className="px-4 py-4 text-sm text-emerald-800 font-medium">SMEs, startups, scale-ups</td>
+                  <td className="px-4 py-4 text-sm text-blue-800 font-medium">CFO vacancy, crisis, M&A</td>
+                  <td className="px-4 py-4 text-sm text-gray-700 font-medium">Large enterprises</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 my-6">
+            <p className="text-sm text-gray-700">
+              <strong>Savings Summary:</strong> A fractional CFO at 2 days/week costs £73,000-£145,000/year vs £200,000-£350,000+ for a full-time CFO (including salary, NI, pension, benefits, equity, and recruitment fees). That&apos;s <strong>50-70% savings</strong> while maintaining senior finance leadership.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Qualifications Section */}
+      <section id="qualifications" className="py-20 bg-white scroll-mt-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Qualifications</span>
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Professional Bodies & Certifications</h2>
+            <p className="text-xl text-gray-600">Key qualifications that impact fractional CFO earning potential.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 my-8">
+            <a href="https://www.icaew.com" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🏛️</span>
+                <div>
+                  <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">ICAEW (ACA)</h4>
+                  <p className="text-sm text-gray-600">Institute of Chartered Accountants in England and Wales</p>
+                  <p className="text-xs text-emerald-600 mt-1">+10-15% rate premium</p>
+                </div>
               </div>
-              <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-                <span className="text-gray-700">+ Employer NI, pension, benefits</span>
-                <span className="font-semibold">+£25,000-£45,000</span>
+            </a>
+            <a href="https://www.accaglobal.com" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🏛️</span>
+                <div>
+                  <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">ACCA</h4>
+                  <p className="text-sm text-gray-600">Association of Chartered Certified Accountants</p>
+                  <p className="text-xs text-emerald-600 mt-1">+10-15% rate premium</p>
+                </div>
               </div>
-              <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-                <span className="text-gray-700">+ Equity (estimated value)</span>
-                <span className="font-semibold">+£30,000-£100,000</span>
+            </a>
+            <a href="https://www.cimaglobal.com" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📊</span>
+                <div>
+                  <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">CIMA</h4>
+                  <p className="text-sm text-gray-600">Chartered Institute of Management Accountants</p>
+                  <p className="text-xs text-emerald-600 mt-1">+10-15% rate premium</p>
+                </div>
               </div>
-              <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-                <span className="text-gray-700">+ Recruitment fees (20-25%)</span>
-                <span className="font-semibold">+£25,000-£50,000</span>
+            </a>
+            <a href="https://www.frc.org.uk" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all group">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📋</span>
+                <div>
+                  <h4 className="font-bold text-gray-900 group-hover:text-emerald-700">FRC</h4>
+                  <p className="text-sm text-gray-600">Financial Reporting Council standards</p>
+                  <p className="text-xs text-gray-500 mt-1">Governance knowledge valued</p>
+                </div>
               </div>
-              <div className="flex justify-between items-center pt-3 text-lg border-t-2 border-gray-300">
-                <span className="font-bold text-gray-900">Full-time Total Cost (Year 1)</span>
-                <span className="font-bold text-red-600">£200,000-£395,000</span>
-              </div>
-              <div className="flex justify-between items-center pt-4 bg-emerald-50 p-4 rounded-lg mt-4">
-                <span className="font-bold text-gray-900">Fractional CFO (2 days/week)</span>
-                <span className="font-bold text-emerald-700">£73,000-£145,000/year</span>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 mt-6">Fractional CFOs typically cost 40-60% less than full-time equivalents while providing senior-level expertise</p>
+            </a>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 p-6 rounded-lg">
+            <h4 className="font-bold text-gray-900 mb-2">Big 4 Experience Premium</h4>
+            <p className="text-gray-600 text-sm">Ex-Deloitte, PwC, EY, and KPMG professionals typically command 10-15% higher day rates. Combined with ACA/ACCA qualification, this can add 20-25% to earning potential.</p>
           </div>
         </div>
       </section>
 
       {/* Calculator Section */}
-      <section id="calculator" className="py-16 bg-white">
+      <section id="calculator" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8 text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Calculate</span>
@@ -451,8 +712,25 @@ export default function FractionalCfoSalaryPage() {
         </div>
       </section>
 
+      {/* Job Board Section */}
+      <section id="jobs" className="py-20 bg-white scroll-mt-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Latest CFO Jobs</h2>
+            <p className="text-xl text-gray-500">Find your next fractional CFO opportunity</p>
+          </div>
+          <EmbeddedJobBoard
+            defaultDepartment="Finance"
+            title="Latest CFO Jobs"
+            accentColor="green"
+            jobsPerPage={6}
+          />
+        </div>
+      </section>
+
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-white">
+      <section id="faq" className="py-20 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-8">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">FAQ</span>

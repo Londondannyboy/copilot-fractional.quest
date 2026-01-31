@@ -8,7 +8,7 @@ import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
-import { TableOfContents } from '@/components/TableOfContents'
+import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 
 export const metadata: Metadata = {
   title: 'Fractional CMO Services UK | Virtual CMO & Part-Time Marketing Leadership',
@@ -26,10 +26,11 @@ export const metadata: Metadata = {
 const tocItems = [
   { id: 'service-areas', title: 'Service Areas' },
   { id: 'engagement-models', title: 'Engagement Models & Pricing' },
+  { id: 'hourly-rates', title: 'Hourly Rates' },
+  { id: 'comparison', title: 'Fractional vs Interim vs Full-Time' },
   { id: 'current-jobs', title: 'Current CMO Jobs' },
   { id: 'when-to-use', title: 'When to Use CMO Services' },
   { id: 'success-stories', title: 'Success Stories' },
-  { id: 'uk-locations', title: 'UK Locations' },
   { id: 'resources', title: 'Professional Resources' },
   { id: 'faq', title: 'FAQ' },
 ]
@@ -102,7 +103,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/
 export default function FractionalCMOServicesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="Fractional CMO Services UK | Part-Time Marketing Leadership" description="Get experienced CMO leadership without full-time commitment." url="https://fractional.quest/fractional-cmo-services" dateModified={new Date('2026-01-17')} />
+      <WebPageSchema title="Fractional CMO Services UK | Part-Time Marketing Leadership" description="Get experienced CMO leadership without full-time commitment." url="https://fractional.quest/fractional-cmo-services" dateModified={new Date('2026-01-31')} />
       <FAQPageSchema faqs={SERVICE_FAQS} />
 
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
@@ -125,6 +126,11 @@ export default function FractionalCMOServicesPage() {
       </section>
 
       <section className="bg-amber-900 py-6"><div className="max-w-6xl mx-auto px-6 lg:px-8"><div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"><div><div className="text-3xl font-black text-amber-200">£850-£1,300</div><div className="text-amber-300/70 text-sm">Day Rate Range</div></div><div><div className="text-3xl font-black text-amber-200">1-3 days</div><div className="text-amber-300/70 text-sm">Per Week</div></div><div><div className="text-3xl font-black text-amber-200">40-60%</div><div className="text-amber-300/70 text-sm">Cost Savings vs FT</div></div><div><div className="text-3xl font-black text-amber-200">90 days</div><div className="text-amber-300/70 text-sm">Typical First Review</div></div></div></div></section>
+
+      {/* Mobile Table of Contents */}
+      <div className="lg:hidden max-w-4xl mx-auto px-6 py-8">
+        <TableOfContentsMobile items={tocItems} />
+      </div>
 
       {/* Table of Contents */}
       <section className="py-8 bg-white border-b">
@@ -187,6 +193,125 @@ export default function FractionalCMOServicesPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 mt-8">
+            <p className="text-sm text-gray-700">
+              <strong>Cost Comparison:</strong> A fractional CMO at 2 days/week costs £81,600-£124,800/year vs £175,000-£275,000+ for a full-time CMO (including salary, NI, pension, benefits, equity, and recruitment fees). That&apos;s <strong>50-60% savings</strong> while accessing senior marketing leadership.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Hourly Rates Section */}
+      <section id="hourly-rates" className="py-16 bg-white scroll-mt-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Hourly</span>
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional CMO Hourly Rates UK</h2>
+            <p className="text-xl text-gray-600">For ad-hoc consultations and project-based work.</p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+              <thead className="bg-amber-700 text-white">
+                <tr>
+                  <th className="px-6 py-4 text-left text-sm font-bold">Level / Specialisation</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">Hourly Rate</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold">Best For</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">Standard Fractional CMO</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">£125-£175/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Marketing audits, strategy reviews</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">Senior CMO (15+ years)</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">£175-£225/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Board presentations, investor decks</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">B2B SaaS Specialist</td>
+                  <td className="px-6 py-4 text-sm text-amber-700 font-semibold">£150-£225/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">PLG, demand gen, ABM strategy</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">Brand / Rebrand Expert</td>
+                  <td className="px-6 py-4 text-sm text-amber-700 font-semibold">£175-£250/hour</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Brand strategy, repositioning</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* 3-Way Comparison Section */}
+      <section id="comparison" className="py-16 bg-amber-50 scroll-mt-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Comparison</span>
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Fractional vs Interim vs Full-Time CMO</h2>
+            <p className="text-xl text-gray-600">Understanding the differences between marketing leadership models.</p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-amber-700">Fractional CMO</th>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-blue-700">Interim CMO</th>
+                  <th className="px-4 py-4 text-left text-sm font-bold text-gray-700">Full-Time CMO</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr>
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Commitment</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">1-3 days/week</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Full-time (temp)</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Full-time (perm)</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Duration</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">6-18 months ongoing</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">3-9 months typical</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Permanent</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Monthly Cost</td>
+                  <td className="px-4 py-4 text-sm text-amber-700 font-semibold">£3,400-£15,600</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£16,000-£24,000</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£14,000-£23,000+</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
+                  <td className="px-4 py-4 text-sm text-amber-700 font-semibold">£41,000-£187,000</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£48,000-£72,000 (3mo)</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">£175,000-£275,000+</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Primary Focus</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Strategy, brand, demand gen</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">CMO gap, rebrand, transformation</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Full marketing ownership</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Flexibility</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Scale up/down easily</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Fixed contract term</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Limited flexibility</td>
+                </tr>
+                <tr className="bg-amber-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">Best For</td>
+                  <td className="px-4 py-4 text-sm text-amber-800 font-medium">SMEs, scale-ups, £1-30M revenue</td>
+                  <td className="px-4 py-4 text-sm text-blue-800 font-medium">CMO vacancy, launch, crisis</td>
+                  <td className="px-4 py-4 text-sm text-gray-700 font-medium">Large enterprises, IPO-ready</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>

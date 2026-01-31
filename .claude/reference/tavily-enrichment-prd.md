@@ -170,6 +170,43 @@ curl -s -X POST "https://api.tavily.com/extract" \
 
 **Output:** Full page content from each competitor URL (truncated to 2500 chars)
 
+### Step 2.5: Research API (Comprehensive Analysis - RECOMMENDED)
+
+**Use the Research API for long-form content creation, NOT just fact-checking.**
+
+```bash
+cat > /tmp/tav_research.json << 'EOF'
+{
+  "api_key": "YOUR_API_KEY",
+  "query": "comprehensive guide fractional [ROLE] UK responsibilities qualifications cost when to hire comparison 2026",
+  "search_depth": "advanced",
+  "include_answer": true,
+  "max_results": 15,
+  "include_raw_content": true
+}
+EOF
+
+curl -s -X POST "https://api.tavily.com/search" \
+  -H "Content-Type: application/json" \
+  -d @/tmp/tav_research.json
+```
+
+**What Research API Provides:**
+- **Narrative arc:** How competitors structure content (intro → definition → responsibilities → costs → FAQs)
+- **Section ordering:** What sections come first (definition box), middle (pricing), end (CTA)
+- **Content gaps:** Sections competitors have that we're missing
+- **Long-form patterns:** How 2000+ word pages are organized
+- **SEO signals:** H2/H3 structure, keyword placement, internal linking patterns
+
+**Research-Driven Content Creation Checklist:**
+1. What does the #1 competitor lead with? (definition box, stat, question)
+2. What sections do top 3 competitors ALL have? (add if missing)
+3. What unique sections differentiate #1? (consider adding)
+4. What's the narrative flow? (problem → solution → proof → action)
+5. What pricing structure do they use? (day rate vs monthly vs hourly)
+6. What FAQs do they answer? (add missing ones)
+7. What authority sources do they cite? (match or exceed)
+
 ### Step 3: Analyze & Enrich
 
 From extracted content, identify:
@@ -249,6 +286,41 @@ UPDATE content_enrichment
 SET word_count_after = [COUNT]
 WHERE page_slug = 'page-slug';
 ```
+
+---
+
+## Serper API for Google Ranking Checks
+
+### API Key
+```bash
+SERPER_API_KEY="b0a322411802bafeb5753e8ca4b988631c56e06e"
+```
+
+### Check Google UK Rankings
+```bash
+cat > /tmp/serper.json << 'EOF'
+{"q": "fractional [role]", "gl": "uk", "hl": "en", "num": 50}
+EOF
+
+curl -s -X POST "https://google.serper.dev/search" \
+  -H "X-API-KEY: b0a322411802bafeb5753e8ca4b988631c56e06e" \
+  -H "Content-Type: application/json" \
+  -d @/tmp/serper.json | jq '.organic[] | select(.link | contains("fractional.quest")) | {position, title, link}'
+```
+
+### Track Rankings in Database
+```sql
+-- Add ranking fields to content_enrichment if not exists
+ALTER TABLE content_enrichment ADD COLUMN IF NOT EXISTS target_keyword VARCHAR(255);
+ALTER TABLE content_enrichment ADD COLUMN IF NOT EXISTS google_uk_position_before INTEGER;
+ALTER TABLE content_enrichment ADD COLUMN IF NOT EXISTS google_uk_position_after INTEGER;
+ALTER TABLE content_enrichment ADD COLUMN IF NOT EXISTS ranking_check_date TIMESTAMP;
+```
+
+### Usage Note
+- Serper checks **actual Google UK rankings** (SERP)
+- Tavily search shows **Tavily's own results** (not Google rankings)
+- Use Serper before/after enrichment to track ranking improvements
 
 ---
 
@@ -398,5 +470,5 @@ After each enrichment session, report:
 
 ---
 
-*Last Updated: January 2026*
-*Version: 1.0*
+*Last Updated: 31 January 2026*
+*Version: 1.1* - Added Serper API for Google UK ranking checks

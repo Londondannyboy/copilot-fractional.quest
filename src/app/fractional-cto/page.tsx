@@ -65,7 +65,7 @@ export default function FractionalCtoPage() {
         title="What is a Fractional CTO? | Part-Time Chief Technology Officer Guide"
         description="Complete guide to fractional CTO meaning, responsibilities, costs, and when to hire one. Learn what a part-time Chief Technology Officer does."
         url="https://fractional.quest/fractional-cto"
-        dateModified={new Date('2026-01-07')}
+        dateModified={new Date('2026-01-31')}
       />
       <FAQPageSchema faqs={CTO_FAQS} />
 
@@ -275,14 +275,35 @@ export default function FractionalCtoPage() {
 
             <h2 id="cost-pricing" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Cost and Pricing UK</h2>
 
+            <p>
+              Fractional CTO costs vary based on experience level, sector specialisation, and engagement intensity. Based on UK market research from Fractional CTO Experts, WhizzBridge, and CodPal (Jan 2026):
+            </p>
+
             <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing Breakdown</h4>
+              <h4 className="font-bold text-gray-900 mb-4">Monthly Retainer Pricing</h4>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>1 day/week:</strong> £4,000-£6,400/month (£48,000-£77,000/year)</li>
                 <li><strong>2 days/week:</strong> £8,000-£12,800/month (£96,000-£154,000/year)</li>
                 <li><strong>3 days/week:</strong> £12,000-£19,200/month (£144,000-£230,000/year)</li>
               </ul>
               <p className="text-sm text-gray-600 mt-4">Compare to full-time CTO total cost: £200,000-£400,000+ (salary + benefits + equity)</p>
+            </div>
+
+            <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
+              <h4 className="font-bold text-gray-900 mb-4">Hourly Rate Breakdown</h4>
+              <ul className="space-y-2 text-gray-700">
+                <li><strong>Senior Level (8-15 years):</strong> £150-£250/hour</li>
+                <li><strong>Executive Level (15+ years):</strong> £200-£350/hour</li>
+                <li><strong>AI/ML Specialist:</strong> £180-£300/hour</li>
+                <li><strong>Cloud/DevOps Expert:</strong> £170-£280/hour</li>
+              </ul>
+              <p className="text-sm text-gray-500 mt-4">Source: Fractional CTO Experts, Arc.dev, WhizzBridge Jan 2026</p>
+            </div>
+
+            <div className="bg-cyan-50 border-l-4 border-cyan-500 p-4 my-6 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>Cost Comparison:</strong> At £200/hour for 20 hours monthly, a fractional CTO costs £4,000/month vs £12,500-£20,000/month for a full-time CTO. This represents <strong>60-80% savings</strong> while accessing equivalent strategic expertise.
+              </p>
             </div>
 
             <h2 id="uk-market" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Types of Technology Leadership Engagement</h2>

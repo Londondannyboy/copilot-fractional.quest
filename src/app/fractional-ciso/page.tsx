@@ -9,6 +9,7 @@ import { ExpertProfile, ExpertProfileSchema } from '@/components/ExpertProfile'
 import { CaseStudy, CaseStudySchema } from '@/components/CaseStudy'
 import { RoleContentHub } from '@/components/RoleContentHub'
 import { RoleCalculator } from '@/components/RoleCalculator'
+import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 
@@ -44,18 +45,20 @@ const breadcrumbs = [
 const tocItems = [
   { id: 'understanding', title: 'Understanding the Role' },
   { id: 'responsibilities', title: 'Key Responsibilities' },
-  { id: 'comparison', title: 'Fractional vs Consultant' },
+  { id: 'comparison', title: 'Fractional vs Interim vs Full-Time' },
   { id: 'when-needed', title: 'When to Hire' },
   { id: 'cost-pricing', title: 'UK Cost Guide' },
-  { id: 'resources', title: 'Related Resources' },
+  { id: 'hourly-rates', title: 'Hourly Rates' },
+  { id: 'qualifications', title: 'Qualifications' },
   { id: 'calculator', title: 'Cost Calculator' },
+  { id: 'jobs', title: 'CISO Jobs' },
   { id: 'faq', title: 'FAQ' },
 ]
 
 export default function FractionalCisoPage() {
   return (
     <div className="min-h-screen bg-white">
-      <WebPageSchema title="What is a Fractional CISO? | Part-Time Chief Security Officer Guide" description="Complete guide to fractional CISO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-ciso" dateModified={new Date('2026-01-07')} />
+      <WebPageSchema title="What is a Fractional CISO? | Part-Time Chief Security Officer Guide" description="Complete guide to fractional CISO meaning, responsibilities, costs, and when to hire one." url="https://fractional.quest/fractional-ciso" dateModified={new Date('2026-01-31')} />
       <FAQPageSchema faqs={CISO_FAQS} />
 
       {/* Hero Section */}
@@ -91,7 +94,8 @@ export default function FractionalCisoPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-8">
             <h2 className="text-sm font-bold uppercase tracking-widest text-red-400 mb-4">Role Definition</h2>
-            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CISO</strong> (Fractional Chief Information Security Officer) is an experienced cybersecurity executive who partners with organisations on a part-time or contract basis, typically 1-3 days per week, providing strategic security leadership without the cost of a full-time hire.</p>
+            <p className="text-2xl font-light leading-relaxed">A <strong className="font-semibold">Fractional CISO</strong> (Fractional Chief Information Security Officer) is an experienced cybersecurity executive who partners with organisations on a part-time or contract basis, typically 1-3 days per week. Day rates range from £1,000-£1,800 depending on experience and sector. Monthly retainers typically range from £4,000-£12,000. Fractional CISOs provide enterprise-grade security leadership without the £180,000-£300,000 cost of a full-time hire.</p>
+            <p className="text-sm text-red-300 mt-4">Source: CyPro, GoFractional Jan 2026</p>
           </div>
         </div>
       </section>
@@ -138,24 +142,69 @@ export default function FractionalCisoPage() {
               ))}
             </div>
 
-            <h2 id="comparison" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Comparison: Fractional vs Consultant</h2>
+            <h2 id="comparison" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Fractional vs Interim vs Full-Time CISO: How They Compare</h2>
+            <p>Understanding the difference between a <strong>fractional CISO</strong>, <strong>interim CISO</strong>, and <strong>full-time CISO</strong> helps companies choose the right security leadership model:</p>
             <div className="overflow-x-auto my-8 not-prose">
-              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+              <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Fractional CISO</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Security Consultant</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-gray-900">Factor</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-red-700">Fractional CISO</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-blue-700">Interim CISO</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-gray-700">Full-Time CISO</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  <tr><td className="px-6 py-4 text-sm font-medium text-gray-900">Engagement</td><td className="px-6 py-4 text-sm text-gray-600">Ongoing, part of leadership team</td><td className="px-6 py-4 text-sm text-gray-600">Project-based, advisory</td></tr>
-                  <tr className="bg-gray-50"><td className="px-6 py-4 text-sm font-medium text-gray-900">Accountability</td><td className="px-6 py-4 text-sm text-gray-600">Owns security outcomes</td><td className="px-6 py-4 text-sm text-gray-600">Provides recommendations</td></tr>
-                  <tr><td className="px-6 py-4 text-sm font-medium text-gray-900">Presence</td><td className="px-6 py-4 text-sm text-gray-600">Regular (1-3 days/week)</td><td className="px-6 py-4 text-sm text-gray-600">As needed</td></tr>
-                  <tr className="bg-gray-50"><td className="px-6 py-4 text-sm font-medium text-gray-900">Cost</td><td className="px-6 py-4 text-sm text-gray-600">£45,000-£110,000/year</td><td className="px-6 py-4 text-sm text-gray-600">£10,000-£50,000/project</td></tr>
-                  <tr><td className="px-6 py-4 text-sm font-medium text-gray-900">Best For</td><td className="px-6 py-4 text-sm text-gray-600">Ongoing security leadership</td><td className="px-6 py-4 text-sm text-gray-600">Specific audits or assessments</td></tr>
+                  <tr>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Commitment</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">1-3 days/week</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Full-time (temp)</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Full-time (perm)</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Duration</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Ongoing (6+ months)</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">3-9 months typical</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Permanent</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Monthly Cost</td>
+                    <td className="px-4 py-4 text-sm text-red-700 font-semibold">£4,000-£12,000</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£18,000-£28,000</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£15,000-£25,000+</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Annual Cost</td>
+                    <td className="px-4 py-4 text-sm text-red-700 font-semibold">£48,000-£144,000</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£54,000-£84,000 (3mo)</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">£180,000-£300,000+</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Primary Focus</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Strategy, compliance, governance</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">CISO gap, crisis, transformation</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Full security ownership</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Flexibility</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Scale up/down easily</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Fixed contract term</td>
+                    <td className="px-4 py-4 text-sm text-gray-600">Limited flexibility</td>
+                  </tr>
+                  <tr className="bg-red-50">
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">Best For</td>
+                    <td className="px-4 py-4 text-sm text-red-800 font-medium">SMEs, startups, Series A-C</td>
+                    <td className="px-4 py-4 text-sm text-blue-800 font-medium">CISO vacancy, incident, M&A</td>
+                    <td className="px-4 py-4 text-sm text-gray-700 font-medium">Large enterprises, regulated</td>
+                  </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 my-6 not-prose">
+              <p className="text-sm text-gray-700">
+                <strong>Cost Comparison:</strong> A fractional CISO at 2 days/week costs £96,000-£144,000/year vs £180,000-£300,000+ for a full-time CISO (including salary, NI, pension, benefits, and recruitment fees). That&apos;s <strong>50-70% savings</strong> while maintaining enterprise-grade security leadership.
+              </p>
             </div>
 
             <h2 id="when-needed" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">When to Hire</h2>
@@ -169,27 +218,178 @@ export default function FractionalCisoPage() {
             </ul>
 
             <h2 id="cost-pricing" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">UK Cost Guide</h2>
-            <p><strong>Fractional CISO</strong> costs in the UK typically range from £900-£1,500 per day:</p>
-            <div className="bg-gray-50 p-6 rounded-lg my-6 not-prose">
-              <h4 className="font-bold text-gray-900 mb-4">Typical Pricing</h4>
-              <ul className="space-y-2 text-gray-700">
-                <li><strong>1 day/week:</strong> £3,600-£6,000/month (£43,000-£72,000/year)</li>
-                <li><strong>2 days/week:</strong> £7,200-£12,000/month (£86,000-£144,000/year)</li>
-                <li><strong>3 days/week:</strong> £10,800-£18,000/month (£130,000-£216,000/year)</li>
-              </ul>
-              <p className="text-sm text-gray-600 mt-4">Compare to full-time CISO total cost: £180,000-£300,000+ (salary + benefits + equity)</p>
+            <p><strong>Fractional CISO</strong> costs in the UK typically range from £1,000-£1,800 per day based on experience and sector:</p>
+
+            <div className="grid md:grid-cols-3 gap-6 my-8 not-prose">
+              <div className="bg-white p-6 border border-gray-200 rounded-lg">
+                <div className="text-red-600 font-bold text-sm mb-2">STARTER</div>
+                <div className="text-3xl font-black text-gray-900 mb-1">£4,000-£6,000</div>
+                <div className="text-gray-500 text-sm mb-4">per month</div>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li>• 1 day per week (4 days/month)</li>
+                  <li>• Security policy development</li>
+                  <li>• Compliance guidance</li>
+                  <li>• Vendor security reviews</li>
+                </ul>
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <span className="text-xs text-gray-500">Best for: Seed/Series A startups</span>
+                </div>
+              </div>
+              <div className="bg-white p-6 border-2 border-red-500 rounded-lg relative">
+                <div className="absolute -top-3 right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">POPULAR</div>
+                <div className="text-red-600 font-bold text-sm mb-2">GROWTH</div>
+                <div className="text-3xl font-black text-gray-900 mb-1">£8,000-£12,000</div>
+                <div className="text-gray-500 text-sm mb-4">per month</div>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li>• 2 days per week (8 days/month)</li>
+                  <li>• SOC 2 / ISO 27001 prep</li>
+                  <li>• Security architecture</li>
+                  <li>• Incident response planning</li>
+                  <li>• Security awareness training</li>
+                </ul>
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <span className="text-xs text-gray-500">Best for: Series A-B scale-ups</span>
+                </div>
+              </div>
+              <div className="bg-white p-6 border border-gray-200 rounded-lg">
+                <div className="text-red-600 font-bold text-sm mb-2">ENTERPRISE</div>
+                <div className="text-3xl font-black text-gray-900 mb-1">£14,000-£22,000</div>
+                <div className="text-gray-500 text-sm mb-4">per month</div>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li>• 3+ days per week</li>
+                  <li>• Full CISO responsibilities</li>
+                  <li>• Board-level reporting</li>
+                  <li>• Security team management</li>
+                  <li>• M&A security due diligence</li>
+                </ul>
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <span className="text-xs text-gray-500">Best for: PE-backed, regulated</span>
+                </div>
+              </div>
             </div>
 
             <div className="bg-red-50 p-6 border border-red-200 rounded-lg my-8 not-prose">
               <p className="text-red-800 font-medium mb-3">Why security leadership matters now</p>
-              <p className="text-red-700 text-sm">The average cost of a data breach in the UK is over £3.4 million. A fractional CISO helps prevent breaches and ensures compliance at a fraction of the cost of both a full-time hire and a potential incident.</p>
+              <p className="text-red-700 text-sm">The average cost of a data breach in the UK is over £3.4 million (IBM Cost of Data Breach Report 2025). A fractional CISO helps prevent breaches and ensures compliance at a fraction of the cost of both a full-time hire and a potential incident.</p>
+            </div>
+
+            <h2 id="hourly-rates" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Fractional CISO Hourly Rates UK</h2>
+            <p>For ad-hoc consultations and project-based security work:</p>
+            <div className="overflow-x-auto my-8 not-prose">
+              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+                <thead className="bg-red-700 text-white">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-bold">Level / Specialisation</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold">Hourly Rate</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold">Best For</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Standard Fractional CISO</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">£150-£200/hour</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">Policy reviews, security assessments</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Senior CISO (15+ years)</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">£200-£275/hour</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">Board reporting, M&A due diligence</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">FinTech / Regulated Specialist</td>
+                    <td className="px-6 py-4 text-sm text-red-700 font-semibold">£225-£325/hour</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">FCA compliance, PCI-DSS</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">Incident Response Expert</td>
+                    <td className="px-6 py-4 text-sm text-red-700 font-semibold">£250-£400/hour</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">Breach response, forensics</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 id="qualifications" className="text-3xl font-black text-gray-900 mt-16 mb-6 scroll-mt-24">Professional Bodies & Certifications</h2>
+            <p>Key qualifications that validate fractional CISO expertise:</p>
+            <div className="grid md:grid-cols-2 gap-4 my-8 not-prose">
+              <a href="https://www.isc2.org/" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-red-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🛡️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-red-700">(ISC)² - CISSP</h4>
+                    <p className="text-sm text-gray-600">Certified Information Systems Security Professional</p>
+                    <p className="text-xs text-red-600 mt-1">Gold standard certification</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.isaca.org/" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-red-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">📋</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-red-700">ISACA - CISM</h4>
+                    <p className="text-sm text-gray-600">Certified Information Security Manager</p>
+                    <p className="text-xs text-red-600 mt-1">Management-focused certification</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.ncsc.gov.uk/" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-red-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🏛️</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-red-700">NCSC</h4>
+                    <p className="text-sm text-gray-600">UK National Cyber Security Centre</p>
+                    <p className="text-xs text-gray-500 mt-1">Government security guidance</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.crest-approved.org/" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-red-300 hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">✓</span>
+                  <div>
+                    <h4 className="font-bold text-gray-900 group-hover:text-red-700">CREST</h4>
+                    <p className="text-sm text-gray-600">Security testing accreditation</p>
+                    <p className="text-xs text-gray-500 mt-1">Penetration testing standards</p>
+                  </div>
+                </div>
+              </a>
             </div>
           </article>
 
             {/* Sidebar with Table of Contents */}
             <aside className="hidden lg:block lg:col-span-4">
-              <div className="sticky top-24">
+              <div className="sticky top-24 space-y-6">
                 <TableOfContents items={tocItems} />
+
+                {/* Quick Links */}
+                <div className="bg-white p-6 rounded-xl border border-gray-200">
+                  <h3 className="font-bold text-gray-900 mb-4">Related Guides</h3>
+                  <div className="space-y-3">
+                    <Link href="/hire-fractional-ciso" className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors">
+                      <span>📋</span> How to Hire a CISO
+                    </Link>
+                    <Link href="/fractional-ciso-salary" className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors">
+                      <span>💰</span> CISO Salary Guide
+                    </Link>
+                    <Link href="/fractional-ciso-jobs-uk" className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors">
+                      <span>💼</span> CISO Jobs UK
+                    </Link>
+                    <Link href="/virtual-ciso" className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors">
+                      <span>🌐</span> Virtual CISO (vCISO)
+                    </Link>
+                    <Link href="/fractional-ciso-services" className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors">
+                      <span>⚙️</span> CISO Services
+                    </Link>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="bg-gray-900 p-6 rounded-xl text-white">
+                  <p className="font-bold mb-2">Looking for a CISO?</p>
+                  <p className="text-sm text-gray-300 mb-4">Browse pre-vetted security leaders</p>
+                  <Link href="/fractional-ciso-jobs-uk" className="block text-center bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-400 transition-colors text-sm">
+                    View CISO Jobs
+                  </Link>
+                </div>
               </div>
             </aside>
           </div>
@@ -207,8 +407,25 @@ export default function FractionalCisoPage() {
         </div>
       </section>
 
+      {/* Job Board Section */}
+      <section id="jobs" className="py-20 bg-white scroll-mt-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">Browse Jobs</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Latest CISO Jobs</h2>
+            <p className="text-xl text-gray-500">Find your next fractional CISO opportunity</p>
+          </div>
+          <EmbeddedJobBoard
+            defaultDepartment="Security"
+            title="Latest Security Jobs"
+            accentColor="red"
+            jobsPerPage={6}
+          />
+        </div>
+      </section>
+
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-white scroll-mt-24">
+      <section id="faq" className="py-20 bg-gray-50 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-2 block">FAQ</span>
