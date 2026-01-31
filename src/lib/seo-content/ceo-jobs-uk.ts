@@ -28,12 +28,18 @@ export const ceoJobsUkSEO = {
   hero: {
     headline: "Fractional CEO Jobs UK",
     subtitle:
-      "Part-time Executive Leadership and CEO roles across the United Kingdom. Day rates £1,200-£2,000.",
+      "Part-time Executive Leadership and CEO roles across the United Kingdom. Day rates £900-£1,800.",
     stats: {
-      avgDayRate: "£1,200-£2,000",
+      avgDayRate: "£900-£1,800",
       hubStatus: "Executive Leadership",
       hybridOptions: "60% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CEO Jobs UK",
+    definition: "Fractional CEO jobs are part-time Chief Executive Officer roles where experienced business leaders work 1-3 days per week for UK companies. Day rates range from £900-£1,800 depending on company size and complexity. Fractional CEOs provide strategic leadership, board-level guidance, and transformation support without the £200,000-£400,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const ceoJobsUkSEO = {
       source: "Harvard Business Review Research",
     },
     averageDayRate: {
-      value: "£1,600",
-      description: "Average day rate for fractional CEOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£1,200",
+      description: "Average day rate for fractional CEOs in the UK (range: £900-£1,800)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const ceoJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CEO cost in the UK?",
+      answer:
+        "A fractional CEO in the UK typically costs £4,500-£9,000 per month or £900-£1,800 per day, depending on company size and complexity. SME fractional CEOs charge £900-£1,200/day, scale-up fractional CEOs charge £1,200-£1,500/day, and premium PE-backed/turnaround fractional CEOs charge £1,500-£1,800/day. This represents 40-60% savings compared to a full-time CEO hire (£200,000-£400,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CEOs need?",
       answer:
         "Fractional CEO roles require extensive leadership experience - typically 15-20+ years with prior CEO, MD, or GM experience. Board experience, P&L ownership, and demonstrated business transformation track record are essential. IoD Chartered Director status and sector expertise often required.",
@@ -178,7 +189,7 @@ export const ceoJobsUkSEO = {
     {
       question: "How much do fractional CEOs earn in the UK?",
       answer:
-        "UK fractional CEOs typically earn £1,200-£2,000 per day, with PE portfolio and turnaround roles at the premium end (£1,500-£2,500). Working 2-3 days per week, annual earnings of £240,000-£500,000+ are achievable while offering portfolio variety and flexibility.",
+        "UK fractional CEOs typically earn £900-£1,800 per day, with PE portfolio and turnaround roles at the premium end (£1,500-£2,000). Working 2-3 days per week, annual earnings of £180,000-£400,000+ are achievable while offering portfolio variety and flexibility.",
     },
     {
       question: "What's the typical fractional CEO engagement?",

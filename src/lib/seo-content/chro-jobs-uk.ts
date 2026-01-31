@@ -28,12 +28,18 @@ export const chroJobsUkSEO = {
   hero: {
     headline: "Fractional CHRO Jobs UK",
     subtitle:
-      "Part-time HR Leadership and Chief People Officer roles across the United Kingdom. Day rates £800-£1,200.",
+      "Part-time HR Leadership and Chief People Officer roles across the United Kingdom. Day rates £650-£1,400.",
     stats: {
-      avgDayRate: "£800-£1,200",
+      avgDayRate: "£650-£1,400",
       hubStatus: "People Leadership",
       hybridOptions: "70% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CHRO Jobs UK",
+    definition: "Fractional CHRO jobs are part-time Chief Human Resources Officer roles where experienced HR leaders work 1-3 days per week for UK companies. Day rates range from £650-£1,400 depending on company size and complexity. Fractional CHROs provide people strategy, talent management, and HR transformation without the £130,000-£200,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const chroJobsUkSEO = {
       source: "People Management Survey 2024",
     },
     averageDayRate: {
-      value: "£1,000",
-      description: "Average day rate for fractional CHROs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£900",
+      description: "Average day rate for fractional CHROs in the UK (range: £650-£1,400)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const chroJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CHRO cost in the UK?",
+      answer:
+        "A fractional CHRO in the UK typically costs £2,600-£5,600 per month or £650-£1,400 per day, depending on company size and complexity. SME fractional CHROs charge £650-£900/day, scale-up fractional CHROs charge £900-£1,200/day, and premium PE-backed fractional CHROs charge £1,200-£1,400/day. This represents 40-55% savings compared to a full-time CHRO hire (£130,000-£200,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CHROs need?",
       answer:
         "Most fractional CHRO roles require CIPD Level 7 (or MCIPD/FCIPD membership) plus 10-15+ years HR experience with prior CHRO, HRD, or CPO experience. Employment law knowledge, change management credentials, and sector-specific expertise add significant value. SHRM certification is also recognised.",
@@ -178,7 +189,7 @@ export const chroJobsUkSEO = {
     {
       question: "How much do fractional CHROs earn in the UK?",
       answer:
-        "UK fractional CHROs typically earn £800-£1,200 per day, with PE-backed and large scale-up roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £150,000-£280,000 are achievable while offering portfolio variety.",
+        "UK fractional CHROs typically earn £650-£1,400 per day, with PE-backed and large scale-up roles at the premium end (£1,000-£1,400). Working 2-3 days per week across multiple clients, annual earnings of £130,000-£280,000 are achievable while offering portfolio variety.",
     },
     {
       question: "What's the typical fractional CHRO engagement?",

@@ -28,12 +28,18 @@ export const cisoJobsUkSEO = {
   hero: {
     headline: "Fractional CISO Jobs UK",
     subtitle:
-      "Part-time Cybersecurity Leadership and CISO roles across the United Kingdom. Day rates £1,000-£1,500.",
+      "Part-time Cybersecurity Leadership and CISO roles across the United Kingdom. Day rates £1,000-£2,000.",
     stats: {
-      avgDayRate: "£1,000-£1,500",
+      avgDayRate: "£1,000-£2,000",
       hubStatus: "Security Leadership",
       hybridOptions: "75% Hybrid",
     },
+  },
+
+  // Definition box for AI Overview optimization
+  definitionBox: {
+    term: "Fractional CISO Jobs UK",
+    definition: "Fractional CISO jobs are part-time Chief Information Security Officer roles where experienced security leaders work 1-3 days per week for UK companies. Day rates range from £1,000-£2,000 depending on sector and regulatory requirements, with financial services commanding premium rates. Fractional CISOs provide cybersecurity strategy, compliance, and incident response without the £180,000-£300,000+ cost of a full-time hire.",
   },
 
   // External authority links - critical for E-E-A-T
@@ -71,9 +77,9 @@ export const cisoJobsUkSEO = {
       source: "UK Cyber Security Council 2024",
     },
     averageDayRate: {
-      value: "£1,250",
-      description: "Average day rate for fractional CISOs in the UK",
-      source: "Fractional Quest Market Analysis",
+      value: "£1,350",
+      description: "Average day rate for fractional CISOs in the UK (range: £1,000-£2,000)",
+      source: "Fractional Quest Market Analysis Jan 2026",
     },
   },
 
@@ -171,6 +177,11 @@ export const cisoJobsUkSEO = {
 
   faqs: [
     {
+      question: "How much does a fractional CISO cost in the UK?",
+      answer:
+        "A fractional CISO in the UK typically costs £4,000-£8,000 per month or £1,000-£2,000 per day, depending on sector and regulatory requirements. SME/startup fractional CISOs charge £1,000-£1,400/day, tech/SaaS fractional CISOs charge £1,200-£1,600/day, and premium financial services/healthcare fractional CISOs charge £1,500-£2,000/day. This represents 60-75% savings compared to a full-time CISO hire (£180,000-£300,000+ annually).",
+    },
+    {
       question: "What qualifications do fractional CISOs need?",
       answer:
         "Most fractional CISO roles require CISSP, CISM, or equivalent certifications plus 10-15+ years security experience. Prior CISO or Security Director experience is typically essential. Sector-specific credentials add significant value: CREST for penetration testing, PCI QSA for payments, DSPT Lead Assessor for NHS. Security clearance (SC/DV) opens additional opportunities.",
@@ -178,7 +189,7 @@ export const cisoJobsUkSEO = {
     {
       question: "How much do fractional CISOs earn in the UK?",
       answer:
-        "UK fractional CISOs typically earn £1,000-£1,500 per day, with financial services and healthcare at the premium end (£1,200-£1,800). Working 2-3 days per week across multiple clients, annual earnings of £200,000-£360,000 are achievable. This often exceeds full-time CISO salaries while offering portfolio variety.",
+        "UK fractional CISOs typically earn £1,000-£2,000 per day, with financial services and healthcare at the premium end (£1,500-£2,000). Working 2-3 days per week across multiple clients, annual earnings of £200,000-£400,000 are achievable. This often exceeds full-time CISO salaries while offering portfolio variety.",
     },
     {
       question: "What's the typical fractional CISO engagement?",
