@@ -1,12 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { PageData, Section, FAQ } from "@/lib/pages";
 import { HotJobs } from "@/components/HotJobs";
 import { JobsSidebar } from "@/components/JobsSidebar";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
+import { RoleCalculator } from "@/components/RoleCalculator";
+import { TrustSignals } from "@/components/TrustSignals";
+import AuthorityLinksPanel from "@/components/mdx/AuthorityLinksPanel";
+import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
 import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
+
+// Lazy load CopilotKit to reduce initial bundle
+const CopilotPopup = dynamic(
+  () => import("@copilotkit/react-ui").then((mod) => mod.CopilotPopup),
+  { ssr: false }
+);
+const CopilotKit = dynamic(
+  () => import("@copilotkit/react-core").then((mod) => mod.CopilotKit),
+  { ssr: false }
+);
 
 // ===========================================
 // Types
@@ -14,6 +29,19 @@ import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
 
 interface IntelligentPageRendererProps {
   page: PageData;
+}
+
+// Extract role from slug (e.g., fractional-cfo-jobs-uk -> cfo)
+function extractRoleFromSlug(slug?: string): "cfo" | "cto" | "cmo" | "coo" | "ceo" | "chro" | "cpo" | "ciso" | "cro" | "cco" {
+  if (!slug) return "cfo";
+  const roleMatch = slug.match(/-(cfo|cto|cmo|coo|ceo|chro|cpo|ciso|cro|cco|cdo)-/i);
+  if (roleMatch) {
+    const role = roleMatch[1].toLowerCase();
+    // Map CDO to CFO for calculator (CDO not in calculator)
+    if (role === "cdo") return "cfo";
+    return role as "cfo" | "cto" | "cmo" | "coo" | "ceo" | "chro" | "cpo" | "ciso" | "cro" | "cco";
+  }
+  return "cfo";
 }
 
 // ===========================================
@@ -323,36 +351,6 @@ function FAQSection({ faqs }: { faqs: FAQ[] }) {
   );
 }
 
-// ===========================================
-// External Links Section
-// ===========================================
-
-function ExternalLinksSection({ links }: { links: Array<{ url: string; title: string; description?: string }> }) {
-  return (
-    <section className="py-8 border-t border-gray-200">
-      <h3 className="text-lg font-bold text-gray-900 mb-4">Authority Sources</h3>
-      <div className="grid sm:grid-cols-2 gap-4">
-        {links.map((link, i) => (
-          <a
-            key={i}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            <span className="text-emerald-500 text-lg">🔗</span>
-            <div>
-              <div className="font-medium text-gray-900">{link.title}</div>
-              {link.description && (
-                <div className="text-sm text-gray-500">{link.description}</div>
-              )}
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 // ===========================================
 // Main Component
@@ -410,19 +408,38 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
                 <SectionRenderer key={i} section={section} />
               ))}
 
+              {/* Role Calculator */}
+              <div className="my-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Calculate Your Day Rate</h2>
+                <RoleCalculator role={extractRoleFromSlug(page.slug)} />
+              </div>
+
               {/* FAQs */}
               {page.faqs && page.faqs.length > 0 && (
                 <FAQSection faqs={page.faqs} />
               )}
 
-              {/* External Links */}
+              {/* Authority Links Panel */}
               {page.external_links && page.external_links.length > 0 && (
-                <ExternalLinksSection links={page.external_links.map(link => ({
-                  url: link.url,
-                  title: link.label || link.url,
-                  description: link.domain
-                }))} />
+                <AuthorityLinksPanel
+                  links={page.external_links.map(link => ({
+                    name: link.label || link.domain || "Resource",
+                    url: link.url,
+                    context: link.domain || "Industry resource"
+                  }))}
+                />
               )}
+
+              {/* Internal Links Grid - Related Pages */}
+              <InternalLinksGrid
+                title="Related Pages"
+                links={[
+                  { name: "CFO Jobs UK", url: "/fractional-cfo-jobs-uk", description: "Find fractional CFO roles", category: "jobs" as const },
+                  { name: "CTO Jobs UK", url: "/fractional-cto-jobs-uk", description: "Find fractional CTO roles", category: "jobs" as const },
+                  { name: "CMO Jobs UK", url: "/fractional-cmo-jobs-uk", description: "Find fractional CMO roles", category: "jobs" as const },
+                  { name: "All UK Jobs", url: "/fractional-jobs-uk", description: "Browse all fractional jobs", category: "jobs" as const },
+                ]}
+              />
             </div>
 
             {/* Sidebar */}
@@ -433,12 +450,8 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
                   location={location}
                 />
 
-                {/* CTA Box */}
-                <div className="bg-white border border-gray-200 rounded-xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-4">Find Your Rate</h3>
-                  <p className="text-gray-600 text-sm mb-4">Use our calculator to estimate your day rate based on role and experience.</p>
-                  <a href="/calculators/rate-finder" className="text-emerald-600 font-medium hover:underline">Rate Calculator →</a>
-                </div>
+                {/* Trust Signals */}
+                <TrustSignals />
 
                 {/* CTA Box */}
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
@@ -458,6 +471,16 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
           </div>
         </div>
       </section>
+
+      {/* CopilotKit AI Assistant */}
+      <CopilotKit runtimeUrl="/api/copilot">
+        <CopilotPopup
+          labels={{
+            title: "Fractional Quest AI",
+            initial: `Hi! I can help you find ${page.hero_title || "fractional executive"} roles. What would you like to know?`,
+          }}
+        />
+      </CopilotKit>
     </main>
   );
 }
