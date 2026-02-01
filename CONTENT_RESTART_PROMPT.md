@@ -1,343 +1,181 @@
-# Fractional Quest - Content Enrichment Session Restart Prompt
+# Fractional Quest - Session Restart Prompt
 
 ## Session Context
 
-You are continuing work on Fractional Quest, a UK-based platform for fractional and interim executive roles. This session focuses on **content enrichment and creation** based on GSC data analysis and Tavily competitive research.
+You are continuing work on Fractional Quest, a UK-based platform for fractional and interim executive roles. The platform serves UK (primary), US, AU, and NZ markets.
 
 ## Quick Start
 
-1. Read `CLAUDE.md` for project overview and Tavily API access
-2. Read `.claude/reference/content-plan.md` for the content creation roadmap
+1. Read `CLAUDE.md` for project overview, architecture, and Tavily API access
+2. Check `content_enrichment` table in Neon for pages already enhanced
 3. Access GSC data at `/Users/dankeegan/Desktop/Queries.csv` and `Pages.csv`
-4. Check `content_enrichment` table in Neon for pages already enhanced
 
 ---
 
-## Enrichments Completed (31 Jan 2026)
+## Architecture Overview (Feb 2026)
 
-### ✅ Calculator Pricing Update
-Updated `RoleCalculator.tsx` and `src/i18n/currency.ts` with realistic UK market pricing:
-- CMO: £900 avg (was £950), range £600-£1,500
-- CFO: £1,000 avg (was £1,050), range £750-£1,500
-- CTO: £1,050 avg (was £1,100), range £850-£1,600
-- CISO: £1,350 avg (was £1,150), range £1,000-£2,000 (premium for security)
-- CHRO: £900 avg (was £850), range £650-£1,400
+### Unified Template System
 
-### ✅ 3-Way Comparison Tables
-Enhanced pillar pages with Fractional vs Interim vs Full-Time comparison tables:
-- `/fractional-cfo` - 8-row comparison with UK market insight callout
-- `/fractional-cmo` - 8-row comparison with amber brand colors
-- `/fractional-cto` - 8-row comparison highlighting #1 ranking for CTO jobs
-
-### ✅ Enrichment Tracking Database
-Created `content_enrichment` table in Neon to track all page enrichments:
-```sql
-SELECT page_slug, enrichment_type, enriched_at::date FROM content_enrichment;
+**ALL pages now served from Neon via IntelligentPageRenderer:**
+```
+src/app/[slug]/page.tsx → Neon pages table → IntelligentPageRenderer
 ```
 
-### ✅ All 17 Role Jobs UK Pages Enriched
-Each page now has:
-- Definition box (60-80 words for AI Overview optimization)
-- "How much does a fractional X cost UK?" FAQ with tiered pricing
-- Authority links to professional bodies (CIPS, IOD, ICAEW, etc.)
-- Statistics with Jan 2026 citations
-- Updated day rate ranges (Entry/Senior/Premium tiers)
+- `STATIC_ROUTE_SLUGS` array is **empty** - all pages use Neon
+- Static hardcoded page files exist as backup but `[slug]` route takes priority
+- International pages (`/us/`, `/au/`, `/nz/`) also use IntelligentPageRenderer
 
-**Pages Updated:**
-- CFO, CMO, CTO, COO, CEO, CHRO, CPO, CISO, CIO, CRO, CCO
-- FD, MD, GC, CAIO, CSO, Procurement
+### IntelligentPageRenderer Features
 
-**25 enrichments tracked in `content_enrichment` table**
+| Feature | Description |
+|---------|-------------|
+| Auto Internal Linking | 55+ terms, locale-aware (stays in market) |
+| Auto External Linking | 20+ authority sources (Gartner, CIPD, ICAEW, etc.) |
+| Visual Sections | Icons based on keywords, gradient cards |
+| Industry Insights | Real HBR/Forbes/LinkedIn data (no fake testimonials) |
+| Structured Data | FAQPage, BreadcrumbList schema.org |
+| Charts | CostSavingsChart, SkillsBreakdownChart |
+| Sidebar | Quick nav, newsletter CTA, related pages |
+| Mobile | overflow-x-hidden, responsive grids |
 
-### Remaining Work
-- [ ] Add 3-way comparison tables to COO, CISO, CHRO pages
-- [ ] Create /part-time-cmo and /interim-finance-director pages
-- [ ] Run Tavily Extract on competitor pages for deeper content
+### Locale-Aware Linking
+
+```typescript
+detectLocaleFromSlug(slug)  // us-fractional-cfo-jobs → 'us'
+localizeUrl(url, locale)    // /fractional-cfo-jobs-uk → /us/fractional-cfo-jobs
+localizeTitle(title, locale) // "Fractional CFO Jobs UK" → "Fractional CFO Jobs"
+```
+
+### URL Structure
+
+| Market | URL Pattern | Neon Slug |
+|--------|-------------|-----------|
+| UK (default) | `/fractional-cfo-jobs-uk` | `fractional-cfo-jobs-uk` |
+| US | `/us/fractional-cfo-jobs` | `us-fractional-cfo-jobs` |
+| AU | `/au/fractional-cfo-jobs` | `au-fractional-cfo-jobs` |
+| NZ | `/nz/fractional-cfo-jobs` | `nz-fractional-cfo-jobs` |
 
 ---
 
-## Tavily API Workflow (Updated 31 Jan 2026)
+## Key Files
 
-### Quick Commands
+| File | Purpose |
+|------|---------|
+| `CLAUDE.md` | Project overview, patterns, session progress |
+| `src/components/pages/IntelligentPageRenderer.tsx` | Main page template (2000+ lines) |
+| `src/lib/international-page.tsx` | International page wrapper |
+| `src/app/[slug]/page.tsx` | Dynamic route handler |
+| `src/i18n/config.ts` | Locale definitions |
+| `.claude/reference/*.md` | Job schema, SEO templates, role data |
 
-**Search API** - Find competitor pages and get AI answer:
+---
+
+## Database
+
+**Neon Project**: `plain-glade-34229418`
+
+| Table | Purpose |
+|-------|---------|
+| `pages` | All page content (800+ pages) |
+| `jobs` | Job listings (213+ entries) |
+| `content_enrichment` | Enrichment tracking |
+| `articles` | Blog content |
+
+**Quick Queries:**
+```sql
+-- Check page content
+SELECT slug, title, hero_title, sections FROM pages WHERE slug LIKE '%cfo%';
+
+-- Check enrichment status
+SELECT page_slug, quality_score_after, needs_revisit FROM content_enrichment ORDER BY enriched_at DESC;
+
+-- Find pages needing work
+SELECT slug FROM pages WHERE slug NOT IN (SELECT page_slug FROM content_enrichment);
+```
+
+---
+
+## Completed Work (Feb 2026)
+
+### Template Unification
+- Migrated ALL pages to Neon + IntelligentPageRenderer
+- Cleared `STATIC_ROUTE_SLUGS` - no more hardcoded page priority
+- Updated international pages (was using legacy PageWithCopilot)
+- Added locale-aware internal linking
+
+### IntelligentPageRenderer Enhancements
+- Auto internal linking (55+ terms) with locale awareness
+- Auto external linking (20+ authority sources)
+- Enhanced section renderers with icons based on keywords
+- Industry insights section (replaced fake testimonials)
+- Mobile responsive fixes
+- Sidebar improvements (quick nav, newsletter, related pages)
+- New components: CostSavingsChart, SkillsBreakdownChart, KeyTakeawaysBox
+- stripMdxComponents() to remove raw MDX tags
+
+### Content Enrichment (Jan 2026)
+- All 17 Role Jobs UK pages enriched with definition boxes, FAQs, authority links
+- 3-way comparison tables (Fractional vs Interim vs Full-Time) for CFO, CMO, CTO
+- Updated calculator pricing to realistic UK market rates
+- 25+ enrichments tracked in `content_enrichment` table
+
+---
+
+## Known Issues / Next Steps
+
+### Priority 1: Header/Footer Locale Awareness
+- Header and Footer components have hardcoded UK links
+- US/AU/NZ users clicking header nav go back to UK pages
+- **Fix:** Pass locale to Header/Footer or make them detect from path
+
+### Priority 2: International Content
+- US/AU/NZ pages in Neon have sparse content (empty sections)
+- Need to enrich international page content
+- Consider locale-specific jobs in jobs table
+
+### Priority 3: Content Enrichment
+- Continue Tavily-based enrichment for remaining pages
+- Track in `content_enrichment` table
+- Target quality score 8+ for all lead pages
+
+### Technical Debt
+- Static hardcoded page files can be deleted (keep as backup)
+- PageWithCopilot component is unused - can be removed
+- Consider adding middleware.ts for proper i18n routing
+
+---
+
+## Tavily API
+
+**API Key**: `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`
+
+**Search API:**
 ```bash
 cat > /tmp/tav.json << 'EOF'
-{"api_key":"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","query":"fractional CFO cost UK 2025","search_depth":"advanced","include_answer":true,"max_results":5}
+{"api_key":"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","query":"fractional CFO cost UK 2026","search_depth":"advanced","include_answer":true,"max_results":8}
 EOF
-curl -s -X POST "https://api.tavily.com/search" -H "Content-Type: application/json" -d @/tmp/tav.json | jq '{answer, sources: [.results[] | {title, url}]}'
+curl -s -X POST "https://api.tavily.com/search" -H "Content-Type: application/json" -d @/tmp/tav.json | jq '{answer, results: [.results[] | {title, url}]}'
 ```
 
-**Extract API** - Get full content from competitor URLs:
+**Extract API:**
 ```bash
 cat > /tmp/tav_extract.json << 'EOF'
 {"api_key":"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","urls":["https://competitor.com/page"],"extract_depth":"advanced"}
 EOF
-curl -s -X POST "https://api.tavily.com/extract" -H "Content-Type: application/json" -d @/tmp/tav_extract.json | jq '.results[] | {url, content: .raw_content[:2000]}'
+curl -s -X POST "https://api.tavily.com/extract" -H "Content-Type: application/json" -d @/tmp/tav_extract.json | jq '.results[] | {url, content: .raw_content[:3000]}'
 ```
-
-### What Tavily Enables
-
-**For Accuracy:**
-- Validate pricing data against competitors
-- Confirm statistics are current
-- Ensure day rates match market reality
-
-**For Content Creation:**
-- Discover content gaps (what competitors cover that we don't)
-- Find new FAQ questions from competitor pages
-- Identify new sections to add
-- Source authority links to cite
-- Get market intelligence for longer-form content
-
-### Workflow: Search → Extract → Enrich
-
-1. **Search** for a keyword to get competitor URLs and AI summary
-2. **Extract** full content from top 3-5 competitor pages
-3. **Analyze** what sections/topics they cover that we don't
-4. **Enrich** our pages with better, more comprehensive content
-5. **Track** enrichment in `content_enrichment` table
-
-### Key Competitor URLs (from Tavily)
-
-**CFO:**
-- cfoiquk.com - UK pricing breakdown
-- fdcapital.co.uk - London-specific
-- hirecfo.com - UK pricing guide
-- csuiterecruit.co.uk - Comprehensive guide
-
-**CMO:**
-- communications-edge.co.uk - UK specific
-- vcmo.co.uk - Investment calculator
-
----
-
-## Research Completed (Jan 2026)
-
-### Key Findings: Pricing Reality Check
-
-**Our current calculators/content skew HIGH.** Tavily research shows realistic UK rates:
-
-| Role | Entry/Mid Level | Senior | Premium (PE/London) | Our Current Default |
-|------|-----------------|--------|---------------------|---------------------|
-| CMO | £600-£900/day | £900-£1,200/day | £1,200-£1,500/day | Too high |
-| CTO | £850-£1,000/day | £1,000-£1,300/day | £1,300-£1,600/day | Slightly high |
-| CFO | £800-£1,000/day | £1,000-£1,200/day | £1,200-£1,500/day | Too high |
-| COO | £800-£1,000/day | £1,000-£1,200/day | £1,200-£1,400/day | Too high |
-| FD | £500-£750/day | £750-£1,000/day | £1,000-£1,500/day | About right |
-
-**Monthly Retainers (1-2 days/week):**
-| Role | Typical Range | Common Mid-Point |
-|------|---------------|------------------|
-| CMO | £3,000-£6,000 | £4,500/month |
-| CTO | £3,400-£6,400 | £5,000/month |
-| CFO | £2,500-£5,000 | £4,000/month |
-| COO | £3,200-£5,500 | £4,500/month |
-
-### Key Findings: Engagement Length Patterns
-
-| Engagement Type | Typical Duration | Notes |
-|-----------------|------------------|-------|
-| Fractional | 6+ months ongoing | Scale up/down as needed |
-| Interim | 3-9 months | Most common is 6 months |
-| Advisory | Ongoing | 2-4 days/month |
-| Project-based | 90-day sprints | Transformation projects |
-
-### Key Findings: Hours/Commitment
-
-| Model | Hours/Week | Days/Week |
-|-------|------------|-----------|
-| Fractional | 10-25 hours | 1-3 days |
-| Interim | 32-40 hours | 4-5 days (full-time temp) |
-| Advisory | 8-16 hours/month | 2-4 days/month |
-
----
-
-## Keyword Opportunities
-
-### High-Impression, Zero-Click (Biggest Opportunities)
-
-| Keyword | Impressions | Position | Action |
-|---------|-------------|----------|--------|
-| fractional cmo | 118 | 75 | Enrich /fractional-cmo page |
-| fractional cmo uk | 115 | 35 | Add UK-specific section |
-| interim cmo | 97 | 51 | Enrich /interim-cmo page |
-| hire fractional coos | 71 | 28 | Enrich /hire-fractional-coo |
-| part time cmo | 69 | 26 | Create /part-time-cmo page |
-| interim finance director | 58 | 50 | Create dedicated page |
-| fractional fd | 52 | 70 | Enrich /fractional-fd page |
-| interim cfo | 51 | 72 | Enrich /interim-cfo page |
-
-### Top Performing (Protect These)
-
-| Keyword | Clicks | Position | Notes |
-|---------|--------|----------|-------|
-| fractional cto jobs | 17 | 1.6 | #1 position - protect this! |
-| fractional jobs | 8 | 4.7 | Strong performer |
-| interim cto jobs | 8 | 2.5 | Strong performer |
-
----
-
-## Content Gaps to Fill
-
-### 1. Comparison Content (MAJOR GAP)
-
-Competitors have "Fractional vs Interim vs Full-Time" tables. We don't.
-
-**Template:**
-```
-| Feature | Fractional | Interim | Full-Time |
-|---------|------------|---------|-----------|
-| Commitment | 1-3 days/week | Full-time (temp) | Full-time (perm) |
-| Duration | 6+ months ongoing | 3-9 months typical | Permanent |
-| Cost | £3k-£6k/month | £8k-£12k/week | £150k-£250k/year |
-| Focus | Strategic + operational | Gap-fill, transformation | All responsibilities |
-| Best For | Growing companies | Leadership gaps | Large orgs |
-```
-
-### 2. FAQ Enrichment (PAA-Style Questions)
-
-Add these high-volume questions to relevant pages:
-
-**Cost Questions:**
-- "How much does a fractional CMO cost UK?"
-- "How much does a fractional CFO cost per month?"
-- "What is the day rate for an interim CFO?"
-
-**Comparison Questions:**
-- "What is the difference between fractional and interim CFO?"
-- "Fractional CMO vs full-time CMO"
-- "When should I hire fractional vs interim?"
-
-**When to Hire Questions:**
-- "When should a startup hire a fractional CFO?"
-- "At what revenue should I hire a fractional CTO?"
-- "How do I know if I need a fractional CMO?"
-
-**Hours/Commitment Questions:**
-- "How many hours does a fractional CTO work?"
-- "How many days a week does a fractional CMO work?"
-
-### 3. Definition Boxes for AI Overview
-
-Add 60-80 word definitions at top of pages:
-
-```
-A Fractional CMO is a part-time Chief Marketing Officer who provides
-strategic marketing leadership to companies 1-3 days per week. They
-typically charge £600-£1,200 per day in the UK, offering the same
-expertise as a full-time CMO at 50-70% less cost. Ideal for companies
-with £1M-£15M revenue that need senior marketing leadership without
-full-time commitment.
-```
-
----
-
-## Competitor Intelligence
-
-### Top Competitors by Role
-
-**CMO:**
-- Communications Edge - UK-specific, PDF downloads, £600-£1,500/day pricing
-- VCMO - Investment calculator, comprehensive guides
-- Chief Outsiders - 2,000+ clients, US-focused
-- Porter Wills - Sport/DTC specialist
-
-**CFO:**
-- FD Capital - UK FD specialist, hourly/daily/monthly pricing
-- Pitch Hill Partners - PE/VC focus, £800-£1,500/day
-- Boardroom Advisors - Comprehensive guides
-- EmergeOne - Startup focus, £2,000-£8,000/month
-
-**CTO:**
-- fractional.quest - WE'RE #1 for "fractional cto jobs" ✅
-- Arc.dev - Freelance marketplace
-- GoFractional - US-focused
-
-**COO:**
-- Tom Wardman - Agency-specific, £4,200-£6,900/month
-- Chore - Startup operations
-- Like Sunday - $1,800/month entry point
-
----
-
-## New Pages to Create
-
-1. `/part-time-cmo` - 69 impressions, position 26
-2. `/interim-finance-director` - 58 impressions, position 50
-3. `/fractional-cmo-vs-interim-cmo` - Comparison page
-4. `/fractional-cfo-vs-interim-cfo` - Comparison page
-5. `/when-to-hire-fractional-cfo` - Decision guide
-
----
-
-## Site-Wide Content Updates
-
-Based on Tavily research, update across all pages:
-
-1. **Calculator Defaults** - Lower default day rates to realistic mid-points
-2. **Pricing Tables** - Show ranges (entry → senior → premium)
-3. **Engagement Length** - Add typical duration info
-4. **Hours/Week** - Add commitment level info
-5. **FAQ Answers** - Use Tavily AI Overview answers as templates
-
----
-
-## Database Access
-
-**Neon Project**: `plain-glade-34229418`
-
-**Key Tables:**
-- `pages` - Database-driven page content
-- `jobs` - Job listings (213+ entries)
-
-**Quick Commands:**
-```sql
--- Check existing page
-SELECT slug, title FROM pages WHERE slug = 'your-slug';
-
--- Update page sections (JSONB)
-UPDATE pages SET sections = jsonb_insert(sections, '{0}', '...'::jsonb, true)
-WHERE slug = 'your-slug';
-```
-
----
-
-## Keywords Still to Research
-
-Use Tavily to research:
-- fractional marketing director (15 impressions, pos 68)
-- interim marketing director (39 impressions, pos 45)
-- part time finance director (12 impressions, pos 53)
-- fractional operations director (5 impressions, pos 44)
-- interim chief operating officer (9 impressions, pos 60)
-- fractional chief people officer (4 impressions, pos 6)
-- fractional CISO cost
-
----
-
-## Files to Reference
-
-| File | Purpose |
-|------|---------|
-| `CLAUDE.md` | Project overview, Tavily API, patterns |
-| `.claude/reference/content-plan.md` | Content creation roadmap |
-| `.claude/reference/job-schema.md` | Job database schema |
-| `.claude/reference/seo-templates.md` | SEO content templates |
-| `.claude/reference/role-data.md` | Day rates, engagement types |
-| `/public/llms.txt` | AI/LLM optimization file |
 
 ---
 
 ## Commands
 
 ```bash
-npm run dev      # Start dev server
-npm run build    # Check for errors
+npm run dev      # Development server (port 3000)
+npm run build    # Production build
 git add -A && git commit -m "message" && git push  # Deploy
 ```
 
 ---
 
-*Last Updated: 31 January 2026*
-*Previous Session: GSC analysis + Tavily competitive research*
+*Last Updated: 1 February 2026*
+*Previous Session: Template unification, locale-aware linking, IntelligentPageRenderer enhancements*
