@@ -119,24 +119,35 @@ SELECT slug FROM pages WHERE slug NOT IN (SELECT page_slug FROM content_enrichme
 - Updated calculator pricing to realistic UK market rates
 - 25+ enrichments tracked in `content_enrichment` table
 
+### Header/Footer Locale Awareness (1 Feb 2026) ✅
+- Header and Footer now detect locale from pathname
+- All nav links use `localizeUrl()` from `src/i18n/config.ts`
+- US/AU/NZ users clicking nav stay in their market
+- Commit: `21051af`
+
+### International Content (1 Feb 2026) ✅
+- Enriched CFO pages for US, AU, NZ with locale-specific content
+- Day rates in local currency (USD, AUD, NZD)
+- Local qualifications (CPA, CA ANZ)
+- CMO/CTO pages already had content
+
+### International Jobs (1 Feb 2026) ✅
+- US: 106 jobs already in database
+- AU: Added 3 jobs (CFO Sydney, CMO Melbourne, CTO Sydney)
+- NZ: Added 3 jobs (CFO Auckland, CMO Wellington, CTO Auckland)
+
 ---
 
 ## Known Issues / Next Steps
 
-### Priority 1: Header/Footer Locale Awareness
-- Header and Footer components have hardcoded UK links
-- US/AU/NZ users clicking header nav go back to UK pages
-- **Fix:** Pass locale to Header/Footer or make them detect from path
-
-### Priority 2: International Content
-- US/AU/NZ pages in Neon have sparse content (empty sections)
-- Need to enrich international page content
-- Consider locale-specific jobs in jobs table
-
-### Priority 3: Content Enrichment
+### Priority 1: Content Enrichment
 - Continue Tavily-based enrichment for remaining pages
 - Track in `content_enrichment` table
 - Target quality score 8+ for all lead pages
+
+### Priority 2: More International Jobs
+- Add more AU/NZ jobs (currently 3 each)
+- Add more role types (COO, CHRO, CISO, etc.)
 
 ### Technical Debt
 - Static hardcoded page files can be deleted (keep as backup)
@@ -178,4 +189,4 @@ git add -A && git commit -m "message" && git push  # Deploy
 ---
 
 *Last Updated: 1 February 2026*
-*Previous Session: Template unification, locale-aware linking, IntelligentPageRenderer enhancements*
+*This Session: Header/Footer locale awareness, international CFO content, AU/NZ jobs added*
