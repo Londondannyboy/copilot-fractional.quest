@@ -26,17 +26,27 @@ Load these when working on specific tasks:
 
 ## Key Patterns
 
-### Page Architecture
+### Page Architecture (Updated Feb 2026)
 
-**High-traffic pages** use static components (NOT database/PageRenderer):
+**ALL pages now served from Neon via IntelligentPageRenderer:**
 ```
-src/app/fractional-cfo-jobs-uk/page.tsx → JobPageClient
+src/app/[slug]/page.tsx → Neon pages table → IntelligentPageRenderer
 ```
 
-**Lower-traffic pages** can use database + PageRenderer:
-```
-src/app/[slug]/page.tsx → Neon pages table → PageRenderer
-```
+- `STATIC_ROUTE_SLUGS` array is now empty - all pages use Neon
+- Static hardcoded page files still exist but `[slug]` route takes priority
+- International pages (`/us/`, `/au/`, `/nz/`) also use IntelligentPageRenderer
+- One unified template with locale-aware internal linking
+
+**IntelligentPageRenderer Features:**
+- Auto internal/external linking (75+ terms, locale-aware)
+- Enhanced visual sections with icons & gradients
+- Industry insights (real HBR/Forbes/LinkedIn data)
+- Schema.org structured data (FAQPage, BreadcrumbList)
+- Mobile responsive design
+- Sidebar with quick nav, newsletter, related pages
+- CostSavingsChart, SkillsBreakdownChart, KeyTakeawaysBox
+- RelatedRolesSection with locale-aware links
 
 ### Adding Jobs to Database
 
@@ -327,6 +337,54 @@ INSERT INTO content_enrichment (
 - [ ] Case study or data point reference
 - [ ] PAA-style questions from Tavily research
 - [ ] Internal links to related pages
+
+## Session Progress (Feb 2026)
+
+### Completed This Session
+
+**Template Unification:**
+- Migrated ALL pages to Neon + IntelligentPageRenderer
+- Cleared `STATIC_ROUTE_SLUGS` - no more hardcoded page priority
+- Updated international pages to use IntelligentPageRenderer (was using legacy PageWithCopilot)
+- Added locale-aware internal linking (US/AU/NZ users stay in their market)
+
+**IntelligentPageRenderer Enhancements:**
+- Auto internal linking (55+ terms) with locale awareness
+- Auto external linking (20+ authority sources: Gartner, CIPD, ICAEW, etc.)
+- Enhanced section renderers with icons based on keywords
+- Industry insights section (replaced fake testimonials with real HBR/Forbes data)
+- Mobile responsive fixes (overflow-x-hidden, grid-cols-1)
+- Sidebar improvements (quick nav, newsletter CTA, related pages)
+- New components: CostSavingsChart, SkillsBreakdownChart, KeyTakeawaysBox
+- stripMdxComponents() to remove raw MDX tags from rendered content
+
+**Locale-Aware Linking System:**
+- `detectLocaleFromSlug()` - detects us/au/nz from page slug
+- `localizeUrl()` - converts UK URLs to locale paths
+- `localizeTitle()` - removes UK references for other markets
+- Updated: addAutoLinks, RelatedRolesSection, Sidebar links
+
+### Known Issues / Next Steps
+
+**Priority 1 - Header/Footer Locale Awareness:**
+- Header and Footer components still have hardcoded UK links
+- US/AU/NZ users clicking header nav go back to UK pages
+- Need to pass locale to Header/Footer or make them locale-aware
+
+**Priority 2 - International Content:**
+- US/AU/NZ pages in Neon may have sparse content (empty sections)
+- Consider enriching international page content in Neon
+- Add locale-specific job data to jobs table
+
+**Priority 3 - Content Enrichment:**
+- Continue Tavily-based enrichment for remaining pages
+- Track in `content_enrichment` table
+- Target quality score 8+ for all lead pages
+
+**Technical Debt:**
+- Static hardcoded page files can be deleted (but keep as backup)
+- Consider adding middleware.ts for proper i18n routing
+- PageWithCopilot component is now unused - can be removed
 
 ## Restart Prompt
 
