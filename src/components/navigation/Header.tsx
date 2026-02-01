@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LocaleSwitcher } from '@/components/LocaleSwitcher'
+import { getLocaleFromPath, localizeUrl } from '@/i18n/config'
 
 // Pages that should have transparent header over hero
 const TRANSPARENT_HEADER_PAGES = [
@@ -77,6 +78,12 @@ export function Header() {
   const [isTouchDevice, setIsTouchDevice] = useState(false)
   const pathname = usePathname()
 
+  // Detect current locale from pathname
+  const locale = useMemo(() => getLocaleFromPath(pathname), [pathname])
+
+  // Helper to get localized URL
+  const localize = (href: string) => localizeUrl(href, locale)
+
   // Check if this page should have transparent header
   const isTransparentPage = TRANSPARENT_HEADER_PAGES.includes(pathname)
 
@@ -143,7 +150,7 @@ export function Header() {
                       {navigation.roles.items.map((item) => (
                         <Link
                           key={item.href}
-                          href={item.href}
+                          href={localize(item.href)}
                           className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
                         >
                           <span className="font-medium text-gray-900">{item.name}</span>
@@ -158,7 +165,7 @@ export function Header() {
                       {navigation.roles.featured.map((item) => (
                         <Link
                           key={item.href}
-                          href={item.href}
+                          href={localize(item.href)}
                           className="flex items-center justify-between px-3 py-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
                         >
                           <span className="font-medium text-gray-900">{item.name}</span>
@@ -168,7 +175,7 @@ export function Header() {
                     </div>
                     <div className="mt-4 pt-4 border-t border-gray-100">
                       <Link
-                        href="/fractional-jobs-uk"
+                        href={localize('/fractional-jobs-uk')}
                         className="text-emerald-700 hover:text-emerald-800 font-medium text-sm flex items-center gap-1"
                       >
                         View all jobs <ArrowRightIcon className="w-4 h-4" />
@@ -201,7 +208,7 @@ export function Header() {
                       {navigation.resources.items.map((item) => (
                         <Link
                           key={item.href}
-                          href={item.href}
+                          href={localize(item.href)}
                           className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-900"
                         >
                           {item.name}
@@ -215,7 +222,7 @@ export function Header() {
                       {navigation.resources.guides.map((item) => (
                         <Link
                           key={item.href}
-                          href={item.href}
+                          href={localize(item.href)}
                           className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-900"
                         >
                           {item.name}
@@ -249,7 +256,7 @@ export function Header() {
                       {navigation.employers.items.map((item) => (
                         <Link
                           key={item.href}
-                          href={item.href}
+                          href={localize(item.href)}
                           className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-900"
                         >
                           {item.name}
@@ -263,7 +270,7 @@ export function Header() {
                       {navigation.employers.services.map((item) => (
                         <Link
                           key={item.href}
-                          href={item.href}
+                          href={localize(item.href)}
                           className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors font-medium text-gray-900"
                         >
                           {item.name}
@@ -286,7 +293,7 @@ export function Header() {
               Sign In
             </Link>
             <Link
-              href="/fractional-jobs-uk"
+              href={localize('/fractional-jobs-uk')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${useTransparentStyle ? 'bg-white text-gray-900 hover:bg-white/90' : 'bg-emerald-700 hover:bg-emerald-800 text-white'}`}
             >
               Browse Jobs
@@ -338,7 +345,7 @@ export function Header() {
                     {navigation.roles.items.map((item) => (
                       <Link
                         key={item.href}
-                        href={item.href}
+                        href={localize(item.href)}
                         className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
                       >
                         {item.name}
@@ -362,7 +369,7 @@ export function Header() {
                     {navigation.resources.items.map((item) => (
                       <Link
                         key={item.href}
-                        href={item.href}
+                        href={localize(item.href)}
                         className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
                       >
                         {item.name}
@@ -386,7 +393,7 @@ export function Header() {
                     {navigation.employers.items.map((item) => (
                       <Link
                         key={item.href}
-                        href={item.href}
+                        href={localize(item.href)}
                         className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
                       >
                         {item.name}

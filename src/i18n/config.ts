@@ -108,3 +108,35 @@ export function getLocaleFromPath(pathname: string): Locale {
   // Default to UK for root paths and paths without locale prefix
   return 'uk';
 }
+
+// Convert a UK URL to the appropriate locale URL
+// UK: /fractional-cfo-jobs-uk → stays as is
+// US: /fractional-cfo-jobs-uk → /us/fractional-cfo-jobs
+// AU: /fractional-cfo-jobs-uk → /au/fractional-cfo-jobs
+// NZ: /fractional-cfo-jobs-uk → /nz/fractional-cfo-jobs
+export function localizeUrl(ukUrl: string, locale: Locale): string {
+  if (locale === 'uk') return ukUrl;
+
+  // Remove leading slash for processing
+  let path = ukUrl.startsWith('/') ? ukUrl.slice(1) : ukUrl;
+
+  // Remove -uk suffix if present
+  if (path.endsWith('-uk')) {
+    path = path.slice(0, -3);
+  }
+
+  // Handle special cases that don't follow the pattern
+  const specialPages: Record<string, string> = {
+    'fractional-jobs-uk': 'fractional-jobs',
+    'interim-jobs-uk': 'interim-jobs',
+    'advisory-jobs-uk': 'advisory-jobs',
+    'part-time-jobs-uk': 'part-time-jobs',
+  };
+
+  const basePath = ukUrl.startsWith('/') ? ukUrl.slice(1) : ukUrl;
+  if (specialPages[basePath]) {
+    path = specialPages[basePath];
+  }
+
+  return `/${locale}/${path}`;
+}

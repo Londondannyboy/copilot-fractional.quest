@@ -1,4 +1,9 @@
+'use client'
+
+import { useMemo } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { getLocaleFromPath, localizeUrl } from '@/i18n/config'
 
 // Simplified footer - key pages only
 const footerLinks = {
@@ -56,6 +61,9 @@ const socialLinks = [
 ]
 
 export function Footer() {
+  const pathname = usePathname()
+  const locale = useMemo(() => getLocaleFromPath(pathname), [pathname])
+  const localize = (href: string) => localizeUrl(href, locale)
   const currentYear = new Date().getFullYear()
 
   return (
@@ -98,7 +106,7 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.findJobs.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                  <Link href={localize(link.href)} className="text-sm hover:text-white transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -111,7 +119,7 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.workTypes.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                  <Link href={localize(link.href)} className="text-sm hover:text-white transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -124,7 +132,7 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.locations.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                  <Link href={localize(link.href)} className="text-sm hover:text-white transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -137,7 +145,7 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.resources.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                  <Link href={localize(link.href)} className="text-sm hover:text-white transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -150,7 +158,7 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.forEmployers.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                  <Link href={localize(link.href)} className="text-sm hover:text-white transition-colors">
                     {link.name}
                   </Link>
                 </li>
