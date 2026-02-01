@@ -23,7 +23,7 @@ const METRICS = [
 ]
 
 interface TrustSignalsProps {
-  variant?: 'full' | 'compact' | 'logos-only' | 'stats-only'
+  variant?: 'full' | 'compact' | 'logos-only' | 'stats-only' | 'sidebar'
   className?: string
   showCTA?: boolean
 }
@@ -66,6 +66,39 @@ export function TrustSignals({ variant = 'full', className = '', showCTA = true 
               <div className="text-sm text-gray-600">{metric.label}</div>
             </div>
           ))}
+        </div>
+      </div>
+    )
+  }
+
+  // Sidebar variant - vertical stack for narrow containers
+  if (variant === 'sidebar') {
+    return (
+      <div className={`bg-white border border-gray-200 rounded-xl p-4 ${className}`}>
+        <h3 className="font-semibold text-gray-900 text-sm mb-3">Platform Stats</h3>
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          {METRICS.slice(0, 4).map((metric) => (
+            <div key={metric.label} className="text-center p-2 bg-gray-50 rounded-lg">
+              <div className={`text-lg font-bold text-${metric.color}-600`}>
+                {metric.value}
+              </div>
+              <div className="text-xs text-gray-500">{metric.label}</div>
+            </div>
+          ))}
+        </div>
+        <div className="pt-3 border-t border-gray-100">
+          <p className="text-xs text-gray-500 mb-2">Founder&apos;s background</p>
+          <div className="flex gap-2">
+            {EMPLOYMENT_HISTORY.map((client) => (
+              <div
+                key={client.name}
+                className={`w-8 h-8 ${client.bg} rounded flex items-center justify-center`}
+                title={client.name}
+              >
+                <span className={`${client.text} font-bold text-[8px]`}>{client.logo}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )

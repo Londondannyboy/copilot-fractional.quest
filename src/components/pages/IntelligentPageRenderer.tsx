@@ -281,6 +281,31 @@ function WhenToHireSection({ section }: { section: Section }) {
   );
 }
 
+// Benefits Section - grid of benefit cards
+function BenefitsSection({ section }: { section: Section }) {
+  const heading = (section.heading as string) || (section.title as string);
+  const items = (section.items as Array<{ title: string; description: string }>) || [];
+
+  return (
+    <div className="my-8">
+      {heading && (
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">{heading}</h2>
+      )}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((item, i) => (
+          <div key={i} className="bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 rounded-xl p-5">
+            <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-3">
+              <span className="text-emerald-600 text-lg">✓</span>
+            </div>
+            <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
+            <p className="text-gray-600 text-sm">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SectionRenderer({ section }: { section: Section }) {
   const title = (section.title as string) || (section.heading as string) || "";
   const content = (section.content as string) || "";
@@ -303,6 +328,8 @@ function SectionRenderer({ section }: { section: Section }) {
       return <ResponsibilitiesSection section={section} />;
     case "when_to_hire":
       return <WhenToHireSection section={section} />;
+    case "benefits":
+      return <BenefitsSection section={section} />;
     case "prose":
       return <ProseSection section={section} />;
     case "table":
@@ -470,7 +497,7 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
                 />
 
                 {/* Trust Signals */}
-                <TrustSignals />
+                <TrustSignals variant="sidebar" />
 
                 {/* CTA Box */}
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">

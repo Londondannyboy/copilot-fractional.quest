@@ -19,37 +19,22 @@ const TRANSPARENT_HEADER_PAGES = [
   '/fractional-ceo-jobs-uk',
 ]
 
-// Navigation data structure
+// Navigation data structure - simplified for cleaner UX
 const navigation = {
   roles: {
     label: 'Find Jobs',
     description: 'Browse by role',
     items: [
-      { name: 'CFO Jobs', href: '/fractional-cfo-jobs-uk', description: 'Finance leadership roles' },
-      { name: 'CTO Jobs', href: '/fractional-cto-jobs-uk', description: 'Technology leadership roles' },
-      { name: 'CMO Jobs', href: '/fractional-cmo-jobs-uk', description: 'Marketing leadership roles' },
-      { name: 'COO Jobs', href: '/fractional-coo-jobs-uk', description: 'Operations leadership roles' },
-      { name: 'CEO Jobs', href: '/fractional-ceo-jobs-uk', description: 'Executive leadership roles' },
-      { name: 'CHRO Jobs', href: '/fractional-chro-jobs-uk', description: 'HR leadership roles' },
-      { name: 'CPO Jobs', href: '/fractional-cpo-jobs-uk', description: 'Product leadership roles' },
-      { name: 'CISO Jobs', href: '/fractional-ciso-jobs-uk', description: 'Security leadership roles' },
+      { name: 'CFO Jobs', href: '/fractional-cfo-jobs-uk', description: 'Finance leadership' },
+      { name: 'CTO Jobs', href: '/fractional-cto-jobs-uk', description: 'Technology leadership' },
+      { name: 'CMO Jobs', href: '/fractional-cmo-jobs-uk', description: 'Marketing leadership' },
+      { name: 'COO Jobs', href: '/fractional-coo-jobs-uk', description: 'Operations leadership' },
+      { name: 'More Roles...', href: '/fractional-jobs-uk', description: 'CEO, CHRO, CPO, CISO' },
     ],
     featured: [
       { name: 'All UK Jobs', href: '/fractional-jobs-uk', tag: 'Popular' },
-      { name: 'Remote Jobs', href: '/remote-fractional-jobs', tag: 'Flexible' },
-      { name: 'Tech Sector', href: '/fractional-jobs-tech', tag: 'Hot' },
-    ]
-  },
-  locations: {
-    label: 'Locations',
-    description: 'Browse by location',
-    items: [
-      { name: 'London', href: '/fractional-jobs-london', count: '50+ jobs' },
-      { name: 'Manchester', href: '/manchester', count: '20+ jobs' },
-      { name: 'Birmingham', href: '/birmingham', count: '15+ jobs' },
-      { name: 'Edinburgh', href: '/edinburgh', count: '12+ jobs' },
-      { name: 'Bristol', href: '/bristol', count: '10+ jobs' },
-      { name: 'All UK', href: '/fractional-jobs-uk', count: '100+ jobs' },
+      { name: 'Interim Jobs', href: '/interim-jobs-uk', tag: 'Full-time' },
+      { name: 'London Jobs', href: '/fractional-jobs-london', tag: 'Location' },
     ]
   },
   resources: {
@@ -77,33 +62,10 @@ const navigation = {
       { name: 'Hire a Fractional CTO', href: '/hire-fractional-cto' },
       { name: 'Hire a Fractional CMO', href: '/hire-fractional-cmo' },
       { name: 'Hire a Fractional COO', href: '/hire-fractional-coo' },
-      { name: 'Hire a Fractional CEO', href: '/hire-fractional-ceo' },
-      { name: 'Hire a Fractional CHRO', href: '/hire-fractional-chro' },
     ],
     services: [
-      { name: 'CFO Services', href: '/fractional-cfo-services' },
-      { name: 'CTO Services', href: '/fractional-cto-services' },
-      { name: 'CMO Services', href: '/fractional-cmo-services' },
       { name: 'Executive Search', href: '/executive-search-firms' },
-      { name: 'Recruitment Agencies', href: '/fractional-recruitment-agency' },
-    ]
-  },
-  engagementTypes: {
-    label: 'Work Types',
-    description: 'Browse by engagement type',
-    items: [
-      { name: 'Interim CFO', href: '/interim-cfo', description: 'Full-time temporary' },
-      { name: 'Interim CTO', href: '/interim-cto', description: 'Full-time temporary' },
-      { name: 'Interim CMO', href: '/interim-cmo', description: 'Full-time temporary' },
-      { name: 'Interim CEO', href: '/interim-ceo', description: 'Full-time temporary' },
-      { name: 'Interim CHRO', href: '/interim-chro', description: 'Full-time temporary' },
-      { name: 'Part-Time CMO', href: '/part-time-cmo', description: 'Fixed days per week' },
-      { name: 'Part-Time COO', href: '/part-time-coo', description: 'Fixed days per week' },
-    ],
-    featured: [
-      { name: 'All Interim Jobs', href: '/interim-jobs-uk', tag: 'Full-time temp' },
-      { name: 'All Part-Time Jobs', href: '/part-time-jobs-uk', tag: 'Flexible' },
-      { name: 'Advisory Roles', href: '/advisory-jobs-uk', tag: 'Strategic' },
+      { name: 'Recruitment', href: '/fractional-recruitment-agency' },
     ]
   }
 }
@@ -217,39 +179,6 @@ export function Header() {
               )}
             </div>
 
-            {/* Locations Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => !isTouchDevice && setActiveDropdown('locations')}
-              onMouseLeave={() => !isTouchDevice && setActiveDropdown(null)}
-            >
-              <button
-                className={`px-4 py-2 font-medium flex items-center gap-1 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}
-                onClick={() => isTouchDevice && setActiveDropdown(activeDropdown === 'locations' ? null : 'locations')}
-              >
-                {navigation.locations.label}
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${activeDropdown === 'locations' ? 'rotate-180' : ''}`} />
-              </button>
-
-              {activeDropdown === 'locations' && (
-                <div className="absolute top-full left-0 w-[90vw] max-w-[320px] bg-white rounded-xl shadow-xl border border-gray-100 p-4">
-                  <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">UK Locations</p>
-                  <div className="space-y-1">
-                    {navigation.locations.items.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-                      >
-                        <span className="font-medium text-gray-900">{item.name}</span>
-                        <span className="text-sm text-gray-500">{item.count}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
             {/* Resources Dropdown */}
             <div
               className="relative"
@@ -346,63 +275,6 @@ export function Header() {
               )}
             </div>
 
-            {/* Work Types Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => !isTouchDevice && setActiveDropdown('engagementTypes')}
-              onMouseLeave={() => !isTouchDevice && setActiveDropdown(null)}
-            >
-              <button
-                className={`px-4 py-2 font-medium flex items-center gap-1 ${useTransparentStyle ? 'text-white hover:text-white/80' : 'text-gray-700 hover:text-gray-900'}`}
-                onClick={() => isTouchDevice && setActiveDropdown(activeDropdown === 'engagementTypes' ? null : 'engagementTypes')}
-              >
-                {navigation.engagementTypes.label}
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${activeDropdown === 'engagementTypes' ? 'rotate-180' : ''}`} />
-              </button>
-
-              {activeDropdown === 'engagementTypes' && (
-                <div className="absolute top-full right-0 w-[90vw] max-w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <div>
-                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">By Type</p>
-                    <div className="space-y-1">
-                      {navigation.engagementTypes.items.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-                        >
-                          <span className="font-medium text-gray-900">{item.name}</span>
-                          <span className="text-sm text-gray-500 block">{item.description}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Featured</p>
-                    <div className="space-y-2">
-                      {navigation.engagementTypes.featured.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="flex items-center justify-between px-3 py-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-                        >
-                          <span className="font-medium text-gray-900">{item.name}</span>
-                          <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">{item.tag}</span>
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="mt-4 pt-4 border-t border-gray-100">
-                      <Link
-                        href="/interim-jobs-uk"
-                        className="text-emerald-700 hover:text-emerald-800 font-medium text-sm flex items-center gap-1"
-                      >
-                        View all work types <ArrowRightIcon className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
 
           {/* Right side - CTA */}
@@ -476,30 +348,6 @@ export function Header() {
                 )}
               </div>
 
-              {/* Locations */}
-              <div>
-                <button
-                  className="w-full flex items-center justify-between px-4 py-3 min-h-[48px] font-medium text-gray-900 hover:bg-gray-50 transition-colors"
-                  onClick={() => setActiveDropdown(activeDropdown === 'mobile-locations' ? null : 'mobile-locations')}
-                >
-                  Locations
-                  <ChevronDownIcon className={`w-5 h-5 transition-transform ${activeDropdown === 'mobile-locations' ? 'rotate-180' : ''}`} />
-                </button>
-                {activeDropdown === 'mobile-locations' && (
-                  <div className="bg-gray-50 py-2">
-                    {navigation.locations.items.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
               {/* Resources */}
               <div>
                 <button
@@ -544,41 +392,6 @@ export function Header() {
                         {item.name}
                       </Link>
                     ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Work Types */}
-              <div>
-                <button
-                  className="w-full flex items-center justify-between px-4 py-3 min-h-[48px] font-medium text-gray-900 hover:bg-gray-50 transition-colors"
-                  onClick={() => setActiveDropdown(activeDropdown === 'mobile-engagementTypes' ? null : 'mobile-engagementTypes')}
-                >
-                  Work Types
-                  <ChevronDownIcon className={`w-5 h-5 transition-transform ${activeDropdown === 'mobile-engagementTypes' ? 'rotate-180' : ''}`} />
-                </button>
-                {activeDropdown === 'mobile-engagementTypes' && (
-                  <div className="bg-gray-50 py-2">
-                    {navigation.engagementTypes.items.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                    <div className="border-t border-gray-200 mt-2 pt-2">
-                      {navigation.engagementTypes.featured.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block px-6 py-3 min-h-[44px] text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
                   </div>
                 )}
               </div>
