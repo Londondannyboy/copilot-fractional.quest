@@ -21,6 +21,70 @@ const CopilotKitWrapper = dynamic(
   { ssr: false, loading: () => null }
 );
 
+// Salary data for chart
+const ROLE_SALARY_DATA: Record<string, { min: number; avg: number; max: number }> = {
+  cfo: { min: 800, avg: 1100, max: 1500 },
+  cto: { min: 900, avg: 1200, max: 1600 },
+  cmo: { min: 750, avg: 1000, max: 1400 },
+  coo: { min: 800, avg: 1050, max: 1400 },
+  ceo: { min: 1000, avg: 1400, max: 2000 },
+  chro: { min: 700, avg: 950, max: 1300 },
+  cpo: { min: 850, avg: 1100, max: 1450 },
+  ciso: { min: 900, avg: 1200, max: 1550 },
+  cdo: { min: 900, avg: 1150, max: 1450 },
+};
+
+// Simple salary visualization component
+function SalaryRangeChart({ role }: { role: string }) {
+  const data = ROLE_SALARY_DATA[role.toLowerCase()] || ROLE_SALARY_DATA.cfo;
+  const maxValue = 2000;
+
+  return (
+    <div className="bg-gradient-to-br from-white to-emerald-50 rounded-xl p-6 border border-emerald-100 shadow-sm">
+      <h3 className="text-lg font-bold text-gray-900 mb-4">UK Day Rate Range</h3>
+      <div className="space-y-4">
+        <div>
+          <div className="flex justify-between text-sm mb-1">
+            <span className="text-gray-600">Minimum</span>
+            <span className="font-semibold text-gray-900">£{data.min}/day</span>
+          </div>
+          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gray-400 rounded-full transition-all"
+              style={{ width: `${(data.min / maxValue) * 100}%` }}
+            />
+          </div>
+        </div>
+        <div>
+          <div className="flex justify-between text-sm mb-1">
+            <span className="text-gray-600">Average</span>
+            <span className="font-semibold text-emerald-700">£{data.avg}/day</span>
+          </div>
+          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-emerald-500 rounded-full transition-all"
+              style={{ width: `${(data.avg / maxValue) * 100}%` }}
+            />
+          </div>
+        </div>
+        <div>
+          <div className="flex justify-between text-sm mb-1">
+            <span className="text-gray-600">Maximum</span>
+            <span className="font-semibold text-blue-700">£{data.max}/day</span>
+          </div>
+          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-blue-500 rounded-full transition-all"
+              style={{ width: `${(data.max / maxValue) * 100}%` }}
+            />
+          </div>
+        </div>
+      </div>
+      <p className="text-xs text-gray-500 mt-4">Based on UK market data for fractional executives</p>
+    </div>
+  );
+}
+
 // ===========================================
 // Types
 // ===========================================
@@ -558,6 +622,9 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
 
                 {/* Trust Signals */}
                 <TrustSignals variant="sidebar" />
+
+                {/* Salary Range Chart */}
+                <SalaryRangeChart role={extractRoleFromSlug(page.slug)} />
 
                 {/* CTA Box */}
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
