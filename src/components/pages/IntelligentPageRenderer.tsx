@@ -446,8 +446,57 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
 
               {/* MDX Long-form Content */}
               {page.mdx_content && (
-                <article className="prose prose-lg prose-gray max-w-none prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-emerald-700 hover:prose-a:underline prose-table:w-full prose-th:bg-gray-50 prose-th:p-3 prose-th:text-left prose-th:font-semibold prose-th:border-b prose-td:p-3 prose-td:border-b prose-strong:text-gray-900 prose-blockquote:border-l-emerald-500 prose-blockquote:bg-emerald-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-emerald-800">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                <article className="prose prose-lg prose-gray max-w-none">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      table: ({ children }) => (
+                        <div className="overflow-x-auto my-6">
+                          <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+                            {children}
+                          </table>
+                        </div>
+                      ),
+                      thead: ({ children }) => (
+                        <thead className="bg-gray-50">{children}</thead>
+                      ),
+                      th: ({ children }) => (
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200">{children}</th>
+                      ),
+                      td: ({ children }) => (
+                        <td className="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">{children}</td>
+                      ),
+                      tr: ({ children }) => (
+                        <tr className="even:bg-gray-50">{children}</tr>
+                      ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="border-l-4 border-emerald-500 bg-emerald-50 py-3 px-4 my-6 not-italic text-emerald-800 rounded-r-lg">
+                          {children}
+                        </blockquote>
+                      ),
+                      h2: ({ children }) => (
+                        <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">{children}</h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className="text-xl font-bold text-gray-900 mt-8 mb-3">{children}</h3>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="list-disc list-inside space-y-2 my-4">{children}</ul>
+                      ),
+                      ol: ({ children }) => (
+                        <ol className="list-decimal list-inside space-y-2 my-4">{children}</ol>
+                      ),
+                      li: ({ children }) => (
+                        <li className="text-gray-700">{children}</li>
+                      ),
+                      strong: ({ children }) => (
+                        <strong className="font-bold text-gray-900">{children}</strong>
+                      ),
+                      a: ({ href, children }) => (
+                        <a href={href} className="text-emerald-700 hover:underline">{children}</a>
+                      ),
+                    }}
+                  >
                     {page.mdx_content}
                   </ReactMarkdown>
                 </article>
