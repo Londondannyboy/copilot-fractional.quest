@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getPageBySlug, getAllPageSlugs, getPageTypeLabel } from '@/lib/pages'
 import { IntelligentPageRenderer } from '@/components/pages/IntelligentPageRenderer'
+import { JobsSidebar } from '@/components/JobsSidebar'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { mdxComponents } from '../../../mdx-components'
 
@@ -400,11 +401,39 @@ export default async function DynamicPage({ params }: PageProps) {
 
       {/* Page Content */}
       {page.mdx_content ? (
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          <article className="prose prose-lg max-w-none">
-            <MDXRemote source={page.mdx_content} components={mdxComponents} />
-          </article>
-        </div>
+        // MDX content with two-column layout
+        <section className="py-8 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Main Content Column */}
+              <div className="lg:col-span-2">
+                <article className="prose prose-lg max-w-none">
+                  <MDXRemote source={page.mdx_content} components={mdxComponents} />
+                </article>
+              </div>
+              {/* Sidebar */}
+              <div className="lg:col-span-1">
+                <div className="sticky top-24 space-y-6">
+                  <JobsSidebar
+                    location={slug.includes('london') ? 'london' : slug.includes('edinburgh') ? 'edinburgh' : slug.includes('manchester') ? 'manchester' : 'uk'}
+                  />
+                  {/* CTA Box */}
+                  <div className="bg-white border border-gray-200 rounded-xl p-6">
+                    <h3 className="font-bold text-gray-900 mb-4">Find Your Rate</h3>
+                    <p className="text-gray-600 text-sm mb-4">Use our calculator to estimate your day rate based on role and experience.</p>
+                    <a href="/calculators/rate-finder" className="text-emerald-600 font-medium hover:underline">Rate Calculator →</a>
+                  </div>
+                  {/* CTA Box */}
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+                    <h3 className="font-bold text-emerald-900 mb-2">Looking to Hire?</h3>
+                    <p className="text-emerald-800 text-sm mb-4">Connect with vetted fractional executives today.</p>
+                    <a href="/contact" className="block w-full text-center bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition-colors font-medium">Post a Role</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       ) : (
         <IntelligentPageRenderer page={page} />
       )}
