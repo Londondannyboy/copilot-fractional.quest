@@ -34,7 +34,7 @@ const ROLE_SALARY_DATA: Record<string, { min: number; avg: number; max: number }
   cdo: { min: 900, avg: 1150, max: 1450 },
 };
 
-// Simple salary visualization component
+// Simple salary visualization component (sidebar version)
 function SalaryRangeChart({ role }: { role: string }) {
   const data = ROLE_SALARY_DATA[role.toLowerCase()] || ROLE_SALARY_DATA.cfo;
   const maxValue = 2000;
@@ -81,6 +81,76 @@ function SalaryRangeChart({ role }: { role: string }) {
         </div>
       </div>
       <p className="text-xs text-gray-500 mt-4">Based on UK market data for fractional executives</p>
+    </div>
+  );
+}
+
+// Large market comparison chart (main content version)
+function MarketComparisonChart({ currentRole }: { currentRole: string }) {
+  const roles = ['cfo', 'cto', 'cmo', 'coo', 'cdo', 'ciso'];
+  const maxValue = 1600;
+
+  return (
+    <div className="bg-white rounded-2xl border border-gray-200 shadow-lg p-6 my-8">
+      <h2 className="text-2xl font-bold text-gray-900 mb-2">UK Fractional Executive Day Rates</h2>
+      <p className="text-gray-600 mb-6">Compare day rates across C-suite roles</p>
+
+      <div className="space-y-4">
+        {roles.map((role) => {
+          const data = ROLE_SALARY_DATA[role] || ROLE_SALARY_DATA.cfo;
+          const isCurrentRole = role.toLowerCase() === currentRole.toLowerCase();
+
+          return (
+            <div key={role} className={`p-4 rounded-xl transition-all ${isCurrentRole ? 'bg-emerald-50 border-2 border-emerald-200' : 'bg-gray-50'}`}>
+              <div className="flex items-center justify-between mb-2">
+                <span className={`font-bold uppercase ${isCurrentRole ? 'text-emerald-700' : 'text-gray-700'}`}>
+                  {role.toUpperCase()}
+                  {isCurrentRole && <span className="ml-2 text-xs bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full">This Role</span>}
+                </span>
+                <span className="text-sm text-gray-600">
+                  £{data.min} - £{data.max}/day
+                </span>
+              </div>
+              <div className="relative h-8 bg-gray-200 rounded-lg overflow-hidden">
+                {/* Min to Max range bar */}
+                <div
+                  className={`absolute h-full rounded-lg ${isCurrentRole ? 'bg-emerald-200' : 'bg-blue-100'}`}
+                  style={{
+                    left: `${(data.min / maxValue) * 100}%`,
+                    width: `${((data.max - data.min) / maxValue) * 100}%`
+                  }}
+                />
+                {/* Average marker */}
+                <div
+                  className={`absolute top-0 bottom-0 w-1 ${isCurrentRole ? 'bg-emerald-600' : 'bg-blue-600'}`}
+                  style={{ left: `${(data.avg / maxValue) * 100}%` }}
+                />
+                {/* Average label */}
+                <div
+                  className="absolute -top-6 transform -translate-x-1/2 text-xs font-semibold"
+                  style={{ left: `${(data.avg / maxValue) * 100}%` }}
+                >
+                  <span className={isCurrentRole ? 'text-emerald-700' : 'text-blue-700'}>£{data.avg}</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-6 pt-4 border-t border-gray-200 flex items-center justify-between text-sm text-gray-500">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-3 bg-blue-100 rounded" />
+            <span>Rate Range</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-1 h-3 bg-blue-600 rounded" />
+            <span>Average</span>
+          </div>
+        </div>
+        <span>Source: UK Market Data 2025</span>
+      </div>
     </div>
   );
 }
@@ -565,6 +635,9 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
                   </ReactMarkdown>
                 </article>
               )}
+
+              {/* Market Comparison Chart */}
+              <MarketComparisonChart currentRole={extractRoleFromSlug(page.slug)} />
 
               {/* Role Calculator */}
               <div className="my-8">
