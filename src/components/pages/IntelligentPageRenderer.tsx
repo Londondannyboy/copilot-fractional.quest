@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { PageData, Section, FAQ } from "@/lib/pages";
 import { HotJobs } from "@/components/HotJobs";
@@ -13,15 +12,8 @@ import AuthorityLinksPanel from "@/components/mdx/AuthorityLinksPanel";
 import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
 import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
 
-// Lazy load CopilotKit to reduce initial bundle
-const CopilotPopup = dynamic(
-  () => import("@copilotkit/react-ui").then((mod) => mod.CopilotPopup),
-  { ssr: false }
-);
-const CopilotKit = dynamic(
-  () => import("@copilotkit/react-core").then((mod) => mod.CopilotKit),
-  { ssr: false }
-);
+// CopilotKit removed - requires /api/copilot endpoint setup
+// TODO: Add CopilotKit when API route is configured for Neon pages
 
 // ===========================================
 // Types
@@ -472,15 +464,6 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
         </div>
       </section>
 
-      {/* CopilotKit AI Assistant */}
-      <CopilotKit runtimeUrl="/api/copilot">
-        <CopilotPopup
-          labels={{
-            title: "Fractional Quest AI",
-            initial: `Hi! I can help you find ${page.hero_title || "fractional executive"} roles. What would you like to know?`,
-          }}
-        />
-      </CopilotKit>
     </main>
   );
 }
