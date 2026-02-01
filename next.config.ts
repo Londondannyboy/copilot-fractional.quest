@@ -455,11 +455,8 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      // Extended roles - serve from articles database
-      {
-        source: '/fractional-cdo-jobs-uk',
-        destination: '/articles/fractional-cdo-jobs-uk',
-      },
+      // Extended roles - now served from pages table via [slug] route
+      // fractional-cdo-jobs-uk removed - uses IntelligentPageRenderer
       {
         source: '/fractional-cro-jobs-uk',
         destination: '/articles/fractional-cro-jobs-uk',
