@@ -171,8 +171,94 @@ function TableSection({ section }: { section: Section }) {
   );
 }
 
+// Intro Section - heading with prose content
+function IntroSection({ section }: { section: Section }) {
+  const heading = (section.heading as string) || (section.title as string);
+  const content = section.content as string | undefined;
+
+  return (
+    <div className="bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg p-6">
+      {heading && (
+        <h2 className="text-xl font-bold text-emerald-900 mb-3">{heading}</h2>
+      )}
+      {content && (
+        <p className="text-emerald-800 leading-relaxed">{content}</p>
+      )}
+    </div>
+  );
+}
+
+// Role Types Section - cards with rates
+function RoleTypesSection({ section }: { section: Section }) {
+  const heading = (section.heading as string) || (section.title as string);
+  const items = (section.items as Array<{ title: string; rate: string; description: string }>) || [];
+
+  return (
+    <div className="my-8">
+      {heading && (
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">{heading}</h2>
+      )}
+      <div className="grid sm:grid-cols-2 gap-4">
+        {items.map((item, i) => (
+          <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+            <div className="flex justify-between items-start mb-2">
+              <h3 className="font-bold text-gray-900">{item.title}</h3>
+              <span className="text-emerald-600 font-semibold text-sm whitespace-nowrap ml-2">{item.rate}</span>
+            </div>
+            <p className="text-gray-600 text-sm">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Responsibilities Section - bulleted list
+function ResponsibilitiesSection({ section }: { section: Section }) {
+  const heading = (section.heading as string) || (section.title as string);
+  const items = (section.items as unknown as string[]) || [];
+
+  return (
+    <div className="my-8">
+      {heading && (
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">{heading}</h2>
+      )}
+      <ul className="grid sm:grid-cols-2 gap-2">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-2 text-gray-700">
+            <span className="text-emerald-500 mt-1">✓</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// When to Hire Section - signal/detail cards
+function WhenToHireSection({ section }: { section: Section }) {
+  const heading = (section.heading as string) || (section.title as string);
+  const signals = (section.signals as Array<{ signal: string; detail: string }>) || [];
+
+  return (
+    <div className="my-8">
+      {heading && (
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">{heading}</h2>
+      )}
+      <div className="space-y-4">
+        {signals.map((item, i) => (
+          <div key={i} className="bg-gray-50 rounded-lg p-4 border-l-4 border-emerald-500">
+            <h3 className="font-bold text-gray-900 mb-1">{item.signal}</h3>
+            <p className="text-gray-600 text-sm">{item.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SectionRenderer({ section }: { section: Section }) {
-  const title = (section.title as string) || "";
+  const title = (section.title as string) || (section.heading as string) || "";
   const content = (section.content as string) || "";
 
   switch (section.type) {
@@ -185,6 +271,14 @@ function SectionRenderer({ section }: { section: Section }) {
           content={content}
         />
       );
+    case "intro":
+      return <IntroSection section={section} />;
+    case "role_types":
+      return <RoleTypesSection section={section} />;
+    case "responsibilities":
+      return <ResponsibilitiesSection section={section} />;
+    case "when_to_hire":
+      return <WhenToHireSection section={section} />;
     case "prose":
       return <ProseSection section={section} />;
     case "table":
