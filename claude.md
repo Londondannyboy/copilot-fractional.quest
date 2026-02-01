@@ -360,26 +360,32 @@ INSERT INTO content_enrichment (
 
 **Locale-Aware Linking System:**
 - `detectLocaleFromSlug()` - detects us/au/nz from page slug
-- `localizeUrl()` - converts UK URLs to locale paths
+- `localizeUrl()` - converts UK URLs to locale paths (now in i18n/config.ts)
 - `localizeTitle()` - removes UK references for other markets
 - Updated: addAutoLinks, RelatedRolesSection, Sidebar links
 
+**Header/Footer Locale Awareness (1 Feb 2026):**
+- Header and Footer now detect locale from pathname
+- All nav links use `localizeUrl()` to stay in market
+- US/AU/NZ users clicking nav stay in their locale
+- Commit: `21051af`
+
+**International CFO Content (1 Feb 2026):**
+- Enriched `us-fractional-cfo-jobs` with US-specific content (day rates in USD, CPA qualifications, US market insights)
+- Enriched `au-fractional-cfo-jobs` with AU-specific content (day rates in AUD, CA ANZ qualifications, ASX context)
+- Enriched `nz-fractional-cfo-jobs` with NZ-specific content (day rates in NZD, CA ANZ qualifications, trans-Tasman context)
+- All international CMO/CTO pages already had content
+
 ### Known Issues / Next Steps
 
-**Priority 1 - Header/Footer Locale Awareness:**
-- Header and Footer components still have hardcoded UK links
-- US/AU/NZ users clicking header nav go back to UK pages
-- Need to pass locale to Header/Footer or make them locale-aware
-
-**Priority 2 - International Content:**
-- US/AU/NZ pages in Neon may have sparse content (empty sections)
-- Consider enriching international page content in Neon
-- Add locale-specific job data to jobs table
-
-**Priority 3 - Content Enrichment:**
+**Priority 1 - Content Enrichment:**
 - Continue Tavily-based enrichment for remaining pages
 - Track in `content_enrichment` table
 - Target quality score 8+ for all lead pages
+
+**Priority 2 - International Jobs:**
+- Add locale-specific job data to jobs table
+- Currently all jobs are UK-based
 
 **Technical Debt:**
 - Static hardcoded page files can be deleted (but keep as backup)
