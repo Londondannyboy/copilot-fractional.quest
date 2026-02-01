@@ -3,6 +3,8 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import type { PageData, Section, FAQ } from "@/lib/pages";
 import { HotJobs } from "@/components/HotJobs";
 import { JobsSidebar } from "@/components/JobsSidebar";
@@ -441,6 +443,15 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
               {page.sections?.map((section, i) => (
                 <SectionRenderer key={i} section={section} />
               ))}
+
+              {/* MDX Long-form Content */}
+              {page.mdx_content && (
+                <article className="prose prose-lg prose-gray max-w-none prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-emerald-700 hover:prose-a:underline prose-table:w-full prose-th:bg-gray-50 prose-th:p-3 prose-th:text-left prose-th:font-semibold prose-th:border-b prose-td:p-3 prose-td:border-b prose-strong:text-gray-900 prose-blockquote:border-l-emerald-500 prose-blockquote:bg-emerald-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-emerald-800">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {page.mdx_content}
+                  </ReactMarkdown>
+                </article>
+              )}
 
               {/* Role Calculator */}
               <div className="my-8">
