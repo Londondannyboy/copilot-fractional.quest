@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { PageData, Section, FAQ } from "@/lib/pages";
 import { HotJobs } from "@/components/HotJobs";
@@ -12,8 +13,11 @@ import AuthorityLinksPanel from "@/components/mdx/AuthorityLinksPanel";
 import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
 import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
 
-// CopilotKit removed - requires /api/copilot endpoint setup
-// TODO: Add CopilotKit when API route is configured for Neon pages
+// Lazy load CopilotKit - doesn't block initial render
+const CopilotKitWrapper = dynamic(
+  () => import("@/components/job-pages/CopilotKitWrapper"),
+  { ssr: false, loading: () => null }
+);
 
 // ===========================================
 // Types
@@ -363,13 +367,24 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
     page.slug?.includes("manchester") ? "manchester" :
     page.slug?.includes("bristol") ? "bristol" : "uk";
 
+  // Build CopilotKit instructions from page content
+  const copilotInstructions = `You are helping users explore ${page.hero_title || page.title}.
+${page.meta_description || ""}
+Help users find relevant jobs, understand day rates, and learn about fractional executive careers.`;
+
   return (
-    <main
-      className="min-h-screen bg-white"
-      style={{ "--copilot-kit-primary-color": accentColorValue } as React.CSSProperties}
+    <CopilotKitWrapper
+      title={`${page.hero_title?.split(" ")[0] || "Fractional"} AI`}
+      instructions={copilotInstructions}
+      initialMessage={`Hi! I can help you explore ${page.hero_title?.split(" ")[0] || "fractional"} opportunities. Ask me about jobs, day rates, or career advice!`}
+      accentColor={accentColorValue}
     >
-      {/* Hero Section */}
-      <IntelligentHero page={page} />
+      <main
+        className="min-h-screen bg-white"
+        style={{ "--copilot-kit-primary-color": accentColorValue } as React.CSSProperties}
+      >
+        {/* Hero Section */}
+        <IntelligentHero page={page} />
 
       {/* Main Content - Two Column Layout */}
       <section className="py-8 bg-white">
@@ -415,23 +430,35 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
               {page.external_links && page.external_links.length > 0 && (
                 <AuthorityLinksPanel
                   links={page.external_links.map(link => ({
-                    name: link.label || link.domain || "Resource",
+                    name: link.title || link.label || link.domain || "Resource",
                     url: link.url,
-                    context: link.domain || "Industry resource"
+                    context: link.description || link.domain || "Industry resource"
                   }))}
                 />
               )}
 
               {/* Internal Links Grid - Related Pages */}
-              <InternalLinksGrid
-                title="Related Pages"
-                links={[
-                  { name: "CFO Jobs UK", url: "/fractional-cfo-jobs-uk", description: "Find fractional CFO roles", category: "jobs" as const },
-                  { name: "CTO Jobs UK", url: "/fractional-cto-jobs-uk", description: "Find fractional CTO roles", category: "jobs" as const },
-                  { name: "CMO Jobs UK", url: "/fractional-cmo-jobs-uk", description: "Find fractional CMO roles", category: "jobs" as const },
-                  { name: "All UK Jobs", url: "/fractional-jobs-uk", description: "Browse all fractional jobs", category: "jobs" as const },
-                ]}
-              />
+              {page.internal_links && page.internal_links.length > 0 ? (
+                <InternalLinksGrid
+                  title="Related Pages"
+                  links={page.internal_links.map(link => ({
+                    name: link.title || link.label || "Related Page",
+                    url: link.href || link.url || "/",
+                    description: link.description,
+                    category: "jobs" as const
+                  }))}
+                />
+              ) : (
+                <InternalLinksGrid
+                  title="Related Pages"
+                  links={[
+                    { name: "CFO Jobs UK", url: "/fractional-cfo-jobs-uk", description: "Find fractional CFO roles", category: "jobs" as const },
+                    { name: "CTO Jobs UK", url: "/fractional-cto-jobs-uk", description: "Find fractional CTO roles", category: "jobs" as const },
+                    { name: "CMO Jobs UK", url: "/fractional-cmo-jobs-uk", description: "Find fractional CMO roles", category: "jobs" as const },
+                    { name: "All UK Jobs", url: "/fractional-jobs-uk", description: "Browse all fractional jobs", category: "jobs" as const },
+                  ]}
+                />
+              )}
             </div>
 
             {/* Sidebar */}
@@ -464,6 +491,7 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
         </div>
       </section>
 
-    </main>
+      </main>
+    </CopilotKitWrapper>
   );
 }

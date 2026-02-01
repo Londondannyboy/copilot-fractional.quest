@@ -87,15 +87,19 @@ export interface Section {
 }
 
 export interface InternalLink {
-  url: string
-  label: string
+  url?: string
+  href?: string
+  label?: string
+  title?: string
   description?: string
 }
 
 export interface ExternalLink {
   url: string
-  label: string
-  domain: string
+  label?: string
+  domain?: string
+  title?: string
+  description?: string
 }
 
 export interface FAQ {
