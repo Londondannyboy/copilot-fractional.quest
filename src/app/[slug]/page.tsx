@@ -109,7 +109,7 @@ export const revalidate = 3600
 // Only add slugs here if they have a static /src/app/[slug]/page.tsx folder
 const STATIC_ROUTE_SLUGS = [
   // Main job pages
-  'fractional-jobs-london',
+  // 'fractional-jobs-london', // Migrated to Neon Feb 2026 - backup at _backup_fractional-jobs-london
   'fractional-jobs-uk',
   'remote-fractional-jobs',
   // Role-specific job pages (UK)

@@ -40,7 +40,7 @@ export const londonSEO = {
     },
   },
 
-  // External authority links - critical for E-E-A-T
+  // External authority links - critical for E-E-A-T (Updated Feb 2026 via Tavily)
   authorityLinks: [
     { name: "City of London Corporation", url: "https://www.cityoflondon.gov.uk", context: "Official city business data" },
     { name: "London & Partners", url: "https://www.londonandpartners.com", context: "Official London promotion agency" },
@@ -50,6 +50,10 @@ export const londonSEO = {
     { name: "Institute of Directors", url: "https://www.iod.com", context: "Executive leadership body" },
     { name: "CBI", url: "https://www.cbi.org.uk", context: "UK business confederation" },
     { name: "ScaleUp Institute", url: "https://www.scaleupinstitute.org.uk", context: "High-growth company insights" },
+    // Tavily-sourced Feb 2026
+    { name: "Porter Wills", url: "https://porterwills.co", context: "Fractional CMO pricing 2026" },
+    { name: "VCMO", url: "https://www.vcmo.uk", context: "Fractional CMO cost guide" },
+    { name: "The Fractionals", url: "https://thefractionals.co.uk", context: "UK fractional exec services" },
   ],
 
   // Market statistics with citations
@@ -85,22 +89,22 @@ export const londonSEO = {
     whyLocation: {
       title: "Fractional Jobs in London: Why the Capital Leads",
       paragraphs: [
-        "Fractional jobs London dominate the UK market, with the capital accounting for over 60% of all UK fractional executive appointments. London's unique concentration of high-growth startups, scale-ups, PE-backed companies, and established enterprises creates unparalleled demand for flexible C-suite expertise.",
-        "According to the ScaleUp Institute, 70% of UK companies using fractional leadership are London-based. When searching for fractional jobs London offers the most diverse business ecosystem—spanning fintech (Revolut, Monzo), healthtech, proptech, and traditional sectors. The CBI reports that London businesses are leading the shift toward flexible executive models.",
-        "For executives seeking fractional jobs London provides the highest day rates in the UK (£900-£1,500 vs £700-£1,100 regionally), access to the broadest range of sectors, and the opportunity to build prestigious portfolio careers with multiple high-growth companies.",
+        "Fractional jobs London dominate the UK market, with the capital accounting for over 60% of all UK fractional executive appointments.<br><br>London's unique concentration of high-growth startups, scale-ups, PE-backed companies, and established enterprises creates unparalleled demand for flexible C-suite expertise.",
+        "According to the <a href='https://www.scaleupinstitute.org.uk' target='_blank' rel='noopener' class='text-emerald-600 hover:underline'>ScaleUp Institute</a>, 70% of UK companies using fractional leadership are London-based.<br><br>When searching for fractional jobs, London offers the most diverse business ecosystem—spanning fintech (Revolut, Monzo), healthtech, proptech, and traditional sectors.<br><br>The <a href='https://www.cbi.org.uk' target='_blank' rel='noopener' class='text-emerald-600 hover:underline'>CBI</a> reports that London businesses are leading the shift toward flexible executive models.",
+        "For executives seeking fractional jobs, London provides the highest day rates in the UK (£1,000-£1,500 vs £700-£1,100 regionally).<br><br>You'll have access to the broadest range of sectors, and the opportunity to build prestigious portfolio careers with multiple high-growth companies.<br><br><em>Content enriched with Tavily research, February 2026.</em>",
       ],
     },
 
     dayRates: {
-      title: "Fractional Jobs Day Rates in London",
+      title: "Fractional Jobs Day Rates in London (2026)",
       description:
-        "Typical day rates for fractional executives in London, based on experience and sector (Source: Glassdoor UK, CIPD Pay Benchmarking):",
+        "Typical day rates for fractional executives in London, updated February 2026. Source: Porter Wills, VCMO, Glassdoor UK, CIPD Pay Benchmarking:",
       rates: [
-        { role: "CFO/CISO", range: "£1,000 - £1,500/day", typical: "£1,200", annual: "£200-350k" },
-        { role: "CTO", range: "£950 - £1,400/day", typical: "£1,100", annual: "£180-320k" },
-        { role: "CMO", range: "£900 - £1,300/day", typical: "£1,000", annual: "£170-280k" },
-        { role: "COO", range: "£900 - £1,300/day", typical: "£1,050", annual: "£175-290k" },
-        { role: "CHRO", range: "£800 - £1,200/day", typical: "£950", annual: "£150-250k" },
+        { role: "CFO/CISO", range: "£1,000 - £1,800/day", typical: "£1,300", annual: "£200-380k" },
+        { role: "CTO", range: "£1,000 - £1,600/day", typical: "£1,200", annual: "£190-340k" },
+        { role: "CMO", range: "£1,000 - £2,500/day", typical: "£1,100", annual: "£180-300k" },
+        { role: "COO", range: "£900 - £1,400/day", typical: "£1,100", annual: "£175-300k" },
+        { role: "CHRO", range: "£850 - £1,300/day", typical: "£1,000", annual: "£160-270k" },
       ],
     },
 
