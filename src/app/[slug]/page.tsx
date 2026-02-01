@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getPageBySlug, getAllPageSlugs, getPageTypeLabel } from '@/lib/pages'
-import { PageWithCopilot } from '@/components/pages/PageWithCopilot'
+import { IntelligentPageRenderer } from '@/components/pages/IntelligentPageRenderer'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { mdxComponents } from '../../../mdx-components'
 
@@ -406,7 +406,7 @@ export default async function DynamicPage({ params }: PageProps) {
           </article>
         </div>
       ) : (
-        <PageWithCopilot page={page} />
+        <IntelligentPageRenderer page={page} />
       )}
 
       {/* Related Pages - Internal linking for all database pages */}
