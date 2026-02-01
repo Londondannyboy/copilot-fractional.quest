@@ -1,21 +1,25 @@
 import Link from 'next/link'
 
+// Simplified footer - key pages only
 const footerLinks = {
   findJobs: {
     title: 'Find Jobs',
     links: [
-      { name: 'CFO Jobs UK', href: '/fractional-cfo-jobs-uk' },
-      { name: 'CTO Jobs UK', href: '/fractional-cto-jobs-uk' },
-      { name: 'CMO Jobs UK', href: '/fractional-cmo-jobs-uk' },
-      { name: 'COO Jobs UK', href: '/fractional-coo-jobs-uk' },
-      { name: 'CEO Jobs UK', href: '/fractional-ceo-jobs-uk' },
-      { name: 'CHRO Jobs UK', href: '/fractional-chro-jobs-uk' },
-      { name: 'CPO Jobs UK', href: '/fractional-cpo-jobs-uk' },
-      { name: 'CISO Jobs UK', href: '/fractional-ciso-jobs-uk' },
-      { name: 'CRO Jobs UK', href: '/fractional-cro-jobs-uk' },
-      { name: 'CCO Jobs UK', href: '/fractional-cco-jobs-uk' },
       { name: 'All UK Jobs', href: '/fractional-jobs-uk' },
+      { name: 'CFO Jobs', href: '/fractional-cfo-jobs-uk' },
+      { name: 'CTO Jobs', href: '/fractional-cto-jobs-uk' },
+      { name: 'CMO Jobs', href: '/fractional-cmo-jobs-uk' },
+      { name: 'COO Jobs', href: '/fractional-coo-jobs-uk' },
       { name: 'Remote Jobs', href: '/remote-fractional-jobs' },
+    ],
+  },
+  workTypes: {
+    title: 'Work Types',
+    links: [
+      { name: 'Fractional Jobs', href: '/fractional-jobs-uk' },
+      { name: 'Interim Jobs', href: '/interim-jobs-uk' },
+      { name: 'Part-Time Jobs', href: '/part-time-jobs-uk' },
+      { name: 'Advisory Jobs', href: '/advisory-jobs-uk' },
     ],
   },
   locations: {
@@ -23,125 +27,25 @@ const footerLinks = {
     links: [
       { name: 'London', href: '/fractional-jobs-london' },
       { name: 'Manchester', href: '/manchester' },
-      { name: 'Birmingham', href: '/birmingham' },
       { name: 'Edinburgh', href: '/edinburgh' },
-      { name: 'Bristol', href: '/bristol' },
-      { name: 'Glasgow', href: '/glasgow' },
-      { name: 'Leeds', href: '/leeds' },
-      { name: 'Belfast', href: '/belfast' },
-      { name: 'Cambridge', href: '/cambridge' },
-      { name: 'Newcastle', href: '/fractional-jobs-newcastle' },
-      { name: 'Liverpool', href: '/fractional-jobs-liverpool' },
-      { name: 'Cardiff', href: '/fractional-jobs-cardiff' },
+      { name: 'Remote UK', href: '/remote-fractional-jobs' },
     ],
   },
   resources: {
     title: 'Resources',
     links: [
-      { name: 'What is a Fractional CFO?', href: '/fractional-cfo' },
-      { name: 'What is a Fractional CTO?', href: '/fractional-cto' },
-      { name: 'What is a Fractional CMO?', href: '/fractional-cmo' },
-      { name: 'What is a Fractional GTM?', href: '/fractional-gtm' },
-      { name: 'What is a Fractional SDR?', href: '/fractional-sdr' },
-      { name: 'What is a Fractional GC?', href: '/fractional-general-counsel' },
-      { name: 'CFO Salary Guide', href: '/fractional-cfo-salary' },
-      { name: 'CTO Salary Guide', href: '/fractional-cto-salary' },
-      { name: 'Portfolio Career Guide', href: '/fractional-executive-portfolio' },
+      { name: 'Salary Guides', href: '/fractional-cfo-salary' },
       { name: 'Rate Calculator', href: '/rate-calculator' },
-      { name: 'Interim CMO Guide', href: '/interim-cmo' },
-      { name: 'Interim CTO Guide', href: '/interim-cto' },
-      { name: 'Interim CEO Guide', href: '/interim-ceo' },
-      { name: 'Interim CHRO Guide', href: '/interim-chro' },
-      { name: 'Virtual CFO Services', href: '/virtual-cfo-services' },
+      { name: 'What is Fractional?', href: '/fractional-cfo' },
+      { name: 'Portfolio Career Guide', href: '/fractional-executive-portfolio' },
     ],
   },
   forEmployers: {
     title: 'For Employers',
     links: [
-      { name: 'Hire a Fractional CFO', href: '/hire-fractional-cfo' },
-      { name: 'Hire a Fractional CTO', href: '/hire-fractional-cto' },
-      { name: 'Hire a Fractional CMO', href: '/hire-fractional-cmo' },
-      { name: 'Hire a Fractional COO', href: '/hire-fractional-coo' },
-      { name: 'CFO Services', href: '/fractional-cfo-services' },
-      { name: 'CMO Services', href: '/fractional-cmo-services' },
-      { name: 'CEO Services', href: '/fractional-ceo-services' },
-      { name: 'CFO Agency', href: '/fractional-cfo-agency' },
-      { name: 'CMO Agency', href: '/fractional-cmo-agency' },
-      { name: 'Fractional Recruitment Agency', href: '/fractional-recruitment-agency' },
-      { name: 'Executive Search Firms', href: '/executive-search-firms' },
-      { name: 'Fractional Executive Search', href: '/fractional-executive-search' },
-      { name: 'Book a Call', href: '/book-call' },
-    ],
-  },
-  jobTypes: {
-    title: 'Job Types',
-    links: [
-      { name: 'Interim CFO Jobs', href: '/interim-cfo-jobs-uk' },
-      { name: 'Interim CTO Jobs', href: '/interim-cto-jobs-uk' },
-      { name: 'Interim CMO Jobs', href: '/interim-cmo-jobs-uk' },
-      { name: 'Interim COO Jobs', href: '/interim-coo-jobs-uk' },
-      { name: 'Interim CCO Jobs', href: '/interim-cco-jobs-uk' },
-      { name: 'Interim CSO Jobs', href: '/interim-cso-jobs-uk' },
-      { name: 'Interim Executive Search', href: '/interim-executive-search' },
-      { name: 'Part-time CFO Jobs', href: '/part-time-cfo-jobs-uk' },
-      { name: 'Part-time CTO Jobs', href: '/part-time-cto-jobs-uk' },
-      { name: 'Part-time CMO Jobs', href: '/part-time-cmo-jobs-uk' },
-      { name: 'Advisory CFO Jobs', href: '/advisory-cfo-jobs-uk' },
-      { name: 'Advisory CTO Jobs', href: '/advisory-cto-jobs-uk' },
-    ],
-  },
-  industries: {
-    title: 'Industries',
-    links: [
-      { name: 'Tech & SaaS', href: '/fractional-jobs-tech' },
-      { name: 'Startups', href: '/fractional-jobs-startups' },
-      { name: 'E-commerce', href: '/fractional-jobs-ecommerce' },
-      { name: 'Fintech Recruitment', href: '/fintech-recruitment-agency' },
-      { name: 'Technology Recruitment', href: '/technology-recruitment-agency' },
-      { name: 'Cybersecurity Recruitment', href: '/cybersecurity-recruitment-agency' },
-    ],
-  },
-  specialistRoles: {
-    title: 'Specialist Roles',
-    links: [
-      { name: 'CCO Jobs UK', href: '/fractional-cco-jobs-uk' },
-      { name: 'CSO Jobs UK', href: '/fractional-cso-jobs-uk' },
-      { name: 'CRO Jobs UK', href: '/fractional-cro-jobs-uk' },
-      { name: 'CIO Jobs UK', href: '/fractional-cio-jobs-uk' },
-      { name: 'GTM Lead', href: '/fractional-gtm-jobs-uk' },
-      { name: 'SDR', href: '/fractional-sdr-jobs-uk' },
-      { name: 'General Counsel', href: '/fractional-general-counsel' },
-      { name: 'Head of Growth', href: '/fractional-head-of-growth-jobs-uk' },
-      { name: 'Product Manager', href: '/fractional-product-manager-jobs-uk' },
-      { name: 'VP Engineering', href: '/fractional-vp-engineering-jobs-uk' },
-      { name: 'Financial Controller', href: '/fractional-financial-controller-jobs-uk' },
-      { name: 'CISO Recruitment', href: '/ciso-recruitment-agency' },
-    ],
-  },
-  costGuides: {
-    title: 'Cost & Pricing',
-    links: [
-      { name: 'CFO Cost Guide', href: '/fractional-cfo-cost' },
-      { name: 'CMO Cost Guide', href: '/fractional-cmo-cost' },
-      { name: 'COO Cost Guide', href: '/fractional-coo-cost' },
-      { name: 'CTO Cost Guide', href: '/fractional-cto-cost' },
-      { name: 'CMO Salary Guide', href: '/fractional-cmo-salary' },
-      { name: 'COO Salary Guide', href: '/fractional-coo-salary' },
-    ],
-  },
-  recruitment: {
-    title: 'Recruitment',
-    links: [
-      { name: 'C-Suite Recruitment', href: '/c-suite-recruitment' },
-      { name: 'CFO Headhunter', href: '/cfo-headhunter' },
-      { name: 'CMO Recruitment', href: '/cmo-recruitment-agency' },
-      { name: 'CTO Recruitment', href: '/cto-recruitment-agency' },
+      { name: 'Post a Role', href: '/contact' },
       { name: 'Executive Search', href: '/executive-search-firms' },
-      { name: 'Interim Executive Search', href: '/interim-executive-search' },
-      { name: 'Private Equity Recruitment', href: '/private-equity-recruitment-agency' },
-      { name: 'FinTech Recruitment', href: '/fintech-recruitment-agency' },
-      { name: 'AI Recruitment', href: '/ai-recruitment-agency' },
-      { name: 'Accounting Recruitment', href: '/accounting-recruitment-agency' },
+      { name: 'Book a Call', href: '/book-call' },
     ],
   },
 }
@@ -156,9 +60,9 @@ export function Footer() {
 
   return (
     <footer className="bg-gray-900 text-gray-300">
-      {/* Main footer content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-10 gap-8">
+      {/* Main footer content - simplified */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -170,7 +74,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-gray-400 mb-4">
-              The UK&apos;s leading platform for fractional executive jobs. Connect with top companies seeking part-time C-suite leadership.
+              UK&apos;s leading platform for fractional executive jobs.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
@@ -193,6 +97,19 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">{footerLinks.findJobs.title}</h3>
             <ul className="space-y-2">
               {footerLinks.findJobs.links.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">{footerLinks.workTypes.title}</h3>
+            <ul className="space-y-2">
+              {footerLinks.workTypes.links.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm hover:text-white transition-colors">
                     {link.name}
@@ -232,71 +149,6 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">{footerLinks.forEmployers.title}</h3>
             <ul className="space-y-2">
               {footerLinks.forEmployers.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">{footerLinks.jobTypes.title}</h3>
-            <ul className="space-y-2">
-              {footerLinks.jobTypes.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">{footerLinks.industries.title}</h3>
-            <ul className="space-y-2">
-              {footerLinks.industries.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">{footerLinks.specialistRoles.title}</h3>
-            <ul className="space-y-2">
-              {footerLinks.specialistRoles.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">{footerLinks.costGuides.title}</h3>
-            <ul className="space-y-2">
-              {footerLinks.costGuides.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-semibold mb-4">{footerLinks.recruitment.title}</h3>
-            <ul className="space-y-2">
-              {footerLinks.recruitment.links.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm hover:text-white transition-colors">
                     {link.name}
