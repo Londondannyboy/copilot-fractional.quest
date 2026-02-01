@@ -22,10 +22,66 @@ const CopilotKitWrapper = dynamic(
 );
 
 // ===========================================
+// Locale Detection & URL Localization
+// ===========================================
+
+type Locale = 'uk' | 'us' | 'au' | 'nz';
+
+// Detect locale from page slug
+function detectLocaleFromSlug(slug: string): Locale {
+  if (slug.startsWith('us-')) return 'us';
+  if (slug.startsWith('au-')) return 'au';
+  if (slug.startsWith('nz-')) return 'nz';
+  return 'uk'; // Default - UK pages end with -uk or have no prefix
+}
+
+// Convert a UK URL to the appropriate locale URL
+// UK: /fractional-cfo-jobs-uk → stays as is
+// US: /fractional-cfo-jobs-uk → /us/fractional-cfo-jobs
+// AU: /fractional-cfo-jobs-uk → /au/fractional-cfo-jobs
+// NZ: /fractional-cfo-jobs-uk → /nz/fractional-cfo-jobs
+function localizeUrl(ukUrl: string, locale: Locale): string {
+  if (locale === 'uk') return ukUrl;
+
+  // Remove leading slash for processing
+  let path = ukUrl.startsWith('/') ? ukUrl.slice(1) : ukUrl;
+
+  // Remove -uk suffix if present
+  if (path.endsWith('-uk')) {
+    path = path.slice(0, -3);
+  }
+
+  // Handle special cases that don't follow the pattern
+  const specialPages: Record<string, string> = {
+    'fractional-jobs-uk': 'fractional-jobs',
+    'interim-jobs-uk': 'interim-jobs',
+    'advisory-jobs-uk': 'advisory-jobs',
+    'part-time-jobs-uk': 'part-time-jobs',
+  };
+
+  const basePath = ukUrl.startsWith('/') ? ukUrl.slice(1) : ukUrl;
+  if (specialPages[basePath]) {
+    path = specialPages[basePath];
+  }
+
+  return `/${locale}/${path}`;
+}
+
+// Get locale-aware title (remove UK reference for other locales)
+function localizeTitle(title: string, locale: Locale): string {
+  if (locale === 'uk') return title;
+  return title
+    .replace(' UK', '')
+    .replace(' uk', '')
+    .replace('UK ', '')
+    .trim();
+}
+
+// ===========================================
 // Auto-Linking System - Internal & External
 // ===========================================
 
-// Internal links to other pages on the site - COMPREHENSIVE
+// Internal links to other pages on the site - COMPREHENSIVE (UK base URLs)
 const INTERNAL_LINK_MAP: Record<string, { url: string; title: string }> = {
   // C-Suite fractional roles
   "fractional CFO": { url: "/fractional-cfo-jobs-uk", title: "Fractional CFO Jobs UK" },
@@ -117,7 +173,8 @@ const EXTERNAL_LINK_MAP: Record<string, { url: string; title: string }> = {
 };
 
 // Process MDX content to add auto-links (first occurrence only)
-function addAutoLinks(content: string, currentSlug?: string): string {
+// Now locale-aware: links stay within the user's market
+function addAutoLinks(content: string, currentSlug?: string, locale: Locale = 'uk'): string {
   if (!content) return content;
 
   let processedContent = content;
@@ -128,15 +185,19 @@ function addAutoLinks(content: string, currentSlug?: string): string {
     if (linkedTerms.has(term.toLowerCase())) continue;
     if (currentSlug && link.url.includes(currentSlug)) continue;
 
+    // Localize the URL and title for the current market
+    const localizedUrl = localizeUrl(link.url, locale);
+    const localizedTitle = localizeTitle(link.title, locale);
+
     // Case-insensitive match, first occurrence only
     const regex = new RegExp(`\\b(${term})\\b(?![^\\[]*\\])(?![^<]*>)`, 'i');
     if (regex.test(processedContent)) {
-      processedContent = processedContent.replace(regex, `[$1](${link.url} "${link.title}")`);
+      processedContent = processedContent.replace(regex, `[$1](${localizedUrl} "${localizedTitle}")`);
       linkedTerms.add(term.toLowerCase());
     }
   }
 
-  // Add external authority links
+  // Add external authority links (these don't need localization)
   for (const [term, link] of Object.entries(EXTERNAL_LINK_MAP)) {
     if (linkedTerms.has(term.toLowerCase())) continue;
 
@@ -1357,7 +1418,7 @@ const RELATED_ROLES: Record<string, Array<{ role: string; url: string; descripti
   ],
 };
 
-function RelatedRolesSection({ currentRole }: { currentRole: string }) {
+function RelatedRolesSection({ currentRole, locale = 'uk' }: { currentRole: string; locale?: Locale }) {
   const roles = RELATED_ROLES[currentRole.toLowerCase()] || RELATED_ROLES.default;
 
   return (
@@ -1375,14 +1436,14 @@ function RelatedRolesSection({ currentRole }: { currentRole: string }) {
         {roles.map((role, i) => (
           <a
             key={i}
-            href={role.url}
+            href={localizeUrl(role.url, locale)}
             className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-lg transition-all"
           >
             <div className="w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center group-hover:from-indigo-200 group-hover:to-purple-200 transition-colors">
               <span className="text-xl">👔</span>
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">{role.role}</h3>
+              <h3 className="font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">{localizeTitle(role.role, locale)}</h3>
               <p className="text-gray-600 text-sm">{role.description}</p>
             </div>
             <span className="text-indigo-400 group-hover:text-indigo-600 transition-colors">→</span>
@@ -1566,6 +1627,9 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
     accentColor === "purple" ? "#7c3aed" :
     accentColor === "red" ? "#dc2626" : "#4f46e5";
 
+  // Detect locale from page slug for locale-aware internal linking
+  const locale = detectLocaleFromSlug(page.slug || '');
+
   // Determine location from slug or page_type
   const location = page.slug?.includes("london") ? "london" :
     page.slug?.includes("edinburgh") ? "edinburgh" :
@@ -1655,11 +1719,12 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
 
               {/* MDX Long-form Content - Enhanced Visual Styling with Auto-Linking */}
               {page.mdx_content && (() => {
-                // Process content: strip MDX components, add auto-links and improve text flow
+                // Process content: strip MDX components, add locale-aware auto-links and improve text flow
                 const processedContent = addTextBreathing(
                   addAutoLinks(
                     stripMdxComponents(page.mdx_content || ''),
-                    page.slug || ''
+                    page.slug || '',
+                    locale // Pass locale for market-aware internal linking
                   )
                 );
                 return (
@@ -1805,8 +1870,8 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
                 <RoleCalculator role={extractRoleFromSlug(page.slug)} />
               </div>
 
-              {/* Related Executive Roles */}
-              <RelatedRolesSection currentRole={extractRoleFromSlug(page.slug)} />
+              {/* Related Executive Roles - Locale-Aware */}
+              <RelatedRolesSection currentRole={extractRoleFromSlug(page.slug)} locale={locale} />
 
               {/* FAQs with Schema */}
               {page.faqs && page.faqs.length > 0 && (
@@ -1934,16 +1999,16 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
                   </div>
                 </div>
 
-                {/* Related Pages Links */}
+                {/* Related Pages Links - Locale-Aware */}
                 <div className="bg-white border border-gray-200 rounded-xl p-4">
                   <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
                     <span>🔗</span> Explore More
                   </h3>
                   <nav className="space-y-2 text-sm">
-                    <a href="/fractional-cfo-jobs-uk" className="block text-gray-600 hover:text-emerald-700 transition-colors">Fractional CFO Jobs →</a>
-                    <a href="/fractional-cto-jobs-uk" className="block text-gray-600 hover:text-emerald-700 transition-colors">Fractional CTO Jobs →</a>
-                    <a href="/fractional-cmo-jobs-uk" className="block text-gray-600 hover:text-emerald-700 transition-colors">Fractional CMO Jobs →</a>
-                    <a href="/fractional-jobs-uk" className="block text-gray-600 hover:text-emerald-700 transition-colors">All Fractional Jobs →</a>
+                    <a href={localizeUrl("/fractional-cfo-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("Fractional CFO Jobs", locale)} →</a>
+                    <a href={localizeUrl("/fractional-cto-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("Fractional CTO Jobs", locale)} →</a>
+                    <a href={localizeUrl("/fractional-cmo-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("Fractional CMO Jobs", locale)} →</a>
+                    <a href={localizeUrl("/fractional-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("All Fractional Jobs", locale)} →</a>
                   </nav>
                 </div>
               </div>
