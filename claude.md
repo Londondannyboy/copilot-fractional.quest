@@ -376,6 +376,12 @@ INSERT INTO content_enrichment (
 - Enriched `nz-fractional-cfo-jobs` with NZ-specific content (day rates in NZD, CA ANZ qualifications, trans-Tasman context)
 - All international CMO/CTO pages already had content
 
+**International Jobs Added (1 Feb 2026):**
+- US: 106 jobs already existed in database
+- AU: Added 3 jobs (CFO Sydney, CMO Melbourne, CTO Sydney)
+- NZ: Added 3 jobs (CFO Auckland, CMO Wellington, CTO Auckland)
+- Jobs table now has AU/NZ representation for job boards
+
 ### Known Issues / Next Steps
 
 **Priority 1 - Content Enrichment:**
@@ -383,9 +389,9 @@ INSERT INTO content_enrichment (
 - Track in `content_enrichment` table
 - Target quality score 8+ for all lead pages
 
-**Priority 2 - International Jobs:**
-- Add locale-specific job data to jobs table
-- Currently all jobs are UK-based
+**Priority 2 - More International Jobs:**
+- Add more AU/NZ jobs (currently 3 each)
+- Consider adding more role types (COO, CHRO, etc.)
 
 **Technical Debt:**
 - Static hardcoded page files can be deleted (but keep as backup)
