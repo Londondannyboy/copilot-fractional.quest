@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Audience = 'candidates' | 'employers'
 
@@ -18,10 +19,10 @@ export function PublicLanding() {
         <div className="absolute top-40 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
 
         <div className="relative max-w-6xl mx-auto px-4 pt-20 pb-16">
-          {/* Logo */}
+          {/* Logo - Changed from h1 to div to fix duplicate h1 issue */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white">Fractional Quest</h1>
-            <p className="text-emerald-400 text-sm mt-1">AI-Powered Executive Matching</p>
+            <div className="text-3xl font-bold text-white">Fractional Quest</div>
+            <p className="text-emerald-400 text-sm mt-1">Beta Launching Q1 2026</p>
           </div>
 
           {/* Audience Toggle */}
@@ -50,63 +51,69 @@ export function PublicLanding() {
             </div>
           </div>
 
-          {/* Main Pitch */}
-          {audience === 'candidates' ? (
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-block bg-emerald-600 text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
-                Beta Launching Q1 2026
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Find Fractional Executive Jobs Through Our
-                <span className="text-emerald-400"> Recruitment Agency</span>
-              </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Browse 200+ fractional CFO, CTO, CMO roles. Our UK recruitment agency specialises in matching C-suite executives with fractional opportunities at competitive rates.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link
-                  href="/register"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
-                >
-                  Register Interest
-                </Link>
-                <Link
-                  href="/fractional-jobs-uk"
-                  className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
-                >
-                  Browse Jobs
-                </Link>
-              </div>
+          {/* Single h1 tag - Primary target keyword */}
+          <div className="text-center max-w-4xl mx-auto mb-12">
+            <h1 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+              Fractional Recruitment Agency UK
+            </h1>
+            <p className="text-2xl text-gray-200 mb-4 font-semibold">
+              {audience === 'candidates'
+                ? 'Find Fractional Executive Jobs Through Our Specialist Agency'
+                : 'Hire C-Suite Executives at 10-15% Fees vs Industry Standard 25-30%'
+              }
+            </p>
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              {audience === 'candidates'
+                ? 'Browse 200+ fractional CFO, CTO, CMO roles. Our fractional recruitment agency specialises in matching senior executives with part-time C-suite opportunities across the UK. From London to Manchester, Edinburgh to Bristol, we connect fractional leaders with companies needing experienced executive talent without full-time commitments.'
+                : 'As a leading fractional recruitment agency, we specialise in placing fractional CFOs, CTOs, CMOs, and COOs with UK businesses. Our recruitment agency model offers transparent 10-15% placement fees—significantly lower than traditional executive search firms charging 25-30%. We understand fractional hiring and deliver pre-vetted C-suite talent in days, not weeks.'
+              }
+            </p>
+
+            {/* Hero Image with keyword in alt */}
+            <div className="relative h-64 md:h-80 mb-8 rounded-2xl overflow-hidden border border-gray-700">
+              <Image
+                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&h=600&fit=crop&q=80"
+                alt="Fractional recruitment agency UK connecting executives with C-suite opportunities"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
-          ) : (
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-block bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
-                Beta Launching Q1 2026
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                UK Fractional
-                <span className="text-indigo-400"> Recruitment Agency </span>
-                for C-Suite Executives
-              </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Hire fractional executives at 10-15% fees vs the industry standard 25-30%. Our recruitment agency specialises in CFO, CTO, CMO, and COO placements.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link
-                  href="/book-call"
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
-                >
-                  Book a Call
-                </Link>
-                <Link
-                  href="/fractional-recruitment-agency"
-                  className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
-                >
-                  Learn More
-                </Link>
-              </div>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              {audience === 'candidates' ? (
+                <>
+                  <Link
+                    href="/register"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
+                  >
+                    Register Interest
+                  </Link>
+                  <Link
+                    href="/fractional-jobs-uk"
+                    className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
+                  >
+                    Browse Jobs
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/book-call"
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
+                  >
+                    Book a Call
+                  </Link>
+                  <Link
+                    href="/fractional-recruitment-agency"
+                    className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
+                  >
+                    Learn More
+                  </Link>
+                </>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </section>
 
@@ -134,33 +141,54 @@ export function PublicLanding() {
         </div>
       </section>
 
+      {/* What is a Fractional Recruitment Agency - SEO Content Block */}
+      <section className="py-16 bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-white mb-6">What is a Fractional Recruitment Agency?</h2>
+          <div className="prose prose-invert prose-lg max-w-none">
+            <p className="text-gray-300 mb-4 leading-relaxed">
+              A <strong>fractional recruitment agency</strong> specialises exclusively in placing part-time and fractional C-suite executives with companies. Unlike traditional recruitment agencies that focus on permanent full-time hires, we understand the unique dynamics of fractional work arrangements where executives work 1-3 days per week across multiple companies.
+            </p>
+            <p className="text-gray-300 mb-4 leading-relaxed">
+              Our fractional recruitment agency model benefits both candidates and employers. For executives, we provide access to curated fractional CFO jobs, fractional CTO roles, and fractional CMO opportunities across finance, technology, marketing, operations, and security functions. For employers, we deliver experienced C-suite talent at a fraction of the cost of permanent hires, with placement fees of just 10-15% versus the 25-30% charged by traditional executive search firms.
+            </p>
+            <p className="text-gray-300 mb-4 leading-relaxed">
+              As the UK's leading fractional recruitment agency, we've built a network of over 200 active fractional executive opportunities across London, Manchester, Edinburgh, Bristol, and remote roles nationwide. Our recruiters understand that fractional hiring requires different vetting than permanent placements—we assess not just technical competence but also the ability to onboard quickly, work autonomously, and deliver value in compressed timeframes.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* For Candidates Section */}
       {audience === 'candidates' && (
         <section className="py-16">
           <div className="max-w-6xl mx-auto px-4">
-            <h3 className="text-2xl font-bold text-white text-center mb-12">
-              Why Executives Choose Us
-            </h3>
+            <h2 className="text-3xl font-bold text-white text-center mb-4">
+              Why Executives Choose Our Fractional Recruitment Agency
+            </h2>
+            <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+              We're not another job board with recruiter spam. We're a specialist fractional recruitment agency connecting C-suite executives with genuine part-time leadership roles.
+            </p>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">🎯</div>
-                <h4 className="text-lg font-semibold text-white mb-2">AI-Powered Matching</h4>
+                <h3 className="text-xl font-semibold text-white mb-2">Curated Opportunities</h3>
                 <p className="text-gray-400">
-                  Our AI understands your experience, preferences, and goals. No more scrolling through irrelevant listings.
+                  Every role is verified and vetted. No time-wasters, no junior positions disguised as fractional. Only genuine C-suite fractional opportunities from companies who understand fractional hiring.
                 </p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">🔍</div>
-                <h4 className="text-lg font-semibold text-white mb-2">Direct Opportunities</h4>
+                <h3 className="text-xl font-semibold text-white mb-2">Transparent Day Rates</h3>
                 <p className="text-gray-400">
-                  We filter out recruiter spam. Every role is from a real company looking for fractional leadership.
+                  See actual day rates (£600-£2,000) upfront. No guessing, no negotiations that waste your time. We publish market-rate benchmarks for every role from fractional CFO to fractional CISO.
                 </p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">🤝</div>
-                <h4 className="text-lg font-semibold text-white mb-2">Expert Recruiters</h4>
+                <h3 className="text-xl font-semibold text-white mb-2">Expert Recruiters</h3>
                 <p className="text-gray-400">
-                  Our UK recruitment agency team understands fractional hiring and matches you with roles that fit your schedule.
+                  Our recruitment agency team understands fractional work. We match you based on your schedule, sector expertise, and career goals—not just keywords on a CV.
                 </p>
               </div>
             </div>
@@ -172,29 +200,32 @@ export function PublicLanding() {
       {audience === 'employers' && (
         <section className="py-16">
           <div className="max-w-6xl mx-auto px-4">
-            <h3 className="text-2xl font-bold text-white text-center mb-12">
-              Why Companies Work With Us
-            </h3>
+            <h2 className="text-3xl font-bold text-white text-center mb-4">
+              Why Companies Choose Our Fractional Recruitment Agency
+            </h2>
+            <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+              Lower fees, faster placements, and better-qualified fractional executives than traditional executive search firms.
+            </p>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">💰</div>
-                <h4 className="text-lg font-semibold text-white mb-2">Lower Fees</h4>
+                <h3 className="text-xl font-semibold text-white mb-2">10-15% Placement Fees</h3>
                 <p className="text-gray-400">
-                  10-15% of first year salary vs 25-30% at traditional agencies. Same quality, better economics.
+                  We charge 10-15% of estimated annual billings vs 25-30% at traditional agencies. Same quality C-suite talent, better economics for your business.
                 </p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">⚡</div>
-                <h4 className="text-lg font-semibold text-white mb-2">Faster Matching</h4>
+                <h3 className="text-xl font-semibold text-white mb-2">Faster Placements</h3>
                 <p className="text-gray-400">
-                  AI-powered search means we find qualified candidates in days, not weeks. No lengthy recruitment cycles.
+                  Most placements complete in 2-3 weeks vs 8-12 weeks for traditional executive search. Our database of active fractional candidates means no lengthy sourcing delays.
                 </p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">✅</div>
-                <h4 className="text-lg font-semibold text-white mb-2">Pre-Vetted Talent</h4>
+                <h3 className="text-xl font-semibold text-white mb-2">Pre-Vetted Executives</h3>
                 <p className="text-gray-400">
-                  Every executive on our platform has verified C-suite or VP experience. No junior candidates.
+                  Every candidate has verified C-suite or VP-level experience. We assess technical competence, fractional readiness, and culture fit before introductions.
                 </p>
               </div>
             </div>
@@ -205,322 +236,95 @@ export function PublicLanding() {
       {/* Role Categories */}
       <section className="py-16 bg-gray-800/30">
         <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-2xl font-bold text-white text-center mb-4">
-            Executive Roles We Cover
-          </h3>
+          <h2 className="text-3xl font-bold text-white text-center mb-4">
+            Fractional Executive Roles We Recruit
+          </h2>
           <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto">
-            From finance to technology, marketing to operations. Find or hire fractional leadership across all business functions.
+            From fractional CFOs to fractional CTOs, CMOs to CISOs. Our recruitment agency covers all C-suite functions with specialist recruiters for each vertical.
           </p>
 
-          {/* Featured Role Guides */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+          {/* Job Boards Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
             <Link
-              href="/fractional-cfo"
-              className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-4 text-center hover:border-emerald-400/50 transition-all group"
+              href="/fractional-cfo-jobs-uk"
+              className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-6 text-center hover:border-emerald-400/50 transition-all group"
             >
-              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-emerald-300 transition-colors">Fractional CFO</h4>
-              <p className="text-gray-400 text-xs mt-1">Finance leadership</p>
+              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Jobs</span>
+              <h3 className="text-2xl font-bold text-white mt-2 group-hover:text-emerald-300 transition-colors">Fractional CFO</h3>
+              <p className="text-gray-400 text-sm mt-2">£1,200-1,800/day</p>
+              <p className="text-gray-500 text-xs mt-1">Finance leadership roles</p>
             </Link>
             <Link
-              href="/fractional-cto"
-              className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-400/50 transition-all group"
+              href="/fractional-cto-jobs-uk"
+              className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-6 text-center hover:border-cyan-400/50 transition-all group"
             >
-              <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-cyan-300 transition-colors">Fractional CTO</h4>
-              <p className="text-gray-400 text-xs mt-1">Tech leadership</p>
+              <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Jobs</span>
+              <h3 className="text-2xl font-bold text-white mt-2 group-hover:text-cyan-300 transition-colors">Fractional CTO</h3>
+              <p className="text-gray-400 text-sm mt-2">£1,000-1,600/day</p>
+              <p className="text-gray-500 text-xs mt-1">Technology leadership roles</p>
             </Link>
             <Link
-              href="/fractional-cmo"
-              className="bg-gradient-to-r from-amber-900/50 to-orange-900/50 border border-amber-500/30 rounded-xl p-4 text-center hover:border-amber-400/50 transition-all group"
+              href="/fractional-cmo-jobs-uk"
+              className="bg-gradient-to-r from-amber-900/50 to-orange-900/50 border border-amber-500/30 rounded-xl p-6 text-center hover:border-amber-400/50 transition-all group"
             >
-              <span className="text-amber-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-amber-300 transition-colors">Fractional CMO</h4>
-              <p className="text-gray-400 text-xs mt-1">Marketing leadership</p>
+              <span className="text-amber-400 text-xs font-semibold uppercase tracking-wider">Jobs</span>
+              <h3 className="text-2xl font-bold text-white mt-2 group-hover:text-amber-300 transition-colors">Fractional CMO</h3>
+              <p className="text-gray-400 text-sm mt-2">£900-1,400/day</p>
+              <p className="text-gray-500 text-xs mt-1">Marketing leadership roles</p>
             </Link>
             <Link
-              href="/fractional-ciso"
-              className="bg-gradient-to-r from-red-900/50 to-rose-900/50 border border-red-500/30 rounded-xl p-4 text-center hover:border-red-400/50 transition-all group"
+              href="/fractional-ciso-jobs-uk"
+              className="bg-gradient-to-r from-red-900/50 to-rose-900/50 border border-red-500/30 rounded-xl p-6 text-center hover:border-red-400/50 transition-all group"
             >
-              <span className="text-red-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-red-300 transition-colors">Fractional CISO</h4>
-              <p className="text-gray-400 text-xs mt-1">Security leadership</p>
-            </Link>
-            <Link
-              href="/fractional-cio"
-              className="bg-gradient-to-r from-purple-900/50 to-violet-900/50 border border-purple-500/30 rounded-xl p-4 text-center hover:border-purple-400/50 transition-all group"
-            >
-              <span className="text-purple-400 text-xs font-semibold uppercase tracking-wider">Guide</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-purple-300 transition-colors">Fractional CIO</h4>
-              <p className="text-gray-400 text-xs mt-1">IT leadership</p>
+              <span className="text-red-400 text-xs font-semibold uppercase tracking-wider">Jobs</span>
+              <h3 className="text-2xl font-bold text-white mt-2 group-hover:text-red-300 transition-colors">Fractional CISO</h3>
+              <p className="text-gray-400 text-sm mt-2">£1,100-1,700/day</p>
+              <p className="text-gray-500 text-xs mt-1">Security leadership roles</p>
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { role: 'CFO', label: 'Chief Financial Officer', href: '/fractional-cfo-jobs-uk', color: 'emerald' },
-              { role: 'CTO', label: 'Chief Technology Officer', href: '/fractional-cto-jobs-uk', color: 'blue' },
-              { role: 'CMO', label: 'Chief Marketing Officer', href: '/fractional-cmo-jobs-uk', color: 'amber' },
-              { role: 'COO', label: 'Chief Operating Officer', href: '/fractional-coo-jobs-uk', color: 'purple' },
-              { role: 'CHRO', label: 'Chief HR Officer', href: '/fractional-chro-jobs-uk', color: 'pink' },
-              { role: 'CEO', label: 'Chief Executive Officer', href: '/fractional-ceo-jobs-uk', color: 'yellow' },
-              { role: 'CPO', label: 'Chief Product Officer', href: '/fractional-cpo-jobs-uk', color: 'indigo' },
-              { role: 'CISO', label: 'Security Officer', href: '/fractional-ciso-jobs-uk', color: 'red' },
-              { role: 'CIO', label: 'Chief Information Officer', href: '/fractional-cio-jobs-uk', color: 'violet' },
-            ].map((item) => (
-              <Link
-                key={item.role}
-                href={item.href}
-                className="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl p-4 text-center transition-colors group"
-              >
-                <p className={`text-xl font-bold text-${item.color}-400 group-hover:text-${item.color}-300`}>
-                  {item.role}
-                </p>
-                <p className="text-gray-400 text-sm mt-1">{item.label}</p>
-              </Link>
-            ))}
+          <div className="text-center">
+            <Link
+              href="/fractional-jobs-uk"
+              className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold transition-colors"
+            >
+              View All 200+ Roles
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Honest About Being New */}
-      <section className="py-16">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h3 className="text-2xl font-bold text-white mb-6">
-            We're Building Something Different
-          </h3>
-          <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            We're a new platform, so we don't have walls of testimonials yet.
-            What we do have is a genuine commitment to making fractional executive
-            hiring better for everyone - lower fees for companies, better matching for candidates.
-          </p>
-          <p className="text-gray-400 mb-8">
-            Try us. If we don't deliver, you've lost nothing. If we do, you'll be one of our early success stories.
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-emerald-900/50 to-indigo-900/50 border-y border-gray-700">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">
+            {audience === 'candidates' ? 'Ready to Find Your Next Fractional Role?' : 'Ready to Hire a Fractional Executive?'}
+          </h2>
+          <p className="text-xl text-gray-300 mb-8">
+            {audience === 'candidates'
+              ? 'Join our beta waitlist and be first to access exclusive fractional executive opportunities when we launch in Q1 2026.'
+              : 'Book a free consultation call to discuss your hiring needs. No obligation, no sales pitch—just expert advice from our fractional recruitment specialists.'
+            }
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/register"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-xl font-medium transition-colors"
-            >
-              Register Interest
-            </Link>
-            <Link
-              href="/book-call"
-              className="border border-gray-600 hover:border-gray-500 text-white px-8 py-3 rounded-xl font-medium transition-colors"
-            >
-              Book a Discovery Call
-            </Link>
+            {audience === 'candidates' ? (
+              <Link
+                href="/register"
+                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
+              >
+                Register for Beta Access
+              </Link>
+            ) : (
+              <Link
+                href="/book-call"
+                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
+              >
+                Book Free Consultation
+              </Link>
+            )}
           </div>
         </div>
       </section>
-
-      {/* Fractional Recruitment Agency CTA */}
-      <section className="py-12 bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 border-t border-emerald-500">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <span className="inline-block bg-white/20 text-white px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">🏢 UK Fractional Recruitment Agency</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Fractional Recruitment Agency - 10-15% Fees
-              </h2>
-              <p className="text-emerald-100 mb-6">
-                Our UK recruitment agency charges 10-15% vs the industry standard 25-30%. Book a free call with our team or browse 200+ fractional executive opportunities.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/fractional-recruitment-agency"
-                  className="bg-white text-gray-900 hover:bg-gray-100 px-6 py-3 rounded-lg font-bold transition-colors"
-                >
-                  Learn More
-                </Link>
-                <Link
-                  href="/book-call"
-                  className="bg-emerald-800 text-white hover:bg-emerald-900 px-6 py-3 rounded-lg font-bold transition-colors border border-emerald-400"
-                >
-                  Book a Free Call
-                </Link>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
-                <div className="text-3xl font-black text-white">10-15%</div>
-                <div className="text-emerald-200 text-sm">Our Fee</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
-                <div className="text-3xl font-black text-white">25-30%</div>
-                <div className="text-emerald-200 text-sm">Industry Avg</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
-                <div className="text-3xl font-black text-white">200+</div>
-                <div className="text-emerald-200 text-sm">Executives</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
-                <div className="text-3xl font-black text-white">2 Weeks</div>
-                <div className="text-emerald-200 text-sm">Avg Hire Time</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Virtual Executive Services - US Market */}
-      <section className="py-12 bg-gray-800/30 border-t border-gray-700">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-xl font-semibold text-white text-center mb-4">Virtual Executive Services</h3>
-          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto text-sm">
-            Remote C-suite leadership for US businesses. Get experienced executive guidance without full-time commitment.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link
-              href="/virtual-cfo"
-              className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-4 text-center hover:border-emerald-400/50 transition-all group"
-            >
-              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-emerald-300 transition-colors">CFO Services</h4>
-              <p className="text-gray-400 text-xs mt-1">$1,200-$2,500/day</p>
-            </Link>
-            <Link
-              href="/virtual-cto"
-              className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-400/50 transition-all group"
-            >
-              <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-cyan-300 transition-colors">CTO Services</h4>
-              <p className="text-gray-400 text-xs mt-1">$1,500-$3,000/day</p>
-            </Link>
-            <Link
-              href="/virtual-coo"
-              className="bg-gradient-to-r from-slate-800/50 to-gray-900/50 border border-slate-500/30 rounded-xl p-4 text-center hover:border-slate-400/50 transition-all group"
-            >
-              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-slate-300 transition-colors">COO Services</h4>
-              <p className="text-gray-400 text-xs mt-1">$1,200-$2,500/day</p>
-            </Link>
-            <Link
-              href="/virtual-ciso"
-              className="bg-gradient-to-r from-red-900/50 to-rose-900/50 border border-red-500/30 rounded-xl p-4 text-center hover:border-red-400/50 transition-all group"
-            >
-              <span className="text-red-400 text-xs font-semibold uppercase tracking-wider">Virtual</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-red-300 transition-colors">CISO Services</h4>
-              <p className="text-gray-400 text-xs mt-1">$1,500-$3,000/day</p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Interim Executive Jobs */}
-      <section className="py-12 bg-gray-800/20 border-t border-gray-700">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-xl font-semibold text-white text-center mb-4">Interim Executive Jobs UK</h3>
-          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto text-sm">
-            Looking for full-time interim assignments? Browse UK interim executive roles with day rates £900-£1,800.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link
-              href="/interim-cto-jobs-uk"
-              className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-4 text-center hover:border-cyan-400/50 transition-all group"
-            >
-              <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-cyan-300 transition-colors">CTO Jobs</h4>
-              <p className="text-gray-400 text-xs mt-1">£900-£1,400/day</p>
-            </Link>
-            <Link
-              href="/interim-cfo-jobs-uk"
-              className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-xl p-4 text-center hover:border-emerald-400/50 transition-all group"
-            >
-              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-emerald-300 transition-colors">CFO Jobs</h4>
-              <p className="text-gray-400 text-xs mt-1">£900-£1,500/day</p>
-            </Link>
-            <Link
-              href="/interim-cmo-jobs-uk"
-              className="bg-gradient-to-r from-amber-900/50 to-orange-900/50 border border-amber-500/30 rounded-xl p-4 text-center hover:border-amber-400/50 transition-all group"
-            >
-              <span className="text-amber-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-amber-300 transition-colors">CMO Jobs</h4>
-              <p className="text-gray-400 text-xs mt-1">£850-£1,300/day</p>
-            </Link>
-            <Link
-              href="/interim-coo-jobs-uk"
-              className="bg-gradient-to-r from-purple-900/50 to-violet-900/50 border border-purple-500/30 rounded-xl p-4 text-center hover:border-purple-400/50 transition-all group"
-            >
-              <span className="text-purple-400 text-xs font-semibold uppercase tracking-wider">Interim</span>
-              <h4 className="text-lg font-bold text-white mt-1 group-hover:text-purple-300 transition-colors">COO Jobs</h4>
-              <p className="text-gray-400 text-xs mt-1">£950-£1,600/day</p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Related Executive Services */}
-      <section className="py-12 bg-gray-800/20 border-t border-gray-700">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-xl font-semibold text-white text-center mb-6">Related Executive Services</h3>
-          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto text-sm">
-            Looking for different types of executive support? Our partner sites specialise in complementary areas.
-          </p>
-          <div className="grid md:grid-cols-3 gap-4">
-            <a href="https://interim.quest" target="_blank" rel="noopener noreferrer" className="bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-xl p-4 text-center transition-colors">
-              <p className="text-emerald-400 font-semibold">Interim Executives</p>
-              <p className="text-gray-400 text-sm mt-1">Full-time temporary C-suite for 3-12 month assignments</p>
-            </a>
-            <a href="https://chiefofstaff.quest" target="_blank" rel="noopener noreferrer" className="bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-xl p-4 text-center transition-colors">
-              <p className="text-indigo-400 font-semibold">Chief of Staff</p>
-              <p className="text-gray-400 text-sm mt-1">Specialist recruitment for strategic operations roles</p>
-            </a>
-            <a href="https://gtm.quest" target="_blank" rel="noopener noreferrer" className="bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-xl p-4 text-center transition-colors">
-              <p className="text-amber-400 font-semibold">GTM Strategy</p>
-              <p className="text-gray-400 text-sm mt-1">Go-to-market strategy and execution for B2B growth</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-800 py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h4 className="text-white font-semibold mb-4">For Candidates</h4>
-              <ul className="space-y-2">
-                <li><Link href="/fractional-jobs-uk" className="text-gray-400 hover:text-white text-sm">Browse Jobs</Link></li>
-                <li><Link href="/interim-cto-jobs-uk" className="text-gray-400 hover:text-white text-sm">Interim CTO Jobs</Link></li>
-                <li><Link href="/interim-cfo-jobs-uk" className="text-gray-400 hover:text-white text-sm">Interim CFO Jobs</Link></li>
-                <li><Link href="/register" className="text-gray-400 hover:text-white text-sm">Create Profile</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">For Employers</h4>
-              <ul className="space-y-2">
-                <li><Link href="/hire-fractional-cfo" className="text-gray-400 hover:text-white text-sm">Hire a CFO</Link></li>
-                <li><Link href="/hire-fractional-cto" className="text-gray-400 hover:text-white text-sm">Hire a CTO</Link></li>
-                <li><Link href="/book-call" className="text-gray-400 hover:text-white text-sm">Book a Call</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2">
-                <li><Link href="/fractional-cfo" className="text-gray-400 hover:text-white text-sm">What is a Fractional CFO?</Link></li>
-                <li><Link href="/fractional-executive-meaning" className="text-gray-400 hover:text-white text-sm">What is Fractional?</Link></li>
-                <li><Link href="/fractional-cfo-salary" className="text-gray-400 hover:text-white text-sm">CFO Salary Guide</Link></li>
-                <li><Link href="/news" className="text-gray-400 hover:text-white text-sm">Latest News</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li><Link href="/about" className="text-gray-400 hover:text-white text-sm">About Us</Link></li>
-                <li><Link href="/contact" className="text-gray-400 hover:text-white text-sm">Contact</Link></li>
-                <li><Link href="/privacy" className="text-gray-400 hover:text-white text-sm">Privacy Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
-            <p>&copy; {new Date().getFullYear()} Fractional Quest. AI-powered executive matching.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
-
-export default PublicLanding
