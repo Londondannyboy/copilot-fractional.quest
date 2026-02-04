@@ -53,21 +53,22 @@ export function PublicLanding() {
           {/* Main Pitch */}
           {audience === 'candidates' ? (
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Find Your Next
-                <span className="text-emerald-400"> Fractional </span>
-                Executive Role
-              </h2>
+              <div className="inline-block bg-emerald-600 text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
+                Beta Launching Q1 2026
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Find Fractional Executive Jobs Through Our
+                <span className="text-emerald-400"> Recruitment Agency</span>
+              </h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Skip the recruiters who ghost you. Our AI searches hundreds of opportunities daily
-                and matches you with roles that actually fit your experience and goals.
+                Browse 200+ fractional CFO, CTO, CMO roles. Our UK recruitment agency specialises in matching C-suite executives with fractional opportunities at competitive rates.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
-                  href="/auth/sign-in"
-                  className="bg-gray-900 hover:bg-black text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
+                  href="/register"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
                 >
-                  Start Your Search
+                  Register Interest
                 </Link>
                 <Link
                   href="/fractional-jobs-uk"
@@ -79,24 +80,26 @@ export function PublicLanding() {
             </div>
           ) : (
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Hire
-                <span className="text-indigo-400"> Fractional </span>
-                Executives
-              </h2>
+              <div className="inline-block bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
+                Beta Launching Q1 2026
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                UK Fractional
+                <span className="text-indigo-400"> Recruitment Agency </span>
+                for C-Suite Executives
+              </h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Get C-suite expertise without the full-time commitment or agency fees.
-                We charge 10-15% vs the industry standard 25-30%.
+                Hire fractional executives at 10-15% fees vs the industry standard 25-30%. Our recruitment agency specialises in CFO, CTO, CMO, and COO placements.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
                   href="/book-call"
-                  className="bg-gray-900 hover:bg-black text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl shadow-lg"
                 >
                   Book a Call
                 </Link>
                 <Link
-                  href="/hire-fractional-cfo"
+                  href="/fractional-recruitment-agency"
                   className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
                 >
                   Learn More
@@ -154,10 +157,10 @@ export function PublicLanding() {
                 </p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
-                <div className="text-3xl mb-4">💬</div>
-                <h4 className="text-lg font-semibold text-white mb-2">Voice-First Search</h4>
+                <div className="text-3xl mb-4">🤝</div>
+                <h4 className="text-lg font-semibold text-white mb-2">Expert Recruiters</h4>
                 <p className="text-gray-400">
-                  Just tell our AI what you're looking for. "Find me CFO roles in London, 3 days a week."
+                  Our UK recruitment agency team understands fractional hiring and matches you with roles that fit your schedule.
                 </p>
               </div>
             </div>
@@ -296,10 +299,10 @@ export function PublicLanding() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              href="/auth/sign-in"
+              href="/register"
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-xl font-medium transition-colors"
             >
-              Get Started Free
+              Register Interest
             </Link>
             <Link
               href="/book-call"
@@ -316,12 +319,12 @@ export function PublicLanding() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <span className="inline-block bg-white/20 text-white px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">Fractional Recruitment Agency</span>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Hire Fractional Executives Without the Fees
-              </h3>
+              <span className="inline-block bg-white/20 text-white px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">🏢 UK Fractional Recruitment Agency</span>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Fractional Recruitment Agency - 10-15% Fees
+              </h2>
               <p className="text-emerald-100 mb-6">
-                Skip the 25% recruiter fees. Book a free call with our team or browse our network of 200+ vetted fractional executives directly.
+                Our UK recruitment agency charges 10-15% vs the industry standard 25-30%. Book a free call with our team or browse 200+ fractional executive opportunities.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -482,7 +485,7 @@ export function PublicLanding() {
                 <li><Link href="/fractional-jobs-uk" className="text-gray-400 hover:text-white text-sm">Browse Jobs</Link></li>
                 <li><Link href="/interim-cto-jobs-uk" className="text-gray-400 hover:text-white text-sm">Interim CTO Jobs</Link></li>
                 <li><Link href="/interim-cfo-jobs-uk" className="text-gray-400 hover:text-white text-sm">Interim CFO Jobs</Link></li>
-                <li><Link href="/auth/sign-in" className="text-gray-400 hover:text-white text-sm">Create Profile</Link></li>
+                <li><Link href="/register" className="text-gray-400 hover:text-white text-sm">Create Profile</Link></li>
               </ul>
             </div>
             <div>

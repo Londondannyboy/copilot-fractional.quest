@@ -6,7 +6,6 @@ import { Providers } from "@/components/providers";
 import { Header, Footer } from "@/components/navigation";
 import { localeConfig, type Locale } from "@/i18n/config";
 import "./globals.css";
-import "@copilotkit/react-ui/styles.css";
 
 // Font configuration - matches fractional.quest design system
 const geistSans = Geist({
@@ -71,9 +70,6 @@ export default async function RootLayout({
         {/* Preconnect to Google Fonts for faster font loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* Preconnect to CopilotKit API (530ms LCP savings per Lighthouse) */}
-        <link rel="preconnect" href="https://api.cloud.copilotkit.ai" />
-        <link rel="dns-prefetch" href="https://api.cloud.copilotkit.ai" />
         {/* Preconnect to Unsplash for job card images */}
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -95,7 +91,7 @@ export default async function RootLayout({
               "name": "Fractional Quest",
               "alternateName": ["Fractional Quest", "FJQ"],
               "url": "https://fractional.quest",
-              "description": "AI-powered fractional job search platform. Find executive roles paying £1,200-£2,500/day.",
+              "description": "UK fractional recruitment agency specialising in C-suite executive hiring.",
               "publisher": {
                 "@type": "Organization",
                 "@id": "https://fractional.quest/#organization",
@@ -110,6 +106,27 @@ export default async function RootLayout({
                 },
                 "query-input": "required name=search_term_string"
               }
+            })
+          }}
+        />
+        {/* EmploymentAgency Schema for recruitment agency positioning */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EmploymentAgency",
+              "@id": "https://fractional.quest/#employment-agency",
+              "name": "Fractional Quest",
+              "description": "UK fractional recruitment agency for C-suite executive hiring. Specialising in fractional CFO, CTO, CMO, COO, and other executive roles.",
+              "url": "https://fractional.quest",
+              "areaServed": {
+                "@type": "Country",
+                "name": "United Kingdom"
+              },
+              "serviceType": ["Executive Recruitment", "Fractional Executive Hiring", "C-Suite Recruitment"],
+              "slogan": "10-15% fees vs 25-30% industry standard",
+              "knowsAbout": ["Fractional CFO", "Fractional CTO", "Fractional CMO", "Interim Executive", "C-Suite Hiring"]
             })
           }}
         />
