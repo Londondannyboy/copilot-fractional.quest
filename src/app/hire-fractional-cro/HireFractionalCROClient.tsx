@@ -1,14 +1,8 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { CopilotProvider } from "@/components/CopilotProvider";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
@@ -42,48 +36,16 @@ const evaluationCriteria = [
   { criteria: 'Fractional Working Model Fit', description: 'Do they know how to work fractionally? This requires discipline, clear communication, and asynchronous collaboration. Ask how they manage multiple clients and make impact in 2 days/week.', lookFor: 'Works with 2-4 companies currently, systems for time management, clear communication cadence', redFlag: 'First fractional engagement or working with 6+ companies (spread too thin)' },
 ];
 
-// Outer component that provides CopilotKit context
 export default function HireFractionalCROClient() {
-  return (
-    <CopilotProvider>
-      <HireFractionalCROClientInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function HireFractionalCROClientInner() {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
   const heroImage = getHeroImageUrl('cro', 1920, 800);
   const imageCredit = getImage('cro');
-  const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
-  useEffect(() => { if (user && !state?.user) { setState((prev) => ({ ...prev, user: { id: user.id, name: user.name || "", email: user.email || "" } })); } }, [user?.id, state?.user, setState]);
-  const { appendMessage } = useCopilotChat();
-  const handleVoiceMessage = useCallback((text: string, role: "user" | "assistant" = "user") => {
-    if (user?.id && text.length > 5) { fetch('/api/zep-store', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: user.id, role, content: text, metadata: { page: 'hire-fractional-cro', hiringGuide: true } }) }).catch(() => {}); }
-    appendMessage(new TextMessage({ content: text, role: role === "user" ? Role.User : Role.Assistant }));
-  }, [appendMessage, user?.id]);
-
-  const suggestions = [
-    { title: "Where to find CROs", message: "Where can I find fractional CROs to hire?" },
-    { title: "Interview questions", message: "What questions should I ask when interviewing a fractional CRO?" },
-    { title: "Pricing & costs", message: "How much does a fractional CRO cost?" },
-  ];
 
   return (
-    <main style={{ "--copilot-kit-primary-color": "#3B82F6" } as CopilotKitCSSProperties}>
+    <main>
       <WebPageSchema title="Hire a Fractional CRO | UK Guide 2026" description="How to hire a fractional CRO in the UK. Where to find them, interview questions, costs, and contract terms." url="https://fractional.quest/hire-fractional-cro" dateModified={new Date('2026-01-17T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT\nPage Type: hiring_guide\nPage URL: /hire-fractional-cro\nRole Type: CRO\n\nYou're helping someone learn how to hire a fractional CRO.\nKey facts: Day rates £1,000-£1,500, 2-4 weeks to hire, 3 month trial, 30 days notice.\nWhen asked what page you're on, say "Fractional CRO Hiring Guide"`}
-        labels={{ title: "CRO Hiring Guide", initial: firstName ? `Hi ${firstName}! I can help you hire a fractional CRO. Ask about sourcing, interview questions, or costs.` : `Welcome! This guide covers everything about hiring a fractional CRO.` }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
-        <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white">
           {/* Hero Section */}
           <section className="relative min-h-[60vh] flex items-center overflow-hidden">
             <Image src={heroImage} alt="Hire a Fractional CRO" fill priority sizes="100vw" className="object-cover" />
@@ -100,7 +62,6 @@ function HireFractionalCROClientInner() {
                   <div><div className="text-5xl font-black text-white">£1,250</div><div className="text-blue-100 text-sm uppercase tracking-wider mt-1">Avg Day Rate</div></div>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'hiring_guide', roleType: 'CRO', pageH1: 'Hire a Fractional CRO', pageUrl: '/hire-fractional-cro', pageDescription: 'Complete guide to hiring a fractional CRO' }} />
                   <Link href="/fractional-cro-jobs-uk" className="px-8 py-4 bg-white text-blue-600 font-bold uppercase tracking-wider hover:bg-blue-50 transition-colors">Browse CRO Candidates</Link>
                   <Link href="#process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-blue-600 transition-colors">See Hiring Process</Link>
                 </div>
@@ -216,7 +177,6 @@ function HireFractionalCROClientInner() {
             </div>
           </section>
         </div>
-      </CopilotSidebar>
     </main>
   );
 }

@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
+import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
 import { LazyYouTube } from "@/components/LazyYouTube";
 
 // Lazy-load below-fold components to reduce initial JS execution
@@ -79,6 +81,9 @@ const benefits = [
  * Page content renders immediately without waiting for AI bundle.
  */
 export function RecruitmentAgencyClient() {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  const firstName = user?.name?.split(" ")[0] || null;
 
   // Use local images for faster loading (served from Vercel CDN)
   const localImage = getLocalImage('services');
@@ -519,7 +524,19 @@ export function RecruitmentAgencyClient() {
 
   return (
     <main>
-      {pageContent}
+      <LazyCopilotSidebar
+        instructions={`## PAGE CONTEXT
+Page Type: guide | Topic: Fractional Recruitment Agencies | URL: /fractional-recruitment-agency
+
+You're helping someone understand fractional recruitment agencies and how to find/hire fractional executives.
+Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractional.Quest is a job board not agency`}
+        labels={{
+          title: "Recruitment Guide",
+          initial: firstName ? `Hi ${firstName}! I can help you find the right fractional recruitment agency.` : `Welcome! This guide covers fractional recruitment agencies in the UK.`
+        }}
+      >
+        {pageContent}
+      </LazyCopilotSidebar>
     </main>
   );
 }

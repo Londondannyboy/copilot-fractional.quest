@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { VoiceInput } from "@/components/voice-input";
 import { StatsBar } from "@/components/ui";
 import { JobStats } from "@/lib/jobs";
 import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
@@ -75,20 +74,10 @@ export function HeroSection({
             {subtitle}
           </p>
 
-          {/* Voice button - centered on mobile */}
+          {/* CTA Section */}
           <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3 sm:gap-4 mb-8">
-            <VoiceInput
-              onMessage={onVoiceMessage}
-              firstName={firstName}
-              userId={userId}
-              pageContext={{
-                location,
-                totalJobs: stats.total,
-                topRoles: stats.topRoles.slice(0, 3).map(r => r.role),
-              }}
-            />
             <span className="text-sm opacity-70 text-center sm:text-left">
-              Ask about {location} jobs
+              Browse {stats.total} available positions
             </span>
           </div>
         </div>

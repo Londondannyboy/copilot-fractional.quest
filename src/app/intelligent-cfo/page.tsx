@@ -1,123 +1,15 @@
 'use client'
 
-// React hooks available if needed for future enhancements
-import { CopilotSidebar, CopilotChat } from '@copilotkit/react-ui'
-import { useCopilotChatSuggestions } from '@copilotkit/react-ui'
-import '@copilotkit/react-ui/styles.css'
-import { CopilotProvider } from '@/components/CopilotProvider'
 import { authClient } from '@/lib/auth/client'
+import { PersonalizedGreeting, LiveMarketChart, LiveJobGrid, ActiveFilters, DocumentSection } from '@/components/mdx/LiveComponents'
 
-import { IntelligentDocument } from '@/components/mdx/IntelligentDocument'
-import {
-  PersonalizedGreeting,
-  LiveMarketChart,
-  LiveJobGrid,
-  ActiveFilters,
-  DocumentSection,
-} from '@/components/mdx/LiveComponents'
-
-/**
- * INTELLIGENT DOCUMENT DEMO
- *
- * This page demonstrates the Medium article's vision:
- * "The document thinks" - CopilotKit is embedded IN the content,
- * not just a sidebar. The page itself responds to conversation.
- *
- * Key insight: We define useCopilotAction hooks that modify PAGE STATE,
- * and the agent's instructions tell it to prefer these actions over
- * its standard tools when on this page.
- */
-
-// Inline chat component for in-content conversation
-function InlineDocumentChat() {
-  // Add suggested prompts
-  useCopilotChatSuggestions({
-    instructions: "Suggest 3 ways to explore this CFO jobs page",
-    maxSuggestions: 3,
-  })
-
-  return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3">
-        <h3 className="text-white font-semibold flex items-center gap-2">
-          <span>💬</span> Ask About This Page
-        </h3>
-      </div>
-      <div className="h-[300px]">
-        <CopilotChat
-          labels={{
-            initial: "Ask me anything about CFO jobs, salaries, or the market. I can filter the page content for you!",
-          }}
-          className="h-full"
-        />
-      </div>
-    </div>
-  )
-}
-
-// Outer component that provides CopilotKit context
 export default function IntelligentCFOPage() {
-  return (
-    <CopilotProvider>
-      <IntelligentCFOPageInner />
-    </CopilotProvider>
-  )
-}
-
-// Inner component with CopilotKit hooks
-function IntelligentCFOPageInner() {
   const { data: session } = authClient.useSession()
   const user = session?.user
   const firstName = user?.name?.split(' ')[0]
 
-  // Instructions that tell the agent to use PAGE ACTIONS not its standard tools
-  const pageInstructions = `
-## INTELLIGENT DOCUMENT MODE - CFO Jobs Page
-
-You are helping the user explore an INTELLIGENT DOCUMENT about Fractional CFO jobs.
-
-CRITICAL: This page has special actions that UPDATE THE PAGE CONTENT directly:
-
-1. **update_document_filters** - Use this to filter jobs/data shown on the page
-   - location: "London", "Manchester", "Remote", etc.
-   - role: "Finance", "Engineering", "Marketing" (changes job category)
-   - remote: true/false (show only remote jobs)
-   - minRate, maxRate: day rate filters
-
-2. **highlight_section** - Use this to visually focus on a section
-   - section: "salary", "jobs", "market", "skills"
-
-3. **clear_highlights** - Remove all highlights
-
-WHEN USER ASKS ABOUT JOBS OR FILTERING:
-- Use update_document_filters to change what the PAGE shows
-- Do NOT use search_jobs (that shows results in sidebar only)
-- The page content will update in real-time
-
-EXAMPLES:
-- "Show me remote jobs" → call update_document_filters with remote=true
-- "Filter to London" → call update_document_filters with location="London"
-- "Show CTO jobs" → call update_document_filters with role="Engineering"
-- "Focus on salary" → call highlight_section with section="salary"
-
-${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
-`
-
   return (
-    <CopilotSidebar
-        defaultOpen={false}
-        clickOutsideToClose={true}
-        instructions={pageInstructions}
-        labels={{
-          title: "Document Assistant",
-          initial: "I can help you explore this page. The content updates based on our conversation!\n\nTry the inline chat below, or ask me here.",
-        }}
-      >
-        <IntelligentDocument
-          pageContext="Fractional CFO Jobs in the UK - A living document about CFO opportunities"
-          initialFilters={{ role: 'Finance', location: '' }}
-        >
-          <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50">
             {/* Hero */}
             <section className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 text-white py-16">
               <div className="max-w-6xl mx-auto px-4">
@@ -231,10 +123,6 @@ ${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
                 </div>
               </DocumentSection>
 
-              {/* INLINE CHAT - The key to "document thinks" */}
-              <section className="mt-8 mb-12">
-                <InlineDocumentChat />
-              </section>
 
               {/* How It Works */}
               <section className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100">
@@ -296,7 +184,5 @@ ${user ? `User: ${firstName} (${user.email})` : 'User: Not logged in'}
               </section>
             </div>
           </main>
-        </IntelligentDocument>
-      </CopilotSidebar>
-  )
+    )
 }

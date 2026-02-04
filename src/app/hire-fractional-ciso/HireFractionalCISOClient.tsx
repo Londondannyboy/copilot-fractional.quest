@@ -1,13 +1,7 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
 import Link from "next/link";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { CopilotProvider } from "@/components/CopilotProvider";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
@@ -64,62 +58,16 @@ const evaluationCriteria = [
   { criteria: 'Fractional Effectiveness', description: 'Can they be impactful part-time? Security requires consistent presence and quick response times.', lookFor: '2-4 clients, clear escalation procedures, responsive communication', redFlag: 'First fractional role, slow response times, overcommitted' },
 ];
 
-// Outer component that provides CopilotKit context
 export default function HireFractionalCISOClient() {
-  return (
-    <CopilotProvider>
-      <HireFractionalCISOClientInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function HireFractionalCISOClientInner() {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
   const heroImage = getHeroImageUrl('services', 1920, 800);
   const imageCredit = getImage('services');
 
-  const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
-
-  useEffect(() => {
-    if (user && !state?.user) {
-      setState((prev) => ({ ...prev, user: { id: user.id, name: user.name || "", email: user.email || "" } }));
-    }
-  }, [user?.id, state?.user, setState]);
-
-  const { appendMessage } = useCopilotChat();
-
-  const handleVoiceMessage = useCallback((text: string, role: "user" | "assistant" = "user") => {
-    if (user?.id && text.length > 5) {
-      fetch('/api/zep-store', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: user.id, role, content: text, metadata: { page: 'hire-fractional-ciso' } }) }).catch(() => {});
-    }
-    appendMessage(new TextMessage({ content: text, role: role === "user" ? Role.User : Role.Assistant }));
-  }, [appendMessage, user?.id]);
-
-  const suggestions = [
-    { title: "Where to find CISOs", message: "Where can I find fractional CISOs to hire?" },
-    { title: "SOC 2 expertise", message: "How do I find a CISO who can help with SOC 2 certification?" },
-    { title: "Pricing & costs", message: "How much does a fractional CISO cost?" },
-  ];
-
   return (
-    <main style={{ "--copilot-kit-primary-color": "#dc2626" } as CopilotKitCSSProperties}>
+    <main>
       <WebPageSchema title="Hire a Fractional CISO UK 2026" description="How to hire a fractional CISO." url="https://fractional.quest/hire-fractional-ciso" dateModified={new Date('2026-01-07T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT
-Page Type: hiring_guide | Role Type: CISO | URL: /hire-fractional-ciso
-
-You're helping someone learn how to hire a fractional CISO.
-Key facts: Day rates £900-£1,500 | 2-4 weeks to hire | Certifications essential (CISSP, CISM)`}
-        labels={{ title: "CISO Hiring Guide", initial: firstName ? `Hi ${firstName}! 👋 I can help you hire a fractional CISO.` : `Welcome! This guide covers hiring a fractional CISO.` }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
-        <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white">
           {/* Hero */}
           <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-red-600 to-rose-500 py-24">
             <Image src={heroImage} alt="Hire a Fractional CISO" fill priority sizes="100vw" className="object-cover" />
@@ -135,7 +83,6 @@ Key facts: Day rates £900-£1,500 | 2-4 weeks to hire | Certifications essentia
                   <div><div className="text-5xl font-black text-white">40+</div><div className="text-red-100 text-sm uppercase tracking-wider mt-1">Candidates</div></div>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'hiring_guide', roleType: 'CISO', pageH1: 'Hire a Fractional CISO', pageUrl: '/hire-fractional-ciso' }} />
                   <Link href="/fractional-ciso-jobs-uk" className="px-8 py-4 bg-white text-red-600 font-bold uppercase tracking-wider hover:bg-red-50 transition-colors">Browse CISO Candidates</Link>
                 </div>
               </div>
@@ -474,7 +421,6 @@ Key facts: Day rates £900-£1,500 | 2-4 weeks to hire | Certifications essentia
             </div>
           </section>
         </div>
-      </CopilotSidebar>
     </main>
   );
 }

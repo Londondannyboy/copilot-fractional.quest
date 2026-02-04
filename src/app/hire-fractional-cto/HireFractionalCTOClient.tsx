@@ -1,14 +1,8 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { CopilotProvider } from "@/components/CopilotProvider";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
@@ -65,69 +59,16 @@ const evaluationCriteria = [
   { criteria: 'Fractional Working Model Fit', description: 'Do they know how to work fractionally? This requires discipline, clear communication, and asynchronous collaboration. Ask how they manage multiple clients, stay organized, and make impact in 2 days/week.', lookFor: 'Works with 2-4 companies currently, systems for time management, clear communication cadence', redFlag: 'First fractional engagement or working with 6+ companies (spread too thin)' },
 ];
 
-// Outer component that provides CopilotKit context
 export default function HireFractionalCTOClient() {
-  return (
-    <CopilotProvider>
-      <HireFractionalCTOClientInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function HireFractionalCTOClientInner() {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
-
-  const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
-
-  useEffect(() => {
-    if (user && !state?.user) {
-      setState((prev) => ({ ...prev, user: { id: user.id, name: user.name || "", email: user.email || "" } }));
-    }
-  }, [user?.id, state?.user, setState]);
-
-  const { appendMessage } = useCopilotChat();
-
-  const handleVoiceMessage = useCallback((text: string, role: "user" | "assistant" = "user") => {
-    if (user?.id && text.length > 5) {
-      fetch('/api/zep-store', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: user.id, role, content: text, metadata: { page: 'hire-fractional-cto', hiringGuide: true } }) }).catch(() => {});
-    }
-    appendMessage(new TextMessage({ content: text, role: role === "user" ? Role.User : Role.Assistant }));
-  }, [appendMessage, user?.id]);
-
   const heroImage = getHeroImageUrl('services', 1920, 800)
   const imageCredit = getImage('services')
 
-  const suggestions = [
-    { title: "Where to find CTOs", message: "Where can I find fractional CTOs to hire?" },
-    { title: "Interview questions", message: "What questions should I ask when interviewing a fractional CTO?" },
-    { title: "Pricing & costs", message: "How much does a fractional CTO cost?" },
-  ];
-
   return (
-    <main style={{ "--copilot-kit-primary-color": "#0284c7" } as CopilotKitCSSProperties}>
+    <main>
       <WebPageSchema title="Hire a Fractional CTO | UK Guide 2026" description="How to hire a fractional CTO in the UK. Where to find them, interview questions, day rates, and contract terms." url="https://fractional.quest/hire-fractional-cto" dateModified={new Date('2026-01-15T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT
-Page Type: hiring_guide
-Page URL: /hire-fractional-cto
-Role Type: CTO
-
-You're helping someone learn how to hire a fractional CTO.
-Key facts: Day rates £900-£1,600, 2-4 weeks to hire, 3 month trial, 30 days notice.
-When asked what page you're on, say "Fractional CTO Hiring Guide"`}
-        labels={{
-          title: "CTO Hiring Guide",
-          initial: firstName ? `Hi ${firstName}! I can help you hire a fractional CTO. Ask about sourcing, interview questions, or costs.` : `Welcome! This guide covers everything about hiring a fractional CTO.`,
-        }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
-        <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white">
           {/* Hero */}
           <section className="relative py-24 overflow-hidden">
             <Image src={heroImage} alt="Fractional CTO services" fill className="object-cover" priority />
@@ -145,7 +86,6 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
                   <div><div className="text-5xl font-black text-white">100+</div><div className="text-cyan-100 text-sm uppercase tracking-wider mt-1">Candidates</div></div>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'hiring_guide', roleType: 'CTO', pageH1: 'Hire a Fractional CTO', pageUrl: '/hire-fractional-cto', pageDescription: 'Complete guide to hiring a fractional CTO' }} />
                   <Link href="/fractional-cto-jobs-uk" className="px-8 py-4 bg-white text-cyan-600 font-bold uppercase tracking-wider hover:bg-cyan-50 transition-colors">Browse CTO Candidates</Link>
                   <Link href="#hiring-process" className="px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-cyan-600 transition-colors">See Hiring Process</Link>
                 </div>
@@ -479,7 +419,6 @@ When asked what page you're on, say "Fractional CTO Hiring Guide"`}
             </div>
           </section>
         </div>
-      </CopilotSidebar>
     </main>
   );
 }

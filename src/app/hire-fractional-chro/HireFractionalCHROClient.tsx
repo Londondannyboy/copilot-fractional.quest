@@ -1,13 +1,7 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
 import Link from "next/link";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { CopilotProvider } from "@/components/CopilotProvider";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
@@ -64,62 +58,16 @@ const evaluationCriteria = [
   { criteria: 'Fractional Working Model', description: 'Do they know how to work fractionally? Clear communication, async updates, prioritisation.', lookFor: 'Works with 2-4 companies, clear systems, communication cadence', redFlag: 'First fractional role or working with 6+ companies' },
 ];
 
-// Outer component that provides CopilotKit context
 export default function HireFractionalCHROClient() {
-  return (
-    <CopilotProvider>
-      <HireFractionalCHROClientInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function HireFractionalCHROClientInner() {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
   const heroImage = getHeroImageUrl('services', 1920, 800);
   const imageCredit = getImage('services');
 
-  const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
-
-  useEffect(() => {
-    if (user && !state?.user) {
-      setState((prev) => ({ ...prev, user: { id: user.id, name: user.name || "", email: user.email || "" } }));
-    }
-  }, [user?.id, state?.user, setState]);
-
-  const { appendMessage } = useCopilotChat();
-
-  const handleVoiceMessage = useCallback((text: string, role: "user" | "assistant" = "user") => {
-    if (user?.id && text.length > 5) {
-      fetch('/api/zep-store', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: user.id, role, content: text, metadata: { page: 'hire-fractional-chro' } }) }).catch(() => {});
-    }
-    appendMessage(new TextMessage({ content: text, role: role === "user" ? Role.User : Role.Assistant }));
-  }, [appendMessage, user?.id]);
-
-  const suggestions = [
-    { title: "Where to find CHROs", message: "Where can I find fractional CHROs to hire?" },
-    { title: "Interview questions", message: "What questions should I ask when interviewing a fractional CHRO?" },
-    { title: "Pricing & costs", message: "How much does a fractional CHRO cost?" },
-  ];
-
   return (
-    <main style={{ "--copilot-kit-primary-color": "#9333ea" } as CopilotKitCSSProperties}>
+    <main>
       <WebPageSchema title="Hire a Fractional CHRO UK 2026" description="How to hire a fractional CHRO." url="https://fractional.quest/hire-fractional-chro" dateModified={new Date('2026-01-07T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT
-Page Type: hiring_guide | Role Type: CHRO | URL: /hire-fractional-chro
-
-You're helping someone learn how to hire a fractional CHRO.
-Key facts: Day rates £600-£1,100 | 2-4 weeks to hire | 3-month trial standard`}
-        labels={{ title: "CHRO Hiring Guide", initial: firstName ? `Hi ${firstName}! 👋 I can help you hire a fractional CHRO.` : `Welcome! This guide covers hiring a fractional CHRO.` }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
-        <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white">
           {/* Hero */}
           <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-purple-600 to-purple-500 py-24">
             <Image src={heroImage} alt="Hire a Fractional CHRO" fill priority sizes="100vw" className="object-cover" />
@@ -135,7 +83,6 @@ Key facts: Day rates £600-£1,100 | 2-4 weeks to hire | 3-month trial standard`
                   <div><div className="text-5xl font-black text-white">50+</div><div className="text-purple-100 text-sm uppercase tracking-wider mt-1">Candidates</div></div>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'hiring_guide', roleType: 'CHRO', pageH1: 'Hire a Fractional CHRO', pageUrl: '/hire-fractional-chro' }} />
                   <Link href="/fractional-chro-jobs-uk" className="px-8 py-4 bg-white text-purple-600 font-bold uppercase tracking-wider hover:bg-purple-50 transition-colors">Browse CHRO Candidates</Link>
                 </div>
               </div>
@@ -467,7 +414,6 @@ Key facts: Day rates £600-£1,100 | 2-4 weeks to hire | 3-month trial standard`
             </div>
           </section>
         </div>
-      </CopilotSidebar>
     </main>
   );
 }

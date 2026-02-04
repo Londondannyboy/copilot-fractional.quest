@@ -1,15 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { Metadata } from "next";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { CopilotProvider } from "@/components/CopilotProvider";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
@@ -153,96 +147,13 @@ const evaluationCriteria = [
   },
 ];
 
-// Outer component that provides CopilotKit context
 export default function HireFractionalCMOClient() {
-  return (
-    <CopilotProvider>
-      <HireFractionalCMOClientInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function HireFractionalCMOClientInner() {
   // Hero image
   const heroImage = getHeroImageUrl('services', 1920, 800)
   const imageCredit = getImage('services')
 
-  // Auth
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
-
-  // Agent state
-  const { state, setState } = useCoAgent<{
-    user?: { id: string; name: string; email: string };
-  }>({
-    name: "my_agent",
-    initialState: {},
-  });
-
-  // Sync user to agent state
-  useEffect(() => {
-    if (user && !state?.user) {
-      setState((prev) => ({
-        ...prev,
-        user: {
-          id: user.id,
-          name: user.name || "",
-          email: user.email || "",
-        },
-      }));
-    }
-  }, [user?.id, state?.user, setState]);
-
-  // Chat integration
-  const { appendMessage } = useCopilotChat();
-
-  // Handle voice messages
-  const handleVoiceMessage = useCallback(
-    (text: string, role: "user" | "assistant" = "user") => {
-      console.log(`🎤 Voice (${role}):`, text.slice(0, 100));
-
-      // Store to Zep for memory
-      if (user?.id && text.length > 5) {
-        fetch('/api/zep-store', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: user.id,
-            role: role,
-            content: text,
-            metadata: { page: 'hire-fractional-cmo', hiringGuide: true }
-          }),
-        }).catch(e => console.warn('Failed to store to Zep:', e));
-      }
-
-      const messageRole = role === "user" ? Role.User : Role.Assistant;
-      appendMessage(new TextMessage({ content: text, role: messageRole }));
-    },
-    [appendMessage, user?.id]
-  );
-
-  // Dynamic suggestions
-  const suggestions = [
-    {
-      title: "Where to find CMOs",
-      message: "Where can I find fractional CMOs to hire?",
-    },
-    {
-      title: "Interview questions",
-      message: "What questions should I ask when interviewing a fractional CMO?",
-    },
-    {
-      title: "Pricing & costs",
-      message: "How much does a fractional CMO cost?",
-    },
-  ];
-
   return (
-    <main
-      style={{ "--copilot-kit-primary-color": "#2563eb" } as CopilotKitCSSProperties}
-    >
+    <main>
       {/* Schema Markup */}
       <WebPageSchema
         title="Hire a Fractional CMO UK 2026"
@@ -252,48 +163,7 @@ function HireFractionalCMOClientInner() {
       />
       <FAQPageSchema faqs={faqItems} />
 
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT (for agent parsing)
-Page Type: hiring_guide
-Page URL: /hire-fractional-cmo
-Role Type: CMO
-Service: Fractional CMO Hiring Guide
-
-## Hiring Guide Context: Fractional CMO
-
-You're helping someone learn how to hire a fractional CMO.
-IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
-
-**What's on this page:**
-- Where to find fractional CMOs (6 sourcing channels)
-- What to look for when evaluating candidates (6 criteria)
-- Interview questions to ask (4 categories)
-- Hiring process timeline (2-4 weeks)
-- Contract terms and structure
-
-**Key facts:**
-- Day rates: £700-£1,400
-- Typical engagement: 1-2 days per week
-- Timeline: 2-4 weeks to hire
-- Trial period: 3 months standard
-- Notice: 30 days standard
-
-**Your approach:**
-1. Help companies understand the hiring process
-2. Explain what makes a good fractional CMO
-3. Share interview questions and red flags
-4. Guide them to browse candidates or post a role
-5. When asked what page you're on, say "Fractional CMO Hiring Guide"`}
-        labels={{
-          title: "CMO Hiring Guide",
-          initial: firstName
-            ? `Hi ${firstName}! 👋 I can help you understand how to hire a fractional CMO. Ask me about sourcing candidates, interview questions, or what to look for in a great CMO.`
-            : `Welcome! 👋 This guide covers everything about hiring a fractional CMO. Ask me anything about the process, costs, or what makes a great candidate.`,
-        }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
-        <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white">
           {/* Hero */}
           <section className="relative py-24 overflow-hidden">
             {/* Background Image */}
@@ -340,20 +210,8 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
                   </div>
                 </div>
 
-                {/* Voice Widget + CTAs */}
+                {/* CTAs */}
                 <div className="flex flex-wrap items-center gap-4">
-                  <VoiceInput
-                    onMessage={handleVoiceMessage}
-                    firstName={firstName}
-                    userId={user?.id}
-                    pageContext={{
-                      pageType: 'hiring_guide',
-                      roleType: 'CMO',
-                      pageH1: 'Hire a Fractional CMO',
-                      pageUrl: '/hire-fractional-cmo',
-                      pageDescription: 'Complete guide to finding, vetting, and hiring the perfect fractional CMO',
-                    }}
-                  />
                   <Link href="/fractional-cmo-jobs-uk" className="px-8 py-4 bg-white text-blue-600 font-bold uppercase tracking-wider hover:bg-blue-50 transition-colors">
                     Browse CMO Candidates
                   </Link>
@@ -901,7 +759,6 @@ IMPORTANT: This is a HIRING GUIDE page, not a services page. Focus on:
             </div>
           </section>
         </div>
-      </CopilotSidebar>
     </main>
   );
 }

@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
+import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
 
 const EmbeddedJobBoard = dynamic(() => import("@/components/EmbeddedJobBoard").then(mod => ({ default: mod.EmbeddedJobBoard })), { ssr: false, loading: () => <div className="animate-pulse bg-gray-100 rounded-xl h-96" /> });
 const FAQ = dynamic(() => import("@/components/seo").then(mod => ({ default: mod.FAQ })), { ssr: false });
@@ -39,6 +41,8 @@ const benefits = [
 ];
 
 export function ExecutiveSearchFirmsClient() {
+  const { data: session } = authClient.useSession();
+  const firstName = session?.user?.name?.split(" ")[0] || null;
   const localImage = getLocalImage('services');
   const imageCredit = getImage('services');
 
@@ -198,7 +202,9 @@ export function ExecutiveSearchFirmsClient() {
 
   return (
     <main>
-      {pageContent}
+      <LazyCopilotSidebar instructions={`## PAGE CONTEXT\nPage Type: guide | Topic: Executive Search Firms | URL: /executive-search-firms\n\nYou're helping someone understand executive search firms and C-suite recruitment.\nKey facts: Retained search fees 25-35% | 12-20 weeks duration | Passive candidate access | 12 month guarantee typical`} labels={{ title: "Exec Search Guide", initial: firstName ? `Hi ${firstName}! I can help you understand executive search firms and find the right approach.` : `Welcome! This guide covers executive search firms and C-suite headhunting.` }}>
+        {pageContent}
+      </LazyCopilotSidebar>
     </main>
   );
 }

@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
+import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
 
 const EmbeddedJobBoard = dynamic(() => import("@/components/EmbeddedJobBoard").then(mod => ({ default: mod.EmbeddedJobBoard })), { ssr: false, loading: () => <div className="animate-pulse bg-gray-100 rounded-xl h-96" /> });
 const FAQ = dynamic(() => import("@/components/seo").then(mod => ({ default: mod.FAQ })), { ssr: false });
@@ -39,6 +41,8 @@ const benefits = [
 ];
 
 export function CTORecruitmentAgencyClient() {
+  const { data: session } = authClient.useSession();
+  const firstName = session?.user?.name?.split(" ")[0] || null;
   const localImage = getLocalImage('cto');
   const imageCredit = getImage('cto');
 
@@ -198,7 +202,9 @@ export function CTORecruitmentAgencyClient() {
 
   return (
     <main>
-      {pageContent}
+      <LazyCopilotSidebar instructions={`## PAGE CONTEXT\nPage Type: guide | Topic: CTO Recruitment Agencies | URL: /cto-recruitment-agency\n\nYou're helping someone understand CTO recruitment agencies and how to hire Chief Technology Officers.\nKey facts: CTO recruiter fees 20-30% | 3-6 weeks for fractional, 8-16 weeks for permanent | Technical assessment critical`} labels={{ title: "CTO Hiring Guide", initial: firstName ? `Hi ${firstName}! I can help you find the right CTO recruitment agency or candidate.` : `Welcome! This guide covers CTO recruitment agencies and executive search.` }}>
+        {pageContent}
+      </LazyCopilotSidebar>
     </main>
   );
 }

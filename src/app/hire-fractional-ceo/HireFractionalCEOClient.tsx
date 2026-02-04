@@ -1,13 +1,7 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
 import Link from "next/link";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { CopilotProvider } from "@/components/CopilotProvider";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { HireProcessStepper } from "@/components/HireProcessStepper";
@@ -64,62 +58,16 @@ const evaluationCriteria = [
   { criteria: 'Fractional Model Fit', description: 'Do they understand fractional working? Managing time, being effective in 2 days/week, clear priorities.', lookFor: '2-4 current clients, clear systems, portfolio approach', redFlag: 'First fractional role, wants full-time really' },
 ];
 
-// Outer component that provides CopilotKit context
 export default function HireFractionalCEOClient() {
-  return (
-    <CopilotProvider>
-      <HireFractionalCEOClientInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function HireFractionalCEOClientInner() {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
   const heroImage = getHeroImageUrl('services', 1920, 800);
   const imageCredit = getImage('services');
 
-  const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
-
-  useEffect(() => {
-    if (user && !state?.user) {
-      setState((prev) => ({ ...prev, user: { id: user.id, name: user.name || "", email: user.email || "" } }));
-    }
-  }, [user?.id, state?.user, setState]);
-
-  const { appendMessage } = useCopilotChat();
-
-  const handleVoiceMessage = useCallback((text: string, role: "user" | "assistant" = "user") => {
-    if (user?.id && text.length > 5) {
-      fetch('/api/zep-store', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: user.id, role, content: text, metadata: { page: 'hire-fractional-ceo' } }) }).catch(() => {});
-    }
-    appendMessage(new TextMessage({ content: text, role: role === "user" ? Role.User : Role.Assistant }));
-  }, [appendMessage, user?.id]);
-
-  const suggestions = [
-    { title: "Where to find CEOs", message: "Where can I find fractional CEOs to hire?" },
-    { title: "Interview questions", message: "What questions should I ask when interviewing a fractional CEO?" },
-    { title: "Pricing & costs", message: "How much does a fractional CEO cost?" },
-  ];
-
   return (
-    <main style={{ "--copilot-kit-primary-color": "#ca8a04" } as CopilotKitCSSProperties}>
+    <main>
       <WebPageSchema title="Hire a Fractional CEO UK 2026" description="How to hire a fractional CEO." url="https://fractional.quest/hire-fractional-ceo" dateModified={new Date('2026-01-07T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT
-Page Type: hiring_guide | Role Type: CEO | URL: /hire-fractional-ceo
-
-You're helping someone learn how to hire a fractional CEO.
-Key facts: Day rates £1,000-£2,000 | 3-6 weeks to hire | Often includes equity`}
-        labels={{ title: "CEO Hiring Guide", initial: firstName ? `Hi ${firstName}! 👋 I can help you hire a fractional CEO.` : `Welcome! This guide covers hiring a fractional CEO.` }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
-        <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white">
           {/* Hero */}
           <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-yellow-600 to-amber-500 py-24">
             <Image src={heroImage} alt="Hire a Fractional CEO" fill priority sizes="100vw" className="object-cover" />
@@ -136,7 +84,6 @@ Key facts: Day rates £1,000-£2,000 | 3-6 weeks to hire | Often includes equity
                   <div><div className="text-5xl font-black text-white">25+</div><div className="text-yellow-100 text-sm uppercase tracking-wider mt-1">Candidates</div></div>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'hiring_guide', roleType: 'CEO', pageH1: 'Hire a Fractional CEO', pageUrl: '/hire-fractional-ceo' }} />
                   <Link href="/fractional-ceo-jobs-uk" className="px-8 py-4 bg-white text-yellow-600 font-bold uppercase tracking-wider hover:bg-yellow-50 transition-colors">Browse CEO Candidates</Link>
                 </div>
               </div>
@@ -468,7 +415,6 @@ Key facts: Day rates £1,000-£2,000 | 3-6 weeks to hire | Often includes equity
             </div>
           </section>
         </div>
-      </CopilotSidebar>
     </main>
   );
 }

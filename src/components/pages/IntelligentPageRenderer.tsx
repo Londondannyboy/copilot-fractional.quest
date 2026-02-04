@@ -16,10 +16,6 @@ import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
 import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
 
 // Lazy load CopilotKit - doesn't block initial render
-const CopilotKitWrapper = dynamic(
-  () => import("@/components/job-pages/CopilotKitWrapper"),
-  { ssr: false, loading: () => null }
-);
 
 // ===========================================
 // Locale Detection & URL Localization
@@ -1637,18 +1633,8 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
     page.slug?.includes("bristol") ? "bristol" : "uk";
 
   // Build CopilotKit instructions from page content
-  const copilotInstructions = `You are helping users explore ${page.hero_title || page.title}.
-${page.meta_description || ""}
-Help users find relevant jobs, understand day rates, and learn about fractional executive careers.`;
-
   return (
-    <CopilotKitWrapper
-      title={`${page.hero_title?.split(" ")[0] || "Fractional"} AI`}
-      instructions={copilotInstructions}
-      initialMessage={`Hi! I can help you explore ${page.hero_title?.split(" ")[0] || "fractional"} opportunities. Ask me about jobs, day rates, or career advice!`}
-      accentColor={accentColorValue}
-    >
-      <main
+    <main
         className="min-h-screen bg-white overflow-x-hidden"
         style={{ "--copilot-kit-primary-color": accentColorValue } as React.CSSProperties}
       >
@@ -2018,6 +2004,5 @@ Help users find relevant jobs, understand day rates, and learn about fractional 
       </section>
 
       </main>
-    </CopilotKitWrapper>
   );
 }

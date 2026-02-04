@@ -1,11 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { useState } from "react";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 
@@ -132,80 +128,9 @@ export function ServicesTemplate({
   ctaButtonLink = "/contact",
 }: ServicesTemplateProps) {
   // Auth
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
-
-  // Agent state
-  const { state, setState } = useCoAgent<{
-    user?: { id: string; name: string; email: string };
-  }>({
-    name: "my_agent",
-    initialState: {},
-  });
-
-  // Sync user to agent state
-  useEffect(() => {
-    if (user && !state?.user) {
-      setState((prev) => ({
-        ...prev,
-        user: {
-          id: user.id,
-          name: user.name || "",
-          email: user.email || "",
-        },
-      }));
-    }
-  }, [user?.id, state?.user, setState]);
-
-  // Chat integration
-  const { appendMessage } = useCopilotChat();
-
-  // Handle voice messages
-  const handleVoiceMessage = useCallback(
-    (text: string, role: "user" | "assistant" = "user") => {
-      console.log(`🎤 Voice (${role}):`, text.slice(0, 100));
-
-      // Store to Zep for memory
-      if (user?.id && text.length > 5) {
-        fetch('/api/zep-store', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: user.id,
-            role: role,
-            content: text,
-            metadata: { page: `hire-fractional-${roleType.toLowerCase()}`, service: true }
-          }),
-        }).catch(e => console.warn('Failed to store to Zep:', e));
-      }
-
-      const messageRole = role === "user" ? Role.User : Role.Assistant;
-      appendMessage(new TextMessage({ content: text, role: messageRole }));
-    },
-    [appendMessage, user?.id, roleType]
-  );
-
-  // Dynamic suggestions
-  const suggestions = [
-    {
-      title: "Pricing details",
-      message: `Tell me about your Fractional ${roleType} pricing`,
-    },
-    {
-      title: "How it works",
-      message: `How does hiring a Fractional ${roleType} work?`,
-    },
-    {
-      title: "Get started",
-      message: `I'd like to discuss hiring a Fractional ${roleType}`,
-    },
-  ];
 
   return (
-    <main
-      style={{ "--copilot-kit-primary-color": "#2563eb" } as CopilotKitCSSProperties}
-    >
+    <main>
       {/* Schema Markup */}
       <WebPageSchema
         title={title}
@@ -214,44 +139,6 @@ export function ServicesTemplate({
         dateModified={new Date('2026-01-07T00:00:00Z')}
       />
       <FAQPageSchema faqs={faqs} />
-
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT (for agent parsing)
-Page Type: services
-Page URL: /hire-fractional-${roleType.toLowerCase()}
-Role Type: ${roleType}
-Service: Fractional ${roleType} Hiring
-
-## Service Page Context: Fractional ${roleType}
-
-You're helping someone learn about our Fractional ${roleType} services.
-IMPORTANT: You are on the HIRE FRACTIONAL ${roleType} services page, NOT the main homepage.
-
-**What we offer:**
-- Part-time ${roleType} leadership (1-3 days/week)
-- Strategic guidance and hands-on execution
-- Team building and management
-- Board/investor support
-
-**Pricing tiers:**
-${tiers.map(t => `- ${t.name}: ${t.price} (${t.description})`).join('\n')}
-
-**Your approach:**
-1. Be helpful and consultative
-2. Explain the value of fractional leadership
-3. Answer questions about pricing, process, and fit
-4. Guide interested visitors toward booking a call
-5. Be confident about our expertise
-6. When asked what page you're on, say "Hire Fractional ${roleType}" services page`}
-        labels={{
-          title: `Fractional ${roleType} Services`,
-          initial: firstName
-            ? `Hi ${firstName}! 👋 Interested in learning about our Fractional ${roleType} services? I can explain how it works, pricing, and help you decide if it's right for your company.`
-            : `Welcome! 👋 Looking for Fractional ${roleType} leadership? I can explain how our services work and help you find the right fit for your needs.`,
-        }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white py-20 px-6 relative overflow-hidden">
           <div className="absolute inset-0 opacity-20">
@@ -274,24 +161,6 @@ ${tiers.map(t => `- ${t.name}: ${t.price} (${t.description})`).join('\n')}
                 {heroDescription}
               </p>
 
-              {/* Voice Widget */}
-              <div className="flex items-center gap-4">
-                <VoiceInput
-                  onMessage={handleVoiceMessage}
-                  firstName={firstName}
-                  userId={user?.id}
-                  pageContext={{
-                    pageType: 'services',
-                    roleType: roleType,
-                    pageH1: heroHeadline,
-                    pageUrl: `/hire-fractional-${roleType.toLowerCase()}`,
-                    pageDescription: heroSubheadline,
-                  }}
-                />
-                <span className="text-sm opacity-70">
-                  Ask about our {roleType} services
-                </span>
-              </div>
             </div>
           </div>
         </section>
@@ -423,7 +292,6 @@ ${tiers.map(t => `- ${t.name}: ${t.price} (${t.description})`).join('\n')}
             </a>
           </div>
         </section>
-      </CopilotSidebar>
     </main>
   );
 }

@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, Suspense } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 
 // Standard components (not lazy - they're light)
@@ -23,50 +21,6 @@ import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
 import { FAQSection, SEOContent } from "./index";
 import { Job, JobStats } from "@/lib/jobs";
 import { ImageCategory, getImage, getHeroImageUrl, getLocalImage, hasLocalImage } from "@/lib/images";
-
-// ============================================================================
-// LAZY LOADED COMPONENTS - These load AFTER initial paint for better LCP
-// ============================================================================
-
-// Lazy load CopilotKit - it's the main culprit for slow LCP
-const CopilotKitWrapper = dynamic(
-  () => import("./CopilotKitWrapper"),
-  {
-    ssr: false,
-    loading: () => null // Don't show loading - content already visible
-  }
-);
-
-// Lazy load IntelligentDocument components
-const IntelligentDocument = dynamic(
-  () => import("@/components/mdx/IntelligentDocument").then((mod) => mod.IntelligentDocument),
-  { ssr: false }
-);
-
-const PersonalizedGreeting = dynamic(
-  () => import("@/components/mdx/LiveComponents").then((mod) => mod.PersonalizedGreeting),
-  { ssr: false }
-);
-
-const LiveMarketChart = dynamic(
-  () => import("@/components/mdx/LiveComponents").then((mod) => mod.LiveMarketChart),
-  { ssr: false }
-);
-
-const LiveJobGrid = dynamic(
-  () => import("@/components/mdx/LiveComponents").then((mod) => mod.LiveJobGrid),
-  { ssr: false }
-);
-
-const ActiveFilters = dynamic(
-  () => import("@/components/mdx/LiveComponents").then((mod) => mod.ActiveFilters),
-  { ssr: false }
-);
-
-const DocumentSection = dynamic(
-  () => import("@/components/mdx/LiveComponents").then((mod) => mod.DocumentSection),
-  { ssr: false }
-);
 
 // ============================================================================
 // TYPES
@@ -254,52 +208,12 @@ export function IntelligentJobPageClient({
   location,
   locationDisplay,
   seoContent,
-  initialJobs,
-  stats,
   imageCategory = 'finance',
   roleFilter,
   accentColor = 'emerald',
-  locale: _locale = 'uk',
 }: IntelligentJobPageClientProps) {
-  const [, setAiLoaded] = useState(false);
-
-  // Get accent color value
-  const accentColorValue = accentColor === 'emerald' ? "#059669" :
-    accentColor === 'blue' ? "#2563eb" :
-    accentColor === 'amber' ? "#d97706" :
-    accentColor === 'purple' ? "#7c3aed" :
-    accentColor === 'red' ? "#dc2626" : "#4f46e5";
-
-  // Build page context for the agent
-  const pageContext = `${locationDisplay} Fractional Executive Jobs`;
-
-  // Build instructions for the agent
-  const agentInstructions = `
-## Page Context: ${pageContext}
-
-You are helping a user browse fractional executive jobs in ${locationDisplay}.
-
-### CRITICAL: Use Page Actions for Filtering
-This page has INTELLIGENT DOCUMENT features. When the user asks to filter or focus on something:
-
-1. **For filtering jobs**: Use the \`update_document_filters\` action
-2. **For highlighting sections**: Use the \`highlight_section\` action
-3. **To clear filters**: Use \`clear_highlights\` action
-
-### Available Roles
-CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
-
-### Current Page Info
-- Location: ${locationDisplay}
-- Total Jobs: ${stats.total}
-- Average Day Rate: ${seoContent.hero.stats.avgDayRate}
-`;
-
   return (
-    <main
-      className="min-h-screen bg-white"
-      style={{ '--copilot-kit-primary-color': accentColorValue } as React.CSSProperties}
-    >
+    <main className="min-h-screen bg-white">
       {/* CRITICAL: Hero renders IMMEDIATELY - no CopilotKit dependency */}
       <IntelligentHero
         headline={seoContent.hero.headline}
@@ -342,71 +256,13 @@ CFO, CTO, CMO, COO, CEO, CHRO, CPO, CISO
                 title={`Hot ${locationDisplay} Jobs`}
               />
 
-              {/* Interactive Job Grid - Lazy loaded with CopilotKit */}
-              <Suspense fallback={
-                <div className="animate-pulse space-y-4">
-                  <div className="h-8 bg-gray-200 rounded w-1/3"></div>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="h-48 bg-gray-200 rounded-xl"></div>
-                    ))}
-                  </div>
-                </div>
-              }>
-                <CopilotKitWrapper
-                  instructions={agentInstructions}
-                  title="Fractional AI"
-                  initialMessage={`Hi! I can help you explore ${locationDisplay} fractional jobs. Try asking me to filter by role, show salary data, or find remote opportunities.`}
-                  accentColor={accentColorValue}
-                  initialJobs={initialJobs}
-                  onLoad={() => setAiLoaded(true)}
-                >
-                  <IntelligentDocument
-                    pageContext={pageContext}
-                    initialFilters={{
-                      location: location === 'london' ? 'London' : '',
-                      role: roleFilter || '',
-                    }}
-                  >
-                    {/* AI Greeting & Filters */}
-                    <div className="mb-6">
-                      <PersonalizedGreeting
-                        userRole={roleFilter}
-                        userLocation={locationDisplay}
-                      />
-                      <ActiveFilters />
-                    </div>
-
-                    {/* Live Job Grid */}
-                    <DocumentSection id="jobs" title={`${locationDisplay} Fractional Jobs`}>
-                      <LiveJobGrid
-                        location={location === 'london' ? 'London' : ''}
-                        role={roleFilter}
-                        limit={9}
-                      />
-                    </DocumentSection>
-
-                    {/* Live Market Chart */}
-                    <div className="mt-8">
-                      <DocumentSection id="salary" title={`${locationDisplay} Day Rates`}>
-                        <LiveMarketChart
-                          location={locationDisplay}
-                          role={roleFilter}
-                          type="bar"
-                        />
-                      </DocumentSection>
-                    </div>
-
-                    {/* Rate Calculator */}
-                    <div className="mt-8 bg-gray-50 rounded-xl p-6 border border-gray-200">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                        {locationDisplay} Fractional Rate Calculator
-                      </h2>
-                      <RoleCalculator role="cfo" />
-                    </div>
-                  </IntelligentDocument>
-                </CopilotKitWrapper>
-              </Suspense>
+              {/* Rate Calculator */}
+              <div className="mt-8 bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  {locationDisplay} Fractional Rate Calculator
+                </h2>
+                <RoleCalculator role="cfo" />
+              </div>
 
               {/* ====== SEO CONTENT - Renders Server-Side ====== */}
 

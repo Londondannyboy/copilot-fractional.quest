@@ -1,13 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
 import Link from "next/link";
-import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotSidebar, CopilotKitCSSProperties } from "@copilotkit/react-ui";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
-import { CopilotProvider } from "@/components/CopilotProvider";
-import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 import { FAQ, FAQItem } from "@/components/seo";
 import { WebPageSchema, FAQPageSchema } from "@/components/seo";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
@@ -52,62 +45,16 @@ const benefits = [
   { title: 'Replacement Guarantee', description: 'Most agencies offer replacement guarantees (typically 3-6 months) if the placement doesn\'t work out.', icon: '🛡️' },
 ];
 
-// Outer component that provides CopilotKit context
 export default function FractionalCFOAgencyPage() {
-  return (
-    <CopilotProvider>
-      <FractionalCFOAgencyPageInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function FractionalCFOAgencyPageInner() {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
   const heroImage = getHeroImageUrl('finance', 1920, 800);
   const imageCredit = getImage('finance');
 
-  const { state, setState } = useCoAgent<{ user?: { id: string; name: string; email: string } }>({ name: "my_agent", initialState: {} });
-
-  useEffect(() => {
-    if (user && !state?.user) {
-      setState((prev) => ({ ...prev, user: { id: user.id, name: user.name || "", email: user.email || "" } }));
-    }
-  }, [user?.id, state?.user, setState]);
-
-  const { appendMessage } = useCopilotChat();
-
-  const handleVoiceMessage = useCallback((text: string, role: "user" | "assistant" = "user") => {
-    if (user?.id && text.length > 5) {
-      fetch('/api/zep-store', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: user.id, role, content: text, metadata: { page: 'fractional-cfo-agency' } }) }).catch(() => {});
-    }
-    appendMessage(new TextMessage({ content: text, role: role === "user" ? Role.User : Role.Assistant }));
-  }, [appendMessage, user?.id]);
-
-  const suggestions = [
-    { title: "Best CFO agencies", message: "What are the best fractional CFO agencies in the UK?" },
-    { title: "Agency fees", message: "How much do fractional CFO agencies charge?" },
-    { title: "Direct vs agency", message: "Should I hire a fractional CFO directly or use an agency?" },
-  ];
-
   return (
-    <main style={{ "--copilot-kit-primary-color": "#059669" } as CopilotKitCSSProperties}>
+    <main>
       <WebPageSchema title="Fractional CFO Agency UK 2026 - Best Agencies for Fractional Finance Leaders" description="Find the best fractional CFO agencies in the UK. Compare agencies specialising in fractional Chief Financial Officer placements. Understand fees, timelines, and how to choose." url="https://fractional.quest/fractional-cfo-agency" dateModified={new Date('2026-01-20T00:00:00Z')} />
       <FAQPageSchema faqs={faqItems} />
 
-      <CopilotSidebar
-        instructions={`## PAGE CONTEXT
-Page Type: guide | Topic: Fractional CFO Agency | URL: /fractional-cfo-agency
-
-You're helping someone understand fractional CFO agencies and how to find/hire fractional finance leaders.
-Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractional.Quest is a job board not agency`}
-        labels={{ title: "CFO Agency Guide", initial: firstName ? `Hi ${firstName}! 👋 I can help you find the right fractional CFO agency.` : `Welcome! This guide covers fractional CFO agencies in the UK.` }}
-        suggestions={suggestions}
-        clickOutsideToClose={false}
-      >
-        <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white">
           {/* Hero */}
           <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-emerald-600 to-teal-500 py-24">
             <Image src={heroImage} alt="Fractional CFO Agency - Finance Leadership Placement" fill priority sizes="100vw" className="object-cover" />
@@ -131,7 +78,6 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
                   >
                     <span>📅</span> Book a Free Call
                   </a>
-                  <VoiceInput onMessage={handleVoiceMessage} firstName={firstName} userId={user?.id} pageContext={{ pageType: 'guide', roleType: 'CFO', pageH1: 'Fractional CFO Agency', pageUrl: '/fractional-cfo-agency' }} />
                   <Link href="#agencies" className="px-8 py-4 bg-emerald-700 text-white font-bold uppercase tracking-wider hover:bg-emerald-800 transition-colors border border-emerald-500">View Top Agencies</Link>
                 </div>
               </div>
@@ -451,7 +397,6 @@ Key facts: Agency fees 15-25% of year 1 | 2-4 weeks to hire via agency | Fractio
             </div>
           </section>
         </div>
-      </CopilotSidebar>
     </main>
   );
 }

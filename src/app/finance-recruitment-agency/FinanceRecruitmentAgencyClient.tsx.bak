@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
+import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
 
 // Lazy-load below-fold components
 const EmbeddedJobBoard = dynamic(
@@ -72,6 +74,9 @@ const benefits = [
 ];
 
 export function FinanceRecruitmentAgencyClient() {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  const firstName = user?.name?.split(" ")[0] || null;
 
   // Use CFO images for finance recruitment
   const localImage = getLocalImage('cfo');
@@ -428,7 +433,19 @@ export function FinanceRecruitmentAgencyClient() {
 
   return (
     <main>
-      {pageContent}
+      <LazyCopilotSidebar
+        instructions={`## PAGE CONTEXT
+Page Type: guide | Topic: Finance Recruitment Agencies | URL: /finance-recruitment-agency
+
+You're helping someone understand finance recruitment agencies and how to find/hire CFOs and Finance Directors.
+Key facts: Agency fees 15-25% | 3-6 weeks to hire CFO | Fractional.Quest is a job board not agency | ACA/ACCA/CIMA qualifications important`}
+        labels={{
+          title: "CFO Hiring Guide",
+          initial: firstName ? `Hi ${firstName}! I can help you find the right finance recruitment agency or CFO candidate.` : `Welcome! This guide covers finance recruitment agencies and CFO hiring.`
+        }}
+      >
+        {pageContent}
+      </LazyCopilotSidebar>
     </main>
   );
 }

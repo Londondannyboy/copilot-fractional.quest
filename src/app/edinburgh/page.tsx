@@ -1,6 +1,6 @@
 // Static route - takes precedence over [slug] dynamic route
 import { Metadata } from "next";
-import { JobPageClient } from "@/components/job-pages";
+import { IntelligentJobPageClient } from "@/components/job-pages/IntelligentJobPageClient";
 import { getJobsPageData } from "@/lib/jobs";
 import { edinburghSEO } from "@/lib/seo-content/edinburgh";
 import { getOGImageUrl, getImage } from "@/lib/images";
@@ -76,7 +76,7 @@ export default async function EdinburghPage() {
       />
 
       {/* Page Content */}
-      <JobPageClient
+      <IntelligentJobPageClient
         location="edinburgh"
         locationDisplay="Edinburgh"
         initialJobs={jobs}

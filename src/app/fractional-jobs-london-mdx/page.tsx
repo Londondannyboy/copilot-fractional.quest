@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect, useCallback, useState } from "react";
-import { CopilotSidebar } from "@copilotkit/react-ui";
-import { useCopilotChat } from "@copilotkit/react-core";
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
-import { CopilotProvider } from "@/components/CopilotProvider";
+import { useState } from "react";
 import { authClient } from "@/lib/auth/client";
-import { VoiceInput } from "@/components/voice-input";
 
 // MDX Components (imported directly for this demo)
 import PersonalizedHero from "@/components/mdx/PersonalizedHero";
 import SalaryBenchmarkChart from "@/components/mdx/SalaryBenchmarkChart";
 import CareerTimeline from "@/components/mdx/CareerTimeline";
 import MarketOverview from "@/components/mdx/MarketOverview";
-import CopilotMainPanel from "@/components/mdx/CopilotMainPanel";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 import { RoleCalculator } from "@/components/RoleCalculator";
 
@@ -28,22 +22,8 @@ import { RoleCalculator } from "@/components/RoleCalculator";
  * - Career trajectory visualization
  * - Salary benchmarking
  */
-// Outer component that provides CopilotKit context
 export default function MDXDemoPage() {
-  return (
-    <CopilotProvider>
-      <MDXDemoPageInner />
-    </CopilotProvider>
-  );
-}
-
-// Inner component with CopilotKit hooks
-function MDXDemoPageInner() {
   const { data: session } = authClient.useSession();
-  const user = session?.user;
-  const firstName = user?.name?.split(" ")[0] || null;
-
-  const { appendMessage } = useCopilotChat();
 
   // User profile state (would come from database in production)
   const [userProfile] = useState({
@@ -53,81 +33,8 @@ function MDXDemoPageInner() {
     dayRate: 1100,
   });
 
-  // Handle voice messages
-  const handleVoiceMessage = useCallback(
-    (text: string, role: "user" | "assistant" = "user") => {
-      if (!text.trim()) return;
-      const message = new TextMessage({
-        content: text,
-        role: role === "user" ? Role.User : Role.Assistant,
-      });
-      appendMessage(message);
-    },
-    [appendMessage]
-  );
-
-  // Listen for questions from CopilotMainPanel
-  useEffect(() => {
-    const handleQuestion = (event: CustomEvent) => {
-      const { question } = event.detail;
-      if (question) {
-        handleVoiceMessage(question, "user");
-      }
-    };
-
-    window.addEventListener("copilot-question", handleQuestion as EventListener);
-    return () => {
-      window.removeEventListener("copilot-question", handleQuestion as EventListener);
-    };
-  }, [handleVoiceMessage]);
-
-  // Build context for CopilotKit
-  const pageContext = {
-    pageType: "guide" as const,
-    pageH1: "Fractional Jobs London - MDX Demo",
-    pageUrl: "/fractional-jobs-london-mdx",
-    pageDescription: "Interactive MDX demo with personalized content",
-  };
-
-  const instructions = `
-## MDX Demo Page Context
-This is a demo page showcasing MDX + CopilotKit integration.
-The user is exploring fractional executive opportunities in London.
-
-User Profile:
-- Name: ${firstName || "Guest"}
-- Location: ${userProfile.location}
-- Target Role: ${userProfile.targetRole}
-- Current Day Rate: £${userProfile.dayRate}
-
-When the user asks questions:
-- Reference their profile data
-- Suggest personalized job matches
-- Provide salary benchmarking insights
-- Help with career trajectory planning
-`;
-
   return (
-    <CopilotSidebar
-      instructions={instructions}
-      labels={{
-        title: "Fractional Quest AI",
-        initial: "Hi! This is an MDX-powered page. Ask me about jobs, salaries, or your career path!",
-      }}
-      className="h-full"
-    >
-      {/* Voice Widget */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <VoiceInput
-          onMessage={handleVoiceMessage}
-          firstName={firstName}
-          userId={user?.id || null}
-          pageContext={pageContext}
-        />
-      </div>
-
-      {/* Main Content - MDX Style */}
-      <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50">
         {/* Personalized Hero */}
         <PersonalizedHero
           location={userProfile.location}
@@ -186,30 +93,6 @@ When the user asks questions:
             />
           </section>
 
-          {/* CopilotKit in Main Panel */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-              🤖 Ask the AI (In-Content Chat)
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Instead of just a sidebar, CopilotKit can be embedded directly in your content.
-              Questions here are forwarded to the same AI assistant - same context, same capabilities.
-            </p>
-            <CopilotMainPanel
-              title="Ask about London opportunities"
-              context={{
-                pageType: "mdx_demo",
-                location: userProfile.location,
-                role: userProfile.targetRole,
-              }}
-              suggestedQuestions={[
-                `What's the average day rate for ${userProfile.targetRole}s in ${userProfile.location}?`,
-                "Show me available jobs",
-                "How can I increase my rate?",
-                "What skills are most valuable?",
-              ]}
-            />
-          </section>
 
           {/* Career Timeline */}
           <section className="mb-12">
@@ -223,7 +106,7 @@ When the user asks questions:
             <CareerTimeline
               currentRole="Marketing Director"
               targetRole={`Fractional ${userProfile.targetRole}`}
-              userName={firstName || undefined}
+              userName={undefined}
             />
           </section>
 
@@ -303,7 +186,6 @@ When the user asks questions:
             </ul>
           </section>
         </div>
-      </main>
-    </CopilotSidebar>
+    </main>
   );
 }

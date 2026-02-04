@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useCopilotReadable } from '@copilotkit/react-core'
 
 interface NewsArticle {
   id: number
@@ -56,13 +55,6 @@ export function NewsSection({ limit = 6 }: { limit?: number }) {
     fetchNews()
   }, [limit])
 
-  // Make news available to CopilotKit
-  useCopilotReadable({
-    description: 'Latest fractional executive news articles',
-    value: articles.length > 0
-      ? `Latest news: ${articles.map(a => `"${a.title}" (${a.category}) - ${a.summary}`).join('; ')}`
-      : 'No news articles loaded yet',
-  })
 
   if (loading) {
     return (

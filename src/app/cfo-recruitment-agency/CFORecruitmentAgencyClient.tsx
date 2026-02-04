@@ -3,11 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
-import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
-
 const EmbeddedJobBoard = dynamic(
   () => import("@/components/EmbeddedJobBoard").then(mod => ({ default: mod.EmbeddedJobBoard })),
   { ssr: false, loading: () => <div className="animate-pulse bg-gray-100 rounded-xl h-96" /> }
@@ -48,8 +45,6 @@ const benefits = [
 ];
 
 export function CFORecruitmentAgencyClient() {
-  const { data: session } = authClient.useSession();
-  const firstName = session?.user?.name?.split(" ")[0] || null;
   const localImage = getLocalImage('cfo');
   const imageCredit = getImage('cfo');
 
@@ -250,19 +245,7 @@ export function CFORecruitmentAgencyClient() {
 
   return (
     <main>
-      <LazyCopilotSidebar
-        instructions={`## PAGE CONTEXT
-Page Type: guide | Topic: CFO Recruitment Agencies | URL: /cfo-recruitment-agency
-
-You're helping someone understand CFO recruitment agencies and how to hire Chief Financial Officers.
-Key facts: CFO recruiter fees 20-30% | 3-6 weeks for fractional, 8-16 weeks for permanent | ACA/ACCA/CIMA + M&A experience important`}
-        labels={{
-          title: "CFO Hiring Guide",
-          initial: firstName ? `Hi ${firstName}! I can help you find the right CFO recruitment agency or candidate.` : `Welcome! This guide covers CFO recruitment agencies and executive search.`
-        }}
-      >
-        {pageContent}
-      </LazyCopilotSidebar>
+      {pageContent}
     </main>
   );
 }

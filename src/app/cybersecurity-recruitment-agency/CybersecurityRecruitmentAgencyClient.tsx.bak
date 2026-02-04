@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { authClient } from "@/lib/auth/client";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
+import { LazyCopilotSidebar } from "@/components/LazyCopilotSidebar";
 
 const EmbeddedJobBoard = dynamic(() => import("@/components/EmbeddedJobBoard").then(mod => ({ default: mod.EmbeddedJobBoard })), { ssr: false, loading: () => <div className="animate-pulse bg-gray-100 rounded-xl h-96" /> });
 const FAQ = dynamic(() => import("@/components/seo").then(mod => ({ default: mod.FAQ })), { ssr: false });
@@ -39,6 +41,8 @@ const benefits = [
 ];
 
 export function CybersecurityRecruitmentAgencyClient() {
+  const { data: session } = authClient.useSession();
+  const firstName = session?.user?.name?.split(" ")[0] || null;
   const localImage = getLocalImage('ciso');
   const imageCredit = getImage('ciso');
 
@@ -198,7 +202,9 @@ export function CybersecurityRecruitmentAgencyClient() {
 
   return (
     <main>
-      {pageContent}
+      <LazyCopilotSidebar instructions={`## PAGE CONTEXT\nPage Type: guide | Topic: Cybersecurity Recruitment Agencies | URL: /cybersecurity-recruitment-agency\n\nYou're helping someone understand cybersecurity recruitment agencies and how to hire security talent.\nKey facts: Cybersecurity recruiter fees 20-30% | 3-5 weeks average | 3.5M global talent shortage | Security clearance experience important`} labels={{ title: "Security Hiring Guide", initial: firstName ? `Hi ${firstName}! I can help you find the right cybersecurity recruitment agency or candidate.` : `Welcome! This guide covers cybersecurity recruitment agencies and security hiring.` }}>
+        {pageContent}
+      </LazyCopilotSidebar>
     </main>
   );
 }

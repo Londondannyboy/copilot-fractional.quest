@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { JobPageClient } from "@/components/job-pages";
+import { IntelligentJobPageClient } from "@/components/job-pages/IntelligentJobPageClient";
 import { getJobsPageData } from "@/lib/jobs";
 import { ukSEO } from "@/lib/seo-content/uk";
 import { getOGImageUrl, getImage } from "@/lib/images";
@@ -72,7 +72,7 @@ export default async function FractionalJobsUKPage() {
       />
 
       {/* Page Content */}
-      <JobPageClient
+      <IntelligentJobPageClient
         location="uk"
         locationDisplay="UK"
         initialJobs={jobs}
