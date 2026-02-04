@@ -153,7 +153,7 @@ export function PublicLanding() {
               Our fractional recruitment agency model benefits both candidates and employers. For executives, we provide access to curated fractional CFO jobs, fractional CTO roles, and fractional CMO opportunities across finance, technology, marketing, operations, and security functions. For employers, we deliver experienced C-suite talent at a fraction of the cost of permanent hires, with placement fees of just 10-15% versus the 25-30% charged by traditional executive search firms.
             </p>
             <p className="text-gray-300 mb-4 leading-relaxed">
-              As the UK's leading fractional recruitment agency, we've built a network of over 200 active fractional executive opportunities across London, Manchester, Edinburgh, Bristol, and remote roles nationwide. Our recruiters understand that fractional hiring requires different vetting than permanent placements—we assess not just technical competence but also the ability to onboard quickly, work autonomously, and deliver value in compressed timeframes.
+              As the UK's leading fractional recruitment agency, we've built a network of over 200 active fractional executive opportunities across London, Manchester, Edinburgh, Bristol, and remote roles nationwide. Our recruiters understand that fractional hiring requires different vetting than permanent placements—we assess not just technical competence but also the ability to onboard quickly, work autonomously, and deliver measurable results in compressed timeframes. This specialist approach ensures every fractional executive placement is successful from day one.
             </p>
           </div>
         </div>
@@ -237,7 +237,7 @@ export function PublicLanding() {
       <section className="py-16 bg-gray-800/30">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-white text-center mb-4">
-            Fractional Executive Roles We Recruit
+            Fractional Recruitment Agency Specialist Roles
           </h2>
           <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto">
             From fractional CFOs to fractional CTOs, CMOs to CISOs. Our recruitment agency covers all C-suite functions with specialist recruiters for each vertical.
