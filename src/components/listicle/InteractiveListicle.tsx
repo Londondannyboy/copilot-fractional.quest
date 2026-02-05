@@ -424,13 +424,25 @@ export function InteractiveListicle({
                     </div>
                   </div>
                   {item.url && (
-                    <Link
-                      href={item.url}
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-2 mt-4 text-emerald-700 font-bold hover:text-emerald-800"
-                    >
-                      Learn More <span>→</span>
-                    </Link>
+                    item.url.startsWith('http') ? (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-2 mt-4 text-emerald-700 font-bold hover:text-emerald-800"
+                      >
+                        Visit Website <span className="text-xs">↗</span>
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.url}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-2 mt-4 text-emerald-700 font-bold hover:text-emerald-800"
+                      >
+                        Learn More <span>→</span>
+                      </Link>
+                    )
                   )}
                 </div>
 
