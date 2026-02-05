@@ -1079,12 +1079,95 @@ function SectionRenderer({ section }: { section: Section }) {
       return <ProseSection section={section} />;
     case "table":
       return <TableSection section={section} />;
+    case "ranked_listicle":
+      return <RankedListicleSection section={section} />;
     default:
       if (content) {
         return <ProseSection section={section} />;
       }
       return null;
   }
+}
+
+// ===========================================
+// Ranked Listicle Section - For "Best X" pages
+// ===========================================
+
+interface RankedAgency {
+  rank: number;
+  name: string;
+  badge: string;
+  description: string;
+  speciality: string;
+  fee: string;
+  placement: string;
+  url?: string;
+  highlight?: boolean;
+}
+
+function RankedListicleSection({ section }: { section: Section }) {
+  const title = (section.title as string) || "Top Ranked";
+  const subtitle = (section.subtitle as string) || "";
+  const agencies = (section.agencies as RankedAgency[]) || [];
+
+  return (
+    <section className="py-12 my-8">
+      <div className="text-center mb-10">
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 block">2026 Rankings</span>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-4">{title}</h2>
+        {subtitle && <p className="text-gray-600 max-w-2xl mx-auto">{subtitle}</p>}
+      </div>
+      <div className="space-y-6">
+        {agencies.map((agency) => (
+          <div
+            key={agency.rank}
+            className={`relative border-2 rounded-xl p-6 sm:p-8 transition-all ${
+              agency.highlight
+                ? 'border-emerald-500 bg-emerald-50 shadow-lg'
+                : 'border-gray-200 bg-white hover:border-emerald-300 hover:shadow-md'
+            }`}
+          >
+            {/* Rank Badge */}
+            <div className={`absolute -top-4 -left-2 w-12 h-12 rounded-full flex items-center justify-center font-black text-lg ${
+              agency.highlight ? 'bg-emerald-600 text-white' : 'bg-gray-700 text-white'
+            }`}>
+              #{agency.rank}
+            </div>
+            {/* Award Badge */}
+            <div className="absolute top-4 right-4">
+              <span className={`px-3 py-1 text-xs font-bold rounded-full ${
+                agency.highlight ? 'bg-emerald-600 text-white' : 'bg-emerald-100 text-emerald-800'
+              }`}>
+                {agency.badge}
+              </span>
+            </div>
+            <div className="ml-8 mt-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{agency.name}</h3>
+              <p className="text-gray-600 mb-4">{agency.description}</p>
+              <div className="flex flex-wrap gap-3 text-sm">
+                <div className={`px-4 py-2 rounded-lg ${
+                  agency.highlight ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-700'
+                }`}>
+                  <span className="font-bold">Fee:</span> {agency.fee}
+                </div>
+                <div className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg">
+                  <span className="font-bold">Time:</span> {agency.placement}
+                </div>
+                <div className="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-lg">
+                  {agency.speciality}
+                </div>
+              </div>
+              {agency.url && (
+                <a href={agency.url} className="inline-flex items-center gap-2 mt-4 text-emerald-700 font-bold hover:text-emerald-800">
+                  Learn More <span>→</span>
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 // ===========================================
