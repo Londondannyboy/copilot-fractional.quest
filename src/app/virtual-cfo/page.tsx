@@ -9,19 +9,19 @@ import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 
 export const metadata: Metadata = {
-  title: 'Virtual CFO Services | Remote Finance Leadership for US Businesses',
-  description: 'Virtual CFO services for US companies. Remote finance leadership, financial strategy, fundraising support. $1,200-$2,500/day. Work with experienced CFOs nationwide.',
-  keywords: 'virtual cfo, virtual cfo services, virtual chief financial officer, remote cfo, outsourced cfo, cfo as a service, virtual cfo usa, virtual cfo for startups, fractional cfo, part time cfo',
+  title: 'Virtual CFO Services UK | Remote Finance Leadership 2026',
+  description: 'Virtual CFO services: Remote finance leadership for £700-£1,400/day. Financial strategy, fundraising, cash flow management. Same as fractional CFO. Compare providers.',
+  keywords: 'virtual cfo, virtual cfo services, virtual cfo uk, virtual chief financial officer, remote cfo, outsourced cfo, cfo as a service, virtual cfo for startups, fractional cfo, part time cfo',
   alternates: { canonical: 'https://fractional.quest/virtual-cfo' },
   openGraph: {
-    title: 'Virtual CFO Services | Remote Finance Leadership',
-    description: 'Get experienced CFO leadership remotely. Virtual CFO services: financial strategy, fundraising, reporting, compliance for US businesses.',
+    title: 'Virtual CFO Services UK | Remote Finance Leadership',
+    description: 'Virtual CFO services: Remote finance leadership £700-£1,400/day. Strategy, fundraising, reporting.',
     url: 'https://fractional.quest/virtual-cfo',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Virtual CFO Services | Remote Finance Leadership',
-    description: 'Get experienced CFO leadership remotely. Virtual CFO services for US businesses.',
+    title: 'Virtual CFO Services UK | Remote Finance Leadership',
+    description: 'Virtual CFO services: Remote finance leadership £700-£1,400/day. Compare UK providers.',
   },
 }
 

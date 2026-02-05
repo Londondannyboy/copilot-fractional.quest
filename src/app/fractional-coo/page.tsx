@@ -11,6 +11,7 @@ import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { RoleCalculator } from '@/components/RoleCalculator'
 import { getOGImageUrl, getImage } from '@/lib/images'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+import { HeyCompanies } from '@/components/HeyCompanies'
 
 // Table of Contents items
 const tocItems = [
@@ -32,22 +33,22 @@ const imageAlt = getImage('coo').alt
 const imageCredit = getImage('coo')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional COO? | Guide',
-  description: 'What is a fractional COO? A part-time operations leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
-  keywords: 'what is a fractional coo, fractional coo meaning, fractional coo definition, part time coo, fractional operations officer, fractional chief operating officer, what does a fractional coo do',
+  title: 'Fractional COO UK | Part-Time Operations Leadership Guide 2026',
+  description: 'Fractional COO: Part-time Chief Operating Officer working 1-3 days/week for £700-£1,300/day. Scale operations, process optimisation, when to hire. Complete UK guide.',
+  keywords: 'fractional coo, fractional coo uk, what is a fractional coo, fractional coo meaning, part time coo, fractional operations officer, fractional chief operating officer, hire fractional coo',
   alternates: {
     canonical: 'https://fractional.quest/fractional-coo',
   },
   openGraph: {
-    title: 'What is a Fractional COO? | Complete Guide',
-    description: 'Understand fractional COO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Operating Officer.',
+    title: 'Fractional COO UK | Part-Time Operations Leadership Guide',
+    description: 'Fractional COO: Part-time operations executive working 1-3 days/week. Day rates £700-£1,300. Complete UK guide.',
     url: 'https://fractional.quest/fractional-coo',
     images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'What is a Fractional COO? | Complete Guide',
-    description: 'Understand fractional COO meaning, responsibilities, and costs.',
+    title: 'Fractional COO UK | Part-Time Operations Leadership Guide',
+    description: 'Fractional COO: Part-time operations executive. Day rates £700-£1,300. Complete UK guide.',
     images: [ogImage],
   },
 }
@@ -553,14 +554,17 @@ export default function FractionalCooPage() {
         </div>
       </section>
 
+      {/* Hey Companies - Founder Profile & Trust Signals */}
+      <HeyCompanies location="UK" />
+
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Get Started?
+            Ready to Hire a Fractional COO?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted operations leaders or post your requirements.
+            Browse pre-vetted fractional COOs or post your requirements.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link

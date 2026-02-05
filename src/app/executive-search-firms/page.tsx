@@ -3,22 +3,22 @@ import { ExecutiveSearchFirmsClient } from "./ExecutiveSearchFirmsClient";
 import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
 export const metadata: Metadata = {
-  title: "Executive Search Firms 🎯 C-Suite & Senior Leadership Recruitment",
+  title: "10 Best Executive Search Firms UK 2026 | Compare Top Headhunters",
   description:
-    "Find the best executive search firms for C-suite and senior leadership placements. Compare retained search, contingent recruitment, and specialist executive headhunters.",
+    "Best executive search firms UK ranked. #1 Fractional Quest (Best Value, 10-15% fees) vs Big 5 (25-35%). Compare retained search firms, fees, specialisms. Updated Feb 2026.",
   keywords: [
+    "best executive search firms",
+    "best executive search firms uk",
     "executive search firms",
-    "executive search",
-    "executive headhunters",
+    "top executive search firms",
+    "executive headhunters uk",
     "executive recruitment firms",
     "c-suite recruitment",
-    "senior executive search",
     "retained executive search",
-    "executive placement firms",
   ],
   openGraph: {
-    title: "Executive Search Firms 🎯 C-Suite & Senior Leadership Recruitment",
-    description: "Find the best executive search firms for C-suite and senior leadership placements.",
+    title: "10 Best Executive Search Firms UK 2026 | Compare Headhunters",
+    description: "Best executive search firms UK ranked. #1 Best Value: Fractional Quest (10-15% fees). Compare all top firms.",
     type: "website",
     url: "https://fractional.quest/executive-search-firms",
   },

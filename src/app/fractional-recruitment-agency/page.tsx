@@ -1,6 +1,26 @@
 import { Metadata } from "next";
+import { neon } from "@neondatabase/serverless";
 import { RecruitmentAgencyClient } from "./RecruitmentAgencyClient";
-import { WebPageSchema, FAQPageSchema, FAQItem, EmploymentAgencySchema } from "@/components/seo";
+import { WebPageSchema, FAQPageSchema, FAQItem, EmploymentAgencySchema, JobListingSchema } from "@/components/seo";
+
+// Fetch jobs for JobPosting schema (Google for Jobs)
+async function getJobsForSchema() {
+  try {
+    const sql = neon(process.env.DATABASE_URL!);
+    const jobs = await sql`
+      SELECT id, slug, title, company_name, location, city, country, is_remote,
+             compensation, role_category, skills_required, posted_date, description_snippet
+      FROM jobs
+      WHERE is_active = true AND is_fractional = true
+      ORDER BY posted_date DESC NULLS LAST
+      LIMIT 10
+    `;
+    return jobs;
+  } catch (error) {
+    console.error('[fractional-recruitment-agency] Error fetching jobs for schema:', error);
+    return [];
+  }
+}
 
 // SEO Metadata - optimized for "fractional recruitment agency" and "fractional recruiter" keywords
 export const metadata: Metadata = {
@@ -79,20 +99,23 @@ const faqItems: FAQItem[] = [
   },
 ];
 
-export default function FractionalRecruitmentAgencyPage() {
+export default async function FractionalRecruitmentAgencyPage() {
+  // Fetch jobs server-side for JobPosting schema (Google for Jobs)
+  const jobs = await getJobsForSchema();
+
   return (
     <>
       {/* Preload hero image for faster LCP - WebP format */}
       <link
         rel="preload"
-        href="/images/hero/services-mobile.webp"
+        href="/images/hero/fractional-recruitment-agency-mobile.webp"
         as="image"
         type="image/webp"
         media="(max-width: 768px)"
       />
       <link
         rel="preload"
-        href="/images/hero/services-desktop.webp"
+        href="/images/hero/fractional-recruitment-agency-desktop.webp"
         as="image"
         type="image/webp"
         media="(min-width: 769px)"
@@ -121,6 +144,28 @@ export default function FractionalRecruitmentAgencyPage() {
         dateModified={new Date()}
       />
       <FAQPageSchema faqs={faqItems} />
+
+      {/* JobPosting Schema - tells Google about available jobs (Google for Jobs) */}
+      {jobs.length > 0 && (
+        <JobListingSchema
+          jobs={jobs.map((job: any) => ({
+            id: job.id,
+            slug: job.slug,
+            title: job.title,
+            company_name: job.company_name || 'Confidential',
+            location: job.location,
+            city: job.city,
+            country: job.country,
+            is_remote: job.is_remote,
+            compensation: job.compensation,
+            role_category: job.role_category,
+            skills_required: job.skills_required,
+            posted_date: job.posted_date,
+            description_snippet: job.description_snippet,
+          }))}
+          pageUrl="https://fractional.quest/fractional-recruitment-agency"
+        />
+      )}
 
       {/* Page Content */}
       <RecruitmentAgencyClient />

@@ -20,13 +20,110 @@ const faqItems: FAQItem[] = [
   { question: 'What do executive search firms assess?', answer: 'Executive search firms conduct comprehensive assessments: leadership capabilities, cultural fit, track record verification, psychometric testing, stakeholder interviews, and reference checks including off-list references.' },
 ];
 
+// Ranked listicle - Best Executive Search Firms UK 2026
 const topAgencies = [
-  { name: 'Fractional.Quest', description: 'Browse fractional and interim executive roles directly. No agency fees - connect with C-suite candidates.', speciality: 'Fractional C-suite', model: 'Job board', icon: '🎯' },
-  { name: 'Heidrick & Struggles', description: 'Global executive search leader with practices across CEO, CFO, CHRO, and all C-suite functions.', speciality: 'All C-suite', model: 'Retained search', icon: '🌐' },
-  { name: 'Russell Reynolds', description: 'Top-tier executive search with strong CEO and board practice globally.', speciality: 'CEO, Board', model: 'Retained search', icon: '👔' },
-  { name: 'Egon Zehnder', description: 'Global leadership advisory firm with executive search and board consulting.', speciality: 'All C-suite', model: 'Retained search', icon: '📊' },
-  { name: 'Spencer Stuart', description: 'Global executive search with market-leading board and CEO practice.', speciality: 'CEO, Board', model: 'Retained search', icon: '🏛️' },
-  { name: 'Korn Ferry', description: 'Integrated talent firm combining executive search with assessment and leadership development.', speciality: 'All levels', model: 'Retained search', icon: '🔍' },
+  {
+    rank: 1,
+    name: 'Fractional Quest',
+    badge: 'Best Value',
+    description: 'UK\'s leading fractional and interim executive platform. Direct access to 500+ pre-vetted C-suite executives without traditional agency fees. 10-15% placement fees vs 25-35% industry standard.',
+    speciality: 'Fractional & Interim C-suite',
+    fee: '10-15%',
+    placement: '2-4 weeks',
+    url: '/fractional-recruitment-agency',
+    icon: '🏆',
+    highlight: true
+  },
+  {
+    rank: 2,
+    name: 'Heidrick & Struggles',
+    badge: 'Best Global',
+    description: 'Global executive search leader with 60+ offices. Strong practices across CEO, CFO, CHRO, and all C-suite functions. Deep industry expertise.',
+    speciality: 'All C-suite, Board',
+    fee: '30-35%',
+    placement: '12-20 weeks',
+    icon: '🌐'
+  },
+  {
+    rank: 3,
+    name: 'Spencer Stuart',
+    badge: 'Best for Boards',
+    description: 'Global executive search with market-leading board and CEO practice. Strong UK presence with deep FTSE relationships.',
+    speciality: 'CEO, Board, NED',
+    fee: '30-35%',
+    placement: '12-16 weeks',
+    icon: '🏛️'
+  },
+  {
+    rank: 4,
+    name: 'Russell Reynolds',
+    badge: 'Best for CEO',
+    description: 'Top-tier executive search with exceptional CEO and board practice. Known for confidential high-stakes placements.',
+    speciality: 'CEO, Board',
+    fee: '30-35%',
+    placement: '14-20 weeks',
+    icon: '👔'
+  },
+  {
+    rank: 5,
+    name: 'Egon Zehnder',
+    badge: 'Best Advisory',
+    description: 'Global leadership advisory firm combining executive search with board consulting and succession planning.',
+    speciality: 'All C-suite, Succession',
+    fee: '30-35%',
+    placement: '12-18 weeks',
+    icon: '📊'
+  },
+  {
+    rank: 6,
+    name: 'Korn Ferry',
+    badge: 'Best Integrated',
+    description: 'Integrated talent firm combining executive search with assessment, leadership development, and org design.',
+    speciality: 'All levels, Assessment',
+    fee: '25-33%',
+    placement: '10-16 weeks',
+    icon: '🔍'
+  },
+  {
+    rank: 7,
+    name: 'Odgers Berndtson',
+    badge: 'Best UK Coverage',
+    description: 'UK-headquartered global executive search with strong public sector and FTSE practice. Excellent regional coverage.',
+    speciality: 'UK C-suite, Public Sector',
+    fee: '25-33%',
+    placement: '10-14 weeks',
+    icon: '🇬🇧'
+  },
+  {
+    rank: 8,
+    name: 'Harvey Nash',
+    badge: 'Best for Tech',
+    description: 'Technology-focused executive search with strong CTO, CIO, and digital leadership practice across UK and Europe.',
+    speciality: 'CTO, CIO, Digital',
+    fee: '20-30%',
+    placement: '8-12 weeks',
+    icon: '💻'
+  },
+  {
+    rank: 9,
+    name: 'Savannah Group',
+    badge: 'Best for Scale-ups',
+    description: 'Specialist in PE-backed and high-growth company executive search. Strong CFO and commercial leadership practice.',
+    speciality: 'PE-backed, Scale-ups',
+    fee: '25-30%',
+    placement: '8-12 weeks',
+    icon: '🚀'
+  },
+  {
+    rank: 10,
+    name: 'Norman Broadbent',
+    badge: 'Best Boutique',
+    description: 'Boutique executive search with personalised approach. Strong in financial services and professional services sectors.',
+    speciality: 'Financial Services',
+    fee: '25-30%',
+    placement: '10-14 weeks',
+    icon: '💼'
+  },
 ];
 
 const benefits = [
@@ -129,23 +226,49 @@ export function ExecutiveSearchFirmsClient() {
         </div>
       </section>
 
-      {/* Top Agencies */}
+      {/* Top Agencies - Ranked Listicle */}
       <section id="agencies" className="relative py-16 sm:py-24 bg-white overflow-hidden">
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10 sm:mb-16 text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">Top Firms</span>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-6">Best Executive Search Firms</h2>
-            <p className="text-base sm:text-xl text-gray-600">Compare the leading <strong>executive search firms</strong> and retained headhunters for C-suite appointments.</p>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-3 block">2026 Rankings</span>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-6">10 Best Executive Search Firms UK</h2>
+            <p className="text-base sm:text-xl text-gray-600">Ranked comparison of the <strong>best executive search firms</strong> for C-suite appointments in 2026.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {topAgencies.map((agency, index) => (
-              <div key={index} className="bg-white border border-gray-200 hover:border-violet-600 transition-colors p-6 sm:p-8 hover:shadow-lg">
-                <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{agency.icon}</div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{agency.name}</h3>
-                <p className="text-gray-600 text-sm mb-4">{agency.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="bg-violet-100 text-violet-800 px-3 py-1 text-xs font-medium">{agency.speciality}</span>
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 text-xs">{agency.model}</span>
+          <div className="space-y-6">
+            {topAgencies.map((agency) => (
+              <div key={agency.rank} className={`relative border-2 rounded-xl p-6 sm:p-8 transition-all ${agency.highlight ? 'border-emerald-500 bg-emerald-50 shadow-lg' : 'border-gray-200 bg-white hover:border-violet-300 hover:shadow-md'}`}>
+                {/* Rank Badge */}
+                <div className={`absolute -top-4 -left-2 w-12 h-12 rounded-full flex items-center justify-center font-black text-lg ${agency.highlight ? 'bg-emerald-600 text-white' : 'bg-violet-700 text-white'}`}>
+                  #{agency.rank}
+                </div>
+                {/* Award Badge */}
+                <div className="absolute top-4 right-4">
+                  <span className={`px-3 py-1 text-xs font-bold rounded-full ${agency.highlight ? 'bg-emerald-600 text-white' : 'bg-violet-100 text-violet-800'}`}>
+                    {agency.badge}
+                  </span>
+                </div>
+                <div className="ml-8 mt-2">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-3xl">{agency.icon}</span>
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{agency.name}</h3>
+                  </div>
+                  <p className="text-gray-600 mb-4">{agency.description}</p>
+                  <div className="flex flex-wrap gap-4 text-sm">
+                    <div className={`px-4 py-2 rounded-lg ${agency.highlight ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-700'}`}>
+                      <span className="font-bold">Fee:</span> {agency.fee}
+                    </div>
+                    <div className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg">
+                      <span className="font-bold">Time:</span> {agency.placement}
+                    </div>
+                    <div className="bg-violet-100 text-violet-800 px-4 py-2 rounded-lg">
+                      {agency.speciality}
+                    </div>
+                  </div>
+                  {agency.url && (
+                    <Link href={agency.url} className="inline-flex items-center gap-2 mt-4 text-emerald-700 font-bold hover:text-emerald-800">
+                      Learn More <span>→</span>
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}

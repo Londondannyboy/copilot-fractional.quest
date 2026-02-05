@@ -16,8 +16,8 @@ const heroImage = getHeroImageUrl('cfo', 1920, 800)
 const imageCredit = getImage('cfo')
 
 export const metadata: Metadata = {
-  title: 'Fractional CFO Salary UK 2026 | Day Rates, Annual Earnings & Compensation Guide',
-  description: 'Fractional CFO salary UK: day rates £700-£1,400. Compare costs by experience, location, specialisation. Calculate potential earnings with our salary calculator.',
+  title: 'Fractional CFO Salary UK 2026 | £700-£1,400/Day + Calculator',
+  description: 'Fractional CFO salary UK: £700-£1,400/day (£109K-£218K/year). Free calculator inside. Compare rates by experience level, sector & location. Updated January 2026.',
   keywords: 'fractional cfo salary, fractional cfo salary uk, fractional cfo day rate, fractional cfo cost, cfo salary uk, part time cfo salary, fractional cfo rates, fractional finance salary, cfo compensation, cfo earnings',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cfo-salary',

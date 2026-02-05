@@ -9,19 +9,19 @@ import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 
 export const metadata: Metadata = {
-  title: 'Virtual CTO Services | Remote Technology Leadership for US Businesses',
-  description: 'Virtual CTO services for US companies. Remote technology leadership, technical strategy, team building. $1,500-$3,000/day. Work with experienced CTOs nationwide.',
-  keywords: 'virtual cto, virtual cto services, virtual chief technology officer, remote cto, outsourced cto, cto as a service, virtual cto usa, virtual cto for startups, fractional cto, part time cto',
+  title: 'Virtual CTO Services UK | Remote Technology Leadership 2026',
+  description: 'Virtual CTO services: Remote technology leadership for £800-£1,500/day. Technical strategy, architecture, team building. Same as fractional CTO. Compare providers.',
+  keywords: 'virtual cto, virtual cto services, virtual cto uk, virtual chief technology officer, remote cto, outsourced cto, cto as a service, virtual cto for startups, fractional cto, part time cto',
   alternates: { canonical: 'https://fractional.quest/virtual-cto' },
   openGraph: {
-    title: 'Virtual CTO Services | Remote Technology Leadership',
-    description: 'Get experienced CTO leadership remotely. Virtual CTO services: technical strategy, architecture, team building for US businesses.',
+    title: 'Virtual CTO Services UK | Remote Technology Leadership',
+    description: 'Virtual CTO services: Remote tech leadership £800-£1,500/day. Technical strategy, architecture, team building.',
     url: 'https://fractional.quest/virtual-cto',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Virtual CTO Services | Remote Technology Leadership',
-    description: 'Get experienced CTO leadership remotely. Virtual CTO services for US businesses.',
+    title: 'Virtual CTO Services UK | Remote Technology Leadership',
+    description: 'Virtual CTO services: Remote tech leadership £800-£1,500/day. Compare UK providers.',
   },
 }
 

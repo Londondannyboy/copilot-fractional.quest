@@ -3,22 +3,22 @@ import { FractionalExecutiveSearchClient } from "./FractionalExecutiveSearchClie
 import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
 export const metadata: Metadata = {
-  title: "Fractional Executive Search 🎯 Part-Time C-Suite Recruitment",
+  title: "Fractional Executive Search UK | Part-Time C-Suite Recruiters 2026",
   description:
-    "Find fractional executive search firms for part-time C-suite placements. Specialist fractional recruiters for CFO, CTO, CMO, and COO roles working 1-3 days per week.",
+    "Fractional executive search firms for part-time C-suite placements. 15-25% fees, 2-4 week placements. Find fractional CFO, CTO, CMO recruiters. Compare top UK search firms.",
   keywords: [
     "fractional executive search",
+    "fractional executive search firms",
     "fractional executive recruitment",
     "fractional recruiter",
     "part-time executive search",
     "fractional cfo search",
     "fractional cto search",
     "fractional cmo search",
-    "fractional executive search firm",
   ],
   openGraph: {
-    title: "Fractional Executive Search 🎯 Part-Time C-Suite Recruitment",
-    description: "Find fractional executive search firms for part-time C-suite placements working 1-3 days per week.",
+    title: "Fractional Executive Search UK | Part-Time C-Suite Recruiters",
+    description: "Fractional executive search firms. 15-25% fees, 2-4 week placements. Compare top UK recruiters.",
     type: "website",
     url: "https://fractional.quest/fractional-executive-search",
   },

@@ -3,22 +3,22 @@ import { InterimExecutiveSearchClient } from "./InterimExecutiveSearchClient";
 import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
 export const metadata: Metadata = {
-  title: "Interim Executive Search 🎯 Temporary C-Suite Recruitment",
+  title: "Interim Executive Search UK | Temporary C-Suite Recruiters 2026",
   description:
-    "Find interim executive search firms for temporary C-suite placements. Specialist interim recruiters for CFO, CTO, CMO, and CEO roles. Fast placement in 2-4 weeks.",
+    "Interim executive search firms for temporary C-suite placements. 2-4 week placements, 15-25% fees. Find interim CFO, CTO, CMO, CEO recruiters. Compare top UK search firms.",
   keywords: [
     "interim executive search",
+    "interim executive search firms",
     "interim executive recruitment",
     "interim management recruitment",
     "temporary executive search",
     "interim cfo search",
     "interim cto search",
     "interim cmo search",
-    "c-suite interim recruitment",
   ],
   openGraph: {
-    title: "Interim Executive Search 🎯 Temporary C-Suite Recruitment",
-    description: "Find interim executive search firms for temporary C-suite placements. Fast placement in 2-4 weeks.",
+    title: "Interim Executive Search UK | Temporary C-Suite Recruiters",
+    description: "Interim executive search firms. 2-4 week placements, 15-25% fees. Compare top UK recruiters.",
     type: "website",
     url: "https://fractional.quest/interim-executive-search",
   },

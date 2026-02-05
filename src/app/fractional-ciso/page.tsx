@@ -12,6 +12,7 @@ import { RoleCalculator } from '@/components/RoleCalculator'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+import { HeyCompanies } from '@/components/HeyCompanies'
 
 const ogImage = getOGImageUrl('ciso')
 const imageAlt = getImage('ciso').alt
@@ -19,20 +20,20 @@ const heroImage = getHeroImageUrl('ciso', 1920, 800)
 const imageCredit = getImage('ciso')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CISO? | Guide',
-  description: 'What is a fractional CISO? A part-time security leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
-  keywords: 'what is a fractional ciso, fractional ciso meaning, fractional ciso definition, part time ciso, fractional security officer, fractional chief security officer, what does a fractional ciso do',
+  title: 'Fractional CISO UK | Part-Time Security Leadership Guide 2026',
+  description: 'Fractional CISO: Part-time Chief Information Security Officer working 1-3 days/week. Day rates £800-£1,500. When to hire, costs, responsibilities. Complete UK guide.',
+  keywords: 'fractional ciso, fractional ciso uk, what is a fractional ciso, fractional ciso meaning, part time ciso, fractional security officer, fractional chief information security officer, vciso, virtual ciso',
   alternates: { canonical: 'https://fractional.quest/fractional-ciso' },
   openGraph: {
-    title: 'What is a Fractional CISO? | Complete Guide',
-    description: 'Understand fractional CISO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Information Security Officer.',
+    title: 'Fractional CISO UK | Part-Time Security Leadership Guide',
+    description: 'Fractional CISO: Part-time security executive working 1-3 days/week. Day rates £800-£1,500. Complete UK guide.',
     url: 'https://fractional.quest/fractional-ciso',
     images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'What is a Fractional CISO? | Complete Guide',
-    description: 'Understand fractional CISO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Information Security Officer.',
+    title: 'Fractional CISO UK | Part-Time Security Leadership Guide',
+    description: 'Fractional CISO: Part-time security executive. Day rates £800-£1,500. Complete UK guide.',
     images: [ogImage],
   },
 }
@@ -70,7 +71,7 @@ export default function FractionalCisoPage() {
             <BreadcrumbsLight items={breadcrumbs} className="mb-8" />
             <div className="max-w-3xl">
               <span className="inline-block bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Role Guide</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair">What is a <strong>Fractional CISO</strong>?</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-playfair"><strong>Fractional CISO</strong>: Part-Time Security Leadership</h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">A <strong>fractional CISO</strong> is a part-time Chief Information Security Officer who provides strategic cybersecurity leadership to companies on a flexible basis. Learn about <strong>fractional CISO meaning</strong>, responsibilities, and costs.</p>
             </div>
           </div>
@@ -539,6 +540,9 @@ export default function FractionalCisoPage() {
       {/* E-E-A-T: Case Study */}
       <CaseStudy />
       <CaseStudySchema />
+
+      {/* Hey Companies - Founder Profile & Trust Signals */}
+      <HeyCompanies location="UK" />
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">

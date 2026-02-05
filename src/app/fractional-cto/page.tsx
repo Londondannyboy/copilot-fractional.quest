@@ -11,6 +11,7 @@ import { RoleCalculator } from '@/components/RoleCalculator'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { getOGImageUrl, getImage } from '@/lib/images'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+import { HeyCompanies } from '@/components/HeyCompanies'
 
 // Table of Contents items
 const tocItems = [
@@ -33,22 +34,22 @@ const imageAlt = getImage('cto').alt
 const imageCredit = getImage('cto')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CTO? | Guide',
-  description: 'What is a fractional CTO? A part-time tech leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
-  keywords: 'what is a fractional cto, fractional cto meaning, fractional cto definition, part time cto, fractional technology officer, fractional chief technology officer, what does a fractional cto do',
+  title: 'Fractional CTO UK | Part-Time Technology Leadership Guide 2026',
+  description: 'Fractional CTO: Part-time Chief Technology Officer working 1-3 days/week for £800-£1,500/day. Tech stack expertise, startup scaling, when to hire. Complete UK guide.',
+  keywords: 'fractional cto, fractional cto uk, what is a fractional cto, fractional cto meaning, part time cto, fractional technology officer, fractional chief technology officer, hire fractional cto',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cto',
   },
   openGraph: {
-    title: 'What is a Fractional CTO? | Complete Guide',
-    description: 'Understand fractional CTO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Technology Officer.',
+    title: 'Fractional CTO UK | Part-Time Technology Leadership Guide',
+    description: 'Fractional CTO: Part-time tech executive working 1-3 days/week. Day rates £800-£1,500. Complete UK guide.',
     url: 'https://fractional.quest/fractional-cto',
     images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'What is a Fractional CTO? | Complete Guide',
-    description: 'Understand fractional CTO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Technology Officer.',
+    title: 'Fractional CTO UK | Part-Time Technology Leadership Guide',
+    description: 'Fractional CTO: Part-time tech executive. Day rates £800-£1,500. Complete UK guide.',
     images: [ogImage],
   },
 }
@@ -556,14 +557,17 @@ export default function FractionalCtoPage() {
         </div>
       </section>
 
+      {/* Hey Companies - Founder Profile & Trust Signals */}
+      <HeyCompanies location="UK" />
+
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Get Started?
+            Ready to Hire a Fractional CTO?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted tech leaders or post your requirements to find the perfect match.
+            Browse pre-vetted fractional CTOs or post your requirements to find the perfect match.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link

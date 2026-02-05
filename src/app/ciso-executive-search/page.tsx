@@ -3,9 +3,9 @@ import { CISOExecutiveSearchClient } from "./CISOExecutiveSearchClient";
 import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
 export const metadata: Metadata = {
-  title: "CISO Executive Search 🎯 Chief Information Security Officer Headhunters",
+  title: "CISO Executive Search UK | Security Leadership Headhunters 2026",
   description:
-    "Find CISO executive search firms for senior security leadership placements. Specialist CISO headhunters with deep networks in cybersecurity, compliance, and technology sectors.",
+    "CISO executive search specialists. Retained search £30K-£80K. 12-20 week placements. Access passive candidates not on job boards. Compare top UK CISO headhunters.",
   keywords: [
     "ciso executive search",
     "ciso headhunter",
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     "ciso retained search",
   ],
   openGraph: {
-    title: "CISO Executive Search 🎯 Chief Information Security Officer Headhunters",
-    description: "Find CISO executive search firms for senior security leadership placements.",
+    title: "CISO Executive Search UK | Security Leadership Headhunters",
+    description: "CISO executive search specialists. Retained search from £30K. Access passive candidates not actively looking.",
     type: "website",
     url: "https://fractional.quest/ciso-executive-search",
   },

@@ -156,6 +156,28 @@ export function PublicLanding() {
         </div>
       </section>
 
+      {/* Featured: Fractional Recruitment Agency Guide */}
+      <section className="py-10 bg-gradient-to-r from-orange-600/20 via-rose-600/20 to-purple-600/20 border-b border-gray-700">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-gray-800/50 rounded-2xl p-6 md:p-8 border border-gray-700">
+            <div className="flex items-start gap-4">
+              <div className="text-4xl">🎯</div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-orange-400">Featured Guide</span>
+                <h3 className="text-xl md:text-2xl font-bold text-white mt-1">Fractional Recruitment Agency Guide</h3>
+                <p className="text-gray-400 mt-2 text-sm md:text-base">Compare top UK agencies, understand fees (15-25%), and learn how to hire fractional executives. Includes FAQs, comparison tables, and booking widget.</p>
+              </div>
+            </div>
+            <Link
+              href="/fractional-recruitment-agency"
+              className="flex-shrink-0 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg whitespace-nowrap"
+            >
+              Read the Guide →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* What is a Fractional Recruitment Agency - SEO Content Block */}
       <section className="py-12 md:py-16 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4">

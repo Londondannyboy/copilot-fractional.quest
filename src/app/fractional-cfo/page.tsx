@@ -11,6 +11,7 @@ import { RoleCalculator } from '@/components/RoleCalculator'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 import { getOGImageUrl, getImage } from '@/lib/images'
+import { HeyCompanies } from '@/components/HeyCompanies'
 
 // Table of Contents items with section IDs
 const tocItems = [
@@ -80,15 +81,15 @@ const organizationSchema = {
 
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CFO? | Guide',
-  description: 'What is a fractional CFO? A part-time finance leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
-  keywords: 'what is a fractional cfo, fractional cfo meaning, fractional cfo definition, part time cfo, fractional finance officer, fractional chief financial officer, what does a fractional cfo do',
+  title: 'Fractional CFO UK | Part-Time Finance Leadership Guide 2026',
+  description: 'Fractional CFO: Part-time Chief Financial Officer working 1-3 days/week for £700-£1,400/day. When to hire, costs, responsibilities. Complete UK guide with calculator.',
+  keywords: 'fractional cfo, fractional cfo uk, what is a fractional cfo, fractional cfo meaning, part time cfo, fractional finance officer, fractional chief financial officer, hire fractional cfo',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cfo',
   },
   openGraph: {
-    title: 'What is a Fractional CFO? | Complete Guide',
-    description: 'Understand fractional CFO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Financial Officer.',
+    title: 'Fractional CFO UK | Part-Time Finance Leadership Guide',
+    description: 'Fractional CFO: Part-time finance executive working 1-3 days/week. Day rates £700-£1,400. Complete UK guide.',
     url: 'https://fractional.quest/fractional-cfo',
     images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
@@ -821,14 +822,17 @@ export default function FractionalCfoPage() {
         </div>
       </section>
 
+      {/* Hey Companies - Founder Profile & Trust Signals */}
+      <HeyCompanies location="UK" />
+
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Get Started?
+            Ready to Hire a Fractional CFO?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted finance leaders or post your requirements.
+            Browse pre-vetted fractional CFOs or post your requirements.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link

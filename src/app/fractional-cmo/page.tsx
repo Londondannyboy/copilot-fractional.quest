@@ -11,6 +11,7 @@ import { RoleCalculator } from '@/components/RoleCalculator'
 import { getOGImageUrl, getImage } from '@/lib/images'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+import { HeyCompanies } from '@/components/HeyCompanies'
 
 // Table of Contents items
 const tocItems = [
@@ -33,22 +34,22 @@ const imageAlt = getImage('cmo').alt
 const imageCredit = getImage('cmo')
 
 export const metadata: Metadata = {
-  title: 'What is a Fractional CMO? | Guide',
-  description: 'What is a fractional CMO? A part-time marketing leader for multiple companies. Learn about roles, costs, and when to hire. UK guide.',
-  keywords: 'what is a fractional cmo, fractional cmo meaning, fractional cmo definition, part time cmo, fractional marketing officer, fractional chief marketing officer, what does a fractional cmo do',
+  title: 'Fractional CMO UK | Part-Time Chief Marketing Officer Guide 2026',
+  description: 'Fractional CMO explained: A part-time Chief Marketing Officer working 1-3 days/week for £700-£1,400/day. Learn fractional CMO meaning, costs, responsibilities & when to hire. UK market guide.',
+  keywords: 'fractional cmo, fractional cmo uk, what is a fractional cmo, fractional cmo meaning, fractional chief marketing officer, part time cmo, fractional marketing officer, fractional cmo cost, hire fractional cmo',
   alternates: {
     canonical: 'https://fractional.quest/fractional-cmo',
   },
   openGraph: {
-    title: 'What is a Fractional CMO? | Complete Guide',
-    description: 'Understand fractional CMO meaning, responsibilities, and costs. Learn when to hire a part-time Chief Marketing Officer.',
+    title: 'Fractional CMO UK | Part-Time Marketing Leadership Guide',
+    description: 'Fractional CMO: Part-time marketing executive working 1-3 days/week. Day rates £700-£1,400. Complete UK guide to fractional CMO meaning, costs & hiring.',
     url: 'https://fractional.quest/fractional-cmo',
     images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'What is a Fractional CMO? | Complete Guide',
-    description: 'Understand fractional CMO meaning, responsibilities, and costs.',
+    title: 'Fractional CMO UK | Part-Time Marketing Leadership Guide',
+    description: 'Fractional CMO: Part-time marketing executive. Day rates £700-£1,400. Complete UK guide.',
     images: [ogImage],
   },
 }
@@ -89,7 +90,7 @@ export default function FractionalCmoPage() {
                 Role Guide
               </span>
               <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                What is a <strong>Fractional CMO</strong>?
+                <strong>Fractional CMO</strong>: Part-Time Marketing Leadership
               </h1>
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
                 A <strong>fractional CMO</strong> is a part-time Chief Marketing Officer who provides strategic marketing leadership to companies on a flexible basis. Learn about <strong>fractional CMO meaning</strong>, responsibilities, and costs.
@@ -549,14 +550,17 @@ export default function FractionalCmoPage() {
         </div>
       </section>
 
+      {/* Hey Companies - Founder Profile & Trust Signals */}
+      <HeyCompanies location="UK" />
+
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-black mb-6">
-            Ready to Get Started?
+            Ready to Hire a Fractional CMO?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Browse pre-vetted marketing leaders or post your requirements to find the perfect match.
+            Browse pre-vetted fractional CMOs or post your requirements to find the perfect marketing leader.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
