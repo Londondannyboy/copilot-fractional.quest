@@ -130,12 +130,12 @@ async function fetchPageBySlug(slug: string): Promise<PageData | null> {
   }
 }
 
-// Cached version - revalidates every hour (3600 seconds)
-// This dramatically improves TTFB for database-served pages
+// Cached version - revalidates every 60 seconds for faster updates
+// This improves TTFB while keeping content fresh
 export const getPageBySlug = unstable_cache(
   fetchPageBySlug,
   ['page-by-slug'],
-  { revalidate: 3600, tags: ['pages'] }
+  { revalidate: 60, tags: ['pages'] }
 )
 
 export async function getAllPublishedPages(): Promise<PageData[]> {
