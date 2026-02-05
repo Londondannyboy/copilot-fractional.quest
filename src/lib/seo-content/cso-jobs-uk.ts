@@ -1,11 +1,12 @@
 // SEO Content for Fractional CSO Jobs UK Page
 // Enriched with Tavily competitive data Jan 2026
+// Last updated: 5 Feb 2026 - SEO refresh for ranking recovery
 
 export const csoJobsUkSEO = {
   meta: {
-    title: "Fractional CSO Jobs UK | Chief Strategy Officer Roles",
+    title: "Fractional CSO Jobs UK 2026 | £900-£1,500/Day Strategy Roles",
     description:
-      "Fractional CSO jobs UK for strategy leadership. Part-time Chief Strategy Officer roles paying £1,000-£1,500/day. Strategy Director positions nationwide.",
+      "Fractional CSO jobs UK: Chief Strategy Officer roles updated Feb 2026. Part-time CSO paying £900-£1,500/day. M&A, transformation, PE-backed. Apply now.",
     keywords: [
       "fractional cso jobs uk",
       "fractional cso",

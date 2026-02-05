@@ -15,7 +15,8 @@ const footerLinks = {
       { name: 'CTO Jobs', href: '/fractional-cto-jobs-uk' },
       { name: 'CMO Jobs', href: '/fractional-cmo-jobs-uk' },
       { name: 'COO Jobs', href: '/fractional-coo-jobs-uk' },
-      { name: 'Remote Jobs', href: '/remote-fractional-jobs' },
+      { name: 'CCO Jobs', href: '/fractional-cco-jobs-uk' },
+      { name: 'CSO Jobs', href: '/fractional-cso-jobs-uk' },
     ],
   },
   workTypes: {

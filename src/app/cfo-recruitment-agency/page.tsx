@@ -4,9 +4,9 @@ import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
 // SEO Metadata - optimized for "cfo recruitment agency" keyword
 export const metadata: Metadata = {
-  title: "CFO Recruitment Agency 🎯 Chief Financial Officer Search",
+  title: "8 Best CFO Recruitment Agencies UK 2026 | Compare Top Recruiters",
   description:
-    "Find specialist CFO recruitment agencies for fractional, interim, and permanent Chief Financial Officer placements. Expert CFO recruiters with M&A, fundraising, and PE-backed experience. Fees 15-25%, placements in 3-6 weeks.",
+    "Best CFO recruitment agencies UK ranked. #1 Fractional Quest (Best Value, 10-15% fees) vs Big 5 (25-35%). Compare CFO recruiters, fees, placement times. Updated Feb 2026.",
   keywords: [
     "cfo recruitment agency",
     "cfo recruiter",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     "cfo placement agency",
   ],
   openGraph: {
-    title: "CFO Recruitment Agency 🎯 Chief Financial Officer Search",
+    title: "8 Best CFO Recruitment Agencies UK 2026 | Compare Recruiters",
     description:
-      "Find specialist CFO recruitment agencies. Expert recruiters with M&A, fundraising, and PE-backed experience.",
+      "Best CFO recruitment agencies UK ranked. #1 Best Value: Fractional Quest (10-15% fees). Compare all top CFO recruiters.",
     type: "website",
     url: "https://fractional.quest/cfo-recruitment-agency",
     images: [
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CFO Recruitment Agency 🎯 Chief Financial Officer Search",
+    title: "8 Best CFO Recruitment Agencies UK 2026 | Compare Recruiters",
     description:
-      "Find specialist CFO recruitment agencies for fractional, interim, and permanent placements.",
+      "Best CFO recruitment agencies UK ranked. Compare fees, placement times, specialisms.",
   },
   alternates: {
     canonical: "https://fractional.quest/cfo-recruitment-agency",
@@ -101,7 +101,7 @@ export default function CFORecruitmentAgencyPage() {
         title="CFO Recruitment Agency - Chief Financial Officer Executive Search"
         description="Find specialist CFO recruitment agencies for fractional, interim, and permanent Chief Financial Officer placements."
         url="https://fractional.quest/cfo-recruitment-agency"
-        dateModified={new Date("2026-01-30T00:00:00Z")}
+        dateModified={new Date("2026-02-05T00:00:00Z")}
       />
       <FAQPageSchema faqs={faqItems} />
 

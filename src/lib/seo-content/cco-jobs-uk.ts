@@ -1,11 +1,12 @@
 // SEO Content for Fractional CCO Jobs UK Page
 // Enhanced with authority links, statistics, and deeper content
+// Last updated: 5 Feb 2026 - SEO refresh for ranking recovery
 
 export const ccoJobsUkSEO = {
   meta: {
-    title: "Fractional CCO Jobs UK | Chief Commercial Officer Roles",
+    title: "Fractional CCO Jobs UK 2026 | £700-£1,300/Day Commercial Roles",
     description:
-      "Fractional CCO jobs UK for B2B, SaaS and PE-backed companies. Part-time Chief Commercial Officer roles paying £800-£1,200/day.",
+      "Fractional CCO jobs UK: 15+ Chief Commercial Officer roles updated Feb 2026. Part-time CCO paying £700-£1,300/day. B2B, SaaS, PE-backed. Apply today.",
     keywords: [
       "fractional cco jobs uk",
       "fractional cco",

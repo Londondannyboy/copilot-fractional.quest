@@ -18,6 +18,10 @@ const TRANSPARENT_HEADER_PAGES = [
   '/fractional-ciso-jobs-uk',
   '/fractional-cpo-jobs-uk',
   '/fractional-ceo-jobs-uk',
+  '/fractional-cco-jobs-uk',
+  '/fractional-cso-jobs-uk',
+  '/fractional-cro-jobs-uk',
+  '/fractional-cio-jobs-uk',
 ]
 
 // Navigation data structure - simplified for cleaner UX
@@ -30,6 +34,8 @@ const navigation = {
       { name: 'CTO Jobs', href: '/fractional-cto-jobs-uk', description: 'Technology leadership' },
       { name: 'CMO Jobs', href: '/fractional-cmo-jobs-uk', description: 'Marketing leadership' },
       { name: 'COO Jobs', href: '/fractional-coo-jobs-uk', description: 'Operations leadership' },
+      { name: 'CCO Jobs', href: '/fractional-cco-jobs-uk', description: 'Commercial leadership' },
+      { name: 'CSO Jobs', href: '/fractional-cso-jobs-uk', description: 'Strategy leadership' },
       { name: 'More Roles...', href: '/fractional-jobs-uk', description: 'CEO, CHRO, CPO, CISO' },
     ],
     featured: [

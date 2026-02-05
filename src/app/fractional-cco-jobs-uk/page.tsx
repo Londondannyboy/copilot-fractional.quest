@@ -56,6 +56,8 @@ export default async function FractionalCCOJobsUKPage() {
     name: ccoJobsUkSEO.meta.title,
     description: ccoJobsUkSEO.meta.description,
     url: "https://fractional.quest/fractional-cco-jobs-uk",
+    datePublished: "2024-06-01T00:00:00Z",
+    dateModified: "2026-02-05T00:00:00Z",
     isPartOf: {
       "@type": "WebSite",
       name: "Fractional Quest",
