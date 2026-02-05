@@ -7,6 +7,7 @@ import { WebPageSchema } from '@/components/seo/WebPageSchema'
 import { FAQPageSchema } from '@/components/seo/FAQPageSchema'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
+import { HeyCompanies } from '@/components/HeyCompanies'
 
 export const metadata: Metadata = {
   title: 'Virtual CFO Services UK | Remote Finance Leadership 2026',
@@ -295,6 +296,9 @@ export default function VirtualCFOPage() {
           </aside>
         </div>
       </div>
+
+      {/* Founder Section */}
+      <HeyCompanies />
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">

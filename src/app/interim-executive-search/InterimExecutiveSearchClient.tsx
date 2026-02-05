@@ -5,6 +5,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { FAQItem } from "@/components/seo";
 import { getLocalImage, getImage } from '@/lib/images';
+import { HeyCompanies } from '@/components/HeyCompanies';
 
 const EmbeddedJobBoard = dynamic(() => import("@/components/EmbeddedJobBoard").then(mod => ({ default: mod.EmbeddedJobBoard })), { ssr: false, loading: () => <div className="animate-pulse bg-gray-100 rounded-xl h-96" /> });
 const FAQ = dynamic(() => import("@/components/seo").then(mod => ({ default: mod.FAQ })), { ssr: false });
@@ -180,6 +181,9 @@ export function InterimExecutiveSearchClient() {
           </div>
         </div>
       </section>
+
+      {/* Founder Section */}
+      <HeyCompanies />
 
       {/* Final CTA */}
       <section className="py-16 sm:py-24 bg-gradient-to-r from-orange-600 to-orange-500">

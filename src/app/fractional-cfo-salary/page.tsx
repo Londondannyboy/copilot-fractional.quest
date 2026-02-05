@@ -9,6 +9,7 @@ import { RoleContentHub } from '@/components/RoleContentHub'
 import { TableOfContents, TableOfContentsMobile } from '@/components/TableOfContents'
 import { EmbeddedJobBoard } from '@/components/EmbeddedJobBoard'
 import { getOGImageUrl, getImage, getHeroImageUrl } from '@/lib/images'
+import { HeyCompanies } from '@/components/HeyCompanies'
 
 const ogImage = getOGImageUrl('salary')
 const imageAlt = getImage('salary').alt
@@ -781,6 +782,9 @@ export default function FractionalCfoSalaryPage() {
           </div>
         </div>
       </section>
+
+      {/* Founder Section */}
+      <HeyCompanies />
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white">
