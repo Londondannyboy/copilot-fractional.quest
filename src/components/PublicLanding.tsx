@@ -167,14 +167,14 @@ export function PublicLanding() {
               Why Executives Choose Our Fractional Recruitment Agency
             </h2>
             <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-              We're not another job board with recruiter spam. We're a specialist fractional recruitment agency connecting C-suite executives with genuine part-time leadership roles.
+              We're not another job board with recruiter spam. We're a specialist fractional recruitment agency connecting experienced C-suite executives with genuine part-time leadership roles at competitive day rates.
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">🎯</div>
                 <h3 className="text-xl font-semibold text-white mb-2">Curated Opportunities</h3>
                 <p className="text-gray-400">
-                  Every role is verified and vetted. No time-wasters, no junior positions disguised as fractional. Only genuine C-suite fractional opportunities from companies who understand fractional hiring.
+                  Every role is carefully verified and thoroughly vetted by our specialist team. No time-wasters, no junior positions disguised as fractional. Only genuine C-suite fractional opportunities from reputable companies who truly understand fractional hiring.
                 </p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
@@ -204,7 +204,7 @@ export function PublicLanding() {
               Why Companies Choose Our Fractional Recruitment Agency
             </h2>
             <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-              Lower fees, faster placements, and better-qualified fractional executives than traditional executive search firms.
+              As a leading fractional recruitment agency, we offer lower placement fees, faster hiring timelines, and better-qualified fractional executives than traditional executive search firms.
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
@@ -286,7 +286,7 @@ export function PublicLanding() {
           <div className="text-center">
             <Link
               href="/fractional-jobs-uk"
-              className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold transition-colors"
+              className="inline-block bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-xl font-bold transition-colors shadow-lg"
             >
               View All 200+ Roles
             </Link>
