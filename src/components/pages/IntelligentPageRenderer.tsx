@@ -14,6 +14,7 @@ import { TrustSignals } from "@/components/TrustSignals";
 import AuthorityLinksPanel from "@/components/mdx/AuthorityLinksPanel";
 import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
 import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
+import { InteractiveListicle } from "@/components/listicle";
 
 // Lazy load CopilotKit - doesn't block initial render
 
@@ -1081,6 +1082,39 @@ function SectionRenderer({ section }: { section: Section }) {
       return <TableSection section={section} />;
     case "ranked_listicle":
       return <RankedListicleSection section={section} />;
+    case "interactive_listicle": {
+      const features = (section.features as {
+        filtering?: boolean;
+        sorting?: boolean;
+        comparison?: boolean;
+        aiAssistant?: boolean;
+        animations?: boolean;
+      }) || {};
+      return (
+        <InteractiveListicle
+          title={(section.title as string) || "Top Ranked"}
+          subtitle={(section.subtitle as string) || undefined}
+          items={(section.items as Array<{
+            rank: number;
+            name: string;
+            badge: string;
+            description: string;
+            speciality: string;
+            fee: string;
+            placement: string;
+            url?: string;
+            highlight?: boolean;
+          }>) || []}
+          features={{
+            filtering: features.filtering !== false,
+            sorting: features.sorting !== false,
+            comparison: features.comparison !== false,
+            aiAssistant: features.aiAssistant !== false,
+            animations: features.animations !== false,
+          }}
+        />
+      );
+    }
     default:
       if (content) {
         return <ProseSection section={section} />;
