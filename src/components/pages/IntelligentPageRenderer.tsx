@@ -666,19 +666,41 @@ function DefinitionBox({ title, content }: { title: string; content: string }) {
 // Section Renderers
 // ===========================================
 
+// Helper to split text into proper paragraphs
+function formatTextToParagraphs(text: string | undefined): string[] {
+  if (!text) return [];
+  // Split on double newlines or single newlines for paragraph breaks
+  return text
+    .split(/\n\n+|\n(?=[A-Z])/)
+    .map(p => p.trim())
+    .filter(p => p.length > 0);
+}
+
 function ProseSection({ section }: { section: Section }) {
   const title = section.title as string | undefined;
   const content = section.content as string | undefined;
+
+  // Check if content is already HTML (has tags) or plain text
+  const isHtml = content && /<[a-z][\s\S]*>/i.test(content);
+  const paragraphs = isHtml ? [] : formatTextToParagraphs(content);
 
   return (
     <div className="prose prose-lg max-w-none">
       {title && (
         <h2 className="text-2xl font-bold text-gray-900 mb-4">{title}</h2>
       )}
-      <div
-        className="text-gray-700 leading-relaxed space-y-4"
-        dangerouslySetInnerHTML={{ __html: content || "" }}
-      />
+      {isHtml ? (
+        <div
+          className="text-gray-700 leading-relaxed space-y-4"
+          dangerouslySetInnerHTML={{ __html: content || "" }}
+        />
+      ) : (
+        <div className="text-gray-700 leading-relaxed space-y-4">
+          {paragraphs.map((para, i) => (
+            <p key={i} className="text-base sm:text-lg">{para}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -725,6 +747,7 @@ function TableSection({ section }: { section: Section }) {
 function IntroSection({ section }: { section: Section }) {
   const heading = (section.heading as string) || (section.title as string);
   const content = section.content as string | undefined;
+  const paragraphs = formatTextToParagraphs(content);
 
   return (
     <div className="relative bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-2xl p-6 overflow-hidden border border-emerald-100">
@@ -744,8 +767,12 @@ function IntroSection({ section }: { section: Section }) {
           {heading && (
             <h2 className="text-xl font-bold text-emerald-900 mb-2">{heading}</h2>
           )}
-          {content && (
-            <p className="text-emerald-800 leading-relaxed">{content}</p>
+          {paragraphs.length > 0 && (
+            <div className="space-y-3">
+              {paragraphs.map((para, i) => (
+                <p key={i} className="text-emerald-800 leading-relaxed">{para}</p>
+              ))}
+            </div>
           )}
         </div>
       </div>
@@ -2023,10 +2050,8 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
             </div>
 
             {/* Sidebar - Full height with sticky content */}
-            <div className="lg:col-span-1 relative self-stretch">
-              {/* Background that extends full height */}
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-gray-100/30 rounded-2xl -mx-2 hidden lg:block" />
-              <div className="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto pb-8 relative z-10">
+            <div className="lg:col-span-1 bg-gradient-to-b from-gray-50/80 via-gray-50/50 to-gray-100/40 rounded-2xl lg:-mr-4 lg:pr-4 lg:pl-2 lg:-ml-2">
+              <div className="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto pb-8 pt-4">
                 {/* Jobs Sidebar */}
                 <JobsSidebar
                   location={location}
