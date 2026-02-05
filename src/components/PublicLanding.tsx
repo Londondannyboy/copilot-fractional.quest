@@ -62,12 +62,27 @@ export function PublicLanding() {
                 : 'Hire C-Suite Executives at 10-15% Fees vs Industry Standard 25-30%'
               }
             </p>
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              {audience === 'candidates'
-                ? 'Browse 200+ fractional CFO, CTO, CMO roles. Our fractional recruitment agency specialises in matching senior executives with part-time C-suite opportunities across the UK. From London to Manchester, Edinburgh to Bristol, we connect fractional leaders with companies needing experienced executive talent without full-time commitments.'
-                : 'As a leading fractional recruitment agency, we specialise in placing fractional CFOs, CTOs, CMOs, and COOs with UK businesses. Our recruitment agency model offers transparent 10-15% placement fees—significantly lower than traditional executive search firms charging 25-30%. We understand fractional hiring and deliver pre-vetted C-suite talent in days, not weeks.'
-              }
-            </p>
+            <div className="space-y-4 mb-8">
+              {audience === 'candidates' ? (
+                <>
+                  <p className="text-xl text-gray-300 leading-relaxed">
+                    Browse 200+ fractional CFO, CTO, CMO roles. Our fractional recruitment agency specialises in matching senior executives with part-time C-suite opportunities across the UK.
+                  </p>
+                  <p className="text-lg text-gray-400 leading-relaxed">
+                    From London to Manchester, Edinburgh to Bristol, we connect fractional leaders with companies needing experienced executive talent without full-time commitments.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-xl text-gray-300 leading-relaxed">
+                    As a leading fractional recruitment agency, we specialise in placing fractional CFOs, CTOs, CMOs, and COOs with UK businesses.
+                  </p>
+                  <p className="text-lg text-gray-400 leading-relaxed">
+                    Our recruitment agency model offers transparent 10-15% placement fees—significantly lower than traditional executive search firms charging 25-30%. We understand fractional hiring and deliver pre-vetted C-suite talent in days, not weeks.
+                  </p>
+                </>
+              )}
+            </div>
 
             {/* Hero Image with keyword in alt */}
             <div className="relative h-64 md:h-80 mb-8 rounded-2xl overflow-hidden border border-gray-700">
@@ -142,18 +157,39 @@ export function PublicLanding() {
       </section>
 
       {/* What is a Fractional Recruitment Agency - SEO Content Block */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-12 md:py-16 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-6">What is a Fractional Recruitment Agency?</h2>
-          <div className="prose prose-invert prose-lg max-w-none">
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              A <strong>fractional recruitment agency</strong> specialises exclusively in placing part-time and fractional C-suite executives with companies. Unlike traditional recruitment agencies that focus on permanent full-time hires, we understand the unique dynamics of fractional work arrangements where executives work 1-3 days per week across multiple companies.
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">What is a Fractional Recruitment Agency?</h2>
+
+          <div className="space-y-6">
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+              A <strong>fractional recruitment agency</strong> specialises exclusively in placing part-time and fractional C-suite executives with companies.
             </p>
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              Our fractional recruitment agency model benefits both candidates and employers. For executives, we provide access to curated fractional CFO jobs, fractional CTO roles, and fractional CMO opportunities across finance, technology, marketing, operations, and security functions. For employers, we deliver experienced C-suite talent at a fraction of the cost of permanent hires, with placement fees of just 10-15% versus the 25-30% charged by traditional executive search firms.
+
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+              Unlike traditional recruitment agencies that focus on permanent full-time hires, we understand the unique dynamics of fractional work arrangements where executives work 1-3 days per week across multiple companies.
             </p>
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              As the UK's leading fractional recruitment agency, we've built a network of over 200 active fractional executive opportunities across London, Manchester, Edinburgh, Bristol, and remote roles nationwide. Our recruiters understand that fractional hiring requires different vetting than permanent placements—we assess not just technical competence but also the ability to onboard quickly, work autonomously, and deliver measurable results in compressed timeframes. This specialist approach ensures every fractional executive placement is successful from day one.
+
+            <div className="border-l-4 border-emerald-500 pl-4 py-2 bg-gray-800/50">
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+                Our fractional recruitment agency model benefits both candidates and employers.
+              </p>
+            </div>
+
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+              For executives, we provide access to curated fractional CFO jobs, fractional CTO roles, and fractional CMO opportunities across finance, technology, marketing, operations, and security functions.
+            </p>
+
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+              For employers, we deliver experienced C-suite talent at a fraction of the cost of permanent hires, with placement fees of just 10-15% versus the 25-30% charged by traditional executive search firms.
+            </p>
+
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+              As the UK's leading fractional recruitment agency, we've built a network of over 200 active fractional executive opportunities across London, Manchester, Edinburgh, Bristol, and remote roles nationwide.
+            </p>
+
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+              Our recruiters understand that fractional hiring requires different vetting than permanent placements—we assess not just technical competence but also the ability to onboard quickly, work autonomously, and deliver measurable results in compressed timeframes.
             </p>
           </div>
         </div>
@@ -166,30 +202,50 @@ export function PublicLanding() {
             <h2 className="text-3xl font-bold text-white text-center mb-4">
               Why Executives Choose Our Fractional Recruitment Agency
             </h2>
-            <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-              We're not another job board with recruiter spam. We're a specialist fractional recruitment agency connecting experienced C-suite executives with genuine part-time leadership roles at competitive day rates.
-            </p>
+            <div className="text-center mb-12 max-w-2xl mx-auto space-y-3">
+              <p className="text-base md:text-lg text-gray-400 leading-relaxed">
+                We're not another job board with recruiter spam.
+              </p>
+              <p className="text-base md:text-lg text-gray-400 leading-relaxed">
+                We're a specialist fractional recruitment agency connecting experienced C-suite executives with genuine part-time leadership roles at competitive day rates.
+              </p>
+            </div>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">🎯</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Curated Opportunities</h3>
-                <p className="text-gray-400">
-                  Every role is carefully verified and thoroughly vetted by our specialist team. No time-wasters, no junior positions disguised as fractional. Only genuine C-suite fractional opportunities from reputable companies who truly understand fractional hiring.
-                </p>
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">Curated Opportunities</h3>
+                <div className="space-y-2">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Every role is carefully verified and thoroughly vetted by our specialist team.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    No time-wasters, no junior positions disguised as fractional. Only genuine C-suite fractional opportunities from reputable companies who truly understand fractional hiring.
+                  </p>
+                </div>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Transparent Day Rates</h3>
-                <p className="text-gray-400">
-                  See actual day rates (£600-£2,000) upfront. No guessing, no negotiations that waste your time. We publish market-rate benchmarks for every role from fractional CFO to fractional CISO.
-                </p>
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">Transparent Day Rates</h3>
+                <div className="space-y-2">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    See actual day rates (£600-£2,000) upfront. No guessing, no negotiations that waste your time.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    We publish market-rate benchmarks for every role from fractional CFO to fractional CISO.
+                  </p>
+                </div>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">🤝</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Expert Recruiters</h3>
-                <p className="text-gray-400">
-                  Our recruitment agency team understands fractional work. We match you based on your schedule, sector expertise, and career goals—not just keywords on a CV.
-                </p>
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">Expert Recruiters</h3>
+                <div className="space-y-2">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Our recruitment agency team understands fractional work.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    We match you based on your schedule, sector expertise, and career goals—not just keywords on a CV.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -203,30 +259,47 @@ export function PublicLanding() {
             <h2 className="text-3xl font-bold text-white text-center mb-4">
               Why Companies Choose Our Fractional Recruitment Agency
             </h2>
-            <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-              As a leading fractional recruitment agency, we offer lower placement fees, faster hiring timelines, and better-qualified fractional executives than traditional executive search firms.
-            </p>
+            <div className="text-center mb-12 max-w-2xl mx-auto space-y-3">
+              <p className="text-base md:text-lg text-gray-400 leading-relaxed">
+                As a leading fractional recruitment agency, we offer lower placement fees, faster hiring timelines, and better-qualified fractional executives than traditional executive search firms.
+              </p>
+            </div>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">💰</div>
-                <h3 className="text-xl font-semibold text-white mb-2">10-15% Placement Fees</h3>
-                <p className="text-gray-400">
-                  We charge 10-15% of estimated annual billings vs 25-30% at traditional agencies. Same quality C-suite talent, better economics for your business.
-                </p>
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">10-15% Placement Fees</h3>
+                <div className="space-y-2">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    We charge 10-15% of estimated annual billings vs 25-30% at traditional agencies.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Same quality C-suite talent, better economics for your business.
+                  </p>
+                </div>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">⚡</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Faster Placements</h3>
-                <p className="text-gray-400">
-                  Most placements complete in 2-3 weeks vs 8-12 weeks for traditional executive search. Our database of active fractional candidates means no lengthy sourcing delays.
-                </p>
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">Faster Placements</h3>
+                <div className="space-y-2">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Most placements complete in 2-3 weeks vs 8-12 weeks for traditional executive search.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Our database of active fractional candidates means no lengthy sourcing delays.
+                  </p>
+                </div>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
                 <div className="text-3xl mb-4">✅</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Pre-Vetted Executives</h3>
-                <p className="text-gray-400">
-                  Every candidate has verified C-suite or VP-level experience. We assess technical competence, fractional readiness, and culture fit before introductions.
-                </p>
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">Pre-Vetted Executives</h3>
+                <div className="space-y-2">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Every candidate has verified C-suite or VP-level experience.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    We assess technical competence, fractional readiness, and culture fit before introductions.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
