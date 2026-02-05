@@ -217,6 +217,20 @@ export default function FractionalProcurementPage() {
                 <p className="text-gray-500 text-xs">Manufacturing and supply chain body</p>
               </div>
             </a>
+            <a href="https://rfp.quest" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-teal-300 transition-colors group">
+              <span className="text-lg">📋</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-teal-700 text-sm">RFP Platform</h4>
+                <p className="text-gray-500 text-xs">AI-powered RFP and tender management</p>
+              </div>
+            </a>
+            <a href="https://rfp.quest/rfp-software" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-teal-300 transition-colors group">
+              <span className="text-lg">💻</span>
+              <div>
+                <h4 className="font-semibold text-gray-900 group-hover:text-teal-700 text-sm">RFP Software</h4>
+                <p className="text-gray-500 text-xs">Proposal management tools for UK businesses</p>
+              </div>
+            </a>
             <Link href="/fractional-jobs-uk?department=Operations" className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200 hover:border-teal-300 transition-colors group">
               <span className="text-lg">🔍</span>
               <div>
