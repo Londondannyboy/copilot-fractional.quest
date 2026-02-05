@@ -2023,8 +2023,10 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
             </div>
 
             {/* Sidebar - Full height with sticky content */}
-            <div className="lg:col-span-1 relative">
-              <div className="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto pb-8">
+            <div className="lg:col-span-1 relative self-stretch">
+              {/* Background that extends full height */}
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-gray-100/30 rounded-2xl -mx-2 hidden lg:block" />
+              <div className="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto pb-8 relative z-10">
                 {/* Jobs Sidebar */}
                 <JobsSidebar
                   location={location}
