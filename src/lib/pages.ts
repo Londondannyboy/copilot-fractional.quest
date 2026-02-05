@@ -130,9 +130,13 @@ async function fetchPageBySlug(slug: string): Promise<PageData | null> {
   }
 }
 
-// Temporarily using uncached version to verify data flow
-// TODO: Re-enable caching once data is confirmed correct
-export const getPageBySlug = fetchPageBySlug
+// Cached version - revalidates every 60 seconds
+// Good balance between performance and content freshness
+export const getPageBySlug = unstable_cache(
+  fetchPageBySlug,
+  ['page-by-slug'],
+  { revalidate: 60, tags: ['pages'] }
+)
 
 export async function getAllPublishedPages(): Promise<PageData[]> {
   try {
