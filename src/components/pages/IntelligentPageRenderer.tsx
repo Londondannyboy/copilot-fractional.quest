@@ -1,20 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
-import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { PageData, Section, FAQ } from "@/lib/pages";
 import { HotJobs } from "@/components/HotJobs";
-import { JobsSidebar } from "@/components/JobsSidebar";
 import { EmbeddedJobBoard } from "@/components/EmbeddedJobBoard";
 import { RoleCalculator } from "@/components/RoleCalculator";
-import { TrustSignals } from "@/components/TrustSignals";
+import { IntelligentSidebar } from "@/components/IntelligentSidebar";
 import AuthorityLinksPanel from "@/components/mdx/AuthorityLinksPanel";
 import InternalLinksGrid from "@/components/mdx/InternalLinksGrid";
-import { getImage, getHeroImageUrl, ImageCategory } from "@/lib/images";
 import { InteractiveListicle } from "@/components/listicle";
+import { SplitHero } from "@/components/SplitHero";
 
 // Lazy load CopilotKit - doesn't block initial render
 
@@ -289,57 +286,6 @@ const ROLE_SALARY_DATA: Record<string, { min: number; avg: number; max: number }
   cdo: { min: 900, avg: 1150, max: 1450 },
 };
 
-// Simple salary visualization component (sidebar version)
-function SalaryRangeChart({ role }: { role: string }) {
-  const data = ROLE_SALARY_DATA[role.toLowerCase()] || ROLE_SALARY_DATA.cfo;
-  const maxValue = 2000;
-
-  return (
-    <div className="bg-gradient-to-br from-white to-emerald-50 rounded-xl p-6 border border-emerald-100 shadow-sm">
-      <h3 className="text-lg font-bold text-gray-900 mb-4">UK Day Rate Range</h3>
-      <div className="space-y-4">
-        <div>
-          <div className="flex justify-between text-sm mb-1">
-            <span className="text-gray-600">Minimum</span>
-            <span className="font-semibold text-gray-900">£{data.min}/day</span>
-          </div>
-          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gray-400 rounded-full transition-all"
-              style={{ width: `${(data.min / maxValue) * 100}%` }}
-            />
-          </div>
-        </div>
-        <div>
-          <div className="flex justify-between text-sm mb-1">
-            <span className="text-gray-600">Average</span>
-            <span className="font-semibold text-emerald-700">£{data.avg}/day</span>
-          </div>
-          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-emerald-500 rounded-full transition-all"
-              style={{ width: `${(data.avg / maxValue) * 100}%` }}
-            />
-          </div>
-        </div>
-        <div>
-          <div className="flex justify-between text-sm mb-1">
-            <span className="text-gray-600">Maximum</span>
-            <span className="font-semibold text-blue-700">£{data.max}/day</span>
-          </div>
-          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-blue-500 rounded-full transition-all"
-              style={{ width: `${(data.max / maxValue) * 100}%` }}
-            />
-          </div>
-        </div>
-      </div>
-      <p className="text-xs text-gray-500 mt-4">Based on UK market data for fractional executives</p>
-    </div>
-  );
-}
-
 // Cost Savings Visualization
 function CostSavingsChart({ role }: { role: string }) {
   const data = ROLE_SALARY_DATA[role.toLowerCase()] || ROLE_SALARY_DATA.cfo;
@@ -545,89 +491,6 @@ function extractRoleFromSlug(slug?: string): "cfo" | "cto" | "cmo" | "coo" | "ce
     return role as "cfo" | "cto" | "cmo" | "coo" | "ceo" | "chro" | "cpo" | "ciso" | "cro" | "cco";
   }
   return "cfo";
-}
-
-// ===========================================
-// Hero Section - Rich hero with stats overlay
-// ===========================================
-
-function IntelligentHero({ page }: { page: PageData }) {
-  const imageCategory = (page.image_category || "finance") as ImageCategory;
-  const image = getImage(imageCategory);
-  const heroUrl = getHeroImageUrl(imageCategory, 1920, 800);
-
-  // Extract stats from first section if it's a stats_bar type
-  const statsSection = page.sections?.find((s) => s.type === "stats_bar");
-  const stats = statsSection?.stats as Array<{ value: string; label: string }> | undefined;
-
-  return (
-    <section className="relative text-white py-12 sm:py-16 px-4 sm:px-6 min-h-[300px] sm:min-h-[350px] md:min-h-[400px] flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <Image
-          src={heroUrl}
-          alt={`${page.hero_title} - ${image.alt}`}
-          title={page.hero_title || page.title}
-          fill
-          priority
-          fetchPriority="high"
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/70 to-gray-900/50" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        {/* Breadcrumb */}
-        <nav className="text-sm mb-6 opacity-80">
-          <a href="/" className="hover:underline">Home</a>
-          <span className="mx-2">→</span>
-          <span>{page.hero_title || page.title}</span>
-        </nav>
-
-        {/* Badge */}
-        {page.hero_badge && (
-          <span className="inline-block bg-emerald-500 text-white text-sm font-semibold px-3 py-1 rounded-full mb-4">
-            {page.hero_badge}
-          </span>
-        )}
-
-        <div className="max-w-3xl">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance font-playfair text-white">
-            {page.hero_title || page.title}
-          </h1>
-          {page.hero_subtitle && (
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 mb-6 sm:mb-8">
-              {page.hero_subtitle}
-            </p>
-          )}
-        </div>
-
-        {/* Stats overlay */}
-        {stats && stats.length > 0 && (
-          <div className="flex flex-wrap gap-3 sm:gap-6 mt-6 sm:mt-8">
-            {stats.slice(0, 4).map((stat, i) => (
-              <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 sm:px-6 py-3 sm:py-4">
-                <div className="text-xl sm:text-2xl font-bold">{stat.value}</div>
-                <div className="text-xs sm:text-sm opacity-80">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Photo credit */}
-      <div className="absolute bottom-2 right-2 z-10">
-        <a
-          href={image.creditUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-white/50 hover:text-white/70"
-        >
-          Photo: {image.credit}
-        </a>
-      </div>
-    </section>
-  );
 }
 
 // ===========================================
@@ -1131,6 +994,9 @@ function SectionRenderer({ section }: { section: Section }) {
             placement: string;
             url?: string;
             highlight?: boolean;
+            feeSource?: string;
+            placementSource?: string;
+            sourceNote?: string;
           }>) || []}
           features={{
             filtering: features.filtering !== false,
@@ -1493,7 +1359,7 @@ function JumpLinksBar() {
 // FAQPage Schema for SEO
 // ===========================================
 
-function FAQSchema({ faqs, pageUrl }: { faqs: FAQ[]; pageUrl: string }) {
+function FAQSchema({ faqs }: { faqs: FAQ[] }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -1776,6 +1642,9 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
     page.slug?.includes("manchester") ? "manchester" :
     page.slug?.includes("bristol") ? "bristol" : "uk";
 
+  // Check if page has an interactive_listicle section (it has its own hero)
+  const hasInteractiveListicle = page.sections?.some(s => s.type === 'interactive_listicle');
+
   // Build CopilotKit instructions from page content
   return (
     <main
@@ -1785,8 +1654,20 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
         {/* Schema Markup */}
         <BreadcrumbSchema page={page} />
 
-        {/* Hero Section */}
-        <IntelligentHero page={page} />
+        {/* Split Hero - Global template with adaptive right-side widget */}
+        {/* Skip for interactive_listicle pages (they have their own specialized hero) */}
+        {!hasInteractiveListicle && <SplitHero page={page} />}
+
+        {/* Interactive Listicle Hero - Full width, edge to edge */}
+        {hasInteractiveListicle && (
+          <section className="bg-white">
+            <div className="w-full">
+              {page.sections?.filter(s => s.type === 'interactive_listicle').map((section, i) => (
+                <SectionRenderer key={`listicle-hero-${i}`} section={section} />
+              ))}
+            </div>
+          </section>
+        )}
 
       {/* Main Content - Two Column Layout */}
       <section className="py-8 bg-white overflow-x-hidden">
@@ -1834,8 +1715,8 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
                 />
               )}
 
-              {/* Content Sections */}
-              {page.sections?.map((section, i) => (
+              {/* Content Sections - Skip interactive_listicle (rendered above as hero) */}
+              {page.sections?.filter(s => s.type !== 'interactive_listicle').map((section, i) => (
                 <SectionRenderer key={i} section={section} />
               ))}
 
@@ -2006,7 +1887,7 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
               {/* FAQs with Schema */}
               {page.faqs && page.faqs.length > 0 && (
                 <div id="faqs">
-                  <FAQSchema faqs={page.faqs} pageUrl={`https://fractional.quest/${page.slug}`} />
+                  <FAQSchema faqs={page.faqs} />
                   <FAQSection faqs={page.faqs} />
                 </div>
               )}
@@ -2051,257 +1932,15 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
 
             {/* Sidebar - Full height with sticky content */}
             <div className="lg:col-span-1 bg-gradient-to-b from-gray-50 via-white to-gray-50 rounded-2xl lg:pl-4">
-              <div className="sticky top-24 space-y-5 pb-8 pt-2">
-                {/* Jobs Sidebar */}
-                <JobsSidebar
-                  location={location}
+              <div className="sticky top-24 pb-8 pt-2">
+                <IntelligentSidebar
+                  context={{
+                    slug: page.slug,
+                    locale: locale,
+                    pageType: page.page_type as "jobs" | "role_definition" | "salary" | "hire_guide" | "career_guide" | "recruitment" | "location" | "industry" | "comparison" | "listicle" | "other",
+                    accentColor: page.accent_color,
+                  }}
                 />
-
-                {/* Trust Signals */}
-                <TrustSignals variant="sidebar" />
-
-                {/* Salary Range Chart */}
-                <SalaryRangeChart role={extractRoleFromSlug(page.slug)} />
-
-                {/* Quick Navigation */}
-                <div className="bg-white border border-gray-200 rounded-xl p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
-                    <span>📍</span> On This Page
-                  </h3>
-                  <nav className="space-y-2 text-sm">
-                    <a href="#jobs" className="block text-gray-600 hover:text-emerald-700 transition-colors">→ Latest Jobs</a>
-                    <a href="#rates" className="block text-gray-600 hover:text-emerald-700 transition-colors">→ Day Rates</a>
-                    <a href="#compare" className="block text-gray-600 hover:text-emerald-700 transition-colors">→ Compare Options</a>
-                    <a href="#faqs" className="block text-gray-600 hover:text-emerald-700 transition-colors">→ FAQs</a>
-                  </nav>
-                </div>
-
-                {/* CTA Box */}
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
-                  <h3 className="font-bold text-emerald-900 mb-2">Looking to Hire?</h3>
-                  <p className="text-emerald-800 text-sm mb-4">
-                    Connect with vetted fractional executives today.
-                  </p>
-                  <a
-                    href="/contact"
-                    className="block w-full text-center bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition-colors font-medium"
-                  >
-                    Post a Role
-                  </a>
-                </div>
-
-                {/* Newsletter Signup */}
-                <div className="bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 rounded-xl p-5">
-                  <h3 className="font-bold text-indigo-900 text-sm mb-2 flex items-center gap-2">
-                    <span>📧</span> Stay Updated
-                  </h3>
-                  <p className="text-indigo-700 text-xs mb-3">
-                    Get the latest fractional exec opportunities and insights.
-                  </p>
-                  <a
-                    href="/newsletter"
-                    className="block w-full text-center bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors font-medium text-sm"
-                  >
-                    Subscribe Free
-                  </a>
-                </div>
-
-                {/* Quick Stats Reminder */}
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-3">Why Fractional?</h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-center gap-2">
-                      <span className="text-emerald-500">✓</span>
-                      <span className="text-gray-700">50-70% cost savings</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-emerald-500">✓</span>
-                      <span className="text-gray-700">No long-term commitment</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-emerald-500">✓</span>
-                      <span className="text-gray-700">Senior expertise on demand</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-emerald-500">✓</span>
-                      <span className="text-gray-700">Flexible 1-3 days/week</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Related Pages Links - Locale-Aware */}
-                <div className="bg-white border border-gray-200 rounded-xl p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
-                    <span>🔗</span> Explore More
-                  </h3>
-                  <nav className="space-y-2 text-sm">
-                    <a href={localizeUrl("/fractional-cfo-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("Fractional CFO Jobs", locale)} →</a>
-                    <a href={localizeUrl("/fractional-cto-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("Fractional CTO Jobs", locale)} →</a>
-                    <a href={localizeUrl("/fractional-cmo-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("Fractional CMO Jobs", locale)} →</a>
-                    <a href={localizeUrl("/fractional-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("All Fractional Jobs", locale)} →</a>
-                  </nav>
-                </div>
-
-                {/* AI Assistant Panel */}
-                <div className="bg-gradient-to-br from-violet-50 to-indigo-50 border border-violet-200 rounded-xl p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center">
-                      <span className="text-xl">✨</span>
-                    </div>
-                    <h3 className="font-bold text-violet-900 text-sm">AI Career Assistant</h3>
-                  </div>
-                  <p className="text-violet-700 text-xs mb-3">
-                    Get personalized recommendations based on your experience and goals.
-                  </p>
-                  <a
-                    href="#ai-assistant"
-                    className="block w-full text-center bg-violet-600 text-white py-2 px-4 rounded-lg hover:bg-violet-700 transition-colors font-medium text-sm"
-                  >
-                    Ask AI Assistant
-                  </a>
-                </div>
-
-                {/* Market Snapshot */}
-                <div className="bg-white border border-gray-200 rounded-xl p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-4 flex items-center gap-2">
-                    <span>📊</span> Market Snapshot
-                  </h3>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-500">CFO Demand</span>
-                        <span className="text-emerald-600 font-semibold">+23% YoY</span>
-                      </div>
-                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                        <div className="h-full w-4/5 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full" />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-500">Avg Day Rate</span>
-                        <span className="text-gray-900 font-semibold">£1,200</span>
-                      </div>
-                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                        <div className="h-full w-3/5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-500">Placement Speed</span>
-                        <span className="text-amber-600 font-semibold">4-6 weeks</span>
-                      </div>
-                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                        <div className="h-full w-2/5 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full" />
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-[10px] text-gray-400 mt-3">Source: Fractional Quest Market Data 2026</p>
-                </div>
-
-                {/* Quick Calculator */}
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
-                  <h3 className="font-bold text-emerald-900 text-sm mb-3 flex items-center gap-2">
-                    <span>🧮</span> Quick Cost Estimate
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-emerald-700">1 day/week</span>
-                      <span className="font-bold text-emerald-900">£4,800/mo</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-emerald-700">2 days/week</span>
-                      <span className="font-bold text-emerald-900">£9,600/mo</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-emerald-700">3 days/week</span>
-                      <span className="font-bold text-emerald-900">£14,400/mo</span>
-                    </div>
-                  </div>
-                  <a
-                    href="/calculator"
-                    className="block w-full text-center bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition-colors font-medium text-sm mt-4"
-                  >
-                    Full Calculator →
-                  </a>
-                </div>
-
-                {/* Testimonial */}
-                <div className="bg-white border border-gray-200 rounded-xl p-4">
-                  <div className="flex gap-1 mb-3">
-                    {[1,2,3,4,5].map(i => (
-                      <span key={i} className="text-amber-400">★</span>
-                    ))}
-                  </div>
-                  <p className="text-gray-600 text-sm italic mb-3">
-                    &ldquo;Found our fractional CFO in just 3 weeks. Game changer for our Series A prep.&rdquo;
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gray-200 rounded-full" />
-                    <div>
-                      <div className="text-xs font-bold text-gray-900">Sarah Chen</div>
-                      <div className="text-[10px] text-gray-500">CEO, TechStart</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Popular Searches */}
-                <div className="bg-white border border-gray-200 rounded-xl p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
-                    <span>🔥</span> Trending Searches
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    <a href="/fractional-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Fractional CFO</a>
-                    <a href="/interim-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Interim CFO</a>
-                    <a href="/part-time-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Part-time CFO</a>
-                    <a href="/cfo-recruitment" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">CFO Recruitment</a>
-                    <a href="/virtual-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Virtual CFO</a>
-                  </div>
-                </div>
-
-                {/* Industry Stats */}
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
-                    <span>📈</span> Industry Insights
-                  </h3>
-                  <div className="space-y-3 text-xs">
-                    <div className="flex items-start gap-2">
-                      <span className="text-emerald-500 mt-0.5">●</span>
-                      <span className="text-gray-600">73% of scale-ups now use fractional executives</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-blue-500 mt-0.5">●</span>
-                      <span className="text-gray-600">Average engagement: 8-12 months</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-amber-500 mt-0.5">●</span>
-                      <span className="text-gray-600">42% convert to full-time hires</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Contact CTA */}
-                <div className="bg-gray-900 rounded-xl p-5 text-center">
-                  <h3 className="font-bold text-white text-sm mb-2">Need Help Deciding?</h3>
-                  <p className="text-gray-400 text-xs mb-4">
-                    Talk to our team for a free consultation
-                  </p>
-                  <a
-                    href="/book-call"
-                    className="block w-full text-center bg-emerald-500 text-white py-2 px-4 rounded-lg hover:bg-emerald-600 transition-colors font-medium text-sm"
-                  >
-                    Book Free Call →
-                  </a>
-                </div>
-
-                {/* Trust Badges */}
-                <div className="bg-white border border-gray-200 rounded-xl p-4 text-center">
-                  <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-3">Trusted By</p>
-                  <div className="flex justify-center gap-4 opacity-50">
-                    <span className="text-gray-400 font-bold text-sm">TechCrunch</span>
-                    <span className="text-gray-400 font-bold text-sm">Forbes</span>
-                    <span className="text-gray-400 font-bold text-sm">Sifted</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

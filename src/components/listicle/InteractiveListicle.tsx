@@ -18,6 +18,9 @@ export interface ListicleItem {
   placement: string;
   url?: string;
   highlight?: boolean;
+  feeSource?: string; // URL citation for fee data
+  placementSource?: string; // URL citation for placement time
+  sourceNote?: string; // e.g. "Based on industry research, Jan 2026"
 }
 
 export interface InteractiveListicleProps {
@@ -47,6 +50,280 @@ function parseTime(time: string): number {
   return match ? parseInt(match[1], 10) : 0;
 }
 
+// Interactive Quiz Component for Hero
+function InteractiveQuiz({
+  items,
+  onRecommendation,
+  onOpenFullAI,
+}: {
+  items: ListicleItem[];
+  onRecommendation: (name: string) => void;
+  onOpenFullAI: () => void;
+}) {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [recommendation, setRecommendation] = useState<ListicleItem | null>(null);
+  const [isCalculating, setIsCalculating] = useState(false);
+
+  const questions = [
+    {
+      id: "priority",
+      question: "What's your top priority?",
+      options: [
+        { value: "cost", label: "💰 Lowest Cost", desc: "Budget is key" },
+        { value: "speed", label: "⚡ Fastest Hire", desc: "Need someone ASAP" },
+        { value: "quality", label: "🎯 Best Match", desc: "Quality over speed" },
+      ],
+    },
+    {
+      id: "type",
+      question: "What type of CFO?",
+      options: [
+        { value: "fractional", label: "📊 Fractional", desc: "Part-time, ongoing" },
+        { value: "interim", label: "🔄 Interim", desc: "Full-time, temporary" },
+        { value: "permanent", label: "👔 Permanent", desc: "Long-term hire" },
+      ],
+    },
+    {
+      id: "budget",
+      question: "Your fee budget?",
+      options: [
+        { value: "low", label: "Under 20%", desc: "Cost-conscious" },
+        { value: "mid", label: "20-30%", desc: "Market rate" },
+        { value: "high", label: "30%+", desc: "Premium service" },
+      ],
+    },
+  ];
+
+  const handleAnswer = (questionId: string, value: string) => {
+    const newAnswers = { ...answers, [questionId]: value };
+    setAnswers(newAnswers);
+
+    if (step < questions.length - 1) {
+      setStep(step + 1);
+    } else {
+      // Calculate recommendation
+      setIsCalculating(true);
+      setTimeout(() => {
+        const rec = calculateRecommendation(newAnswers, items);
+        setRecommendation(rec);
+        setIsCalculating(false);
+        if (rec) onRecommendation(rec.name);
+      }, 1500);
+    }
+  };
+
+  const calculateRecommendation = (
+    ans: Record<string, string>,
+    allItems: ListicleItem[]
+  ): ListicleItem | null => {
+    // Simple scoring algorithm
+    let bestMatch = allItems[0];
+    let bestScore = 0;
+
+    allItems.forEach((item) => {
+      let score = 0;
+      const fee = parseFee(item.fee);
+      const time = parseTime(item.placement);
+
+      // Priority scoring
+      if (ans.priority === "cost" && fee <= 20) score += 30;
+      if (ans.priority === "speed" && time <= 6) score += 30;
+      if (ans.priority === "quality" && item.rank <= 3) score += 30;
+
+      // Type scoring
+      if (ans.type === "fractional" && item.speciality.toLowerCase().includes("fractional")) score += 20;
+      if (ans.type === "interim" && item.speciality.toLowerCase().includes("interim")) score += 20;
+
+      // Budget scoring
+      if (ans.budget === "low" && fee <= 20) score += 20;
+      if (ans.budget === "mid" && fee > 20 && fee <= 30) score += 20;
+      if (ans.budget === "high" && fee > 30) score += 20;
+
+      // Bonus for highlighted item
+      if (item.highlight) score += 10;
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = item;
+      }
+    });
+
+    return bestMatch;
+  };
+
+  const resetQuiz = () => {
+    setStep(0);
+    setAnswers({});
+    setRecommendation(null);
+  };
+
+  return (
+    <div className="h-full flex flex-col">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-violet-500/30">
+          <span className="text-2xl">✨</span>
+        </div>
+        <div>
+          <h3 className="text-white font-bold text-lg">AI Quick Match</h3>
+          <p className="text-white/50 text-xs">Find your ideal headhunter in 30 seconds</p>
+        </div>
+      </div>
+
+      {/* Progress Bar */}
+      {!recommendation && (
+        <div className="mb-6">
+          <div className="flex justify-between text-xs text-white/40 mb-2">
+            <span>Question {step + 1} of {questions.length}</span>
+            <span>{Math.round(((step + 1) / questions.length) * 100)}%</span>
+          </div>
+          <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${((step + 1) / questions.length) * 100}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Question or Result */}
+      <div className="flex-1">
+        <AnimatePresence mode="wait">
+          {isCalculating ? (
+            <motion.div
+              key="calculating"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="text-center py-8"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-16 h-16 mx-auto mb-4 border-4 border-violet-500/30 border-t-violet-500 rounded-full"
+              />
+              <p className="text-white font-semibold">Analyzing your preferences...</p>
+              <p className="text-white/50 text-sm mt-1">Matching with {items.length} agencies</p>
+            </motion.div>
+          ) : recommendation ? (
+            <motion.div
+              key="result"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-4"
+            >
+              <div className="text-center mb-4">
+                <span className="text-emerald-400 text-sm font-bold uppercase tracking-wider">Your Best Match</span>
+              </div>
+
+              <div className="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 rounded-2xl p-5">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-black text-lg">
+                    #{recommendation.rank}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg">{recommendation.name}</h4>
+                    <span className="text-emerald-400 text-xs font-medium">{recommendation.badge}</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="bg-white/5 rounded-lg p-3 text-center">
+                    <div className="text-emerald-400 font-bold">{recommendation.fee}</div>
+                    <div className="text-white/50 text-xs">Fee</div>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-3 text-center">
+                    <div className="text-white font-bold">{recommendation.placement}</div>
+                    <div className="text-white/50 text-xs">Time</div>
+                  </div>
+                </div>
+
+                <p className="text-white/70 text-sm mb-4">{recommendation.description.slice(0, 100)}...</p>
+
+                {recommendation.url && (
+                  <a
+                    href={recommendation.url}
+                    className="block w-full text-center py-3 bg-emerald-500 text-white font-bold rounded-xl hover:bg-emerald-600 transition-all"
+                  >
+                    View {recommendation.name} →
+                  </a>
+                )}
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={resetQuiz}
+                  className="flex-1 py-2 bg-white/10 text-white/70 text-sm font-medium rounded-lg hover:bg-white/20 transition-all"
+                >
+                  Try Again
+                </button>
+                <button
+                  onClick={onOpenFullAI}
+                  className="flex-1 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-500 transition-all"
+                >
+                  Ask AI More
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key={`question-${step}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h4 className="text-white font-bold text-xl mb-6">
+                {questions[step].question}
+              </h4>
+
+              <div className="space-y-3">
+                {questions[step].options.map((option) => (
+                  <motion.button
+                    key={option.value}
+                    whileHover={{ scale: 1.02, x: 4 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleAnswer(questions[step].id, option.value)}
+                    className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
+                      answers[questions[step].id] === option.value
+                        ? "bg-violet-500/20 border-violet-500"
+                        : "bg-white/5 border-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{option.label.split(" ")[0]}</span>
+                      <div>
+                        <div className="text-white font-semibold">{option.label.split(" ").slice(1).join(" ")}</div>
+                        <div className="text-white/50 text-xs">{option.desc}</div>
+                      </div>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Footer */}
+      {!recommendation && !isCalculating && (
+        <div className="mt-6 pt-4 border-t border-white/10">
+          <button
+            onClick={onOpenFullAI}
+            className="w-full flex items-center justify-center gap-2 py-3 text-white/50 text-sm hover:text-white/70 transition-colors"
+          >
+            <span>Or ask our AI anything</span>
+            <span>→</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -73,19 +350,6 @@ const itemVariants = {
     opacity: 0,
     scale: 0.95,
     transition: { duration: 0.2 },
-  },
-};
-
-const highlightVariants = {
-  idle: { scale: 1 },
-  highlighted: {
-    scale: 1.02,
-    boxShadow: "0 0 30px rgba(16, 185, 129, 0.3)",
-    transition: {
-      duration: 0.5,
-      repeat: Infinity,
-      repeatType: "reverse" as const,
-    },
   },
 };
 
@@ -205,361 +469,201 @@ export function InteractiveListicle({
   const featuredItem = items.find(item => item.highlight) || items[0];
 
   return (
-    <section className="py-8">
-      {/* Innovative Data-Driven Hero */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 mb-12">
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
-          }} />
-        </div>
-
-        {/* Floating Data Points Animation */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-emerald-400/30 rounded-full"
-              initial={{
-                x: Math.random() * 100 + '%',
-                y: Math.random() * 100 + '%',
-                opacity: 0
-              }}
-              animate={{
-                y: [null, '-20%'],
-                opacity: [0, 0.6, 0],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
+    <section>
+      {/* Split Hero: Image + Interactive AI Quiz - Full width on desktop */}
+      <div className="relative overflow-hidden lg:rounded-none rounded-2xl mx-4 lg:mx-0 mb-8 lg:mb-12">
+        <div className="grid lg:grid-cols-5 min-h-[500px] lg:min-h-[600px]">
+          {/* Left: Hero Image (3 cols on desktop) */}
+          <div className="lg:col-span-3 relative min-h-[350px] lg:min-h-full">
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&q=80"
+              alt="CFO Headhunter Analysis"
+              className="absolute inset-0 w-full h-full object-cover"
             />
-          ))}
-        </div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-transparent lg:to-slate-900/40" />
 
-        <div className="relative z-10 p-6 sm:p-10">
-          {/* Header */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div className="flex items-center gap-3">
-              <span className="px-4 py-2 bg-emerald-500 text-white text-sm font-bold rounded-full animate-pulse">
-                LIVE DATA
-              </span>
-              <span className="px-4 py-2 bg-white/10 text-white/80 text-sm font-medium rounded-full backdrop-blur-sm">
-                February 2026 Rankings
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-emerald-400 text-sm font-mono">
-              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
-              Analyzing {items.length} agencies...
-            </div>
-          </div>
+            {/* Content on Image */}
+            <div className="relative z-10 p-8 lg:p-12 h-full flex flex-col justify-center">
+              {/* Badges */}
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <span className="px-4 py-2 bg-emerald-500 text-white text-sm font-bold rounded-full">
+                  2026 Rankings
+                </span>
+                <span className="px-3 py-1.5 bg-white/10 text-white/80 text-xs font-medium rounded-full backdrop-blur-sm">
+                  {items.length} Agencies Analyzed
+                </span>
+              </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            {/* Left: Title & Description */}
-            <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
+              {/* Title */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight max-w-xl">
                 {title}
               </h2>
               {subtitle && (
-                <p className="text-white/70 text-lg mb-6">{subtitle}</p>
+                <p className="text-white/70 text-lg mb-8 max-w-lg">{subtitle}</p>
               )}
 
-              {/* Quick Winner Preview */}
-              <div className="bg-emerald-500/20 border border-emerald-500/30 rounded-2xl p-4 mb-6">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">🏆</span>
-                  <span className="text-emerald-400 font-bold text-sm uppercase tracking-wider">Top Pick for 2026</span>
+              {/* Quick Stats Row */}
+              <div className="flex flex-wrap gap-6 mb-8">
+                <div>
+                  <div className="text-3xl font-black text-emerald-400">10-35%</div>
+                  <div className="text-white/50 text-sm">Fee Range</div>
                 </div>
-                <div className="text-white font-black text-2xl">{featuredItem?.name}</div>
-                <div className="flex items-center gap-4 mt-2 text-sm">
-                  <span className="text-emerald-300">✓ {featuredItem?.fee} fees</span>
-                  <span className="text-emerald-300">✓ {featuredItem?.placement}</span>
+                <div>
+                  <div className="text-3xl font-black text-white">2-20</div>
+                  <div className="text-white/50 text-sm">Weeks</div>
                 </div>
-              </div>
-
-              {/* AI CTA */}
-              {features.aiAssistant && (
-                <button
-                  onClick={() => setShowAI(true)}
-                  className="group flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold rounded-2xl hover:from-violet-500 hover:to-indigo-500 transition-all shadow-lg shadow-violet-500/25"
-                >
-                  <span className="text-2xl group-hover:scale-110 transition-transform">✨</span>
-                  <span>Get AI Recommendation</span>
-                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                </button>
-              )}
-            </div>
-
-            {/* Right: Live Data Visualization */}
-            <div className="space-y-4">
-              {/* Fee Comparison Chart */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-bold text-sm">Fee Comparison</h3>
-                  <span className="text-emerald-400 text-xs font-mono">LIVE</span>
-                </div>
-                <div className="space-y-3">
-                  {items.slice(0, 5).map((item, idx) => (
-                    <div key={item.name} className="flex items-center gap-3">
-                      <span className="w-6 text-xs text-white/50 font-mono">#{item.rank}</span>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-white/80 text-xs truncate max-w-[100px]">{item.name.split(' ')[0]}</span>
-                          <span className={`text-xs font-bold ${item.highlight ? 'text-emerald-400' : 'text-white/60'}`}>
-                            {item.fee}
-                          </span>
-                        </div>
-                        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: `${Math.min(100, parseFee(item.fee) * 2.8)}%` }}
-                            transition={{ duration: 1, delay: idx * 0.1 }}
-                            className={`h-full rounded-full ${
-                              item.highlight
-                                ? 'bg-gradient-to-r from-emerald-400 to-emerald-500'
-                                : 'bg-gradient-to-r from-slate-400 to-slate-500'
-                            }`}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-3 pt-3 border-t border-white/10 flex justify-between text-[10px] text-white/40">
-                  <span>Lower is better</span>
-                  <span>Industry avg: 25-35%</span>
+                <div>
+                  <div className="text-3xl font-black text-amber-400">£50k+</div>
+                  <div className="text-white/50 text-sm">Savings</div>
                 </div>
               </div>
 
-              {/* Speed vs Fee Scatter Plot */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-bold text-sm">Speed vs Cost Analysis</h3>
-                  <span className="text-xs text-white/40">Best = Bottom Left</span>
-                </div>
-                <div className="relative h-32 border-l border-b border-white/20">
-                  {/* Y-axis label */}
-                  <span className="absolute -left-2 top-0 text-[10px] text-white/40 -rotate-90 origin-left">Time</span>
-                  {/* X-axis label */}
-                  <span className="absolute right-0 -bottom-4 text-[10px] text-white/40">Fee %</span>
-
-                  {/* Grid lines */}
-                  <div className="absolute inset-0 grid grid-cols-4 grid-rows-4">
-                    {[...Array(16)].map((_, i) => (
-                      <div key={i} className="border-r border-t border-white/5" />
-                    ))}
-                  </div>
-
-                  {/* Data points */}
-                  {items.map((item, idx) => {
-                    const x = (parseFee(item.fee) / 40) * 100;
-                    const y = 100 - (parseTime(item.placement) / 20) * 100;
-                    return (
-                      <motion.div
-                        key={item.name}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.5 + idx * 0.1 }}
-                        className={`absolute w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold ${
-                          item.highlight
-                            ? 'bg-emerald-400 text-emerald-900 ring-4 ring-emerald-400/30'
-                            : 'bg-slate-400 text-slate-900'
-                        }`}
-                        style={{
-                          left: `${Math.min(95, Math.max(5, x))}%`,
-                          bottom: `${Math.min(95, Math.max(5, y))}%`,
-                          transform: 'translate(-50%, 50%)'
-                        }}
-                        title={`${item.name}: ${item.fee}, ${item.placement}`}
-                      >
-                        {item.rank}
-                      </motion.div>
-                    );
-                  })}
-
-                  {/* Sweet spot indicator */}
-                  <div className="absolute bottom-0 left-0 w-1/3 h-1/3 border-2 border-dashed border-emerald-500/30 rounded-tr-xl" />
-                  <span className="absolute bottom-1 left-1 text-[8px] text-emerald-400/60">Sweet Spot</span>
-                </div>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="grid grid-cols-3 gap-3">
+              {/* Scroll indicator */}
+              <div className="hidden lg:flex items-center gap-2 text-white/40 text-sm">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8 }}
-                  className="bg-emerald-500/20 rounded-xl p-3 text-center"
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <div className="text-xl font-black text-emerald-400">50%</div>
-                  <div className="text-[10px] text-white/60">Avg Savings</div>
+                  ↓
                 </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.9 }}
-                  className="bg-blue-500/20 rounded-xl p-3 text-center"
-                >
-                  <div className="text-xl font-black text-blue-400">4x</div>
-                  <div className="text-[10px] text-white/60">Faster</div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1 }}
-                  className="bg-amber-500/20 rounded-xl p-3 text-center"
-                >
-                  <div className="text-xl font-black text-amber-400">300+</div>
-                  <div className="text-[10px] text-white/60">CFOs</div>
-                </motion.div>
+                Scroll to explore all agencies
               </div>
             </div>
+          </div>
+
+          {/* Right: Interactive AI Quiz (2 cols on desktop) */}
+          <div className="lg:col-span-2 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-900 p-6 lg:p-8">
+            <InteractiveQuiz
+              items={items}
+              onRecommendation={(name) => {
+                setAiHighlighted(name);
+                // Scroll to the item
+                setTimeout(() => {
+                  document.getElementById(`agency-${name.replace(/\s+/g, '-').toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+              }}
+              onOpenFullAI={() => setShowAI(true)}
+            />
           </div>
         </div>
       </div>
 
-      {/* Featured Winner Card */}
-      {featuredItem && sortBy === "rank" && !search && !feeFilter && !timeFilter && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-2xl">🏆</span>
-            <h3 className="text-2xl font-black text-gray-900">Our Top Recommendation</h3>
-            <span className="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">EDITOR&apos;S CHOICE</span>
-          </div>
-
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500 shadow-2xl shadow-emerald-200/50">
-            {/* Background Image */}
-            <div className="absolute inset-0">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=600&fit=crop&q=80"
-                alt=""
-                className="w-full h-full object-cover opacity-20"
-              />
+      {/* Content below hero - contained width */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Featured CTA Banner - Fractional Quest */}
+        {featuredItem && featuredItem.highlight && sortBy === "rank" && !search && !feeFilter && !timeFilter && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12"
+          >
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-2xl">
+            {/* Subtle pattern overlay */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="absolute inset-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
             </div>
 
+            {/* Accent gradient line at top */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400" />
+
             <div className="relative z-10 p-8 sm:p-12">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                {/* Left Side - Info */}
-                <div>
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-24 h-24 bg-white rounded-2xl flex flex-col items-center justify-center shadow-2xl">
-                      <span className="text-4xl font-black text-emerald-600">#1</span>
-                      <span className="text-xs text-gray-500 font-bold">RANKED</span>
+              <div className="grid md:grid-cols-5 gap-8 items-center">
+                {/* Left Side - Main CTA (3 cols) */}
+                <div className="md:col-span-3">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-3 py-1 bg-amber-500 text-slate-900 text-xs font-black rounded-full uppercase tracking-wider">
+                      #1 Ranked
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 text-white/80 text-xs font-bold rounded-full">
+                      Editor&apos;s Choice 2026
+                    </span>
+                  </div>
+
+                  <h3 className="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight">
+                    Ready to Find Your Perfect CFO?
+                  </h3>
+
+                  <p className="text-white/70 text-lg mb-6 leading-relaxed max-w-xl">
+                    Skip the 12-week search. Our pre-vetted network of 300+ fractional and interim CFOs means you can have shortlisted candidates within days, not months.
+                  </p>
+
+                  {/* Key stats row */}
+                  <div className="flex flex-wrap gap-6 mb-8">
+                    <div>
+                      <div className="text-2xl font-black text-amber-400">10-15%</div>
+                      <div className="text-white/50 text-sm">Placement Fee</div>
                     </div>
                     <div>
-                      <h4 className="text-3xl sm:text-4xl font-black text-white">{featuredItem.name}</h4>
-                      <span className="inline-block mt-2 px-4 py-1 bg-white/20 text-white text-sm font-bold rounded-full">
-                        {featuredItem.badge}
-                      </span>
+                      <div className="text-2xl font-black text-white">2-4 Weeks</div>
+                      <div className="text-white/50 text-sm">Time to Hire</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-black text-emerald-400">50-60%</div>
+                      <div className="text-white/50 text-sm">Cost Savings</div>
                     </div>
                   </div>
 
-                  <p className="text-white/90 text-lg mb-6 leading-relaxed">{featuredItem.description}</p>
-
-                  {/* Key Benefits */}
-                  <div className="grid grid-cols-2 gap-3 mb-6">
-                    <div className="flex items-center gap-2 text-white">
-                      <span className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm">✓</span>
-                      <span className="text-sm font-medium">300+ Pre-vetted CFOs</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-white">
-                      <span className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm">✓</span>
-                      <span className="text-sm font-medium">96% Retention Rate</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-white">
-                      <span className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm">✓</span>
-                      <span className="text-sm font-medium">2-4 Week Placement</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-white">
-                      <span className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm">✓</span>
-                      <span className="text-sm font-medium">50-60% Cost Savings</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-3">
-                    {featuredItem.url && (
-                      <Link
-                        href={featuredItem.url.startsWith('http') ? '#' : featuredItem.url}
-                        className="px-8 py-4 bg-white text-emerald-700 font-bold rounded-xl hover:bg-emerald-50 transition-all shadow-lg hover:shadow-xl"
-                      >
-                        Learn More About {featuredItem.name} →
-                      </Link>
-                    )}
-                    <button
-                      onClick={() => toggleComparison(featuredItem.name)}
-                      className="px-6 py-4 bg-white/20 text-white font-bold rounded-xl hover:bg-white/30 transition-all backdrop-blur-sm"
+                  {/* CTA Buttons */}
+                  <div className="flex flex-wrap gap-4">
+                    <a
+                      href="https://calendly.com/fractionalquest/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-amber-500 text-slate-900 font-bold rounded-xl hover:bg-amber-400 transition-all shadow-lg hover:shadow-xl hover:scale-105"
                     >
-                      + Add to Compare
-                    </button>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      Book a Free Consultation
+                    </a>
+                    <Link
+                      href="/fractional-recruitment-agency"
+                      className="inline-flex items-center gap-2 px-6 py-4 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-all backdrop-blur-sm border border-white/10"
+                    >
+                      Learn More
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
 
-                {/* Right Side - Visual Stats */}
-                <div className="space-y-4">
-                  {/* Fee Comparison */}
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-white/80 font-semibold">Placement Fee</span>
-                      <span className="text-2xl font-black text-white">{featuredItem.fee}</span>
+                {/* Right Side - Trust signals (2 cols) */}
+                <div className="md:col-span-2 space-y-4">
+                  {/* Testimonial/Social proof */}
+                  <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                    <div className="flex items-center gap-1 mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
                     </div>
-                    <div className="relative h-4 bg-white/20 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: "35%" }}
-                        transition={{ duration: 1.5, delay: 0.5 }}
-                        className="absolute h-full bg-white rounded-full"
-                      />
-                      <div className="absolute h-full w-full flex items-center justify-end pr-2">
-                        <span className="text-[10px] text-white/60">Industry avg: 25-35%</span>
-                      </div>
+                    <p className="text-white/80 text-sm italic mb-3">
+                      &ldquo;Found our fractional CFO in 10 days. The quality of candidates was exceptional.&rdquo;
+                    </p>
+                    <p className="text-white/50 text-xs">
+                      — Series B Fintech, London
+                    </p>
+                  </div>
+
+                  {/* Trust badges */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white/5 rounded-xl p-4 text-center border border-white/10">
+                      <div className="text-2xl font-black text-white">300+</div>
+                      <div className="text-white/50 text-xs">Vetted CFOs</div>
                     </div>
-                    <div className="mt-2 text-emerald-200 text-sm font-semibold">
-                      Save £15,000-£30,000 per hire
+                    <div className="bg-white/5 rounded-xl p-4 text-center border border-white/10">
+                      <div className="text-2xl font-black text-white">96%</div>
+                      <div className="text-white/50 text-xs">Retention</div>
                     </div>
                   </div>
 
-                  {/* Time Comparison */}
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-white/80 font-semibold">Time to Hire</span>
-                      <span className="text-2xl font-black text-white">{featuredItem.placement}</span>
-                    </div>
-                    <div className="relative h-4 bg-white/20 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: "20%" }}
-                        transition={{ duration: 1.5, delay: 0.7 }}
-                        className="absolute h-full bg-white rounded-full"
-                      />
-                      <div className="absolute h-full w-full flex items-center justify-end pr-2">
-                        <span className="text-[10px] text-white/60">Industry avg: 12-20 weeks</span>
-                      </div>
-                    </div>
-                    <div className="mt-2 text-emerald-200 text-sm font-semibold">
-                      4x faster than traditional headhunters
-                    </div>
-                  </div>
-
-                  {/* Trust Badges */}
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-2 bg-white/10 text-white text-xs font-bold rounded-lg backdrop-blur-sm">
-                      🏅 Best Value 2026
-                    </span>
-                    <span className="px-3 py-2 bg-white/10 text-white text-xs font-bold rounded-lg backdrop-blur-sm">
-                      ⚡ Fastest Placement
-                    </span>
-                    <span className="px-3 py-2 bg-white/10 text-white text-xs font-bold rounded-lg backdrop-blur-sm">
-                      💰 Lowest Fees
-                    </span>
-                  </div>
+                  {/* No obligation note */}
+                  <p className="text-white/40 text-xs text-center">
+                    Free 30-min consultation · No obligation · Cancel anytime
+                  </p>
                 </div>
               </div>
             </div>
@@ -831,9 +935,16 @@ export function InteractiveListicle({
                           <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Placement Fee</span>
                         </div>
                       </div>
-                      <div className={`text-2xl font-black ${
-                        item.highlight ? "text-emerald-700" : "text-gray-900"
-                      }`}>{item.fee}</div>
+                      <div className="flex items-baseline gap-2">
+                        <span className={`text-2xl font-black ${
+                          item.highlight ? "text-emerald-700" : "text-gray-900"
+                        }`}>{item.fee}</span>
+                        {item.sourceNote && (
+                          <span className="text-[10px] text-gray-400 italic">
+                            ({item.sourceNote})
+                          </span>
+                        )}
+                      </div>
                       {/* Visual fee gauge */}
                       <div className="mt-3 relative">
                         <div className="flex justify-between text-[10px] text-gray-400 mb-1">
@@ -1017,23 +1128,56 @@ export function InteractiveListicle({
         </motion.div>
       )}
 
-      {/* Comparison Modal */}
-      {showComparison && (
-        <ListicleComparison
-          items={comparisonItems}
-          onClose={() => setShowComparison(false)}
-        />
-      )}
+        {/* Methodology & Disclaimer */}
+        <div className="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-200">
+          <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+            <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            About These Rankings
+          </h4>
+          <p className="text-xs text-gray-500 leading-relaxed mb-3">
+            <strong>Fee percentages are industry estimates.</strong> Executive search firms do not publicly disclose their fee structures.
+            Industry-standard retained search fees typically range from 25-35% of first-year compensation for C-level roles.
+            See{" "}
+            <a href="https://merje.com/blog/2024/01/how-much-does-executive-search-cost/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700">
+              MERJE&apos;s guide
+            </a>
+            {" "}and{" "}
+            <a href="https://tgsus.com/executive-search-blog/executive-search-fees-search-firm-pricing/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700">
+              TGS&apos;s pricing guide
+            </a>
+            {" "}for industry context.
+          </p>
+          <p className="text-xs text-gray-500 leading-relaxed mb-3">
+            <strong>Placement times are estimates</strong> based on industry norms and publicly stated timelines where available.
+            Actual timelines vary significantly based on role complexity, market conditions, and candidate availability.
+            We recommend confirming current rates and timelines directly with each provider.
+          </p>
+          <p className="text-xs text-gray-400">
+            Rankings are based on our editorial assessment considering value, speed, specialisation, and market reputation.
+            Fractional Quest is operated by the same team that produces this content — we&apos;ve ranked ourselves #1 based on our pricing model, not independent verification.
+          </p>
+        </div>
 
-      {/* AI Assistant Panel */}
-      {showAI && (
-        <ListicleAI
-          items={items}
-          filteredItems={filteredItems}
-          actions={aiActions}
-          onClose={() => setShowAI(false)}
-        />
-      )}
+        {/* Comparison Modal */}
+        {showComparison && (
+          <ListicleComparison
+            items={comparisonItems}
+            onClose={() => setShowComparison(false)}
+          />
+        )}
+
+        {/* AI Assistant Panel */}
+        {showAI && (
+          <ListicleAI
+            items={items}
+            filteredItems={filteredItems}
+            actions={aiActions}
+            onClose={() => setShowAI(false)}
+          />
+        )}
+      </div>
     </section>
   );
 }
