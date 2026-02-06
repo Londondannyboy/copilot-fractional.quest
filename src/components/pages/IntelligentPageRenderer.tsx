@@ -2050,8 +2050,8 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
             </div>
 
             {/* Sidebar - Full height with sticky content */}
-            <div className="lg:col-span-1 bg-gradient-to-b from-gray-50/80 via-gray-50/50 to-gray-100/40 rounded-2xl lg:-mr-4 lg:pr-4 lg:pl-2 lg:-ml-2">
-              <div className="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto pb-8 pt-4">
+            <div className="lg:col-span-1 bg-gradient-to-b from-gray-50 via-white to-gray-50 rounded-2xl lg:pl-4">
+              <div className="sticky top-24 space-y-5 pb-8 pt-2">
                 {/* Jobs Sidebar */}
                 <JobsSidebar
                   location={location}
@@ -2140,6 +2140,167 @@ export function IntelligentPageRenderer({ page }: IntelligentPageRendererProps) 
                     <a href={localizeUrl("/fractional-cmo-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("Fractional CMO Jobs", locale)} →</a>
                     <a href={localizeUrl("/fractional-jobs-uk", locale)} className="block text-gray-600 hover:text-emerald-700 transition-colors">{localizeTitle("All Fractional Jobs", locale)} →</a>
                   </nav>
+                </div>
+
+                {/* AI Assistant Panel */}
+                <div className="bg-gradient-to-br from-violet-50 to-indigo-50 border border-violet-200 rounded-xl p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                      <span className="text-xl">✨</span>
+                    </div>
+                    <h3 className="font-bold text-violet-900 text-sm">AI Career Assistant</h3>
+                  </div>
+                  <p className="text-violet-700 text-xs mb-3">
+                    Get personalized recommendations based on your experience and goals.
+                  </p>
+                  <a
+                    href="#ai-assistant"
+                    className="block w-full text-center bg-violet-600 text-white py-2 px-4 rounded-lg hover:bg-violet-700 transition-colors font-medium text-sm"
+                  >
+                    Ask AI Assistant
+                  </a>
+                </div>
+
+                {/* Market Snapshot */}
+                <div className="bg-white border border-gray-200 rounded-xl p-4">
+                  <h3 className="font-bold text-gray-900 text-sm mb-4 flex items-center gap-2">
+                    <span>📊</span> Market Snapshot
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-gray-500">CFO Demand</span>
+                        <span className="text-emerald-600 font-semibold">+23% YoY</span>
+                      </div>
+                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-full w-4/5 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full" />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-gray-500">Avg Day Rate</span>
+                        <span className="text-gray-900 font-semibold">£1,200</span>
+                      </div>
+                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-full w-3/5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-gray-500">Placement Speed</span>
+                        <span className="text-amber-600 font-semibold">4-6 weeks</span>
+                      </div>
+                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-full w-2/5 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-gray-400 mt-3">Source: Fractional Quest Market Data 2026</p>
+                </div>
+
+                {/* Quick Calculator */}
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                  <h3 className="font-bold text-emerald-900 text-sm mb-3 flex items-center gap-2">
+                    <span>🧮</span> Quick Cost Estimate
+                  </h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-emerald-700">1 day/week</span>
+                      <span className="font-bold text-emerald-900">£4,800/mo</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-emerald-700">2 days/week</span>
+                      <span className="font-bold text-emerald-900">£9,600/mo</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-emerald-700">3 days/week</span>
+                      <span className="font-bold text-emerald-900">£14,400/mo</span>
+                    </div>
+                  </div>
+                  <a
+                    href="/calculator"
+                    className="block w-full text-center bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition-colors font-medium text-sm mt-4"
+                  >
+                    Full Calculator →
+                  </a>
+                </div>
+
+                {/* Testimonial */}
+                <div className="bg-white border border-gray-200 rounded-xl p-4">
+                  <div className="flex gap-1 mb-3">
+                    {[1,2,3,4,5].map(i => (
+                      <span key={i} className="text-amber-400">★</span>
+                    ))}
+                  </div>
+                  <p className="text-gray-600 text-sm italic mb-3">
+                    &ldquo;Found our fractional CFO in just 3 weeks. Game changer for our Series A prep.&rdquo;
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                    <div>
+                      <div className="text-xs font-bold text-gray-900">Sarah Chen</div>
+                      <div className="text-[10px] text-gray-500">CEO, TechStart</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Popular Searches */}
+                <div className="bg-white border border-gray-200 rounded-xl p-4">
+                  <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
+                    <span>🔥</span> Trending Searches
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    <a href="/fractional-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Fractional CFO</a>
+                    <a href="/interim-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Interim CFO</a>
+                    <a href="/part-time-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Part-time CFO</a>
+                    <a href="/cfo-recruitment" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">CFO Recruitment</a>
+                    <a href="/virtual-cfo" className="px-3 py-1 bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 text-xs rounded-full transition-colors">Virtual CFO</a>
+                  </div>
+                </div>
+
+                {/* Industry Stats */}
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                  <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
+                    <span>📈</span> Industry Insights
+                  </h3>
+                  <div className="space-y-3 text-xs">
+                    <div className="flex items-start gap-2">
+                      <span className="text-emerald-500 mt-0.5">●</span>
+                      <span className="text-gray-600">73% of scale-ups now use fractional executives</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-blue-500 mt-0.5">●</span>
+                      <span className="text-gray-600">Average engagement: 8-12 months</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-amber-500 mt-0.5">●</span>
+                      <span className="text-gray-600">42% convert to full-time hires</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact CTA */}
+                <div className="bg-gray-900 rounded-xl p-5 text-center">
+                  <h3 className="font-bold text-white text-sm mb-2">Need Help Deciding?</h3>
+                  <p className="text-gray-400 text-xs mb-4">
+                    Talk to our team for a free consultation
+                  </p>
+                  <a
+                    href="/book-call"
+                    className="block w-full text-center bg-emerald-500 text-white py-2 px-4 rounded-lg hover:bg-emerald-600 transition-colors font-medium text-sm"
+                  >
+                    Book Free Call →
+                  </a>
+                </div>
+
+                {/* Trust Badges */}
+                <div className="bg-white border border-gray-200 rounded-xl p-4 text-center">
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-3">Trusted By</p>
+                  <div className="flex justify-center gap-4 opacity-50">
+                    <span className="text-gray-400 font-bold text-sm">TechCrunch</span>
+                    <span className="text-gray-400 font-bold text-sm">Forbes</span>
+                    <span className="text-gray-400 font-bold text-sm">Sifted</span>
+                  </div>
                 </div>
               </div>
             </div>
