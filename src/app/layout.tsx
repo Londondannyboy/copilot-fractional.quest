@@ -31,10 +31,10 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Fractional Jobs UK | Executive Roles £900-£1,500/day",
+    default: "Fractional Executive Agency | C-Suite Roles £900-£1,500/day",
     template: "%s | Fractional Quest"
   },
-  description: "AI-powered fractional job search platform. Find executive roles paying £1,200-£2,500/day.",
+  description: "Fractional executive agency matching C-suite talent with companies. Find roles paying £1,200-£2,500/day.",
   metadataBase: new URL("https://fractional.quest"),
   alternates: {
     canonical: "/",
@@ -91,7 +91,7 @@ export default async function RootLayout({
               "name": "Fractional Quest",
               "alternateName": ["Fractional Quest", "FJQ"],
               "url": "https://fractional.quest",
-              "description": "UK fractional recruitment agency specialising in C-suite executive hiring.",
+              "description": "Fractional executive agency specialising in C-suite talent matching and recruitment.",
               "publisher": {
                 "@type": "Organization",
                 "@id": "https://fractional.quest/#organization",
@@ -118,12 +118,14 @@ export default async function RootLayout({
               "@type": "EmploymentAgency",
               "@id": "https://fractional.quest/#employment-agency",
               "name": "Fractional Quest",
-              "description": "UK fractional recruitment agency for C-suite executive hiring. Specialising in fractional CFO, CTO, CMO, COO, and other executive roles.",
+              "description": "Fractional executive agency for C-suite talent matching. Specialising in fractional CFO, CTO, CMO, COO, and other executive roles.",
               "url": "https://fractional.quest",
-              "areaServed": {
-                "@type": "Country",
-                "name": "United Kingdom"
-              },
+              "areaServed": [
+                { "@type": "Country", "name": "United Kingdom" },
+                { "@type": "Country", "name": "United States" },
+                { "@type": "Country", "name": "Australia" },
+                { "@type": "Country", "name": "New Zealand" }
+              ],
               "serviceType": ["Executive Recruitment", "Fractional Executive Hiring", "C-Suite Recruitment"],
               "slogan": "10-15% fees vs 25-30% industry standard",
               "knowsAbout": ["Fractional CFO", "Fractional CTO", "Fractional CMO", "Interim Executive", "C-Suite Hiring"]
