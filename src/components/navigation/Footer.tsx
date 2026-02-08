@@ -49,7 +49,7 @@ const footerLinks = {
   forEmployers: {
     title: 'For Employers',
     links: [
-      { name: 'Fractional Recruitment Agency', href: '/fractional-recruitment-agency' },
+      { name: 'Fractional Recruitment Agency', href: '/' },
       { name: 'Post a Role', href: '/contact' },
       { name: 'Executive Search', href: '/executive-search-firms' },
       { name: 'Book a Call', href: '/book-call' },

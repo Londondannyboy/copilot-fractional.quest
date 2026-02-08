@@ -255,7 +255,7 @@ export const csoJobsUkSEO = {
     { name: "Interim CSO Jobs UK", url: "/interim-cso-jobs-uk" },
     { name: "Advisory CSO Jobs UK", url: "/advisory-cso-jobs-uk" },
     // Recruitment & Executive Search
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     { name: "Fractional Executive Search", url: "/fractional-executive-search" },
     { name: "Executive Search Firms", url: "/executive-search-firms" },
     // Tools & Guides

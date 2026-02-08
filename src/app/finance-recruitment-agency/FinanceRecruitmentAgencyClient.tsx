@@ -98,7 +98,7 @@ export function FinanceRecruitmentAgencyClient() {
           />
         </picture>
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/fractional-recruitment-agency" className="text-blue-100 hover:text-white mb-6 sm:mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Recruitment Agencies</Link>
+          <Link href="/" className="text-blue-100 hover:text-white mb-6 sm:mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Back to Recruitment Agencies</Link>
           <div className="max-w-4xl">
             <span className="inline-block bg-white text-blue-800 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4 sm:mb-6">Finance Recruitment</span>
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-8 leading-tight">Finance<br /><span className="text-blue-200">Recruitment Agency</span></h1>
@@ -385,7 +385,7 @@ export function FinanceRecruitmentAgencyClient() {
               <div className="text-2xl sm:text-3xl mb-2">🎯</div>
               <div className="font-medium text-gray-900 text-sm sm:text-base">CFO Recruitment Agency</div>
             </Link>
-            <Link href="/fractional-recruitment-agency" className="bg-white p-4 sm:p-6 rounded-lg border hover:border-blue-500 hover:shadow-md transition-all text-center">
+            <Link href="/" className="bg-white p-4 sm:p-6 rounded-lg border hover:border-blue-500 hover:shadow-md transition-all text-center">
               <div className="text-2xl sm:text-3xl mb-2">🏢</div>
               <div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div>
             </Link>

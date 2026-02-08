@@ -285,7 +285,7 @@ export const cfoJobsUkSEO = {
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },
     { name: "Executive Finder", url: "/fractional-executive-finder" },
     // Recruitment
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     { name: "CFO Headhunter", url: "/cfo-headhunter" },
     { name: "Outsourced CFO", url: "/outsourced-cfo" },
     { name: "CFO Recruitment", url: "/cfo-recruitment" },

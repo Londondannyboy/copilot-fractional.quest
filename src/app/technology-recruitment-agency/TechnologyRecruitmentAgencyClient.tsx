@@ -51,7 +51,7 @@ export function TechnologyRecruitmentAgencyClient() {
           <Image src={localImage?.desktop || '/images/hero/cto-desktop.webp'} alt="Technology Recruitment Agency - Tech Recruiter and Engineering Search" fill priority fetchPriority="high" sizes="100vw" className="object-cover" />
         </picture>
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/fractional-recruitment-agency" className="text-indigo-100 hover:text-white mb-6 sm:mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Fractional Recruitment</Link>
+          <Link href="/" className="text-indigo-100 hover:text-white mb-6 sm:mb-8 inline-flex items-center text-sm"><span className="mr-2">←</span> Fractional Recruitment</Link>
           <div className="max-w-4xl">
             <span className="inline-block bg-white text-indigo-800 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-4 sm:mb-6">Tech Recruitment</span>
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-8 leading-tight">Technology<br /><span className="text-indigo-200">Recruitment Agency</span></h1>
@@ -176,7 +176,7 @@ export function TechnologyRecruitmentAgencyClient() {
             <Link href="/fractional-cto" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-indigo-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">📖</div><div className="font-medium text-gray-900 text-sm sm:text-base">What is a Fractional CTO?</div></Link>
             <Link href="/hire-fractional-cto" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-indigo-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🤝</div><div className="font-medium text-gray-900 text-sm sm:text-base">Hire a CTO</div></Link>
             <Link href="/fractional-cpo-jobs-uk" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-indigo-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">📱</div><div className="font-medium text-gray-900 text-sm sm:text-base">CPO Jobs UK</div></Link>
-            <Link href="/fractional-recruitment-agency" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-indigo-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🎯</div><div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div></Link>
+            <Link href="/" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-indigo-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🎯</div><div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div></Link>
           </div>
         </div>
       </section>

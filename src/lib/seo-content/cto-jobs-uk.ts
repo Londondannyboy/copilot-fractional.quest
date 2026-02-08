@@ -265,7 +265,7 @@ export const ctoJobsUkSEO = {
     // Featured Role
     { name: "Featured: Fractional CTO Role", url: "/fractional-job/fractional-cto-london" },
     // Recruitment
-    { name: "Fractional Recruiter Guide", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruiter Guide", url: "/" },
     { name: "Technology Recruitment", url: "/technology-executive-recruitment" },
     { name: "AI Recruitment Agency", url: "/ai-recruitment-agency" },
     { name: "Data Science Recruitment", url: "/data-science-recruitment-agency" },

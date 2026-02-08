@@ -176,7 +176,7 @@ export function FintechRecruitmentAgencyClient() {
             <Link href="/fractional-cfo-jobs-uk" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-emerald-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🎯</div><div className="font-medium text-gray-900 text-sm sm:text-base">CFO Jobs UK</div></Link>
             <Link href="/fractional-cto-jobs-uk" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-emerald-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🚀</div><div className="font-medium text-gray-900 text-sm sm:text-base">CTO Jobs UK</div></Link>
             <Link href="/fractional-cfo" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-emerald-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">📖</div><div className="font-medium text-gray-900 text-sm sm:text-base">What is a Fractional CFO?</div></Link>
-            <Link href="/fractional-recruitment-agency" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-emerald-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🎯</div><div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div></Link>
+            <Link href="/" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-emerald-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🎯</div><div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div></Link>
           </div>
         </div>
       </section>

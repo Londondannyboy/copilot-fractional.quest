@@ -71,7 +71,7 @@ const navigation = {
       { name: 'Hire a Fractional COO', href: '/hire-fractional-coo' },
     ],
     services: [
-      { name: 'Fractional Recruitment Agency', href: '/fractional-recruitment-agency', tag: 'Featured' },
+      { name: 'Fractional Recruitment Agency', href: '/', tag: 'Featured' },
       { name: 'Executive Search', href: '/executive-search-firms' },
     ]
   }

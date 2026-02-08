@@ -80,7 +80,7 @@ export default function ThankYouPage() {
               Browse Jobs
             </Link>
             <Link
-              href="/fractional-recruitment-agency"
+              href="/"
               className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold transition-colors border border-gray-600"
             >
               Learn About Us

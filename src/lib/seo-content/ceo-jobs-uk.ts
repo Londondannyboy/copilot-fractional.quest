@@ -233,7 +233,7 @@ export const ceoJobsUkSEO = {
     { name: "Fractional CFO Jobs UK", url: "/fractional-cfo-jobs-uk" },
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Interim CEO Jobs UK", url: "/interim-ceo-jobs-uk" },
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
   ],
 

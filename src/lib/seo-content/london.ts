@@ -280,7 +280,7 @@ export const londonSEO = {
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
     { name: "Fractional CCO Jobs UK", url: "/fractional-cco-jobs-uk" },
     // Recruitment
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     // Other UK Cities
     { name: "Manchester Jobs", url: "/manchester" },
     { name: "Birmingham Jobs", url: "/birmingham" },

@@ -618,7 +618,7 @@ export function InteractiveListicle({
                       Book a Free Consultation
                     </a>
                     <Link
-                      href="/fractional-recruitment-agency"
+                      href="/"
                       className="inline-flex items-center gap-2 px-6 py-4 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-all backdrop-blur-sm border border-white/10"
                     >
                       Learn More

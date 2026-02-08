@@ -120,7 +120,7 @@ export function PublicLanding() {
                     Book a Call
                   </Link>
                   <Link
-                    href="/fractional-recruitment-agency"
+                    href="/"
                     className="bg-gray-800 hover:bg-gray-900 text-white px-10 py-5 rounded-xl font-bold transition-colors text-xl border border-gray-600"
                   >
                     Learn More
@@ -169,7 +169,7 @@ export function PublicLanding() {
               </div>
             </div>
             <Link
-              href="/fractional-recruitment-agency"
+              href="/"
               className="flex-shrink-0 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg whitespace-nowrap"
             >
               Read the Guide →

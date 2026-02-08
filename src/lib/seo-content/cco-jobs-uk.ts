@@ -247,7 +247,7 @@ export const ccoJobsUkSEO = {
     { name: "Advisory CCO Jobs UK", url: "/advisory-cco-jobs-uk" },
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     // Recruitment & Executive Search
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     { name: "Fractional Executive Search", url: "/fractional-executive-search" },
     { name: "Marketing Recruitment Agency", url: "/marketing-recruitment-agency" },
     // Tools & Guides

@@ -253,7 +253,7 @@ export const cioJobsUkSEO = {
     { name: "Part-Time CIO Jobs UK", url: "/part-time-cio-jobs-uk" },
     { name: "Interim CIO Jobs UK", url: "/interim-cio-jobs-uk" },
     // Recruitment
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     // Tools & Guides
     { name: "Rate Calculator", url: "/rate-calculator" },
     { name: "Portfolio Career Guide", url: "/fractional-executive-portfolio" },

@@ -243,7 +243,7 @@ export const cmoJobsUkSEO = {
     { name: "Fractional CEO Jobs UK", url: "/fractional-ceo-jobs-uk" },
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
     // Recruitment
-    { name: "Fractional Recruitment Agencies", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agencies", url: "/" },
     { name: "CMO Recruitment Agency", url: "/cmo-recruitment-agency" },
     { name: "Executive Marketing Recruitment", url: "/executive-marketing-recruitment" },
     { name: "Marketing Recruitment Agency", url: "/marketing-recruitment-agency" },

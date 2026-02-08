@@ -239,7 +239,7 @@ export const chroJobsUkSEO = {
     { name: "Fractional COO Jobs UK", url: "/fractional-coo-jobs-uk" },
     { name: "Remote Fractional Jobs", url: "/remote-fractional-jobs" },
     { name: "Part-Time CHRO Jobs UK", url: "/part-time-chro-jobs-uk" },
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     { name: "Fractional CIO Jobs UK", url: "/fractional-cio-jobs-uk" },
   ],
 

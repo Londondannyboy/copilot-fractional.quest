@@ -281,7 +281,7 @@ export const ukSEO = {
     { name: "Fractional CMO Services", url: "/fractional-cmo-services" },
     { name: "Fractional CFO Agency", url: "/fractional-cfo-agency" },
     { name: "Fractional CMO Agency", url: "/fractional-cmo-agency" },
-    { name: "Fractional Recruitment Agency", url: "/fractional-recruitment-agency" },
+    { name: "Fractional Recruitment Agency", url: "/" },
     // Articles
     { name: "Benefits of Fractional Executives", url: "/articles/benefits-of-fractional-executives" },
     { name: "Fractional Controller Jobs Guide", url: "/articles/fractional-controller-jobs" },

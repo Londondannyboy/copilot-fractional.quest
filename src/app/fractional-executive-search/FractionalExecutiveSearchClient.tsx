@@ -176,7 +176,7 @@ export function FractionalExecutiveSearchClient() {
             <Link href="/fractional-cmo-jobs-uk" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-teal-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">📢</div><div className="font-medium text-gray-900 text-sm sm:text-base">Fractional CMO Jobs</div></Link>
             <Link href="/cfo-recruitment-agency" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-teal-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">📊</div><div className="font-medium text-gray-900 text-sm sm:text-base">CFO Recruitment</div></Link>
             <Link href="/cto-recruitment-agency" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-teal-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🔧</div><div className="font-medium text-gray-900 text-sm sm:text-base">CTO Recruitment</div></Link>
-            <Link href="/fractional-recruitment-agency" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-teal-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🎯</div><div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div></Link>
+            <Link href="/" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-teal-500 hover:shadow-md transition-all text-center"><div className="text-2xl sm:text-3xl mb-2">🎯</div><div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div></Link>
           </div>
         </div>
       </section>

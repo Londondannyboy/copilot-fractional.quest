@@ -37,7 +37,7 @@ const topAgencies = [
     speciality: 'Fractional & Interim CFO',
     fee: '10-15%',
     placement: '2-4 weeks',
-    url: '/fractional-recruitment-agency',
+    url: '/',
     icon: '🏆',
     highlight: true
   },
@@ -311,7 +311,7 @@ export function CFORecruitmentAgencyClient() {
               <div className="text-2xl sm:text-3xl mb-2">🏢</div>
               <div className="font-medium text-gray-900 text-sm sm:text-base">Finance Recruitment</div>
             </Link>
-            <Link href="/fractional-recruitment-agency" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-indigo-500 hover:shadow-md transition-all text-center">
+            <Link href="/" className="bg-gray-50 p-4 sm:p-6 rounded-lg border hover:border-indigo-500 hover:shadow-md transition-all text-center">
               <div className="text-2xl sm:text-3xl mb-2">🎯</div>
               <div className="font-medium text-gray-900 text-sm sm:text-base">Fractional Recruitment</div>
             </Link>

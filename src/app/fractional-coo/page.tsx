@@ -374,7 +374,7 @@ export default function FractionalCooPage() {
                     <Link href="/fractional-cfo" className="flex items-center gap-2 text-sm text-gray-600 hover:text-slate-700 transition-colors">
                       <span>📊</span> Fractional CFO Guide
                     </Link>
-                    <Link href="/fractional-recruitment-agency" className="flex items-center gap-2 text-sm text-slate-700 hover:text-slate-900 font-medium transition-colors">
+                    <Link href="/" className="flex items-center gap-2 text-sm text-slate-700 hover:text-slate-900 font-medium transition-colors">
                       <span>🎯</span> Fractional Recruiter Guide
                     </Link>
                   </div>
@@ -546,7 +546,7 @@ export default function FractionalCooPage() {
               <span className="text-gray-300">•</span>
               <Link href="/fractional-chro" className="text-sm text-gray-600 hover:text-slate-700">Fractional CHRO</Link>
               <span className="text-gray-300">•</span>
-              <Link href="/fractional-recruitment-agency" className="text-sm text-slate-700 hover:text-slate-900 font-medium">Recruitment Agency</Link>
+              <Link href="/" className="text-sm text-slate-700 hover:text-slate-900 font-medium">Recruitment Agency</Link>
               <span className="text-gray-300">•</span>
               <Link href="/fractional-ciso" className="text-sm text-gray-600 hover:text-slate-700">Fractional CISO</Link>
             </div>
