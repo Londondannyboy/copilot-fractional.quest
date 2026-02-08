@@ -30,7 +30,7 @@ const topAgencies = [
 ];
 
 const benefits = [
-  { title: 'Marketing Model Expertise', description: 'Marketing recruiters understand B2B, B2C, PLG, and enterprise marketing models. They can match CMO candidates to your specific go-to-market strategy.', icon: '🎯' },
+  { title: 'Marketing Model Expertise', description: 'Marketing recruiters understand B2B, B2C, PLG, and enterprise marketing models. They can match CMO candidates to your specific go-to-market strategy. For GTM execution, consider a specialist <a href="https://gtm.quest" target="_blank" rel="noopener noreferrer" class="text-purple-600 hover:underline">GTM agency</a>.', icon: '🎯' },
   { title: 'Portfolio Assessment', description: 'Top marketing recruiters evaluate brand campaigns, growth metrics, and marketing ROI. They can assess both creative and performance marketing capabilities.', icon: '📊' },
   { title: 'Sector-Specific Networks', description: 'Specialist CMO recruiters have networks in specific sectors: SaaS, consumer, fintech, healthtech - to find candidates with relevant experience.', icon: '🔗' },
   { title: 'MarTech Assessment', description: 'Marketing recruiters assess marketing technology stack experience: CRM, marketing automation, analytics, and data platforms.', icon: '💻' },

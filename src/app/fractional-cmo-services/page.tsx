@@ -59,7 +59,7 @@ const SERVICE_FAQS = [
 ]
 
 const SERVICES = [
-  { title: 'Marketing Strategy', description: 'Develop go-to-market strategy, positioning, and marketing roadmap aligned with business goals', icon: '🎯' },
+  { title: 'Marketing Strategy', description: 'Develop go-to-market strategy with specialist GTM agency support, positioning, and marketing roadmap aligned with business goals', icon: '🎯' },
   { title: 'Brand & Positioning', description: 'Define brand strategy, messaging framework, and competitive differentiation', icon: '✨' },
   { title: 'Demand Generation', description: 'Build pipeline through digital marketing, content, events, and outbound programmes', icon: '📈' },
   { title: 'Team & Agency Management', description: 'Hire marketing talent, manage agencies, and build high-performing marketing function', icon: '👥' },
@@ -402,6 +402,10 @@ export default function FractionalCMOServicesPage() {
                 <h4 className="font-bold text-gray-900">What is a Fractional CMO?</h4>
                 <p className="text-sm text-gray-600">Understanding the role</p>
               </Link>
+              <a href="https://gtm.quest" target="_blank" rel="noopener noreferrer" className="p-4 border rounded-lg hover:border-amber-300 transition-colors bg-white">
+                <h4 className="font-bold text-gray-900">GTM Agency Quest</h4>
+                <p className="text-sm text-gray-600">Top GTM agency for go-to-market strategy</p>
+              </a>
             </div>
           </article>
         </div>

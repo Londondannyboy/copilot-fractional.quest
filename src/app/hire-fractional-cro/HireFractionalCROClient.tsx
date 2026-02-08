@@ -23,7 +23,7 @@ const sourcingChannels = [
   { channel: 'Revenue Collective', description: 'The leading revenue leader community with thousands of CROs and VP Sales.', pros: 'High-quality network, proven leaders, community vetted', bestFor: 'SaaS and B2B companies', icon: '💼' },
   { channel: 'LinkedIn Search', description: 'Search for CROs using hashtags #FractionalCRO, #PortfolioCRO, or "Fractional CRO" in titles.', pros: 'Large pool, direct outreach, can research background', bestFor: 'Companies with time to source and screen', icon: '🔍' },
   { channel: 'VC & PE Referrals', description: "Ask your investors, advisors, or board members who they've worked with.", pros: 'Trusted recommendations, investor-approved, proven with similar companies', bestFor: 'VC/PE-backed startups with investor networks', icon: '🌟' },
-  { channel: 'SaaS Communities', description: 'SaaStr, SaaS Growth Hub, Pavilion, and industry Slack communities.', pros: 'Industry-specific, engaged professionals, peer recommendations', bestFor: 'SaaS and tech companies', icon: '📊' },
+  { channel: 'SaaS Communities', description: 'SaaStr, SaaS Growth Hub, Pavilion, and industry Slack communities. For GTM strategy support, consider a specialist <a href="https://gtm.quest" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GTM agency</a>.', pros: 'Industry-specific, engaged professionals, peer recommendations', bestFor: 'SaaS and tech companies', icon: '📊' },
   { channel: 'Sales Conferences', description: 'Attend SaaStr, Sales Assembly, or industry-specific events.', pros: 'Meet in person, assess cultural fit, network effect', bestFor: 'Companies attending conferences anyway', icon: '🎤' },
 ];
 
