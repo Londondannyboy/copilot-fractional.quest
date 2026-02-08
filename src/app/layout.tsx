@@ -31,10 +31,10 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Fractional Executive Agency | C-Suite Roles £900-£1,500/day",
+    default: "Fractional Recruitment Agency | C-Suite Roles £900-£1,500/day",
     template: "%s | Fractional Quest"
   },
-  description: "Fractional executive agency matching C-suite talent with companies. Find roles paying £1,200-£2,500/day.",
+  description: "Fractional recruitment agency matching C-suite talent with companies. Find roles paying £1,200-£2,500/day.",
   metadataBase: new URL("https://fractional.quest"),
   alternates: {
     canonical: "/",
@@ -91,7 +91,7 @@ export default async function RootLayout({
               "name": "Fractional Quest",
               "alternateName": ["Fractional Quest", "FJQ"],
               "url": "https://fractional.quest",
-              "description": "Fractional executive agency specialising in C-suite talent matching and recruitment.",
+              "description": "Fractional recruitment agency specialising in C-suite talent matching and executive search.",
               "publisher": {
                 "@type": "Organization",
                 "@id": "https://fractional.quest/#organization",
@@ -118,7 +118,7 @@ export default async function RootLayout({
               "@type": "EmploymentAgency",
               "@id": "https://fractional.quest/#employment-agency",
               "name": "Fractional Quest",
-              "description": "Fractional executive agency for C-suite talent matching. Specialising in fractional CFO, CTO, CMO, COO, and other executive roles.",
+              "description": "Fractional recruitment agency for C-suite executive search. Specialising in fractional CFO, CTO, CMO, COO, and other executive roles.",
               "url": "https://fractional.quest",
               "areaServed": [
                 { "@type": "Country", "name": "United Kingdom" },
