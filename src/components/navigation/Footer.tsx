@@ -55,6 +55,15 @@ const footerLinks = {
       { name: 'Book a Call', href: '/book-call' },
     ],
   },
+  executiveResources: {
+    title: 'Executive Resources',
+    external: true,
+    links: [
+      { name: 'MIAM Certificate', href: 'https://miam.quest' },
+      { name: 'Membership Marketing Agency', href: 'https://membership.quest' },
+      { name: 'Relocation Advice', href: 'https://relocation.quest' },
+    ],
+  },
 }
 
 const socialLinks = [
@@ -163,6 +172,17 @@ export function Footer() {
                   <Link href={localize(link.href)} className="text-sm hover:text-white transition-colors">
                     {link.name}
                   </Link>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="text-white font-semibold mt-6 mb-4">{footerLinks.executiveResources.title}</h3>
+            <ul className="space-y-2">
+              {footerLinks.executiveResources.links.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener" className="text-sm hover:text-emerald-400 transition-colors">
+                    {link.name}
+                  </a>
                 </li>
               ))}
             </ul>
