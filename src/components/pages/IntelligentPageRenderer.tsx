@@ -121,6 +121,10 @@ const INTERNAL_LINK_MAP: Record<string, { url: string; title: string }> = {
   "Managing Director": { url: "/fractional-managing-director-jobs-uk", title: "Fractional MD Jobs" },
   "Chief AI Officer": { url: "/fractional-chief-ai-officer-jobs-uk", title: "Fractional CAIO Jobs" },
   // Topics & Concepts
+  "fractional recruitment agency": { url: "/", title: "Fractional Recruitment Agency" },
+  "fractional recruitment agencies": { url: "/top-fractional-recruitment-agency", title: "Top Fractional Recruitment Agency" },
+  "fractional recruiter": { url: "/", title: "Fractional Recruitment Agency" },
+  "fractional recruiters": { url: "/top-fractional-recruitment-agency", title: "Top Fractional Recruitment Agency" },
   "day rate": { url: "/fractional-executive-day-rates", title: "Fractional Executive Day Rates" },
   "day rates": { url: "/fractional-executive-day-rates", title: "Fractional Executive Day Rates" },
   "executive search": { url: "/executive-search-firms", title: "Executive Search Firms" },
