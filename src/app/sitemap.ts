@@ -47,6 +47,8 @@ const REDIRECT_SOURCE_SLUGS = [
   'articles',
   'top-fractional-recruitment-agencies',
   'top-fractional-recruitment-agencies-best-fractional-recruitment-agency-fractional-recruiter',
+  'best-fractional-recruitment-agencies',
+  'fractional-recruitment-agency',
   'fractional-property-ownership-uk',
   'fractional-client-services-services',
   'fractional-jobs-articles',

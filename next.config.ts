@@ -152,21 +152,26 @@ const nextConfig: NextConfig = {
         destination: '/bristol',
         permanent: true,
       },
-      // High-impression missing pages - redirect to homepage (main target for "fractional recruitment agency")
+      // Fractional recruitment agency pages - redirect to main SEO-optimized page
+      {
+        source: '/best-fractional-recruitment-agencies',
+        destination: '/top-fractional-recruitment-agency',
+        permanent: true,
+      },
       {
         source: '/top-fractional-recruitment-agencies',
-        destination: '/',
+        destination: '/top-fractional-recruitment-agency',
         permanent: true,
       },
       {
         source: '/top-fractional-recruitment-agencies-best-fractional-recruitment-agency-fractional-recruiter',
-        destination: '/',
+        destination: '/top-fractional-recruitment-agency',
         permanent: true,
       },
       {
         source: '/fractional-recruitment-agency',
-        destination: '/',
-        permanent: true, // Consolidate link equity to homepage
+        destination: '/top-fractional-recruitment-agency',
+        permanent: true,
       },
       {
         source: '/fractional-hr',
