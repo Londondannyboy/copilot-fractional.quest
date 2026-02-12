@@ -2,11 +2,14 @@ import { Metadata } from 'next'
 import { PublicLanding } from '@/components/PublicLanding'
 
 export const metadata: Metadata = {
-  title: 'Fractional Recruitment Agency | Fractional Executive Search Firms',
+  title: 'Fractional Recruitment Agency | C-Suite Executive Search',
   description: 'Fractional recruitment agency matching C-suite talent with companies. 200+ fractional CFO, CTO, CMO roles. 10-15% fees vs 25-30% industry standard.',
   keywords: ['fractional recruitment agency', 'fractional executive search firms', 'fractional executive search', 'fractional CFO jobs', 'fractional CTO jobs', 'fractional CMO jobs'],
+  alternates: {
+    canonical: 'https://fractional.quest',
+  },
   openGraph: {
-    title: 'Fractional Recruitment Agency | Fractional Executive Search Firms',
+    title: 'Fractional Recruitment Agency | C-Suite Executive Search',
     description: 'Fractional recruitment agency matching C-suite talent with companies. 200+ roles. 10-15% fees vs 25-30% industry standard.',
     url: 'https://fractional.quest',
     siteName: 'Fractional Quest',
@@ -20,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fractional Recruitment Agency | Fractional Executive Search Firms',
+    title: 'Fractional Recruitment Agency | C-Suite Executive Search',
     description: 'Fractional recruitment agency matching C-suite talent with companies. 200+ roles. 10-15% fees.',
     images: ['https://fractional.quest/og-image.png'],
   },
