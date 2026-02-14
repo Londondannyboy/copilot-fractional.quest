@@ -87,16 +87,16 @@ export const londonSEO = {
 
   content: {
     whyLocation: {
-      title: "Fractional Jobs in London: Why the Capital Leads",
+      title: "Why London Leads the UK Market",
       paragraphs: [
-        "Fractional jobs London dominate the UK market, with the capital accounting for over 60% of all UK fractional executive appointments.<br><br>London's unique concentration of high-growth startups, scale-ups, PE-backed companies, and established enterprises creates unparalleled demand for flexible C-suite expertise.",
-        "According to the <a href='https://www.scaleupinstitute.org.uk' target='_blank' rel='noopener' class='text-emerald-600 hover:underline'>ScaleUp Institute</a>, 70% of UK companies using fractional leadership are London-based.<br><br>When searching for fractional jobs, London offers the most diverse business ecosystem—spanning fintech (Revolut, Monzo), healthtech, proptech, and traditional sectors.<br><br>The <a href='https://www.cbi.org.uk' target='_blank' rel='noopener' class='text-emerald-600 hover:underline'>CBI</a> reports that London businesses are leading the shift toward flexible executive models.",
-        "For executives seeking fractional jobs, London provides the highest day rates in the UK (£1,000-£1,500 vs £700-£1,100 regionally).<br><br>You'll have access to the broadest range of sectors, and the opportunity to build prestigious portfolio careers with multiple high-growth companies.<br><br><em>Content enriched with Tavily research, February 2026.</em>",
+        "<strong>Fractional jobs</strong> London dominate the UK market, with the capital accounting for over 60% of all UK <strong>fractional</strong> executive appointments.<br><br>London's unique concentration of high-growth startups, scale-ups, PE-backed companies, and established enterprises creates unparalleled demand for flexible C-suite expertise.",
+        "According to the <a href='https://www.scaleupinstitute.org.uk' target='_blank' rel='noopener' class='text-emerald-600 hover:underline'>ScaleUp Institute</a>, 70% of UK companies using fractional leadership are London-based.<br><br>When searching for <strong>fractional jobs</strong>, London offers the most diverse business ecosystem—spanning fintech (Revolut, Monzo), healthtech, proptech, and traditional sectors.<br><br>The <a href='https://www.cbi.org.uk' target='_blank' rel='noopener' class='text-emerald-600 hover:underline'>CBI</a> reports that London businesses are leading the shift toward flexible executive models.",
+        "For executives seeking <strong>fractional jobs</strong>, London provides the highest day rates in the UK (£1,000-£1,500 vs £700-£1,100 regionally).<br><br>You'll have access to the broadest range of sectors, and the opportunity to build prestigious portfolio careers with multiple high-growth companies.<br><br><em>Content enriched with Tavily research, February 2026.</em>",
       ],
     },
 
     dayRates: {
-      title: "Fractional Jobs Day Rates in London (2026)",
+      title: "Executive Day Rates in London (2026)",
       description:
         "Typical day rates for fractional executives in London, updated February 2026. Source: Porter Wills, VCMO, Glassdoor UK, CIPD Pay Benchmarking:",
       rates: [
@@ -109,7 +109,7 @@ export const londonSEO = {
     },
 
     locations: {
-      title: "Where to Find Fractional Jobs in London",
+      title: "Where to Find Executive Roles in London",
       areas: [
         {
           name: "Square Mile & City of London",
@@ -139,28 +139,28 @@ export const londonSEO = {
     },
 
     emergingRoles: {
-      title: "New Fractional Jobs Categories in London",
+      title: "Emerging Executive Categories in London",
       roles: [
         {
-          title: "Fractional CISO",
+          title: "Chief Information Security Officer (CISO)",
           description:
             "Cybersecurity leadership on demand. With NCSC reporting 2.7 million cyber attacks on UK businesses annually, demand for fractional CISOs has grown 180% since 2022.",
           rate: "£1,200-£1,800/day",
         },
         {
-          title: "Fractional CIO",
+          title: "Chief Information Officer (CIO)",
           description:
             "IT transformation expertise for digital-first strategies. Critical for companies modernising legacy systems or implementing AI/ML capabilities.",
           rate: "£1,000-£1,400/day",
         },
         {
-          title: "Fractional CDO",
+          title: "Chief Data Officer (CDO)",
           description:
             "Data leadership for AI/ML initiatives and analytics maturity. Growing demand as companies seek to monetise data assets.",
           rate: "£1,000-£1,400/day",
         },
         {
-          title: "Fractional CCO",
+          title: "Chief Commercial Officer (CCO)",
           description:
             "Commercial leadership bridging sales, marketing, and growth. Popular with VC-backed companies optimising GTM strategy.",
           rate: "£950-£1,300/day",
@@ -169,7 +169,7 @@ export const londonSEO = {
     },
 
     futureOutlook: {
-      title: "The Future of Fractional Jobs in London",
+      title: "The Future of Flexible Executive Work in London",
       paragraphs: [
         "The global fractional executive market is projected to exceed $5.7 billion by 2026, with London positioned as a leading hub. Tech Nation reports that London's tech sector alone employs over 600,000 people, creating sustained demand for flexible executive leadership.",
         "Key trends shaping London's fractional market include: increased acceptance of portfolio careers among senior executives, the rise of AI requiring specialist leadership, and growing PE/VC preference for operational expertise without permanent overhead.",

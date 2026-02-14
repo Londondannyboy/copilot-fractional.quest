@@ -35,9 +35,9 @@ const localImageMap: Partial<Record<ImageCategory, LocalImageData>> = {
     creditUrl: 'https://unsplash.com/@amyhirschi'
   },
   london: {
-    desktop: '/images/hero/london-desktop.webp',
-    mobile: '/images/hero/london-mobile.webp',
-    alt: 'London city skyline with Tower Bridge',
+    desktop: '/images/hero/fractional-jobs-london-desktop.webp',
+    mobile: '/images/hero/fractional-jobs-london-mobile.webp',
+    alt: 'Fractional jobs London - Executive roles in the City',
     credit: 'Charles Postiaux',
     creditUrl: 'https://unsplash.com/@charlpost'
   },

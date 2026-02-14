@@ -69,7 +69,7 @@ export default async function FractionalJobsLondonPage() {
       {/* Note: Unsplash preconnect is now in layout.tsx for all pages */}
       <link
         rel="preload"
-        href="/images/hero/london-mobile.webp"
+        href="/images/hero/fractional-jobs-london-mobile.webp"
         as="image"
         type="image/webp"
         media="(max-width: 768px)"
@@ -77,7 +77,7 @@ export default async function FractionalJobsLondonPage() {
       />
       <link
         rel="preload"
-        href="/images/hero/london-desktop.webp"
+        href="/images/hero/fractional-jobs-london-desktop.webp"
         as="image"
         type="image/webp"
         media="(min-width: 769px)"
