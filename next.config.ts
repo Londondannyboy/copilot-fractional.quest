@@ -118,6 +118,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/cpo-headhunter',
+        destination: '/cpo-recruitment-agency',
+        permanent: true,
+      },
+      {
         source: '/fractional-director-jobs-uk',
         destination: '/fractional-jobs-uk',
         permanent: true,
