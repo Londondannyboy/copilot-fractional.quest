@@ -104,12 +104,17 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/engineering-manager-jobs-uk',
-        destination: '/fractional-cto-jobs-uk',
+        destination: '/fractional-cto-recruitment-agency-uk',
         permanent: true,
       },
       {
         source: '/fractional-vp-engineering-jobs-uk',
-        destination: '/fractional-cto-jobs-uk',
+        destination: '/fractional-cto-recruitment-agency-uk',
+        permanent: true,
+      },
+      {
+        source: '/fractional-cto-jobs-uk',
+        destination: '/fractional-cto-recruitment-agency-uk',
         permanent: true,
       },
       {

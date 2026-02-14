@@ -3,19 +3,19 @@ import { CTORecruitmentAgencyClient } from "./CTORecruitmentAgencyClient";
 import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
 export const metadata: Metadata = {
-  title: "CTO Recruitment Agency 🎯 Chief Technology Officer Search",
+  title: "CTO Recruitment Agency | CTO Recruitment Services & Solutions",
   description:
-    "Find specialist CTO recruitment agencies for fractional, interim, and permanent Chief Technology Officer placements. Expert CTO recruiters with AI, cloud, security, and scale-up experience.",
+    "Leading CTO recruitment agency & CTO recruitment services. CTO recruitment specialists, CTO recruitment company, CTO recruitment firm. Fractional CTO recruitment & interim CTO recruitment experts.",
   keywords: [
     "cto recruitment agency",
-    "cto recruiter",
-    "chief technology officer recruitment",
-    "cto executive search",
-    "cto headhunter",
+    "cto recruitment services",
+    "cto recruitment",
+    "cto recruitment specialists",
+    "cto recruitment company",
+    "cto recruitment professionals",
+    "cto recruitment firm",
     "fractional cto recruitment",
     "interim cto recruitment",
-    "tech executive search",
-    "vp engineering recruitment",
   ],
   openGraph: {
     title: "CTO Recruitment Agency 🎯 Chief Technology Officer Search",

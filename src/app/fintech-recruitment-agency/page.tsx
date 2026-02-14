@@ -3,18 +3,18 @@ import { FintechRecruitmentAgencyClient } from "./FintechRecruitmentAgencyClient
 import { WebPageSchema, FAQPageSchema, FAQItem } from "@/components/seo";
 
 export const metadata: Metadata = {
-  title: "FinTech Recruitment Agency 🎯 Fintech Executive Search",
+  title: "Fintech Recruitment Agencies | Fintech Recruitment Solutions UK",
   description:
-    "Find specialist FinTech recruitment agencies for CTO, CFO, and C-suite placements. Expert fintech recruiters with payments, banking, crypto, and FCA-regulated experience.",
+    "Leading fintech recruitment agencies & fintech recruitment solutions. Financial technology recruitment agencies for CTO, CFO, C-suite. Fintech recruitment agency London specialists.",
   keywords: [
+    "fintech recruitment agencies",
     "fintech recruitment agency",
-    "fintech recruiter",
-    "fintech executive search",
-    "fintech cto recruitment",
-    "fintech cfo recruitment",
-    "payments recruitment agency",
-    "crypto recruitment agency",
-    "banking technology recruitment",
+    "fintech recruitment solutions",
+    "financial technology recruitment agencies",
+    "financial technology recruitment agency",
+    "fintech recruitment agency london",
+    "fintech recruitment specialists",
+    "fintech recruitment company",
   ],
   openGraph: {
     title: "FinTech Recruitment Agency 🎯 Fintech Executive Search",
